@@ -18,6 +18,25 @@
                 height: 50px; /* Size of the logo next to the navbar */
                 margin-right: 10px;
             }
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px; /* Add padding to the left */
+                padding-right: 15px; /* Add padding to the right */
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+            }
             .contact-button {
                 margin-bottom: 20px; /* Adds space below the button */
             }
@@ -28,7 +47,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-lg-5">
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="Code Crunch  Logo" />
+                    <img src="assets/images/logo.png" alt="Code Crunch Logo" />
                     Code Crunch 
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -39,7 +58,6 @@
                         <li class="nav-item"><a class="nav-link" href="upcoming-events.html">Events</a></li>
                         <li class="nav-item"><a class="nav-link" href="onboarding-guide.html">Onboarding Guide</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
-                        
                     </ul>
                 </div>
             </div>
@@ -49,7 +67,7 @@
         <header class="py-5 bg-light">
             <div class="container px-lg-5">
                 <div class="p-4 p-lg-5 rounded-3 text-center">
-                    <h1 class="display-5 fw-bold">Contact Code Crunch </h1>
+                    <h1 class="display-5 fw-bold">Contact Code Crunch</h1>
                     <p class="fs-4">Have any questions or need more information? Reach out to us using the form below!</p>
                 </div>
             </div>

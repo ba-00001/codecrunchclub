@@ -18,6 +18,39 @@
                 height: 50px; /* Size of the logo next to the navbar */
                 margin-right: 10px;
             }
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px; /* Add padding to the left */
+                padding-right: 15px; /* Add padding to the right */
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+            }
+            .card-body {
+                text-align: center; /* Ensure all text is centered */
+            }
+            .card-img-top {
+                width: 150px; /* Larger image size */
+                height: 150px; 
+                object-fit: cover;
+                border-radius: 50%; /* Optional: Makes the image circular */
+                margin: 0 auto; /* Center the image */
+            }
+            .bi-person-circle {
+                font-size: 150px; /* Adjust icon size */
+                color: gray;
+            }
         </style>
     </head>
     <body>
@@ -25,7 +58,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-lg-5">
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="Code Crunch  Logo" />
+                    <img src="https://github.com/ba-00001/imagesforWEB-1/blob/main/logo.png?raw=true" alt="Code Crunch  Logo" />
                     Code Crunch 
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -56,17 +89,17 @@
             <div class="container px-lg-5">
                 <div class="row gx-lg-5">
                     <div class="col-lg-12">
-                        <h2 class="fw-bold">Club Description</h2>
-                        <p>Founded in August 2024, Code Crunch is a student-led club at Florida International University (FIU) dedicated to providing a collaborative and inclusive environment for students interested in coding and technology. Our mission is to enhance coding skills, foster innovation, and build a strong, diverse tech community at FIU. We are committed to supporting minorities, people of color, and individuals of all genders. Whether you're a beginner or an experienced coder, our club offers a space for everyone to learn, grow, and connect with like-minded peers through workshops, coding challenges, and networking events.</p>
+                        <h2 class="fw-bold text-center">Club Description</h2>
+                        <p class="text-center">Founded in August 2024, Code Crunch is a student-led club at Florida International University (FIU) dedicated to providing a collaborative and inclusive environment for students interested in coding and technology. Our mission is to enhance coding skills, foster innovation, and build a strong, diverse tech community at FIU. We are committed to supporting minorities, people of color, and individuals of all genders. Whether you're a beginner or an experienced coder, our club offers a space for everyone to learn, grow, and connect with like-minded peers through workshops, coding challenges, and networking events.</p>
                     </div>
                 </div>
 
                 <!-- Executive Board-->
-                <div class="row gx-lg-5 pt-5">
+                <div class="row gx-lg-5 pt-5 justify-content-center">
                     <div class="col-lg-3 col-md-6 mb-5">
                         <div class="card bg-light border-0 h-100">
-                            <img class="card-img-top" src="assets/images/president.jpg" alt="Brian Bazurto - President" />
-                            <div class="card-body text-center p-4 p-lg-5">
+                            <img class="card-img-top" src="https://github.com/ba-00001/imagesforWEB-1/blob/main/president.jpg?raw=true" alt="Brian Bazurto - President" />
+                            <div class="card-body">
                                 <h5 class="fw-bold">Brian Bazurto</h5>
                                 <p class="mb-0">President & Founder</p>
                                 <p class="mt-3">Rising Junior @Florida International University majoring in Computer Science with a minor in Actuarial Studies. Brian dedicates his time to animal shelters and enjoys Miami's diverse cuisine. His passion for tech and community service drives his work and leisure.</p>
@@ -76,10 +109,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-5">
                         <div class="card bg-light border-0 h-100">
-                            <img class="card-img-top" src="assets/images/vice-president.jpg" alt="Amilcar Pena - Vice President" />
-                            <div class="card-body text-center p-4 p-lg-5">
+                            <img class="card-img-top" src="https://github.com/ba-00001/imagesforWEB-1/blob/main/vice-president.jpg?raw=true" alt="Amilcar Pena - Vice President" />
+                            <div class="card-body">
                                 <h5 class="fw-bold">Amilcar Pena</h5>
                                 <p class="mb-0">Vice President & Co-Founder</p>
                                 <p class="mt-3">Rising Junior @Florida International University majoring in Computer Science</p>
@@ -89,26 +123,50 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-5">
                         <div class="card bg-light border-0 h-100">
-                            <img class="card-img-top" src="assets/images/treasurer.jpg" alt="Yana Judah - Treasurer" />
-                            <div class="card-body text-center p-4 p-lg-5">
+                            <div class="card-body">
+                                <i class="bi bi-person-circle" style="font-size: 150px; color: gray;"></i> <!-- Icon for Bryan -->
+                                <h5 class="fw-bold mt-4">Bryan Garcia</h5>
+                                <p class="mb-0">Treasurer & RSOC Representative</p>
+                                <p class="mt-3">Rising Junior @Florida International University majoring in Computer Science. Bryan is passionate about leadership and financial management, ensuring that the club runs smoothly and efficiently.</p>
+                                <a href="https://www.linkedin.com/in/bryan-garcia" target="_blank" class="linkedin-icon">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Team Section -->
+        <section class="pt-4">
+            <div class="container px-lg-5">
+                <h2 class="fw-bold text-center mb-4">Support Team</h2>
+                <div class="row gx-lg-5 justify-content-center">
+                    <div class="col-lg-3 col-md-6 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <img class="card-img-top" src="https://github.com/ba-00001/imagesforWEB-1/blob/main/treasurer-assistant.jpg?raw=true" alt="Yana Judah - Treasurer Assistant" />
+                            <div class="card-body">
                                 <h5 class="fw-bold">Yana Judah</h5>
-                                <p class="mb-0">Treasurer  & Co-Founder</p>
-                                <p class="mt-3">Rising Junior @Florida International University majoring in Computer Science</p>
+                                <p class="mb-0">Treasurer Assistant</p>
+                                <p class="mt-3">Rising Junior @Florida International University majoring in Computer Science. Yana supports financial planning and event organization for Code Crunch.</p>
                                 <a href="https://www.linkedin.com/in/yana-j/" target="_blank" class="linkedin-icon">
                                     <i class="bi bi-linkedin"></i> LinkedIn
                                 </a>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-5">
                         <div class="card bg-light border-0 h-100">
-                            <img class="card-img-top" src="assets/images/rsoc-representative.jpg" alt="Jennifer Parra - RSOC Representative" />
-                            <div class="card-body text-center p-4 p-lg-5">
+                            <img class="card-img-top" src="https://github.com/ba-00001/imagesforWEB-1/blob/main/rsoc-assistant.jpg?raw=true" alt="Jennifer Parra - RSOC Assistant" />
+                            <div class="card-body">
                                 <h5 class="fw-bold">Jennifer Parra</h5>
-                                <p class="mb-0">RSOC Representative</p>
-                                <p class="mt-3">First Generation Computer Science student at Florida International University, with a minor in Criminal Justice. Passionate about being a well-rounded organizer, she has developed strong communication skills through her current role as an audience services representative. In her free time, Jennifer enjoys doing road trips across the country and painting.</p>
+                                <p class="mb-0">RSOC Assistant</p>
+                                <p class="mt-3">First Generation Computer Science student at Florida International University, with a minor in Criminal Justice. Jennifer helps with organizing club events and engaging with RSOC to expand Code Crunch's impact.</p>
                                 <a href="https://www.linkedin.com/in/jennifer-d-parra/" target="_blank" class="linkedin-icon">
                                     <i class="bi bi-linkedin"></i> LinkedIn
                                 </a>
