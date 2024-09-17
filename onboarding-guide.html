@@ -12,10 +12,30 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom CSS for the navbar and onboarding guide-->
         <style>
             .navbar-brand img {
                 height: 50px;
                 margin-right: 10px;
+            }
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px;
+                padding-right: 15px;
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5);
             }
             .content-section {
                 padding: 40px 0;
@@ -41,27 +61,39 @@
         </style>
     </head>
     <body>
-        <!-- Responsive navbar-->
+        <!-- Updated Responsive Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-lg-5">
                 <a class="navbar-brand" href="index.html">
                     <img src="assets/images/logo.png" alt="Code Crunch Logo" />
                     Code Crunch
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="upcoming-events.html">Events</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="onboarding-guide.html">Onboarding Guide</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upcoming-events.html">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="onboarding-guide.html">Onboarding Guide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Header-->
+        <!-- Header -->
         <header class="py-5 bg-light">
             <div class="container px-lg-5">
                 <div class="p-4 p-lg-5 rounded-3 text-center">
@@ -71,7 +103,7 @@
             </div>
         </header>
 
-        <!-- Onboarding Content-->
+        <!-- Onboarding Content -->
         <section class="content-section">
             <div class="container px-lg-5">
                 <div class="row">
@@ -81,7 +113,7 @@
                             <li>RSVP for the meeting <strong>(for special events, this helps us estimate attendance for giveaways, food, etc. Don't forget!)</strong>. You can RSVP in advance for weekly meetings.</li>
                             <li>You can RSVP for up to 3 meetings in advance.</li>
                         </ul>
-                        
+
                         <h2>Steps for New Members:</h2>
                         <ul class="steps-list">
                             <li><a href="index.html">Go to the HOME club page</a>.</li>
@@ -104,14 +136,14 @@
             </div>
         </section>
 
-        <!-- Footer-->
+        <!-- Footer -->
         <footer class="py-5 bg-dark">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Code Crunch</p>
             </div>
         </footer>
 
-        <!-- Bootstrap core JS-->
+        <!-- Bootstrap core JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

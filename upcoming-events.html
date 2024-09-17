@@ -14,9 +14,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <style>
-        body {
-            padding-top: 80px;
-        }
+       
 
         .navbar-brand img {
             height: 50px;
@@ -84,6 +82,45 @@
             border: 1px solid #ccc;
             margin: 40px 0;
         }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-nav .nav-item {
+            padding-left: 15px;
+            padding-right: 15px;
+            position: relative;
+        }
+
+        .navbar-nav .nav-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card-img-top {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .bi-person-circle {
+            font-size: 150px;
+            color: gray;
+        }
     </style>
     <script>
         function loadEvents() {
@@ -100,6 +137,14 @@
                     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
                 },
                 {
+                    name: "Code Crunch Convos (Wednesday)",
+                    date: new Date("2024-09-18T17:00:00"),
+                    time: "5 PM - 6 PM",
+                    description: "Weekly sessions focusing on Data Structures and Python.",
+                    location: "Tamiami Hall Room 107 (FIU Campus)",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
+                },
+                {
                     name: "CrunchTime LeetCode Session #2 (Thursday - Morning)",
                     date: new Date("2024-09-19T11:00:00"),
                     time: "11 AM - 12 PM",
@@ -108,7 +153,7 @@
                     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
                 },
                 {
-                    name: "CrunchTime LeetCode Session # 3(Thursday - Afternoon)",
+                    name: "CrunchTime LeetCode Session # 3 (Thursday - Afternoon)",
                     date: new Date("2024-09-19T14:00:00"),
                     time: "2 PM - 3 PM",
                     description: "Afternoon LeetCode session to prep for technical interviews.",
@@ -120,22 +165,6 @@
                     date: new Date("2024-09-20T16:00:00"),
                     time: "4 PM - 5 PM",
                     description: "End your week with a LeetCode problem-solving session.",
-                    location: "Tamiami Hall Room 107 (FIU Campus)",
-                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
-                },
-                {
-                    name: "Code Crunch Convos (Wednesday)",
-                    date: new Date("2024-09-18T17:00:00"),
-                    time: "5 PM - 6 PM",
-                    description: "Weekly sessions focusing on Data Structures and Python.",
-                    location: "Tamiami Hall Room 107 (FIU Campus)",
-                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
-                },
-                {
-                    name: "General Body Meeting",
-                    date: new Date("2024-09-11T17:00:00"),
-                    time: "5 PM - 6 PM",
-                    description: "The first General Body Meeting of Code Crunch Club.",
                     location: "Tamiami Hall Room 107 (FIU Campus)",
                     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus"
                 },
@@ -166,6 +195,7 @@
                             📍 Location: ${eventLocation}<br>
                             ${event.description}
                         </p>
+                        ${event.imageUrl ? `<img src="${event.imageUrl}" alt="Event image" class="img-fluid rounded" />` : ''}
                         ${mapHtml}
                     </div>
                     <hr />
@@ -186,20 +216,35 @@
 
 <body>
     <!-- Responsive navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
+            <!-- Logo and Brand Name -->
             <a class="navbar-brand" href="index.html">
-                <img src="https://github.com/ba-00001/imagesforWEB-1/blob/main/logo.png?raw=true" alt="Code Crunch Logo" />
+                <img src="assets/images/logo.png" alt="Code Crunch Logo" />
                 Code Crunch
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <!-- Toggler for mobile view -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navigation Links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="onboarding-guide.html">Onboarding Guide</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="upcoming-events.html">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="upcoming-events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="onboarding-guide.html">Onboarding Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
