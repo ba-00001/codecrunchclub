@@ -222,6 +222,7 @@
                 zoom: 'https://fiu.zoom.us/meeting/register/tZwuf-GtrTojHNyFaTdaneKD5H-OpmMuikKa',
                 mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
+
             var leetCodeEvent3 = {
                 title: 'CrunchTime LeetCode Session #3',
                 description: 'Afternoon LeetCode session to sharpen your coding skills.',
@@ -244,14 +245,46 @@
                 mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
+            var panelEvent01 = {
+                title: '🚀 HackerRank Prep Session with Corey Rizzi-Wise from Goldman Sachs! 🚀',
+                description: `📅 Date: October 17th<br>
+            ⏰ Time: 11 AM EST<br>
+            📍 Virtual Location: The virtual meeting link will be available on the event's calendar on our club's website.<br>
+            🏢 In-Person Location: TAM Room 107 (Limited Capacity)<br><br>
+            About This Session: Join us for an exclusive HackerRank Prep Session led by Corey Rizzi-Wise, Vice President of Data Engineering at Goldman Sachs. This session will be available both virtually and in-person, offering you flexible ways to participate. Dive deep into strategies for acing HackerRank assessments and excelling at technical interviews.<br><br>
+            What You Will Learn:<br>
+            🎯 Insights on HackerRank’s Assessment Criteria: Understand what top firms seek in candidates.<br>
+            🧠 Effective Problem-Solving Techniques: Enhance your approach to tackling complex coding challenges.<br>
+            🔥 Expert Advice: Gain direct insights from an industry leader to help you stand out in your technical interviews.<br><br>
+            Spaces for the in-person session are limited, so make sure to RSVP soon!<br><br>
+            Register and Reserve Your Spot Here: <a href="https://lu.ma/3xukhw5y" target="_blank">https://lu.ma/3xukhw5y</a><br><br>
+            We look forward to seeing you there, whether you join us online or in person!`,
+                location: 'Tamiami Hall Room 107',
+                zoom: 'https://fiu.zoom.us/meeting/register/tZMkf-qoqzkiEtCNZHWkK43K3zGBnq0mXSWl',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+            };
+
+
+
+
+
+
+
             // Generate recurring events until November 29th, 2024
             var events = [
                 ...generateRecurringEvents(leetCodeEvent1, new Date('2024-09-09'), new Date('2024-11-29'), 1, { hours: 12, minutes: 0 }), // Mondays
                 ...generateRecurringEvents(codeCrunchConvos, new Date('2024-09-09'), new Date('2024-11-29'), 3, { hours: 17, minutes: 0 }), // Wednesdays
-                ...generateRecurringEvents(leetCodeEvent2, new Date('2024-09-09'), new Date('2024-11-29'), 4, { hours: 11, minutes: 0 }),  // Thursdays
+                ...generateRecurringEvents(leetCodeEvent2, new Date('2024-09-09'), new Date('2024-10-16'), 4, { hours: 11, minutes: 0 }),  // Thursdays
+
+                ...generateRecurringEvents(leetCodeEvent2, new Date('2024-10-20'), new Date('2024-11-29'), 4, { hours: 11, minutes: 0 }),  // Thursdays
+
                 ...generateRecurringEvents(leetCodeEvent3, new Date('2024-09-09'), new Date('2024-11-29'), 4, { hours: 14, minutes: 0 }),  // Thursdays
                 ...generateRecurringEvents(leetCodeEvent4, new Date('2024-09-09'), new Date('2024-11-29'), 5, { hours: 16, minutes: 0 }),  // friday
-                ...generateRecurringEvents(leetCodeEvent0, new Date('2024-09-04'), new Date('2024-09-05'), 3, { hours: 16, minutes: 0 })  // wed
+                ...generateRecurringEvents(leetCodeEvent0, new Date('2024-09-04'), new Date('2024-09-05'), 3, { hours: 16, minutes: 0 }),  // wed
+
+                //PANEL EVENTS 
+                ...generateRecurringEvents(panelEvent01, new Date('2024-10-17'), new Date('2024-10-18'), 4, { hours: 11, minutes: 0 }) // GOLDMAN
+
             ];
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
