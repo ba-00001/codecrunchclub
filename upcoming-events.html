@@ -158,9 +158,15 @@
             <p id="eventDescription"></p>
             <p id="eventTime"></p>
             <p id="eventLocation"></p>
-            <div id="eventMap" style="margin-top: 20px;">
+            
+            <!--Map 
+            
+             <div id="eventMap" style="margin-top: 20px;">
                 <iframe id="mapFrame" allowfullscreen="" loading="lazy"></iframe>
             </div>
+            
+            -->
+           
             <a id="zoomLink" href="#" target="_blank" style="display: block; margin-top: 10px;">If you can't join in person, click here to join via Zoom</a>
         </div>
     </div>
@@ -176,7 +182,7 @@
             var eventTime = document.getElementById('eventTime');
             var eventLocation = document.getElementById('eventLocation');
             var zoomLink = document.getElementById('zoomLink');
-            var mapFrame = document.getElementById('mapFrame');
+            //var mapFrame = document.getElementById('mapFrame');
 
             // Helper function to generate recurring events
             function generateRecurringEvents(eventTemplate, startDate, endDate, dayOfWeek, timeObj) {
@@ -211,51 +217,51 @@
             var leetCodeEvent0 = {
                 title: 'CrunchTime GBM',
                 description: 'GENERAL BODY MEETING! Come join us for our first GBM of the semester! We will be discussing our plans for the semester and how you can get involved!',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
             var leetCodeEvent1 = {
                 title: 'CrunchTime LeetCode Session #1',
                 description: 'A LeetCode practice session for enhancing problem-solving skills.',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZcldOqqpzMpEtwGD4E56DuKsgQTOOVlcgi-',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
             var leetCodeEvent2 = {
                 title: 'CrunchTime LeetCode Session #2',
                 description: 'Morning LeetCode session to sharpen your coding skills.',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZwuf-GtrTojHNyFaTdaneKD5H-OpmMuikKa',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
             var leetCodeEvent3 = {
                 title: 'CrunchTime LeetCode Session #3',
                 description: 'Afternoon LeetCode session to sharpen your coding skills.',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZwucOqrpj0tHd02AxG8cVroGKq5rDop78rm',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
             var leetCodeEvent4 = {
                 title: 'CrunchTime LeetCode Session #4',
                 description: 'Afternoon LeetCode session to sharpen your coding skills.',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZMkd-uqpzgiGNO6x6etGuiZMjecXdT1CtDH',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
             var codeCrunchConvos = {
                 title: 'Code Crunch Convos',
                 description: 'Weekly sessions focusing on Data Structures and Python.',
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZEtcOCppjkuE9AGNEnpQCsJm8Y-5DpwZZ7j ',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
             var panelEvent01 = {
-                title: '🚀 HackerRank Prep Session with Corey Rizzi-Wise from Goldman Sachs! 🚀',
+                title: '🚀 SWE Session with Corey Rizzi-Wise from Goldman Sachs! 🚀',
                 description: `📅 Date: October 17th<br>
             ⏰ Time: 11 AM EST<br>
             📍 Virtual Location: The virtual meeting link will be available on the event's calendar on our club's website.<br>
@@ -268,9 +274,9 @@
             Spaces for the in-person session are limited, so make sure to RSVP soon!<br><br>
             Register and Reserve Your Spot Here: <a href="https://lu.ma/3xukhw5y" target="_blank">https://lu.ma/3xukhw5y</a><br><br>
             We look forward to seeing you there, whether you join us online or in person!`,
-                location: 'Tamiami Hall Room 107',
+                location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
                 zoom: 'https://fiu.zoom.us/meeting/register/tZMkf-qoqzkiEtCNZHWkK43K3zGBnq0mXSWl',
-                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+                //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
 
 
@@ -307,15 +313,17 @@
                     eventLocation.innerHTML = 'Location: ' + info.event.extendedProps.location;
                     zoomLink.href = info.event.extendedProps.zoom;
 
-                    // Check if there's a map URL and display it
-                    if (info.event.extendedProps.mapUrl) {
-                        mapFrame.src = info.event.extendedProps.mapUrl;
-                        document.getElementById('eventMap').style.display = 'block';
-                    } else {
-                        document.getElementById('eventMap').style.display = 'none';
-                    }
 
-                    // Show the modal
+                    
+                    // Check if there's a map URL and display it
+                //    if (info.event.extendedProps.mapUrl) {
+                //        mapFrame.src = info.event.extendedProps.mapUrl;
+                //        document.getElementById('eventMap').style.display = 'block';
+                //    } else {
+                //        document.getElementById('eventMap').style.display = 'none';
+                //    }
+
+                //    // Show the modal
                     modal.style.display = 'block';
                 }
             });
