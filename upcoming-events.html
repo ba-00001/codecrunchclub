@@ -158,7 +158,7 @@
             <p id="eventDescription"></p>
             <p id="eventTime"></p>
             <p id="eventLocation"></p>
-            
+            <div id="eventImage"></div>
             <!--Map 
             
              <div id="eventMap" style="margin-top: 20px;">
@@ -182,6 +182,7 @@
             var eventTime = document.getElementById('eventTime');
             var eventLocation = document.getElementById('eventLocation');
             var zoomLink = document.getElementById('zoomLink');
+            var eventImage = document.getElementById('eventImage');
             //var mapFrame = document.getElementById('mapFrame');
 
             // Helper function to generate recurring events
@@ -249,7 +250,7 @@
                 title: 'CrunchTime LeetCode Session #4',
                 description: 'Afternoon LeetCode session to sharpen your coding skills.',
                 location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
-                zoom: 'https://fiu.zoom.us/meeting/register/tZMkd-uqpzgiGNO6x6etGuiZMjecXdT1CtDH',
+                zoom: 'https://fiu.zoom.us/j/87902293827?pwd=LvcrFPLUBOz6J4D2FyzEjhuY1Qvu3u.1',
                 //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
             };
             var codeCrunchConvos = {
@@ -275,8 +276,11 @@
             Register and Reserve Your Spot Here: <a href="https://lu.ma/3xukhw5y" target="_blank">https://lu.ma/3xukhw5y</a><br><br>
             We look forward to seeing you there, whether you join us online or in person!`,
                 location: 'RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
-                zoom: 'https://fiu.zoom.us/meeting/register/tZMkf-qoqzkiEtCNZHWkK43K3zGBnq0mXSWl',
+                zoom: 'https://recruiting360.avature.net/candidates?projectId=21369',
+                imageLink: `<a href="https://github.com/user-attachments/assets/4b87599d-adbc-4375-b4c9-92b74826fe4b"><img src="https://github.com/user-attachments/assets/4b87599d-adbc-4375-b4c9-92b74826fe4b" alt="FIU Code Crunch: HackerRank Prep Session" style="width:100%;"></a>`
                 //mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.580537138036!2d-80.3777072!3d25.7528213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9bf2398be2b61%3A0x46987dbd1a6e11cd!2sTamiami%20Hall!5e0!3m2!1sen!2sus!4v1693181870989!5m2!1sen!2sus'
+            //https://fiu.zoom.us/meeting/register/tZMkf-qoqzkiEtCNZHWkK43K3zGBnq0mXSWl
+            //
             };
 
 
@@ -313,7 +317,7 @@
                     eventLocation.innerHTML = 'Location: ' + info.event.extendedProps.location;
                     zoomLink.href = info.event.extendedProps.zoom;
 
-
+                    eventImage.innerHTML = info.event.extendedProps.imageLink;
                     
                     // Check if there's a map URL and display it
                 //    if (info.event.extendedProps.mapUrl) {
@@ -343,7 +347,7 @@
             };
         });
 
-        
+        document.getElementById('eventImage').innerHTML = panelEvent01.imageLink;
     </script>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
