@@ -315,6 +315,27 @@
             zoom: 'https://fiu.zoom.us/meeting/register/tZcvduGqqzMsG9T__LKSHRQ8CiyWsvUIKybJ#/registration',
             //imageLink: `<a href="https://github.com/user-attachments/assets/emely-session-image"><img src="https://github.com/user-attachments/assets/emely-session-image" alt="FIU Code Crunch: SWE Convos with Emely Rosario" style="width:100%;"></a>`
         };
+        
+
+        var panelEvent03 = {
+                title: '🎉 SWE Convos with Jose Puyol, Software Engineer at Google! 🎉',
+                description: `📅 Date: Friday, November 8<br>
+                            🕓 Time: 4:00 PM - 5:00 PM EST<br>
+                            📍 Virtual Event: Join In-Person at FIU GC Room 305 or Stream via Zoom<br>
+                            <br>
+                            We’re thrilled to host Jose Puyol, a Software Engineer at Google, as part of our Code Crunch SWE Convos series! Jose will share his journey, insights into the tech industry, and tips on excelling in technical interviews. This event is open to all students—whether you’re aiming for a career in tech or just looking to grow your skills, this session is for you!<br><br>
+                            🔹 RSVP Here: <a href="https://lu.ma/codecrunch" target="_blank">https://lu.ma/codecrunch</a><br>
+                            🔹 Event Direct Link: <a href="https://lu.ma/93z6pl8d" target="_blank">https://lu.ma/93z6pl8d</a><br>
+                            🔹 Zoom Registration Link: <a href="https://fiu.zoom.us/meeting/register/tZAqceqtqT8vHtXor1aXAlyJQSp8YtAxpJ4X" target="_blank">https://fiu.zoom.us/meeting/register/tZAqceqtqT8vHtXor1aXAlyJQSp8YtAxpJ4X</a><br>
+                            🔹 ZOOM passcode: CODEFALL24<br><br>
+                            Don't miss out on this unique opportunity to learn, network, and get inspired! 🎉<br><br>
+                            #CodeCrunchClub #SWEConvos #Google #SoftwareEngineering #TechCareers #UniversityStudents #Networking #FIU #OpenToAllStudents`,
+                location: 'FIU GC Room 305 (in-person) or join via Zoom',
+                rsvpLink: 'https://lu.ma/codecrunch',
+                eventDirectLink: 'https://lu.ma/93z6pl8d',
+                zoom: 'https://fiu.zoom.us/meeting/register/tZAqceqtqT8vHtXor1aXAlyJQSp8YtAxpJ4X',
+                passcode: 'CODEFALL24'
+            };
 
 
 
@@ -332,9 +353,9 @@
                 ...generateRecurringEvents(leetCodeEvent2, new Date('2024-10-20'), new Date('2024-11-29'), 4, { hours: 11, minutes: 0 }),  // Thursdays
 
                 ...generateRecurringEvents(leetCodeEvent3, new Date('2024-09-09'), new Date('2024-11-29'), 4, { hours: 14, minutes: 0 }),  // Thursdays
-                ...generateRecurringEvents(leetCodeEvent4, new Date('2024-09-09'), new Date('2024-10-31'), 5, { hours: 16, minutes: 0 }),  // friday
+                ...generateRecurringEvents(leetCodeEvent4, new Date('2024-09-09'), new Date('2024-10-31'), 5, { hours: 16, minutes: 0 }),  // friday break
 
-                ...generateRecurringEvents(leetCodeEvent4, new Date('2024-11-05'), new Date('2024-11-29'), 5, { hours: 16, minutes: 0 }),  // friday
+                ...generateRecurringEvents(leetCodeEvent4, new Date('2024-11-14'), new Date('2024-11-29'), 5, { hours: 16, minutes: 0 }),  // friday start again
 
                 ...generateRecurringEvents(leetCodeEvent0, new Date('2024-09-04'), new Date('2024-09-05'), 3, { hours: 16, minutes: 0 }),  // wed
 
@@ -342,15 +363,25 @@
                 ...generateRecurringEvents(panelEvent01, new Date('2024-10-17'), new Date('2024-10-18'), 4, { hours: 11, minutes: 0 }), // GOLDMAN
                 
 
-                {
-        title: panelEvent02.title,
-        description: panelEvent02.description,
-        start: '2024-11-01T16:00:00',
-        time: '4:00 PM - 5:00 PM EST',
-        location: panelEvent02.location,
-        zoom: panelEvent02.zoom,
-        imageLink: panelEvent02.imageLink
-    }
+                {// ukg
+                    title: panelEvent02.title,
+                    description: panelEvent02.description,
+                    start: '2024-11-01T16:00:00',
+                    time: '4:00 PM - 5:00 PM EST',
+                    location: panelEvent02.location,
+                    zoom: panelEvent02.zoom,
+                    imageLink: panelEvent02.imageLink
+                },     
+                
+                {  // GOOGLE
+                    title: panelEvent03.title,
+                    description: panelEvent03.description,
+                    start: '2024-11-08T16:00:00',
+                    time: '4:00 PM - 5:00 PM EST',
+                    location: panelEvent03.location,
+                    zoom: panelEvent03.zoom,
+                    imageLink: panelEvent03.imageLink
+                },
 
             ];
 
