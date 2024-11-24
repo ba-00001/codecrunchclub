@@ -12,34 +12,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <!-- Custom CSS for logo positioning and background color-->
+        <!-- Custom CSS -->
         <style>
-
-
-            .logo-container {
-                text-align: center;
-                background-color: #5072a7; /* Match the background color of the logo */
-                padding: 5px 0;
-            }
-            .logo-container img {
-                height: 300px; /* Twice the original size */
+            /* General styles */
+            html, body {
+                margin: 0;
+                padding: 0;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
             }
 
-            .navbar-brand img {
-                height: 50px; /* Size of the logo next to the navbar */
-                margin-right: 10px;
-            }
-            .contact-button {
-                margin-bottom: 20px; /* Adds space below the button */
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #1a73e8, #ff5722);
+                color: white;
             }
 
-            .group-photo img {
-                max-width: 100%; /* Makes sure the image is responsive */
-                height: auto;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
-                border-radius: 8px; /* Rounds the corners slightly */
-            }
-
+            /* Navbar styles */
             .navbar {
                 position: sticky;
                 top: 0;
@@ -60,114 +50,192 @@
                 background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
             }
 
+            
+            .navbar-brand img {
+                height: 50px; /* Size of the logo next to the navbar */
+                margin-right: 10px;
+            }
+
             .header-container {
                 background-color: #f8f9fa; /* Light, neutral background */
                 padding: 3rem 1rem; /* More vertical padding for better emphasis */
                 border-radius: 0.5rem; /* Soft rounded corners */
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
             }
+            
 
-            .header-title {
-                font-size: 2.5rem; /* Slightly larger for emphasis */
-                color: #0056b3; /* Deep blue, offering a professional yet vibrant look */
+
+            /* Logo section styles */
+            .logo-container {
+                text-align: center;
+                padding: 5px 0;
             }
 
-            .header-subtitle {
-                font-size: 1.2rem;
-                color: #333; /* Ensuring good readability */
-                margin-top: 1rem; /* Adding space between paragraphs */
+            .logo-container img {
+                height: 300px;
             }
 
+            /* Hackathon Section */
+            .hackathon-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                padding: 50px 20px;
+                flex-wrap: wrap;
+            }
 
+            .countdown-section {
+                flex: 0 0 40%;
+                text-align: left;
+            }
 
+            .countdown-section h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+
+            .countdown {
+                font-size: 1.8rem;
+                margin-top: 20px;
+            }
+
+            .image-section {
+                flex: 0 0 55%;
+                text-align: center;
+            }
+
+            .image-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Page content styles */
+            .card {
+                background: rgba(255, 255, 255, 0.8);
+                color: #333;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .card h2 {
+                color: #0056b3;
+            }
+
+            /* Footer styles */
+            footer {
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                width: 100%;
+                position: relative;
+                margin-top: auto;
+            }
+
+            /* Social buttons */
+            .social-buttons .btn {
+                margin: 5px;
+            }
         </style>
     </head>
     <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container px-lg-5">
-        <!-- Logo and Brand Name -->
-        <a class="navbar-brand" href="index.html">
-            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
-            Code Crunch
-        </a>
-        <!-- Toggler for mobile view -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Navigation Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="upcoming-events.html">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cc_atfiu.html">Code Crunch at FIU</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cc_global.html">Code Crunch GLOBAL</a>
-                </li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+                    Code Crunch
+                </a>
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upcoming-events.html">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cc_atfiu.html">Code Crunch at FIU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cc_global.html">Code Crunch GLOBAL</a>
+                        </li>
+        
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-        <!-- Logo section below the navbar -->
+        <!-- Logo Section -->
         <div class="logo-container">
             <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
         </div>
 
-<!-- Header -->
-<header class="py-5 bg-light">
-    <div class="container px-lg-5">
-        <div class="p-4 p-lg-5 rounded-3 text-center">
-            <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
-            <p class="fs-4">
-                Bridging global innovation and local engagement, Code Crunch offers a dynamic platform for all university students—from FIU and beyond. Join us to break down barriers in technology, participate in coding workshops, engage in community-driven projects, and prepare for the future with hands-on experiences both virtually and on campus.
-            </p>
-            <p>
-                Whether you're tuning in from across the globe or joining us at Florida International University, we provide resources and a community to support your growth as a coder and innovator.
-            </p>
 
-                <!-- Social Media Links -->
-                <div class="d-flex justify-content-center mt-3">
-                    <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary mx-2" aria-label="LinkedIn">
-                        <i class="bi bi-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger mx-2" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i> Instagram
-                    </a>
-                    <a href="https://forms.office.com/r/M5itd5FK32" class="btn btn-success mx-2" aria-label="WhatsApp">
-                        <i class="bi bi-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://forms.office.com/r/JEbApqq0U9" class="btn btn-secondary mx-2" aria-label="Discord">
-                        <i class="bi bi-discord"></i> Discord
-                    </a>
-                    <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning mx-2" aria-label="Panther Connect">
-                        <i class="bi bi-university"></i> Panther Connect
-                    </a>
-                    <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark mx-2" aria-label="Linktree">
-                        <i class="bi bi-link"></i> Linktree
-                    </a>
-
-                </div>
-
+ <!-- Welcome Header -->
+ <header class="py-5">
+    <div class="container px-lg-5 text-center">
+        <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
+        <p class="fs-4">
+            Bridging global innovation and local engagement, Code Crunch offers a dynamic platform for all university students—from FIU and beyond. Join us to break down barriers in technology, participate in coding workshops, engage in community-driven projects, and prepare for the future with hands-on experiences both virtually and on campus.
+        </p>
+        <p>
+            Whether you're tuning in from across the globe or joining us at Florida International University, we provide resources and a community to support your growth as a coder and innovator.
+        </p>
+        <div class="social-buttons">
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+                <i class="bi bi-instagram"></i> Instagram
+            </a>
+            <a href="https://forms.office.com/r/M5itd5FK32" class="btn btn-success" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://forms.office.com/r/JEbApqq0U9" class="btn btn-secondary" aria-label="Discord">
+                <i class="bi bi-discord"></i> Discord
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+                <i class="bi bi-university"></i> Panther Connect
+            </a>
+            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+                <i class="bi bi-link"></i> Linktree
+            </a>
         </div>
-        
-
     </div>
 </header>
 
+
+        <!-- Hackathon Section -->
+        <section class="hackathon-section">
+            <div class="hackathon-container">
+                <!-- Countdown Section -->
+                <div class="countdown-section">
+                    <h1>Code Crunch Hackathon</h1>
+                    <p>Spring 2026 - Something amazing is on its way!</p>
+                    <div id="countdown" class="countdown"></div>
+                </div>
+
+                <!-- Image Section -->
+                <div class="image-section">
+                    <img src="https://github.com/user-attachments/assets/7863c177-b000-45ed-8b84-02e3b1946e32" alt="Hackathon Image">
+                </div>
+            </div>
+        </section>
 
         <!-- Group Photo Section -->
         <section class="group-photo py-5">
@@ -177,43 +245,64 @@
             </div>
         </section>
 
-            <!-- Page Content -->
-            <section class="pt-4">
-                <div class="container px-lg-5">
-                    <div class="row gx-lg-5">
 
-                        <!-- Global Code Crunch Card -->
-                        <div class="col-lg-6 mb-5">
-                            <div class="card bg-light border-0 h-100">
-                                <div class="card-body text-center p-4 p-lg-5">
-                                    <h2 class="fs-4 fw-bold">Code Crunch Global</h2>
-                                    <p class="mb-0">Join a global community of coders and connect with like-minded individuals from around the world through our virtual platforms.</p>
-                                    <a class="btn btn-primary btn-lg mt-3" href="cc_global.html" target="_blank">All University Students</a>
-                                </div>
+        <!-- Page Content -->
+        <section class="page-content-section pt-4">
+            <div class="container px-lg-5">
+                <div class="row gx-lg-5">
+                    <!-- Global Code Crunch Card -->
+                    <div class="col-lg-6 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Code Crunch Global</h2>
+                                <p>Join a global community of coders and connect with like-minded individuals through virtual platforms.</p>
+                                <a class="btn btn-primary btn-lg mt-3" href="cc_global.html" target="_blank">All University Students</a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Code Crunch at FIU Card -->
-                        <div class="col-lg-6 mb-5">
-                            <div class="card bg-light border-0 h-100">
-                                <div class="card-body text-center p-4 p-lg-5">
-                                    <h2 class="fs-4 fw-bold">Code Crunch at FIU</h2>
-                                    <p class="mb-0">Engage in exclusive on-campus events and workshops designed for FIU students, offering hands-on learning and collaboration.</p>
-                                    <a class="btn btn-primary btn-lg mt-3" href="cc_atfiu.html" target="_blank">FIU Students</a>
-                                </div>
+                    <!-- Code Crunch at FIU Card -->
+                    <div class="col-lg-6 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Code Crunch at FIU</h2>
+                                <p>Engage in exclusive on-campus events and workshops designed for FIU students.</p>
+                                <a class="btn btn-primary btn-lg mt-3" href="cc_atfiu.html" target="_blank">FIU Students</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <section class="footer-section">
+            <footer>
+                <p>&copy; Code Crunch. All rights reserved.</p>
+            </footer>
+        </section>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Code Crunch</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
+        <!-- Countdown Script -->
+        <script>
+            const hackathonDate = new Date("March 15, 2026 09:00:00").getTime();
+            const countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = hackathonDate - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = "The hackathon is live now!";
+                }
+            }, 1000);
+        </script>
+
+        <!-- Bootstrap Core JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
