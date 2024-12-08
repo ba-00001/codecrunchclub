@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Code Crunch - Home" />
+        <meta name="author" content="Code Crunch" />
+        <title>Home - Code Crunch</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <style>
+            /* General styles */
+            html, body {
+                margin: 0;
+                padding: 0;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #1a73e8, #ff5722);
+                color: white;
+            }
+
+            /* Navbar styles */
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px; /* Add padding to the left */
+                padding-right: 15px; /* Add padding to the right */
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+            }
+
+            
+            .navbar-brand img {
+                height: 50px; /* Size of the logo next to the navbar */
+                margin-right: 10px;
+            }
+
+            .header-container {
+                background-color: #f8f9fa; /* Light, neutral background */
+                padding: 3rem 1rem; /* More vertical padding for better emphasis */
+                border-radius: 0.5rem; /* Soft rounded corners */
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
+            }
+            
+
+
+            /* Logo section styles */
+            .logo-container {
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .logo-container img {
+                height: 300px;
+            }
+
+            /* Hackathon Section */
+            .hackathon-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                padding: 50px 20px;
+                flex-wrap: wrap;
+            }
+
+            .countdown-section {
+                flex: 0 0 40%;
+                text-align: left;
+            }
+
+            .countdown-section h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+
+            .countdown {
+                font-size: 1.8rem;
+                margin-top: 20px;
+            }
+
+            .image-section {
+                flex: 0 0 55%;
+                text-align: center;
+            }
+
+            .image-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Page content styles */
+            .card {
+                background: rgba(255, 255, 255, 0.8);
+                color: #333;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .card h2 {
+                color: #0056b3;
+            }
+
+            /* Footer styles */
+            footer {
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                width: 100%;
+                position: relative;
+                margin-top: auto;
+            }
+
+            /* Social buttons */
+            .social-buttons .btn {
+                margin: 5px;
+            }
+
+
+
+
+
+
+
+            .center-text {
+        text-align: center;
+        padding: 10px;
+    }
+    .member-section {
+        text-align: center;
+        padding: 20px;
+    }
+    .benefits-list {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+    .benefits-list li {
+        margin: 5px 0;
+    }
+    .social-buttons a {
+        margin: 5px;
+    }
+    .social-buttons a:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+                    Code Crunch
+                </a>
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upcoming-events.html">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+        </div>
+
+
+        
+ <!-- Welcome Header -->
+<header class="py-5">
+    <div class="container px-lg-5 text-center">
+
+        <!-- Social Media Buttons -->
+        <div class="social-buttons">
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="Visit Code Crunch on LinkedIn">
+                <i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Visit Code Crunch on Instagram">
+                <i class="bi bi-instagram" aria-hidden="true"></i> Instagram
+            </a>
+            <a href="https://forms.office.com/r/M5itd5FK32" class="btn btn-success" aria-label="Join Code Crunch WhatsApp group">
+                <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
+            </a>
+            <a href="https://forms.office.com/r/JEbApqq0U9" class="btn btn-secondary" aria-label="Join Code Crunch Discord community">
+                <i class="bi bi-discord" aria-hidden="true"></i> Discord
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Join Code Crunch on Panther Connect">
+                <i class="bi bi-university" aria-hidden="true"></i> Panther Connect
+            </a>
+            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Visit Code Crunch on Linktree">
+                <i class="bi bi-link" aria-hidden="true"></i> Linktree
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="page-content-section pt-4">
+    <div class="container px-lg-5">
+        
+        <!-- Become a Member Section -->
+        <h1 class="display-5 fw-bold member-section">Feedback</h1>
+        <p class="center-text">
+            We value your feedback! Share your thoughts on our events and suggest improvements.
+        </p>
+
+        <!-- Page Cards -->
+        <div class="row gx-lg-5">
+            
+            <!-- Code Crunch at FIU Card -->
+            <div class="col-lg-6 mb-5">
+                <div class="card bg-light border-0 h-100 shadow-sm">
+                    <div class="card-body text-center p-4 p-lg-5">
+                        <h2 class="fs-4 fw-bold">Feedback for FIU Students</h2>
+                        <a 
+                           class="btn btn-primary btn-lg mt-3" 
+                           href="https://forms.office.com/r/H5vtXACK6j" 
+                           target="_blank" 
+                           aria-label="Join Code Crunch for FIU Students">
+                            Give Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Code Crunch Card -->
+            <div class="col-lg-6 mb-5">
+                <div class="card bg-light border-0 h-100 shadow-sm">
+                    <div class="card-body text-center p-4 p-lg-5">
+                        <h2 class="fs-4 fw-bold">Feedback for Any University Student</h2>
+                        <a 
+                           class="btn btn-primary btn-lg mt-3" 
+                           href="https://forms.gle/5Z8Pha7G7d2kfoFY9" 
+                           target="_blank" 
+                           aria-label="Join Code Crunch for University Students Worldwide">
+                           Give Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Footer -->
+        <section class="footer-section">
+            <footer>
+                <p>&copy; Code Crunch. All rights reserved.</p>
+            </footer>
+        </section>
+
+ 
+
+        <!-- Bootstrap Core JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
