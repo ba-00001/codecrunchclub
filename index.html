@@ -76,41 +76,49 @@
             }
 
             /* Hackathon Section */
-            .hackathon-container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 20px;
-                padding: 50px 20px;
-                flex-wrap: wrap;
-            }
+            .hackathon-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full height */
+}
 
-            .countdown-section {
-                flex: 0 0 40%;
-                text-align: left;
-            }
+.hackathon-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 
-            .countdown-section h1 {
-                font-size: 2.5rem;
-                font-weight: bold;
-            }
+.countdown-section {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    text-align: center;
+    color: #333; /* Dark text for better contrast */
+    background-color: white; /* White background behind text */
+    padding: 20px; /* Add padding around the text */
+    border-radius: 10px; /* Optional: rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    z-index: 10; /* Ensure the countdown is above the image */
+}
 
-            .countdown {
-                font-size: 1.8rem;
-                margin-top: 20px;
-            }
+.countdown-section h1, .countdown-section p {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
 
-            .image-section {
-                flex: 0 0 55%;
-                text-align: center;
-            }
+.image-section {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
-            .image-section img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the section without distortion */
+    display: block;
+}
 
             /* Page content styles */
             .card {
@@ -186,11 +194,22 @@
     <div class="container px-lg-5 text-center">
         <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
         <p class="fs-4">
-            Bridging global innovation and local engagement, Code Crunch offers a dynamic platform  open to all university students from any background🌍. Join us to break down barriers in technology, participate in coding workshops, engage in community-driven projects, and prepare for the future with hands-on experiences both virtually and on campus.
+            Code Crunch is bridging global innovation with local engagement, offering a dynamic platform open to all university students, regardless of major—no prior experience required! Freshmen, graduates, and alumni from any university are welcome 🌍. Join us to break down barriers in technology, participate in hands-on coding workshops, collaborate on community-driven projects, and prepare for the future through immersive virtual and on-campus experiences.
         </p>
+        
+        <p class="fs-4">
+            Whether you’re joining us via our virtual Zoom sessions from anywhere in the world or in person right here at Florida International University, we provide the resources, mentorship, and community you need to grow as a coder and innovator.
+        </p>
+        
+        <p class="fs-4"><strong>Let’s innovate together! Built and led by students, for students.</strong></p>
+        
         <p>
-            Whether you're tuning in from across the globe or joining us at Florida International University, we provide resources and a community to support your growth as a coder and innovator.
+            <h5 class="fw-bold">#CodeCrunch #CodeCrunchFIU #DiversityInTech #InclusiveTech #LeadershipOpportunities #FIUTechCommunity #WomenInSTEM #LGBTQInTech #LatinxInTech #BlackInTech #AAPIsInTech #TechLeadership #JoinOurTeam #FIUInnovation #TechForEveryone #EmpowerTech #FutureLeaders #HackerCulture #CodeYourFuture #TechDiversity #FIUPanthers #STEMOpportunities #BuildYourFuture #LeadWithCode #PanthersInTech</h5>
         </p>
+        
+        
+        
+        
         <div class="social-buttons">
             <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
                 <i class="bi bi-linkedin"></i> LinkedIn
@@ -215,22 +234,24 @@
 </header>
 
 
-        <!-- Hackathon Section -->
-        <section class="hackathon-section">
-            <div class="hackathon-container">
-                <!-- Countdown Section -->
-                <div class="countdown-section">
-                    <h1>Code Crunch Hackathon</h1>
-                    <p>Spring 2026 - Something amazing is on its way!</p>
-                    <div id="countdown" class="countdown"></div>
-                </div>
+<!-- Hackathon Section -->
+<section class="hackathon-section">
+    <div class="hackathon-container">
+        <!-- Countdown Section -->
+        <div class="countdown-section">
+            <h1>Code Crunch Hackathon</h1>
+            <p>Spring 2026 - Something amazing is on its way!</p>
+            <div id="countdown" class="countdown"></div>
+        </div>
 
-                <!-- Image Section -->
-                <div class="image-section">
-                    <img src="https://github.com/user-attachments/assets/7863c177-b000-45ed-8b84-02e3b1946e32" alt="Hackathon Image">
-                </div>
-            </div>
-        </section>
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="https://github.com/user-attachments/assets/7863c177-b000-45ed-8b84-02e3b1946e32" alt="Hackathon Image">
+        </div>
+    </div>
+</section>
+
+
 
         <!-- Group Photo Section -->
         <section class="group-photo py-5">
