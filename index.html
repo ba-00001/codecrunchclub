@@ -77,48 +77,48 @@
 
             /* Hackathon Section */
             .hackathon-section {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full height */
-}
+                position: relative;
+                width: 100%;
+                height: 100vh; /* Full height */
+            }
 
-.hackathon-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
+            .hackathon-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
 
-.countdown-section {
-    position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for exact centering */
-    text-align: center;
-    color: #333; /* Dark text for better contrast */
-    background-color: white; /* White background behind text */
-    padding: 20px; /* Add padding around the text */
-    border-radius: 10px; /* Optional: rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-    z-index: 10; /* Ensure the countdown is above the image */
-}
+            .countdown-section {
+                position: absolute;
+                top: 50%; /* Center vertically */
+                left: 50%; /* Center horizontally */
+                transform: translate(-50%, -50%); /* Adjust for exact centering */
+                text-align: center;
+                color: #333; /* Dark text for better contrast */
+                background-color: white; /* White background behind text */
+                padding: 20px; /* Add padding around the text */
+                border-radius: 10px; /* Optional: rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+                z-index: 10; /* Ensure the countdown is above the image */
+            }
 
-.countdown-section h1, .countdown-section p {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+            .countdown-section h1, .countdown-section p {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
 
-.image-section {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
+            .image-section {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
 
-.image-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the section without distortion */
-    display: block;
-}
+            .image-section img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ensure the image covers the section without distortion */
+                display: block;
+            }
 
             /* Page content styles */
             .card {
@@ -144,8 +144,12 @@
             }
 
             /* Social buttons */
-            .social-buttons .btn {
+            .social-buttons a {
                 margin: 5px;
+            }
+            .social-buttons a:hover {
+                transform: scale(1.1);
+                transition: transform 0.2s ease-in-out;
             }
         </style>
     </head>
@@ -269,12 +273,41 @@
 
 
             <!-- 
+            Tropical Spring Hack: A spring hackathon that embodies Miami's vibrant tropical energy. 
+            It includes workshops throughout the week, followed by the hackathon from Friday evening to Sunday evening.
+            -->
+            <div class="card text-center my-4">
+                <div class="card-header bg-success text-white">
+                    <h3>Code Crunch - Tropical Spring Hack | SPRING 2026 </h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Spring 2026 Hackathon</h4>
+                    <p class="card-text">
+                        Hack your way into the spring vibes! Let Miami's tropical energy inspire your next big idea in this vibrant hackathon.
+                    </p>
+                    <p class="card-text">
+                        <strong>Workshops:</strong> Daily sessions from Monday to Friday to prep you for the big weekend.  
+                        <strong>Hackathon:</strong> Starts on <strong>Friday, March 27, 2026, at 9 AM</strong> and ends on <strong>Sunday, March 29, 2026, at 5 PM</strong>.
+                    </p>
+                    <p class="card-text">
+                        Dive into the tropical Miami spirit, code with fellow innovators, and let your ideas bloom this spring.
+                    </p>
+                    <p>Applications open November 2025</p>
+                    <a href="all-tropical-spring-hack26.html" class="btn btn-warning">Learn More</a> <!-- Register Now on nov 2025 -->
+                </div>
+                <div class="card-footer text-muted">
+                    March 27–29, 2026
+                </div>
+            </div>
+
+
+        <!-- 
         305 Hackathon: A fall hackathon inspired by Miami's iconic area code. 
         It includes daily workshops from Monday to Friday, followed by the hackathon from Friday evening to Sunday evening.
         -->
         <div class="card text-center my-4">
             <div class="card-header bg-primary text-white">
-                <h3>Code Crunch - 305 Hackathon</h3>
+                <h3>Code Crunch - 305 Hackathon | FALL 2025 </h3>
             </div>
             <div class="card-body">
                 <h4 class="card-title">Fall 2025 Hackathon</h4>
@@ -283,12 +316,13 @@
                 </p>
                 <p class="card-text">
                     <strong>Workshops:</strong> Daily sessions from Monday to Friday to sharpen your skills.  
-                    <strong>Hackathon:</strong> Starts on <strong>Friday, September 12, 2025, at 7 PM</strong> and ends on <strong>Sunday, September 14, 2025, at 7 PM</strong>.
+                    <strong>Hackathon:</strong> Starts on <strong>Friday, September 12, 2025, at 9 AM</strong> and ends on <strong>Sunday, September 14, 2025, at 5 PM</strong>.
                 </p>
                 <p class="card-text">
                     Bring your A-game and showcase your skills in the heart of the 305. Whether you’re a beginner or a pro, this hackathon is for everyone!
                 </p>
-                <a href="all-305-Hackathon.html" class="btn btn-warning">Register Now</a>
+                <p>Applications open March 2025</p>
+                <a href="all-305-Hackathon25.html" class="btn btn-warning">Learn More</a> <!-- Register Now on march 2025 -->
             </div>
             <div class="card-footer text-muted">
                 September 12–14, 2025
@@ -301,24 +335,25 @@
             -->
             <div class="card text-center my-4">
                 <div class="card-header bg-success text-white">
-                    <h3>Code Crunch - Tropical Spring Hack</h3>
+                    <h3>Code Crunch - Tropical Spring Hack | SPRING 2025</h3>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Spring 2026 Hackathon</h4>
+                    <h4 class="card-title">Spring 2025 Hackathon</h4>
                     <p class="card-text">
                         Hack your way into the spring vibes! Let Miami's tropical energy inspire your next big idea in this vibrant hackathon.
                     </p>
                     <p class="card-text">
                         <strong>Workshops:</strong> Daily sessions from Monday to Friday to prep you for the big weekend.  
-                        <strong>Hackathon:</strong> Starts on <strong>Friday, March 14, 2026, at 7 PM</strong> and ends on <strong>Sunday, March 16, 2026, at 7 PM</strong>.
+                        <strong>Hackathon:</strong> Starts on <strong>Friday, March 28, 2025, at 9 AM</strong> and ends on <strong>Sunday, March 30, 2025, at 5 PM</strong>.
                     </p>
                     <p class="card-text">
                         Dive into the tropical Miami spirit, code with fellow innovators, and let your ideas bloom this spring.
                     </p>
-                    <a href="all-tropical-spring-hack.html" class="btn btn-warning">Register Now</a>
+                    <p>Applications open December 2024</p>
+                    <a href="all-tropical-spring-hack25.html" class="btn btn-warning">Register Now</a>
                 </div>
                 <div class="card-footer text-muted">
-                    March 14–16, 2026
+                    March 28–30, 2025
                 </div>
             </div>
 
