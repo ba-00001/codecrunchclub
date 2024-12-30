@@ -149,37 +149,89 @@
             .center-text {
         text-align: center;
         padding: 10px;
-    }
-    .member-section {
-        text-align: center;
-        padding: 20px;
-    }
-    .benefits-list {
-        list-style-type: none;
-        padding: 0;
-        text-align: center;
-    }
-    .benefits-list li {
-        margin: 5px 0;
-    }
-    /* Social buttons */
-    .social-buttons a {
-        margin: 5px;
-    }
-    .social-buttons a:hover {
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
-    }
+        }
+        .member-section {
+            text-align: center;
+            padding: 20px;
+        }
+        .benefits-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .benefits-list li {
+            margin: 5px 0;
+        }
+        /* Social buttons */
+        .social-buttons a {
+            margin: 5px;
+        }
+        .social-buttons a:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s ease-in-out;
+        }
 
 
 
+        /* Style for the semester schedule image */
+        .content-section img {
+            width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            display: block;
+        }
 
 
+        /* Style for event images */
+        .event-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 20px;
+                padding: 15px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                background-color: #7dbdfc;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+            }
+
+            .event-container h3 {
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .event-container p {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            .event-container img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Layout for the flyer sections */
+            .flyer-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            /* end Style for event images */
 
 
         </style>
     </head>
+
     <body>
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-lg-5">
                 <!-- Logo and Brand Name -->
@@ -195,7 +247,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About</a>
@@ -203,7 +255,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="events.html">Events</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS & Schedules</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="SWE-CONVOS.html">SWE-CONVOS & Schedules</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
@@ -248,67 +302,114 @@
     </div>
 </header>
 
-<!-- Page Content -->
-<section class="page-content-section pt-4">
-    <div class="container px-lg-5">
-        
-        <!-- Become a Member Section -->
-        <h1 class="display-5 fw-bold member-section">Attendance</h1>
-        <p class="center-text">
-            Mark your attendance for meetings and events by following the steps provided in our Attendance Guide.
-        </p>
 
-        <!-- Page Cards -->
-        <div class="row gx-lg-5">
-            
-            <!-- Code Crunch at FIU Card -->
-            <div class="col-lg-6 mb-5">
-                <div class="card bg-light border-0 h-100 shadow-sm">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Attendance for FIU Students</h2>
-                        <a 
-                           class="btn btn-primary btn-lg mt-3" 
-                           href="Attendance-FIU-guide.html" 
-                           target="_blank" 
-                           aria-label="Join Code Crunch for FIU Students">
-                           Report attendance
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Global Code Crunch Card -->
-            <div class="col-lg-6 mb-5">
-                <div class="card bg-light border-0 h-100 shadow-sm">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Attendance for Any University Student</h2>
-                        <a 
-                           class="btn btn-primary btn-lg mt-3" 
-                           href="Attendance-GLOBAL-guide.html" 
-                           target="_blank" 
-                           aria-label="Join Code Crunch for University Students Worldwide">
-                           Report attendance
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+
+
+   <!-- Section 1: Semester Schedule -->
+   <section class="content-section">
+    <h1 class="text-center">Code Crunch Weekly Schedule - Spring 2025</h1>
+    <img src="https://github.com/user-attachments/assets/c87c187f-99eb-4027-8156-62cab2b8251d" alt="Semester Schedule" class="img-fluid mx-auto d-block" />
+</section>
+
+<!-- Section 2: Current and Upcoming SWE Convos -->
+<section class="content-section">
+    <h2 class="text-center">Upcoming SWE Convos</h2>
+    <div class="flyer-container" id="current-upcoming">
+        <!-- Dynamic content will be injected here -->
     </div>
 </section>
 
+<!-- Section 3: Past Flyers -->
+<section class="content-section">
+    <h2 class="text-center">Past SWE Convos</h2>
+    <div class="flyer-container" id="past">
+        <!-- Dynamic content will be injected here -->
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; Code Crunch. All rights reserved.</p>
+</footer>
 
 
-        <!-- Footer -->
-        <section class="footer-section">
-            <footer>
-                <p>&copy; Code Crunch. All rights reserved.</p>
-            </footer>
-        </section>
+<script>
+    var events = [
+        {
+            title: '💻 📚 C9 | WK1: SWE CONVOS WITH SWE @ UKG & General Body Meeting (GBM) | Spring 2025 Kickoff 🚀Open to All University Students!',
+            location: 'Friday, January 10, 2025 @ 2:00 PM - 3:00 PM - RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
+            imageUrl: 'https://github.com/user-attachments/assets/ca5465e1-d568-4998-aa16-573958dce4a8',
+            date: '2025-01-10'
+        },
+        {
+            title: '💻 📚 C9 | WK1.1: SWE CONVOS WITH SWE @ LOWES | Spring 2025 🚀Open to All University Students!',
+            location: 'Date: Friday, Jan 24, 2025 2:00 PM - 3:00 PM EST - RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
+            imageUrl: 'https://github.com/user-attachments/assets/a0f4b1ad-9296-4162-8375-2b07bd1b788c',
+            date: '2025-1-17'
+        },
+        {
+            title: '💻 📚 C9 | WK2: SWE CONVOS WITH PM @ MICROSOFT | Spring 2025 🚀Open to All University Students!',
+            location: 'Date: Friday, Jan 24, 2025 2:00 PM - 3:00 PM EST - RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
+            imageUrl: 'https://github.com/user-attachments/assets/501cf5e5-9fb3-48fa-97b0-cbcd9ac2bc64',
+            date: '2025-1-24'
+        },
+        {
+            title: '🚀 C9 | WK4: SWE Convos - SWE @ AMAZON - SPRING 2025',
+            location: 'Monday, February 3, 2025 @ 8:30 PM - 9:30 PM EST - RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
+            imageUrl: 'https://github.com/user-attachments/assets/0f51043e-8e7f-49c2-898c-ab6d2924b3c6',
+            date: '2025-02-03'
+        },
+      
+        {
+            title: 'SWE Convos with Google Software Engineer | Location: GC Room 305 (Virtual event, streamed in-person and on Zoom)',
+            location: 'Date: Friday, November 8 4:00 PM - 5:00 PM - RSVP & find the location on <a href="https://lu.ma/CODECRUNCH" target="_blank">Luma</a>',
+            imageUrl: 'https://github.com/user-attachments/assets/33eb5e30-556e-4adc-8c13-5dd86aac574c',
+            date: '2024-11-08'
+        }
+    ];
 
- 
+    function categorizeAndPopulateEvents() {
+        const today = new Date();
+        const upcomingSection = document.getElementById('current-upcoming');
+        const pastSection = document.getElementById('past');
 
-        <!-- Bootstrap Core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        const upcomingEvents = events.filter(event => new Date(event.date) >= today);
+        const pastEvents = events.filter(event => new Date(event.date) < today);
+
+        // Sort events by date
+        upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        pastEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Populate upcoming events
+        upcomingEvents.forEach(event => {
+            const eventContainer = document.createElement('div');
+            eventContainer.className = 'event-container';
+            const imgElement = document.createElement('img');
+            imgElement.src = event.imageUrl;
+            imgElement.alt = event.title;
+            eventContainer.innerHTML = `<h3>${event.title}</h3><p>${event.location}</p>`;
+            eventContainer.appendChild(imgElement);
+            upcomingSection.appendChild(eventContainer);
+        });
+
+        // Populate past events
+        pastEvents.forEach(event => {
+            const eventContainer = document.createElement('div');
+            eventContainer.className = 'event-container';
+            const imgElement = document.createElement('img');
+            imgElement.src = event.imageUrl;
+            imgElement.alt = event.title;
+            eventContainer.innerHTML = `<h3>${event.title}</h3><p>${event.location}</p>`;
+            eventContainer.appendChild(imgElement);
+            pastSection.appendChild(eventContainer);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', categorizeAndPopulateEvents);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
