@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Code Crunch - Home" />
+        <meta name="author" content="Code Crunch" />
+        <title>Home - Code Crunch</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <style>
+            /* General styles */
+            html, body {
+                margin: 0;
+                padding: 0;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #1a73e8, #ff5722);
+                color: white;
+            }
+
+            /* Navbar styles */
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px; /* Add padding to the left */
+                padding-right: 15px; /* Add padding to the right */
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+            }
+
+            
+            .navbar-brand img {
+                height: 50px; /* Size of the logo next to the navbar */
+                margin-right: 10px;
+            }
+
+            .header-container {
+                background-color: #f8f9fa; /* Light, neutral background */
+                padding: 3rem 1rem; /* More vertical padding for better emphasis */
+                border-radius: 0.5rem; /* Soft rounded corners */
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
+            }
+            
+
+
+            /* Logo section styles */
+            .logo-container {
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .logo-container img {
+                height: 300px;
+            }
+
+            /* Hackathon Section */
+            .hackathon-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                padding: 50px 20px;
+                flex-wrap: wrap;
+            }
+
+            .countdown-section {
+                flex: 0 0 40%;
+                text-align: left;
+            }
+
+            .countdown-section h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+
+            .countdown {
+                font-size: 1.8rem;
+                margin-top: 20px;
+            }
+
+            .image-section {
+                flex: 0 0 55%;
+                text-align: center;
+            }
+
+            .image-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Page content styles */
+            .card {
+                background: rgba(255, 255, 255, 0.8);
+                color: #333;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .card h2 {
+                color: #0056b3;
+            }
+
+            /* Footer styles */
+            footer {
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                width: 100%;
+                position: relative;
+                margin-top: auto;
+            }
+
+            /* Social buttons */
+            .social-buttons .btn {
+                margin: 5px;
+            }
+
+
+
+
+
+
+
+            .center-text {
+        text-align: center;
+        padding: 10px;
+        }
+        .member-section {
+            text-align: center;
+            padding: 20px;
+        }
+        .benefits-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .benefits-list li {
+            margin: 5px 0;
+        }
+        /* Social buttons */
+        .social-buttons a {
+            margin: 5px;
+        }
+        .social-buttons a:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+
+
+
+         /* Content Section */
+         .content-section {
+            padding: 20px;
+        }
+
+        .content-section h1, .content-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .event-container h3 {
+        color: #333; /* Dark gray for headings */
+        margin-bottom: 10px;
+        }
+
+
+        /* Style for the semester schedule image */
+        .content-section img {
+            width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            display: block;
+        }
+
+
+        /* Style for event images */
+/* Flyer Container */
+.flyer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .event-container {
+    background: #ffffff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #000; /* Default text color for the container */
+}
+
+.event-container h3 {
+    color: #333; /* Dark gray for headings */
+    margin-bottom: 10px;
+}
+
+.event-container p {
+    color: #000; /* Black text for high contrast */
+    margin-bottom: 15px;
+}
+
+.event-container img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.event-container:hover {
+    background: #f0f0f0; /* Slightly lighter background on hover */
+    transform: translateY(-5px); /* Lift effect */
+    transition: 0.3s ease; /* Smooth transition */
+}
+
+
+            /* end Style for event images */
+
+
+        </style>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+                    Code Crunch
+                </a>
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">Events</a>
+                        </li><li class="nav-item">
+                            <a class="nav-link " href="SWE-CONVOS.html">SWE CONVOS</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="SCHDEULES.html">Schedules</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+        </div>
+
+
+        
+ <!-- Welcome Header -->
+<header class="py-5">
+    <div class="container px-lg-5 text-center">
+
+        <!-- Social Media Buttons -->
+        <div class="social-buttons">
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="Visit Code Crunch on LinkedIn">
+                <i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Visit Code Crunch on Instagram">
+                <i class="bi bi-instagram" aria-hidden="true"></i> Instagram
+            </a>
+            <a href="https://forms.office.com/r/M5itd5FK32" class="btn btn-success" aria-label="Join Code Crunch WhatsApp group">
+                <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
+            </a>
+            <a href="https://forms.office.com/r/JEbApqq0U9" class="btn btn-secondary" aria-label="Join Code Crunch Discord community">
+                <i class="bi bi-discord" aria-hidden="true"></i> Discord
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Join Code Crunch on Panther Connect">
+                <i class="bi bi-university" aria-hidden="true"></i> Panther Connect
+            </a>
+            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Visit Code Crunch on Linktree">
+                <i class="bi bi-link" aria-hidden="true"></i> Linktree
+            </a>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Spring 2025 Section -->
+<section class="content-section">
+    <h1>Code Crunch Weekly Schedule - Spring 2025</h1>
+
+    <!-- Sub-section for Schedule -->
+    <div class="content-section">
+        <img src="https://github.com/user-attachments/assets/cbab914b-ba7d-4ba2-a011-0fa6286ee0da" alt="Spring 2025 Schedule" class="img-fluid mx-auto d-block" />
+    </div>
+
+    <!-- Sub-section for Event Flyers -->
+    <h2>Workshops/ Events Spring 2025</h2>
+    <div class="flyer-container" id="spring-2025">
+        <!-- Dynamic content will be injected here -->
+    </div>
+</section>
+
+
+ <!-- Fall 2025 Section -->
+ <section class="content-section">
+    <h1>Code Crunch Weekly Schedule - Fall 2024</h1>
+
+    <!-- Sub-section for Schedule -->
+   
+    <div class="content-section">
+        <img src="https://github.com/user-attachments/assets/e1d09405-49cb-46d7-950b-819de55b9521" alt="Fall 2025 Schedule" class="img-fluid mx-auto d-block" />
+    </div>
+
+    <!-- Sub-section for Event Flyers -->
+    <h2>Workshops/ Events Fall 2024</h2>
+    <div class="flyer-container" id="fall-2024">
+        <!-- Dynamic content will be injected here -->
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; Code Crunch. All rights reserved.</p>
+</footer>
+
+
+
+    <script>
+        var events = [
+            // Fall 2025 Events
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 1',
+                location: 'MON 12PM - 1PM -weekly fall 24',
+                imageUrl: 'https://github.com/user-attachments/assets/f38a4566-9fdc-40af-9d8c-a46487fa78f5',
+                date: '2024-09-01'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 Code Crunch Convos',
+                location: 'WED 5PM - 6PM -weekly fall 24',
+                imageUrl: 'https://github.com/user-attachments/assets/9ccdda15-22d1-4676-a3af-67a0834d57d0',
+                date: '2024-09-02'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 2',
+                location: 'THU 11AM - 12PM -weekly fall 24',
+                imageUrl: 'https://github.com/user-attachments/assets/718f1a73-46a5-4705-b75a-a196e1b040a7',
+                date: '2024-09-03'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 3',
+                location: 'THU 2PM - 3PM -weekly fall 24',
+                imageUrl: 'https://github.com/user-attachments/assets/8c8058ed-ef1b-45ad-9a2a-5d5cdfd78699',
+                date: '2024-09-04'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 4',
+                location: 'FRI 4PM - 5PM -weekly fall 24',
+                imageUrl: 'https://github.com/user-attachments/assets/acb512b4-acae-4253-9b13-c3f75247f70f',
+                date: '2024-09-05'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 SWE Convos',
+                location: 'Special Events, see dates on LU.MA/CODECRUNCH', 
+                imageUrl: 'https://github.com/user-attachments/assets/a912c5b9-def8-4716-8c90-c108edae540c',
+                date: '2024-09-06'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 2 - RESUME WORKSHOP',
+                location: 'THU 10.24.2024 @ 11AM - 12PM   ',
+                imageUrl: 'https://github.com/user-attachments/assets/c3915a27-fdef-42b8-8f1b-2b4c2824b8a6',
+                date: '2024-09-07'
+            },
+            {
+                semester: 'fall-2024',
+                title: '💻 CrunchTime - The Code # 3 - LINKEDIN WORKSHOP',
+                location: 'THU 10.24.2024 @ 2PM - 3PM ',
+                imageUrl: 'https://github.com/user-attachments/assets/70e29658-8f61-41c1-8eef-a09e38435ba1',
+                date: '2024-09-08'
+            },
+
+
+            // Spring 2025 Events
+            {
+                semester: 'spring-2025',
+                title: '💻 General Body Meeting (GBM) & SWE Convo',
+                location: 'WED 2PM - 3PM | weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/ca5465e1-d568-4998-aa16-573958dce4a8',
+                date: '2025-01-01'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C1 | Code Crunch Convos',
+                location: 'WED 2PM - 3PM | weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/9672fea8-5228-4c64-9a6e-4e7081fd08de',
+                date: '2025-01-01'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C2 | CrunchTime The Code',
+                location: 'FRI 1PM - 2PM | weekly spring 2025',
+                imageUrl: 'https://github.com/user-attachments/assets/26d60a74-8bb3-4ddc-add2-1a8f7917c32f',
+                date: '2025-01-02'
+            },  
+            {
+                semester: 'spring-2025',
+                title: '💻 C3 | CRUNCH LABS : PORTFOLIO',
+                location: 'MON 2PM - 3PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/e68cf20f-cea9-4f7a-bb4c-3b64fdfc63c5',
+                date: '2025-01-03'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C4 | Crunch Labs : Hackathons',
+                location: 'MON 2PM - 3PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/9c00c29d-c580-4fc1-84c3-0069b03bd78f',
+                date: '2025-01-04'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C5 crunch AI DATA SCIENCE| ',
+                location: 'MON & WED 1PM - 2PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/57dadf54-1774-473c-b9ee-7b1daeb638c4',
+                date: '2025-01-05'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C6 | CYBERSECURITY CRUNCH',
+                location: 'MON & WED 1PM - 2PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/7b99ab92-6c59-4406-b00b-4e09948b1f5b',
+                date: '2025-01-06'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C7 | WIRE CRUNCH : EMBEDDED SYSTEMS',
+                location: 'TUE 1PM - 2PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/ddd7b2c8-c902-4488-bab1-4e80ab3810ea',
+                date: '2025-01-07'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C8 | CRUNCH LABS : WEB DEV',
+                location: 'THU 3PM- 4PM | WEEKLY SPRING 25',
+                imageUrl: 'https://github.com/user-attachments/assets/0d0c348c-35e5-4044-9598-e657e9f8193f',
+                date: '2025-01-08'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C9 | SWE CONVOS',
+                location: 'FRI 1PM - 2PM | weekly spring 2025',
+                imageUrl: 'https://github.com/user-attachments/assets/e3bfd29c-10ba-4c52-9fd1-7336df5fb613',
+                date: '2025-01-09'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C7 | WIRE CRUNCH : EMBEDDED SYSTEMS - Suggested Tools for Hands-On Participation ',
+                location: 'TUE 1PM - 2PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/28cb26c9-bb28-46a2-af10-99cda8171073',
+                date: '2025-01-07'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C4 | Crunch Labs : Hackathons - Team Sign up HACK # 01 "Data"',
+                location: 'MON 2PM - 3PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/06d56ad0-927d-423f-937f-29f5e5c563bd',
+                date: '2025-01-04'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C4 | Crunch Labs : Hackathons - Team Sign up HACK # 02 "AI/ML"',
+                location: 'MON 2PM - 3PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/53196e71-fc57-48d6-9000-c1729128df80',
+                date: '2025-01-04'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 C4 | Crunch Labs : Hackathons - Team Sign up HACK # 03 "AI"',
+                location: 'MON 2PM - 3PM -weekly spring 25',
+                imageUrl: 'https://github.com/user-attachments/assets/af215a38-c68e-486e-b0cd-24bd8ea00776',
+                date: '2025-01-04'
+            },
+            {
+                semester: 'spring-2025',
+                title: '💻 CODE CRUNCH Tropical Spring Hackathon',
+                location: 'Mar 29th - 31st 2025 - virtual | Hybrid workshops Mon March 24th - Thu 27th @ Fiu Campus & Zoom Stream',
+                imageUrl: 'https://github.com/user-attachments/assets/6d519560-2752-4b71-998c-d0b1e17b55f0',
+                date: '2025-01-04'
+            },
+            
+           
+        ];
+
+        function populateEvents() {
+            events.forEach(event => {
+                const sectionId = event.semester;
+                const section = document.getElementById(sectionId);
+
+                const eventContainer = document.createElement('div');
+                eventContainer.className = 'event-container';
+
+                const imgElement = document.createElement('img');
+                imgElement.src = event.imageUrl;
+                imgElement.alt = event.title;
+
+                eventContainer.innerHTML = `<h3>${event.title}</h3><p>${event.location}</p>`;
+                eventContainer.appendChild(imgElement);
+
+                section.appendChild(eventContainer);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', populateEvents);
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
