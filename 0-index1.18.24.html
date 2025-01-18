@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Code Crunch - Home" />
+        <meta name="author" content="Code Crunch" />
+        <title>Home - Code Crunch</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <style>
+            /* General styles */
+            html, body {
+                margin: 0;
+                padding: 0;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #1a73e8, #ff5722);
+                color: white;
+            }
+
+            /* Navbar styles */
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .navbar-nav .nav-item {
+                padding-left: 15px; /* Add padding to the left */
+                padding-right: 15px; /* Add padding to the right */
+                position: relative;
+            }
+            .navbar-nav .nav-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+            }
+
+            
+            .navbar-brand img {
+                height: 50px; /* Size of the logo next to the navbar */
+                margin-right: 10px;
+            }
+
+            .header-container {
+                background-color: #f8f9fa; /* Light, neutral background */
+                padding: 3rem 1rem; /* More vertical padding for better emphasis */
+                border-radius: 0.5rem; /* Soft rounded corners */
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
+            }
+            
+
+
+            /* Logo section styles */
+            .logo-container {
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .logo-container img {
+                height: 300px;
+            }
+
+            /* Hackathon Section */
+            .hackathon-section {
+                position: relative;
+                width: 100%;
+                height: 100vh; /* Full height */
+            }
+
+            .hackathon-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            .countdown-section {
+                position: absolute;
+                top: 50%; /* Center vertically */
+                left: 50%; /* Center horizontally */
+                transform: translate(-50%, -50%); /* Adjust for exact centering */
+                text-align: center;
+                color: #333; /* Dark text for better contrast */
+                background-color: white; /* White background behind text */
+                padding: 20px; /* Add padding around the text */
+                border-radius: 10px; /* Optional: rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+                z-index: 10; /* Ensure the countdown is above the image */
+            }
+
+            .countdown-section h1, .countdown-section p {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .image-section {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+
+            .image-section img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ensure the image covers the section without distortion */
+                display: block;
+            }
+
+            /* Page content styles */
+            .card {
+                background: rgba(255, 255, 255, 0.8);
+                color: #333;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .card h2 {
+                color: #0056b3;
+            }
+
+            /* Footer styles */
+            footer {
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                width: 100%;
+                position: relative;
+                margin-top: auto;
+            }
+
+            /* Social buttons */
+            .social-buttons a {
+                margin: 5px;
+            }
+            .social-buttons a:hover {
+                transform: scale(1.1);
+                transition: transform 0.2s ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <!-- Logo and Brand Name -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+                    Code Crunch
+                </a>
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">Events</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS</a></li>
+                        <li class="nav-item"><a class="nav-link " href="SCHDEULES.html">Schedules</a></li>     
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+        </div>
+
+
+ <!-- Welcome Header -->
+ <header class="py-5">
+    <div class="container px-lg-5 text-center">
+        <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
+        <p class="fs-4">
+            Code Crunch is bridging global innovation with local engagement, offering a dynamic platform open to all university students, regardless of major—no prior experience required! Freshmen, graduates, and alumni from any university are welcome 🌍. Join us to break down barriers in technology, participate in hands-on coding workshops, collaborate on community-driven projects, and prepare for the future through immersive virtual and on-campus experiences.
+        </p>
+        
+        <p class="fs-4">
+            Whether you’re joining us via our virtual Zoom sessions from anywhere in the world or in person right here at Florida International University, we provide the resources, mentorship, and community you need to grow as a coder and innovator.
+        </p>
+        
+        <p class="fs-4"><strong>Let’s innovate together! Built and led by students, for students.</strong></p>
+        
+        <p>
+            <h5 class="fw-bold">#CodeCrunch #CodeCrunchFIU #DiversityInTech #InclusiveTech #LeadershipOpportunities #FIUTechCommunity #WomenInSTEM #LGBTQInTech #LatinxInTech #BlackInTech #AAPIsInTech #TechLeadership #JoinOurTeam #FIUInnovation #TechForEveryone #EmpowerTech #FutureLeaders #HackerCulture #CodeYourFuture #TechDiversity #FIUPanthers #STEMOpportunities #BuildYourFuture #LeadWithCode #PanthersInTech</h5>
+        </p>
+        
+        
+        
+        
+        <!-- Social Media Links -->
+        <div class="social-buttons">
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+                <i class="bi bi-instagram"></i> Instagram
+            </a>
+            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
+                <i class="bi bi-discord"></i> Discord
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+                <i class="bi bi-university"></i> Panther Connect
+            </a>
+            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+                <i class="bi bi-link"></i> Linktree
+            </a>
+        </div>
+
+        
+    </div>
+</header>
+
+
+
+
+
+<section class="hackathon-group-section py-5">
+    <div class="container">
+        <!-- Unified Card -->
+        <div class="card shadow-lg border-0">
+            <!-- Card Header: Meet Our Club -->
+            <div class="card-header bg-success text-white text-center">
+                <h1 class="card-title mb-0">Meet Our Club</h1>
+            </div>
+            <div class="card-body">
+                <!-- Group Photo Section -->
+                <div class="text-center mb-4">
+                    <img src="https://github.com/user-attachments/assets/3cc0162a-0596-4d51-a59a-b135efc28d80" 
+                         alt="Code Crunch Club Group Photo" 
+                         class="img-fluid rounded shadow-sm w-100" 
+                         style="max-height: 400px; object-fit: cover;">
+                </div>
+
+                <!-- Card Header: Hackathon Card -->
+                <div class="card-header bg-success text-white text-center">
+                    <h1 class="card-title mb-0">Code Crunch - Tropical Spring Hack | SPRING 2025</h1>
+                </div>
+
+                <!-- Hackathon flyer -->
+                <div class="text-center mb-4">
+                    <div class="text-center my-3">
+                        <img src="https://github.com/user-attachments/assets/bad2bccc-0c81-4665-b0e1-5f815acdb0e9" 
+                             alt="Tropical Spring Hack Photo" 
+                             class="img-fluid rounded shadow-sm" 
+                             style="max-width: 100%; height: auto;">
+                    </div>
+
+
+
+                    <!-- 
+                    
+                    
+                    
+                    
+                    -->
+                <!-- Tropical Spring Hackathon Section -->
+                <div class="card-body">
+                    <div class="row text-center">
+                        <!-- Column 1 -->
+                        <div class="col-lg-4 mb-4">
+                            <h4 class="fw-bold">Hackathon Overview</h4>
+                            <p>Hack your way into the spring vibes! Let Miami's tropical energy inspire your next big idea in this vibrant hackathon.</p>
+                            <p><strong>Workshops:</strong> March 24th - 27th, 2025<br>Daily sessions from Monday to Thursday to prep you for the big weekend.</p>
+                            <p><strong>Hackathon:</strong> March 29–31, 2025<br>Starts Saturday at 9 AM and ends Monday at 5 PM.</p>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="col-lg-4 mb-4">
+                            <h4 class="fw-bold">In Partnership With:</h4>
+                            <ul class="list-unstyled">
+                                <li>🐾 Panther Robotics @ FIU</li>
+                                <li>🔥 National Society of Black Engineers (NSBE) FIU Chapter</li>
+                                <li>🔐 Women in CyberSecurity (WiCyS) @ FIU</li>
+                                <li>💻 Women in Computer Science (WiCS) @ FIU</li>
+                                <li>🤖 Artificial Intelligence Organization (AIO) @ FIU</li>
+                                <li>🚀 Society of Hispanic Professional Engineers (SHEP) @ FIU</li>
+                                <li>🌟 Association of Latino Professionals for America (ALPFA) @ FIU</li>
+                            </ul>
+                            <p>The Code Crunch Club at FIU, along with its partners, is thrilled to host the Tropical Spring Hackathon, open to <strong>ALL university students</strong>!</p>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div class="col-lg-4 mb-4">
+                            <h4 class="fw-bold">Key Details</h4>
+                            <p>Applications open <strong>December 2024</strong>.</p>
+                            <p>Whether you're an experienced coder or a beginner, this is your chance to learn, build, and showcase your skills while connecting with industry experts and fellow tech enthusiasts.</p>
+                            <p><strong>Upcoming Hackathons:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Code Crunch - 305 Hackathon:</strong> September 12–14, 2025</li>
+                                <li><strong>Code Crunch - Tropical Spring Hack:</strong> March 27–29, 2026</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Centered Button -->
+                    <div class="text-center mt-4">
+                        <a href="all-tropical-spring-hack25.html" class="btn btn-warning btn-lg">Get More Info</a>
+                    </div>
+                </div>
+
+                <!-- Card Header: Spring 2026 Hackathon -->
+                <div class="card-header bg-success text-white text-center mt-5">
+                    <h1 class="card-title mb-0">Code Crunch Hackathon | Spring 2026</h1>
+                </div>
+
+                <!-- Spring 2026 Hackathon Section -->
+                <div class="text-center mb-4">
+                    <p>Spring 2026 - Something amazing is on its way!</p>
+                    <div id="countdown" class="countdown mb-3">
+          
+                    </div>
+                    <img src="https://github.com/user-attachments/assets/7863c177-b000-45ed-8b84-02e3b1946e32" 
+                         alt="Hackathon Image" 
+                         class="img-fluid rounded shadow-sm w-100" 
+                         style="max-height: 400px; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer text-center text-muted">
+                <p>&copy; Code Crunch. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Page Content club cards -->
+<section class="page-content-section pt-4">
+    <div class="container px-lg-5">
+        <div class="row gx-lg-5 justify-content-center">           
+
+
+
+                <!-- Simple Card for Main Page Code Crunch E-Board -->
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card bg-light border-0 shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <h2 class="fs-4 fw-bold">Join the Code Crunch E-Board</h2>
+                                    <p class="mt-3">
+                                        Be part of the leadership team that fosters innovation and collaboration in technology. Whether you're a student or an industry leader, help shape the future of our club.
+                                    </p>
+                                
+
+                                <div class="container">
+                                    <h3 class="fs-5 fw-bold mt-4 text-center">Who Can Apply?</h3>
+                                    <ul class="text-start mx-auto" style="max-width: 600px;">
+                                        <li>FIU students from all majors.</li>
+                                        <li>Students from other universities worldwide.</li>
+                                        <li>Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="https://go.fiu.edu/cc-e-board" 
+                                    target="_blank" 
+                                    class="btn btn-primary btn-lg mt-3" 
+                                    aria-label="E-Board Application">
+                                    Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                   <!-- Become a Member Card -->
+                   <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5">
+                            <h2 class="fs-4 fw-bold">Become a Member</h2>
+                            <p class="mb-0">Join our club to gain access to exclusive events, resources, and a community of like-minded peers.</p>
+                            <p class="mt-3"><strong>After Sign-Up:</strong> Upon submitting the form, you will receive a welcome email that includes:</p>
+                            <ul class="text-start mt-2">
+                                <li>Link to join our <strong>Discord</strong> community.</li>
+                                <li>Link to join Code Crunch on <strong>Panther Connect.</strong> Only Available for fiu students.</li>
+                                <li><strong>Code Crunch Github</strong> access granted weekly.</li>
+                            </ul>
+                            <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/9KNQZ94W3KFurvm67" target="_blank">Become a Member</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                    <!-- Upcoming Events Card -->
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Upcoming Events</h2>
+                                
+                                <p class="mt-3">Find all the information about our workshops, including date, time, Zoom links, and in-person locations, on our Luma Calendar or the <a href="https://ba-00001.github.io/codecrunchclub/events.html" target="_blank">Events tab</a> on the website.</p>
+                                
+                                <p class="mt-3 mb-0"><strong>Visit:</strong> <a href="https://lu.ma/CODECRUNCH" target="_blank">LU.MA/CODECRUNCH</a> or click the button below to RSVP and view event details.</p>
+                                <a class="btn btn-primary btn-lg mt-3" href="https://lu.ma/CODECRUNCH" target="_blank">RSVP on Luma calendar</a><br>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Attendance Form Card -->
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Attendance Form</h2>
+                                <p class="mb-0">Mark your attendance for meetings and events by following the steps provided in our <strong>Attendance Guide</strong>.</p>
+                                
+                                <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/StgULTsytrcfZXBv6" target="_blank">Attendance</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Form Card -->
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Feedback Form</h2>
+                                <p class="mb-0">We value your feedback! Share your thoughts on our events and suggest improvements.</p>
+                                
+                                <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/u8P1KMEXmjWTgzhd8" target="_blank">Give Feedback</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Join Discord Card -->
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Join Our Discord & WhatsApp group</h2>
+                                <p class="mb-0">You must <strong>become a member</strong> to receive the invite link to join our Discord community & WhatsApp group.</p>
+                                
+                                <a class="btn btn-primary btn-lg mt-3" href="https://forms.office.com/r/M5itd5FK32" target="_blank">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Docs Folder & GitHub Repository Access Card -->
+                    <!-- Google Docs Folder: https://drive.google.com/drive/folders/1TszlvVIOM9glMcMINbFpELWidgagtSD1?usp=sharing -->
+                    <!-- GitHub Repository: https://github.com/CODE-CRUNCH-CLUB -->
+
+             
+
+
+
+                    <!-- Crunch LABS: Hackathon Edition & Team Sign-Up -->
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">C4 | Crunch LABS: Hackathon Edition & Team Sign-Up</h2>
+                                <p class="mb-0">The C4 course is structured as a 45-minute project development session followed by 15 to 20 minutes of club member planning and troubleshooting for hackathon team projects representing Code Crunch, with guidance from the C3 and C4 Tech Leads.</p>
+                                <p class="mb-0">Participating in the hackathon workshops is open to everyone and does not require signing up for the team. Feel free to join the workshops to learn, collaborate, and innovate!</p>
+                                <p class="mt-3">If you’d like to represent Code Crunch in the hackathon as part of the team, you can sign up below:</p>
+                                <a class="btn btn-primary btn-lg mt-3" href="all-team-hack-signup.html" target="_blank">Sign Up for the Team</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+             
+                  
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Resource Access Section -->
+<section class="page-content-section pt-4">
+    <div class="container px-lg-5">
+        <div class="row gx-lg-5 justify-content-center">
+        
+            <!-- Weekly Access Updates Card -->
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5">
+                        <h2 class="fs-4 fw-bold">Weekly Access Updates</h2>
+                        <p class="mb-0">
+                            Each Code Crunch course has its own GitHub repository. Weekly files, including Google Slides, code blocks, and other resources, are uploaded to ensure members stay up to date.
+                        </p>
+                        <p class="mt-3">
+                            Access to these resources is available exclusively to members.
+                        </p>
+                        <p class="mt-3">
+                            <strong>Note:</strong> Access to all Google Docs and Slides will be granted using the Google account provided in the "Become a Member" form. Ensure the correct account is used during registration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- GitHub Repositories Card -->
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5">
+                        <h2 class="fs-4 fw-bold">GitHub Repositories</h2>
+                        <p class="mb-0">
+                            After becoming a member, you will receive an invite to our GitHub repositories.
+                        </p>
+                        <ul class="text-start mt-3">
+                            <li>Each course has its own repository.</li>
+                            <li>You should see a <strong>repository for each course</strong> when accessing the Code Crunch organization on GitHub.</li>
+                            <li>Weekly updates include slides, code blocks, and session resources.</li>
+                        </ul>
+                        
+                        <p class="mt-1">
+                            <small><strong>URL:</strong> <a href="https://github.com/CODE-CRUNCH-CLUB" target="_blank">github.com/CODE-CRUNCH-CLUB</a></small>
+                        </p>
+                        
+                        <p class="mt-3">
+                            <a class="btn btn-primary btn-lg mt-2" href="https://github.com/CODE-CRUNCH-CLUB" target="_blank">Code CrunchGitHub Repositories</a>
+                        </p>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Us Card -->
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5">
+                        <h2 class="fs-4 fw-bold">Issues? Contact Us</h2>
+                        <p class="mb-0">
+                            If you encounter any issues, such as a <strong>404 error</strong> when accessing repositories, or you do not receive your GitHub invite after becoming a member:
+                        </p>
+                        <p class="mt-3">
+                            Please email us at:
+                        </p>
+                        <p><a href="mailto:codecrunchhelp@outlook.com" class="fw-bold">codecrunchhelp@outlook.com</a></p>
+                        <p class="mt-3">
+                            <a class="btn btn-success btn-lg mt-2" href="mailto:codecrunchhelp@outlook.com">Contact Us</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</section>
+
+
+        <!-- Footer -->
+        <section class="footer-section">
+            <footer>
+                <p>&copy; Code Crunch. All rights reserved.</p>
+            </footer>
+        </section>
+
+        <!-- Countdown Script -->
+        <script>
+            const hackathonDate = new Date("March 15, 2026 09:00:00").getTime();
+            const countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = hackathonDate - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = "The hackathon is live now!";
+                }
+            }, 1000);
+        </script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
