@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tropical Hacks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            background: url('https://github.com/user-attachments/assets/97323124-4654-44d8-89c6-fe89caddb167') repeat-x;
+            background-attachment: fixed; /* Parallax effect */
+            background-size: cover; /* Ensures the background image covers the viewport */
+            background-position: center; /* Centers the image */
+            color: #333;
+        }
+
+        /* Cloud Styling */
+        .cloud {
+            position: absolute;
+            animation: moveClouds 30s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes moveClouds {
+            from {
+                transform: translateX(-120%);
+            }
+            to {
+                transform: translateX(120%);
+            }
+        }
+
+        /* Coin Styling */
+        .coin {
+            position: absolute;
+            animation: bounceCoins 3s ease-in-out infinite;
+        }
+
+        @keyframes bounceCoins {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px); /* Bouncing up */
+            }
+        }
+
+        /* Mario Styling */
+        #mario {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            width: 60px;
+            animation: jumpMario 3s ease-in-out infinite;
+            transform: translateX(-50%);
+        }
+
+        @keyframes jumpMario {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -150px); /* Jumping up */
+            }
+        }
+
+
+
+
+
+
+        /* Parallax Scrolling Effect not in use now */
+        .parallax {
+            background: url('https://github.com/user-attachments/assets/97323124-4654-44d8-89c6-fe89caddb167') repeat-x;
+            background-attachment: fixed; /* Makes the background static while the content scrolls */
+            background-size: cover; /* Ensures the image covers the section */
+            background-position: center;
+            height: 100vh; /* Full viewport height for the parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-size: 2rem;
+        }
+
+
+            /* Content Styling */
+            header, section, footer {
+            text-align: center;
+            padding: 50px;
+            z-index: 10;
+            position: relative;
+        }
+
+
+
+
+        header {
+            background: linear-gradient(135deg, #0073e6, #00bfa5);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0 20px;
+        }
+        .side-menu {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .side-menu a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+        }
+        .side-menu a.active {
+            color: white;
+            background: #0073e6;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero {
+            background: linear-gradient(135deg, #00bfa5, #0073e6);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+        }
+        footer {
+            background: #003f5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        footer a {
+            color: #00bfa5;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .fade-section {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        
+        
+       /* SECTION TRACK*/
+       #tracks {
+        text-align: center;
+    }
+    .tracks-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two fixed columns */
+        gap: 20px;
+        justify-content: center; /* Centers the grid horizontally */
+        padding: 20px;
+        max-width: 800px; /* Optional: Control max width of the grid */
+        margin: 0 auto; /* Centers the grid container */
+    }
+    .track-card {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+    .track-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .track-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+        color: #0073e6;
+    }
+    .track-card p {
+        margin: 0;
+        font-size: 1rem;
+        color: #333;
+    }
+
+
+
+      
+
+/* SECTION EXTRA AWRDS*/
+
+#awards {
+        text-align: center;
+    }
+    .awards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two fixed columns */
+        gap: 20px;
+        justify-content: center; /* Centers the grid horizontally */
+        padding: 20px;
+        max-width: 800px; /* Optional: Control max width of the grid */
+        margin: 0 auto; /* Centers the grid container */
+    }
+    .award-card {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .award-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .award-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+        color: #0073e6;
+    }
+    .award-card p {
+        margin: 0;
+        font-size: 1rem;
+        color: #333;
+    }
+
+/* COLLABORATION */
+.collaborate-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.collaborate-section p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.email-button {
+    display: inline-block;
+    background: #0073e6; /* Blue background */
+    color: white; /* White text for contrast */
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.email-button i {
+    margin-right: 8px; /* Space between the icon and text */
+}
+
+.email-button:hover {
+    background: #005bb5; /* Darker blue on hover */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.text-retroRed {
+    color: #e63946; /* Retro red for the text above */
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+
+
+
+
+/* FFAQ*/
+
+    .faq-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .faq-question {
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px;
+            background: #f1f1f1;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background: #fff;
+            border-left: 2px solid #0073e6;
+            margin-bottom: 5px;
+        }
+        .faq-question:hover {
+            background: #eaeaea;
+        }
+    </style>
+</head>
+<body >
+        
+    <!-- Dynamic Props Container -->
+    <div id="dynamic-props"></div>
+
+    <!-- Mario Character -->
+    <img id="mario" src="https://github.com/user-attachments/assets/0288b32a-bc25-4806-8e65-b5784cce936e" alt="Mario">
+
+
+
+    <header>
+        <h1>Tropical Hacks 2025</h1>
+        <p>Welcome to the premier tropical hackathon for innovation and creativity!</p>
+    </header>
+
+    <div class="side-menu">
+        <a href="#about" class="menu-link">About</a>
+        <a href="#tracks" class="menu-link">Tracks</a>
+        <a href="#awards" class="menu-link">Extra Awards</a>
+        <a href="#faq" class="menu-link">FAQ</a>
+        <a href="#contributors" class="menu-link">Contributors</a>
+        <a href="#collaborators" class="menu-link">Collaborators</a>
+        <a href="#workshop-partners" class="menu-link">Workshop Partners</a>
+    </div>
+
+    <div class="hero">
+        <h2>Hacking in Paradise</h2>
+    </div>
+
+    <section id="about" class="fade-section">
+        <h2>About Tropical Hacks</h2>
+        <p>Tropical Hacks brings together hackers from around the globe to solve real-world problems in the heart of paradise. Join us for 36 hours of innovation, mentorship, and fun!</p>
+    </section>
+
+
+  
+
+
+    <section id="tracks" class="fade-section">
+        <h2>Spring 2025 Tracks</h2>
+        <div class="tracks-grid">
+            <div class="track-card">
+                <h3>🌍 Sustainability</h3>
+                <p>Innovate solutions to create a greener planet.</p>
+            </div>
+            <div class="track-card">
+                <h3>🤖 AI & Machine Learning</h3>
+                <p>Build intelligent systems to tackle complex problems.</p>
+            </div>
+            <div class="track-card">
+                <h3>💼 Fintech</h3>
+                <p>Revolutionize the financial industry with cutting-edge tech.</p>
+            </div>
+            <div class="track-card">
+                <h3>🎮 Gaming</h3>
+                <p>Design immersive games and digital experiences.</p>
+            </div>
+        </div>
+    
+        <div id="awards" class="fade-section">
+            <h2>Extra Awards</h2>
+            <p>We recognize outstanding contributions and creativity with these special awards:</p>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <h3>🏆 Best Beginner Hack</h3>
+                    <p>Celebrating first-time hackers.</p>
+                </div>
+                <div class="award-card">
+                    <h3>💡 Most Innovative Idea</h3>
+                    <p>For groundbreaking and creative projects.</p>
+                </div>
+                <div class="award-card">
+                    <h3>🎨 Best Design</h3>
+                    <p>Rewarding visually appealing and user-friendly designs.</p>
+                </div>
+                <div class="award-card">
+                    <h3>🌟 Community Impact</h3>
+                    <p>For hacks that make a positive difference.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="collaborate-section">
+            <p>
+                Want to collaborate with us on a track for Spring 2025? Contact us at:
+            </p>
+            <a href="mailto:codecrunchsponsors@outlook.com" class="email-button">
+                <i class="fas fa-envelope"></i> codecrunchsponsors@outlook.com
+            </a>
+        </div>
+    </section>
+
+ 
+    
+    
+
+    <section id="faq" class="fade-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            
+                <div class="faq-container">
+                    <div class="faq-question">What is a hackathon?</div>
+                    <div class="faq-answer">
+                        A hackathon is a marathon software product creation event. At Tropical Hacks, you can look forward to amazing guest speakers, helpful workshops, tons of skilled mentors, and, of course, fun games and great swag.
+                    </div>
+            
+                    <div class="faq-question">When is Tropical Hacks?</div>
+                    <div class="faq-answer">
+                        This year, Tropical Hacks will take place in-person from March 28th-30th, 2025. It’ll be 36 hours of hacking, events, speakers, social events, and more!
+                    </div>
+            
+                    <div class="faq-question">Who can attend?</div>
+                    <div class="faq-answer">
+                        Any undergraduate or graduate student at any university in the world!
+                    </div>
+            
+                    <div class="faq-question">Why should I come to Tropical Hacks?</div>
+                    <div class="faq-answer">
+                        Tropical Hacks offers an incredible opportunity to learn, network, and collaborate with fellow hackers. Beyond the workshops and mentorship, you’ll enjoy fun events, prizes, and a memorable hacking experience.
+                    </div>
+            
+                    <div class="faq-question">Is Tropical Hacks in-person?</div>
+                    <div class="faq-answer">
+                        Tropical Hacks operates in a hybrid format. The hackathon itself will be conducted virtually, while the career expo will be exclusively in-person, providing opportunities for networking and engagement.
+                    </div>
+            
+                    <div class="faq-question">Do I need a team to participate?</div>
+                    <div class="faq-answer">
+                        Teams are not required to sign up, and you can join solo. You’ll have opportunities to form teams at our Team Formation events or on the Discord server. Teams can have up to 4 members.
+                    </div>
+            
+                    <div class="faq-question">Are travel stipends available?</div>
+                    <div class="faq-answer">
+                        Unfortunately, Tropical Hacks does not provide travel stipends. However, we encourage participants to explore funding options through their universities or local organizations.
+                    </div>
+            
+                    <div class="faq-question">Do I need to pay to participate in Tropical Hacks?</div>
+                    <div class="faq-answer">
+                        No, participation in Tropical Hacks is completely free! We aim to make this event accessible to everyone interested.
+                    </div>
+             
+        </div>
+    </section>
+
+<footer>
+        <p>&copy; 2025 Tropical Hacks | <a href="mailto:info@tropicalhacks.com">info@tropicalhacks.com</a></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+
+
+        const propContainer = document.getElementById('dynamic-props');
+        const cloudImage = "https://github.com/user-attachments/assets/5d6f6e7c-6331-4523-8e66-8420a84e12f2";
+        const coinImages = [
+            "https://github.com/user-attachments/assets/f04cb610-7286-497e-bb98-c60b052e7834",
+            "https://github.com/user-attachments/assets/cb859275-899f-4a02-a3ca-b9d46486b5cb",
+            "https://github.com/user-attachments/assets/e844efc8-c116-4891-ad85-ef0fafd555c0"
+        ];
+
+        function createCloud() {
+            const cloud = document.createElement('img');
+            cloud.src = cloudImage;
+            cloud.className = 'cloud';
+            cloud.style.top = `${Math.random() * 60 + 20}vh`; // Random vertical position
+            cloud.style.width = `${150 + Math.random() * 300}px`; // Random size
+            cloud.style.animationDuration = `${10 + Math.random() * 5}s`; // Random speed
+            cloud.style.left = `${Math.random() * 100}vw`; // Random initial horizontal position
+            propContainer.appendChild(cloud);
+        }
+
+        function createCoin() {
+            const coin = document.createElement('img');
+            coin.src = coinImages[Math.floor(Math.random() * coinImages.length)]; // Random coin
+            coin.className = 'coin';
+            coin.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            coin.style.top = `${Math.random() * 60 + 20}vh`; // Random vertical position
+            coin.style.width = `${100 + Math.random() * 300}px`; // Larger size for coins
+            coin.style.animationDuration = `${2 + Math.random() * 3}s`; // Random bounce speed
+            propContainer.appendChild(coin);
+        }
+
+        // Generate Clouds and Coins
+        function generateDynamicProps() {
+            for (let i = 0; i < 10; i++) {
+                createCloud();
+            }
+            for (let i = 0; i < 15; i++) {
+                createCoin();
+            }
+        }
+
+        // Regenerate Props Every Few Seconds
+        function regenerateProps() {
+            propContainer.innerHTML = ''; // Clear previous props
+            generateDynamicProps();
+        }
+
+        // Initialize Props
+        generateDynamicProps();
+        setInterval(regenerateProps, 10000); // Refresh props every 10 seconds
+
+
+    </script>
+</body>
+</html>
