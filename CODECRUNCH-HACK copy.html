@@ -4,165 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tropical Hacks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins:wght@500&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-        /* Global Styles */
-        body {
-            background-color: #ADE8F4;
-            color: #05445E;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        /* Navbar */
-        .navbar {
-            background: linear-gradient(135deg, #0073e6, #00bfa5);
-            padding: 15px;
-        }
-        .navbar-brand {
-            font-size: 2rem;
-            font-weight: bold;
-            color: white;
-        }
-        .navbar-nav .nav-link {
-            color: white;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-        }
-        .navbar-nav .nav-link:hover {
-            color: #ffcc00;
-        }
-
-        /* Title & Sun Container */
-        .title-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .tropical-title {
-            font-size: 4rem;
-            text-shadow: 3px 3px 0px #1A659E, 5px 5px 0px #0D3B66;
-            color: white;
-            background: linear-gradient(to right, #FFB703, #FB8500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Pacifico', cursive;
-        }
-
-        .sun {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, #FFD700, #FF5733);
-            border-radius: 50%;
-            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        /* Running Waves */
-        .wave-animation {
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    width: 100vw;
-    white-space: nowrap;
-}
-
-.waves {
-    display: flex;
-    font-size: 2rem;
-    animation: wave-scroll 20s linear infinite;
-}
-
-/* Infinite Scrolling Effect */
-@keyframes wave-scroll {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-
-
-
-        /* Flyer Section */
-        .flyer-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        .flyer-placeholder img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* EST. 2025 with Hibiscus */
-        .est-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .hibiscus-top {
-            width: 60px;
-            margin-bottom: 5px;
-        }
-        .est-2025 {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #FF5733;
-        }
-
-        /* Apply Now Button */
-        .apply-button {
-            background: #FFB703;
-            color: #023047;
-            padding: 12px 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            box-shadow: 4px 4px 0px #FB8500;
-            transition: all 0.3s ease-in-out;
-            justify-content: center;
-            width: 250px;
-            margin: auto;
-        }
-        .apply-button:hover {
-            background: #FB8500;
-            box-shadow: 6px 6px 0px #FFFFFF;
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        footer {
-            background: #003f5c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -207,25 +54,24 @@
             }
         }
 
-/* Mario Styling */
-#mario {
-    position: fixed;  /* Keeps Mario in a fixed position */
-    bottom: 10%;      /* Adjusts Mario’s vertical position */
-    right: 5%;        /* Positions Mario on the right side */
-    width: 80px;      /* Adjusts Mario’s size */
-    animation: jumpMario 3s ease-in-out infinite;
-    z-index: 10;      /* Ensures Mario is layered above the background */
-}
+        /* Mario Styling */
+        #mario {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            width: 60px;
+            animation: jumpMario 3s ease-in-out infinite;
+            transform: translateX(-50%);
+        }
 
-/* Mario Jumping Animation */
-@keyframes jumpMario {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px); /* Slight jump effect */
-    }
-}
+        @keyframes jumpMario {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -150px); /* Jumping up */
+            }
+        }
 
 
 
@@ -289,8 +135,6 @@
             text-align: center;
         }
         .hero {
-            z-index: 20;         /* Higher than Mario so it's not hidden */
-            position: relative;  /* Ensures it's above other elements */
             background: linear-gradient(135deg, #00bfa5, #0073e6);
             height: 300px;
             display: flex;
@@ -568,115 +412,37 @@
         }
 
 
-
     </style>
 </head>
-<body>
-
-    <!-- NAVIGATION MENU -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">Tropical Hacks</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link"  href="https://ba-00001.github.io/codecrunchclub">Code Crunch |</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
-                    
-                
-                
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Title & Sun -->
-    <div class="title-container">
-        <h1 class="tropical-title">Tropical Hacks</h1>
-        <div class="sun"></div>
-    </div>
-
-<!-- Running Parrot Animation -->
- <div class="emoji-container" style="position: relative; width: 100vw; height: 60px; overflow: hidden; display: flex; justify-content: center; align-items: center; white-space: nowrap;">
-    <div class="scrolling-emojis" style="display: inline-block; font-size: 2.5rem; animation: scroll-loop 20s linear infinite;">
-        🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 🦜 
-    </div>
-</div>
-
-<style>
-    @keyframes scroll-loop {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100vw); }
-    }
-</style>
+<body >
+        
     
 
 
 
-    <!-- Flyer & EST. 2025 Section -->
-    <div class="flyer-section">
-        <div class="flyer-placeholder">
-            <img src="https://github.com/user-attachments/assets/c2b82faa-7267-4570-877a-2c486b7d6862" alt="Tropical Hacks Flyer">
-        </div>
-        <div class="est-container">
-            <img src="https://github.com/user-attachments/assets/30568fdc-c31d-4260-8a24-7e62db85451a" alt="Hibiscus Flower" class="hibiscus-top">
-            <div class="est-2025">EST. 2025</div>
-        </div>
-    </div>
-
-    <!-- Apply Now Button -->
-    <div class="apply-now-container">
-        <p></p>
-        <a href="https://forms.gle/9aqZ2eZquc4jFcaf6" class="apply-button">Apply Now</a>
-        <p></p>
-    </div>
+    <header>
+        <h1>Tropical Hacks 2025</h1>
+        <p>Welcome to the premier tropical hackathon for innovation and creativity!</p>
+    </header>
 
 
- <!-- Running Pineapple Animation -->
-<div class="emoji-container" style="position: relative; width: 100vw; height: 60px; overflow: hidden; display: flex; justify-content: center; align-items: center; white-space: nowrap;">
-    <div class="scrolling-emojis" style="display: inline-block; font-size: 2.5rem; animation: scroll-loop 20s linear infinite;">
-        🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 🍍 
-    </div>
-</div>
-
-<style>
-    @keyframes scroll-loop {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100vw); }
-    }
-</style>
-
-    <!-- (Continue Part 2 Content: Tracks, Awards, FAQ, Contributors...) -->
-
- <!-- Part 2: Hackathon Details, Tracks, FAQ, Contributors -->
- <!-- About Section -->
-
-
-
-<section id="about">
-    
+    <!-- Dynamic Props Container -->
     <div id="dynamic-props"></div>
+
     <!-- Mario Character -->
     <img id="mario" src="https://github.com/user-attachments/assets/0288b32a-bc25-4806-8e65-b5784cce936e" alt="Mario">
-</section>
 
-<section id="about">
-     <!-- Heading and Description -->
-     <div class="hero">
+    <div class="hero">
         <h2>Hacking in Paradise</h2>
     </div>
 
-    <h2>About Tropical Hacks</h2>
-    <p>Join hackers from around the world for 36 hours of innovation in paradise.</p>
+    <section id="about" class="fade-section">
+        <h2>About Tropical Hacks</h2>
+        <p>Tropical Hacks brings together hackers from around the globe to solve real-world problems in the heart of paradise. Join us for 36 hours of innovation, mentorship, and fun!</p>
+    </section>
 
-</section>
 
+  
 
 
     <section id="tracks" class="fade-section">
@@ -734,19 +500,7 @@
     </section>
 
  
-<!-- Running Leaves Section -->
-<div class="emoji-container" style="position: relative; width: 100vw; height: 60px; overflow: hidden; display: flex; justify-content: center; align-items: center; white-space: nowrap;">
-    <div class="scrolling-emojis" style="display: inline-block; font-size: 2.5rem; animation: scroll-loop 20s linear infinite;">
-        🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 
-    </div>
-</div>
-
-<style>
-    @keyframes scroll-loop {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100vw); }
-    }
-</style>
+    
     
 
     <section id="faq" class="fade-section">
@@ -838,24 +592,12 @@
 </div>
 
 
-
-
-<!-- Running Leaves Section -->
-<div class="emoji-container" style="position: relative; width: 100vw; height: 60px; overflow: hidden; display: flex; justify-content: center; align-items: center; white-space: nowrap;">
-    <div class="scrolling-emojis" style="display: inline-block; font-size: 2.5rem; animation: scroll-loop 20s linear infinite;">
-        🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊
-    </div>
+ <!-- Running Wave Emoji 🌊 Below Title -->
+ <div class="wave-animation">
+    <p></p>
+    <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span><span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span><span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span><span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span><span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span><span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span> <span>🌊</span>
+    <p></p>
 </div>
-
-<style>
-    @keyframes scroll-loop {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100vw); }
-    }
-</style>
-
-
-
 
 <!-- Tropical Spring Hackathon collaborators Section -->
 <div class="card-body">
@@ -1003,7 +745,7 @@
 </div>
 
 
-<section id="contributors" class="fade-section">
+
 
     <!-- Contributors Section -->
     <div class="text-center">
@@ -1046,24 +788,16 @@
         </div>
     </div>
 
-</section>
+ 
 
 
 
 
 
 
-
-
-
-
-
-    <footer>
+<footer>
         <p>&copy; 2025 Tropical Hacks | <a href="mailto:info@tropicalhacks.com">info@tropicalhacks.com</a></p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -1140,9 +874,5 @@
 
 
     </script>
-
-
-
-
 </body>
 </html>
