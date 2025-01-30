@@ -238,9 +238,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.html">Events</a>
-                        </li>
+                        
                         <li class="nav-item"><a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS</a></li>
                         <li class="nav-item"><a class="nav-link " href="SCHDEULES.html">Schedules</a></li>     
                         <li class="nav-item">
@@ -304,7 +302,140 @@
     </div>
 </header>
 
-<iframe id="game-frame" src="game.html"></iframe>
+<!-- Ticker Section with Famous Java Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #004aad, #004aad); /* Matching Java gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="java-ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>System.out.println("Hello, World!");</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>System.out.println("Hello, World!");</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
+            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
+        </div>
+    </div>
+</div>
+
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
+    }
+</style>
+<p></p>
+
+
+
+<!-- Luma Calendar Content -->
+<section class="content-section">
+    <div class="container px-lg-5">
+        <div style="text-align: center;"> <!-- Centers the iframe horizontally -->
+            <iframe
+                src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light"
+                frameborder="0"
+                allowfullscreen=""
+                aria-hidden="false"
+                tabindex="0"
+                style="
+                    width: 100%; /* Makes it responsive */
+                    max-width: 1200px; /* Optional: Sets a maximum width */
+                    height: 450px; /* Set the desired height */
+                    border: 1px solid #bfcbda88; /* Optional: Add border for styling */
+                    border-radius: 4px; /* Optional: Rounded corners */
+                    margin: 0 auto; /* Centers the iframe */
+                "
+            ></iframe>
+        </div>
+    </div>
+</section>
+
+
+<!-- Ticker Section with Famous Python Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #1a73e8, #004aad); /* Matching blue gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>for i in range(10): print(i)</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>if "Python" in ["Java", "C++", "Python"]: print("Found it!")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>while True: pass</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>import this</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>lambda x: x * 2</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>try: x = 1/0 except: print("Error")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>[x**2 for x in range(10)]</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>list(map(str.upper, ["hello", "world"]))</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>from datetime import datetime; print(datetime.now())</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>def greet(name): return f"Hello, {name}!"</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>{'a': 1, 'b': 2}.get('c', 'Not found')</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print('\n'.join(['🐍 Python Rocks! 🚀' for _ in range(3)]))</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>for i in range(10): print(i)</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>if "Python" in ["Java", "C++", "Python"]: print("Found it!")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>while True: pass</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>import this</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>lambda x: x * 2</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>try: x = 1/0 except: print("Error")</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>[x**2 for x in range(10)]</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>list(map(str.upper, ["hello", "world"]))</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>from datetime import datetime; print(datetime.now())</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>def greet(name): return f"Hello, {name}!"</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>{'a': 1, 'b': 2}.get('c', 'Not found')</code></h4>
+            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print('\n'.join(['🐍 Python Rocks! 🚀' for _ in range(3)]))</code></h4>
+        </div>
+    </div>
+</div>
+
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
+    }
+</style>
+
+<!-- End python ticker -->
 
 
 <section class="hackathon-group-section py-5">
@@ -337,12 +468,80 @@
 
 
 
+<!-- Ticker Section with Famous Swift Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #fa7343, #ff9500); /* Matching Swift gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="swift-ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
+            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
+        </div>
+    </div>
+</div>
+
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
+    }
+</style>
+<!-- End Ticker Section with Famous Swift Lines -->
 
 
+<!-- Ticker for hackathon section -->
+<div style="overflow: hidden; background-color: #ff5733; padding: 10px 0; margin-top: 30px; width: 100%;">
+    <div style="white-space: nowrap; display: flex; animation: ticker 27s linear infinite;">
+        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Beginner and experienced students are welcome to apply.</h4>
+        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Join us for an exciting hackathon experience!</h4>
+        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Network, build, and innovate with top student engineers!</h4>
+    </div>
+</div>
 
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+</style>
+
+<p></p>
 
 <!-- Flyer & Collaborators Section -->
 <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+
+
+    
     <!-- First Flyer -->
     <div style="text-align: center; max-width: 300px;">
         <div>
@@ -380,23 +579,56 @@
     </div>
 </div>
 
-<!-- Ticker Section at the End -->
-<div style="overflow: hidden; background-color: #ff5733; padding: 10px 0; margin-top: 30px; width: 100%;">
-    <div style="white-space: nowrap; display: flex; animation: ticker 27s linear infinite;">
-        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Beginner and experienced students are welcome to apply.</h4>
-        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Join us for an exciting hackathon experience!</h4>
-        <h4 style="color: white; font-size: 18px; margin: 0 50px;">Network, build, and innovate with top student engineers!</h4>
+
+
+
+<!-- Ticker Section with Famous C++ Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #005cb2, #003f7f); /* Matching C++ gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="cpp-ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>#include &lt;iostream&gt; using namespace std;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>cout << "Hello, World!" << endl;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>for(int i = 0; i < 10; i++) cout << i << endl;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>vector<int> nums = {1,2,3};</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>map<string, int> scores = {{"Alice", 90}, {"Bob", 85}};</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>auto sum = [](int a, int b) { return a + b; };</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>int arr[] = {1, 2, 3}; for(auto x : arr) cout << x;</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>#include &lt;iostream&gt; using namespace std;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>cout << "Hello, World!" << endl;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>for(int i = 0; i < 10; i++) cout << i << endl;</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>vector<int> nums = {1,2,3};</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>map<string, int> scores = {{"Alice", 90}, {"Bob", 85}};</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>auto sum = [](int a, int b) { return a + b; };</code></h4>
+            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>int arr[] = {1, 2, 3}; for(auto x : arr) cout << x;</code></h4>
+        </div>
     </div>
 </div>
 
 <!-- Ticker Animation -->
 <style>
-    @keyframes ticker {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
     }
 </style>
-
 
 
 
@@ -412,40 +644,30 @@
         <div class="row gx-lg-5 justify-content-center">           
 
 
+                <!-- Join the Code Crunch E-Board Card -->
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5">
+                            <h2 class="fs-4 fw-bold">Join the Code Crunch E-Board</h2>
+                            <p class="mt-3">
+                                Be part of the leadership team that fosters innovation and collaboration in technology. Whether you're a student or an industry leader, help shape the future of our club.
+                            </p>
+                            
+                            <h3 class="fs-5 fw-bold mt-4">Who Can Apply?</h3>
+                            <ul class="text-start mx-auto" style="max-width: 600px; list-style: none; padding: 0;">
+                                <li>✅ FIU students from all majors.</li>
+                                <li>✅ Students from other universities worldwide.</li>
+                                <li>✅ Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
+                            </ul>
 
-                <!-- Simple Card for Main Page Code Crunch E-Board -->
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card bg-light border-0 shadow-sm">
-                                <div class="card-body text-center p-4">
-                                    <h2 class="fs-4 fw-bold">Join the Code Crunch E-Board</h2>
-                                    <p class="mt-3">
-                                        Be part of the leadership team that fosters innovation and collaboration in technology. Whether you're a student or an industry leader, help shape the future of our club.
-                                    </p>
-                                
-
-                                <div class="container">
-                                    <h3 class="fs-5 fw-bold mt-4 text-center">Who Can Apply?</h3>
-                                    <ul class="text-start mx-auto" style="max-width: 600px;">
-                                        <li>FIU students from all majors.</li>
-                                        <li>Students from other universities worldwide.</li>
-                                        <li>Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
-                                    </ul>
-                                </div>
-
-                                    <a href="all-eboard.html" 
-                                    target="_blank" 
-                                    class="btn btn-primary btn-lg mt-3" 
-                                    aria-label="E-Board Application">
-                                    Apply Now
-                                    </a>
-                                </div>
-                            </div>
+                            <a href="all-eboard.html" target="_blank" class="btn btn-primary btn-lg mt-3" aria-label="E-Board Application">
+                                Apply Now
+                            </a>
                         </div>
                     </div>
                 </div>
 
+             
 
                    <!-- Become a Member Card -->
                    <div class="col-lg-6 col-xxl-4 mb-5">
@@ -567,24 +789,62 @@
                         </div>
                     </div>
 
-                    <!-- Google Docs Folder & GitHub Repository Access Card -->
-                    <!-- Google Docs Folder: https://drive.google.com/drive/folders/1TszlvVIOM9glMcMINbFpELWidgagtSD1?usp=sharing -->
-                    <!-- GitHub Repository: https://github.com/CODE-CRUNCH-CLUB -->
-
-             
-
-
-
-                  
-                    
-                    
-                    
-             
-                  
+       
 
         </div>
     </div>
 </section>
+
+<!-- Ticker Section with Famous C# Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #68217a, #4b0082); /* Matching C# gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="csharp-ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Console.WriteLine("Hello, World!");</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) Console.WriteLine(i);</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>if (name == "CSharp") Console.WriteLine("Found it!");</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Task.Run(() => Console.WriteLine("Async running!"));</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>List<int> nums = new List<int> {1, 2, 3};</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Dictionary<string, int> scores = new() {{"Alice", 90}, {"Bob", 85}};</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>var sum = (int a, int b) => a + b;</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>foreach (var num in nums) Console.WriteLine(num);</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Console.WriteLine("Hello, World!");</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) Console.WriteLine(i);</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>if (name == "CSharp") Console.WriteLine("Found it!");</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Task.Run(() => Console.WriteLine("Async running!"));</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>List<int> nums = new List<int> {1, 2, 3};</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Dictionary<string, int> scores = new() {{"Alice", 90}, {"Bob", 85}};</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>var sum = (int a, int b) => a + b;</code></h4>
+            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>foreach (var num in nums) Console.WriteLine(num);</code></h4>
+        </div>
+    </div>
+</div>
+
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
+    }
+</style>
+
 
 
 <!-- Resource Access Section -->
@@ -661,6 +921,86 @@
     </div>
 </section>
 
+
+<!-- Ticker Section with Famous JavaScript Lines -->
+<div style="
+    overflow: hidden; 
+    background: linear-gradient(135deg, #f7df1e, #ff9800); /* Matching JavaScript gradient */
+    padding: 10px 0; 
+    margin-top: 30px; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+">
+    <div id="javascript-ticker-content" style="
+        display: flex;
+        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
+    ">
+        <div style="display: flex;">
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>console.log("Hello, World!");</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>for(let i = 0; i < 10; i++) console.log(i);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>if ("JavaScript" in ["Python", "JavaScript", "C++"]) console.log("Found it!");</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>setTimeout(() => console.log("Delayed execution"), 1000);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const nums = [1, 2, 3].map(x => x * 2);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const user = { name: "John", age: 25 };</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>fetch('https://api.example.com').then(res => res.json()).then(data => console.log(data));</code></h4>
+        </div>
+        <!-- Duplicate content to make seamless looping -->
+        <div style="display: flex;">
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>console.log("Hello, World!");</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>for(let i = 0; i < 10; i++) console.log(i);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>if ("JavaScript" in ["Python", "JavaScript", "C++"]) console.log("Found it!");</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>setTimeout(() => console.log("Delayed execution"), 1000);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const nums = [1, 2, 3].map(x => x * 2);</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const user = { name: "John", age: 25 };</code></h4>
+            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>fetch('https://api.example.com').then(res => res.json()).then(data => console.log(data));</code></h4>
+        </div>
+    </div>
+</div>
+
+<!-- Ticker Animation -->
+<style>
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
+    }
+</style>
+<p></p>
+
+
+<!-- CrunchWars Game Content -->
+<section class="content-section">
+    <div class="container px-lg-5">
+        <h2 style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 10px; color: white;">
+            CrunchWars - Play on PC Only
+        </h2>
+        <p id="device-warning" style="text-align: center; color: red; font-size: 18px; font-weight: bold; display: none;">
+            ⚠️ This game is only playable on PC. Please visit on a desktop or laptop.
+        </p>
+        <div id="game-container" style="text-align: center;">
+            <iframe
+                id="game-frame"
+                src="game.html"
+                frameborder="0"
+                allowfullscreen=""
+                aria-hidden="false"
+                tabindex="0"
+                style="
+                    width: 100%; /* Makes it responsive */
+                    max-width: 1200px; /* Optional: Sets a maximum width */
+                    height: 450px; /* Set the desired height */
+                    border: 1px solid #bfcbda88; /* Optional: Add border for styling */
+                    border-radius: 4px; /* Optional: Rounded corners */
+                    margin: 0 auto; /* Centers the iframe */
+                "
+            ></iframe>
+        </div>
+    </div>
+</section>
 
         <!-- Footer -->
         <section class="footer-section">
