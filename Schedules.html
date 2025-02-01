@@ -15,161 +15,23 @@
         <!-- Custom CSS -->
         <style>
             /* General styles */
-            html, body {
-                margin: 0;
-                padding: 0;
-                min-height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-
-            body {
-                font-family: Arial, sans-serif;
-                background: linear-gradient(135deg, #1a73e8, #ff5722);
-                color: white;
-            }
-
-            /* Navbar styles */
-            .navbar {
-                position: sticky;
-                top: 0;
-                z-index: 1000;
-            }
-            .navbar-nav .nav-item {
-                padding-left: 15px; /* Add padding to the left */
-                padding-right: 15px; /* Add padding to the right */
-                position: relative;
-            }
-            .navbar-nav .nav-item:not(:last-child)::after {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                height: 100%;
-                width: 1px;
-                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
-            }
-
-            
-            .navbar-brand img {
-                height: 50px; /* Size of the logo next to the navbar */
-                margin-right: 10px;
-            }
-
-            .header-container {
-                background-color: #f8f9fa; /* Light, neutral background */
-                padding: 3rem 1rem; /* More vertical padding for better emphasis */
-                border-radius: 0.5rem; /* Soft rounded corners */
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
-            }
-            
-
-
-            /* Logo section styles */
-            .logo-container {
-                text-align: center;
-                padding: 5px 0;
-            }
-
-            .logo-container img {
-                height: 300px;
-            }
-
-            /* Hackathon Section */
-            .hackathon-container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 20px;
-                padding: 50px 20px;
-                flex-wrap: wrap;
-            }
-
-            .countdown-section {
-                flex: 0 0 40%;
-                text-align: left;
-            }
-
-            .countdown-section h1 {
-                font-size: 2.5rem;
-                font-weight: bold;
-            }
-
-            .countdown {
-                font-size: 1.8rem;
-                margin-top: 20px;
-            }
-
-            .image-section {
-                flex: 0 0 55%;
-                text-align: center;
-            }
-
-            .image-section img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
-
-            /* Page content styles */
-            .card {
-                background: rgba(255, 255, 255, 0.8);
-                color: #333;
-                border-radius: 12px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
-
-            .card h2 {
-                color: #0056b3;
-            }
-
-            /* Footer styles */
-            footer {
-                background-color: rgba(0, 0, 0, 0.8);
-                color: white;
-                text-align: center;
-                padding: 20px 0;
-                width: 100%;
-                position: relative;
-                margin-top: auto;
-            }
-
-            /* Social buttons */
-            .social-buttons .btn {
-                margin: 5px;
-            }
-
-
-
-
-
-
-
-            .center-text {
-        text-align: center;
-        padding: 10px;
+           
+        html,
+        body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
         }
-        .member-section {
-            text-align: center;
-            padding: 20px;
+
+        /* Logo image below main page */
+        .logo-container img {
+        height: 300px;
         }
-        .benefits-list {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-        .benefits-list li {
-            margin: 5px 0;
-        }
-        /* Social buttons */
-        .social-buttons a {
-            margin: 5px;
-        }
-        .social-buttons a:hover {
-            transform: scale(1.1);
-            transition: transform 0.2s ease-in-out;
-        }
+
+        
+
 
 
 
@@ -183,9 +45,27 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+                /* Style for event images */
+        .event-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 20px;
+                padding: 15px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                background-color: #7dbdfc;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+            }
+
+
         .event-container h3 {
         color: #333; /* Dark gray for headings */
         margin-bottom: 10px;
+        
+        
         }
 
 
@@ -197,6 +77,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             margin: 20px auto;
             display: block;
+            
         }
 
 
@@ -211,15 +92,15 @@
         }
 
         .event-container {
-    background: #ffffff; /* White background for contrast */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 20px;
-    color: #000; /* Default text color for the container */
-}
+            background-color: #7dbdfc; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #000; /* Default text color for the container */
+        }
 
 .event-container h3 {
     color: #333; /* Dark gray for headings */
@@ -247,86 +128,149 @@
 
             /* end Style for event images */
 
+      /* Logo section styles nav bar */
+      .logo-container {
+        text-align: center;
+        padding: 5px 0;
+        }
+       
+        /* Footer styles */
+        footer {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+        position: relative;
+        margin-top: auto;
+        }
+      
+      /* Social buttons */
+      .social-buttons .btn,
+      .social-buttons a {
+        margin: 5px;
+      }
+      .social-buttons a:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+      }
 
-        </style>
-    </head>
 
-    <body>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-lg-5">
-                <!-- Logo and Brand Name -->
-                <a class="navbar-brand" href="index.html">
-                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
-                    Code Crunch
-                </a>
-                <!-- Toggler for mobile view -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Navigation Links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link " href="SWE-CONVOS.html">SWE CONVOS</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="SCHDEULES.html">Schedules</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Logo Section -->
-        <div class="logo-container">
-            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+      /* Navigation link styles with hover highlighting */
+      .navbar-nav .nav-link {
+        position: relative;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        padding: 10px 15px;
+        border-radius: 5px;
+      }
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      /* Apply button section */
+      .apply-section {
+        text-align: center;
+        padding: 40px 0;
+      }
+      .apply-section .btn {
+        font-size: 1.25rem;
+        padding: 15px 30px;
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; min-height:100%; display:flex; flex-direction:column; font-family:Arial, sans-serif;">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0; z-index:1000;">
+      <div class="container px-lg-5">
+        <!-- Logo and Brand Name -->
+        <a class="navbar-brand" href="index.html" style="display:flex; align-items:center;">
+          <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" style="height:50px; margin-right:10px;" />
+          Code Crunch
+        </a>
+        <!-- Toggler Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Collapsible Nav Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html" style="padding:10px 15px;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html" style="padding:10px 15px;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Schedules.html" style="padding:10px 15px;">Schedules</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px;">SWE Convos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="CODECRUNCH-HACK.html" style="padding:10px 15px;">Code Crunch Hackathon</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-eboard.html" style="padding:10px 15px;">E-board</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" style="padding:10px 15px;">Contact</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
 
 
-        
- <!-- Welcome Header -->
+<!-- Welcome Header -->
 <header class="py-5">
-    <div class="container px-lg-5 text-center">
-
-        <!-- Social Media Links -->
-        <div class="social-buttons">
-            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
-                <i class="bi bi-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
-                <i class="bi bi-instagram"></i> Instagram
-            </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
-                <i class="bi bi-whatsapp"></i> WhatsApp
-            </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
-                <i class="bi bi-discord"></i> Discord
-            </a>
-            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
-                <i class="bi bi-university"></i> Panther Connect
-            </a>
-            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
-                <i class="bi bi-link"></i> Linktree
-            </a>
-        </div>
+    <div class="container px-lg-5 text-center" data-aos="fade-up">
+      <h1 class="display-5 fw-bold">Code Crunch Club Weekly Schedule</h1>
+      <p class="fs-4">Stay ahead in your coding journey with Code Crunch! Join us for engaging sessions designed to sharpen your technical skills, build projects, and connect with a community of passionate learners.</p>
+      <p class="fs-4">From LeetCode practice to hands-on coding workshops, we've got something for everyone. All skill levels are welcome—whether you're a beginner or an advanced coder, there's a place for you at Code Crunch!</p>
+      
 
         
+        <!-- Social Media Links -->
+        <div class="social-buttons mt-4">
+          <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+            <i class="bi bi-instagram"></i> Instagram
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
+            <i class="bi bi-discord"></i> Discord
+          </a>
+          <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+            <i class="bi bi-university"></i> Panther Connect
+          </a>
+          <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+            <i class="bi bi-link"></i> Linktree
+        </a>
+        </div>
+      </div>
     </div>
-</header>
+  </header>
+  
 
 
 <!-- Spring 2025 Section -->
 <section class="content-section">
     <h1>Code Crunch Weekly Schedule - Spring 2025</h1>
+    
+    <div class="container px-lg-5 text-center" data-aos="fade-up">
+        <h2 class="fw-bold">Our Weekly Sessions</h2>
+        <ul class="list-group list-group-flush text-start d-inline-block">
+          <li class="list-group-item fs-5"><strong>📅 Wednesdays (5:00 PM - 6:00 PM):</strong> Crunch Portfolio - Hands-on project development & workshops</li>
+          <li class="list-group-item fs-5"><strong>📅 Thursdays (11:00 AM - 12:00 PM):</strong> CrunchTime LeetCode - Master data structures & algorithms</li>
+          <li class="list-group-item fs-5"><strong>📅 Thursdays (5:00 PM - 7:00 PM):</strong> Crunch Lab - Build real-world projects & collaborate</li>
+          <li class="list-group-item fs-5"><strong>🎙 Special Events:</strong> #CrunchConvos - Industry panels & networking (Dates TBD)</li>
+        </ul>
 
     <!-- Sub-section for Schedule -->
     <div class="content-section">

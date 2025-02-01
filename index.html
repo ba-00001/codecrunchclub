@@ -14,47 +14,37 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Custom CSS -->
         <style>
-            /* General styles */
-            html, body {
-                margin: 0;
-                padding: 0;
-                min-height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
+       /* General styles */
+       body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+      }
+ 
+      /* Logo section styles */
+      .logo-container {
+        text-align: center;
+        padding: 5px 0;
+      }
+      .logo-container img {
+        height: 300px;
+      }
+      /* Footer styles */
+      footer {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+        position: relative;
+        margin-top: auto;
+      }
 
-            body {
-                font-family: Arial, sans-serif;
-               
-                color: white;
-            }
 
-            /* Navbar styles */
-            .navbar {
-                position: sticky;
-                top: 0;
-                z-index: 1000;
-            }
-            .navbar-nav .nav-item {
-                padding-left: 15px; /* Add padding to the left */
-                padding-right: 15px; /* Add padding to the right */
-                position: relative;
-            }
-            .navbar-nav .nav-item:not(:last-child)::after {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                height: 100%;
-                width: 1px;
-                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
-            }
-
-            
-            .navbar-brand img {
-                height: 50px; /* Size of the logo next to the navbar */
-                margin-right: 10px;
-            }
+           
 
             .header-container {
                 background-color: #f8f9fa; /* Light, neutral background */
@@ -215,39 +205,83 @@
       /* end game */
 
 
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-lg-5">
-                <!-- Logo and Brand Name -->
-                <a class="navbar-brand" href="index.html">
-                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
-                    Code Crunch
-                </a>
-                <!-- Toggler for mobile view -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Navigation Links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS</a></li>
-                        <li class="nav-item"><a class="nav-link " href="SCHDEULES.html">Schedules</a></li>     
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+      /* Social buttons */
+      .social-buttons .btn,
+      .social-buttons a {
+        margin: 5px;
+      }
+      .social-buttons a:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+      }
+
+
+      /* Navigation link styles with hover highlighting */
+      .navbar-nav .nav-link {
+        position: relative;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        padding: 10px 15px;
+        border-radius: 5px;
+      }
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      /* Apply button section */
+      .apply-section {
+        text-align: center;
+        padding: 40px 0;
+      }
+      .apply-section .btn {
+        font-size: 1.25rem;
+        padding: 15px 30px;
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; min-height:100%; display:flex; flex-direction:column; font-family:Arial, sans-serif;">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0; z-index:1000;">
+      <div class="container px-lg-5">
+        <!-- Logo and Brand Name -->
+        <a class="navbar-brand" href="index.html" style="display:flex; align-items:center;">
+          <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" style="height:50px; margin-right:10px;" />
+          Code Crunch
+        </a>
+        <!-- Toggler Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Collapsible Nav Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html" style="padding:10px 15px;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html" style="padding:10px 15px;">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Schedules.html" style="padding:10px 15px;">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px;">SWE Convos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="CODECRUNCH-HACK.html" style="padding:10px 15px;">Code Crunch Hackathon</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-eboard.html" style="padding:10px 15px;">E-board</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" style="padding:10px 15px;">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
 
         <!-- Logo Section -->
         <div class="logo-container">
