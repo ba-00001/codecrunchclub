@@ -42,6 +42,37 @@
         position: relative;
         margin-top: auto;
       }
+/* Scroll Down Indicator - Fixed at Bottom Right */
+.scroll-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 10px;
+    animation: bounce 1.5s infinite;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Hide when the user reaches the bottom */
+.hidden {
+    display: none;
+}
+
 
 
            
@@ -1037,6 +1068,12 @@
     </div>
 </section>
 
+
+<!-- Scroll Down Indicator -->
+<div id="scroll-down-indicator" class="scroll-indicator">
+    ⬇️ <span>Scroll Down</span> ⬇️
+</div>
+
         <!-- Footer -->
         <section class="footer-section">
             <footer>
@@ -1070,5 +1107,20 @@
 
 
         </script>
+
+<script>
+    window.addEventListener("scroll", function() {
+        let scrollIndicator = document.getElementById("scroll-down-indicator");
+
+        // Check if the user has scrolled to the bottom
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            scrollIndicator.classList.add("hidden"); // Hide the indicator
+        } else {
+            scrollIndicator.classList.remove("hidden"); // Show the indicator if not at the bottom
+        }
+    });
+</script>
+
+
     </body>
 </html>
