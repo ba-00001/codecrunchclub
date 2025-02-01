@@ -1,80 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Code Crunch Tropical Hack 25 | Spring 2025 - Join Florida's leading student hackathon for coding enthusiasts. Build, learn, and network with the best!">
-    <meta property="og:title" content="Code Crunch Tropical Hack 25 | Spring 2025">
-    <meta property="og:description" content="Build innovative projects, attend workshops, and network with top companies at Code Crunch Tropical Hack 25 - Spring 2025.">
-    <meta property="og:image" content="https://example.com/code-crunch-hack-banner.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://codecrunchfiu.com/tropicalhack25">
-    <title>Code Crunch Tropical Hack 25</title>
-    <link rel="icon" href="https://example.com/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="hero">
-            <h1>Code Crunch Tropical Hack 25</h1>
-            <p>Spring 2025 | FIU</p>
-            <a href="#register" class="btn-register">Register Now</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Code Crunch - Home" />
+    <meta name="author" content="Code Crunch" />
+    <title>About Us - Code Crunch</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <!-- Required pseudo‑classes and keyframes (cannot be fully inlined) -->
+    <style>
+      /* Navigation hover effect */
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+          background-color: rgba(255, 255, 255, 0.25);
+          color: #fff;
+      }
+      /* Keyframes for ticker animations */
+      @keyframes ticker-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+      }
+      @keyframes ticker {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; min-height:100vh; display:flex; flex-direction:column; font-family:Arial, sans-serif; background: linear-gradient(135deg, #1a73e8, #ff5722); color:white;">
+    <!-- Navigation (with flex-wrap for mobile) -->
+    <nav data-aos="fade-down" class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0; z-index:1000;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+        <!-- Logo and Brand Name -->
+        <a class="navbar-brand" href="index.html" style="display:flex; align-items:center; text-decoration:none; color:white;">
+          <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" style="height:50px; margin-right:10px;" />
+          Code Crunch
+        </a>
+        <!-- Navigation Links -->
+        <div class="navbar-nav" style="display:flex; align-items:center; flex-wrap:wrap;">
+          <a class="nav-link" href="index.html" style="padding:10px 15px; color:white; text-decoration:none;">Home</a>
+          <a class="nav-link" href="about.html" style="padding:10px 15px; color:white; text-decoration:none;">About</a>
+          <a class="nav-link" href="events.html" style="padding:10px 15px; color:white; text-decoration:none;">Events</a>
+          <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px; color:white; text-decoration:none;">SWE-CONVOS</a>
+          <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px; color:white; text-decoration:none;">SWE-CONVOS</a>
+          <a class="nav-link" href="CODECRUNCH-HACK.html" style="padding:10px 15px; color:white; text-decoration:none;">Code Crunch Hackathon</a>
+          <a class="nav-link" href="all-eboard.html" style="padding:10px 15px; color:white; text-decoration:none;">E-board</a>
+          <a class="nav-link" href="contact.html" style="padding:10px 15px; color:white; text-decoration:none;">Contact</a>
         </div>
+      </div>
+    </nav>
+
+    <!-- Logo Section -->
+    <div style="text-align:center; padding:5px 0;" data-aos="fade-up">
+      <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" style="height:300px;" />
+    </div>
+
+    <!-- Welcome Header -->
+    <header data-aos="fade-down" style="padding:50px 0; background-color:white; color:#333; text-align:center;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px;">
+        <h1 style="font-size:2.5rem; font-weight:bold; margin-bottom:20px;">Welcome to Code Crunch</h1>
+        <p style="font-size:1.25rem; margin-bottom:20px; line-height:1.5;">
+          Code Crunch bridges global innovation with local engagement—offering a dynamic platform for all university students, no prior experience required! Join us to break down barriers in technology, participate in hands-on coding workshops, collaborate on community projects, and prepare for the future with immersive virtual and on-campus experiences.
+        </p>
+        <p style="font-size:1.25rem; margin-bottom:20px;">
+          Whether you join via virtual sessions or in person at FIU, we provide the resources, mentorship, and community to help you grow as a coder and innovator.
+        </p>
+        <p style="font-size:1.25rem; font-weight:bold; margin-bottom:20px;">
+          Let’s innovate together! Built and led by students, for students.
+        </p>
+        <h5 style="font-weight:bold; margin-bottom:20px; color:#333;">
+          #CodeCrunch #CodeCrunchFIU #DiversityInTech #InclusiveTech #LeadershipOpportunities #FIUTechCommunity #WomenInSTEM #LGBTQInTech #LatinxInTech #BlackInTech #AAPIsInTech #TechLeadership #JoinOurTeam #FIUInnovation #TechForEveryone #EmpowerTech #FutureLeaders #HackerCulture #CodeYourFuture #TechDiversity #FIUPanthers #STEMOpportunities #BuildYourFuture #LeadWithCode #PanthersInTech
+        </h5>
+        <!-- Social Media Links -->
+        <div class="social-buttons" data-aos="fade-up">
+          <a href="https://www.linkedin.com/company/code-crunch-club/" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#0077b5; color:white; text-decoration:none; border-radius:5px;" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://www.instagram.com/codecrunchclub/" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#e4405f; color:white; text-decoration:none; border-radius:5px;" aria-label="Instagram">
+            <i class="bi bi-instagram"></i> Instagram
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#28a745; color:white; text-decoration:none; border-radius:5px;" aria-label="WhatsApp">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#6c757d; color:white; text-decoration:none; border-radius:5px;" aria-label="Discord">
+            <i class="bi bi-discord"></i> Discord
+          </a>
+          <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#ffc107; color:white; text-decoration:none; border-radius:5px;" aria-label="Panther Connect">
+            <i class="bi bi-university"></i> Panther Connect
+          </a>
+          <a href="https://linktr.ee/CODE.CRUNCH" style="display:inline-block; margin:5px; padding:8px 12px; background-color:#343a40; color:white; text-decoration:none; border-radius:5px;" aria-label="Linktree">
+            <i class="bi bi-link"></i> Linktree
+          </a>
+        </div>
+      </div>
     </header>
 
-    <section id="about">
-        <h2>About Tropical Hack 25</h2>
-        <p>Welcome to Code Crunch Tropical Hack 25, Florida's premier student hackathon hosted by FIU. This spring, over 1,000 students from around the state and beyond will come together to:</p>
-        <ul>
-            <li><strong>Build</strong> innovative projects in cutting-edge technology.</li>
-            <li><strong>Learn</strong> new skills through hands-on workshops.</li>
-            <li><strong>Network</strong> with recruiters from top companies.</li>
-        </ul>
-        <p>Don’t miss out on this exciting event filled with prizes, fun activities, and amazing opportunities!</p>
-    </section>
-
-    <section id="schedule">
-        <h2>Schedule</h2>
-        <ul>
-            <li><strong>Day 1:</strong> Kickoff, Team Formation, Workshops</li>
-            <li><strong>Day 2:</strong> Hacking Begins, Mentorship Sessions</li>
-            <li><strong>Day 3:</strong> Project Submissions, Demo Day, Awards Ceremony</li>
-        </ul>
-    </section>
-
-    <section id="workshops">
-        <h2>Workshops & Activities</h2>
-        <p>Join our expert-led workshops and fun activities:</p>
-        <ul>
-            <li>Intro to AI and Machine Learning</li>
-            <li>Web Development Crash Course</li>
-            <li>Networking Social with Industry Leaders</li>
-            <li>Yoga and Chill Zone</li>
-        </ul>
-    </section>
-
-    <section id="sponsors">
-        <h2>Our Sponsors</h2>
-        <p>We are proud to partner with industry-leading organizations to make Tropical Hack 25 a success.</p>
-        <div class="sponsor-logos">
-            <img src="https://example.com/sponsor1.png" alt="Sponsor 1">
-            <img src="https://example.com/sponsor2.png" alt="Sponsor 2">
-            <img src="https://example.com/sponsor3.png" alt="Sponsor 3">
+    <!-- Ticker Section (Famous Java Lines) -->
+    <div data-aos="fade-up" style="overflow:hidden; background: linear-gradient(135deg, #004aad, #004aad); padding:10px 0; margin-top:30px; width:100%; display:flex; align-items:center; white-space:nowrap; position:relative;">
+      <div style="display:flex; animation: ticker-scroll 80s linear infinite;">
+        <div style="display:flex;">
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>System.out.println("Hello, World!");</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
         </div>
+        <div style="display:flex;">
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>System.out.println("Hello, World!");</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
+          <h4 style="color:#ffd700; font-size:18px; margin:0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ticker Animation Keyframes (in a style block) -->
+    <style>
+      @keyframes ticker-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+      }
+    </style>
+
+    <!-- Luma Calendar Section -->
+    <section data-aos="fade-up" style="padding:50px 0;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px; text-align:center;">
+        <div style="text-align:center; margin-bottom:20px;">
+          <iframe src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style="width:100%; max-width:1200px; height:450px; border:1px solid #bfcbda88; border-radius:4px; margin:0 auto;"></iframe>
+        </div>
+      </div>
     </section>
 
-    <section id="register">
-        <h2>Register Now</h2>
-        <p>Be part of an unforgettable hackathon experience! Registration is free and open to all students.</p>
-        <a href="https://forms.office.com/r/TropicalHack25" target="_blank" class="btn">Sign Up Here</a>
+    <!-- Ticker Section with Famous Swift Lines -->
+    <div data-aos="fade-up" style="overflow:hidden; background: linear-gradient(135deg, #fa7343, #ff9500); padding:10px 0; margin-top:30px; width:100%; display:flex; align-items:center; white-space:nowrap; position:relative;">
+      <div style="display:flex; animation: ticker-scroll 80s linear infinite;">
+        <div style="display:flex;">
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>print("Hello, World!")</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
+        </div>
+        <div style="display:flex;">
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>print("Hello, World!")</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
+          <h4 style="color:#00ffcc; font-size:18px; margin:0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ticker Animation for Hackathon Section -->
+    <div data-aos="fade-up" style="overflow:hidden; background-color:#ff5733; padding:10px 0; margin-top:30px; width:100%; text-align:center;">
+      <div style="white-space:nowrap; display:flex; animation: ticker 27s linear infinite;">
+        <h4 style="color:white; font-size:18px; margin:0 50px;">Beginner and experienced students are welcome to apply.</h4>
+        <h4 style="color:white; font-size:18px; margin:0 50px;">Join us for an exciting hackathon experience!</h4>
+        <h4 style="color:white; font-size:18px; margin:0 50px;">Network, build, and innovate with top student engineers!</h4>
+      </div>
+    </div>
+
+    <style>
+      @keyframes ticker {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+      }
+    </style>
+
+    <!-- Resource Access Section -->
+    <section data-aos="fade-up" style="padding:50px 0;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+          <!-- Weekly Access Updates Card -->
+          <div style="max-width:300px; background:rgba(255,255,255,0.8); color:#333; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3); padding:20px; text-align:center;" data-aos="fade-up">
+            <h2 style="font-size:1.5rem; font-weight:bold; margin-bottom:10px;">Weekly Access Updates</h2>
+            <p style="margin:10px 0;">Each Code Crunch course has its own GitHub repository. Weekly files, including Google Slides, code blocks, and other resources, are uploaded to ensure members stay up to date.</p>
+            <p style="margin:10px 0;">Access to these resources is available exclusively to members.</p>
+            <p style="margin:10px 0;"><strong>Note:</strong> Access to all Google Docs and Slides will be granted using the Google account provided in the "Become a Member" form.</p>
+          </div>
+          <!-- GitHub Repositories Card -->
+          <div style="max-width:300px; background:rgba(255,255,255,0.8); color:#333; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3); padding:20px; text-align:center;" data-aos="fade-up">
+            <h2 style="font-size:1.5rem; font-weight:bold; margin-bottom:10px;">GitHub Repositories</h2>
+            <p style="margin:10px 0;">After becoming a member, you will receive an invite to our GitHub repositories.</p>
+            <ul style="text-align:left; padding-left:20px; margin:10px 0;">
+              <li>Each course has its own repository.</li>
+              <li>You should see a repository for each course when accessing the Code Crunch organization on GitHub.</li>
+              <li>Weekly updates include slides, code blocks, and session resources.</li>
+            </ul>
+            <p style="margin:10px 0;"><small><strong>URL:</strong> <a href="https://github.com/CODE-CRUNCH-CLUB" target="_blank" style="color:#007bff; text-decoration:none;">github.com/CODE-CRUNCH-CLUB</a></small></p>
+            <a href="https://github.com/CODE-CRUNCH-CLUB" target="_blank" style="display:inline-block; padding:8px 15px; background-color:#007bff; color:white; text-decoration:none; border-radius:5px; font-size:14px; font-weight:bold; margin-top:10px;">Code Crunch GitHub Repositories</a>
+          </div>
+          <!-- Contact Us Card -->
+          <div style="max-width:300px; background:rgba(255,255,255,0.8); color:#333; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3); padding:20px; text-align:center;" data-aos="fade-up">
+            <h2 style="font-size:1.5rem; font-weight:bold; margin-bottom:10px;">Issues? Contact Us</h2>
+            <p style="margin:10px 0;">If you encounter any issues (e.g. a 404 error when accessing repositories or no GitHub invite), please email us at:</p>
+            <p style="margin:10px 0;"><a href="mailto:codecrunchhelp@outlook.com" style="font-weight:bold; color:#007bff; text-decoration:none;">codecrunchhelp@outlook.com</a></p>
+            <a href="mailto:codecrunchhelp@outlook.com" target="_blank" style="display:inline-block; padding:8px 15px; background-color:#28a745; color:white; text-decoration:none; border-radius:5px; font-size:14px; font-weight:bold; margin-top:10px;">Contact Us</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Code Crunch Club. All Rights Reserved.</p>
-        <ul class="social-links">
-            <li><a href="https://linkedin.com/company/code-crunch-club" target="_blank">LinkedIn</a></li>
-            <li><a href="https://codecrunchfiu.com" target="_blank">Website</a></li>
-        </ul>
+    <!-- Executive Board Section (cards in groups of 3 on large screens) -->
+    <section data-aos="fade-up" style="padding:50px 0; background:rgba(255,255,255,0.8); color:#333;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px;">
+        <h2 style="text-align:center; font-weight:bold; margin-bottom:30px;">Executive Board</h2>
+        <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+          <!-- Brian -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/ba-00001/imagesforWEB-1/blob/main/president.jpg?raw=true" alt="Brian Bazurto - President" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Brian Bazurto</h5>
+                <p style="margin:0;">President & Founder</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him/They/Them</p>
+                <p style="margin:10px 0;">Rising Junior @FIU majoring in Computer Science with a minor in Actuarial Studies.</p>
+                <p style="margin:10px 0;">I’m passionate about technology and how it can bring people together. Outside of school, I volunteer at animal shelters, explore Miami’s food scene, and connect with others who share my passion for impactful projects.</p>
+                <a href="https://www.linkedin.com/in/IBA001" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Amilcar -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/ba-00001/imagesforWEB-1/blob/main/vice-president.jpg?raw=true" alt="Amilcar Pena - Vice President" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Amilcar Pena</h5>
+                <p style="margin:0;">Vice President & Tech Engagement Chair C1 | C2</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Rising Junior @FIU majoring in Computer Science.</p>
+                <a href="https://www.linkedin.com/in/amilcarjpena/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Daniel -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/a7bc6985-cbcc-42ff-a415-87aad149914c" alt="Daniel Hernandez - Vice President" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Daniel Hernandez</h5>
+                <p style="margin:0;">Tech Engagement Chair C5</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Graduate student @FIU, majoring in Computer Science.</p>
+                <p style="margin:10px 0;">B.Sc. in Computer Science, December 2024</p>
+                <a href="https://www.linkedin.com/in/daniel-hernandez-10203b24a/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Mariana -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/7d0db14a-f473-41be-99b6-080d0066b4ca" alt="Mariana Phelan - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Mariana Phelan</h5>
+                <p style="margin:0;">Logistics Chair 3 &amp; Marketing Chair</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: She/Her</p>
+                <p style="margin:10px 0;">Junior @FIU majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Born and raised in Caracas, Venezuela. I aspire to become a Software Engineer at a top tech company and eventually the CEO of my own firm while exploring new cultures.</p>
+                <a href="https://www.linkedin.com/in/mariana-phelan-b7a380238/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Alvise -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/ff5dcc32-7df0-4aec-98b5-88358795fa16" alt="Alvise Carpin - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Alvise Carpin</h5>
+                <p style="margin:0;">Tech Engagement Chair C1/C2/C3/C4</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Graduate student @FIU, majoring in Computer Science.</p>
+                <p style="margin:10px 0;">B.A. in Computer Science, December 2024</p>
+                <p style="margin:10px 0;">Alvise is passionate about solving complex problems and helping others. Outside of coding, he enjoys working out and reading.</p>
+                <a href="https://www.linkedin.com/in/alvisec/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Arnold -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/715871d8-3d0f-48b9-9983-020dce3e1a7f" alt="Arnold Miranda-Pino - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Arnold Miranda-Pino</h5>
+                <p style="margin:0;">Tech Engagement Chair C3 | C4</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Junior @FIU majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Arnold, of Cuban descent, is passionate about web and app development and enjoys working with TypeScript. He has supported new students and helped design a mobile app workshop using Agile methods.</p>
+                <a href="https://www.linkedin.com/in/arnold-miranda-pino/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Sara -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/cb0af0a3-0ab4-4806-a52d-000bb95fdff0" alt="Sara Salvatierra - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Sara Salvatierra</h5>
+                <p style="margin:0;">Tech Engagement Chair C6</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: She/Her</p>
+                <p style="margin:10px 0;">FIU student majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Sara is passionate about creating simple solutions to complex problems, especially in cybersecurity. She has contributed to front-end development for a web3 marketing platform and an Instagram filter with over 1.7 million impressions.</p>
+                <a href="https://www.linkedin.com/in/sarasalvatierra/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Gabriel -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/a8415473-ac0d-4b9d-92f4-d810210e230d" alt="Gabriel Nogueras - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Gabriel Nogueras</h5>
+                <p style="margin:0;">Tech Engagement Chair C7</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">FIU student majoring in Computer Science.</p>
+                <a href="https://www.linkedin.com/in/gabrielnogueras/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Justin -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/fd6f828d-03b0-4ca5-8c91-c9746c26c052" alt="Justin Joseph - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Justin Joseph</h5>
+                <p style="margin:0;">Tech Engagement Chair C6</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">FIU student majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Born and raised in Florida, Justin is a sophomore at FIU, majoring in Computer Science with a minor in Mathematical Sciences. He is particularly interested in cybersecurity and web development.</p>
+                <a href="https://www.linkedin.com/in/jjosephe/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Thierry -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/9b2f6572-b17d-4f5d-a50b-4964dd3c6222" alt="Thierry Laguerre - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Thierry Laguerre</h5>
+                <p style="margin:0;">Tech Engagement Chair C8</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">FIU student majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Thierry is a driven student with hands-on experience in database management, web development, and UI/UX design. He is passionate about leveraging technology for meaningful solutions.</p>
+                <a href="https://www.linkedin.com/in/thierrylaguerre/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Jhoan Gonzales -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/9c130cb5-083c-4a17-ae50-d9848af2b5d0" alt="Jhoan Gonzales - Biomedical Engineer" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Jhoan Gonzales</h5>
+                <p style="margin:0;">Tech Engagement Chair C10</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Junior @FIU majoring in Biomedical Engineering</p>
+                <p style="margin:10px 0;">Jhoan works as a Biochemist Student Assistant and has diverse research experience. He is passionate about innovation and technology.</p>
+                <a href="https://www.linkedin.com/in/jhoan-gonzales497/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Ashley Prado -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/b39b7a78-c1c8-407d-b073-998fcf1aaa34" alt="Ashley Prado - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Ashley Prado</h5>
+                <p style="margin:0;">Tech Engagement Chair C11</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: She/Her</p>
+                <p style="margin:10px 0;">Junior @FIU majoring in Computer Science</p>
+                <p style="margin:10px 0;">Ashley is dedicated to using technology to solve real-world problems and empower her community.</p>
+                <a href="https://www.linkedin.com/in/ashley-prado/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Gabriela Machado -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/aa5ac66d-1fe8-42c3-9656-87931f0145e2" alt="Gabriela Machado - Tech Lead" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Gabriela Machado</h5>
+                <p style="margin:0;">Tech Engagement Chair C11</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: She/Her</p>
+                <p style="margin:10px 0;">Information Technology Student @FIU</p>
+                <p style="margin:10px 0;">Gabriela is passionate about using technology to create innovative ideas and inspire creativity.</p>
+                <a href="https://www.linkedin.com/in/gabriela-machado-76b808311/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Jason -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/167ecf79-4bca-4b21-b4f3-52e5a7b32057" alt="Jason Jiang - Treasurer" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Jason Jiang</h5>
+                <p style="margin:0;">Logistics Chair 2 &amp; Industry Chair</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Senior @FIU majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Jason, born in New York with Chinese heritage, is exploring the tech world and focusing on personal growth.</p>
+                <a href="https://www.linkedin.com/in/jasonjiangexperience/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Henry -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/user-attachments/assets/bed7c1cb-aaac-4502-a94d-9766e945384b" alt="Henry Cruz - Marketing and Logistics Chair" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Henry Cruz</h5>
+                <p style="margin:0;">Logistics Chair 1</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Junior @FIU majoring in Computer Science.</p>
+                <a href="https://www.linkedin.com/in/henrycruz03/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <!-- Bryan -->
+          <div style="flex:1 1 calc(33.33% - 30px); max-width:calc(33.33% - 30px);" data-aos="fade-up">
+            <div style="height:100%; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+              <img src="https://github.com/ba-00001/imagesforWEB-1/blob/main/Treasurer%26RSOC%20Representative.JPG?raw=true" alt="Bryan Garcia - Treasurer" style="width:100%; border-top-left-radius:12px; border-top-right-radius:12px; object-fit:cover; max-height:200px;">
+              <div style="padding:20px; text-align:center;">
+                <h5 style="font-weight:bold; margin-bottom:10px;">Bryan Garcia</h5>
+                <p style="margin:0;">Treasurer &amp; RSOC Representative</p>
+                <p style="margin:5px 0; color:#666;">Pronouns: He/Him</p>
+                <p style="margin:10px 0;">Rising Junior @FIU majoring in Computer Science.</p>
+                <p style="margin:10px 0;">Bryan is focused on programming, software development, and emerging technologies like AI and VR. He has honed his skills through open-source projects and hackathons.</p>
+                <a href="https://www.linkedin.com/in/bryan-bg-garcia/" target="_blank" style="color:#007bff; text-decoration:none;">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer data-aos="fade-up" style="background-color: rgba(0,0,0,0.8); color:white; text-align:center; padding:20px 0; width:100%; margin-top:auto;">
+      <div style="max-width:1200px; margin:0 auto; padding:0 15px;">
+        <p style="margin:0;">&copy; Code Crunch 2024</p>
+      </div>
     </footer>
-</body>
+
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,    // Animation duration in ms
+        once: false,      // Re-animate every time element scrolls into view
+        mirror: true      // Re-trigger animations when scrolling back into view
+      });
+    </script>
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
