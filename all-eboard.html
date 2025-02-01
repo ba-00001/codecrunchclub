@@ -12,6 +12,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <!-- AOS CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
         <!-- Custom CSS -->
         <style>
             /* General styles */
@@ -22,7 +27,6 @@
                 display: flex;
                 flex-direction: column;
             }
-
             body {
                 font-family: Arial, sans-serif;
                 background: linear-gradient(135deg, #1a73e8, #ff5722);
@@ -36,8 +40,8 @@
                 z-index: 1000;
             }
             .navbar-nav .nav-item {
-                padding-left: 15px; /* Add padding to the left */
-                padding-right: 15px; /* Add padding to the right */
+                padding-left: 15px;
+                padding-right: 15px;
                 position: relative;
             }
             .navbar-nav .nav-item:not(:last-child)::after {
@@ -47,30 +51,25 @@
                 top: 0;
                 height: 100%;
                 width: 1px;
-                background-color: rgba(255, 255, 255, 0.5); /* Adjust color as needed */
+                background-color: rgba(255, 255, 255, 0.5);
             }
-
-            
             .navbar-brand img {
-                height: 50px; /* Size of the logo next to the navbar */
+                height: 50px;
                 margin-right: 10px;
             }
 
             .header-container {
-                background-color: #f8f9fa; /* Light, neutral background */
-                padding: 3rem 1rem; /* More vertical padding for better emphasis */
-                border-radius: 0.5rem; /* Soft rounded corners */
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
+                background-color: #f8f9fa;
+                padding: 3rem 1rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
-            
-
 
             /* Logo section styles */
             .logo-container {
                 text-align: center;
                 padding: 5px 0;
             }
-
             .logo-container img {
                 height: 300px;
             }
@@ -84,27 +83,22 @@
                 padding: 50px 20px;
                 flex-wrap: wrap;
             }
-
             .countdown-section {
                 flex: 0 0 40%;
                 text-align: left;
             }
-
             .countdown-section h1 {
                 font-size: 2.5rem;
                 font-weight: bold;
             }
-
             .countdown {
                 font-size: 1.8rem;
                 margin-top: 20px;
             }
-
             .image-section {
                 flex: 0 0 55%;
                 text-align: center;
             }
-
             .image-section img {
                 max-width: 100%;
                 height: auto;
@@ -119,7 +113,6 @@
                 border-radius: 12px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             }
-
             .card h2 {
                 color: #0056b3;
             }
@@ -139,52 +132,40 @@
             .social-buttons .btn {
                 margin: 5px;
             }
+            .social-buttons a {
+                margin: 5px;
+            }
+            .social-buttons a:hover {
+                transform: scale(1.1);
+                transition: transform 0.2s ease-in-out;
+            }
 
-
-
-
-
-
-
+            /* Centered text sections */
             .center-text {
-        text-align: center;
-        padding: 10px;
-    }
-    .member-section {
-        text-align: center;
-        padding: 20px;
-    }
-    .benefits-list {
-        list-style-type: none;
-        padding: 0;
-        text-align: center;
-    }
-    .benefits-list li {
-        margin: 5px 0;
-    }
-    /* Social buttons */
-    .social-buttons a {
-        margin: 5px;
-    }
-    .social-buttons a:hover {
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
-    }
-
-
-
-
-
-
-
+                text-align: center;
+                padding: 10px;
+            }
+            .member-section {
+                text-align: center;
+                padding: 20px;
+            }
+            .benefits-list {
+                list-style-type: none;
+                padding: 0;
+                text-align: center;
+            }
+            .benefits-list li {
+                margin: 5px 0;
+            }
         </style>
     </head>
     <body>
+        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-lg-5">
                 <!-- Logo and Brand Name -->
                 <a class="navbar-brand" href="index.html">
-                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" />
                     Code Crunch
                 </a>
                 <!-- Toggler for mobile view -->
@@ -192,7 +173,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Navigation Links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
@@ -203,8 +184,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="events.html">Events</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS</a></li>
-                        <li class="nav-item"><a class="nav-link " href="SCHDEULES.html">Schedules</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="SWE-CONVOS.html">SWE-CONVOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="SCHDEULES.html">Schedules</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
@@ -215,175 +200,190 @@
 
         <!-- Logo Section -->
         <div class="logo-container">
-            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" />
         </div>
 
+        <!-- Welcome Header -->
+        <header class="py-5">
+            <div class="container px-lg-5 text-center">
+                <!-- Social Media Links -->
+                <div class="social-buttons">
+                    <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+                        <i class="bi bi-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
+                    <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
+                        <i class="bi bi-discord"></i> Discord
+                    </a>
+                    <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+                        <i class="bi bi-university"></i> Panther Connect
+                    </a>
+                    <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+                        <i class="bi bi-link"></i> Linktree
+                    </a>
+                </div>
+            </div>
+        </header>
 
-        
- <!-- Welcome Header -->
-<header class="py-5">
-    <div class="container px-lg-5 text-center">
-
-        <!-- Social Media Links -->
-        <div class="social-buttons">
-            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
-                <i class="bi bi-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
-                <i class="bi bi-instagram"></i> Instagram
-            </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
-                <i class="bi bi-whatsapp"></i> WhatsApp
-            </a>
-            <a href="hhttps://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
-                <i class="bi bi-discord"></i> Discord
-            </a>
-            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
-                <i class="bi bi-university"></i> Panther Connect
-            </a>
-            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
-                <i class="bi bi-link"></i> Linktree
-            </a>
-        </div>
-
-    </div>
-</header>
-
-
-
-<!-- Page Content -->
-<section class="page-content-section pt-4">
-    <div class="container px-lg-5">
-
-        <!-- E-Board Roles Section -->
-        <h1 class="display-5 fw-bold member-section text-center">Join the Code Crunch E-Board!</h1>
-        <p class="text-center">
-            Be a part of the leadership team that drives innovation, collaboration, and inclusivity at Code Crunch! We’re looking for passionate individuals to fill E-Board roles for this year. Whether you're a student or an industry leader who champions diversity and inclusion, we welcome you to help shape the future of our club.
-        </p>
-        <p class="text-center">
-            No experience? No problem! All students, regardless of major, and professionals eager to make an impact are encouraged to apply.
-        </p>
+        <!-- Page Content -->
+        <section class="page-content-section pt-4">
+            <div class="container px-lg-5">
+                <!-- E-Board Roles Section -->
+                <h1 data-aos="fade-down" class="display-5 fw-bold member-section text-center">
+                    Join the Code Crunch E-Board!
+                </h1>
+                <p data-aos="fade-in" data-aos-delay="100" class="text-center">
+                    Be a part of the leadership team that drives innovation, collaboration, and inclusivity at Code Crunch! We’re looking for passionate individuals to fill E-Board roles for this year. Whether you're a student or an industry leader who champions diversity and inclusion, we welcome you to help shape the future of our club.
+                </p>
+                <p data-aos="fade-in" data-aos-delay="200" class="text-center">
+                    No experience? No problem! All students, regardless of major, and professionals eager to make an impact are encouraged to apply.
+                </p>
 
                 <!-- E-Board Details Section -->
-        <section class="e-board-section py-5">
+                <section class="e-board-section py-5">
+                    <div class="container">
+                        <h1 data-aos="fade-up" class="display-5 fw-bold text-center mb-5">
+                            Join Code Crunch as an E-Board Volunteer!
+                        </h1>
+                        <div class="row">
+                            <!-- Column 1: About the Job -->
+                            <div data-aos="fade-right" class="col-lg-4 mb-4">
+                                <h2 class="fs-4 fw-bold">About the Job</h2>
+                                <p><strong>Company Description:</strong></p>
+                                <p>
+                                    Founded in August 2024, Code Crunch is a student-led club at Florida International University (FIU) dedicated to fostering a collaborative and inclusive environment for students passionate about coding and technology. The club’s mission is to enhance coding skills, promote innovation, and build a strong, diverse tech community at FIU.
+                                </p>
+                                <p>
+                                    With the launch of Code Crunch Global in October 2024, students worldwide can now join virtually to improve their technical skills and prepare for interviews in a supportive, community-driven environment.
+                                </p>
+                                <h3 class="fs-5 fw-bold mt-4 text-center">Who Can Apply?</h3>
+                                <ul class="text-start mx-auto" style="max-width: 600px;">
+                                    <li>FIU students from all majors.</li>
+                                    <li>Students from other universities worldwide.</li>
+                                    <li>Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 2: Key Responsibilities -->
+                            <div data-aos="fade-up" class="col-lg-4 mb-4">
+                                <h2 class="fs-4 fw-bold">Open Position: Tech Engagement Chair</h2>
+                                <p><strong>Time Commitment:</strong> 5 hours per week.</p>
+                                <h3 class="fs-5 fw-bold mt-4">Key Responsibilities:</h3>
+                                <p><strong>Weekly Tech Sessions:</strong></p>
+                                <ul>
+                                    <li>Host 1–2 hours of engaging sessions to inspire and educate club members.</li>
+                                </ul>
+                                <p><strong>Lecture Preparation:</strong></p>
+                                <ul>
+                                    <li>Dedicate 1 hour weekly to develop and refine impactful lecture content.</li>
+                                </ul>
+                                <p><strong>Club Logistics & Special Events:</strong></p>
+                                <ul>
+                                    <li>Assist for 1 hour with planning and executing club events and workshops.</li>
+                                </ul>
+                                <p><strong>Club Outreach:</strong></p>
+                                <ul>
+                                    <li>Dedicate 1 hour per week to expand our network and connect with potential members and partners.</li>
+                                    <li>
+                                        Conduct weekly tabling events and short 5-minute classroom outreach sessions to invite students to club events and share opportunities.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Column 3: Qualifications and How to Apply -->
+                            <div data-aos="fade-left" class="col-lg-4 mb-4">
+                                <h2 class="fs-4 fw-bold">Qualifications</h2>
+                                <p><strong>General Requirements:</strong></p>
+                                <ul>
+                                    <li>A passion for technology, education, and fostering diversity and inclusion.</li>
+                                    <li>Strong communication and organizational skills.</li>
+                                    <li>Ability to work collaboratively in a team setting.</li>
+                                    <li>Enthusiasm to contribute to the growth of a student-led community.</li>
+                                </ul>
+                                <p><strong>Preferred (But Not Required):</strong></p>
+                                <ul>
+                                    <li>Experience in event planning, public speaking, or community outreach.</li>
+                                    <li>Familiarity with project management tools (e.g., Trello, Asana) or technical platforms (e.g., GitHub).</li>
+                                    <li>Knowledge of coding and technology concepts.</li>
+                                </ul>
+                                <p>No prior experience is required; we welcome individuals eager to learn and make an impact.</p>
+                                <h2 class="fs-4 fw-bold mt-4">How to Apply</h2>
+                                <p>
+                                    Interested in joining? Apply by filling out the application form below. We’re excited to have you help us create an inclusive and innovative tech community at FIU and beyond!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- What You'll Gain Section -->
+                <section class="page-content-section py-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div data-aos="fade-up" class="col-lg-8 mb-4">
+                                <h2 class="fs-3 fw-bold text-center">
+                                    What You’ll Gain by Joining the Code Crunch E-Board
+                                </h2>
+                                <ul class="list-unstyled mt-4">
+                                    <li class="mb-3">
+                                        <strong>Leadership Experience:</strong> Develop critical leadership skills and gain hands-on experience managing dynamic projects.
+                                    </li>
+                                    <li class="mb-3">
+                                        <strong>Professional Development:</strong> Bolster your resume with real-world experience in technical leadership, event coordination, and community outreach.
+                                    </li>
+                                    <li class="mb-3">
+                                        <strong>Networking Opportunities:</strong> Connect with industry professionals, alumni, and peers, expanding your professional network.
+                                    </li>
+                                    <li class="mb-3">
+                                        <strong>Exclusive Perks:</strong> Access special club events, workshops, mentorship programs, and career development sessions.
+                                    </li>
+                                    <li class="mb-3">
+                                        <strong>Impact & Legacy:</strong> Contribute directly to building a diverse and innovative tech community at FIU and beyond.
+                                    </li>
+                                    <li class="mb-3">
+                                        <strong>Personal Growth:</strong> Enhance your communication, organizational, and problem-solving skills while making a tangible impact.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+        <!-- Final Call-to-Action Section -->
+        <section class="page-content-section py-5">
             <div class="container">
-                <h1 class="display-5 fw-bold text-center mb-5">Join Code Crunch as an E-Board Volunteer!</h1>
-                <div class="row">
-                    <!-- Column 1: About the Job -->
-                    <div class="col-lg-4 mb-4">
-                        <h2 class="fs-4 fw-bold">About the Job</h2>
-                        <p><strong>Company Description:</strong></p>
-                        <p>
-                            Founded in August 2024, Code Crunch is a student-led club at Florida International University (FIU) dedicated to fostering a collaborative and inclusive environment for students passionate about coding and technology. The club’s mission is to enhance coding skills, promote innovation, and build a strong, diverse tech community at FIU.
-                        </p>
-
-                        <p>
-                            With the launch of Code Crunch Global in October 2024, students worldwide can now join virtually to improve their technical skills and prepare for interviews in a supportive, community-driven environment.
-                        </p>
-
-                        <h3 class="fs-5 fw-bold mt-4 text-center">Who Can Apply?</h3>
-                        <ul class="text-start mx-auto" style="max-width: 600px;">
-                            <li>FIU students from all majors.</li>
-                            <li>Students from other universities worldwide.</li>
-                            <li>Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 2: Key Responsibilities -->
-                    <div class="col-lg-4 mb-4">
-                        <h2 class="fs-4 fw-bold">Open Position: Logistics Chair</h2>
-                        <p><strong>Time Commitment:</strong> 4 to 5 hours per week (may vary).</p>
-
-                        <h3 class="fs-5 fw-bold mt-4">Key Responsibilities:</h3>
-                        <p><strong>Industry Engagement:</strong></p>
-                        <ul>
-                            <li>Reach out to industry professionals to organize guest speaker sessions, workshops, or panels.</li>
-                            <li>Establish and maintain relationships with corporate sponsors or community partners.</li>
-                            <li>Represent the club at external events, such as hackathons, conferences, or networking mixers.</li>
-                        </ul>
-
-                        <p><strong>Event Coordination:</strong></p>
-                        <ul>
-                            <li>Plan and execute club events, including workshops, general meetings, and social gatherings.</li>
-                            <li>Manage event logistics, such as booking venues, arranging equipment, and coordinating with vendors.</li>
-                            <li>Oversee event timelines and ensure all materials and resources are ready before each event.</li>
-                        </ul>
-
-                        <p><strong>Grant and Funding Support:</strong></p>
-                        <ul>
-                            <li>Research potential grants and funding opportunities to support club initiatives.</li>
-                            <li>Write and submit grant proposals with detailed budgets and project descriptions.</li>
-                            <li>Collaborate with the Treasurer to track funds and ensure proper allocation for events and activities.</li>
-                        </ul>
-
-                        <p><strong>Tech Lead:</strong></p>
-                        <ul>
-                            <li>Assist in the technical setup of club activities, such as workshops or coding challenges.</li>
-                            <li>Manage technical tools and platforms, such as the club’s website, GitHub repositories, and event calendars.</li>
-                            <li>Provide technical support during events, ensuring smooth operations of presentations, live demos, or virtual tools.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 3: Qualifications and How to Apply -->
-                    <div class="col-lg-4 mb-4">
-                        <h2 class="fs-4 fw-bold">Qualifications</h2>
-                        <p><strong>General Requirements:</strong></p>
-                        <ul>
-                            <li>A passion for technology, education, and fostering diversity and inclusion.</li>
-                            <li>Strong communication and organizational skills.</li>
-                            <li>Ability to work collaboratively in a team setting.</li>
-                            <li>Enthusiasm to contribute to the growth of a student-led community.</li>
-                        </ul>
-                        <p><strong>Preferred (But Not Required):</strong></p>
-                        <ul>
-                            <li>Experience in event planning, grant writing, or engaging with industry professionals.</li>
-                            <li>Familiarity with project management tools (e.g., Trello, Asana) or fundraising platforms.</li>
-                            <li>Knowledge of coding and technology concepts.</li>
-                        </ul>
-                        <p>No prior experience is required; we welcome individuals eager to learn and make an impact.</p>
-                        <h2 class="fs-4 fw-bold mt-4">How to Apply</h2>
-                        <p>
-                            Interested in joining? Apply by filling out the application form below. We’re excited to have you help us create an inclusive and innovative tech community at FIU and beyond!
-                        </p>
+                <div class="row justify-content-center">
+                    <div data-aos="zoom-in" class="col-lg-6 mb-5 d-flex justify-content-center align-items-center">
+                        <div class="card bg-light border-0 h-100 shadow-sm text-center">
+                            <div class="card-body p-4 p-lg-5">
+                                <h2 class="fs-4 fw-bold">Join Our E-Board</h2>
+                                <p>
+                                    Are you a FIU student, non-FIU student, or an industry leader passionate about technology and innovation? Join Code Crunch's E-Board to help foster the next generation of tech talent.
+                                </p>
+                                <p>
+                                    Whether you're a student from another university or a seasoned professional, we welcome you to bring your expertise and energy to our team!
+                                </p>
+                                <a 
+                                    class="btn btn-primary btn-lg mt-3" 
+                                    href="https://forms.gle/skZUsCyPGPeUw7zRA"
+                                    target="_blank" 
+                                    aria-label="E-Board Application for FIU Students, non-FIU Students, and Industry Leaders">
+                                    Apply Now
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-    </div>
-</section>
-
-<section class="page-content-section py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 mb-5 d-flex justify-content-center align-items-center">
-                <div class="card bg-light border-0 h-100 shadow-sm text-center">
-                    <div class="card-body p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Join Our E-Board</h2>
-                        <p>Are you a FIU Student, non-FIU student, or an industry leader passionate about technology and innovation? Join Code Crunch's E-Board to help foster the next generation of tech talent.</p>
-                        <p>Whether you're a student from another university or a seasoned professional, we welcome you to bring your expertise and energy to our team!</p>
-                        <a 
-                            class="btn btn-primary btn-lg mt-3" 
-                            href="https://forms.gle/skZUsCyPGPeUw7zRA" 
-                            target="_blank" 
-                            aria-label="E-Board Application for FIU Students, non-FIU Students, and Industry Leaders">
-                            Apply Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-        
-
-
-
-
-
-
-
 
         <!-- Footer -->
         <section class="footer-section">
@@ -392,8 +392,14 @@
             </footer>
         </section>
 
- 
-
+        <!-- AOS JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 800, // Animation duration in ms
+                once: true   // Whether animation should happen only once
+            });
+        </script>
         <!-- Bootstrap Core JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
