@@ -42,20 +42,24 @@
         position: relative;
         margin-top: auto;
       }
-/* Scroll Down Indicator - Fixed at Bottom Right */
+    
+
+/* Scroll Indicator - Positioned at Bottom Right */
 .scroll-indicator {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: white;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     padding: 10px 15px;
     border-radius: 10px;
     animation: bounce 1.5s infinite;
     text-align: center;
     z-index: 1000;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Bounce Animation */
@@ -68,13 +72,60 @@
     }
 }
 
-/* Hide when the user reaches the bottom */
+/* Hide the indicator when not needed */
 .hidden {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 
+/* Animation */
+/* Fade-in Animation */
+/* Fade-in Effect */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateY(30px);
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
+/* Slide-in from Left */
+.slide-in-left {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateX(-50px);
+}
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide-in from Right */
+.slide-in-right {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateX(50px);
+}
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Zoom-in Effect */
+.zoom-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: scale(0.9);
+}
+.zoom-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* end Animation */
            
 
             .header-container {
@@ -321,7 +372,7 @@
 
 
  <!-- Welcome Header -->
- <header class="py-5">
+ <header class="py-5" class="fade-in">
     <div class="container px-lg-5 text-center">
         <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
         <p class="fs-4">
@@ -342,7 +393,7 @@
         
         
         <!-- Social Media Links -->
-        <div class="social-buttons">
+        <div class="social-buttons" class="slide-in-left">
             <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
                 <i class="bi bi-linkedin"></i> LinkedIn
             </a>
@@ -379,7 +430,7 @@
     white-space: nowrap;
     position: relative;
 ">
-    <div id="java-ticker-content" style="
+    <div class="zoom-in" id="java-ticker-content" style="
         display: flex;
         animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
     ">
@@ -419,7 +470,7 @@
 
 
 <!-- Luma Calendar Content -->
-<section class="content-section">
+<section class="content-section" class="zoom-in" class="animate-on-scroll>
     <div class="container px-lg-5">
         <div style="text-align: center;"> <!-- Centers the iframe horizontally -->
             <iframe
@@ -619,9 +670,11 @@
             <li>Women in CyberSecurity (WiCyS)</li>
             <li>SWE FIU (Society of Women Engineers)</li>
             <li>Society of Hispanic Professional Engineers (SHPE)</li>
+            <li>ALPFA FIU (Association of Latino Professionals for America)</li>
             <li>AIS FIU (Association for Information Systems)</li>
             <li>ERS FIU (Engineers for Real Solutions)</li>
             <li>Artificial Intelligence Organization (AIO)</li>
+            <li>🌈 Pride Student Union</li>
         </ul>
         <div style="margin-top: 15px;">
             <a href="CODECRUNCH-HACK.html" style="display: inline-block; padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 14px; font-weight: bold;">Get More Info</a>
@@ -1069,10 +1122,12 @@
 </section>
 
 
-<!-- Scroll Down Indicator -->
-<div id="scroll-down-indicator" class="scroll-indicator">
-    ⬇️ <span>Scroll Down</span> ⬇️
+<!-- Scroll Indicator -->
+<div id="scroll-indicator" class="scroll-indicator">
+    ⬇️ <span id="scroll-text">Scroll Down</span> ⬇️
 </div>
+
+
 
         <!-- Footer -->
         <section class="footer-section">
@@ -1110,15 +1165,63 @@
 
 <script>
     window.addEventListener("scroll", function() {
-        let scrollIndicator = document.getElementById("scroll-down-indicator");
+        let scrollIndicator = document.getElementById("scroll-indicator");
+        let scrollText = document.getElementById("scroll-text");
 
-        // Check if the user has scrolled to the bottom
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            scrollIndicator.classList.add("hidden"); // Hide the indicator
+        let scrollTop = window.scrollY;
+        let scrollHeight = document.documentElement.scrollHeight;
+        let windowHeight = window.innerHeight;
+
+        if (scrollTop === 0) {
+            // At the very top, only show "Scroll Down"
+            scrollText.innerHTML = "Scroll Down";
+            scrollIndicator.innerHTML = "⬇️ <span id='scroll-text'>Scroll Down</span> ⬇️";
+        } else if (scrollTop + windowHeight >= scrollHeight) {
+            // At the bottom, only show "Scroll Up"
+            scrollText.innerHTML = "Scroll Up";
+            scrollIndicator.innerHTML = "⬆️ <span id='scroll-text'>Scroll Up</span> ⬆️";
         } else {
-            scrollIndicator.classList.remove("hidden"); // Show the indicator if not at the bottom
+            // In the middle, let it dynamically update based on the scroll direction
+            let prevScroll = this.oldScroll || 0;
+            if (scrollTop > prevScroll) {
+                // Scrolling down
+                scrollText.innerHTML = "Scroll Down";
+                scrollIndicator.innerHTML = "⬇️ <span id='scroll-text'>Scroll Down</span> ⬇️";
+            } else {
+                // Scrolling up
+                scrollText.innerHTML = "Scroll Up";
+                scrollIndicator.innerHTML = "⬆️ <span id='scroll-text'>Scroll Up</span> ⬆️";
+            }
+            this.oldScroll = scrollTop; // Store the previous scroll position
         }
     });
+
+    // Click event to scroll based on the current state
+    document.getElementById("scroll-indicator").addEventListener("click", function() {
+        if (document.getElementById("scroll-text").innerText === "Scroll Up") {
+            window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
+        } else {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); // Scroll to bottom smoothly
+        }
+    });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in, .animate-on-scroll');
+
+    function handleScrollAnimations() {
+        animatedElements.forEach(element => {
+            const position = element.getBoundingClientRect().top;
+            if (position < window.innerHeight * 0.85) { // Adjust threshold for visibility
+                element.classList.add("visible");
+            }
+        });
+    }
+
+    // Trigger animations when scrolling
+    window.addEventListener("scroll", handleScrollAnimations);
+    handleScrollAnimations(); // Ensure elements animate when page loads
+});
 </script>
 
 
