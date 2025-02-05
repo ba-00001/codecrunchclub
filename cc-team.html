@@ -4,120 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeCrunch E-Board Resources</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-light">
 
-    <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">CodeCrunch E-Board Resources</h1>
-        <p class="text-center text-gray-600 mb-10">Access shared files and documents for the E-Board team.</p>
-
+    <div class="container py-5">
+        <h1 class="text-center fw-bold text-dark mb-3">CodeCrunch E-Board Resources</h1>
+        <p class="text-center text-muted mb-4">Access shared files and documents for the E-Board team.</p>
 
         <!-- Access Restriction Notice -->
-        <p class="text-center text-red-600 font-semibold mb-6">
+        <div class="alert alert-danger text-center fw-semibold">
             🚨 Access available only for E-Board members with a validated Gmail account. Please ensure you are logged in with your authorized email.
-        </p>
-
+        </div>
 
         <!-- Card Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            
+        <div class="row g-4">
+
             <!-- General Resources Card -->
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold text-gray-800">📁 General Resources</h2>
-                <p class="text-gray-600 mt-2">All essential resources for E-Board operations.</p>
-                
-                <ul class="text-gray-700 text-left mt-4 space-y-2">
-                    <li>📂 <strong>Club Promo In-Person:</strong> Resources for promoting the club.</li>
-                    <li>📄 <strong>Tech Steps for Presentation:</strong> Guide for using tech in presentations.</li>
-                    <li>🔑 <strong>Zoom Password & Streaming Guide:</strong> Setup instructions.</li>
-                    <li>📝 <strong>CodeCrunch 2025 Guidelines:</strong> Best practices for teamwork.</li>
-                    <li>📊 <strong>Spring 2025 Schedule:</strong> Meeting and event planning.</li>
-                    <li>📋 <strong>E-Board Task Tracker:</strong> Tracks assigned tasks.</li>
-                </ul>
-
-                <a href="https://drive.google.com/drive/folders/1fRSA1Tz0LkKmMuP3qj0OC7_WJoVrvdwH?usp=sharing" target="_blank">
-                    <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
-                        Open Resources
-                    </button>
-                </a>
-            </div>
-
-            <!-- Marketing Resources Card -->
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold text-gray-800">📢 Marketing Resources</h2>
-                <p class="text-gray-600 mt-2">Branding, outreach, and promotional materials.</p>
-                
-                <ul class="text-gray-700 text-left mt-4 space-y-2">
-                    <li>📜 <strong>Social Media Guidelines:</strong> Posting strategy & templates.</li>
-                    <li>🎨 <strong>Branding Assets:</strong> Logos, color schemes, and fonts.</li>
-                    <li>📝 <strong>Flyers & Posters:</strong> Templates for marketing events.</li>
-                </ul>
-
-                <a href="https://drive.google.com/drive/folders/1M391ijoY_RzilhouiuYs2hHzShm8P3Lw?usp=drive_link" target="_blank">
-                    <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
-                        Open Marketing Resources
-                    </button>
-                </a>
-            </div>
-
-            <!-- Logistics Resources Card -->
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold text-gray-800">📦 Logistics Resources</h2>
-                <p class="text-gray-600 mt-2">Event planning, scheduling, and coordination.</p>
-                
-                <ul class="text-gray-700 text-left mt-4 space-y-2">
-                    <li>📅 <strong>Event Planning Checklist:</strong> Step-by-step guide.</li>
-                    <li>🗂 <strong>Meeting Agendas:</strong> Templates for effective discussions.</li>
-                    <li>📍 <strong>Room Reservations:</strong> Booking guidelines.</li>
-                </ul>
-
-                <a href="https://drive.google.com/drive/folders/1sk9f8Axz0YyLWNDBne4Au6NkxFSLlf31?usp=drive_link" target="_blank">
-                    <button class="mt-4 bg-yellow-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700">
-                        Open Logistics Resources
-                    </button>
-                </a>
-            </div>
-
-            <!-- Hackathon Logistics & Planning -->
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold text-gray-800">🏆 Hackathon Logistics</h2>
-                <p class="text-gray-600 mt-2">Planning and logistics for hosting and attending hackathons.</p>
-                
-                <ul class="text-gray-700 text-left mt-4 space-y-2">
-                    <li>📋 <strong>Hackathon Event Planning Guide:</strong> Organizing a successful hackathon.</li>
-                    <li>📍 <strong>Venue & Budget Planning:</strong> Essential logistics and cost breakdown.</li>
-                    <li>📅 <strong>Hackathon Schedule:</strong> Managing time slots and activities.</li>
-                </ul>
-
-                <a href="https://drive.google.com/drive/folders/1KjPWTPaPT2C0yb2xNEnM-uthmqghrfgB?usp=sharing" target="_blank">
-                    <button class="mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700">
-                        Open Hackathon Resources
-                    </button>
-                </a>
-            </div>
-
-            <!-- CodeCrunch Courses for Tech Leads -->
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center col-span-2">
-                <h2 class="text-xl font-bold text-gray-800">💻 CodeCrunch Courses</h2>
-                <p class="text-gray-600 mt-2">Resources for tech leads, covering 11 courses.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
-                    <a href="https://drive.google.com/drive/folders/1cQF7nyClf1xWWdI77vJkDTz61Vcwg5Nl?usp=sharing" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 1 & Course 2</a>
-                
-                    <a href="https://drive.google.com/drive/folders/12w_2B9x3k-mijioKc8L_olVF8Tk7RRap?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 3 & Course 4</a>
-        
-                    <a href="https://drive.google.com/drive/folders/1d2LljX_p-OVSY6JsFGlGC0G6EZqKLH66?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 5</a>
-                    <a href="https://drive.google.com/drive/folders/1pyr9pNLex9QkxxBnm6Hb63RlDLWTzLFK?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 6</a>
-                    <a href="https://drive.google.com/drive/folders/1WrqULMNgtxdTjfPJfafF_dsB2DiaK4uE?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 7</a>
-                    <a href="https://drive.google.com/drive/folders/1dDyrpnUirA3uqCc07IdSK2hyf1ao5tZ4?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 8</a>
-                    <a href="https://drive.google.com/drive/folders/1AfOQhiBdfolmA98wulGY2IeCY-Lu16U5?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 9</a>
-                    <a href="https://drive.google.com/drive/folders/15_uX5P1-IjpnPXsWTc4VzZoODZlAbp3V?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 10</a>
-                    <a href="https://drive.google.com/drive/folders/1Ybr4E-ujhZTomm7L9B1-53Jtx0SDc4c3?usp=drive_link" target="_blank" class="bg-gray-200 py-2 px-3 rounded-md hover:bg-gray-300">Course 11</a>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">📁 General Resources</h5>
+                        <p class="card-text">All essential resources for E-Board operations.</p>
+                        <ul class="list-unstyled text-start">
+                            <li>📂 <strong>Club Promo In-Person:</strong> Resources for promoting the club.</li>
+                            <li>📄 <strong>Tech Steps for Presentation:</strong> Guide for using tech in presentations.</li>
+                            <li>🔑 <strong>Zoom Password & Streaming Guide:</strong> Setup instructions.</li>
+                            <li>📝 <strong>CodeCrunch 2025 Guidelines:</strong> Best practices for teamwork.</li>
+                            <li>📊 <strong>Spring 2025 Schedule:</strong> Meeting and event planning.</li>
+                            <li>📋 <strong>E-Board Task Tracker:</strong> Tracks assigned tasks.</li>
+                        </ul>
+                        <a href="https://drive.google.com/drive/folders/1fRSA1Tz0LkKmMuP3qj0OC7_WJoVrvdwH?usp=sharing" target="_blank" class="btn btn-primary">Open Resources</a>
+                    </div>
                 </div>
             </div>
 
-        </div> <!-- End of Grid -->
+            <!-- Marketing Resources Card -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">📢 Marketing Resources</h5>
+                        <p class="card-text">Branding, outreach, and promotional materials.</p>
+                        <ul class="list-unstyled text-start">
+                            <li>📜 <strong>Social Media Guidelines:</strong> Posting strategy & templates.</li>
+                            <li>🎨 <strong>Branding Assets:</strong> Logos, color schemes, and fonts.</li>
+                            <li>📝 <strong>Flyers & Posters:</strong> Templates for marketing events.</li>
+                        </ul>
+                        <a href="https://drive.google.com/drive/folders/1M391ijoY_RzilhouiuYs2hHzShm8P3Lw?usp=drive_link" target="_blank" class="btn btn-success">Open Marketing Resources</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logistics Resources Card -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">📦 Logistics Resources</h5>
+                        <p class="card-text">Event planning, scheduling, and coordination.</p>
+                        <ul class="list-unstyled text-start">
+                            <li>📅 <strong>Event Planning Checklist:</strong> Step-by-step guide.</li>
+                            <li>🗂 <strong>Meeting Agendas:</strong> Templates for effective discussions.</li>
+                            <li>📍 <strong>Room Reservations:</strong> Booking guidelines.</li>
+                        </ul>
+                        <a href="https://drive.google.com/drive/folders/1sk9f8Axz0YyLWNDBne4Au6NkxFSLlf31?usp=drive_link" target="_blank" class="btn btn-warning">Open Logistics Resources</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hackathon Logistics Card -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">🏆 Hackathon Logistics</h5>
+                        <p class="card-text">Planning and logistics for hosting and attending hackathons.</p>
+                        <ul class="list-unstyled text-start">
+                            <li>📋 <strong>Hackathon Event Planning Guide:</strong> Organizing a successful hackathon.</li>
+                            <li>📍 <strong>Venue & Budget Planning:</strong> Essential logistics and cost breakdown.</li>
+                            <li>📅 <strong>Hackathon Schedule:</strong> Managing time slots and activities.</li>
+                        </ul>
+                        <a href="https://drive.google.com/drive/folders/1KjPWTPaPT2C0yb2xNEnM-uthmqghrfgB?usp=sharing" target="_blank" class="btn btn-success">Open Hackathon Resources</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CodeCrunch Courses for Tech Leads -->
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">💻 CodeCrunch Courses</h5>
+                        <p class="card-text">Resources for tech leads, covering 11 courses.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center flex-wrap">
+                            <a href="https://drive.google.com/drive/folders/1cQF7nyClf1xWWdI77vJkDTz61Vcwg5Nl?usp=sharing" target="_blank" class="btn btn-secondary">Course 1 & 2</a>
+                            <a href="https://drive.google.com/drive/folders/12w_2B9x3k-mijioKc8L_olVF8Tk7RRap?usp=drive_link" target="_blank" class="btn btn-secondary">Course 3 & 4</a>
+                            <a href="https://drive.google.com/drive/folders/1d2LljX_p-OVSY6JsFGlGC0G6EZqKLH66?usp=drive_link" target="_blank" class="btn btn-secondary">Course 5</a>
+                            <a href="https://drive.google.com/drive/folders/1pyr9pNLex9QkxxBnm6Hb63RlDLWTzLFK?usp=drive_link" target="_blank" class="btn btn-secondary">Course 6</a>
+                            <a href="https://drive.google.com/drive/folders/1WrqULMNgtxdTjfPJfafF_dsB2DiaK4uE?usp=drive_link" target="_blank" class="btn btn-secondary">Course 7</a>
+                            <a href="https://drive.google.com/drive/folders/1dDyrpnUirA3uqCc07IdSK2hyf1ao5tZ4?usp=drive_link" target="_blank" class="btn btn-secondary">Course 8</a>
+                            <a href="https://drive.google.com/drive/folders/1AfOQhiBdfolmA98wulGY2IeCY-Lu16U5?usp=drive_link" target="_blank" class="btn btn-secondary">Course 9</a>
+                            <a href="https://drive.google.com/drive/folders/15_uX5P1-IjpnPXsWTc4VzZoODZlAbp3V?usp=drive_link" target="_blank" class="btn btn-secondary">Course 10</a>
+                            <a href="https://drive.google.com/drive/folders/1Ybr4E-ujhZTomm7L9B1-53Jtx0SDc4c3?usp=drive_link" target="_blank" class="btn btn-secondary">Course 11</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of Row -->
     </div> <!-- End of Container -->
 
 </body>
