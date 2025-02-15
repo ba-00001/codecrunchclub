@@ -467,27 +467,65 @@
 </style>
 <p></p>
 
-<section class="content-section" style="display: flex; justify-content: center; align-items: center; width: 100%; overflow: hidden; padding: 30px;">
-    <blockquote 
-        class="instagram-media" 
-        data-instgrm-captioned 
-        data-instgrm-permalink="https://www.instagram.com/reel/DFwEbQIseXw/?utm_source=ig_embed&amp;utm_campaign=loading" 
-        data-instgrm-version="14" 
-        style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-    </blockquote>
-    <script async src="https://www.instagram.com/embed.js"></script>
+
+
+<section class="content-section" style="display: flex; flex-direction: column; align-items: center; width: 100%; overflow: hidden; padding: 30px;">
+    
+   
+
+    <!-- Video Section -->
+    <div class="video-section" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%;">
+        
+        <!-- Video 1 -->
+        <div class="video-container" style="margin-bottom: 20px; text-align: center;">
+            <h3>Code Crunch Global: A Career Accelerator</h3>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Be44hpTkHA0?rel=0" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-container" style="text-align: center;">
+            <h3>Breaking Into Tech: The 305 Hackathon Experience | Code Crunch @ FIU 🚀💻</h3>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/xbKAPQtoelk?rel=0" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+
 </section>
 
-<section class="content-section" style="width: 100%; padding: 30px;">
-    <iframe 
-        src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light"
-        frameborder="0"
-        allowfullscreen
-        aria-hidden="false"
-        tabindex="0"
-        style="width: 600px; height: 450px; border: 1px solid #bfcbda88; border-radius: 4px; margin: 0 auto; display: block;">
-    </iframe>
+
+<section class="content-section" style="width: 100%; padding: 30px; display: flex; justify-content: center;">
+    <div style="width: 100%; max-width: 600px; height: 450px; border: 1px solid #bfcbda88; border-radius: 4px; overflow: hidden;">
+        <iframe 
+            src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light"
+            frameborder="0"
+            allowfullscreen
+            aria-hidden="false"
+            tabindex="0"
+            style="width: 100%; height: 100%;">
+        </iframe>
+    </div>
 </section>
+
+<!-- Responsive adjustments using inline media query -->
+<style>
+    @media screen and (max-width: 768px) {
+        .content-section div {
+            max-width: 100% !important; /* Ensures full width on smaller screens */
+            height: auto !important;
+            aspect-ratio: 4 / 3; /* Maintains proportional aspect ratio */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .content-section div {
+            height: 400px !important; /* Adjusts height for very small screens */
+        }
+    }
+</style>
 
 
 
@@ -680,9 +718,8 @@
             <!-- 12--><li>12. International Business Honors Society (IBHS)</li>
             <!-- 13--><li>13. American Marketing Association (AMA)</li>
             <!-- 14--><li>14. Dean’s Student Advisory Board (DSAB)</li>
-   
-            <!-- 15--><li><li>17. Workshop - Collaborator: Women in Computer Science (WiCS)</li>
-           </ul>
+            <!-- 15--><li><li>15. Workshop - Collaborator: Women in Computer Science (WiCS)</li>
+        </ul>
         <div style="margin-top: 15px;">
             <a href="CODECRUNCH-HACK.html" style="display: inline-block; padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 14px; font-weight: bold;">Get More Info</a>
         </div>
@@ -709,8 +746,7 @@
             <!-- 12--><li>12. International Business Honors Society (IBHS)</li>
             <!-- 13--><li>13. American Marketing Association (AMA)</li>
             <!-- 14--><li>14. Dean’s Student Advisory Board (DSAB)</li>
-   
-            <!-- 15--><li><li>17. Workshop - Collaborator: Women in Computer Science (WiCS)</li>
+            <!-- 15--><li><li>15. Workshop - Collaborator: Women in Computer Science (WiCS)</li>
         </ul>
         <div style="margin-top: 15px;">
             <a href="all-305-Hackathon25.html" style="display: inline-block; padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 14px; font-weight: bold;">Get More Info</a>
