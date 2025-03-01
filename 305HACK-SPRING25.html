@@ -602,6 +602,50 @@ body {
     border-radius: 10px;
 }
 
+/* Contributor Logos +++++++++++++++++++++++++++ */
+
+/* Contributor Logos - Ensure they don't shrink too much */
+.contributor-card img {
+    max-width: 100%; /* Ensures responsiveness */
+    min-width: 80px; /* Ensures a minimum size */
+    height: auto;
+}
+
+/* Adjust size for smaller screens */
+@media (max-width: 768px) {
+    .contributors-logos {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .contributor-card {
+        width: 45%; /* Ensure they are not too small */
+        min-width: 150px; /* Set a reasonable minimum width */
+        text-align: center;
+    }
+
+    .contributor-card img {
+        min-width: 100px; /* Prevents images from shrinking too much */
+        max-width: 120px; /* Controls the max size */
+        height: auto;
+    }
+}
+
+/* Extra fix for very small screens */
+@media (max-width: 480px) {
+    .contributor-card {
+        width: 100%; /* Make cards full width on very small screens */
+        min-width: 200px;
+    }
+
+    .contributor-card img {
+        min-width: 120px; /* Slightly larger min width for better visibility */
+        max-width: 140px;
+    }
+}
+/* Contributor Logos end +++++++++++++++++++++++++++ */
+
 
     </style>
 </head>
@@ -612,13 +656,13 @@ body {
     <div class="container">
         <!-- Brand Name -->
         <a class="navbar-brand fw-bold" href="#">305 Hackathon</a>
-        
+
         <!-- Mobile Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
@@ -632,6 +676,7 @@ body {
         </div>
     </div>
 </nav>
+
 
 
 <section style="padding:35px;">
@@ -1258,6 +1303,22 @@ onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.tr
             });
         });
 
+        
+         //<!-- JavaScript for nav bar Toggle Function -->
+        document.addEventListener("DOMContentLoaded", function() {
+        var navLinks = document.querySelectorAll(".nav-link");
+        var navbarCollapse = document.querySelector(".navbar-collapse");
+
+        navLinks.forEach(function(link) {
+            link.addEventListener("click", function() {
+                if (navbarCollapse.classList.contains("show")) {
+                    new bootstrap.Collapse(navbarCollapse).hide();
+                }
+            });
+        });
+    });
+        
+        
         //<!-- JavaScript for Toggle Function -->
  
         function toggleCollaborators() {
