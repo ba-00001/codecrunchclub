@@ -163,18 +163,30 @@
         }
 
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-            background: url('https://github.com/user-attachments/assets/97323124-4654-44d8-89c6-fe89caddb167') repeat-x;
-            background-attachment: fixed; /* Parallax effect */
-            background-size: cover; /* Ensures the background image covers the viewport */
-            background-position: center; /* Centers the image */
-            color: #333;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 0px; /* Prevents navbar overlap */
+    padding: 20px; /* Corrected padding */
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    
+    /* Background Image */
+    background: url('https://github.com/user-attachments/assets/97323124-4654-44d8-89c6-fe89caddb167') repeat-x;
+    background-attachment: fixed; /* Parallax effect */
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+/* Ensure proper mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* Fix background issues on mobile */
+        padding: 15px; /* Adjust padding for smaller screens */
+        margin-top: 70px; /* Adjust for smaller navbar on mobile */
+    }
+}
+
 
         /* Cloud Styling */
         .cloud {
@@ -595,34 +607,41 @@
 </head>
 <body>
 
-    <!-- NAVIGATION MENU -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">305 Hackathon</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link"  href="https://ba-00001.github.io/codecrunchclub">Code Crunch |</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
-
-                </ul>
-            </div>
+<!-- NAVIGATION MENU -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3 px-3">
+    <div class="container">
+        <!-- Brand Name -->
+        <a class="navbar-brand fw-bold" href="#">305 Hackathon</a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="https://ba-00001.github.io/codecrunchclub">Code Crunch |</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
+
+<section style="padding:35px;">
     <!-- Title & Sun -->
     <div class="title-container">
         <h1 class="tropical-title">305 Hackathon</h1>
         <div class="sun"></div>
     </div>
 
-
+</section>
 
 
     <section style="padding:50px; text-align: center; ">
@@ -630,7 +649,7 @@
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
             <!-- Spring 2025 Flyer -->
             <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/b8da7f23-5c5e-4c9e-a6ae-2deee94ef7c3" 
+                <img src="https://github.com/user-attachments/assets/09e848e3-26b6-4cf1-a2ec-8c046cb20eba" 
                      alt="305 Tropical Hacks Flyer 1ST" 
                      style="width: 100%; height: auto; border-radius: 10px;">
                 <a href="https://forms.gle/EkFVXEzDbLQfCeLS8" 
@@ -650,7 +669,7 @@
     
             <!-- Fall 2025 Flyer -->
             <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/5de3c9d5-b7a0-4677-ad8c-fa68d21b580f" 
+                <img src="https://github.com/user-attachments/assets/686c3b7e-5a12-4ef3-8bfc-c5994af77e10" 
                      alt="305 Tropical Hacks Flyer" 
                      style="width: 100%; height: auto; border-radius: 10px;">
                 <a href="https://forms.gle/22FiKu3sYd87jps19" 
@@ -1174,19 +1193,19 @@ onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.tr
 
             <div class="contributors-logos">
                 <div class="contributor-card">
-                    <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
+                    <img src="https://github.com/user-attachments/assets/e6278f06-8e35-422e-9c96-a27acaf8646e" alt=""> <!-- Company Logo - alt="Company Logo 1 codepath" -->
                 </div>
                 <div class="contributor-card">
-                    <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
+                    <img src="https://github.com/user-attachments/assets/cb30e307-b84d-41e1-b6dd-d58d5420b97f" alt=""> <!-- Company Logo - alt="Company Logo 2 epic" -->
                 </div>
                 <div class="contributor-card">
-                    <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
+                    <img src="https://github.com/user-attachments/assets/1252a097-5e1c-4079-8985-df5f0c298f9f" alt=""> <!-- Company Logo - alt="Company Logo 3 honors" -->
                 </div>
                 <div class="contributor-card">
-                    <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
+                    <img src="https://github.com/user-attachments/assets/865e0c61-ddaf-42c3-afc0-8b8a8b5f78f6" alt=""> <!-- Company Logo - alt="Company Logo 4 cec" -->
                 </div>
                 <div class="contributor-card">
-                    <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
+                    <img src="https://github.com/user-attachments/assets/aac87410-602c-497b-aa37-79b10dc765e6" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
                 </div>
                 <div class="contributor-card">
                     <img src="#" alt=""> <!-- Company Logo - alt="Company Logo 1" -->
