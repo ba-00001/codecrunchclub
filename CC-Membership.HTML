@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Crunch Membership</title>
+
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
+<!-- Custom CSS -->
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .image-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            width: 300px; /* Adjust image size */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+        .download-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Social buttons */
+                  .social-buttons a {
+                margin: 5px;
+            }
+            .social-buttons a:hover {
+                transform: scale(1.1);
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .welcome-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+        }    
+    /* end Social buttons */
+
+ /* Navigation link styles with hover highlighting */
+    
+
+ .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #333;
+            padding: 10px 20px;
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+       /* end Navigation link styles with hover highlighting */
+
+
+
+
+    </style>
+</head>
+<body>
+
+   <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0; z-index:1000;">
+    <div class="container px-lg-5">
+      <!-- Logo and Brand Name -->
+      <a class="navbar-brand" href="index.html" style="display:flex; align-items:center;">
+        <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" style="height:50px; width: auto;" />
+        Code Crunch
+      </a>
+      <!-- Toggler Button for Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Collapsible Nav Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" style="padding:10px 15px;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html" style="padding:10px 15px;">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Schedules.html" style="padding:10px 15px;">Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px;">SWE Convos</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="305HACK-SPRING25.html" style="padding:10px 15px;">305 Hackathon</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="all-eboard.html" style="padding:10px 15px;">E-board</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html" style="padding:10px 15px;">Contact</a>
+          </li>
+          <!-- Graphics-->
+          <li class="nav-item">
+              <a class="nav-link" href="CC-Membership.HTML" style="padding:10px 15px;">Graphic</a>
+            </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <section style="padding:35px;">
+
+<!-- Social Media Links -->
+<div class="social-buttons" class="slide-in-left">
+    <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+        <i class="bi bi-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+        <i class="bi bi-instagram"></i> Instagram
+    </a>
+    <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp"></i> WhatsApp
+    </a>
+    <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
+        <i class="bi bi-discord"></i> Discord
+    </a>
+    <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+        <i class="bi bi-university"></i> Panther Connect
+    </a>
+    <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+        <i class="bi bi-link"></i> Linktree
+    </a>
+        <!-- YouTube Button -->
+    <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-danger" aria-label="YouTube">
+        <i class="bi bi-youtube"></i> YouTube
+    </a>
+    <!-- RESUME BOOK Button -->
+    <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="btn btn-primary" aria-label="Resume Book">
+        <i class="bi bi-journal-text"></i> Resume Book
+    </a>
+
+</div>
+  </section>
+
+
+    <section style="padding:35px;">
+    
+    <div class="container">
+        <h2>1️⃣ Download Your Code Crunch Membership Graphic!</h2>
+        <p>Click any flyer below and hit the download button</p>
+        
+        <div class="image-wrapper">
+            <div class="image-container">
+                <img src="https://github.com/user-attachments/assets/bdd09571-3be2-4690-9454-9adca00d352a" alt="Code Crunch Membership 1">
+                <a class="download-btn" href="https://github.com/user-attachments/assets/bdd09571-3be2-4690-9454-9adca00d352a" download>Download</a>
+            </div>
+            <div class="image-container">
+                <img src="https://github.com/user-attachments/assets/6ab3a22e-5063-467c-8a66-cbb64a568d49" alt="Code Crunch Membership 2">
+                <a class="download-btn" href="https://github.com/user-attachments/assets/6ab3a22e-5063-467c-8a66-cbb64a568d49" download>Download</a>
+            </div>
+        </div>
+
+        <section style="padding:35px;">
+
+        <h2>2️⃣ Copy the Blurb Below</h2>
+        <p>
+            🎉 I’m officially a member of Code Crunch Club at FIU! 🚀<br><br>
+            Code Crunch isn’t just a coding club—it’s a vibrant, welcoming space where students from all backgrounds and skill levels come together to learn, innovate, and grow! Whether you’re dreaming of becoming a software engineer, diving into data science, or simply passionate about technology, Code Crunch provides the ultimate launchpad for success! 🌎✨<br><br>
+            At Code Crunch, we don’t just teach—we empower! Our Crunch DevOps course immerses members in cloud technologies, Crunch Linux builds a solid foundation in system administration, and Crunch Kotlin & Android Development takes mobile development to the next level. Want to tackle algorithmic challenges? Our LeetCode UMPIRE sessions will sharpen your problem-solving skills for technical interviews! 🏆💡<br><br>
+            But what makes Code Crunch truly special? The diversity in collaboration! 🌍💙 Our competitions welcome students from all majors and experience levels, fostering an environment where creativity meets problem-solving in a space open to everyone willing to learn and grow. We believe that the best ideas come from collaboration, and that’s what makes our hackathons and coding challenges so unique! 💡✨<br><br>
+            Ready to be part of something extraordinary? Join us at <a href="https://CodeCrunch.cs.fiu.edu" target="_blank">CodeCrunch.cs.fiu.edu</a> and start your journey today! 🚀💻<br><br>
+            Huge thanks to the Code Crunch leadership team for fostering an inclusive and supportive tech community at FIU! 💙⚡<br><br>
+            #CodeCrunch #FIU #TechCommunity #Coding #CareerGrowth #LeetCode #Hackathons #DiversityInTech #Innovation
+        </p>
+        
+        <h2>3️⃣ Make a LinkedIn post with the blurb + graphic</h2>
+        <p>Feel free to customize and add your thoughts!</p>
+        <a href="http://www.linkedin.com" target="_blank" class="download-btn">Go to LinkedIn</a>
+    </div>
+    
+</body>
+
+</html>
