@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackFiesta Miami - Virtual Hackathon</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Global Styles - Miami Vice Colors */
+        body {
+            background-color: #1A1A2E;
+            color: #F8F9FA;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #FF00FF, #00FFFF);
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+  /* end Navbar */
+
+        /* Flyer Container */
+        .flyer-container {
+            margin: 50px auto;
+        }
+
+        .flyer-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Apply Button */
+        .apply-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #FF00FF, #00FFFF);
+            color: #1A1A2E;
+            box-shadow: 4px 4px 0px #F8F9FA;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .apply-button:hover {
+            background: linear-gradient(135deg, #FF1493, #00CED1);
+            box-shadow: 6px 6px 0px #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 40px 20px;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0F3460;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+             /* ------ */
+          /* faq format */
+          /* ------ */
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+    }
+
+    .faq-question {
+        width: 100%;
+        background: #FF4D00;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: left;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+        background: #FB8500;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        font-size: 1rem;
+        color: #333;
+        background: #f8f9fa;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+             /* ------ */
+          /* end faq format */
+          /* ------ */
+
+/* Contributor Logos +++++++++++++++++++++++++++ */
+
+/* Contributor Section */
+        .contributors-header {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #FF00FF;
+        }
+
+        .window-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .window-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00FFFF;
+        }
+
+        .contributors-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contributor-card img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .contributor-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .volunteer-btn, .prospectus-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            background: #FF00FF;
+            color: white;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .volunteer-btn:hover, .prospectus-btn:hover {
+            background: #00FFFF;
+            color: #1A1A2E;
+        }
+/* Contributor Logos end +++++++++++++++++++++++++++ */
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">HackFiesta Miami</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Flyer & Registration Button -->
+<div class="flyer-container">
+    <img src="https://github.com/user-attachments/assets/5c0f107e-4301-423a-942e-5c326988c839" alt="HackFiesta Flyer">
+    <a href="https://forms.gle/UZYKKG6B1Roj32yj8" class="apply-button">Register Now</a>
+</div>
+
+<!-- Hackathon Details -->
+<section id="about" class="content-section">
+    <h2>🚀 HackFiesta Miami | Spring 2025 Edition</h2>
+    <p>Join HackFiesta Miami, a virtual hackathon for students of all majors! Innovate, collaborate, and build impactful projects in AI, blockchain, automation, and web development.</p>
+
+    <h3>📅 Event Schedule</h3>
+    <ul>
+        <li>📅 <strong>March 21 - 23, 2025</strong></li>
+        <li>⏳ <strong>Starts:</strong> Friday at 8:00 PM EST</li>
+        <li>🏁 <strong>Ends:</strong> Sunday at 8:00 AM EST</li>
+    </ul>
+
+    <h3>💻 Why Join?</h3>
+    <ul>
+        <li>✅ Open to all students, no experience required</li>
+        <li>✅ Learn from industry professionals</li>
+        <li>✅ Network with recruiters and mentors</li>
+        <li>✅ Win prizes and earn recognition</li>
+    </ul>
+
+
+
+</section>
+
+<!-- Hackathon Details -->
+<section id="tracks" class="content-section">
+ 
+
+    <h3>💡 Hackathon Tracks</h3>
+    <ul>
+        <li>🔹 <strong>Easy Track:</strong> AI-Powered Personal Assistants (Chatbots & Automation)</li>
+        <li>🔹 <strong>Medium Track:</strong> AI-Powered Code Review & Debugging Tools</li>
+        <li>🔹 <strong>Hard Track:</strong> AI + Blockchain for Decentralized AI Models</li>
+    </ul>
+
+
+</section>
+
+
+
+<section id="faq" class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+
+        <!-- Question 1 -->
+        <div class="faq-item">
+            <button class="faq-question">What is a hackathon?</button>
+            <div class="faq-answer">
+                A hackathon is an event where participants collaborate to create software or hardware projects in a limited time. At Hack Fiesta Miami, you’ll experience inspiring keynote speakers, skill-enhancing workshops, mentorship from industry professionals, and exciting challenges with great prizes!
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-item">
+            <button class="faq-question">When is Hack Fiesta Miami?</button>
+            <div class="faq-answer">
+                Hack Fiesta Miami will take place in-person from <strong>March 28th to 30th, 2025</strong>. The event will run for <strong>36 hours</strong>, filled with hacking, networking, fun activities, and exclusive speaker sessions.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-item">
+            <button class="faq-question">Who can attend?</button>
+            <div class="faq-answer">
+                Any undergraduate or graduate student from any university worldwide is welcome to participate!
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-item">
+            <button class="faq-question">Why should I attend Hack Fiesta Miami?</button>
+            <div class="faq-answer">
+                Hack Fiesta Miami is more than just a hackathon—it’s a chance to <strong>learn, build, and connect</strong> with fellow innovators. From hands-on workshops and mentorship to networking opportunities and incredible prizes, you’ll leave with valuable experiences and new skills.
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="faq-item">
+            <button class="faq-question">Is Hack Fiesta Miami an in-person event?</button>
+            <div class="faq-answer">
+                Yes, Hack Fiesta Miami will be <strong>fully in-person</strong>, allowing for a more immersive experience. Participants will have access to dedicated workspaces, networking events, and in-person mentorship.
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="faq-item">
+            <button class="faq-question">Do I need a team to participate?</button>
+            <div class="faq-answer">
+                No, you don’t need a team to register! You can <strong>join solo</strong> and find teammates at our <strong>Team Formation event</strong> or on our <strong>Discord server</strong>. Teams can have up to <strong>4 members</strong>.
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="faq-item">
+            <button class="faq-question">Are travel stipends available?</button>
+            <div class="faq-answer">
+                Unfortunately, <strong>Hack Fiesta Miami does not provide travel stipends</strong> at this time. However, we encourage you to explore funding options through your university or local organizations.
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="faq-item">
+            <button class="faq-question">Is there a participation fee?</button>
+            <div class="faq-answer">
+                <strong>No!</strong> Hack Fiesta Miami is completely <strong>free</strong> for all accepted participants. We are committed to making this event accessible to everyone.
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="faq-item">
+            <button class="faq-question">What should I bring?</button>
+            <div class="faq-answer">
+                Bring your <strong>laptop, charger, student ID, and any additional hardware</strong> you may need for your project. We’ll provide <strong>Wi-Fi, food, swag, and workspaces</strong> throughout the event.
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="faq-item">
+            <button class="faq-question">How can I stay updated?</button>
+            <div class="faq-answer">
+                Stay updated by <strong>following our social media, joining our Discord server, and checking your email</strong> for important announcements!
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section id="contributors" class="fade-section">
+
+    <!-- Contributors Section -->
+    <div class="text-center">
+        <div class="contributors-header">Contributors</div>
+    </div>
+
+    <!-- Volunteer Form -->
+    <div class="container">
+        <div class="dashed-box">
+            <p>If you're interested in working with 305 Hack, or being a mentor, judge, Workshop Hosts or organizer for our hackathon, fill out this form:</p>
+            <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn">Volunteer Form</a> and we'll get back to you!
+        </div>
+
+<!-- Donor Prospectus -->
+<div class="dashed-box">
+    <p>View our Donor Prospectus:</p>
+    <a href="https://github.com/user-attachments/files/19045785/305-HACKATHON-Prospectus.pdf" 
+    class="prospectus-btn" 
+    download>
+    <i class="fas fa-file-download"></i> Download Prospectus
+ </a>
+ 
+</div>
+
+   <!-- Contributors Section -->
+<section id="contributors" class="content-section">
+    <div class="text-center">
+        <div class="contributors-header">Contributors</div>
+    </div>
+
+    <div class="container">
+        <div class="window-box">
+            <div class="window-header">🌟 A BIG Thanks To...</div>
+            <div class="contributors-logos">
+                <div class="contributor-card">
+                    <img src="https://github.com/user-attachments/assets/e6278f06-8e35-422e-9c96-a27acaf8646e" alt="CodePath Logo">
+                </div>
+                <div class="contributor-card">
+                    <img src="https://github.com/user-attachments/assets/cb30e307-b84d-41e1-b6dd-d58d5420b97f" alt="Epic Logo">
+                </div>
+                <div class="contributor-card">
+                    <img src="https://github.com/user-attachments/assets/1252a097-5e1c-4079-8985-df5f0c298f9f" alt="Honors College">
+                </div>
+                <div class="contributor-card">
+                    <img src="https://github.com/user-attachments/assets/865e0c61-ddaf-42c3-afc0-8b8a8b5f78f6" alt="CEC">
+                </div>
+                <div class="contributor-card">
+                    <img src="https://github.com/user-attachments/assets/aac87410-602c-497b-aa37-79b10dc765e6" alt="Sponsor Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="window-box">
+            <p>If you're interested in working with HackFiesta Miami as a mentor, judge, workshop host, or organizer, sign up below!</p>
+            <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn">Volunteer Form</a>
+        </div>
+        <div class="window-box">
+            <p>View our Donor Prospectus:</p>
+            <a href="#" class="prospectus-btn" download>
+                <i class="fas fa-file-download"></i> Download Prospectus
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; HackFiesta Miami 2025 | Contact: hackfiestamiami@gmail.com</p>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Bootstrap JavaScript Bundle with Popper -->
+<!-- Bootstrap JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach(question => {
+        question.addEventListener("click", function () {
+            const answer = this.nextElementSibling;
+            
+            if (answer) {
+                answer.style.display = (answer.style.display === "block") ? "none" : "block";
+            }
+        });
+    });
+});
+
+</script>
+
+</body>
+</html>
