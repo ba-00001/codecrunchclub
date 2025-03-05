@@ -336,12 +336,14 @@
         /* Game section (keeps the game within its viewport space) */
         .game-section {
             width: 100vw;
-            height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #F4F4F4;
+            flex-direction: column;
+            text-align: center;
+            padding: 50px 0;
         }
         /* Game container (adjusts in and out of fullscreen) */
         .game-container {
@@ -408,6 +410,21 @@
         /* Hide "PLAY" text in fullscreen */
         .fullscreen .play-btn span {
             display: none;
+        }
+        
+        .btn-purple {
+            background-color: #ad00ff; /* Purple color */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+        .btn-purple:hover {
+            background-color: #6B0086; /* Darker purple on hover */
+            color: white; /* Keep text color the same */
         }
     </style>
   </head>
@@ -545,6 +562,23 @@
         
     </div>
 </header>
+
+<!-- Digi Dash Game Content -->
+<div class="game-section">
+    <div class="container px-lg-5 text-center">
+        <h1 class="fw-bold">Code Crunch Runner </h1>
+        <p class="fs-4 mt-4">
+            Play this exciting 3D obstacle game that tests your knowledge about Code Crunch. Powered by Digi Dash, this interactive experience shows how gamification can boost student success! 🎮💡
+        </p>
+        <a href="https://www.playdigidash.io/" class="btn btn-purple mb-5" aria-label="Digi Dash" target="_blank" rel="noopener noreferrer">
+            Learn more about Digi Dash
+        </a>
+    </div>
+    <div class="game-container" id="gameContainer">
+        <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
+        <button class="play-btn" id="playBtn"><span>PLAY</span></button>
+    </div>
+</div>
 
 <!-- Ticker Section with Famous Java Lines -->
 <div style="
@@ -1247,14 +1281,6 @@
 </style>
 <p></p>
 
-
-<!-- Digi Dash Game Content -->
-<div class="game-section">
-    <div class="game-container" id="gameContainer">
-        <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
-        <button class="play-btn" id="playBtn"><span>PLAY</span></button>
-    </div>
-</div>
 
 
 <script>
