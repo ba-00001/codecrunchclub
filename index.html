@@ -50,7 +50,7 @@
     border-radius: 10px;
     animation: bounce 1.5s infinite;
     text-align: center;
-    z-index: 1000;
+    z-index: 999;
     cursor: pointer;
     transition: opacity 0.3s ease-in-out;
 }
@@ -326,6 +326,89 @@
         font-size: 1.25rem;
         padding: 15px 30px;
       }
+
+         /* Styles for the Digi Dash game container */
+
+        /* Prevent scrolling */
+        .no-scroll {
+            overflow: hidden;
+        }
+        /* Game section (keeps the game within its viewport space) */
+        .game-section {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F4F4F4;
+        }
+        /* Game container (adjusts in and out of fullscreen) */
+        .game-container {
+            width: 90vw;
+            height: 60vh;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+        .game-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 1rem;
+        }
+        /* Fullscreen Mode */
+        .fullscreen {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: #000;
+        }
+        /* Centered "PLAY" button */
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem 4rem;
+            background: #ad00ff;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        /* Shrink and move button when in fullscreen */
+        .fullscreen .play-btn {
+            bottom: 2vh;
+            right: 2vw;
+            top: auto;
+            left: auto;
+            transform: none;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ad00ff;
+        }
+        /* Expand icon (arrows) */
+        .fullscreen .play-btn::before {
+            content: "⤢"; /* Expand Icon */
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        /* Hide "PLAY" text in fullscreen */
+        .fullscreen .play-btn span {
+            display: none;
+        }
     </style>
   </head>
   <body style="margin:0; padding:0; min-height:100%; display:flex; flex-direction:column; font-family:Arial, sans-serif;">
@@ -1165,35 +1248,30 @@
 <p></p>
 
 
-<!-- CrunchWars Game Content -->
-<section class="content-section">
-    <div class="container px-lg-5">
-        <h2 style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 10px; color: white;">
-            CrunchWars - Play on PC Only
-        </h2>
-        <p id="device-warning" style="text-align: center; color: red; font-size: 18px; font-weight: bold; display: none;">
-            ⚠️ This game is only playable on PC. Please visit on a desktop or laptop.
-        </p>
-        <div id="game-container" style="text-align: center;">
-            <iframe
-                id="game-frame"
-                src="game.html"
-                frameborder="0"
-                allowfullscreen=""
-                aria-hidden="false"
-                tabindex="0"
-                style="
-                    width: 100%; /* Makes it responsive */
-                    max-width: 1200px; /* Optional: Sets a maximum width */
-                    height: 450px; /* Set the desired height */
-                    border: 1px solid #bfcbda88; /* Optional: Add border for styling */
-                    border-radius: 4px; /* Optional: Rounded corners */
-                    margin: 0 auto; /* Centers the iframe */
-                "
-            ></iframe>
-        </div>
+<!-- Digi Dash Game Content -->
+<div class="game-section">
+    <div class="game-container" id="gameContainer">
+        <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
+        <button class="play-btn" id="playBtn"><span>PLAY</span></button>
     </div>
-</section>
+</div>
+
+
+<script>
+    const gameContainer = document.getElementById('gameContainer');
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => {
+        if (!gameContainer.classList.contains('fullscreen')) {
+        // Expand to fullscreen
+        gameContainer.classList.add('fullscreen');
+        document.body.classList.add('no-scroll'); // Prevent scrolling
+        } else {
+        // Exit fullscreen
+        gameContainer.classList.remove('fullscreen');
+        document.body.classList.remove('no-scroll'); // Restore scrolling
+        }
+    });
+</script>
 
 
 <!-- Scroll Indicator -->
