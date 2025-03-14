@@ -17,12 +17,12 @@
     <link href="css/styles.css" rel="stylesheet" />
     
     <!-- Custom CSS -->
-    <link href="css/custom.css" rel="stylesheet" />
+    <link href="/custom.css" rel="stylesheet" />
   </head>
   
   <body>
     <!-- Fixed Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 100;">
       <div class="container px-lg-5">
         <!-- Logo and Brand Name -->
         <a class="navbar-brand" href="index.html">
@@ -400,23 +400,38 @@
       </div>
     </section>
 
-    <!-- Interactive Game Section -->
-    <section class="game-section py-5">
-      <div class="container px-lg-5 text-center">
-        <h2 class="fw-bold mb-4">Code Crunch Runner</h2>
-        <p class="fs-5 mb-4">
-          Play this exciting 3D obstacle game that tests your knowledge about Code Crunch. Powered by Digi Dash, this interactive experience shows how gamification can boost student success! 🎮💡
-        </p>
-        <a href="https://www.playdigidash.io/" class="btn btn-purple mb-5" target="_blank" rel="noopener noreferrer">
-          Learn more about Digi Dash
-        </a>
-        
-        <div class="game-container" id="gameContainer">
-          <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
-          <button class="play-btn" id="playBtn"><span>PLAY</span></button>
+    <!-- Digi Dash Game Content -->
+    <div class="game-section">
+        <div class="container px-lg-5 text-center">
+            <h1 class="fw-bold">Code Crunch Runner </h1>
+            <p class="fs-4 mt-4">
+                Play this exciting 3D obstacle game that tests your knowledge about Code Crunch. Powered by Digi Dash, this interactive experience shows how gamification can boost student success! 🎮💡
+            </p>
+            <a href="https://www.playdigidash.io/" class="btn btn-purple mb-5" aria-label="Digi Dash" target="_blank" rel="noopener noreferrer">
+                Learn more about Digi Dash
+            </a>
         </div>
-      </div>
-    </section>
+        <div class="game-container" id="gameContainer">
+            <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
+            <button class="play-btn" id="playBtn"><span>PLAY</span></button>
+        </div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('gameContainer');
+        const playBtn = document.getElementById('playBtn');
+        playBtn.addEventListener('click', () => {
+            if (!gameContainer.classList.contains('fullscreen')) {
+            // Expand to fullscreen
+            gameContainer.classList.add('fullscreen');
+            document.body.classList.add('no-scroll'); // Prevent scrolling
+            } else {
+            // Exit fullscreen
+            gameContainer.classList.remove('fullscreen');
+            document.body.classList.remove('no-scroll'); // Restore scrolling
+            }
+        });
+    </script>
 
     <!-- Support Section -->
     <section class="support-section py-5">

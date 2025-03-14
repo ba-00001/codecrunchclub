@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initCodeTicker();
     initNavHighlighting();
+    initPlayButton();
 });
 
 /**
@@ -276,4 +277,21 @@ function validateForm(formId) {
     });
     
     return isValid;
+}
+
+function initPlayButton() {
+    const playBtn = document.getElementById("playBtn");
+    playBtn.addEventListener("click", toggleFullscreen);
+}
+
+function toggleFullscreen() {
+    const gameContainer = document.getElementById("gameContainer");
+
+    if (!gameContainer.classList.contains("fullscreen")) {
+        gameContainer.classList.add("fullscreen");
+        document.body.classList.add("no-scroll");
+    } else {
+        gameContainer.classList.remove("fullscreen");
+        document.body.classList.remove("no-scroll");
+    }
 }
