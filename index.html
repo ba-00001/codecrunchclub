@@ -1,1421 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Code Crunch - Home" />
-        <meta name="author" content="Code Crunch" />
-        <title>Home - Code Crunch</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <!-- Custom CSS -->
-        <style>
-       /* General styles */
-       body {
-        margin: 0;
-        padding: 0;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        font-family: Arial, sans-serif;
-      }
- 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Code Crunch - A coding community for students of all majors" />
+    <meta name="author" content="Code Crunch" />
+    <title>Home - Code Crunch</title>
     
-      /* Footer styles */
-      footer {
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        text-align: center;
-        padding: 20px 0;
-        width: 100%;
-        position: relative;
-        margin-top: auto;
-      }
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     
-
-/* Scroll Indicator - Positioned at Bottom Right */
-.scroll-indicator {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 10px 15px;
-    border-radius: 10px;
-    animation: bounce 1.5s infinite;
-    text-align: center;
-    z-index: 999;
-    cursor: pointer;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Bounce Animation */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* Hide the indicator when not needed */
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-
-/* Animation */
-/* Fade-in Animation */
-/* Fade-in Effect */
-.fade-in {
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: translateY(30px);
-}
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Slide-in from Left */
-.slide-in-left {
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: translateX(-50px);
-}
-.slide-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Slide-in from Right */
-.slide-in-right {
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: translateX(50px);
-}
-.slide-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Zoom-in Effect */
-.zoom-in {
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: scale(0.9);
-}
-.zoom-in.visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* end Animation */
-           
-
-            .header-container {
-                background-color: #f8f9fa; /* Light, neutral background */
-                padding: 3rem 1rem; /* More vertical padding for better emphasis */
-                border-radius: 0.5rem; /* Soft rounded corners */
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light shadow for depth */
-            }
-            
-
-
-            /* Logo section styles */
-            .logo-container {
-                text-align: center;
-                padding: 5px 0;
-            }
-
-            .logo-container img {
-                height: 300px;
-            }
-
-            /* Hackathon Section */
-            .hackathon-section {
-                position: relative;
-                width: 100%;
-                height: 100vh; /* Full height */
-            }
-
-            .hackathon-container {
-                position: relative;
-                width: 100%;
-                height: 100%;
-            }
-
-            .countdown-section {
-                position: absolute;
-                top: 50%; /* Center vertically */
-                left: 50%; /* Center horizontally */
-                transform: translate(-50%, -50%); /* Adjust for exact centering */
-                text-align: center;
-                color: #333; /* Dark text for better contrast */
-                background-color: white; /* White background behind text */
-                padding: 20px; /* Add padding around the text */
-                border-radius: 10px; /* Optional: rounded corners */
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-                z-index: 10; /* Ensure the countdown is above the image */
-            }
-
-            .countdown-section h1, .countdown-section p {
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-
-            .image-section {
-                width: 100%;
-                height: 100%;
-                position: relative;
-            }
-
-            .image-section img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover; /* Ensure the image covers the section without distortion */
-                display: block;
-            }
-
-            /* Page content styles */
-            .card {
-                background: rgba(255, 255, 255, 0.8);
-                color: #333;
-                border-radius: 12px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
-
-            .card h2 {
-                color: #0056b3;
-            }
-
-            /* Footer styles */
-            footer {
-                background-color: rgba(0, 0, 0, 0.8);
-                color: white;
-                text-align: center;
-                padding: 20px 0;
-                width: 100%;
-                position: relative;
-                margin-top: auto;
-            }
-
-            /* Social buttons */
-            .social-buttons a {
-                margin: 5px;
-            }
-            .social-buttons a:hover {
-                transform: scale(1.1);
-                transition: transform 0.2s ease-in-out;
-            }
-
-            .welcome-message {
-            background-color: white;
-            color: #333;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 20px auto;
-            font-family: 'Arial', sans-serif;
-            font-size: 18px;
-        }    
-
-
-        /* Ticker container styles */
-    .ticker-container {
-        overflow: hidden; /* Hide overflowing content */
-        white-space: nowrap; /* Prevent text from wrapping */
-        width: 100%; /* Full width */
-        background-color: #ffffff; /* White background */
-        border: 1px solid #ddd; /* Optional: border for the ticker */
-        padding: 10px 0; /* Padding for better visibility */
-        position: relative;
-    }
-
-    /* Ticker text styles */
-    .ticker-text {
-        display: inline-block;
-        white-space: nowrap;
-        animation: scroll-left 10s linear infinite; /* Animation effect */
-    }
-
-    /* Text style inside ticker */
-    .ticker-text h4 {
-        display: inline; /* Ensure text flows inline */
-        color: #333; /* Text color */
-        font-size: 18px;
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0 20px; /* Add some padding between text repeats */
-    }
-
-    /* Keyframes for scrolling effect */
-    @keyframes scroll-left {
-        0% {
-            transform: translateX(100%); /* Start off-screen to the right */
-        }
-        100% {
-            transform: translateX(-100%); /* Move off-screen to the left */
-        }
-    }
-
-
-         /* General Styles */
-         #game-frame {
-            width: 100%;
-            height: 700px;
-            border: none; /* Removes iframe border */
-        }
-
-      /* end game */
-
-
-      /* Social buttons */
-      .social-buttons .btn,
-      .social-buttons a {
-        margin: 5px;
-      }
-      .social-buttons a:hover {
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
-      }
-
-    /* Logo section styles */
-    .logo-container {
-        text-align: center;
-        padding: 5px 0;
-      }
-      .logo-container img {
-        height: 300px;
-      }
-        /* end Logo section styles */
-
-      /* Navigation link styles with hover highlighting */
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     
-
-      .navbar-nav .nav-link {
-        position: relative;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        padding: 10px 15px;
-        border-radius: 5px;
-      }
-      .navbar-nav .nav-link:hover,
-      .navbar-nav .nav-link.active {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #fff;
-      }
-
-       /* end Navigation link styles with hover highlighting */
-
-      /* Apply button section */
-      .apply-section {
-        text-align: center;
-        padding: 40px 0;
-      }
-      .apply-section .btn {
-        font-size: 1.25rem;
-        padding: 15px 30px;
-      }
-
-         /* Styles for the Digi Dash game container */
-
-        /* Prevent scrolling */
-        .no-scroll {
-            overflow: hidden;
-        }
-        /* Game section (keeps the game within its viewport space) */
-        .game-section {
-            width: 100vw;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #F4F4F4;
-            flex-direction: column;
-            text-align: center;
-            padding: 50px 0;
-        }
-        /* Game container (adjusts in and out of fullscreen) */
-        .game-container {
-            width: 90vw;
-            height: 60vh;
-            position: relative;
-            transition: all 0.3s ease-in-out;
-        }
-        .game-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 1rem;
-        }
-        /* Fullscreen Mode */
-        .fullscreen {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: #000;
-        }
-        /* Centered "PLAY" button */
-        .play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 2rem 4rem;
-            background: #DF8E40;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        /* Shrink and move button when in fullscreen */
-        .fullscreen .play-btn {
-            bottom: 2vh;
-            right: 2vw;
-            top: auto;
-            left: auto;
-            transform: none;
-            padding: 0.8rem;
-            font-size: 1.2rem;
-            border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #DF8E40;
-        }
-        /* Expand icon (arrows) */
-        .fullscreen .play-btn::before {
-            content: "⤢"; /* Expand Icon */
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        /* Hide "PLAY" text in fullscreen */
-        .fullscreen .play-btn span {
-            display: none;
-        }
-        
-        .btn-purple {
-            background-color: #ad00ff; /* Purple color */
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 5px;
-            display: inline-block;
-            transition: background 0.3s ease;
-        }
-        .btn-purple:hover {
-            background-color: #6B0086; /* Darker purple on hover */
-            color: white; /* Keep text color the same */
-        }
-    </style>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet" />
   </head>
-  <body style="margin:0; padding:0; min-height:100%; display:flex; flex-direction:column; font-family:Arial, sans-serif;">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0; z-index:1000;">
+  
+  <body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container px-lg-5">
         <!-- Logo and Brand Name -->
-        <a class="navbar-brand" href="index.html" style="display:flex; align-items:center;">
-          <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" style="height:50px; margin-right:10px;" />
+        <a class="navbar-brand" href="index.html">
+          <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-2" />
           Code Crunch
         </a>
-        <!-- Toggler Button for Mobile -->
+        
+        <!-- Mobile Toggle -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Collapsible Nav Links -->
+        
+        <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="index.html" style="padding:10px 15px;">Home</a>
+              <a class="nav-link active" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html" style="padding:10px 15px;">About</a>
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="hackathonsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Hackathons
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="hackathonsDropdown">
+                <li><a class="dropdown-item" href="305HACK-SPRING25.html">305 Hackathon</a></li>
+                <li><a class="dropdown-item" href="HACKFIESTA-SPRING25.HTML">HackFiesta</a></li>
+                <li><a class="dropdown-item" href="empowher-agenda.html">EmpowHer Hackathon</a></li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Schedules.html" style="padding:10px 15px;">Schedule</a>
+              <a class="nav-link" href="Schedules.html">Schedule</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="SWE-CONVOS.html" style="padding:10px 15px;">SWE Convos</a>
+              <a class="nav-link" href="SWE-CONVOS.html">SWE Convos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="305HACK-SPRING25.html" style="padding:10px 15px;">305 Hackathon</a>
+              <a class="nav-link" href="all-eboard.html">E-board</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="all-eboard.html" style="padding:10px 15px;">E-board</a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html" style="padding:10px 15px;">Contact</a>
+              <a class="nav-link" href="CC-Membership.HTML">Club Graphics</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="CC-Membership.HTML" style="padding:10px 15px;">Club Graphics</a>
-              </li>
-
           </ul>
         </div>
       </div>
     </nav>
 
-
-        <!-- Logo Section -->
-        <div class="logo-container">
-            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" />
-        </div>
-
-
- <!-- Welcome Header -->
-<header class="py-5 fade-in">
-    <div class="container px-lg-5 text-center">
+    <!-- Header Section with Logo -->
+    <header class="py-5 text-center fade-in">
+      <div class="logo-container mb-4">
+        <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" height="300" />
+      </div>
+      
+      <div class="container px-lg-5">
         <h1 class="display-5 fw-bold">Welcome to Code Crunch</h1>
         <p class="fs-4">
-            Code Crunch is bridging global innovation with local engagement, offering a dynamic platform open to all university students, regardless of major—no prior experience required! Freshmen, graduates, and alumni from any university are welcome. Join us to break down barriers in technology, participate in hands-on coding workshops, collaborate on community-driven projects, and prepare for the future through immersive virtual and on-campus experiences.
+          Code Crunch is bridging global innovation with local engagement, offering a dynamic platform open to all university students, regardless of major—no prior experience required! Freshmen, graduates, and alumni from any university are welcome.
         </p>
         
-        <p class="fs-4">
-            Whether you’re joining us via our virtual Zoom sessions from anywhere in the world or in person right here at Florida International University, we provide the resources, mentorship, and community you need to grow as a coder and innovator.
-        </p>
-
-       
-
-        <!-- Mission Section -->
-        <section class="mt-5">
-            <h2 class="fw-bold">Mission</h2>
-            <p class="fs-4">
-                Code Crunch is dedicated to empowering university students by providing hands-on experience in software development, interdisciplinary collaboration, and real-world project building. 
-                Through workshops, coding challenges, and peer mentorship, we equip members with the skills needed for technical interviews, industry-relevant problem-solving, and cutting-edge technology applications. 
-                Our mission extends beyond traditional coding—we strive to bridge the gap between theory and practice, ensuring that students, regardless of major or prior experience, have access to the tools, resources, and community needed to innovate, create, and succeed in the tech industry.
-            </p>
-        </section>
-
-        <!-- Vision Section -->
-        <section class="mt-5">
-            <h2 class="fw-bold">Vision</h2>
-            <p class="fs-4">
-                Our vision is to foster a global community of innovators and problem-solvers by providing interdisciplinary learning opportunities that integrate software development, engineering, data science, and emerging technologies. 
-                We aim to empower students through hands-on projects, industry mentorship, and technical workshops while preparing them for careers in tech, research, and entrepreneurship. 
-                By creating an inclusive, collaborative, and knowledge-sharing ecosystem, we ensure that students from all backgrounds, universities, and experience levels can thrive in technology, innovation, and beyond. 
-                Through mentorship, alumni engagement, and industry partnerships, we are shaping the next generation of leaders, builders, and changemakers in the digital world.
-            </p>
-        </section>
-
-        <p></p>
-        <p class="fs-4"><strong>Let’s innovate together! Built and led by students, for students.</strong></p>
-        <p></p>
-
-        <p>
-            <h5 class="fw-bold">#CodeCrunch #CodeCrunchFIU #DiversityInTech #InclusiveTech #LeadershipOpportunities #FIUTechCommunity #WomenInSTEM #LGBTQInTech #LatinxInTech #BlackInTech #AAPIsInTech #TechLeadership #JoinOurTeam #FIUInnovation #TechForEveryone #EmpowerTech #FutureLeaders #HackerCulture #CodeYourFuture #TechDiversity #FIUPanthers #STEMOpportunities #BuildYourFuture #LeadWithCode #PanthersInTech</h5>
-        </p>
-  
-        
-        
-        <!-- Social Media Links -->
-        <div class="social-buttons" class="slide-in-left">
-            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
-                <i class="bi bi-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
-                <i class="bi bi-instagram"></i> Instagram
-            </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
-                <i class="bi bi-whatsapp"></i> WhatsApp
-            </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
-                <i class="bi bi-discord"></i> Discord
-            </a>
-            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
-                <i class="bi bi-university"></i> Panther Connect
-            </a>
-            <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
-                <i class="bi bi-link"></i> Linktree
-            </a>
-                <!-- YouTube Button -->
-            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-danger" aria-label="YouTube">
-                <i class="bi bi-youtube"></i> YouTube
-            </a>
-            <!-- RESUME BOOK Button -->
-            <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="btn btn-primary" aria-label="Resume Book">
-                <i class="bi bi-journal-text"></i> Resume Book
-            </a>
-
+        <div class="social-buttons mt-4">
+          <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-primary" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-danger" aria-label="Instagram">
+            <i class="bi bi-instagram"></i> Instagram
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-success" aria-label="WhatsApp">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-secondary" aria-label="Discord">
+            <i class="bi bi-discord"></i> Discord
+          </a>
+          <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-warning" aria-label="Panther Connect">
+            <i class="bi bi-university"></i> Panther Connect
+          </a>
+          <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-dark" aria-label="Linktree">
+            <i class="bi bi-link"></i> Linktree
+          </a>
+          <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-danger" aria-label="YouTube">
+            <i class="bi bi-youtube"></i> YouTube
+          </a>
+          <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="btn btn-primary" aria-label="Resume Book">
+            <i class="bi bi-journal-text"></i> Resume Book
+          </a>
         </div>
+      </div>
+    </header>
 
-        
-    </div>
-</header>
-
-<!-- Digi Dash Game Content -->
-<div class="game-section">
-    <div class="container px-lg-5 text-center">
-        <h1 class="fw-bold">Code Crunch Runner </h1>
-        <p class="fs-4 mt-4">
-            Play this exciting 3D obstacle game that tests your knowledge about Code Crunch. Powered by Digi Dash, this interactive experience shows how gamification can boost student success! 🎮💡
-        </p>
-        <a href="https://www.playdigidash.io/" class="btn btn-purple mb-5" aria-label="Digi Dash" target="_blank" rel="noopener noreferrer">
-            Learn more about Digi Dash
-        </a>
-    </div>
-    <div class="game-container" id="gameContainer">
-        <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
-        <button class="play-btn" id="playBtn"><span>PLAY</span></button>
-    </div>
-</div>
-
-<!-- Ticker Section with Famous Java Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #004aad, #004aad); /* Matching Java gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div class="zoom-in" id="java-ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>System.out.println("Hello, World!");</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
-        </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>System.out.println("Hello, World!");</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) System.out.println(i);</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>if(name.equals("Java")) System.out.println("Found it!");</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>new Thread(() -> System.out.println("Running...")).start();</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>List<Integer> nums = Arrays.asList(1,2,3);</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>Map<String, Integer> map = new HashMap<>();</code></h4>
-            <h4 style="color: #ffd700; font-size: 18px; margin: 0 50px;"><code>int[] arr = {1,2,3}; Arrays.stream(arr).forEach(System.out::println);</code></h4>
-        </div>
-    </div>
-</div>
-
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
-<p></p>
-
-
-
-<section class="content-section" style="display: flex; flex-direction: column; align-items: center; width: 100%; overflow: hidden; padding: 30px;">
-
-    <!-- Video Section -->
-    <div class="video-section" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%;">
-        <!-- Video 1 -->
-        <div class="video-container" style="margin-bottom: 20px; text-align: center; width: 100%;">
-            <h3>Code Crunch Global: A Career Accelerator</h3>
-            <iframe style="width: 100%; max-width: 560px; height: auto; aspect-ratio: 16/9;" 
-                src="https://www.youtube.com/embed/Be44hpTkHA0?rel=0" 
-                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-</section>
-
-<section class="content-section" style="display: flex; flex-direction: column; align-items: center; width: 100%; overflow: hidden; padding: 30px;">
-
-    <!-- Video Section -->
-    <div class="video-section" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%;">
-        <!-- Video 2 -->
-        <div class="video-container" style="text-align: center; width: 100%;">
-            <h3>Breaking Into Tech: The 305 Hackathon Experience | Code Crunch @ FIU 🚀💻</h3>
-            <iframe style="width: 100%; max-width: 560px; height: auto; aspect-ratio: 16/9;" 
-                src="https://www.youtube.com/embed/xbKAPQtoelk?rel=0" 
-                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-</section>
-
-
-<!-- Page Content Club Section -->
-<section class="page-content-section pt-4">
-    <div class="container px-lg-5">
-        <div class="row gx-lg-5 justify-content-center">           
-            
-     <!-- Upcoming Events Card -->
-     <div class="col-lg-6 col-xxl-4 mb-5">
-        <div class="card bg-light border-0 h-100">
-            <div class="card-body text-center p-4 p-lg-5">
-                <h2 class="fs-4 fw-bold">Upcoming Events</h2>
-                
-                <p class="mt-3">Find all the information about our workshops, including date, time, Zoom links, and in-person locations, on our Luma Calendar website.</p>
-                
-                <p class="mt-3 mb-0"><strong>LUMA Calendar:</strong> <a href="https://lu.ma/CODECRUNCH" target="_blank">LU.MA/CODECRUNCH</a></p>
-                <a class="btn btn-primary btn-lg mt-3" href="https://lu.ma/CODECRUNCH" target="_blank">RSVP on LUMA calendar</a><br>
+    <!-- Mission & Vision Section -->
+    <section class="bg-light py-5">
+      <div class="container px-lg-5">
+        <div class="row gx-5">
+          <div class="col-lg-6 mb-4 zoom-in">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-primary text-white">
+                <h2 class="fw-bold h4 mb-0">Our Mission</h2>
+              </div>
+              <div class="card-body">
+                <p>
+                  Code Crunch is dedicated to empowering university students by providing hands-on experience in software development, interdisciplinary collaboration, and real-world project building. 
+                  Through workshops, coding challenges, and peer mentorship, we equip members with the skills needed for technical interviews, industry-relevant problem-solving, and cutting-edge technology applications.
+                </p>
+              </div>
             </div>
+          </div>
+          
+          <div class="col-lg-6 mb-4 zoom-in">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-success text-white">
+                <h2 class="fw-bold h4 mb-0">Our Vision</h2>
+              </div>
+              <div class="card-body">
+                <p>
+                  Our vision is to foster a global community of innovators and problem-solvers by providing interdisciplinary learning opportunities that integrate software development, engineering, data science, and emerging technologies. 
+                  We aim to empower students through hands-on projects, industry mentorship, and technical workshops while preparing them for careers in tech, research, and entrepreneurship.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Code Ticker Banner -->
+    <div class="code-ticker">
+      <div class="ticker-track">
+        <!-- Content generated by JavaScript -->
+      </div>
     </div>
 
-            <!-- Embedded Calendar -->
-            <div class="col-lg-6 col-xxl-4 mb-5">
-                <div class="card bg-light border-0 h-100 d-flex align-items-center justify-content-center">
-                    <div style="width: 100%; max-width: 600px; height: 450px; border: 1px solid #bfcbda88; border-radius: 4px; overflow: hidden;">
-                        <iframe 
-                            src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light"
-                            frameborder="0"
-                            allowfullscreen
-                            aria-hidden="false"
-                            tabindex="0"
-                            style="width: 100%; height: 100%;">
-                        </iframe>
-                    </div>
+    <!-- Call to Action Section -->
+    <section class="join-section py-5">
+      <div class="container px-lg-5">
+        <h2 class="text-center fw-bold mb-5">Join Our Community</h2>
+        
+        <div class="row gx-4 gy-4">
+          <!-- Become a Member Card -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-primary text-white">
+                <h3 class="h5 mb-0">Become a Member</h3>
+              </div>
+              <div class="card-body">
+                <p>Join our club to gain access to exclusive events, resources, and a community of like-minded peers.</p>
+                <ul class="mb-0">
+                  <li>Access to Discord & WhatsApp communities</li>
+                  <li>Panther Connect membership (FIU students)</li>
+                  <li>GitHub repository access</li>
+                  <li>Workshop materials and resources</li>
+                </ul>
+              </div>
+              <div class="card-footer bg-transparent border-0 text-center">
+                <a class="btn btn-primary" href="https://forms.gle/9KNQZ94W3KFurvm67" target="_blank">Become a Member</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Join the E-Board Card -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-success text-white">
+                <h3 class="h5 mb-0">Join the E-Board</h3>
+              </div>
+              <div class="card-body">
+                <p>Join Code Crunch as our <strong>Tech Engagement Chair</strong>—a dynamic role combining technical leadership, event support, and outreach.</p>
+                <p>Open to:</p>
+                <ul class="mb-0">
+                  <li>FIU students (any major)</li>
+                  <li>Students from other universities</li>
+                  <li>Industry professionals</li>
+                </ul>
+              </div>
+              <div class="card-footer bg-transparent border-0 text-center">
+                <a class="btn btn-success" href="all-eboard.html" target="_blank">Apply Now</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Community Resources Card -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-info text-white">
+                <h3 class="h5 mb-0">Community Resources</h3>
+              </div>
+              <div class="card-body">
+                <p>Access our community resources to enhance your learning experience:</p>
+                <ul class="mb-0">
+                  <li>GitHub repositories with course materials</li>
+                  <li>Weekly updates with slides and code</li>
+                  <li>Feedback form for improving our events</li>
+                  <li>Attendance tracking for members</li>
+                </ul>
+              </div>
+              <div class="card-footer bg-transparent border-0 text-center">
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                  <a class="btn btn-info" href="https://github.com/CODE-CRUNCH-CLUB" target="_blank">GitHub</a>
+                  <a class="btn btn-secondary" href="https://forms.gle/u8P1KMEXmjWTgzhd8" target="_blank">Feedback</a>
+                  <a class="btn btn-dark" href="https://forms.gle/StgULTsytrcfZXBv6" target="_blank">Attendance</a>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-            <!-- Attendance Form Card -->
-            <div class="col-lg-6 col-xxl-4 mb-5">
-                <div class="card bg-light border-0 h-100">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Attendance Form</h2>
-                        <p class="mb-0">Mark your attendance for meetings and events by following the steps provided in our <strong>Attendance Guide</strong>.</p>
-                        <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/StgULTsytrcfZXBv6" target="_blank">Attendance</a>
-                    </div>
+    <!-- Hackathons Section -->
+    <section class="hackathons-section py-5 bg-light">
+      <div class="container px-lg-5">
+        <h2 class="text-center fw-bold mb-5">Upcoming Hackathons</h2>
+        
+        <div class="row gx-4 gy-4">
+          <!-- Hackathon Cards -->
+          <div class="col-lg-3 col-md-6">
+            <div class="card shadow h-100">
+              <img src="https://github.com/user-attachments/assets/5c0f107e-4301-423a-942e-5c326988c839" 
+                  class="card-img-top" alt="HackFiesta Flyer">
+              <div class="card-body text-center">
+                <h3 class="card-title h5">HackFiesta</h3>
+                <div class="mt-3">
+                  <a href="HACKFIESTA-SPRING25.HTML" class="btn btn-sm btn-primary m-1">Learn More</a>
+                  <a href="https://forms.gle/UZYKKG6B1Roj32yj8" class="btn btn-sm btn-danger m-1">Register</a>
+                  <a href="305-spr-agenda.html" class="btn btn-sm btn-success m-1 mt-2 w-100">View Agenda</a>
                 </div>
+              </div>
             </div>
-
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="card shadow h-100">
+              <img src="https://github.com/user-attachments/assets/09e848e3-26b6-4cf1-a2ec-8c046cb20eba" 
+                  class="card-img-top" alt="Spring 2025 Flyer">
+              <div class="card-body text-center">
+                <h3 class="card-title h5">Spring 2025</h3>
+                <div class="mt-3">
+                  <a href="https://305hackathon.vercel.app/" class="btn btn-sm btn-primary m-1">Learn More</a>
+                  <a href="https://forms.gle/UZYKKG6B1Roj32yj8" class="btn btn-sm btn-danger m-1">Register</a>
+                  <a href="305-spr-agenda.html" class="btn btn-sm btn-success m-1 mt-2 w-100">View Agenda</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="card shadow h-100">
+              <img src="https://github.com/user-attachments/assets/686c3b7e-5a12-4ef3-8bfc-c5994af77e10" 
+                  class="card-img-top" alt="Fall 2025 Flyer">
+              <div class="card-body text-center">
+                <h3 class="card-title h5">Fall 2025</h3>
+                <div class="mt-3">
+                  <a href="https://305hackathon.vercel.app/" class="btn btn-sm btn-primary m-1">Learn More</a>
+                  <a href="https://forms.gle/UZYKKG6B1Roj32yj8" class="btn btn-sm btn-danger m-1">Register</a>
+                  <a href="305-fall-agenda.html" class="btn btn-sm btn-success m-1 mt-2 w-100">View Agenda</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="card shadow h-100">
+              <img src="https://github.com/user-attachments/assets/31434f7e-68fe-45e7-915b-63254862ddab" 
+                  class="card-img-top" alt="EmpowHer Fall 2025 Flyer">
+              <div class="card-body text-center">
+                <h3 class="card-title h5">EmpowHer Fall 2025</h3>
+                <div class="mt-3">
+                  <a href="#" class="btn btn-sm btn-primary m-1">Learn More</a>
+                  <a href="https://forms.gle/UZYKKG6B1Roj32yj8" class="btn btn-sm btn-danger m-1">Register</a>
+                  <a href="empowher-agenda.html" class="btn btn-sm btn-success m-1 mt-2 w-100">View Agenda</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-
-<!-- Responsive adjustments using inline media query -->
-<style>
-    @media screen and (max-width: 768px) {
-        .content-section div {
-            max-width: 100% !important; /* Ensures full width on smaller screens */
-            height: auto !important;
-            aspect-ratio: 4 / 3; /* Maintains proportional aspect ratio */
-        }
-    }
-
-    @media screen and (max-width: 480px) {
-        .content-section div {
-            height: 400px !important; /* Adjusts height for very small screens */
-        }
-    }
-</style>
-
-
-
-
-
-
-<!-- Ticker Section with Famous Python Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #1a73e8, #004aad); /* Matching blue gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div id="ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>for i in range(10): print(i)</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>if "Python" in ["Java", "C++", "Python"]: print("Found it!")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>while True: pass</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>import this</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>lambda x: x * 2</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>try: x = 1/0 except: print("Error")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>[x**2 for x in range(10)]</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>list(map(str.upper, ["hello", "world"]))</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>from datetime import datetime; print(datetime.now())</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>def greet(name): return f"Hello, {name}!"</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>{'a': 1, 'b': 2}.get('c', 'Not found')</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print('\n'.join(['🐍 Python Rocks! 🚀' for _ in range(3)]))</code></h4>
+    <!-- Upcoming Events & Calendar Section -->
+    <section class="events-section py-5">
+      <div class="container px-lg-5">
+        <h2 class="text-center fw-bold mb-5">Events & Calendar</h2>
+        
+        <div class="row gx-4">
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-white shadow h-100">
+              <div class="card-body p-4">
+                <h3 class="card-title h4 mb-3">Upcoming Events</h3>
+                <p>Find all the information about our workshops, including date, time, Zoom links, and in-person locations, on our Luma Calendar website.</p>
+                <p class="mb-0"><strong>LUMA Calendar:</strong> <a href="https://lu.ma/CODECRUNCH" target="_blank">LU.MA/CODECRUNCH</a></p>
+                <div class="text-center mt-4">
+                  <a class="btn btn-primary" href="https://lu.ma/CODECRUNCH" target="_blank">RSVP on LUMA calendar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-white shadow h-100">
+              <div class="card-body p-4">
+                <h3 class="card-title h4 mb-3">Calendar</h3>
+                <div class="ratio ratio-1x1">
+                  <iframe 
+                    src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?lt=light"
+                    frameborder="0"
+                    allowfullscreen
+                    aria-hidden="false"
+                    tabindex="0">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>for i in range(10): print(i)</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>if "Python" in ["Java", "C++", "Python"]: print("Found it!")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>while True: pass</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>import this</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>lambda x: x * 2</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>try: x = 1/0 except: print("Error")</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>[x**2 for x in range(10)]</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>list(map(str.upper, ["hello", "world"]))</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>from datetime import datetime; print(datetime.now())</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>def greet(name): return f"Hello, {name}!"</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>{'a': 1, 'b': 2}.get('c', 'Not found')</code></h4>
-            <h4 style="color: white; font-size: 18px; margin: 0 50px;"><code>print('\n'.join(['🐍 Python Rocks! 🚀' for _ in range(3)]))</code></h4>
-        </div>
-    </div>
-</div>
+      </div>
+    </section>
 
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
-
-<!-- End python ticker -->
-
-
-<section class="hackathon-group-section py-5">
-    <div class="container">
-        <!-- Unified Card -->
+    <!-- Club Photo Section -->
+    <section class="photo-section py-5 bg-light">
+      <div class="container px-lg-5">
         <div class="card shadow-lg border-0">
+          <div class="card-header bg-success text-white text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
+            <h2 class="card-title mb-0">Meet Our Club</h2>
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" 
+                 alt="Code Crunch Club Logo" style="max-width: 60px; height: auto;">
+            <h3 class="h5 mb-0">EST. 2024</h3>
+          </div>
+          <div class="card-body p-0">
+            <img src="https://github.com/user-attachments/assets/3cc0162a-0596-4d51-a59a-b135efc28d80" 
+                 alt="Code Crunch Club Group Photo" 
+                 class="img-fluid w-100" style="max-height: 400px; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Card Header: Meet Our Club with Logo and EST. 2024 -->
-            <div class="card-header bg-success text-white text-center" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <h1 class="card-title mb-0">Meet Our Club</h1>
-                <!-- Club Logo -->
-                <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" 
-                     alt="Code Crunch Club Logo" 
-                     style="max-width: 60px; height: auto;">
-                <!-- EST. 2024 -->
-                <h2 style="font-size: 18px; font-weight: bold; color: white; margin: 0;">EST. 2024</h2>
-            </div>
-
-            <div class="card-body">
-                <!-- Group Photo -->
-                <div class="text-center mb-4">
-                    <img src="https://github.com/user-attachments/assets/3cc0162a-0596-4d51-a59a-b135efc28d80" 
-                         alt="Code Crunch Club Group Photo" 
-                         class="img-fluid rounded shadow-sm w-100" 
-                         style="max-height: 400px; object-fit: cover;">
+    <!-- Videos Section -->
+    <section class="videos-section py-5">
+      <div class="container px-lg-5">
+        <h2 class="text-center fw-bold mb-5">Featured Videos</h2>
+        
+        <div class="row gx-4 gy-4">
+          <div class="col-lg-6">
+            <div class="card shadow h-100">
+              <div class="card-header">
+                <h3 class="h5 mb-0">Code Crunch Global: A Career Accelerator</h3>
+              </div>
+              <div class="card-body text-center">
+                <div class="ratio ratio-16x9">
+                  <iframe src="https://www.youtube.com/embed/Be44hpTkHA0?rel=0" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- Ticker Section with Famous Swift Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #fa7343, #ff9500); /* Matching Swift gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div id="swift-ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
-        </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>print("Hello, World!")</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>for i in 0..<10 { print(i) }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let name = "Swift"; if name == "Swift" { print("Found it!") }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>while true { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>DispatchQueue.global().async { print("Async running!") }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let nums = [1, 2, 3].map { $0 * 2 }</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>let user = ["name": "John", "age": 25]</code></h4>
-            <h4 style="color: #ffcc00; font-size: 18px; margin: 0 50px;"><code>URLSession.shared.dataTask(with: url) { data, response, error in }</code></h4>
-        </div>
-    </div>
-</div>
-
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
-<!-- End Ticker Section with Famous Swift Lines -->
-
-
-
-
-<p></p>
-
-<section style="padding: 50px; text-align: center;">
-    <!-- Flyer & EST. 2025 Section -->
-    <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-
-        <!-- EST. 2025 Logo (on the side) -->
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <img src="https://github.com/user-attachments/assets/30568fdc-c31d-4260-8a24-7e62db85451a" 
-                 alt="Hibiscus Flower" 
-                 style="width: 80px; height: auto;">
-            <div style="font-size: 24px; font-weight: bold; color: #FF4D00;">EST. 2025</div>
-        </div>
-
-        <!-- Flyers Section -->
-        <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
-
-            <!-- HackFiesta Flyer -->
-            <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/5c0f107e-4301-423a-942e-5c326988c839" 
-                     alt="HackFiesta Flyer" 
-                     style="width: 100%; height: auto; border-radius: 10px;">
-                
-                <!-- Buttons Below Flyer -->
-                <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center;">
-                    <div>
-                        <a href="HACKFIESTA-SPRING25.HTML" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #007BFF; color: white;">Learn More</a>
-                        <a href="https://forms.gle/UZYKKG6B1Roj32yj8" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #FF4D00; color: white;">Register Now</a>
-                    </div>
-                    <a href="305-spr-agenda.html" style="margin-top: 10px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #28A745; color: white;">Hack Agenda</a>
+          </div>
+          
+          <div class="col-lg-6">
+            <div class="card shadow h-100">
+              <div class="card-header">
+                <h3 class="h5 mb-0">Breaking Into Tech: The 305 Hackathon Experience</h3>
+              </div>
+              <div class="card-body text-center">
+                <div class="ratio ratio-16x9">
+                  <iframe src="https://www.youtube.com/embed/xbKAPQtoelk?rel=0" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
                 </div>
+              </div>
             </div>
-
-            <!-- Spring 2025 Flyer -->
-            <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/09e848e3-26b6-4cf1-a2ec-8c046cb20eba" 
-                     alt="Spring 2025 Flyer" 
-                     style="width: 100%; height: auto; border-radius: 10px;">
-                
-                <!-- Buttons Below Flyer -->
-                <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center;">
-                    <div>
-                        <a href="https://305hackathon.vercel.app/" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #007BFF; color: white;">Learn More</a>
-                        <a href="https://forms.gle/UZYKKG6B1Roj32yj8" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #FF4D00; color: white;">Register Now</a>
-                    </div>
-                    <a href="305-spr-agenda.html" style="margin-top: 10px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #28A745; color: white;">Hack Agenda</a>
-                </div>
-            </div>
-
-            <!-- Fall 2025 Flyer -->
-            <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/686c3b7e-5a12-4ef3-8bfc-c5994af77e10" 
-                     alt="Fall 2025 Flyer" 
-                     style="width: 100%; height: auto; border-radius: 10px;">
-                
-                <!-- Buttons Below Flyer -->
-                <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center;">
-                    <div>
-                        <a href="https://305hackathon.vercel.app/" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #007BFF; color: white;">Learn More</a>
-                        <a href="https://forms.gle/UZYKKG6B1Roj32yj8" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #FF4D00; color: white;">Register Now</a>
-                    </div>
-                    <a href="305-fall-agenda.html" style="margin-top: 10px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #28A745; color: white;">Hack Agenda</a>
-                </div>
-            </div>
-
-            <!-- EmpowHer Fall 2025 Flyer -->
-            <div style="text-align: center; max-width: 400px;">
-                <img src="https://github.com/user-attachments/assets/31434f7e-68fe-45e7-915b-63254862ddab" 
-                     alt="EmpowHer Fall 2025 Flyer" 
-                     style="width: 100%; height: auto; border-radius: 10px;">
-                
-                <!-- Buttons Below Flyer -->
-                <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center;">
-                    <div>
-                        <a href="#" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #007BFF; color: white;">Learn More</a>
-                        <a href="https://forms.gle/UZYKKG6B1Roj32yj8" style="margin: 5px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #FF4D00; color: white;">Register Now</a>
-                    </div>
-                    <a href="empowher-agenda.html" style="margin-top: 10px; padding: 10px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 8px; background: #28A745; color: white;">Hack Agenda</a>
-                </div>
-            </div>
-
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-
-
-
-
-<!-- Ticker Section with Famous C++ Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #005cb2, #003f7f); /* Matching C++ gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div id="cpp-ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>#include &lt;iostream&gt; using namespace std;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>cout << "Hello, World!" << endl;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>for(int i = 0; i < 10; i++) cout << i << endl;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>vector<int> nums = {1,2,3};</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>map<string, int> scores = {{"Alice", 90}, {"Bob", 85}};</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>auto sum = [](int a, int b) { return a + b; };</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>int arr[] = {1, 2, 3}; for(auto x : arr) cout << x;</code></h4>
+    <!-- Interactive Game Section -->
+    <section class="game-section py-5">
+      <div class="container px-lg-5 text-center">
+        <h2 class="fw-bold mb-4">Code Crunch Runner</h2>
+        <p class="fs-5 mb-4">
+          Play this exciting 3D obstacle game that tests your knowledge about Code Crunch. Powered by Digi Dash, this interactive experience shows how gamification can boost student success! 🎮💡
+        </p>
+        <a href="https://www.playdigidash.io/" class="btn btn-purple mb-5" target="_blank" rel="noopener noreferrer">
+          Learn more about Digi Dash
+        </a>
+        
+        <div class="game-container" id="gameContainer">
+          <iframe src="https://go.playdigidash.io/code-crunch-runner/" class="game-iframe" allowfullscreen></iframe>
+          <button class="play-btn" id="playBtn"><span>PLAY</span></button>
         </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>#include &lt;iostream&gt; using namespace std;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>cout << "Hello, World!" << endl;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>for(int i = 0; i < 10; i++) cout << i << endl;</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>vector<int> nums = {1,2,3};</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>map<string, int> scores = {{"Alice", 90}, {"Bob", 85}};</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>auto sum = [](int a, int b) { return a + b; };</code></h4>
-            <h4 style="color: #00ffff; font-size: 18px; margin: 0 50px;"><code>int arr[] = {1, 2, 3}; for(auto x : arr) cout << x;</code></h4>
-        </div>
-    </div>
-</div>
+      </div>
+    </section>
 
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
+    <!-- Support Section -->
+    <section class="support-section py-5">
+      <div class="container px-lg-5 text-center">
+        <h2 class="fw-bold mb-4">Need Help?</h2>
+        <p class="fs-5 mb-4">
+          If you encounter any issues with accessing our resources or have questions about Code Crunch:
+        </p>
+        <a href="mailto:codecrunchhelp@outlook.com" class="btn btn-lg btn-success">
+          <i class="bi bi-envelope"></i> Contact Support Team
+        </a>
+      </div>
+    </section>
 
-
-
-
-
-
-
-
-
-<!-- Page Content club cards -->
-<section class="page-content-section pt-4">
-    <div class="container px-lg-5">
-        <div class="row gx-lg-5 justify-content-center">           
-
-
-    <!-- Join the Code Crunch E-Board Card -->
-<div class="col-lg-6 col-xxl-4 mb-5">
-    <div class="card bg-light border-0 h-100">
-
-        <div class="card-body text-center p-4 p-lg-5"> 
-            <h2 class="fs-4 fw-bold">Join the Code Crunch E-Board - Lead, Innovate, and Inspire! 🚀</h2>
-            <p class="mt-3">
-                Join Code Crunch as our <strong>Tech Engagement Chair</strong>—a dynamic role combining technical leadership, event support, and outreach. With just 5 hours a week, you can help shape an inclusive tech community at FIU. Apply now and be the spark that drives innovation! ✨
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container px-lg-5">
+        <div class="row gy-4">
+          <div class="col-lg-4">
+            <h3 class="h5">Code Crunch</h3>
+            <p class="mb-0">
+              Built and led by students, for students.<br>
+              Bridging global innovation with local engagement.
             </p>
-            
-            <h3 class="fs-5 fw-bold mt-4">Who Can Apply to the E-Board?</h3>
-            <ul class="text-start mx-auto" style="max-width: 600px; list-style: none; padding: 0;">
-                <li>✅ FIU students from all majors.</li>
-                <li>✅ Students from other universities worldwide.</li>
-                <li>✅ Industry professionals passionate about fostering innovation and supporting the next generation of tech talent.</li>
+          </div>
+          
+          <div class="col-lg-4">
+            <h3 class="h5">Connect With Us</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-sm btn-outline-light" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-sm btn-outline-light" aria-label="Instagram">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-sm btn-outline-light" aria-label="YouTube">
+                <i class="bi bi-youtube"></i>
+              </a>
+              <a href="https://linktr.ee/CODE.CRUNCH" class="btn btn-sm btn-outline-light" aria-label="Linktree">
+                <i class="bi bi-link"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <h3 class="h5">Quick Links</h3>
+            <ul class="list-unstyled mb-0">
+              <li><a href="about.html" class="text-white">About Us</a></li>
+              <li><a href="contact.html" class="text-white">Contact</a></li>
+              <li><a href="https://forms.gle/9KNQZ94W3KFurvm67" class="text-white">Become a Member</a></li>
+              <li><a href="https://lu.ma/CODECRUNCH" class="text-white">Events Calendar</a></li>
             </ul>
-
-            <a href="all-eboard.html" target="_blank" class="btn btn-primary btn-lg mt-3" aria-label="E-Board Application">
-                Apply Now
-            </a>
+          </div>
         </div>
-    </div>
-</div>
-
-
-             
-
-                   <!-- Become a Member Card -->
-                   <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5">
-                            <h2 class="fs-4 fw-bold">Become a Member</h2>
-                            <p class="mb-0">Join our club to gain access to exclusive events, resources, and a community of like-minded peers.</p>
-                            <p class="mt-3"><strong>After Sign-Up:</strong> Upon submitting the form, you will receive a welcome email that includes:</p>
-                            <ul class="text-start mt-2">
-                                <li>Link to join our <strong>Discord</strong> community.</li>
-                                <li>Link to join Code Crunch on <strong>Panther Connect.</strong> Only Available for fiu students.</li>
-                                <li><strong>Code Crunch Github</strong> access granted weekly.</li>
-                            </ul>
-                            <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/9KNQZ94W3KFurvm67" target="_blank">Become a Member</a>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-                    <!-- Upcoming Events Card -->
-         
-
-
-
-                    <!-- Attendance Form Card -->
-               
-
-                    <!-- Feedback Form Card -->
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5">
-                                <h2 class="fs-4 fw-bold">Feedback Form</h2>
-                                <p class="mb-0">We value your feedback! Share your thoughts on our events and suggest improvements.</p>
-                                
-                                <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/u8P1KMEXmjWTgzhd8" target="_blank">Give Feedback</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Join Discord Card -->
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5">
-                                <h2 class="fs-4 fw-bold">Join Our Discord & WhatsApp group</h2>
-                                <p class="mb-0">You must <strong>become a member</strong> to receive the invite link to join our Discord community & WhatsApp group.</p>
-                                
-                                <a class="btn btn-primary btn-lg mt-3" href="https://forms.gle/PPyyu8zyCNP1TT8S8" target="_blank">Sign Up</a>
-                            </div>
-                        </div>
-                    </div>
-
-       
-
-        </div>
-    </div>
-</section>
-
-<!-- Ticker Section with Famous C# Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #68217a, #4b0082); /* Matching C# gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div id="csharp-ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Console.WriteLine("Hello, World!");</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) Console.WriteLine(i);</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>if (name == "CSharp") Console.WriteLine("Found it!");</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Task.Run(() => Console.WriteLine("Async running!"));</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>List<int> nums = new List<int> {1, 2, 3};</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Dictionary<string, int> scores = new() {{"Alice", 90}, {"Bob", 85}};</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>var sum = (int a, int b) => a + b;</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>foreach (var num in nums) Console.WriteLine(num);</code></h4>
-        </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Console.WriteLine("Hello, World!");</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>for (int i = 0; i < 10; i++) Console.WriteLine(i);</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>if (name == "CSharp") Console.WriteLine("Found it!");</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Task.Run(() => Console.WriteLine("Async running!"));</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>List<int> nums = new List<int> {1, 2, 3};</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>Dictionary<string, int> scores = new() {{"Alice", 90}, {"Bob", 85}};</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>var sum = (int a, int b) => a + b;</code></h4>
-            <h4 style="color: #00ffcc; font-size: 18px; margin: 0 50px;"><code>foreach (var num in nums) Console.WriteLine(num);</code></h4>
-        </div>
-    </div>
-</div>
-
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
-
-
-
-<!-- Resource Access Section -->
-<section class="page-content-section pt-4">
-    <div class="container px-lg-5">
-        <div class="row gx-lg-5 justify-content-center">
         
-            <!-- Weekly Access Updates Card -->
-            <div class="col-lg-6 col-xxl-4 mb-5">
-                <div class="card bg-light border-0 h-100">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Weekly Access Updates</h2>
-                        <p class="mb-0">
-                            Each Code Crunch course has its own GitHub repository. Weekly files, including Google Slides, code blocks, and other resources, are uploaded to ensure members stay up to date.
-                        </p>
-                        <p class="mt-3">
-                            Access to these resources is available exclusively to members.
-                        </p>
-                        <p class="mt-3">
-                            <strong>Note:</strong> Access to all Google Docs and Slides will be granted using the Google account provided in the "Become a Member" form. Ensure the correct account is used during registration.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- GitHub Repositories Card -->
-            <div class="col-lg-6 col-xxl-4 mb-5">
-                <div class="card bg-light border-0 h-100">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">GitHub Repositories</h2>
-                        <p class="mb-0">
-                            After becoming a member, you will receive an invite to our GitHub repositories.
-                        </p>
-                        <ul class="text-start mt-3">
-                            <li>Each course has its own repository.</li>
-                            <li>You should see a <strong>repository for each course</strong> when accessing the Code Crunch organization on GitHub.</li>
-                            <li>Weekly updates include slides, code blocks, and session resources.</li>
-                        </ul>
-                        
-                        <p class="mt-1">
-                            <small><strong>URL:</strong> <a href="https://github.com/CODE-CRUNCH-CLUB" target="_blank">github.com/CODE-CRUNCH-CLUB</a></small>
-                        </p>
-                        
-                        <p class="mt-3">
-                            <a class="btn btn-primary btn-lg mt-2" href="https://github.com/CODE-CRUNCH-CLUB" target="_blank">Code CrunchGitHub Repositories</a>
-                        </p>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Us Card -->
-            <div class="col-lg-6 col-xxl-4 mb-5">
-                <div class="card bg-light border-0 h-100">
-                    <div class="card-body text-center p-4 p-lg-5">
-                        <h2 class="fs-4 fw-bold">Issues? Contact Us</h2>
-                        <p class="mb-0">
-                            If you encounter any issues, such as a <strong>404 error</strong> when accessing repositories, or you do not receive your GitHub invite after becoming a member:
-                        </p>
-                        <p class="mt-3">
-                            Please email us at:
-                        </p>
-                        <p><a href="mailto:codecrunchhelp@outlook.com" class="fw-bold">codecrunchhelp@outlook.com</a></p>
-                        <p class="mt-3">
-                            <a class="btn btn-success btn-lg mt-2" href="mailto:codecrunchhelp@outlook.com">Contact Us</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <hr class="my-4">
         
+        <div class="text-center">
+          <p class="small mb-0">&copy; Code Crunch. All rights reserved.</p>
         </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      ⬇️ <span id="scroll-text">Scroll Down</span> ⬇️
     </div>
-</section>
 
-
-<!-- Ticker Section with Famous JavaScript Lines -->
-<div style="
-    overflow: hidden; 
-    background: linear-gradient(135deg, #f7df1e, #ff9800); /* Matching JavaScript gradient */
-    padding: 10px 0; 
-    margin-top: 30px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    position: relative;
-">
-    <div id="javascript-ticker-content" style="
-        display: flex;
-        animation: ticker-scroll 80s linear infinite; /* Continuous smooth scrolling */
-    ">
-        <div style="display: flex;">
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>console.log("Hello, World!");</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>for(let i = 0; i < 10; i++) console.log(i);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>if ("JavaScript" in ["Python", "JavaScript", "C++"]) console.log("Found it!");</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>setTimeout(() => console.log("Delayed execution"), 1000);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const nums = [1, 2, 3].map(x => x * 2);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const user = { name: "John", age: 25 };</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>fetch('https://api.example.com').then(res => res.json()).then(data => console.log(data));</code></h4>
-        </div>
-        <!-- Duplicate content to make seamless looping -->
-        <div style="display: flex;">
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>console.log("Hello, World!");</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>for(let i = 0; i < 10; i++) console.log(i);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>if ("JavaScript" in ["Python", "JavaScript", "C++"]) console.log("Found it!");</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>while (true) { /* Infinite loop */ }</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>setTimeout(() => console.log("Delayed execution"), 1000);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const nums = [1, 2, 3].map(x => x * 2);</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>const user = { name: "John", age: 25 };</code></h4>
-            <h4 style="color: #212121; font-size: 18px; margin: 0 50px;"><code>fetch('https://api.example.com').then(res => res.json()).then(data => console.log(data));</code></h4>
-        </div>
-    </div>
-</div>
-
-<!-- Ticker Animation -->
-<style>
-    @keyframes ticker-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); } /* Moves only half since we have two copies */
-    }
-</style>
-<p></p>
-
-
-
-<script>
-    const gameContainer = document.getElementById('gameContainer');
-    const playBtn = document.getElementById('playBtn');
-    playBtn.addEventListener('click', () => {
-        if (!gameContainer.classList.contains('fullscreen')) {
-        // Expand to fullscreen
-        gameContainer.classList.add('fullscreen');
-        document.body.classList.add('no-scroll'); // Prevent scrolling
-        } else {
-        // Exit fullscreen
-        gameContainer.classList.remove('fullscreen');
-        document.body.classList.remove('no-scroll'); // Restore scrolling
-        }
-    });
-</script>
-
-
-<!-- Scroll Indicator -->
-<div id="scroll-indicator" class="scroll-indicator">
-    ⬇️ <span id="scroll-text">Scroll Down</span> ⬇️
-</div>
-
-
-
-        <!-- Footer -->
-        <section class="footer-section">
-            <footer>
-                <p>&copy; Code Crunch. All rights reserved.</p>
-            </footer>
-        </section>
-
-        <!-- Countdown Script -->
-        <script>
-            const hackathonDate = new Date("March 15, 2026 09:00:00").getTime();
-            const countdownInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const timeLeft = hackathonDate - now;
-
-                if (timeLeft > 0) {
-                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                } else {
-                    clearInterval(countdownInterval);
-                    document.getElementById("countdown").innerHTML = "The hackathon is live now!";
-                }
-            }, 1000);
-        </script>
-
-        <!-- Bootstrap Core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
-
-
-
-        </script>
-
-<script>
-    window.addEventListener("scroll", function() {
-        let scrollIndicator = document.getElementById("scroll-indicator");
-        let scrollText = document.getElementById("scroll-text");
-
-        let scrollTop = window.scrollY;
-        let scrollHeight = document.documentElement.scrollHeight;
-        let windowHeight = window.innerHeight;
-
-        if (scrollTop === 0) {
-            // At the very top, only show "Scroll Down"
-            scrollText.innerHTML = "Scroll Down";
-            scrollIndicator.innerHTML = "⬇️ <span id='scroll-text'>Scroll Down</span> ⬇️";
-        } else if (scrollTop + windowHeight >= scrollHeight) {
-            // At the bottom, only show "Scroll Up"
-            scrollText.innerHTML = "Scroll Up";
-            scrollIndicator.innerHTML = "⬆️ <span id='scroll-text'>Scroll Up</span> ⬆️";
-        } else {
-            // In the middle, let it dynamically update based on the scroll direction
-            let prevScroll = this.oldScroll || 0;
-            if (scrollTop > prevScroll) {
-                // Scrolling down
-                scrollText.innerHTML = "Scroll Down";
-                scrollIndicator.innerHTML = "⬇️ <span id='scroll-text'>Scroll Down</span> ⬇️";
-            } else {
-                // Scrolling up
-                scrollText.innerHTML = "Scroll Up";
-                scrollIndicator.innerHTML = "⬆️ <span id='scroll-text'>Scroll Up</span> ⬆️";
-            }
-            this.oldScroll = scrollTop; // Store the previous scroll position
-        }
-    });
-
-    // Click event to scroll based on the current state
-    document.getElementById("scroll-indicator").addEventListener("click", function() {
-        if (document.getElementById("scroll-text").innerText === "Scroll Up") {
-            window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
-        } else {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); // Scroll to bottom smoothly
-        }
-    });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in, .animate-on-scroll');
-
-    function handleScrollAnimations() {
-        animatedElements.forEach(element => {
-            const position = element.getBoundingClientRect().top;
-            if (position < window.innerHeight * 0.85) { // Adjust threshold for visibility
-                element.classList.add("visible");
-            }
-        });
-    }
-
-    // Trigger animations when scrolling
-    window.addEventListener("scroll", handleScrollAnimations);
-    handleScrollAnimations(); // Ensure elements animate when page loads
-});
-</script>
-
-
-    </body>
+    <!-- Bootstrap Core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+  </body>
 </html>

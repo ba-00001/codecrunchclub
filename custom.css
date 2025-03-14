@@ -1,0 +1,316 @@
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Banner image styles */
+  .banner-container img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  /* Navigation link styles with hover highlighting */
+  .navbar-nav .nav-link {
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  
+  /* Logo section styles */
+  .logo-container {
+    text-align: center;
+    padding: 5px 0;
+  }
+  
+  .logo-container img {
+    max-height: 300px;
+    width: auto;
+  }
+  
+  /* Card styles */
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card h2, .card h3 {
+    color: #0056b3;
+  }
+  
+  /* Footer styles */
+  footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    position: relative;
+    margin-top: auto;
+  }
+  
+  /* Social buttons */
+  .social-buttons a {
+    margin: 5px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .social-buttons a:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 10px;
+    animation: bounce 1.5s infinite;
+    text-align: center;
+    z-index: 999;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Bounce Animation */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Animation effects */
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateY(30px);
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .slide-in-left {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateX(-50px);
+  }
+  
+  .slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .slide-in-right {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateX(50px);
+  }
+  
+  .slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .zoom-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: scale(0.9);
+  }
+  
+  .zoom-in.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Game Section Styles */
+  .game-section {
+    width: 100vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F4F4F4;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .game-container {
+    width: 90vw;
+    height: 60vh;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .game-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 1rem;
+  }
+  
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem 4rem;
+    background: #DF8E40;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Prevent scrolling when in fullscreen */
+  .no-scroll {
+    overflow: hidden;
+  }
+  
+  /* Fullscreen Mode */
+  .fullscreen {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #000;
+  }
+  
+  /* Shrink and move button when in fullscreen */
+  .fullscreen .play-btn {
+    bottom: 2vh;
+    right: 2vw;
+    top: auto;
+    left: auto;
+    transform: none;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #DF8E40;
+  }
+  
+  /* Expand icon (arrows) */
+  .fullscreen .play-btn::before {
+    content: "⤢"; /* Expand Icon */
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Hide "PLAY" text in fullscreen */
+  .fullscreen .play-btn span {
+    display: none;
+  }
+  
+  /* Button styles */
+  .btn-purple {
+    background-color: #ad00ff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-purple:hover {
+    background-color: #6B0086;
+    color: white;
+  }
+  
+  /* Code ticker styles */
+  .code-ticker {
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a73e8, #004aad);
+    padding: 10px 0;
+    margin: 30px 0;
+    width: 100%;
+    position: relative;
+  }
+  
+  .ticker-track {
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .game-container {
+      height: 45vh;
+    }
+    
+    .play-btn {
+      padding: 1.5rem 3rem;
+      font-size: 1.5rem;
+    }
+    
+    .logo-container img {
+      max-height: 200px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .game-container {
+      height: 35vh;
+    }
+    
+    .play-btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+    }
+    
+    .logo-container img {
+      max-height: 150px;
+    }
+  }
