@@ -283,34 +283,3 @@ body {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .game-container {
-      height: 45vh;
-    }
-    
-    .play-btn {
-      padding: 1.5rem 3rem;
-      font-size: 1.5rem;
-    }
-    
-    .logo-container img {
-      max-height: 200px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .game-container {
-      height: 35vh;
-    }
-    
-    .play-btn {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-    }
-    
-    .logo-container img {
-      max-height: 150px;
-    }
-  }
