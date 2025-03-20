@@ -3,76 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Viewer with Download</title>
+    <title>Document Viewer</title>
     <style>
-        /* Center content */
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
+            background-color: #f5f5f5;
         }
-
-        /* Container for iframe */
-        .pdf-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;  /* Full width */
-            height: 90vh;  /* 90% of viewport height */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .doc-container {
+            width: 100%;
+            height: 85vh;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
-
+        
         iframe {
-            width: 90%;  /* Adjusts to screen */
-            height: 90vh; /* Almost full screen */
+            width: 100%;
+            height: 100%;
             border: none;
         }
-
-        /* Button styles */
-        .button-container {
-            margin: 10px 0;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .download-btn:hover {
-            background-color: #0056b3;
-        }
-
-        @media (max-width: 768px) {
-            iframe {
-                width: 100%; /* Full width on smaller screens */
-                height: 80vh;
-            }
+        
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-
-    <h2>Responsive PDF Viewer with Download</h2>
-
-    <!-- Download Button -->
-    <div class="button-container">
-        <a href="https://drive.google.com/uc?export=download&id=14CvZQGXFYa9WKqS9lK-Ows6RtHzvtw1W" 
-           class="download-btn" target="_blank">
-            Download PDF
-        </a>
+    <div class="container">
+        <h2>Doc Viewer</h2>
+        
+        <!-- Google Doc Viewer -->
+        <div class="doc-container">
+            <!-- Using Google Docs preview mode -->
+            <iframe src="https://docs.google.com/document/d/1IyGL_JRD_tGSjUNdijBi7EjHD41hwtQYFI9fmdgBJTo/preview" allowfullscreen></iframe>
+        </div>
+        
+        <div class="loading-message">
+            If the document doesn't load, please check your internet connection.
+        </div>
     </div>
-
-    <!-- PDF Viewer -->
-    <div class="pdf-container">
-        <iframe src="https://drive.google.com/file/d/14CvZQGXFYa9WKqS9lK-Ows6RtHzvtw1W/preview"></iframe>
-    </div>
-
 </body>
 </html>
