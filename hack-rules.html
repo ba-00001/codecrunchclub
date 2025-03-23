@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Rules | Code Crunch</title>
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --bg-color: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-light: #64748b;
+            --accent: #38bdf8;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 1px;
+        }
+
+        .header {
+            padding: 3.5rem 0 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-light);
+        }
+
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 40%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .rules-list {
+            list-style: none;
+            counter-reset: rules-counter;
+        }
+
+        .rule-item {
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            background-color: rgba(14, 165, 233, 0.05);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 3.5rem;
+            border-left: 3px solid var(--primary);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .rule-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .rule-item::before {
+            counter-increment: rules-counter;
+            content: counter(rules-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1.25rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .rule-content {
+            font-weight: 500;
+        }
+
+        .rule-content strong {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .alert {
+            background-color: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .alert-content {
+            color: var(--text-secondary);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            gap: 0.5rem;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .button-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .footer {
+            background-color: var(--bg-card);
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.75rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">CC</div>
+                <span>Code Crunch</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link active">Hackathons</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="https://www.linkedin.com/company/code-crunch-club/" class="nav-link">Linkedin Community</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container header-container">
+            <div class="breadcrumbs">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="ind" class="breadcrumb-link">Hackathons</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Rules</span>
+            </div>
+            <h1 class="header-title">Hackathon Rules</h1>
+            <p class="header-subtitle">To ensure a fair and productive competition, all participants must follow these guidelines throughout the event.</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            <section class="card">
+                <h2 class="card-title">Official Rules</h2>
+                <p class="card-description">The following rules have been established to create a level playing field and ensure all participants have an equal opportunity to succeed.</p>
+                
+                <ol class="rules-list">
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Team Size:</strong> Teams can have up to 4 members.
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Fresh Code:</strong> All projects must be started and completed during the hackathon.
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Thematic Compliance:</strong> Submissions must follow the provided themes and requirements.
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Respectful Environment:</strong> Participants must maintain a respectful and inclusive environment.
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Original Work:</strong> Plagiarism or pre-existing projects are not allowed.
+                        </div>
+                    </li>
+                    <li class="rule-item">
+                        <div class="rule-content">
+                            <strong>Legal Agreement:</strong> By submitting a project, you agree to the hackathon's terms and conditions.
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            
+            <div class="alert">
+                <h3 class="alert-title">Important Notice</h3>
+                <p class="alert-content">Compliance with these rules is mandatory. Violations may result in disqualification from the competition and forfeiture of any potential prizes or recognitions.</p>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">Code of Conduct</h2>
+                <p class="card-description">All participants are expected to adhere to our Code of Conduct throughout the duration of the hackathon.</p>
+                
+                <p>Our hackathon is dedicated to providing a safe and comfortable environment and harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, nationality, religion, political views, previous hackathon attendance or lack of, computing experience or lack of, or chosen programming language or tech stack.</p>
+                
+                <p>We do not tolerate harassment of hackathon participants in any form. Sexual language and imagery is not appropriate at any hackathon venue, including hacks, talks, presentations, demos, workshops, any parties associated with the hackathon, social media, or any other online media.</p>
+                
+                <p>Hackathon participants violating these rules <strong>may be sanctioned or expelled</strong> from the hackathon <strong>without a refund</strong> (if applicable) at the discretion of the hackathon organisers.</p>
+                
+                <div class="text-center" style="margin-top: 2rem;">
+                    <a href="hack-code-of-conduct.html" class="button">
+                        <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        View Full Code of Conduct
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
