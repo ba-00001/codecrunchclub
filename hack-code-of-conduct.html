@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code of Conduct</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --highlight: #dbeafe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0) 70%);
+            z-index: 1;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ffffff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight {
+            background-color: var(--highlight);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .emphasis {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Code of Conduct</h1>
+            <div class="subtitle">Creating a safe and inclusive environment for all participants</div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="card">
+            <h2>Our Commitment</h2>
+            <p>Our hackathon is dedicated to providing a safe and comfortable environment and harassment-free experience for everyone, regardless of:</p>
+            
+            <ul>
+                <li>Gender</li>
+                <li>Gender identity and expression</li>
+                <li>Age</li>
+                <li>Sexual orientation</li>
+                <li>Disability</li>
+                <li>Physical appearance</li>
+                <li>Body size</li>
+                <li>Race</li>
+                <li>Ethnicity</li>
+                <li>Nationality</li>
+                <li>Religion</li>
+                <li>Political views</li>
+                <li>Previous hackathon attendance or lack of</li>
+                <li>Computing experience or lack of</li>
+                <li>Chosen programming language or tech stack</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Zero Tolerance Policy</h2>
+            <p>We do not tolerate harassment of hackathon participants in any form. Sexual language and imagery is not appropriate at any hackathon venue, including:</p>
+            
+            <ul>
+                <li>Hacks</li>
+                <li>Talks, presentations, or demos</li>
+                <li>Workshops</li>
+                <li>Any parties associated to the hackathon</li>
+                <li>Social media</li>
+                <li>Any other online media</li>
+            </ul>
+        </div>
+        
+        <div class="highlight">
+            <p>Hackathon participants violating these rules <span class="emphasis">may be sanctioned or expelled</span> from the hackathon <span class="emphasis">without a refund</span> (if applicable) at the discretion of the hackathon organisers.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© Code Crunch Hackathons. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
