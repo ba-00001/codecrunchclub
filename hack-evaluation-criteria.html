@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Evaluation Criteria | Code Crunch</title>
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --bg-color: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-light: #64748b;
+            --accent: #38bdf8;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 1px;
+        }
+
+        .header {
+            padding: 3.5rem 0 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-light);
+        }
+
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 40%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .criteria-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            border-top: 4px solid var(--primary);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .criteria-card-title {
+            color: var(--primary-dark);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .criteria-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        .criteria-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .score-scale {
+            margin-top: 1rem;
+            background-color: rgba(14, 165, 233, 0.05);
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        .score-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .score-list {
+            list-style: none;
+        }
+
+        .score-item {
+            display: flex;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .score-item strong {
+            margin-right: 0.5rem;
+            color: var(--primary-dark);
+            min-width: 24px;
+        }
+
+        .judging-process {
+            margin-top: 2rem;
+        }
+
+        .process-steps {
+            list-style: none;
+            counter-reset: step-counter;
+            margin-top: 1.5rem;
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            counter-increment: step-counter;
+        }
+
+        .process-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .process-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-description {
+            color: var(--text-secondary);
+        }
+
+        .footer {
+            background-color: var(--bg-card);
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .criteria-weighting {
+            margin-top: 2rem;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+
+        .weighting-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .weighting-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .weighting-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .weighting-table th, .weighting-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .weighting-table th {
+            color: var(--primary-dark);
+            font-weight: 600;
+            background-color: rgba(14, 165, 233, 0.05);
+        }
+
+        .weighting-table td {
+            color: var(--text-secondary);
+        }
+
+        .weighting-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .award-badges {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-badge {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            transition: transform 0.2s ease;
+        }
+
+        .award-badge:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-icon {
+            margin: 0 auto 1rem;
+            width: 64px;
+            height: 64px;
+            background-color: rgba(14, 165, 233, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .badge-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .award-badges {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-title {
+                font-size: 1.75rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">CC</div>
+                <span>Code Crunch</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hackathons.html" class="nav-link">Hackathons</a>
+                <a href="hack-resources.html" class="nav-link">Resources</a>
+                <a href="hack-submissions-req.html" class="nav-link">Submission Req.</a>
+                <a href="hack-evaluation-criteria.html" class="nav-link">Judging Criteria</a>
+                <a href="hack-rules.html" class="nav-link">Rules & Guidelines</a>
+                <a href="hack-code-of-conduct.html" class="nav-link">Code of Conduct</a>
+                <a href="hack-evaluation-criteria.html" class="nav-link active">Evaluation Criteria</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container header-container">
+            <div class="breadcrumbs">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="hackathons.html" class="breadcrumb-link">Hackathon</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Evaluation Criteria</span>
+            </div>
+            <h1 class="header-title">Hackathon Evaluation Criteria</h1>
+            <p class="header-subtitle">Understand how projects will be judged during the Code Crunch Hackathon. Learn about our evaluation categories and scoring system.</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            <section class="card">
+                <h2 class="card-title">Judging Criteria</h2>
+                <p class="card-description">
+                    Projects submitted to the Code Crunch Hackathon will be evaluated based on the following six criteria. Each project will receive a score from 1 to 5 in each category, with the final score being a weighted average of all categories.
+                </p>
+                
+                <div class="criteria-grid">
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                            </svg>
+                            Technical Difficulty
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Evaluates the complexity of the technical problems solved and the sophistication of the solution implemented. Higher scores are awarded to projects that tackle challenging problems or implement advanced features.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Very basic implementation with minimal technical challenges</li>
+                                <li class="score-item"><strong>3:</strong> Moderate technical complexity with some challenging elements</li>
+                                <li class="score-item"><strong>5:</strong> Highly sophisticated solution demonstrating advanced technical knowledge</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Functionality
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Assesses how well the solution works, including reliability, performance, and completeness. Projects should function as intended without significant bugs or issues.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Barely functional with major bugs or incomplete features</li>
+                                <li class="score-item"><strong>3:</strong> Mostly functional with minor bugs or performance issues</li>
+                                <li class="score-item"><strong>5:</strong> Fully functional, reliable, and robust with excellent performance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            Innovation & Creativity
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Evaluates the originality and creativity of the solution. High scores go to projects that demonstrate novel approaches, unique solutions to problems, or creative implementations that stand out from typical approaches.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Derivative solution with little originality</li>
+                                <li class="score-item"><strong>3:</strong> Some creative elements but builds mostly on existing approaches</li>
+                                <li class="score-item"><strong>5:</strong> Highly original solution with innovative approach or features</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                            Design & User Experience
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Focuses on the usability, accessibility, and visual design of the solution. Well-designed projects should be intuitive to use, visually appealing, and consider the needs of diverse users.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Poor design with confusing interface and usability issues</li>
+                                <li class="score-item"><strong>3:</strong> Decent design with generally intuitive interface</li>
+                                <li class="score-item"><strong>5:</strong> Exceptional design with highly intuitive, accessible, and polished UI/UX</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            Impact & Usefulness
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Evaluates the potential real-world impact and practical value of the solution. Projects addressing important problems, offering substantial benefits to users, or demonstrating social or environmental impact will score higher.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Limited practical use or addressing trivial problems</li>
+                                <li class="score-item"><strong>3:</strong> Moderate usefulness with potential benefits to a specific group</li>
+                                <li class="score-item"><strong>5:</strong> Significant potential impact addressing important problems</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <h3 class="criteria-card-title">
+                            <svg class="criteria-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            Presentation & Demo
+                        </h3>
+                        <div class="criteria-description">
+                            <p>Assesses the quality of the project presentation, demo, and communication. This includes the clarity of explanation, the effectiveness of the demo, and the team's ability to articulate the value and functionality of their solution.</p>
+                        </div>
+                        <div class="score-scale">
+                            <h4 class="score-title">Scoring Scale:</h4>
+                            <ul class="score-list">
+                                <li class="score-item"><strong>1:</strong> Unclear presentation with ineffective demo</li>
+                                <li class="score-item"><strong>3:</strong> Clear presentation with adequate demonstration of key features</li>
+                                <li class="score-item"><strong>5:</strong> Exceptional presentation with compelling demo and clear articulation of value</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="criteria-weighting">
+                    <h3 class="weighting-title">Criteria Weighting</h3>
+                    <p class="weighting-description">The final score for each project will be calculated using the following weighted formula. This weighting reflects the relative importance of each criterion in the overall evaluation.</p>
+                    
+                    <table class="weighting-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Weight</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Technical Difficulty</td>
+                                <td>16.7%</td>
+                                <td>Emphasizes sophisticated technical implementation</td>
+                            </tr>
+                            <tr>
+                                <td>Functionality</td>
+                                <td>16.7%</td>
+                                <td>Prioritizes working solutions that perform as intended</td>
+                            </tr>
+                            <tr>
+                                <td>Innovation & Creativity</td>
+                                <td>16.7%</td>
+                                <td>Rewards original thinking and novel approaches</td>
+                            </tr>
+                            <tr>
+                                <td>Design & User Experience</td>
+                                <td>16.7%</td>
+                                <td>Values solutions that are easy and pleasant to use</td>
+                            </tr>
+                            <tr>
+                                <td>Impact & Usefulness</td>
+                                <td>16.7%</td>
+                                <td>Recognizes solutions that address meaningful problems</td>
+                            </tr>
+                            <tr>
+                                <td>Presentation & Demo</td>
+                                <td>16.7%</td>
+                                <td>Considers how effectively the solution is communicated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card judging-process">
+                <h2 class="card-title">Judging Process</h2>
+                <p class="card-description">
+                    Here's how the evaluation process works for all hackathon submissions:
+                </p>
+                
+                <ol class="process-steps">
+                    <li class="process-step">
+                        <h3 class="process-title">Initial Screening</h3>
+                        <p class="process-description">
+                            All submissions undergo an initial screening to ensure they meet basic requirements, including adherence to hackathon rules, completion by the deadline, and addressing the designated challenge categories. All code base, video, presentation, descriptive README, and track selection must be on a public GitHub repository.
+                        </p>
+                    </li>
+                    <li class="process-step">
+                        <h3 class="process-title">Project Review</h3>
+                        <p class="process-description">
+                            Projects will be reviewed by judges based on submission materials in the GitHub repository. Judges will evaluate each project against the six criteria using the 1-5 scale outlined above.
+                        </p>
+                    </li>
+                    <li class="process-step">
+                        <h3 class="process-title">Evaluation Scoring</h3>
+                        <p class="process-description">
+                            Judges will independently score each project on all six criteria using the 1-5 scale outlined above. These individual scores will be averaged and weighted to calculate the final score.
+                        </p>
+                    </li>
+                    <li class="process-step">
+                        <h3 class="process-title">Deliberation</h3>
+                        <p class="process-description">
+                            After all submissions have been reviewed, judges will deliberate to review scores, discuss projects, and determine winners across various categories. In case of ties, judges will deliberate to determine the final rankings.
+                        </p>
+                    </li>
+                    <li class="process-step">
+                        <h3 class="process-title">Announcement of Winners</h3>
+                        <p class="process-description">
+                            Winners will be announced 48 hours after the hackathon ends. All participants will receive feedback on their projects from the judges.
+                        </p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="card">
+                <h2 class="card-title">Award Categories</h2>
+                <p class="card-description">
+                    There will only be first place winners for each track. Each track winner will be determined based on the highest combined score across all evaluation criteria.
+                </p>
+                
+                <div class="award-badges">
+                    <div class="award-badge">
+                        <div class="badge-icon">🏆</div>
+                        <h3 class="badge-title">Track Winner</h3>
+                        <p class="badge-description">
+                            Awarded to the project with the highest combined score in each track
+                        </p>
+                    </div>
+                    <div class="award-badge">
+                        <div class="badge-icon">💡</div>
+                        <h3 class="badge-title">Most Innovative</h3>
+                        <p class="badge-description">
+                            Recognizes the project that demonstrates the most original and creative approach
+                        </p>
+                    </div>
+                    <div class="award-badge">
+                        <div class="badge-icon">🎨</div>
+                        <h3 class="badge-title">Best Design</h3>
+                        <p class="badge-description">
+                            Celebrates exceptional UI/UX design and visual appeal
+                        </p>
+                    </div>
+                    <div class="award-badge">
+                        <div class="badge-icon">🔧</div>
+                        <h3 class="badge-title">Technical Excellence</h3>
+                        <p class="badge-description">
+                            Honors the project with the most impressive technical implementation
+                        </p>
