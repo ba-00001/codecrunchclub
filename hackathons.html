@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Schedule & Themes | Code Crunch</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --bg-color: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-light: #64748b;
+            --accent: #38bdf8;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+            
+            /* Hackathon theme colors */
+            --virtual: #6366f1;
+            --hybrid: #8b5cf6;
+            --in-person: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 1px;
+        }
+
+        .header {
+            padding: 3.5rem 0 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-light);
+        }
+
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 40%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary-dark));
+            border-radius: 3px;
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-event:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            top: 0.5rem;
+            left: -2.4rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+            z-index: 1;
+        }
+
+        .event-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .event-card.virtual {
+            border-top-color: var(--virtual);
+        }
+
+        .event-card.hybrid {
+            border-top-color: var(--hybrid);
+        }
+
+        .event-card.in-person {
+            border-top-color: var(--in-person);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .event-title {
+            font-weight: 700;
+            font-size: 1.375rem;
+            color: var(--text-primary);
+        }
+
+        .event-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .event-badge.virtual {
+            background-color: var(--virtual);
+        }
+
+        .event-badge.hybrid {
+            background-color: var(--hybrid);
+        }
+
+        .event-badge.in-person {
+            background-color: var(--in-person);
+        }
+
+        .event-date {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-date-icon {
+            color: var(--primary);
+        }
+
+        .event-theme {
+            background-color: rgba(14, 165, 233, 0.1);
+            border-radius: var(--radius);
+            padding: 1rem;
+        }
+
+        .event-theme-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-theme-title i {
+            font-size: 1rem;
+        }
+
+        .event-theme-content {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: var(--primary-dark);
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .subscribe-banner {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .subscribe-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .subscribe-description {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 500px;
+        }
+
+        .form-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            border: none;
+            font-size: 0.9375rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-input:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-subscribe {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer {
+            background-color: var(--bg-card);
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.75rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            .btn-subscribe {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">CC</div>
+                <span>Code Crunch</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hackathons.html" class="nav-link active">Hackathons</a>
+                <a href="hack-resources.html" class="nav-link">Resources</a>
+                <a href="hack-rules.html" class="nav-link">Rules & Guidelines</a>
+                <a href="hack-code-of-conduct.html" class="nav-link">Code of Conduct</a>
+                <a href="https://www.linkedin.com/company/code-crunch-club/" class="nav-link">Linkedin Community</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container header-container">
+            <div class="breadcrumbs">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Hackathon Schedule</span>
+            </div>
+            <h1 class="header-title">Hackathon Schedule & Themes</h1>
+            <p class="header-subtitle">Join us for a year of exciting hackathons designed to challenge your skills and expand your network. From virtual to in-person events, we have something for everyone.</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            <section class="card">
+                <h2 class="card-title">2025 Hackathon Calendar</h2>
+                <p class="card-description">Mark your calendar for these upcoming Code Crunch hackathons. Each event offers unique themes and opportunities to showcase your talents.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-event">
+                        <div class="event-card virtual">
+                            <div class="event-header">
+                                <h3 class="event-title">HackFiesta Miami</h3>
+                                <span class="event-badge virtual">Virtual</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                March 21-23, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">Global Impact, AI & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Global Impact</span>
+                                    <span class="tag">AI</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="HACKFIESTA-SPRING25.HTML" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card hybrid">
+                            <div class="event-header">
+                                <h3 class="event-title">305 Hackathon Edition: Spring</h3>
+                                <span class="event-badge hybrid">Hybrid</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                March 29-31, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">Tech for Good, AI & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Tech for Good</span>
+                                    <span class="tag">AI</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="305HACK-SPRING25.html" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card virtual">
+                            <div class="event-header">
+                                <h3 class="event-title">CodeStorm</h3>
+                                <span class="event-badge virtual">Virtual</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                May 23-25, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">Cloud, AI & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Cloud</span>
+                                    <span class="tag">AI</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="#" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Website Under Construction
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card virtual">
+                            <div class="event-header">
+                                <h3 class="event-title">SummerCodeX</h3>
+                                <span class="event-badge virtual">Virtual</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                July 25-27, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">XR, Web3, Blockchain & Decentralization</p>
+                                <div class="tag-list">
+                                    <span class="tag">XR</span>
+                                    <span class="tag">Web3</span>
+                                    <span class="tag">Blockchain</span>
+                                    <span class="tag">Decentralization</span>
+                                </div>
+                            </div>
+                            <a href="#" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Website Under Construction
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card in-person">
+                            <div class="event-header">
+                                <h3 class="event-title">305 Hackathon Edition: Fall</h3>
+                                <span class="event-badge in-person">In-Person</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                September 20-22, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">Smart Cities, DevOps, Cybersecurity & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Smart Cities</span>
+                                    <span class="tag">DevOps</span>
+                                    <span class="tag">Cybersecurity</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="#" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Website Under Construction
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card virtual">
+                            <div class="event-header">
+                                <h3 class="event-title">EmpowHER Hackathon</h3>
+                                <span class="event-badge virtual">Virtual</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                October 18-20, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">Women in Tech, Ethical AI & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Women in Tech</span>
+                                    <span class="tag">Ethical AI</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="#" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Website Under Construction
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="event-card virtual">
+                            <div class="event-header">
+                                <h3 class="event-title">CodeFest</h3>
+                                <span class="event-badge virtual">Virtual</span>
+                            </div>
+                            <div class="event-date">
+                                <i class="bi bi-calendar-event event-date-icon"></i>
+                                December 12-14, 2025
+                            </div>
+                            <div class="event-theme">
+                                <h4 class="event-theme-title">
+                                    <i class="bi bi-lightbulb"></i>
+                                    Theme
+                                </h4>
+                                <p class="event-theme-content">End-of-Year Innovation, AI & Blockchain</p>
+                                <div class="tag-list">
+                                    <span class="tag">Innovation</span>
+                                    <span class="tag">AI</span>
+                                    <span class="tag">Blockchain</span>
+                                </div>
+                            </div>
+                            <a href="#" class="button">
+                                <i class="bi bi-info-circle"></i>
+                                Website Under Construction
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- <section class="subscribe-banner">
+                <h2 class="subscribe-title">Stay Updated</h2>
+                <p class="subscribe-description">Subscribe to our newsletter to receive the latest updates, early registration access, and exclusive hackathon resources.</p>
+                <form class="subscribe-form">
+                    <input type="email" class="form-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </section> -->
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
