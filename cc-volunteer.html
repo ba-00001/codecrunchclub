@@ -2,206 +2,487 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hackathon Volunteer Process</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathon Volunteer Hub</title>
   <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #f72585;
+      --accent: #7209b7;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --warning: #ffc107;
+      --success: #4cc9f0;
+      --danger: #e63946;
+      --gray-100: #f8f9fa;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-800: #343a40;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--gray-100);
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-
-    h2, h3 {
-      margin-top: 40px;
+    
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      padding: 3rem 0;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
     }
-
-    ol {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
-
-    p {
-      font-size: 1rem;
-      margin-top: 10px;
-    }
-
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .note {
-      background: #fff3cd;
-      border-left: 6px solid #ffeeba;
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 0.95rem;
-      margin: 20px 0;
-    }
-
-    .highlight {
-      font-weight: bold;
-      color: #dc3545;
-    }
-
-    .button-group {
-      margin-top: 30px;
+    
+    header .container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
     }
 
+    h2 {
+      font-size: 2rem;
+      margin: 2.5rem 0 1rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    h2:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 60px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 2px;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--accent);
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    
+    .direct-link {
+      background-color: #ffd166;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      margin: 1rem 0;
+      font-weight: 500;
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .direct-link a {
+      color: #4b1d8e;
+      font-weight: 700;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .note {
+      background: #fff8e6;
+      border-left: 4px solid var(--warning);
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    
+    .highlight {
+      color: var(--danger);
+      font-weight: 600;
+    }
+    
+    .process-steps {
+      list-style-position: inside;
+      padding-left: 0;
+      counter-reset: step-counter;
+    }
+    
+    .process-steps li {
+      position: relative;
+      padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .process-steps li::before {
+      content: counter(step-counter);
+      counter-increment: step-counter;
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    .process-steps strong {
+      color: var(--primary-dark);
+    }
+    
+    ul {
+      padding-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
     .btn {
       display: inline-block;
-      padding: 12px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 6px;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 8px;
       text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
     }
-
+    
     .btn:hover {
-      background-color: #0056b3;
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      color: white;
+    }
+    
+    .btn svg {
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    
+    .hackathon-card {
+      border-left: 4px solid var(--secondary);
+      padding: 1.25rem;
+      background: white;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .hackathon-card h3 {
+      margin-top: 0;
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .resource-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .resource-card h4 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .resource-card h4 svg {
+      margin-right: 8px;
+    }
+    
+    code {
+      font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+      background: var(--gray-200);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      color: var(--gray-800);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--gray-300);
     }
 
-    ul {
-      margin-top: 10px;
-      margin-bottom: 20px;
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 10px;
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-
-  <h1>🎉 Hackathon Volunteer HUB </a></h1>
-  <h3>Direct Link: <a href="https://go.fiu.edu/CODECRUNCH-HACK-VOLUNTEER" target="_blank">go.fiu.edu/CODECRUNCH-HACK-VOLUNTEER</a></h3>
-
-  <h2>🎉 Hackathon Volunteer Process </a></h2>
-  <div class="note">
-    🔐 <strong>Access is granted only to the Gmail address you applied with.</strong><br />
-    If you're using a different Google account, please switch to the one used on your application form.
-  </div>
-
-
-
-  <ol>
-    <li><strong>Step 1:</strong> Fill out the    <em> <a href="https://forms.gle/C6VwzHZb9WS8VYCg6" target="_blank">" volunteer interest form."</a></em></li>
-
-    <li><strong>Step 2:</strong> If accepted, you will receive the 
-      <em> <a href="https://forms.gle/eTuZEadukrqBacWq9" target="_blank">"HACKATHON Volunteer Confirmation & Discord Form (Required) – Judges, Mentors & Workshop Leads."</a></em>  <br>
-      If your availability changes, simply fill out the form again. We will consider your most recent entry.
-    </li>
-
-    <li><strong>Step 3:</strong> After submitting the second form:
-      <ul>
-        <li>Join the <strong>Discord</strong> server and introduce yourself!</li>
-        <li>Send a DM to <code>@codecrunchclub</code> to gain access to the private <strong>#hack-volunteers</strong> channel</li>
-        <li>Discord roles <strong>@hackathon-judge, @hackathon-mentor, and @hackathon-speaker</strong> with access to channel #hack-volunteers.</li>
-        <li>Check the <strong>#hack-volunteers</strong> channel for updates and announcements.</li>
-        <li><span class="highlight">Only those who join Discord will be considered</span></li>
-      </ul>
-    </li>
-  </ol>
-
-  <p><strong>In addition:</strong> 
-    If you're a <strong>Workshop Host</strong>, please complete the 
-    <a href="https://forms.gle/8ACTxkXRsMEBsTna8" target="_blank">Hackathon Workshop Host/Speaker Interest Form</a>.
-  </p>
-
-  <div class="note">
-    ⏳ <strong>Please be patient.</strong> Responses are reviewed every 5 business days.<br />
-    ⚡ The fastest way to receive a response after being accepted is to DM <code>@codecrunchclub</code> on Discord.
-  </div>
-
-  <div class="button-group">
-    <a class="btn" href="https://docs.google.com/spreadsheets/d/1aHEyr2O5dKBbecAM3k-rRdzlABTnq7FZpzXqzhAY5XY/edit?usp=sharing" target="_blank">📄 View Completed Interest Form</a>
-    <a class="btn" href="https://docs.google.com/spreadsheets/d/1y4hdAR8Coo1c-XmeVvEhEBtXtRctU2M5PSNgAIO5KaI/edit?usp=sharing" target="_blank">✅ View Completed Volunteers Confirmation & Discord Form</a>
-  </div>
-
-  <h2>📊 Resources</h2>
-  <ul>
-    <li><strong>Judging</strong></li>
-    <p>
-       
-        <a href="https://ba-00001.github.io/codecrunchclub/hack-evaluation-criteria.html" target="_blank">Evaluation criteria</a>.
-      </p>
-    <p>If the hackathons end on a Sunday, the evaluation process will begin on the next day.</p>
-      If you're a <strong>Judge</strong>, please complete the evaluation Google Sheet within 48 hours of the evaluation start date.
-    </p>
-
-    <div class="note">
-      🔎 Please read the <strong>README tab</strong> in the evaluation sheet before scoring.
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <h1>🎉 Hackathon Volunteer HUB</h1>
+      <div class="direct-link">
+        <span>Direct Link: <a href="https://go.fiu.edu/CODECRUNCH-HACK-VOLUNTEER" target="_blank">go.fiu.edu/CODECRUNCH-HACK-VOLUNTEER</a></span>
+      </div>
     </div>
+  </header>
 
-    <li><strong>Mentorship</strong></li>
-    <p>
-      Mentorship will take place during the hackathon in dedicated Discord voice channels from <strong>6:00 pm EST – 9 pm EST</strong>.<br /><br />
-      Please make an announcement in the hackathon Discord channel when you're available for mentorship (minimum of 4 hours).
-    </p>
+  <div class="container">
+    <!-- Volunteer Process Section -->
+    <section class="card">
+      <h2>🛠️ Hackathon Volunteer Process</h2>
+      
+      <div class="note">
+        <strong>🔐 Access is granted only to the Gmail address you applied with.</strong><br />
+        If you're using a different Google account, please switch to the one used on your application form.
+      </div>
 
-    <li><strong>Workshop Host / Speaker</strong></li>
-    <li>Each session has a required duration of 1hr.</li>
-    <p>
-      <strong>Google Slide Template:</strong> Please make a copy: 
-      <a href="https://docs.google.com/presentation/d/183bmzBqLGtcG6sQcrnebPODynKxBLZY7KFqwMCK6Zw4/edit?usp=sharing" target="_blank">Workshop Slides Template</a>.
-    </p>
+      <ol class="process-steps">
+        <li>
+          <strong>Fill out the Volunteer Interest Form.</strong>
+          <div><a href="https://forms.gle/C6VwzHZb9WS8VYCg6" target="_blank">Access the form here →</a></div>
+        </li>
 
-    <li><strong>Volunteer Certificates:</strong> Will be emailed within 10 business days. If not received, DM <code>@codecrunchclub</code> on Discord.</li>
-  </ul>
+        <li>
+          <strong>If accepted, fill out the Volunteer Confirmation & Discord Form.</strong>
+          <div>
+            <a href="https://forms.gle/eTuZEadukrqBacWq9" target="_blank">Access the form here →</a>
+            <p>If your availability changes, simply fill out the form again — we'll consider your latest entry.</p>
+          </div>
+        </li>
 
-  <div class="note">
-    💬 If you have questions or don't see the <code>#hack-volunteers</code> channel on Discord, DM <strong>@codecrunchclub</strong> to update your volunteer role.
+        <li>
+          <strong>After submitting the second form:</strong>
+          <ul>
+            <li>Join the <strong>Discord</strong> server and introduce yourself!</li>
+            <li>Send a DM to <code>@codecrunchclub</code> to gain access to the private <strong>#hack-volunteers</strong> channel.</li>
+            <li>Receive your role: <strong>@hackathon-judge</strong>, <strong>@hackathon-mentor</strong>, or <strong>@hackathon-speaker</strong>.</li>
+            <li>Check the <strong>#hack-volunteers</strong> channel for updates and announcements.</li>
+            <li><span class="highlight">Only those who join Discord will be confirmed.</span></li>
+          </ul>
+        </li>
+      </ol>
+
+      <p><strong>Additional Note:</strong> If you're a <strong>Workshop Host</strong>, please also complete the 
+        <a href="https://forms.gle/8ACTxkXRsMEBsTna8" target="_blank">Workshop/Speaker Interest Form</a>.
+      </p>
+
+      <div class="note">
+        <strong>⏳ Please be patient.</strong> We review submissions every 5 business days.<br />
+        <strong>⚡ The fastest way to get a response</strong> is to DM <code>@codecrunchclub</code> on Discord after submitting your form.
+      </div>
+
+      <div class="btn-group">
+        <a class="btn" href="https://docs.google.com/spreadsheets/d/1aHEyr2O5dKBbecAM3k-rRdzlABTnq7FZpzXqzhAY5XY/edit?usp=sharing" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          View Volunteer Interest Form Responses
+        </a>
+        <a class="btn" href="https://docs.google.com/spreadsheets/d/1y4hdAR8Coo1c-XmeVvEhEBtXtRctU2M5PSNgAIO5KaI/edit?usp=sharing" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          View Confirmation & Discord Form Responses
+        </a>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section>
+      <h2>📊 Resources</h2>
+      
+      <div class="resources-grid">
+        <!-- Judging Resource -->
+        <div class="resource-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            Judging
+          </h4>
+          <p><a href="https://ba-00001.github.io/codecrunchclub/hack-evaluation-criteria.html" target="_blank">View evaluation criteria</a>.</p>
+          <p>If a hackathon ends on a Sunday, evaluation will begin the following Monday.</p>
+          <p>If you're a <strong>Judge</strong>, please complete the evaluation sheet within 48 hours of the start date.</p>
+          <div class="note">
+            <strong>🔎 Please read the README tab</strong> in the evaluation sheet before scoring.
+          </div>
+        </div>
+
+        <!-- Mentorship Resource -->
+        <div class="resource-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Mentorship
+          </h4>
+          <p>
+            Mentorship will be hosted in dedicated Discord voice channels from <strong>6:00 PM – 9:00 PM EST</strong>.
+          </p>
+          <p>
+            Please announce your availability in the hackathon Discord channel (minimum commitment: 4 hours).
+          </p>
+        </div>
+
+        <!-- Workshop/Speaker Resource -->
+        <div class="resource-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Workshop Host / Speaker
+          </h4>
+          <p>Each workshop must be at least 1 hour long.</p>
+          <p>
+            <strong>Google Slide Template:</strong> 
+            <a href="https://docs.google.com/presentation/d/183bmzBqLGtcG6sQcrnebPODynKxBLZY7KFqwMCK6Zw4/edit?usp=sharing" target="_blank">Make a copy here</a>.
+          </p>
+        </div>
+
+        <!-- Certificate Resource -->
+        <div class="resource-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            Volunteer Certificates
+          </h4>
+          <p>Certificates will be emailed within 10 business days.</p>
+          <p>If not received, DM <code>@codecrunchclub</code> on Discord.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>💬 If you don't see the <code>#hack-volunteers</code> channel on Discord</strong>, DM <strong>@codecrunchclub</strong> to update your volunteer role.
+      </div>
+    </section>
+
+    <!-- Upcoming Hackathons Section -->
+    <section>
+      <h2>🚀 Upcoming Hackathons</h2>
+
+      <div class="hackathon-card">
+        <h3>📝 305 Hack - Spring 2025 Evaluation Process</h3>
+        
+        <div class="note">
+          <strong>Do not evaluate through Devpost. Use the Google Sheet provided below, with teams assigned by track to each judge.</strong><br /><br />
+          <strong>📅 Project submissions close on March 31, 2025 @ 6:15 PM EST</strong>.
+        </div>
+
+        <p>
+          Evaluation begins on <strong>Tuesday, April 1, 2025 @ 11:00 AM EST</strong> and ends on <strong>Thursday, April 3, 2025 @ 11:00 AM EST</strong>.
+        </p>
+
+        <p>
+          Judges must complete the evaluation using the Google Sheet within 48 hours of the start time:  
+          <a href="https://docs.google.com/spreadsheets/d/1QCWqa9SQyzGzRLpmBKv2ujFqnV6_zqouJazBHgtRKds/edit?usp=sharing" target="_blank">305 Hack Evaluation Doc</a>.
+        </p>
+
+        <div class="note">
+          <strong>🔎 Please read the README tab</strong> in the evaluation sheet before scoring.
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Hackathons Section -->
+    <section>
+      <h2>📚 Past Hackathons</h2>
+
+      <div class="hackathon-card">
+        <h3>📝 Hack Fiesta Evaluation Process</h3>
+        
+        <div class="note">
+          <strong>📅 Evaluation began on March 24, 2025 @ 6:00 PM EST</strong>. Please check the sheet for final updates.
+        </div>
+
+        <p>
+          Judges must complete the evaluation Google Sheet within 48 hours of the start date:  
+          <a href="https://docs.google.com/spreadsheets/d/14p0Yrp9G-3KS1xGqmy4uScJqgIG2OeMreV6Ajy_jHy0/edit?usp=sharing" target="_blank">Hack Fiesta Miami Evaluation Doc | 2025</a>.
+        </p>
+
+        <div class="note">
+          <strong>🔎 Please read the README tab</strong> in the evaluation sheet before scoring.
+        </div>
+      </div>
+    </section>
   </div>
 
-  <h2>🚀 Upcoming Hackathons</h2>
-
-  <h3>📝 305 Hack - Spring 2025 Evaluation Process</h3>
-  <p class="note">
-    📅 Projects submissions close on <strong>March 31, 2025 @ 6:15 PM EST</strong>. 
-  </p>
-  
-  <p >
-     Evaluation begins on <strong>TUE April 1st, 2025 @ 11 am EST and ends on THU April 3st, 2025 @ 11 am</strong>. 
-  </p>
-  <p>
-    Judges must complete the evaluation Google Sheet within 48 hours of the start date: 
-    <a href="https://docs.google.com/spreadsheets/d/1QCWqa9SQyzGzRLpmBKv2ujFqnV6_zqouJazBHgtRKds/edit?usp=sharing" target="_blank">305 Hack Evaluation Doc</a>.
-  </p>
-  <div class="note">
-    🔎 Please read the <strong>README tab</strong> in the evaluation sheet before scoring.
-  </div>
-
-  <h2>📚 Past Hackathons</h2>
-
-  <h3>📝 Hack Fiesta Evaluation Process</h3>
-  <p class="note">
-    📅 Evaluation began on <strong>March 24, 2025 @ 6:00 PM EST</strong>. Please check the sheet for final updates.
-  </p>
-  <p>
-    Judges must complete the evaluation Google Sheet within 48 hours of the start date: 
-    <a href="https://docs.google.com/spreadsheets/d/14p0Yrp9G-3KS1xGqmy4uScJqgIG2OeMreV6Ajy_jHy0/edit?usp=sharing" target="_blank">Hack Fiesta Miami Evaluation Doc | 2025</a>.
-  </p>
-  <div class="note">
-    🔎 Please read the <strong>README tab</strong> in the evaluation sheet before scoring.
-  </div>
-
+  <footer>
+    <div class="container">
+      <p>© Code Crunch Hackathon | Powered by CodeCrunch Club</p>
+    </div>
+  </footer>
 </body>
 </html>
