@@ -237,6 +237,76 @@
       margin-top: 0;
     }
     
+/* Navigation Bar Styles */
+.navbar {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.75rem 0;
+    }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .navbar-logo img {
+      height: 32px;
+      margin-right: 8px;
+    }
+    
+    .navbar-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .navbar-link {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .navbar-link:hover {
+      color: var(--primary);
+      background-color: rgba(67, 97, 238, 0.1);
+      text-decoration: none;
+    }
+    
+    .navbar-link.active {
+      color: var(--primary);
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+    
+    .navbar-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+/* end */
+
+
     .resources-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -357,6 +427,32 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+        Hackathon Hub
+      </a>
+      <div class="navbar-links">
+        <a href="hackathons.html"class="navbar-link">Hackathons</a>
+        <a  href="hack-submissions-req.html"class="navbar-link">Submission Requirements</a>
+        <a href="hack-evaluation-criteria.html"class="navbar-link">Judging Criteria</a>
+        <a  href="hack-code-of-conduct.html"class="navbar-link">Code of Conduct</a>
+        <a href="#process" class="navbar-link active">Hackathon Volunteer HUB</a>
+        <a href="#resources" class="navbar-link">Volunteer Resources</a>
+        <a href="#speakers" class="navbar-link">Volunteer Speakers</a>
+        <a href="#upcoming" class="navbar-link">Upcoming Hackathons</a>
+        <a href="#past" class="navbar-link">Past Hackathons</a>
+      </div>
+      <button class="navbar-mobile-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </nav>
+  
+  
+  
   <!-- Header Section -->
   <header>
     <div class="container">
@@ -366,7 +462,7 @@
       </div>
     </div>
   </header>
-
+<section id="process" class="container">
   <div class="container">
     <!-- Volunteer Process Section -->
     <section class="card">
@@ -423,9 +519,12 @@
         </a>
       </div>
     </section>
+  </section>
+
+
 
     <!-- Resources Section -->
-    <section>
+    <section id="resources" class="card">
       <h2>📊 Resources</h2>
       
       <div class="resources-grid">
@@ -487,7 +586,9 @@
     </section>
 
     <!-- Upcoming Hackathons Section -->
-    <section>
+    <section id="upcoming" class="card">
+
+
       <h2>🚀 Upcoming Hackathons</h2>
 
       <div class="hackathon-card">
@@ -514,7 +615,7 @@
 
 
 
-      <section class="card agenda-section">
+      <section id= "speakers" class="card agenda-section">
         <h2>Code Crunch Hackathons | Open Speaker Sessions</h2>
         
         <div class="note">
@@ -677,7 +778,7 @@
     </section>
 
     <!-- Past Hackathons Section -->
-    <section>
+    <section id="past" class="card">
       <h2>📚 Past Hackathons</h2>
 
       <div class="hackathon-card">
