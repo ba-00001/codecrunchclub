@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS Bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
     <title>Hackathon Schedule & Themes | Code Crunch</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
     <style>
         :root {
             --primary: #0ea5e9;
@@ -34,6 +29,7 @@
             --virtual: #6366f1;
             --hybrid: #8b5cf6;
             --in-person: #ec4899;
+            --past-event: #94a3b8;
         }
 
         * {
@@ -65,85 +61,20 @@
             z-index: 10;
         }
 
-        .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background-color: var(--primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-        }
-
-        /* mathcing nav bar with main page */
         .navbar-custom {
-        background-color: var(--bg-card) !important;
-        box-shadow: var(--shadow);
+            background-color: var(--bg-card) !important;
+            box-shadow: var(--shadow);
         }
 
         .navbar-custom .navbar-brand,
         .navbar-custom .nav-link {
-        color: var(--text-secondary);
-        font-weight: 500;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .navbar-custom .nav-link.active,
         .navbar-custom .nav-link:hover {
-        color: var(--primary) !important;
-        }
-        /* end mathcing nav bar with main page */
-
-
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link.active {
-            color: var(--primary);
-            position: relative;
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary);
-            border-radius: 1px;
+            color: var(--primary) !important;
         }
 
         .header {
@@ -228,6 +159,7 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Timeline and Event Card Styles */
         .timeline {
             position: relative;
             margin-top: 3rem;
@@ -247,7 +179,7 @@
 
         .timeline-event {
             position: relative;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .timeline-event:last-child {
@@ -257,7 +189,7 @@
         .timeline-event::before {
             content: '';
             position: absolute;
-            top: 0.5rem;
+            top: 1.5rem;
             left: -2.4rem;
             width: 1rem;
             height: 1rem;
@@ -267,13 +199,62 @@
             z-index: 1;
         }
 
+        .timeline-event.past-event::before {
+            background-color: var(--past-event);
+            box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.2);
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .section-title.past {
+            border-left-color: var(--past-event);
+        }
+
+        .timeline-divider {
+            margin: 2rem 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .timeline-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -2.4rem;
+            right: 0;
+            height: 2px;
+            background-color: rgba(148, 163, 184, 0.3);
+            z-index: 0;
+        }
+
+        .timeline-divider-text {
+            position: relative;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 1;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Condensed Event Card Styles */
         .event-card {
             background-color: var(--bg-card);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 1.5rem;
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 4px solid var(--primary);
         }
 
         .event-card:hover {
@@ -281,29 +262,56 @@
             box-shadow: var(--shadow-md);
         }
 
-        .event-card.virtual {
-            border-top-color: var(--virtual);
-        }
-
-        .event-card.hybrid {
-            border-top-color: var(--hybrid);
-        }
-
-        .event-card.in-person {
-            border-top-color: var(--in-person);
-        }
-
-        .event-header {
+        .card-header {
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+        }
+
+        .event-card.virtual .card-header {
+            border-left-color: var(--virtual);
+        }
+
+        .event-card.hybrid .card-header {
+            border-left-color: var(--hybrid);
+        }
+
+        .event-card.in-person .card-header {
+            border-left-color: var(--in-person);
+        }
+
+        .event-card.past .card-header {
+            border-left-color: var(--past-event);
+            opacity: 0.8;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
         }
 
         .event-title {
             font-weight: 700;
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .event-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
         }
 
         .event-badge {
@@ -316,61 +324,100 @@
             color: white;
         }
 
-        .event-badge.virtual {
+        .event-card.virtual .event-badge {
             background-color: var(--virtual);
         }
 
-        .event-badge.hybrid {
+        .event-card.hybrid .event-badge {
             background-color: var(--hybrid);
         }
 
-        .event-badge.in-person {
+        .event-card.in-person .event-badge {
             background-color: var(--in-person);
         }
 
-        .event-date {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .event-card.past .event-badge {
+            background-color: var(--past-event);
         }
 
-        .event-date-icon {
+        .countdown {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .countdown-value {
+            font-weight: 600;
             color: var(--primary);
         }
 
-        .event-theme {
-            background-color: rgba(14, 165, 233, 0.1);
-            border-radius: var(--radius);
+        .event-card.virtual .countdown-value {
+            color: var(--virtual);
+        }
+
+        .event-card.hybrid .countdown-value {
+            color: var(--hybrid);
+        }
+
+        .event-card.in-person .countdown-value {
+            color: var(--in-person);
+        }
+
+        .card-body {
             padding: 1rem;
         }
 
-        .event-theme-title {
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
+        .theme-container {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
-        .event-theme-title i {
+        .theme-icon {
+            color: var(--primary);
             font-size: 1rem;
+            margin-top: 0.125rem;
         }
 
-        .event-theme-content {
-            color: var(--text-secondary);
+        .event-card.virtual .theme-icon {
+            color: var(--virtual);
+        }
+
+        .event-card.hybrid .theme-icon {
+            color: var(--hybrid);
+        }
+
+        .event-card.in-person .theme-icon {
+            color: var(--in-person);
+        }
+
+        .event-card.past .theme-icon {
+            color: var(--past-event);
+        }
+
+        .theme-content {
+            flex: 1;
+        }
+
+        .theme-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .theme-text {
             font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
         }
 
         .tag-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
 
         .tag {
@@ -382,6 +429,32 @@
             font-weight: 500;
         }
 
+        .event-card.virtual .tag {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--virtual);
+        }
+
+        .event-card.hybrid .tag {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--hybrid);
+        }
+
+        .event-card.in-person .tag {
+            background-color: rgba(236, 72, 153, 0.1);
+            color: var(--in-person);
+        }
+
+        .past-event .tag {
+            background-color: rgba(148, 163, 184, 0.1);
+            color: var(--text-light);
+        }
+
+        .card-footer {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: right;
+        }
+
         .button {
             display: inline-flex;
             align-items: center;
@@ -389,74 +462,132 @@
             background-color: var(--primary);
             color: white;
             font-weight: 600;
-            padding: 0.75rem 1.25rem;
+            padding: 0.5rem 1rem;
             border-radius: var(--radius);
             text-decoration: none;
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            transition: background-color 0.2s ease, transform 0.2s ease;
             gap: 0.5rem;
-            margin-top: 1.5rem;
+            font-size: 0.875rem;
         }
 
         .button:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            color: white;
         }
 
-        .subscribe-banner {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-            color: white;
+        .event-card.virtual .button {
+            background-color: var(--virtual);
+        }
+
+        .event-card.virtual .button:hover {
+            background-color: #4f46e5;
+        }
+
+        .event-card.hybrid .button {
+            background-color: var(--hybrid);
+        }
+
+        .event-card.hybrid .button:hover {
+            background-color: #7c3aed;
+        }
+
+        .event-card.in-person .button {
+            background-color: var(--in-person);
+        }
+
+        .event-card.in-person .button:hover {
+            background-color: #db2777;
+        }
+
+        .event-card.past .button {
+            background-color: var(--past-event);
+        }
+
+        .event-card.past .button:hover {
+            background-color: #64748b;
+        }
+
+/* Partner Organization Section */
+.partner-section {
+            background-color: var(--bg-card);
             border-radius: var(--radius);
             padding: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             box-shadow: var(--shadow);
         }
 
-        .subscribe-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .partner-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            background-color: var(--bg-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .partner-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
             margin-bottom: 1rem;
         }
 
-        .subscribe-description {
-            margin-bottom: 1.5rem;
-            max-width: 600px;
+        .partner-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        .subscribe-form {
+        .partner-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
             display: flex;
             gap: 0.75rem;
-            max-width: 500px;
+            margin-top: auto;
         }
 
-        .form-input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius);
-            border: none;
-            font-size: 0.9375rem;
-            box-shadow: var(--shadow-sm);
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .form-input:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.5);
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
         }
 
-        .btn-subscribe {
-            background-color: white;
-            color: var(--primary);
-            border: none;
-            padding: 0.75rem 1.25rem;
-            border-radius: var(--radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+        /* end Partner Organization Section */
 
-        .btn-subscribe:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
+
+
+
 
         .footer {
             background-color: var(--bg-card);
@@ -491,13 +622,20 @@
             color: var(--primary);
         }
 
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .header-title {
                 font-size: 1.75rem;
             }
             
-            .nav-links {
-                display: none;
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-right {
+                align-items: flex-start;
+                margin-top: 0.5rem;
             }
             
             .footer-container {
@@ -505,92 +643,52 @@
                 gap: 1rem;
                 align-items: flex-start;
             }
-            
-            .subscribe-form {
-                flex-direction: column;
-            }
-            
-            .btn-subscribe {
-                width: 100%;
-            }
+
+        
         }
-
-
-
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .contact-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: var(--radius);
-            padding: 1.5rem;
-        }
-
-        .contact-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--primary-dark);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .contact-link:hover {
-            color: var(--primary);
-        }
-
-        .contact-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-
         <div class="container px-lg-5">
-          <!-- Logo and Brand Name -->
-          <a class="navbar-brand" href="index.html">
-            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-2" />
-            Code Crunch
-          </a>
-      
-          <!-- Mobile Toggle -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <!-- Navigation Links -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link active" href="hackathons.html">Hackathons</a></li>
-              <li class="nav-item"><a class="nav-link" href="hack-resources.html">Resources</a></li>
-              <li class="nav-item"><a class="nav-link " href="hack-submissions-req.html">Submission Requirements</a></li>
-              <li class="nav-item"><a class="nav-link" href="hack-evaluation-criteria.html">Judging Criteria</a></li>
-              <li class="nav-item"><a class="nav-link" href="hack-rules.html">Rules & Guidelines</a></li>
-              <li class="nav-item"><a class="nav-link" href="hack-code-of-conduct.html">Code of Conduct</a></li>
-              <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/code-crunch-club/">LinkedIn Community</a></li>
-            </ul>
-          </div>
+            <!-- Logos and Brand Names -->
+            <div class="d-flex align-items-center">
+                <!-- Code Crunch Logo -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">Code Crunch @ FIU</span>
+                </a>
+                
+                <!-- Color Stack Logo -->
+                <a class="navbar-brand me-3" href="https://go.fiu.edu/colorstackatfiu">
+                    <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> ColorStack @ FIU </span>
+                </a>
+                
+                <!-- CAHSI Logo -->
+                <a class="navbar-brand" href="https://go.fiu.edu/cahsiatfiu">
+                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> CAHSI @ FIU </span>
+                </a>
+            </div>
+        
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="hacks-toolkit.html">Hacks Toolkit</a></li>
+
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
     <header class="header">
         <div class="container header-container">
@@ -610,340 +708,611 @@
                 <h2 class="card-title">2025 Hackathon Calendar</h2>
                 <p class="card-description">Mark your calendar for these upcoming Code Crunch hackathons. Each event offers unique themes and opportunities to showcase your talents.</p>
                 
-                <div class="timeline">
-                    <div class="timeline-event">
+                <div class="timeline" id="hackathon-timeline">
+                    <!-- HackFiesta Miami -->
+                    <div class="timeline-event" data-event-date="2025-03-21">
                         <div class="event-card virtual">
-                            <div class="event-header">
-                                <h3 class="event-title">HackFiesta Miami</h3>
-                                <span class="event-badge virtual">Virtual</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                March 21-23, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">Global Impact, AI & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Global Impact</span>
-                                    <span class="tag">AI</span>
-                                    <span class="tag">Blockchain</span>
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <h3 class="event-title">HackFiesta Miami</h3>
+                                    <div class="event-date">
+                                        <i class="bi bi-calendar-event"></i>
+                                        March 21-23, 2025
+                                    </div>
+                                </div>
+                                <div class="header-right">
+                                    <span class="event-badge">Virtual</span>
+                                    <div class="countdown">
+                                        <span class="countdown-value"></span> until start
+                                    </div>
                                 </div>
                             </div>
-                            <a href="HACKFIESTA-SPRING25.HTML" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Learn More
-                            </a>
+                            <div class="card-body">
+                                <div class="theme-container">
+                                    <i class="bi bi-lightbulb theme-icon"></i>
+                                    <div class="theme-content">
+                                        <div class="theme-title">Theme</div>
+                                        <div class="theme-text">Global Impact, AI & Blockchain</div>
+                                        <div class="tag-list">
+                                            <span class="tag">Global Impact</span>
+                                            <span class="tag">AI</span>
+                                            <span class="tag">Blockchain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="HACKFIESTA-SPRING25.HTML" class="button">
+                                    <i class="bi bi-info-circle"></i>
+                                    Learn More
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-event">
+                    <!-- 305 Hackathon Edition: Spring -->
+                    <div class="timeline-event" data-event-date="2025-03-29">
                         <div class="event-card hybrid">
-                            <div class="event-header">
-                                <h3 class="event-title">305 Hackathon Edition: Spring</h3>
-                                <span class="event-badge hybrid">Hybrid</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                March 29-31, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">Tech for Good, AI & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Tech for Good</span>
-                                    <span class="tag">AI</span>
-                                    <span class="tag">Blockchain</span>
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <h3 class="event-title">305 Hackathon Edition: Spring</h3>
+                                    <div class="event-date">
+                                        <i class="bi bi-calendar-event"></i>
+                                        March 29-31, 2025
+                                    </div>
+                                </div>
+                                <div class="header-right">
+                                    <span class="event-badge">Hybrid</span>
+                                    <div class="countdown">
+                                        <span class="countdown-value"></span> until start
+                                    </div>
                                 </div>
                             </div>
-                            <a href="305HACK-SPRING25.html" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Learn More
-                            </a>
+                            <div class="card-body">
+                                <div class="theme-container">
+                                    <i class="bi bi-lightbulb theme-icon"></i>
+                                    <div class="theme-content">
+                                        <div class="theme-title">Theme</div>
+                                        <div class="theme-text">Tech for Good, AI & Blockchain</div>
+                                        <div class="tag-list">
+                                            <span class="tag">Tech for Good</span>
+                                            <span class="tag">AI</span>
+                                            <span class="tag">Blockchain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="305HACK-SPRING25.html" class="button">
+                                    <i class="bi bi-info-circle"></i>
+                                    Learn More
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-event">
+                    <!-- CodeStorm -->
+                    <div class="timeline-event" data-event-date="2025-05-23">
                         <div class="event-card virtual">
-                            <div class="event-header">
-                                <h3 class="event-title">CodeStorm</h3>
-                                <span class="event-badge virtual">Virtual</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                May 23-25, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">Cloud, AI & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Cloud</span>
-                                    <span class="tag">AI</span>
-                                    <span class="tag">Blockchain</span>
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <h3 class="event-title">CodeStorm</h3>
+                                    <div class="event-date">
+                                        <i class="bi bi-calendar-event"></i>
+                                        May 23-25, 2025
+                                    </div>
+                                </div>
+                                <div class="header-right">
+                                    <span class="event-badge">Virtual</span>
+                                    <div class="countdown">
+                                        <span class="countdown-value"></span> until start
+                                    </div>
                                 </div>
                             </div>
-                            <a href="HACK-CODESTORM.HTML" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Learn
-                            </a>
+                            <div class="card-body">
+                                <div class="theme-container">
+                                    <i class="bi bi-lightbulb theme-icon"></i>
+                                    <div class="theme-content">
+                                        <div class="theme-title">Theme</div>
+                                        <div class="theme-text">Cloud, AI & Blockchain</div>
+                                        <div class="tag-list">
+                                            <span class="tag">Cloud</span>
+                                            <span class="tag">AI</span>
+                                            <span class="tag">Blockchain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="HACK-CODESTORM.HTML" class="button">
+                                    <i class="bi bi-info-circle"></i>
+                                    Learn More
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-event">
+                    <!-- SummerCodeX -->
+                    <div class="timeline-event" data-event-date="2025-07-25">
                         <div class="event-card virtual">
-                            <div class="event-header">
-                                <h3 class="event-title">SummerCodeX</h3>
-                                <span class="event-badge virtual">Virtual</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                July 25-27, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">XR, Web3, Blockchain & Decentralization</p>
-                                <div class="tag-list">
-                                    <span class="tag">XR</span>
-                                    <span class="tag">Web3</span>
-                                    <span class="tag">Blockchain</span>
-                                    <span class="tag">Decentralization</span>
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <h3 class="event-title">SummerCodeX</h3>
+                                    <div class="event-date">
+                                        <i class="bi bi-calendar-event"></i>
+                                        July 25-27, 2025
+                                    </div>
+                                </div>
+                                <div class="header-right">
+                                    <span class="event-badge">Virtual</span>
+                                    <div class="countdown">
+                                        <span class="countdown-value"></span> until start
+                                    </div>
                                 </div>
                             </div>
-                            <a href="#" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Website Under Construction
-                            </a>
+                            <div class="card-body">
+                                <div class="theme-container">
+                                    <i class="bi bi-lightbulb theme-icon"></i>
+                                    <div class="theme-content">
+                                        <div class="theme-title">Theme</div>
+                                        <div class="theme-text">XR, Web3, Blockchain & Decentralization</div>
+                                        <div class="tag-list">
+                                            <span class="tag">XR</span>
+                                            <span class="tag">Web3</span>
+                                            <span class="tag">Blockchain</span>
+                                            <span class="tag">Decentralization</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="button">
+                                    <i class="bi bi-info-circle"></i>
+                                    Website Under Construction
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-event">
+                    <!-- 305 Hackathon Edition: Fall -->
+                    <div class="timeline-event" data-event-date="2025-09-20">
                         <div class="event-card in-person">
-                            <div class="event-header">
-                                <h3 class="event-title">305 Hackathon Edition: Fall</h3>
-                                <span class="event-badge in-person">In-Person</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                September 20-22, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">Smart Cities, DevOps, Cybersecurity & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Smart Cities</span>
-                                    <span class="tag">DevOps</span>
-                                    <span class="tag">Cybersecurity</span>
-                                    <span class="tag">Blockchain</span>
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <h3 class="event-title">305 Hackathon Edition: Fall</h3>
+                                    <div class="event-date">
+                                        <i class="bi bi-calendar-event"></i>
+                                        September 20-22, 2025
+                                    </div>
+                                </div>
+                                <div class="header-right">
+                                    <span class="event-badge">In-Person</span>
+                                    <div class="countdown">
+                                        <span class="countdown-value"></span> until start
+                                    </div>
                                 </div>
                             </div>
-                            <a href="#" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Website Under Construction
-                            </a>
+                            <div class="card-body">
+                                <div class="theme-container">
+                                    <i class="bi bi-lightbulb theme-icon"></i>
+                                    <div class="theme-content">
+                                        <div class="theme-title">Theme</div>
+                                        <div class="theme-text">Smart Cities, DevOps, Cybersecurity & Blockchain</div>
+                                        <div class="tag-list">
+                                            <span class="tag">Smart Cities</span>
+                                            <span class="tag">DevOps</span>
+                                            <span class="tag">Cybersecurity</span>
+                                            <span class="tag">Blockchain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="button">
+                                    <i class="bi bi-info-circle"></i>
+                                    Website Under Construction
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-event">
-                        <div class="event-card virtual">
-                            <div class="event-header">
-                                <h3 class="event-title">EmpowHER Hackathon</h3>
-                                <span class="event-badge virtual">Virtual</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                October 18-20, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">Women in Tech, Ethical AI & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Women in Tech</span>
-                                    <span class="tag">Ethical AI</span>
-                                    <span class="tag">Blockchain</span>
-                                </div>
-                            </div>
-                            <a href="#" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Website Under Construction
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-event">
-                        <div class="event-card virtual">
-                            <div class="event-header">
-                                <h3 class="event-title">CodeFest</h3>
-                                <span class="event-badge virtual">Virtual</span>
-                            </div>
-                            <div class="event-date">
-                                <i class="bi bi-calendar-event event-date-icon"></i>
-                                December 12-14, 2025
-                            </div>
-                            <div class="event-theme">
-                                <h4 class="event-theme-title">
-                                    <i class="bi bi-lightbulb"></i>
-                                    Theme
-                                </h4>
-                                <p class="event-theme-content">End-of-Year Innovation, AI & Blockchain</p>
-                                <div class="tag-list">
-                                    <span class="tag">Innovation</span>
-                                    <span class="tag">AI</span>
-                                    <span class="tag">Blockchain</span>
-                                </div>
-                            </div>
-                            <a href="#" class="button">
-                                <i class="bi bi-info-circle"></i>
-                                Website Under Construction
-                            </a>
-                        </div>
-                    </div>
+<!-- EmpowHER Hackathon -->
+<div class="timeline-event" data-event-date="2025-10-18">
+    <div class="event-card virtual">
+        <div class="card-header">
+            <div class="header-left">
+                <h3 class="event-title">EmpowHER Hackathon</h3>
+                <div class="event-date">
+                    <i class="bi bi-calendar-event"></i>
+                    October 18-20, 2025
                 </div>
-            </section>
-            
-            <!-- <section class="subscribe-banner">
-                <h2 class="subscribe-title">Stay Updated</h2>
-                <p class="subscribe-description">Subscribe to our newsletter to receive the latest updates, early registration access, and exclusive hackathon resources.</p>
-                <form class="subscribe-form">
-                    <input type="email" class="form-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn-subscribe">Subscribe</button>
-                </form>
-            </section> -->
-
-
-            <section class="card">
-                <h2 class="card-title">Stay Connected</h2>
-                <p class="card-description">Join our community channels for updates, resources, and networking opportunities.</p>
-                
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <h3 class="contact-title">Official Links</h3>
-                        <a href="https://codecrunch.cs.fiu.edu" class="contact-link" target="_blank">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                            Official Website
-                        </a>
-                        <a href="mailto:codecrunch@fiu.edu" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                            </svg>
-                            Contact Email
-                        </a>
-                        <a href="https://www.linkedin.com/company/code-crunch-club/" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-            
-                        <a href="https://www.instagram.com/codecrunchclub/" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                           Instagram
-                        </a>
-            
-                        <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                            WhatsApp
-                        
-                        </a>
-            
-                        <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                            Panther Connect
-                        
-                        </a>
-            
-                        <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                            </svg>
-                            YouTube
-                    </a>
-                        
-            
-            
-            
-                            <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="contact-link">
-                                <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-                                </svg>
-                                Resume Book
-                        </a>
-            
-            
-                    </div>
+            </div>
+            <div class="header-right">
+                <span class="event-badge">Virtual</span>
+                <div class="countdown">
+                    <span class="countdown-value"></span> until start
                 </div>
-                
-               
-                
-                <div class="contact-grid" style="margin-top: 2rem;">
-                    <div class="contact-card">
-                        <h3 class="contact-title">Hackathon Support</h3>
-                        <a href="hack-code-of-conduct.html" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                            </svg>
-                            Code of Conduct
-                        </a>
-                        <a href="hack-rules.html" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg"width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
-                                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-                            </svg>
-                            Rules & Guidelines
-                        </a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqByl0Yn3cWeDDuxhCu23O224rqE-aJgRPP6bz30pVpiXITA/viewform" class="contact-link">
-                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-                            </svg>
-                            Discord Server
-                        </a>
-                    </div>
-                    
-            
-                </section>
-
-
-
-
-
-
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-container">
-            <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
-                <a href="contact.html" class="footer-link">Contact</a>
             </div>
         </div>
-    </footer>
+        <div class="card-body">
+            <div class="theme-container">
+                <i class="bi bi-lightbulb theme-icon"></i>
+                <div class="theme-content">
+                    <div class="theme-title">Theme</div>
+                    <div class="theme-text">Women in Tech, Ethical AI & Blockchain</div>
+                    <div class="tag-list">
+                        <span class="tag">Women in Tech</span>
+                        <span class="tag">Ethical AI</span>
+                        <span class="tag">Blockchain</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="button">
+                <i class="bi bi-info-circle"></i>
+                Website Under Construction
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- CodeFest -->
+<div class="timeline-event" data-event-date="2025-12-12">
+    <div class="event-card virtual">
+        <div class="card-header">
+            <div class="header-left">
+                <h3 class="event-title">CodeFest</h3>
+                <div class="event-date">
+                    <i class="bi bi-calendar-event"></i>
+                    December 12-14, 2025
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="event-badge">Virtual</span>
+                <div class="countdown">
+                    <span class="countdown-value"></span> until start
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="theme-container">
+                <i class="bi bi-lightbulb theme-icon"></i>
+                <div class="theme-content">
+                    <div class="theme-title">Theme</div>
+                    <div class="theme-text">End-of-Year Innovation, AI & Blockchain</div>
+                    <div class="tag-list">
+                        <span class="tag">Innovation</span>
+                        <span class="tag">AI</span>
+                        <span class="tag">Blockchain</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="button">
+                <i class="bi bi-info-circle"></i>
+                Website Under Construction
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="partner-section">
+    <h2 class="section-title">Our Partners</h2>
+    <p class="section-description">Our hackathons are made possible by collaboration with these amazing organizations. Connect with them to learn more about their initiatives and opportunities.</p>
+    
+    <div class="partner-grid">
+        <!-- Code Crunch Card -->
+        <div class="partner-card">
+            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" class="partner-logo">
+            <h3 class="partner-name">Code Crunch @ FIU</h3>
+            <p class="partner-description">Open to all majors, universities, and students, Code Crunch is an interdisciplinary tech community focused on making tech education approachable for everyone. We provide hands-on coding workshops, technical interview prep, and collaborative projects that help students from any background build skills, grow professionally, and break into tech.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/code-crunch-club/" class="social-link" target="_blank">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/codecrunchclub/" class="social-link" target="_blank">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://codecrunch.cs.fiu.edu" class="social-link" target="_blank">
+                    <i class="bi bi-globe"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- ColorStack Card -->
+        <div class="partner-card">
+            <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack Logo" class="partner-logo">
+            <h3 class="partner-name">ColorStack @ FIU</h3>
+            <p class="partner-description">Open to all majors, universities, and students, ColorStack at FIU supports those pursuing computer science by offering mentorship, community, and career development. While open to all, we focus on uplifting underserved students in CS by helping them navigate academic and career pathways in the tech industry with confidence and connection.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/color-stack-at-fiu" class="social-link" target="_blank">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/colorstackatfiu" class="social-link" target="_blank">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://go.fiu.edu/colorstackatfiu" class="social-link" target="_blank">
+                    <i class="bi bi-globe"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- CAHSI Card -->
+        <div class="partner-card">
+            <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI Logo" class="partner-logo">
+            <h3 class="partner-name">CAHSI @ FIU</h3>
+            <p class="partner-description">Open to all majors, universities, and students, CAHSI (Computing Alliance of Hispanic-Serving Institutions) at FIU focuses on expanding access to computing research and graduate-level opportunities. Our chapter supports students through research experiences, academic mentoring, and guidance into advanced tech careers across industry and academia.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/cahsi-at-fiu-club" class="social-link" target="_blank">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/colorstackatfiu" class="social-link" target="_blank">
+                    <i class="bi bi-instagram""></i>
+                </a>
+                <a href="https://go.fiu.edu/cahsiatfiu" class="social-link" target="_blank">
+                    <i class="bi bi-globe"></i>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- <section class="card">
+<h2 class="card-title">Stay Connected</h2>
+<p class="card-description">Join our community channels for updates, resources, and networking opportunities.</p>
+
+<div class="contact-grid">
+    <div class="contact-card">
+        <h3 class="contact-title">Official Links</h3>
+        <a href="https://codecrunch.cs.fiu.edu" class="contact-link" target="_blank">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+            Official Website
+        </a>
+        <a href="mailto:codecrunch@fiu.edu" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>
+            Contact Email
+        </a>
+        <a href="https://www.linkedin.com/company/code-crunch-club/" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+           LinkedIn
+        </a>
+
+        <a href="https://www.instagram.com/codecrunchclub/" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+           Instagram
+        </a>
+
+        <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+            WhatsApp
+        
+        </a>
+
+        <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+            Panther Connect
+        
+        </a>
+
+        <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+            YouTube
+    </a>
+        
+
+
+        <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg>
+            Resume Book
+    </a>
+
+
+    </div>
+</div>
+
+
+<div class="contact-grid" style="margin-top: 2rem;">
+    <div class="contact-card">
+        <h3 class="contact-title">Hackathon Support</h3>
+        <a href="hack-code-of-conduct.html" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+            </svg>
+            Code of Conduct
+        </a>
+        <a href="hack-rules.html" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg"width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+            </svg>
+            Rules & Guidelines
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqByl0Yn3cWeDDuxhCu23O224rqE-aJgRPP6bz30pVpiXITA/viewform" class="contact-link">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+            </svg>
+            Discord Server
+        </a>
+    </div>
+</div>
+
+</section> -->
+
+</div>
+</main>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Hackathon Timeline Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Sort events by date (upcoming vs past)
+        const today = new Date();
+        const timeline = document.getElementById('hackathon-timeline');
+        const events = Array.from(timeline.querySelectorAll('.timeline-event'));
+        
+        // Separate events into upcoming and past
+        const upcomingEvents = [];
+        const pastEvents = [];
+        
+        events.forEach(event => {
+            const dateString = event.getAttribute('data-event-date');
+            const eventDate = new Date(dateString);
+            
+            // Add days to the event date to account for end date of hackathon (usually 2-3 days)
+            const eventEndDate = new Date(eventDate);
+            eventEndDate.setDate(eventEndDate.getDate() + 2); // Assuming all hackathons are 3 days
+            
+            if (eventEndDate >= today) {
+                upcomingEvents.push({ element: event, date: eventDate });
+            } else {
+                pastEvents.push({ element: event, date: eventDate });
+                
+                // Add past event styling
+                event.classList.add('past-event');
+                const eventCard = event.querySelector('.event-card');
+                eventCard.classList.add('past');
+                
+                const eventBadge = event.querySelector('.event-badge');
+                if (eventBadge) {
+                    const format = eventBadge.textContent;
+                    eventBadge.className = 'event-badge past';
+                    eventBadge.textContent = format + ' (Past)';
+                }
+                
+                // Change the countdown text for past events
+                const countdown = event.querySelector('.countdown');
+                if (countdown) {
+                    countdown.innerHTML = '<i class="bi bi-check-circle"></i> Event completed';
+                }
+            }
+        });
+        
+        // Sort upcoming events by date (closest first)
+        upcomingEvents.sort((a, b) => a.date - b.date);
+        
+        // Sort past events by date (most recent first)
+        pastEvents.sort((a, b) => b.date - a.date);
+        
+        // Clear the timeline
+        timeline.innerHTML = '';
+        
+        // Add section title for upcoming events if any
+        if (upcomingEvents.length > 0) {
+            const upcomingTitle = document.createElement('div');
+            upcomingTitle.className = 'section-title';
+            upcomingTitle.textContent = 'Upcoming Hackathons';
+            timeline.appendChild(upcomingTitle);
+            
+            // Add upcoming events to timeline
+            upcomingEvents.forEach(event => {
+                timeline.appendChild(event.element);
+            });
+        }
+        
+        // Add divider if both upcoming and past events exist
+        if (upcomingEvents.length > 0 && pastEvents.length > 0) {
+            const divider = document.createElement('div');
+            divider.className = 'timeline-divider';
+            divider.innerHTML = '<span class="timeline-divider-text">Past Events</span>';
+            timeline.appendChild(divider);
+        }
+        
+        // Add section title for past events if any
+        if (pastEvents.length > 0) {
+            if (upcomingEvents.length === 0) {
+                const pastTitle = document.createElement('div');
+                pastTitle.className = 'section-title past';
+                pastTitle.textContent = 'Past Hackathons';
+                timeline.appendChild(pastTitle);
+            }
+            
+            // Add past events to timeline
+            pastEvents.forEach(event => {
+                timeline.appendChild(event.element);
+            });
+        }
+        
+        // 2. Calculate countdowns for each event
+        const countdowns = document.querySelectorAll('.countdown-value');
+        
+        countdowns.forEach(countdown => {
+            const eventCard = countdown.closest('.event-card');
+            const dateElement = eventCard.querySelector('.event-date');
+            
+            if (dateElement) {
+                const dateText = dateElement.textContent.trim();
+                
+                // Extract date from format like "March 21-23, 2025"
+                const dateParts = dateText.match(/(\w+)\s+(\d+)(?:-\d+)?,\s+(\d{4})/);
+                
+                if (dateParts) {
+                    const month = dateParts[1];
+                    const day = parseInt(dateParts[2]);
+                    const year = parseInt(dateParts[3]);
+                    
+                    const months = {
+                        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+                        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+                    };
+                    
+                    const eventDate = new Date(year, months[month], day);
+                    const today = new Date();
+                    
+                    const diffTime = eventDate - today;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    if (diffDays > 0) {
+                        countdown.textContent = diffDays + ' days';
+                    } else if (diffDays === 0) {
+                        countdown.textContent = 'Today!';
+                    } else {
+                        // For past events, hiding is handled by the previous section
+                    }
+                }
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

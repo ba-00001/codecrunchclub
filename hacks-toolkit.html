@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Toolkit | Code Crunch</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --bg-color: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-light: #64748b;
+            --accent: #38bdf8;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+            
+            /* Resource card colors */
+            --resources: #f59e0b;
+            --submissions: #10b981;
+            --judging: #8b5cf6;
+            --rules: #ef4444;
+            --conduct: #0ea5e9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-custom {
+            background-color: var(--bg-card) !important;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .navbar-custom .nav-link.active,
+        .navbar-custom .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .header {
+            padding: 3.5rem 0 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-light);
+        }
+
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        /* Toolkit Card Styles */
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .toolkit-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .toolkit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+
+        .card-resources .card-icon {
+            color: var(--resources);
+        }
+
+        .card-submissions .card-icon {
+            color: var(--submissions);
+        }
+
+        .card-judging .card-icon {
+            color: var(--judging);
+        }
+
+        .card-rules .card-icon {
+            color: var(--rules);
+        }
+
+        .card-conduct .card-icon {
+            color: var(--conduct);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .card-footer {
+            padding: 0.5rem 1.5rem 1.5rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            color: white;
+        }
+
+        .card-resources .button {
+            background-color: var(--resources);
+        }
+
+        .card-resources .button:hover {
+            background-color: #d97706;
+        }
+
+        .card-submissions .button {
+            background-color: var(--submissions);
+        }
+
+        .card-submissions .button:hover {
+            background-color: #059669;
+        }
+
+        .card-judging .button {
+            background-color: var(--judging);
+        }
+
+        .card-judging .button:hover {
+            background-color: #7c3aed;
+        }
+
+        .card-rules .button {
+            background-color: var(--rules);
+        }
+
+        .card-rules .button:hover {
+            background-color: #dc2626;
+        }
+
+        .card-conduct .button {
+            background-color: var(--conduct);
+        }
+
+        .card-conduct .button:hover {
+            background-color: #0284c7;
+        }
+
+        /* Partner Organization Section */
+        .partner-section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .partner-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            background-color: var(--bg-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .partner-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .partner-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .partner-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* end Partner Organization Section */
+
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--bg-card);
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container px-lg-5">
+            <!-- Logos and Brand Names -->
+            <div class="d-flex align-items-center">
+                <!-- Code Crunch Logo -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">Code Crunch @ FIU</span>
+                </a>
+                
+                <!-- Color Stack Logo -->
+                <a class="navbar-brand me-3" href="https://go.fiu.edu/colorstackatfiu">
+                    <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> ColorStack @ FIU </span>
+                </a>
+                
+                <!-- CAHSI Logo -->
+                <a class="navbar-brand" href="https://go.fiu.edu/cahsiatfiu">
+                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> CAHSI @ FIU </span>
+                </a>
+            </div>
+        
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="hacks-toolkit.html">Hacks Toolkit</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container header-container">
+            <div class="breadcrumbs">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Hackathon Toolkit</span>
+            </div>
+            <h1 class="header-title">Hackathon Toolkit</h1>
+            <p class="header-subtitle">Access everything you need to know about our hackathons, from preparation resources to evaluation criteria and guidelines.</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            <section>
+                <h2 class="section-title">Essential Resources</h2>
+                <p class="section-description">Navigate our comprehensive toolkit to find everything you need for a successful hackathon experience. From preparation resources to submission requirements and judging criteria, we've got you covered.</p>
+                
+                <div class="toolkit-grid">
+                    <!-- Resources Card -->
+                    <div class="toolkit-card card-resources">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <div class="card-icon">
+                                <i class="bi bi-book fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Hackathon Resources</h3>
+                            <p class="card-description">Access coding templates, starter kits, useful APIs, and other technical resources to help jumpstart your project. Find tutorials on popular technologies and frameworks to boost your hackathon performance.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hack1-resources.html" class="button">
+                                <i class="bi bi-arrow-right"></i>
+                                Explore Resources
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Submission Requirements Card -->
+                    <div class="toolkit-card card-submissions">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1470&q=80);">
+                            <div class="card-icon">
+                                <i class="bi bi-upload fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Submission Requirements</h3>
+                            <p class="card-description">Understand what's expected in your project submission, including code formats, documentation, presentation materials, and demo requirements. Make sure your hard work gets properly evaluated.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hack2-submissions-req.html" class="button">
+                                <i class="bi bi-arrow-right"></i>
+                                View Requirements
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Judging Criteria Card -->
+                    <div class="toolkit-card card-judging">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <div class="card-icon">
+                                <i class="bi bi-award fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Judging Criteria</h3>
+                            <p class="card-description">Learn how your project will be evaluated by our panel of judges. Discover the key factors that make a winning submission, from technical innovation to design quality and presentation skills.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hack3-judging-criteria.html" class="button">
+                                <i class="bi bi-arrow-right"></i>
+                                See Criteria
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Rules & Guidelines Card -->
+                    <div class="toolkit-card card-rules">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <div class="card-icon">
+                                <i class="bi bi-clipboard-check fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Rules & Guidelines</h3>
+                            <p class="card-description">Familiarize yourself with the hackathon rules, including eligibility requirements, team formation policies, intellectual property considerations, and other important guidelines to follow.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hack4-rules.html" class="button">
+                                <i class="bi bi-arrow-right"></i>
+                                Read Rules
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Code of Conduct Card -->
+                    <div class="toolkit-card card-conduct">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <div class="card-icon">
+                                <i class="bi bi-people fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Code of Conduct</h3>
+                            <p class="card-description">Understand our expectations for professional and respectful behavior during the hackathon. This code ensures a safe, inclusive, and positive environment for all participants regardless of background.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hack5-code-of-conduct.html" class="button">
+                                <i class="bi bi-arrow-right"></i>
+                                View Conduct Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="partner-section">
+                <h2 class="section-title">Our Partners</h2>
+                <p class="section-description">Our hackathons are made possible by collaboration with these amazing organizations. Connect with them to learn more about their initiatives and opportunities.</p>
+                
+                <div class="partner-grid">
+                    <!-- Code Crunch Card -->
+                    <div class="partner-card">
+                        <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Logo" class="partner-logo">
+                        <h3 class="partner-name">Code Crunch @ FIU</h3>
+                        <p class="partner-description">Open to all majors, universities, and students, Code Crunch is an interdisciplinary tech community focused on making tech education approachable for everyone. We provide hands-on coding workshops, technical interview prep, and collaborative projects that help students from any background build skills, grow professionally, and break into tech.</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/company/code-crunch-club/" class="social-link" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/codecrunchclub/" class="social-link" target="_blank">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://codecrunch.cs.fiu.edu" class="social-link" target="_blank">
+                                <i class="bi bi-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- ColorStack Card -->
+                    <div class="partner-card">
+                        <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack Logo" class="partner-logo">
+                        <h3 class="partner-name">ColorStack @ FIU</h3>
+                        <p class="partner-description">Open to all majors, universities, and students, ColorStack at FIU supports those pursuing computer science by offering mentorship, community, and career development. While open to all, we focus on uplifting underserved students in CS by helping them navigate academic and career pathways in the tech industry with confidence and connection.</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/company/color-stack-at-fiu" class="social-link" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/colorstackatfiu" class="social-link" target="_blank">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://go.fiu.edu/colorstackatfiu" class="social-link" target="_blank">
+                                <i class="bi bi-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- CAHSI Card -->
+                    <div class="partner-card">
+                        <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI Logo" class="partner-logo">
+                        <h3 class="partner-name">CAHSI @ FIU</h3>
+                        <p class="partner-description">Open to all majors, universities, and students, CAHSI (Computing Alliance of Hispanic-Serving Institutions) at FIU focuses on expanding access to computing research and graduate-level opportunities. Our chapter supports students through research experiences, academic mentoring, and guidance into advanced tech careers across industry and academia.</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/company/cahsi-at-fiu-club" class="social-link" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/colorstackatfiu" class="social-link" target="_blank">
+                                <i class="bi bi-instagram""></i>
+                            </a>
+                            <a href="https://go.fiu.edu/cahsiatfiu" class="social-link" target="_blank">
+                                <i class="bi bi-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
