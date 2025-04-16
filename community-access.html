@@ -46,105 +46,162 @@
         }
     </style>
 </head>
+
+
 <body class="min-h-screen bg-gray-50">
-    <!-- Navigation -->
-    <nav class="cc-blue text-white fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center space-x-4">
-                    <!-- Logo -->
-                    <div class="flex-shrink-0 flex items-center">
-                        <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2">
-                            <!-- Star SVG -->
-                            <svg viewBox="0 0 24 24" class="h-full w-full text-white">
-                                <path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
-                            </svg>
-                        </div>
-                        <div class="ml-3 flex flex-col">
-                            <span class="text-xl font-bold leading-none">CODE</span>
-                            <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html#home" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Home</a>
-                        <a href="index.html#mission" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Mission</a>
-                        <a href="index.html#events" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Events</a>
-                        <a href="index.html#hackathons" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Hackathons</a>
-                        <a href="membership.html" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700">Membership</a>
-                        <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Resources</a>
-                        <a href="index.html#connect" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Connect</a>
-                        
-                        <!-- Partners dropdown -->
-                        <div class="dropdown">
-                            <button class="px-3 py-2 rounded-md text-sm font-medium cc-orange cc-blue-text hover:bg-yellow-400 flex items-center">
-                                Partners
-                                <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="https://www.colorstack.org" target="_blank" rel="noopener noreferrer" 
-                                   class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                                    ColorStack @ FIU
-                                </a>
-                                <a href="https://cahsi.utep.edu/" target="_blank" rel="noopener noreferrer" 
-                                   class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                                    CAHSI @ FIU
-                                </a>
-                                <a href="#" target="_blank" rel="noopener noreferrer" 
-                                   class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                                    Tech Partners
-                                </a>
+ <!-- Navigation -->
+ <nav class="cc-blue text-white fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <div class="flex items-center space-x-4">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2">
+                        <!-- Star SVG -->
+                        <!-- Logo -->
+                        <div class="flex-shrink-0 flex items-center">
+                            <div class="h-12 w-12 rounded-lg flex items-center justify-center">
+                                <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" class="h-full w-full object-contain" />
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-blue-700 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                    <div class="ml-3 flex flex-col">
+                        <span class="text-xl font-bold leading-none">CODE</span>
+                        <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
+                    </div>
                 </div>
             </div>
-        </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Home</a>
+                    <a href="index.html#mission" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Mission</a>
+                    <a href="index.html#events" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Events</a>
+                    <a href="hackathons.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Hackathons</a>
+                    <a href="community-access.html" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700">Membership</a>
+                    <a href="all-eboard.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Join Executive-Board</a>
+                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Our Team</a>
+                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Gallery</a>
+                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Resources</a>
+                    <a href="index.html#connect" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Connect</a>
+                <!-- Partners dropdown -->
+            <div class="dropdown">
+                <button class="px-3 py-2 rounded-md text-sm font-medium cc-orange cc-blue-text hover:bg-yellow-400 flex items-center">
+                    Partners
+                    <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" 
+                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                        ColorStack at FIU
+                    </a>
+                    <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer" 
+                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                        CAHSI at FIU
+                    </a>
+                    <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                    class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                    FIU Business - Supporter
+                     </a>
+                     <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                     class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                     FIU Honors College - Supporter
+                      </a>
+                      <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                     class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                     FIU College of Engineering and Computing - Supporter
+                      </a>
+                      <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" 
+                      class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                      Eugenio Pino and Family Global Entrepreneurship Center - Supporter
+                       </a>
+                       <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" 
+                       class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
+                       Blackstone LaunchPad at FIU - Supporter
+                        </a>
 
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Home</a>
-                <a href="index.html#mission" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Mission</a>
-                <a href="index.html#events" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Events</a>
-                <a href="index.html#hackathons" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Hackathons</a>
-                <a href="membership.html" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-700">Membership</a>
-                <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Resources</a>
-                <a href="index.html#connect" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Connect</a>
-                
-                <!-- Mobile Partners Links -->
-                <div class="pt-2 pb-1">
-                    <div class="block px-3 py-2 rounded-md text-base font-medium cc-orange-text">Partners:</div>
-                    <a href="https://www.colorstack.org" target="_blank" rel="noopener noreferrer" 
-                       class="block px-6 py-1 text-sm hover:bg-blue-700">
-                        ColorStack @ FIU
-                    </a>
-                    <a href="https://cahsi.utep.edu/" target="_blank" rel="noopener noreferrer" 
-                       class="block px-6 py-1 text-sm hover:bg-blue-700">
-                        CAHSI @ FIU
-                    </a>
                     <a href="#" target="_blank" rel="noopener noreferrer" 
-                       class="block px-6 py-1 text-sm hover:bg-blue-700">
+                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
                         Tech Partners
                     </a>
                 </div>
             </div>
+                
+                
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-blue-700 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="index.html"           class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Home</a>
+            <a href="index.html#mission"   class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Mission</a>
+            <a href="index.html#events"     class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Events</a>
+            <a href="hackathons.html"        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Hackathons</a>
+            <a href="community-access.html" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-700">Membership</a>
+            <a href="all-eboard.html"       class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Join Executive-Board</a>
+            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Our Team</a>
+            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Gallery</a>
+            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Resources</a>
+            <a href="index.html#connect" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Connect</a>
+            
+            <!-- Mobile Partners Links -->
+            <div class="pt-2 pb-1">
+                <div class="block px-3 py-2 rounded-md text-base font-medium cc-orange-text">Partners:</div>
+
+                <a href="https://ba-00001.github.io/colorstackatfiu/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    ColorStack at FIU
+                </a>
+                <a href="https://ba-00001.github.io/CAHSIatFIU/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    CAHSI at FIU
+                </a>
+                <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    FIU Business - Supporter
+                </a>
+                <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    FIU Honors College - Supporter
+                </a>
+                <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    FIU College of Engineering and Computing - Supporter
+                </a>
+                <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    Eugenio Pino and Family Global Entrepreneurship Center - Supporter
+                </a>
+                <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    Blackstone LaunchPad at FIU - Supporter
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" 
+                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
+                    Tech Partners
+                </a>
+            </div>
+
+
+
+        </div>
+    </div>
+</nav>
 
     <!-- Main Content -->
     <div class="pt-32">
@@ -283,49 +340,107 @@
         </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="cc-blue text-white py-12 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Code Crunch <span class="star">✨</span></h3>
-                    <p class="text-sm opacity-80">
-                        An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning.
-                    </p>
-                    <p class="text-sm mt-2">
-                        <a href="http://codecrunch.cs.fiu.edu" class="text-white underline hover:opacity-90">codecrunch.cs.fiu.edu</a>
-                    </p>
+        <!-- Footer -->
+        <footer id="connect" class="cc-blue text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Code Crunch <span class="star">✨</span></h3>
+                        <p class="text-sm opacity-80">
+                            An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning.
+                        </p>
+                        <p class="text-sm mt-2">
+                            <a href="http://codecrunch.cs.fiu.edu" class="text-white underline hover:opacity-90">codecrunch.cs.fiu.edu</a>
+                        </p>
+                        
+                        <!-- Social Media Links Grid -->
+                        <div class="mt-6">
+                            <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+                            <div class="grid grid-cols-3 gap-3">
+                                <a href="https://www.linkedin.com/company/code-crunch-club" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                    <span class="text-xs mt-1">LinkedIn</span>
+                                </a>
+                                <a href="https://www.instagram.com/codecrunchclub/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                    <span class="text-xs mt-1">Instagram</span>
+                                </a>
+                                <a href="https://github.com/CODE-CRUNCH-CLUB" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fab fa-github text-xl"></i>
+                                    <span class="text-xs mt-1">GitHub</span>
+                                </a>
+                                <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fab fa-youtube text-xl"></i>
+                                    <span class="text-xs mt-1">YouTube</span>
+                                </a>
+                                <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-university text-xl"></i>
+                                    <span class="text-xs mt-1 text-center">Panther Connect</span>
+                                </a>
+                                <a href="community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fab fa-discord text-xl"></i>
+                                    <span class="text-xs mt-1">Discord</span>
+                                </a>
+                                <a href="community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-users text-xl"></i>
+                                    <span class="text-xs mt-1">GroupMe</span>
+                                </a>
+                                <a href="https://go.fiu.edu/codecrunch-zoom" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-video text-xl"></i>
+                                    <span class="text-xs mt-1">Zoom</span>
+                                </a>
+                                <a href="https://lu.ma/CODECRUNCH" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="far fa-calendar-alt text-xl"></i>
+                                    <span class="text-xs mt-1 text-center">Event Calendar</span>
+                                </a>
+                                <a href="https://app.epichire.com/clubs/809/invite?code=mXjh9s" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-briefcase text-xl"></i>
+                                    <span class="text-xs mt-1">EpicHire</span>
+                                </a>
+                                <a href="https://go.fiu.edu/CC-SCHEDULE" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-book text-xl"></i>
+                                    <span class="text-xs mt-1 text-center">Course Schedule</span>
+                                </a>
+                                <a href="https://forms.gle/StgULTsytrcfZXBv6" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
+                                    <i class="fas fa-clipboard-check text-xl"></i>
+                                    <span class="text-xs mt-1">Attendance</span>
+                                </a>
+
+                                <!-- <i class="fas fa-link text-xl"></i> chain link icon -->
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html#mission" class="text-sm opacity-80 hover:opacity-100">Mission</a></li>
+                            <li><a href="index.html#events" class="text-sm opacity-80 hover:opacity-100">Events</a></li>
+                            <li><a href="index.html#hackathons" class="text-sm opacity-80 hover:opacity-100">Hackathons</a></li>
+                            <li><a href="membership.html" class="text-sm opacity-80 hover:opacity-100">Membership</a></li>
+                            <li><a href="#" class="text-sm opacity-80 hover:opacity-100">Join E-Board</a></li>
+                            <li><a href="index.html#resources" class="text-sm opacity-80 hover:opacity-100">Resources</a></li>
+                            <li><a href="index.html#connect" class="text-sm opacity-80 hover:opacity-100">Connect</a></li>
+                            <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100">Join Discord</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Contact</h3>
+                        <p class="text-sm opacity-80">
+                            Florida International University<br>
+                            Miami, FL<br>
+                            <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100">codecrunchclub@gmail.com</a>
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html#mission" class="text-sm opacity-80 hover:opacity-100">Mission</a></li>
-                        <li><a href="index.html#events" class="text-sm opacity-80 hover:opacity-100">Events</a></li>
-                        <li><a href="index.html#hackathons" class="text-sm opacity-80 hover:opacity-100">Hackathons</a></li>
-                        <li><a href="community-access.html" class="text-sm opacity-80 hover:opacity-100">Membership</a></li>
-                        <li><a href="community-access.html" class="text-sm opacity-80 hover:opacity-100">Join the Executive board</a></li>
-                        <li><a href="index.html#resources" class="text-sm opacity-80 hover:opacity-100">Resources</a></li>
-                        <li><a href="index.html#connect" class="text-sm opacity-80 hover:opacity-100">Connect</a></li>
-                        <li><a href="community-access.html" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100">Join Discord</a></li>
-                        <li><a href="community-access.html" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100">Join GroupMe</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                <div class="mt-8 pt-8 border-t border-white/20 text-center">
                     <p class="text-sm opacity-80">
-                        Florida International University<br>
-                        Miami, FL<br>
-                        <a href="mailto:codecrunch@example.com" class="hover:opacity-100">codecrunch@example.com</a>
+                        © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
                     </p>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-white/20 text-center">
-                <p class="text-sm opacity-80">
-                    © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
         // Mobile menu toggle
