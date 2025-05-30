@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SummerCodeX 2025 - Virtual Hackathon</title>
+    <title>HackFiesta Miami 2026 - Virtual Hackathon</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* Global Styles - Summer XR Colors */
+        /* Global Styles - Miami Vice Colors */
         body {
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #ff006e 0%, #8338ec 25%, #3a86ff 50%, #06ffa5 75%, #ffbe0b 100%);
             color: #F8F9FA;
             font-family: 'Poppins', sans-serif;
             text-align: center;
@@ -27,7 +27,7 @@
 
         /* Navbar */
         .navbar {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background: linear-gradient(135deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b);
             padding: 15px;
         }
 
@@ -45,7 +45,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            color: #ffdd59 !important;
+            color: #ff006e !important;
         }
         
         /* Apply Button */
@@ -57,17 +57,17 @@
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, #ff006e, #8338ec);
             color: white;
-            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
             transition: all 0.3s ease-in-out;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .apply-button:hover {
-            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
-            box-shadow: 0 0 30px rgba(78, 205, 196, 0.8);
+            background: linear-gradient(135deg, #3a86ff, #06ffa5);
+            box-shadow: 0 0 30px rgba(58, 134, 255, 0.8);
             transform: translateY(-5px) scale(1.05);
             color: white;
         }
@@ -85,7 +85,7 @@
 
         .content-section h2 {
             font-size: 2.5rem;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background: linear-gradient(90deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -98,7 +98,7 @@
             border-radius: 12px;
             padding: 25px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(78, 205, 196, 0.2);
+            border: 1px solid rgba(255, 0, 110, 0.2);
             margin-bottom: 30px;
             transition: transform 0.3s ease;
             height: 100%;
@@ -106,21 +106,21 @@
 
         .storm-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
         }
 
         .card-title {
-            color: #4ecdc4;
+            color: #ff006e;
             font-size: 1.5rem;
             margin-bottom: 15px;
             font-weight: bold;
         }
 
         .track-card {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(131, 56, 236, 0.1) 100%);
             border-radius: 16px;
             padding: 30px;
-            border: 1px solid rgba(78, 205, 196, 0.3);
+            border: 1px solid rgba(255, 0, 110, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 30px;
             position: relative;
@@ -128,14 +128,14 @@
 
         .track-card:hover {
             transform: translateY(-7px);
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
         }
 
         .special-track-badge {
             position: absolute;
             top: 0;
             right: 0;
-            background: #ffdd59;
+            background: #06ffa5;
             color: #1A1A2E;
             padding: 8px 20px;
             font-weight: bold;
@@ -154,7 +154,7 @@
             content: '';
             position: absolute;
             width: 6px;
-            background: linear-gradient(180deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(180deg, #ff006e, #8338ec, #3a86ff);
             top: 0;
             bottom: 0;
             left: 50%;
@@ -177,8 +177,8 @@
             right: -12px;
             top: 15px;
             border-radius: 50%;
-            background: #4ecdc4;
-            box-shadow: 0 0 10px rgba(78, 205, 196, 0.8);
+            background: #ff006e;
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.8);
             z-index: 1;
         }
 
@@ -200,12 +200,12 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(78, 205, 196, 0.2);
+            border: 1px solid rgba(255, 0, 110, 0.2);
         }
 
         .timeline-title {
             font-weight: bold;
-            color: #4ecdc4;
+            color: #ff006e;
             font-size: 1.3rem;
             margin-bottom: 10px;
         }
@@ -231,20 +231,20 @@
             border-radius: 15px;
             width: 220px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(78, 205, 196, 0.2);
+            border: 1px solid rgba(255, 0, 110, 0.2);
             transition: transform 0.3s ease;
         }
 
         .stat-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: bold;
-            color: #4ecdc4;
-            text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+            color: #ff006e;
+            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
             margin-bottom: 10px;
         }
 
@@ -261,13 +261,13 @@
         }
 
         .faq-item {
-            border-bottom: 1px solid rgba(78, 205, 196, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 110, 0.3);
             padding: 15px 0;
         }
 
         .faq-question {
             width: 100%;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, #ff006e, #8338ec);
             color: white;
             border: none;
             padding: 15px;
@@ -277,12 +277,12 @@
             text-align: left;
             border-radius: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.2);
         }
 
         .faq-question:hover {
-            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
-            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+            background: linear-gradient(135deg, #3a86ff, #06ffa5);
+            box-shadow: 0 8px 20px rgba(58, 134, 255, 0.4);
         }
 
         .faq-answer {
@@ -341,7 +341,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">SummerCodeX 2025</a>
+        <a class="navbar-brand" href="#">HackFiesta Miami 2026</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -361,31 +361,30 @@
 
 <!-- Hackathon Details -->
 <section id="about" class="content-section">
-    <h2>🌟 SummerCodeX 2025</h2>
+    <h2>🌍 HackFiesta Miami 2026</h2>
     <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; color: #e0e0ff;">
-        Dive into the future with XR, Web3, Blockchain & Decentralization! A week-long virtual hackathon where innovation meets immersive technology. ✨🚀
+        ¡Bienvenidos! Join us for a celebration of global innovation and sustainable technology from the vibrant heart of Miami! Create solutions that transform communities worldwide! 🌴🚀
     </p>
     
-    <div style="margin: 3rem 0; background: rgba(255, 107, 107, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 107, 107, 0.3);">
-        <h3 style="color: #ff6b6b; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🌐 THEME: XR, Web3, Blockchain & Decentralization</h3>
-        <p style="text-align: center; margin-bottom: 1rem;">Explore the cutting edge of technology with Extended Reality, decentralized systems, and blockchain innovation.</p>
-        <p style="text-align: center; font-weight: bold; color: #e0e0ff;">🌍 Open to ALL majors from ANY university & High School Students (16+)!</p>
+    <div style="margin: 3rem 0; background: rgba(255, 0, 110, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.3);">
+        <h3 style="color: #ff006e; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🌎 THEME: Global Impact • Innovation • Sustainability</h3>
+        <p style="text-align: center; margin-bottom: 1rem;">Build technology solutions that create positive change for communities around the world!</p>
+        <p style="text-align: center; font-weight: bold; color: #e0e0ff;">🌍 Open to ALL students worldwide - celebrating diversity and global collaboration!</p>
     </div>
 
     <div style="margin: 3rem 0; background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(50, 205, 50, 0.3);">
         <h3 style="color: #32cd32; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">✅ REGISTRATION NOW OPEN!</h3>
-        <p style="text-align: center; margin-bottom: 1rem; font-size: 1.2rem;">Don't wait - secure your spot today and get early access to resources!</p>
+        <p style="text-align: center; margin-bottom: 1rem; font-size: 1.2rem;">Join the global fiesta of innovation and sustainable impact!</p>
         <div style="text-align: center; margin-top: 20px;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #ff006e);">
                 <i class="fas fa-rocket me-2"></i> Register Now
             </a>
             
-            <a href="https://witty-suede-4a1.notion.site/HACKS-at-FIU-Wiki-Students-only-1ee7f868cc8c806183f4f8ede9d5d0a3" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+            <a href="https://witty-suede-4a1.notion.site/HACKS-at-FIU-Wiki-Students-only-1ee7f868cc8c806183f4f8ede9d5d0a3" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #ff006e);">
                 <i class="fas fa-book me-2"></i> HACKS at FIU Wiki
             </a>
-            <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+            <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #ff006e);">
                 <i class="fas fa-toolbox me-2"></i> Hacks Toolkit
-
             </a>
         </div>
     </div>
@@ -393,59 +392,59 @@
     <!-- Stats Section -->
     <div class="stats-container">
         <div class="stat-item">
-            <div class="stat-number">53</div>
+            <div class="stat-number">284</div>
             <div class="stat-text">Days Until Start</div>
         </div>
         <div class="stat-item">
             <div class="stat-number">7</div>
-            <div class="stat-text">Days of Innovation</div>
+            <div class="stat-text">Days of Impact</div>
         </div>
         <div class="stat-item">
             <div class="stat-number">5</div>
-            <div class="stat-text">Exciting Tracks</div>
+            <div class="stat-text">Global Tracks</div>
         </div>
     </div>
     
     <div style="margin: 3rem 0;">
-        <h3 style="color: #4ecdc4; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
+        <h3 style="color: #ff006e; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0;">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.2);">
-                <span style="font-size: 1.2rem;">📅</span> <strong>July 21-28, 2025</strong>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2);">
+                <span style="font-size: 1.2rem;">📅</span> <strong>March 09-15, 2026</strong>
             </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.2);">
-                <span style="font-size: 1.2rem;">🚦</span> <strong>Start:</strong> Monday at 12:00 AM
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2);">
+                <span style="font-size: 1.2rem;">🚦</span> <strong>Start:</strong> Monday at 12:00 AM EST
             </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.2);">
-                <span style="font-size: 1.2rem;">🏁</span> <strong>End:</strong> Monday at 11:59 PM
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2);">
+                <span style="font-size: 1.2rem;">🏁</span> <strong>End:</strong> Monday at 11:59 PM EST
             </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.2);">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2);">
                 <span style="font-size: 1.2rem;">💻</span> <strong>100% Virtual</strong>
             </div>
         </div>
     </div>
             
     <div style="margin: 3rem 0;">
-        <h3 style="color: #4ecdc4; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💫 Why SummerCodeX Is Your Opportunity</h3>
+        <h3 style="color: #ff006e; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💫 Why HackFiesta Is Your Global Stage</h3>
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="storm-card">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🥽</div>
-                    <h4 class="card-title">XR Innovation</h4>
-                    <p>Dive into AR/VR and create immersive experiences that shape the future</p>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🌍</div>
+                    <h4 class="card-title">Global Impact</h4>
+                    <p>Build solutions that address real-world challenges and create positive change for communities worldwide</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="storm-card">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">⛓️</div>
-                    <h4 class="card-title">Web3 & Blockchain</h4>
-                    <p>Build decentralized applications and explore the future of the internet</p>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💡</div>
+                    <h4 class="card-title">Innovation Hub</h4>
+                    <p>Explore cutting-edge technologies and creative solutions with global collaborators from Miami's innovation spirit</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="storm-card">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
-                    <h4 class="card-title">AI Integration</h4>
-                    <p>Combine AI with cutting-edge tech for truly revolutionary solutions</p>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🌱</div>
+                    <h4 class="card-title">Sustainability Focus</h4>
+                    <p>Develop environmentally conscious and socially responsible technology for a better tomorrow</p>
                 </div>
             </div>
         </div>
@@ -455,54 +454,54 @@
 <!-- Timeline Section -->
 <section id="timeline" class="content-section">
     <h2>Hackathon Timeline</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Mark these key dates in your calendar to stay on track throughout the event!</p>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Mark these key dates in your calendar to stay on track throughout the global fiesta!</p>
     
     <div class="timeline-container">
         <div class="timeline-item timeline-left">
             <div class="timeline-content" style="background: rgba(50, 205, 50, 0.1); border: 1px solid rgba(50, 205, 50, 0.3);">
                 <div class="timeline-title" style="color: #32cd32;">Registration Open</div>
-                <div class="timeline-date">Now through July 20, 2025</div>
-                <p><i class="fas fa-check-circle" style="color: #32cd32;"></i> Registration is currently open! Sign up early to secure your spot and get access to pre-hackathon resources</p>
+                <div class="timeline-date">Now through March 08, 2026</div>
+                <p><i class="fas fa-check-circle" style="color: #32cd32;"></i> Registration is currently open! Join our global community of innovators</p>
             </div>
         </div>
         
         <div class="timeline-item timeline-right">
             <div class="timeline-content">
-                <div class="timeline-title">Hacking Begins</div>
-                <div class="timeline-date">July 21, 2025 at 12:00 AM EST</div>
-                <p>Track challenges revealed! Start building your XR, Web3, and AI projects</p>
+                <div class="timeline-title">¡Fiesta Begins!</div>
+                <div class="timeline-date">March 09, 2026 at 12:00 AM EST</div>
+                <p>Global challenges revealed! Start building technology for worldwide impact</p>
             </div>
         </div>
         
         <div class="timeline-item timeline-left">
             <div class="timeline-content">
-                <div class="timeline-title">Midweek Check-in</div>
-                <div class="timeline-date">July 24, 2025 at 6:00 PM EST</div>
-                <p>Optional progress update and mentorship session via Discord</p>
+                <div class="timeline-title">Global Check-in</div>
+                <div class="timeline-date">March 12, 2026 at 6:00 PM EST</div>
+                <p>International progress showcase and mentorship session via Discord</p>
             </div>
         </div>
         
         <div class="timeline-item timeline-right">
             <div class="timeline-content">
                 <div class="timeline-title">Submission Deadline</div>
-                <div class="timeline-date">July 28, 2025 at 11:59 PM EST</div>
+                <div class="timeline-date">March 15, 2026 at 11:59 PM EST</div>
                 <p>Final project submissions due on DevPost</p>
             </div>
         </div>
         
         <div class="timeline-item timeline-left">
             <div class="timeline-content">
-                <div class="timeline-title">Judging Period</div>
-                <div class="timeline-date">July 29-31, 2025</div>
-                <p>Projects reviewed by our panel of industry judges</p>
+                <div class="timeline-title">Global Judging</div>
+                <div class="timeline-date">March 16-18, 2026</div>
+                <p>Projects reviewed by our international panel of judges</p>
             </div>
         </div>
         
         <div class="timeline-item timeline-right">
             <div class="timeline-content">
-                <div class="timeline-title">Winners Announced</div>
-                <div class="timeline-date">August 1, 2025</div>
-                <p>Track winners announced via email and social media</p>
+                <div class="timeline-title">Winners Celebration</div>
+                <div class="timeline-date">March 19, 2026</div>
+                <p>Global winners announced - ¡Vamos a celebrar!</p>
             </div>
         </div>
     </div>
@@ -510,53 +509,53 @@
 
 <!-- Tracks Section -->
 <section id="tracks" class="content-section">
-    <h2>Hackathon Tracks 🧭</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Explore the themes below and pick your challenge - dive into the future of technology!</p>
+    <h2>Global Impact Tracks 🧭</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Choose your global challenge and build technology that makes a difference worldwide!</p>
     
-    <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #4ecdc4;">
+    <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.15) 0%, rgba(131, 56, 236, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #ff006e;">
         <div style="font-size: 2rem; margin-bottom: 20px;">🔓</div>
-        <h4 style="color: #4ecdc4; font-size: 1.5rem; margin-bottom: 20px;">Challenges Unlock Soon!</h4>
-        <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique challenges automatically revealed when the hackathon begins on <strong>July 21, 2025 at 12:00 AM</strong>.</p>
-        <p style="font-style: italic; color: #e0e0ff;">Get ready to innovate with cutting-edge technology! 🚀✨</p>
+        <h4 style="color: #ff006e; font-size: 1.5rem; margin-bottom: 20px;">Global Challenges Unlock Soon!</h4>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique global challenges automatically revealed when the hackathon begins on <strong>March 09, 2026 at 12:00 AM</strong>.</p>
+        <p style="font-style: italic; color: #e0e0ff;">Get ready to code for global impact! 🌍✨</p>
     </div>
     
     <div class="row">
         <div class="col-md-6 mb-4">
             <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🥽 Track 1: Immersive Worlds</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Dive into AR/VR experiences—social hangouts, virtual concerts, or interactive learning.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+                <h4 style="color: #2ecc71; font-size: 1.3rem;">🌍 Track 1: Global Health Solutions</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Build technology that improves healthcare access and outcomes for communities worldwide.</p>
+                <div class="challenge-lock" style="background: rgba(46, 204, 113, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(46, 204, 113, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until March 09</p>
                 </div>
             </div>
         </div>
         
         <div class="col-md-6 mb-4">
             <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🎮 Track 2: Play-to-Earn & GameFi</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Combine blockchain and gaming by crafting tokenized assets or play-to-earn mechanics.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+                <h4 style="color: #2ecc71; font-size: 1.3rem;">🎓 Track 2: Education for All</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Create educational technology that breaks down barriers and empowers learners globally.</p>
+                <div class="challenge-lock" style="background: rgba(46, 204, 113, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(46, 204, 113, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until March 09</p>
                 </div>
             </div>
         </div>
         
         <div class="col-md-6 mb-4">
             <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🤖 Track 3: AI-Powered Interactive Systems</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Leverage AI for chatbots, recommendation engines, or real-time image/speech recognition.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+                <h4 style="color: #2ecc71; font-size: 1.3rem;">🌱 Track 3: Climate & Environment</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Develop sustainable solutions to combat climate change and protect our planet.</p>
+                <div class="challenge-lock" style="background: rgba(46, 204, 113, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(46, 204, 113, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until March 09</p>
                 </div>
             </div>
         </div>
         
         <div class="col-md-6 mb-4">
             <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">📱 Track 4: Scalable Web & Mobile Experiences</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Design and implement robust full-stack applications—responsive web or cross-platform mobile apps.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+                <h4 style="color: #2ecc71; font-size: 1.3rem;">🤝 Track 4: Social Justice & Equality</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Build platforms that promote fairness, inclusion, and human rights worldwide.</p>
+                <div class="challenge-lock" style="background: rgba(46, 204, 113, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(46, 204, 113, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until March 09</p>
                 </div>
             </div>
         </div>
@@ -564,20 +563,20 @@
     
     <!-- Special Track -->
     <div class="col-12 mb-4">
-        <div class="track-card" style="border: 2px solid rgba(255, 221, 89, 0.4);">
+        <div class="track-card" style="border: 2px solid rgba(231, 76, 60, 0.4);">
             <div class="special-track-badge">Special Track</div>
-            <h4 style="color: #ffdd59; font-size: 1.3rem;">💼 Track #05: Tech Unicorn Track</h4>
-            <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;"><strong>Startup Pitch Arena</strong> – pitch your startup idea & prototype it</p>
-            <p style="color: #ffdd59; font-style: italic; margin-top: 10px;">Coding is <strong>not</strong> required for this track—you can use no-code/low-code tools or paper prototypes.</p>
-            <div class="challenge-lock" style="background: rgba(255, 221, 89, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255, 221, 89, 0.3);">
-                <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #ffdd59;"></i> <span style="color: #ffdd59;">Challenge locked until July 21</span></p>
+            <h4 style="color: #e74c3c; font-size: 1.3rem;">💼 Track #05: Global Startup Arena</h4>
+            <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;"><strong>International Pitch Competition</strong> – pitch your global impact startup idea & prototype it</p>
+            <p style="color: #e74c3c; font-style: italic; margin-top: 10px;">Coding is <strong>not</strong> required for this track—you can use no-code/low-code tools or paper prototypes.</p>
+            <div class="challenge-lock" style="background: rgba(231, 76, 60, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(231, 76, 60, 0.3);">
+                <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #e74c3c;"></i> <span style="color: #e74c3c;">Challenge locked until March 09</span></p>
             </div>
         </div>
     </div>
 
-    <script>
+   <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const releaseDate = new Date('2025-07-21T00:00:00');
+            const releaseDate = new Date('2026-03-09T00:00:00');
             
             function updateCountdown() {
                 const currentDate = new Date();
@@ -597,17 +596,17 @@
                     const daysText = document.querySelector('.stat-item .stat-text');
                     if (daysCountdown && daysText) {
                         daysCountdown.textContent = "LIVE";
-                        daysCountdown.style.color = "#32cd32";
+                        daysCountdown.style.color = "#06ffa5";
                         daysText.textContent = "NOW ACTIVE!";
                     }
                     
                     // Update all challenge locks
                     const lockedChallenges = document.querySelectorAll('.challenge-lock');
                     lockedChallenges.forEach((element) => {
-                        element.style.background = "rgba(50, 205, 50, 0.1)";
-                        element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
+                        element.style.background = "rgba(6, 255, 165, 0.1)";
+                        element.style.border = "1px solid rgba(6, 255, 165, 0.3)";
                         element.innerHTML = `
-                            <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
+                            <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #06ffa5;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
                         `;
                     });
                     
@@ -635,24 +634,24 @@
                         
                         const countdownEl = document.createElement('div');
                         countdownEl.className = 'live-countdown';
-                        countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(78, 205, 196, 0.1); border-radius: 10px; border: 1px solid rgba(78, 205, 196, 0.3);";
+                        countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(255, 0, 110, 0.1); border-radius: 10px; border: 1px solid rgba(255, 0, 110, 0.3);";
                         countdownEl.innerHTML = `
-                            <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #4ecdc4;">Challenges unlock in:</p>
+                            <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #ff006e;">Challenges unlock in:</p>
                             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
                                 <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #ff6b6b;">${days}</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #ff006e;">${days}</div>
                                     <div style="font-size: 0.9rem; color: #e0e0ff;">Days</div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #4ecdc4;">${hours}</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #8338ec;">${hours}</div>
                                     <div style="font-size: 0.9rem; color: #e0e0ff;">Hours</div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #45b7d1;">${minutes}</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #3a86ff;">${minutes}</div>
                                     <div style="font-size: 0.9rem; color: #e0e0ff;">Minutes</div>
                                 </div>
                                 <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #ffdd59;">${seconds}</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #06ffa5;">${seconds}</div>
                                     <div style="font-size: 0.9rem; color: #e0e0ff;">Seconds</div>
                                 </div>
                             </div>
@@ -674,30 +673,30 @@
 <!-- FAQ Section -->
 <section id="faq" class="content-section">
     <h2>Frequently Asked Questions</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Find answers to common questions about SummerCodeX 2025</p>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Find answers to common questions about HackFiesta Miami 2026</p>
     
     <div class="faq-container">
         <!-- Question 1 -->
         <div class="faq-item">
-            <button class="faq-question">What is SummerCodeX 2025?</button>
+            <button class="faq-question">What is HackFiesta Miami 2026?</button>
             <div class="faq-answer">
-                SummerCodeX is a week-long virtual hackathon focused on XR (Extended Reality), Web3, Blockchain, and Decentralization. It's open to students from all universities and all majors, challenging participants to build innovative projects using cutting-edge technologies in just 7 days.
+                HackFiesta Miami is a week-long virtual hackathon focused on Global Impact, Innovation, and Sustainability. Celebrating Miami's vibrant culture, it brings together global innovators to build technology solutions that create positive change for communities worldwide.
             </div>
         </div>
 
         <!-- Question 2 -->
         <div class="faq-item">
-            <button class="faq-question">Who can participate in SummerCodeX?</button>
+            <button class="faq-question">Who can participate in HackFiesta?</button>
             <div class="faq-answer">
-                <strong>All university students from ANY institution worldwide</strong> and high school students (16+) are welcome! You don't need to be a tech major - we welcome students from all disciplines. The hackathon accommodates all skill levels, from beginners to advanced developers.
+                <strong>All students worldwide are welcome!</strong> University students from ANY institution globally and high school students (16+) can participate. We celebrate diversity and encourage international collaboration from all majors and backgrounds.
             </div>
         </div>
 
         <!-- Question 3 -->
         <div class="faq-item">
-            <button class="faq-question">Do I need experience with XR, Web3, or Blockchain?</button>
+            <button class="faq-question">Do I need experience with global impact projects?</button>
             <div class="faq-answer">
-                No prior experience required! We'll provide resources, tutorials, and mentorship to help you get started. Many successful projects come from teams learning these technologies for the first time during the hackathon.
+                No prior experience required! We'll provide comprehensive resources, tutorials, and mentorship to help you understand global challenges and sustainable solutions. Many successful projects come from teams passionate about making a difference, regardless of technical background.
             </div>
         </div>
 
@@ -705,99 +704,97 @@
         <div class="faq-item">
             <button class="faq-question">Is there a registration fee?</button>
             <div class="faq-answer">
-                <strong>No!</strong> SummerCodeX is completely <strong>free</strong> for all participants. We are committed to making cutting-edge technology accessible to everyone.
+                <strong>¡Absolutamente gratis!</strong> HackFiesta Miami is completely <strong>free</strong> for all participants. We are committed to making global innovation accessible to everyone, celebrating diversity and inclusion in technology.
             </div>
         </div>
 
         <!-- Question 5 -->
         <div class="faq-item">
-            <button class="faq-question">What can I build in the Tech Unicorn Track?</button>
+            <button class="faq-question">What makes HackFiesta special with its Miami connection?</button>
             <div class="faq-answer">
-                The Tech Unicorn Track is perfect for non-coders! You can create business pitches, prototypes using no-code tools, paper mockups, or business plans. Focus on innovation, market potential, and solving real problems rather than coding complexity.
+                HackFiesta embodies Miami's spirit of diversity, innovation, and global connection! We celebrate the city's multicultural energy while focusing on solutions that impact communities worldwide. It's where Miami's vibrant culture meets global problem-solving.
             </div>
         </div>
 
         <!-- Question 6 -->
         <div class="faq-item">
-            <button class="faq-question">How do teams work?</button>
+            <button class="faq-question">How do international teams collaborate?</button>
             <div class="faq-answer">
-                You can register solo or with a team of up to 4 members. Solo participants can join our Discord team formation channels to connect with others. We encourage diverse teams mixing different skills and backgrounds.
+                You can register solo or with a team of up to 4 members from anywhere in the world! Our Discord channels facilitate global team formation, and we provide mentorship across different time zones to support international collaboration.
             </div>
         </div>
 
         <!-- Question 7 -->
         <div class="faq-item">
-            <button class="faq-question">What resources will be available?</button>
+            <button class="faq-question">What resources support global impact projects?</button>
             <div class="faq-answer">
-                Participants get access to mentors via Discord, workshops on XR/Web3/AI technologies, starter templates, API keys for various services, and comprehensive documentation. We'll also have 24/7 technical support during the event.
+                Participants get access to global mentors via Discord, workshops on sustainable technology, social impact frameworks, APIs for global data, comprehensive documentation, and 24/7 international support. We also provide resources on UN Sustainable Development Goals.
             </div>
         </div>
 
         <!-- Question 8 -->
         <div class="faq-item">
-            <button class="faq-question">How are projects judged?</button>
+            <button class="faq-question">How are projects judged for global impact?</button>
             <div class="faq-answer">
-                Projects are evaluated on innovation, technical implementation, theme alignment, presentation quality, and potential impact. Each track has specialized judges with expertise in the respective technologies.
+                Projects are evaluated on global impact potential, innovation, technical implementation, sustainability, scalability, and presentation quality. Our international panel includes experts in social impact, sustainable technology, and global development.
             </div>
         </div>
     </div>
 </section>
 
-
-
 <!-- Resources Section -->
 <section id="resources" class="content-section">
     <h2>Hackathon Resources</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Access comprehensive resources to help you succeed in CODESTORM Hack 2025!</p>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Access comprehensive resources to help you succeed in HackFiesta Miami 2026!</p>
     
-    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2); margin-bottom: 30px; text-align: center;">
-        <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">🧰 Complete Resource Library</h3>
-        <p style="margin-bottom: 25px; font-size: 1.1rem;">For tutorials, starter code, tool recommendations, and more, visit our resources page:</p>
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2); margin-bottom: 30px; text-align: center;">
+        <h3 style="color: #ff006e; font-size: 1.4rem; margin-bottom: 20px;">🧰 Complete Resource Library</h3>
+        <p style="margin-bottom: 25px; font-size: 1.1rem;">For tutorials, global impact frameworks, tool recommendations, and more, visit our resources page:</p>
         <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="font-size: 1.2rem; padding: 15px 30px;">
             <i class="fas fa-external-link-alt me-2"></i> Hackathon Resources
         </a>
     </div>
     
-    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2); margin-top: 30px;">
-        <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">🔗 Stay Connected</h3>
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(255, 0, 110, 0.2); margin-top: 30px;">
+        <h3 style="color: #ff006e; font-size: 1.4rem; margin-bottom: 20px;">🔗 Stay Connected</h3>
         
         <div class="contact-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
-            <a href="https://codecrunch.cs.fiu.edu" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://codecrunch.cs.fiu.edu" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fas fa-globe me-2"></i> Website
             </a>
-            <a href="https://ba-00001.github.io/codecrunchclub/index.html#connect" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://ba-00001.github.io/codecrunchclub/index.html#connect" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fas fa-envelope me-2"></i> Email
             </a>
-            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fab fa-linkedin me-2"></i> LinkedIn
             </a>
-            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fab fa-instagram me-2"></i> Instagram
             </a>
-            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fab fa-whatsapp me-2"></i> WhatsApp
             </a>
-            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fas fa-university me-2"></i> Panther Connect
             </a>
-            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fab fa-youtube me-2"></i> YouTube
             </a>
-            <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+            <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                 <i class="fas fa-file-alt me-2"></i> Resume Book
             </a>
         </div>
         
         <div style="margin-top: 30px;">
-            <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">📚 Hackathon Support</h3>
+            <h3 style="color: #ff006e; font-size: 1.4rem; margin-bottom: 20px;">📚 Hackathon Support</h3>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                     <i class="fas fa-handshake me-2"></i> Code of Conduct
                 </a>
-                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                     <i class="fas fa-file-alt me-2"></i> Rules & Guidelines
                 </a>
-                <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #ff006e, #8338ec); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
                     <i class="fab fa-discord me-2"></i> Discord Server
                 </a>
             </div>
@@ -808,28 +805,28 @@
 <!-- Contributors Section -->
 <section id="contributors" class="content-section">
     <h2>Contributors & Sponsors</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">CODESTORM Hack 2025 is made possible by our amazing partners and supporters!</p>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">HackFiesta Miami 2026 is made possible by our amazing global partners and supporters!</p>
     
     <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; margin: 30px auto; max-width: 800px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
-        <div class="window-header" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; color: #00FFFF; text-align: center;">🌟 A Big Thanks To Our Partners</div>
+        <div class="window-header" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; color: #ff006e; text-align: center;">🌟 A Big Thanks To Our Global Partners</div>
         <div class="contributors-logos" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;">
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="CodePath Logo" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="Global Impact Foundation" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="Epic Logo" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="Miami Innovation Hub" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="Honors College" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="Sustainability Tech Labs" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="CEC" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="International Development Fund" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="KFSCIS" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="Global Education Alliance" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
             <div class="contributor-card">
-                <img src="/api/placeholder/140/80" alt="Business" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                <img src="/api/placeholder/140/80" alt="Climate Action Network" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
             </div>
         </div>
     </div>
@@ -837,9 +834,9 @@
     <div class="row">
         <div class="col-md-6 mb-4">
             <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
-                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Interested in being a mentor, judge, workshop host, or organizer for CODESTORM?</p>
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Interested in being a mentor, judge, workshop host, or organizer for HackFiesta?</p>
                 <div style="text-align: center;">
-                    <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #9d4edd, #ff6b6b); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);">
+                    <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #ff006e, #06ffa5); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.4);">
                         <i class="fas fa-hands-helping me-2"></i> Volunteer Form
                     </a>
                 </div>
@@ -847,9 +844,9 @@
         </div>
         <div class="col-md-6 mb-4">
             <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
-                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Want to support this event as a sponsor?</p>
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Want to support this global fiesta as a sponsor?</p>
                 <div style="text-align: center;">
-                    <a href="cc-prospectus.html" class="prospectus-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #0072ff, #00c6ff); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);">
+                    <a href="cc-prospectus.html" class="prospectus-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #8338ec, #ffbe0b); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);">
                         <i class="fas fa-file-download me-2"></i> Download Prospectus
                     </a>
                 </div>
@@ -861,12 +858,12 @@
 <!-- Footer -->
 <footer style="background: linear-gradient(135deg, rgba(15, 52, 96, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%); color: white; text-align: center; padding: 30px; margin-top: 60px; border-radius: 12px 12px 0 0;">
     <div class="container">
-        <p>© 2025 SummerCodeX | Code Crunch Club</p>
-        <p>Building the future with XR, Web3, Blockchain & AI</p>
+        <p>© 2026 HackFiesta Miami | Code Crunch Club</p>
+        <p>¡Vamos a cambiar el mundo! Code for global impact, innovate for sustainability!</p>
         <div style="margin-top: 15px;">
-            <a href="#" style="color: #4ecdc4; margin: 0 10px; text-decoration: none;">Contact</a>
-            <a href="#" style="color: #4ecdc4; margin: 0 10px; text-decoration: none;">Code of Conduct</a>
-            <a href="#" style="color: #4ecdc4; margin: 0 10px; text-decoration: none;">Privacy Policy</a>
+            <a href="#" style="color: #ff006e; margin: 0 10px; text-decoration: none;">Contact</a>
+            <a href="#" style="color: #ff006e; margin: 0 10px; text-decoration: none;">Code of Conduct</a>
+            <a href="#" style="color: #ff006e; margin: 0 10px; text-decoration: none;">Privacy Policy</a>
         </div>
     </div>
 </footer>
