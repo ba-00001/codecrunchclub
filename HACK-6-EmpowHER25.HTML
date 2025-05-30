@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowHER Hackathon 2025 - Virtual Hackathon</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Global Styles - EmpowHER Colors */
+        body {
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 50%, #38ef7d 100%);
+            color: #F8F9FA;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f093fb !important;
+        }
+        
+        /* Apply Button */
+        .apply-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .apply-button:hover {
+            background: linear-gradient(135deg, #764ba2, #f093fb);
+            box-shadow: 0 0 30px rgba(240, 147, 251, 0.8);
+            transform: translateY(-5px) scale(1.05);
+            color: white;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(18, 18, 40, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Storm Card */
+        .storm-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .storm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .card-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .track-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .track-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .special-track-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #f093fb;
+            color: #1A1A2E;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-bottom-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            top: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        /* Stats */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            width: 220px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 15px 0;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #764ba2, #f093fb);
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 0 8px 8px;
+            margin-top: 2px;
+            line-height: 1.6;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 40px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+            
+            .timeline-left::after, .timeline-right::after {
+                left: 28px;
+            }
+            
+            .timeline-right {
+                left: 0%;
+            }
+
+            .stat-item {
+                width: 160px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">EmpowHER 2025</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hackathon Details -->
+<section id="about" class="content-section">
+    <h2>💜 EmpowHER Hackathon 2025</h2>
+    <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; color: #e0e0ff;">
+        Empowering women in technology through innovation, ethical AI, and blockchain solutions. Join us for a week of coding, collaboration, and creating positive change! 💪✨
+    </p>
+    
+    <div style="margin: 3rem 0; background: rgba(102, 126, 234, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.3);">
+        <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🌟 THEME: Women in Tech, Ethical AI & Blockchain</h3>
+        <p style="text-align: center; margin-bottom: 1rem;">Building technology that empowers, includes, and creates positive impact for communities worldwide.</p>
+        <p style="text-align: center; font-weight: bold; color: #e0e0ff;">🌍 Especially welcoming women, non-binary individuals, and allies from ALL backgrounds!</p>
+    </div>
+
+    <div style="margin: 3rem 0; background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(50, 205, 50, 0.3);">
+        <h3 style="color: #32cd32; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">✅ REGISTRATION NOW OPEN!</h3>
+        <p style="text-align: center; margin-bottom: 1rem; font-size: 1.2rem;">Join a supportive community and build technology for positive change!</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #667eea);">
+                <i class="fas fa-rocket me-2"></i> Register Now
+            </a>
+            
+            <a href="https://witty-suede-4a1.notion.site/HACKS-at-FIU-Wiki-Students-only-1ee7f868cc8c806183f4f8ede9d5d0a3" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #667eea);">
+                <i class="fas fa-book me-2"></i> HACKS at FIU Wiki
+            </a>
+            <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #667eea);">
+                <i class="fas fa-toolbox me-2"></i> Hacks Toolkit
+            </a>
+        </div>
+    </div>
+            
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <div class="stat-item">
+            <div class="stat-number">137</div>
+            <div class="stat-text">Days Until Start</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">7</div>
+            <div class="stat-text">Days of Innovation</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">5</div>
+            <div class="stat-text">Empowering Tracks</div>
+        </div>
+    </div>
+    
+    <div style="margin: 3rem 0;">
+        <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+                <span style="font-size: 1.2rem;">📅</span> <strong>October 13-20, 2025</strong>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+                <span style="font-size: 1.2rem;">🚦</span> <strong>Start:</strong> Monday at 12:00 AM
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+                <span style="font-size: 1.2rem;">🏁</span> <strong>End:</strong> Monday at 11:59 PM
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+                <span style="font-size: 1.2rem;">💻</span> <strong>100% Virtual</strong>
+            </div>
+        </div>
+    </div>
+            
+    <div style="margin: 3rem 0;">
+        <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💫 Why EmpowHER Is Your Opportunity</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">👩‍💻</div>
+                    <h4 class="card-title">Women in Tech Focus</h4>
+                    <p>Celebrating and amplifying women's voices in technology, creating inclusive solutions</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                    <h4 class="card-title">Ethical AI</h4>
+                    <p>Build AI systems that are fair, transparent, and beneficial for all communities</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⛓️</div>
+                    <h4 class="card-title">Blockchain for Good</h4>
+                    <p>Leverage blockchain technology to create transparency and positive social impact</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section id="timeline" class="content-section">
+    <h2>Hackathon Timeline</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Mark these key dates in your calendar to stay on track throughout the event!</p>
+    
+    <div class="timeline-container">
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content" style="background: rgba(50, 205, 50, 0.1); border: 1px solid rgba(50, 205, 50, 0.3);">
+                <div class="timeline-title" style="color: #32cd32;">Registration Open</div>
+                <div class="timeline-date">Now through October 12, 2025</div>
+                <p><i class="fas fa-check-circle" style="color: #32cd32;"></i> Registration is currently open! Join our inclusive community early</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Hacking Begins</div>
+                <div class="timeline-date">October 13, 2025 at 12:00 AM EST</div>
+                <p>Track challenges revealed! Start building technology for positive change</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Midweek Check-in</div>
+                <div class="timeline-date">October 16, 2025 at 6:00 PM EST</div>
+                <p>Optional progress update and mentorship session via Discord</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Submission Deadline</div>
+                <div class="timeline-date">October 20, 2025 at 11:59 PM EST</div>
+                <p>Final project submissions due on DevPost</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Judging Period</div>
+                <div class="timeline-date">October 21-23, 2025</div>
+                <p>Projects reviewed by our diverse panel of industry judges</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Winners Announced</div>
+                <div class="timeline-date">October 24, 2025</div>
+                <p>Track winners announced via email and social media</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tracks Section -->
+<section id="tracks" class="content-section">
+    <h2>Hackathon Tracks 🧭</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Explore the themes below and pick your challenge - build technology that empowers and includes!</p>
+    
+    <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #667eea;">
+        <div style="font-size: 2rem; margin-bottom: 20px;">🔓</div>
+        <h4 style="color: #667eea; font-size: 1.5rem; margin-bottom: 20px;">Challenges Unlock Soon!</h4>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique challenges automatically revealed when the hackathon begins on <strong>October 13, 2025 at 12:00 AM</strong>.</p>
+        <p style="font-style: italic; color: #e0e0ff;">Get ready to build technology that empowers everyone! 💪✨</p>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="track-card">
+                <h4 style="color: #667eea; font-size: 1.3rem;">👩‍💻 Track 1: Women in Tech Empowerment</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Build solutions that support, mentor, and amplify women's voices in technology.</p>
+                <div class="challenge-lock" style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until October 13</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="track-card">
+                <h4 style="color: #667eea; font-size: 1.3rem;">🤖 Track 2: Ethical AI Solutions</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Create AI systems that are fair, transparent, and beneficial for all communities.</p>
+                <div class="challenge-lock" style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until October 13</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="track-card">
+                <h4 style="color: #667eea; font-size: 1.3rem;">⛓️ Track 3: Blockchain for Social Good</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Leverage blockchain technology to create transparency and positive social impact.</p>
+                <div class="challenge-lock" style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until October 13</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="track-card">
+                <h4 style="color: #667eea; font-size: 1.3rem;">🌍 Track 4: Inclusive Digital Solutions</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Build accessible and inclusive technology that serves diverse communities.</p>
+                <div class="challenge-lock" style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until October 13</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Special Track -->
+    <div class="col-12 mb-4">
+        <div class="track-card" style="border: 2px solid rgba(240, 147, 251, 0.4);">
+            <div class="special-track-badge">Special Track</div>
+            <h4 style="color: #f093fb; font-size: 1.3rem;">💼 Track #05: Tech Unicorn Track</h4>
+            <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;"><strong>Startup Pitch Arena</strong> – pitch your startup idea & prototype it</p>
+            <p style="color: #f093fb; font-style: italic; margin-top: 10px;">Coding is <strong>not</strong> required for this track—you can use no-code/low-code tools or paper prototypes.</p>
+            <div class="challenge-lock" style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(240, 147, 251, 0.3);">
+                <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #f093fb;"></i> <span style="color: #f093fb;">Challenge locked until October 13</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const releaseDate = new Date('2025-10-13T00:00:00');
+            
+            function updateCountdown() {
+                const currentDate = new Date();
+                const timeLeft = releaseDate - currentDate;
+                
+                if (timeLeft <= 0) {
+                    // Hackathon has started - reveal challenges
+                    console.log("Challenges are now available!");
+                    
+                    const mysteryBanner = document.getElementById('mysteryBanner');
+                    if (mysteryBanner) {
+                        mysteryBanner.style.display = 'none';
+                    }
+                    
+                    // Update stats to show "LIVE NOW"
+                    const daysCountdown = document.querySelector('.stat-item .stat-number');
+                    const daysText = document.querySelector('.stat-item .stat-text');
+                    if (daysCountdown && daysText) {
+                        daysCountdown.textContent = "LIVE";
+                        daysCountdown.style.color = "#32cd32";
+                        daysText.textContent = "NOW ACTIVE!";
+                    }
+                    
+                    // Update all challenge locks
+                    const lockedChallenges = document.querySelectorAll('.challenge-lock');
+                    lockedChallenges.forEach((element) => {
+                        element.style.background = "rgba(50, 205, 50, 0.1)";
+                        element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
+                        element.innerHTML = `
+                            <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
+                        `;
+                    });
+                    
+                    return; // Stop the countdown
+                } else {
+                    // Calculate days, hours, minutes, seconds
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    // Update the days counter in stats
+                    const daysCountdown = document.querySelector('.stat-item .stat-number');
+                    if (daysCountdown) {
+                        daysCountdown.textContent = days;
+                    }
+                    
+                    // Update mystery banner with detailed countdown
+                    const mysteryBanner = document.getElementById('mysteryBanner');
+                    if (mysteryBanner) {
+                        const existingCountdown = mysteryBanner.querySelector('.live-countdown');
+                        if (existingCountdown) {
+                            existingCountdown.remove();
+                        }
+                        
+                        const countdownEl = document.createElement('div');
+                        countdownEl.className = 'live-countdown';
+                        countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; border: 1px solid rgba(102, 126, 234, 0.3);";
+                        countdownEl.innerHTML = `
+                            <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #667eea;">Challenges unlock in:</p>
+                            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">${days}</div>
+                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Days</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #764ba2;">${hours}</div>
+                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Hours</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #f093fb;">${minutes}</div>
+                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Minutes</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #11998e;">${seconds}</div>
+                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Seconds</div>
+                                </div>
+                            </div>
+                        `;
+                        mysteryBanner.appendChild(countdownEl);
+                    }
+                }
+            }
+            
+            // Update countdown immediately
+            updateCountdown();
+            
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Find answers to common questions about EmpowHER Hackathon 2025</p>
+    
+    <div class="faq-container">
+        <!-- Question 1 -->
+        <div class="faq-item">
+            <button class="faq-question">What is EmpowHER Hackathon 2025?</button>
+            <div class="faq-answer">
+                EmpowHER is a week-long virtual hackathon focused on Women in Tech, Ethical AI, and Blockchain for social good. It's designed to create an inclusive space where participants build technology that empowers communities and promotes positive change.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-item">
+            <button class="faq-question">Who can participate in EmpowHER?</button>
+            <div class="faq-answer">
+                <strong>Everyone is welcome!</strong> While we especially encourage women and non-binary individuals to participate, allies from all backgrounds are invited. Students from all universities, high school students (16+), and participants from all majors are welcome.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-item">
+            <button class="faq-question">Do I need experience with AI or Blockchain?</button>
+            <div class="faq-answer">
+                No prior experience required! We'll provide comprehensive resources, tutorials, and mentorship focused on ethical AI and blockchain for social good. Many successful projects come from teams learning these technologies during the hackathon.
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-item">
+            <button class="faq-question">Is there a registration fee?</button>
+            <div class="faq-answer">
+                <strong>No!</strong> EmpowHER Hackathon is completely <strong>free</strong> for all participants. We are committed to making technology accessible and creating an inclusive environment for everyone.
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="faq-item">
+            <button class="faq-question">What kind of projects should I build?</button>
+            <div class="faq-answer">
+                Focus on projects that empower communities, promote inclusion, and create positive social impact. This could include solutions for women in tech mentorship, ethical AI applications, blockchain for transparency, or accessible technology for diverse communities.
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="faq-item">
+            <button class="faq-question">How do teams work in EmpowHER?</button>
+            <div class="faq-answer">
+                You can register solo or with a team of up to 4 members. Solo participants can join our Discord team formation channels to connect with others. We encourage diverse teams and provide mentorship to support collaborative learning.
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="faq-item">
+            <button class="faq-question">What resources will be available?</button>
+            <div class="faq-answer">
+                Participants get access to mentors via Discord, workshops on ethical AI and blockchain, starter templates, API keys, comprehensive documentation, and 24/7 support. We also provide resources specifically focused on women in tech initiatives.
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="faq-item">
+            <button class="faq-question">How are projects judged?</button>
+            <div class="faq-answer">
+                Projects are evaluated on innovation, social impact, technical implementation, inclusivity, and presentation quality. Our diverse panel of judges includes women leaders in tech, AI ethics experts, and blockchain specialists.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Resources Section -->
+<section id="resources" class="content-section">
+    <h2>Hackathon Resources</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Access comprehensive resources to help you succeed in EmpowHER Hackathon 2025!</p>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2); margin-bottom: 30px; text-align: center;">
+        <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 20px;">🧰 Complete Resource Library</h3>
+        <p style="margin-bottom: 25px; font-size: 1.1rem;">For tutorials, starter code, tool recommendations, and more, visit our resources page:</p>
+        <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="font-size: 1.2rem; padding: 15px 30px;">
+            <i class="fas fa-external-link-alt me-2"></i> Hackathon Resources
+        </a>
+    </div>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2); margin-top: 30px;">
+        <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 20px;">🔗 Stay Connected</h3>
+        
+        <div class="contact-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+            <a href="https://codecrunch.cs.fiu.edu" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-globe me-2"></i> Website
+            </a>
+            <a href="https://ba-00001.github.io/codecrunchclub/index.html#connect" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-envelope me-2"></i> Email
+            </a>
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-linkedin me-2"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-instagram me-2"></i> Instagram
+            </a>
+            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-whatsapp me-2"></i> WhatsApp
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-university me-2"></i> Panther Connect
+            </a>
+            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-youtube me-2"></i> YouTube
+            </a>
+            <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-file-alt me-2"></i> Resume Book
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 20px;">📚 Hackathon Support</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-handshake me-2"></i> Code of Conduct
+                </a>
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-file-alt me-2"></i> Rules & Guidelines
+                </a>
+                <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" class="btn btn-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fab fa-discord me-2"></i> Discord Server
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contributors Section -->
+<section id="contributors" class="content-section">
+    <h2>Contributors & Sponsors</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">EmpowHER Hackathon 2025 is made possible by our amazing partners and supporters!</p>
+    
+    <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; margin: 30px auto; max-width: 800px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+        <div class="window-header" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; color: #667eea; text-align: center;">🌟 A Big Thanks To Our Partners</div>
+        <div class="contributors-logos" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;">
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Women in Tech Logo" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="AI Ethics Foundation" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Blockchain for Good" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Diversity in Tech" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Tech Inclusion Foundation" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Social Impact Tech" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Interested in being a mentor, judge, workshop host, or organizer for EmpowHER?</p>
+                <div style="text-align: center;">
+                    <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #667eea, #f093fb); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                        <i class="fas fa-hands-helping me-2"></i> Volunteer Form
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Want to support this event as a sponsor?</p>
+                <div style="text-align: center;">
+                    <a href="cc-prospectus.html" class="prospectus-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #764ba2, #667eea); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);">
+                        <i class="fas fa-file-download me-2"></i> Download Prospectus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer style="background: linear-gradient(135deg, rgba(15, 52, 96, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%); color: white; text-align: center; padding: 30px; margin-top: 60px; border-radius: 12px 12px 0 0;">
+    <div class="container">
+        <p>© 2025 EmpowHER Hackathon | Code Crunch Club</p>
+        <p>Empowering women in tech through innovation and inclusion</p>
+        <div style="margin-top: 15px;">
+            <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">Contact</a>
+            <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">Code of Conduct</a>
+            <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- FAQ Toggle Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const questions = document.querySelectorAll(".faq-question");
+        
+        questions.forEach(question => {
+            question.addEventListener("click", function () {
+                const answer = this.nextElementSibling;
+                
+                if (answer) {
+                    answer.style.display = (answer.style.display === "block") ? "none" : "block";
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
