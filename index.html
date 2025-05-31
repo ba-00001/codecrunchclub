@@ -6,13 +6,12 @@
     <title>Code Crunch</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <!-- Font Awesome CDN for social icons -->
-    <!-- Font Awesome CDN for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --cc-blue: #2463EB; /* Bright blue from the logo */
-            --cc-orange: #F59E0B; /* Orange from the logo */
-            --cc-dark: #111827; /* Dark text/accent color */
+            --cc-blue: #2463EB;
+            --cc-orange: #F59E0B;
+            --cc-dark: #111827;
         }
         .cc-blue { background-color: var(--cc-blue); }
         .cc-blue-text { color: var(--cc-blue); }
@@ -28,299 +27,548 @@
             margin: 0 0.5rem;
         }
         
-        /* Dropdown styles */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        /* Hamburger menu styles */
+        .hamburger {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
         
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--cc-blue);
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 100;
-            border-radius: 0.375rem;
+        .hamburger:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
         
-        .dropdown:hover .dropdown-content {
+        .hamburger span {
             display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Slide-out menu styles */
+        .slide-menu {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--cc-blue) 0%, #1e40af 100%);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .slide-menu.open {
+            right: 0;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Donate button styles */
+        .donate-btn {
+            background: linear-gradient(135deg, var(--cc-orange), #EF4444);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            animation: pulse-glow 3s ease-in-out infinite;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            background: linear-gradient(135deg, #EF4444, var(--cc-orange));
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5); }
+        }
+
+        .menu-item {
+            display: block;
+            padding: 16px 24px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 32px;
+        }
+
+        .menu-section {
+            padding: 8px 0;
+        }
+
+        .menu-section-title {
+            padding: 12px 24px 8px;
+            color: var(--cc-orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .partner-link {
+            display: block;
+            padding: 12px 32px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .partner-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 40px;
+            color: white;
+        }
+
+        .menu-header {
+            padding: 24px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Compact header donate button */
+        .header-donate-btn {
+            background: linear-gradient(135deg, var(--cc-orange), #EF4444);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .header-donate-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Animation for fade-in elements */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.opacity-100 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .slide-menu {
+                width: 100vw;
+                right: -100vw;
+            }
         }
     </style>
 </head>
 
-
 <body class="min-h-screen bg-gray-50">
- <!-- Navigation -->
- <nav class="cc-blue text-white fixed w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            <div class="flex items-center space-x-4">
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Slide-out Menu -->
+    <div class="slide-menu" id="slide-menu">
+        <button class="close-btn" id="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="menu-header">
+            <div class="flex items-center mb-4">
+                <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2 mr-3">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" class="h-full w-full object-contain" />
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold leading-none text-white">CODE</span>
+                    <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
+                </div>
+            </div>
+            <a href="donate.html" class="donate-btn w-full justify-center">
+                <i class="fas fa-heart"></i>
+                Support Hack University
+            </a>
+            <a href="https://hack-university.vercel.app/" target="_blank" rel="noopener noreferrer" class="donate-btn w-full justify-center mt-3" style="background: linear-gradient(135deg, #10b981, #059669);">
+                <i class="fas fa-graduation-cap"></i>
+                Visit Hack University
+            </a>
+        </div>
+
+        <div class="menu-section">
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-home mr-3"></i>Home
+            </a>
+            <a href="index.html#mission" class="menu-item">
+                <i class="fas fa-bullseye mr-3"></i>Mission
+            </a>
+            <a href="index.html#events" class="menu-item">
+                <i class="fas fa-calendar mr-3"></i>Events
+            </a>
+            <a href="https://witty-suede-4a1.notion.site/ebd/1fe7f868cc8c8042b1ebfebc42034954" class="menu-item">
+                <i class="fas fa-book mr-3"></i>Wiki
+            </a>
+            <a href="hackathons.html" class="menu-item">
+                <i class="fas fa-code mr-3"></i>Hackathons
+            </a>
+            <a href="community-access.html" class="menu-item">
+                <i class="fas fa-users mr-3"></i>Become a Member
+            </a>
+            <a href="all-eboard.html" class="menu-item">
+                <i class="fas fa-user-tie mr-3"></i>Join Executive Board
+            </a>
+            <a href="index.html#resources" class="menu-item">
+                <i class="fas fa-user-friends mr-3"></i>Our Team
+            </a>
+            <a href="index.html#resources" class="menu-item">
+                <i class="fas fa-images mr-3"></i>Gallery
+            </a>
+            <a href="index.html#resources" class="menu-item">
+                <i class="fas fa-tools mr-3"></i>Resources
+            </a>
+            <a href="index.html#connect" class="menu-item">
+                <i class="fas fa-link mr-3"></i>Connect
+            </a>
+            <a href="https://hack-university.vercel.app/" target="_blank" rel="noopener noreferrer" class="menu-item">
+                <i class="fas fa-graduation-cap mr-3"></i>Hack University Portal
+            </a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Partners</div>
+            <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" class="partner-link">
+                ColorStack at FIU
+            </a>
+            <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer" class="partner-link">
+                CAHSI at FIU
+            </a>
+            <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
+                FIU Business - Supporter
+            </a>
+            <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
+                FIU Honors College - Supporter
+            </a>
+            <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
+                FIU College of Engineering and Computing - Supporter
+            </a>
+            <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" class="partner-link">
+                Eugenio Pino and Family Global Entrepreneurship Center - Supporter
+            </a>
+            <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" class="partner-link">
+                Blackstone LaunchPad at FIU - Supporter
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="partner-link">
+                Tech Partners
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="cc-blue text-white fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2">
-                        <!-- Star SVG -->
-                        <!-- Logo -->
-                        <div class="flex-shrink-0 flex items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2">
                             <div class="h-12 w-12 rounded-lg flex items-center justify-center">
                                 <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" class="h-full w-full object-contain" />
                             </div>
                         </div>
-                    </div>
-                    <div class="ml-3 flex flex-col">
-                        <span class="text-xl font-bold leading-none">CODE</span>
-                        <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
+                        <div class="ml-3 flex flex-col">
+                            <span class="text-xl font-bold leading-none">CODE</span>
+                            <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <div class="hidden md:block">
-                <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700">Home</a>
-                    <a href="index.html#mission" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Mission</a>
-                    <a href="index.html#events" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Events</a>
-                    <a href="hackathons.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Hackathons</a>
-                    <a href="community-access.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Membership</a>
-                    <a href="all-eboard.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Join Executive-Board</a>
-                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Our Team</a>
-                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Gallery</a>
-                    <a href="index.html#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Resources</a>
-                    <a href="index.html#connect" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Connect</a>
-                <!-- Partners dropdown -->
-            <div class="dropdown">
-                <button class="px-3 py-2 rounded-md text-sm font-medium cc-orange cc-blue-text hover:bg-yellow-400 flex items-center">
-                    Partners
-                    <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" 
-                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                        ColorStack at FIU
-                    </a>
-                    <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer" 
-                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                        CAHSI at FIU
-                    </a>
-                    <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                    class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                    FIU Business - Supporter
-                     </a>
-                     <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                     class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                     FIU Honors College - Supporter
-                      </a>
-                      <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                     class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                     FIU College of Engineering and Computing - Supporter
-                      </a>
-                      <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" 
-                      class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                      Eugenio Pino and Family Global Entrepreneurship Center - Supporter
-                       </a>
-                       <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" 
-                       class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                       Blackstone LaunchPad at FIU - Supporter
+                
+                <!-- Right side: Donate button + Hamburger -->
+                <div class="flex items-center space-x-4">
+                    <!-- Compact donate button for larger screens -->
+                    <div class="hidden sm:block">
+                        <a href="donate.html" class="header-donate-btn">
+                            <i class="fas fa-heart"></i>
+                            <span class="hidden md:inline">Support Us</span>
+                            <span class="md:hidden">Donate</span>
                         </a>
-
-                    <a href="#" target="_blank" rel="noopener noreferrer" 
-                        class="block px-4 py-2 text-sm text-white hover:bg-blue-700">
-                        Tech Partners
-                    </a>
+                    </div>
+                    
+                    <!-- Hamburger menu button -->
+                    <div class="hamburger" id="hamburger-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
-                
-                
-                </div>
-            </div>
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-blue-700 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
         </div>
-    </div>
-
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="index.html"           class="block px-3 py-2 rounded-md text-base font-medium bg-blue-700">Home</a>
-            <a href="index.html#mission"   class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Mission</a>
-            <a href="index.html#events"     class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Events</a>
-            <a href="hackathons.html"        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Hackathons</a>
-            <a href="community-access.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Membership</a>
-            <a href="all-eboard.html"       class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Join Executive-Board</a>
-            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Our Team</a>
-            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Gallery</a>
-            <a href="index.html#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Resources</a>
-            <a href="index.html#connect" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Connect</a>
-            
-            <!-- Mobile Partners Links -->
-            <div class="pt-2 pb-1">
-                <div class="block px-3 py-2 rounded-md text-base font-medium cc-orange-text">Partners:</div>
-
-                <a href="https://ba-00001.github.io/colorstackatfiu/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    ColorStack at FIU
-                </a>
-                <a href="https://ba-00001.github.io/CAHSIatFIU/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    CAHSI at FIU
-                </a>
-                <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    FIU Business - Supporter
-                </a>
-                <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    FIU Honors College - Supporter
-                </a>
-                <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    FIU College of Engineering and Computing - Supporter
-                </a>
-                <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    Eugenio Pino and Family Global Entrepreneurship Center - Supporter
-                </a>
-                <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    Blackstone LaunchPad at FIU - Supporter
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" 
-                class="block px-6 py-1 text-sm text-white hover:bg-blue-700">
-                    Tech Partners
-                </a>
-            </div>
-
-
-
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Main Content -->
     <div class="pt-20">
-<!-- Hero Section -->
-<section id="home" class="cc-blue text-white py-20 md:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                Code Crunch <span class="star">✨</span>
-            </h1>
-            <p class="text-xl mb-8">
-                An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. <span class="font-bold">Open to all majors and universities.</span>
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="community-access.html" class="inline-block cc-orange cc-blue-text px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-bold">
-                    Join Code Crunch
-                </a>
-                <a href="hackathons.html" class="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-md hover:bg-white hover:text-[#2463EB] transition-colors font-bold">
-                    Upcoming Hackathons
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
- <!-- Mission Section -->
-<section id="mission" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold mb-8 text-center">Mission & Purpose <span class="star">✨</span></h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-2xl font-bold mb-4 cc-blue-text">Our Mission</h3>
-                <p class="text-gray-700">
-                    Code Crunch is an interdisciplinary club connecting students across all majors through technology and innovation. We empower students through coding workshops, technical interview prep, and project-based learning.
-                </p>
-            </div>
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-2xl font-bold mb-4 cc-blue-text">Connecting All Disciplines</h3>
-                <p class="text-gray-700 mb-4">
-                    We welcome students from diverse academic backgrounds including:
-                </p>
-                <div class="grid grid-cols-2 gap-2">
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Computer Science
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Mechanical Engineering
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Civil Engineering
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Business
-                        </li>
-                    </ul>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Biomedical Engineering
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Health Sciences
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            Law
-                        </li>
-                        <li class="flex items-center">
-                            <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                            And many more!
-                        </li>
-                    </ul>
+        <!-- Hero Section -->
+        <section id="home" class="cc-blue text-white py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                        Code Crunch <span class="star">✨</span>
+                    </h1>
+                    <p class="text-xl mb-8">
+                        An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. <span class="font-bold">Open to high school students (16+), all majors, and any university.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="community-access.html" class="inline-block cc-orange cc-blue-text px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-bold">
+                            Join Code Crunch
+                        </a>
+                        <a href="hackathons.html" class="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-md hover:bg-white hover:text-[#2463EB] transition-colors font-bold">
+                            Upcoming Hackathons
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-8 text-center">
-            <p class="text-lg text-gray-700">
-                At Code Crunch, we believe that the most innovative solutions come from collaboration across disciplines.
-            </p>
-        </div>
-    </div>
+        </section>
 
-</section>
-    
-<!-- Events Section -->
-<section id="events" class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold mb-8 text-center">Upcoming Events <span class="star">✨</span></h2>
-        <div class="bg-white rounded-lg shadow p-8">
-            <p class="text-lg mb-6">
-                Stay connected with our upcoming coding challenges, workshops, and tech talks:
-            </p>
-            
-            <!-- Luma Calendar Embed -->
-            <div class="flex justify-center mb-8">
-                <iframe src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?compact=true&lt=light" 
-                        width="100%" height="450" frameborder="0" 
-                        style="border: 1px solid #bfcbda88; border-radius: 4px; max-width: 800px;" 
-                        allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <!-- Mission Section -->
+        <section id="mission" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Mission & Purpose <span class="star">✨</span></h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Our Mission</h3>
+                        <p class="text-gray-700">
+                            Code Crunch is an interdisciplinary club connecting students across all majors, high schools (16+), and universities through technology and innovation. We empower students through coding workshops, technical interview prep, and project-based learning.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Connecting All Disciplines & Education Levels</h3>
+                        <p class="text-gray-700 mb-4">
+                            We welcome students from diverse academic backgrounds and education levels including:
+                        </p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    High School Students (16+)
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Computer Science
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Mechanical Engineering
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Civil Engineering
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Business
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    College/University Students
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Biomedical Engineering
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Health Sciences
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    Law
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
+                                    And many more!
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-lg text-gray-700">
+                        At Code Crunch, we believe that the most innovative solutions come from collaboration across disciplines.
+                    </p>
+                </div>
             </div>
-            
-            <div class="text-center">
-                <a href="https://lu.ma/CODECRUNCH" target="_blank" rel="noopener noreferrer" 
-                   class="inline-block cc-blue text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors font-bold">
-                    View All Events
-                </a>
+        </section>
+        
+        <!-- Events Section -->
+        <section id="events" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Upcoming Events <span class="star">✨</span></h2>
+                <div class="bg-white rounded-lg shadow p-8">
+                    <p class="text-lg mb-6">
+                        Stay connected with our upcoming coding challenges, workshops, and tech talks:
+                    </p>
+                    
+                    <!-- Luma Calendar Embed -->
+                    <div class="flex justify-center mb-8">
+                        <iframe src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?compact=true&lt=light" 
+                                width="100%" height="450" frameborder="0" 
+                                style="border: 1px solid #bfcbda88; border-radius: 4px; max-width: 800px;" 
+                                allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="https://lu.ma/CODECRUNCH" target="_blank" rel="noopener noreferrer" 
+                           class="inline-block cc-blue text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors font-bold">
+                            View All Events
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+
+        <!-- Join Us Section -->
+        <section id="join" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Join Our Club <span class="star">✨</span></h2>
+                <div class="bg-gray-50 rounded-lg p-8">
+                    <div class="max-w-3xl mx-auto">
+                        <p class="text-lg mb-6 text-center">
+                            Becoming a member of Code Crunch connects you with a diverse community of peers, 
+                            mentors, and resources to help you succeed in technology and innovation. Open to high school students (16+), all majors, and any university.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-white rounded-lg p-6 shadow">
+                                <h3 class="text-xl font-bold mb-3 cc-blue-text">Membership Benefits</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Access to all club events and workshops</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Mentorship from experienced students and professionals</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Networking with industry professionals and peers</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Leadership and volunteer opportunities</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Hackathon participation and team building</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow">
+                                <h3 class="text-xl font-bold mb-3 cc-blue-text">How to Join</h3>
+                                <p class="mb-4">
+                                    Membership is open to all students interested in technology and innovation, 
+                                    including high school students (16+), college students from any major, and from any university worldwide.
+                                </p>
+                                <p class="mb-4">
+                                    To become a member, simply fill out the membership form and join our community events.
+                                    <span class="font-bold">Free Membership.</span>
+                                </p>
+                                <p class="text-sm text-gray-500">
+                                    Questions about membership? Message us on <a href="https://www.linkedin.com/company/code-crunch-club" target="_blank" class="text-blue-600 hover:underline font-medium">LinkedIn</a> or DM us on <a href="community-access.html" class="text-blue-600 hover:underline font-medium">Discord @codecrunchclub</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="community-access.html" 
+                               class="inline-block cc-orange cc-blue-text px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-bold">
+                                Join Code Crunch Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Hackathons Section -->
         <section id="hackathons" class="py-16 bg-white">
@@ -465,7 +713,128 @@
             </div>
         </section>
 
-        
+        <!-- Team Section -->
+        <section id="team" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Meet Our Team <span class="star">✨</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Team Member 1 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold">
+                                <a href="https://www.linkedin.com/in/brian-bazurto/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
+                                    Brian Bazurto
+                                </a>
+                            </h3>
+                            <p class="text-sm text-gray-600">President</p>
+                            <p class="text-xs mt-2 text-gray-500">Computer Science student</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold">
+                                <a href="https://www.linkedin.com/in/jhoan-gonzalez/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
+                                    Jhoan Gonzalez
+                                </a>
+                            </h3>
+                            <p class="text-sm text-gray-600">Vice President</p>
+                            <p class="text-xs mt-2 text-gray-500">Biomedical Engineering student</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 3 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold">
+                                <a href="https://www.linkedin.com/in/bryan-garcia/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
+                                    Bryan Garcia
+                                </a>
+                            </h3>
+                            <p class="text-sm text-gray-600">Treasurer</p>
+                            <p class="text-xs mt-2 text-gray-500">Computer Science student @ FIU</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 4 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold">
+                                <a href="https://www.linkedin.com/in/ruben-otano/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
+                                    Ruben Otano
+                                </a>
+                            </h3>
+                            <p class="text-sm text-gray-600">Program Manager</p>
+                            <p class="text-xs mt-2 text-gray-500">Computer Science student @ FIU</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <a href="all-eboard.html" class="cc-blue text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium">
+                        View All Executive Board Members
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Club Gallery <span class="star">✨</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Gallery Image 1 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Workshop Photo</span>
+                    </div>
+                    <!-- Gallery Image 2 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Networking Event</span>
+                    </div>
+                    <!-- Gallery Image 3 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Hackathon</span>
+                    </div>
+                    <!-- Gallery Image 4 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Social Gathering</span>
+                    </div>
+                    <!-- Gallery Image 5 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Tech Talk</span>
+                    </div>
+                    <!-- Gallery Image 6 -->
+                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Industry Visit</span>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <a href="#" class="inline-block cc-blue text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors font-medium">
+                        View All Photos
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
         <footer id="connect" class="cc-blue text-white py-12">
@@ -474,7 +843,7 @@
                     <div>
                         <h3 class="text-lg font-bold mb-4">Code Crunch <span class="star">✨</span></h3>
                         <p class="text-sm opacity-80">
-                            An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning.
+                            An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
                         </p>
                         <p class="text-sm mt-2">
                             <a href="http://codecrunch.cs.fiu.edu" class="text-white underline hover:opacity-90">codecrunch.cs.fiu.edu</a>
@@ -512,8 +881,6 @@
                                     <i class="fas fa-users text-xl"></i>
                                     <span class="text-xs mt-1">GroupMe</span>
                                 </a>
-                                <!-- Zoom
-                                https://go.fiu.edu/codecrunch-zoom -->
                                 <a href="https://fiu.zoom.us/j/84519758626?pwd=SoHxgbkfCrTLCjwy0faEKjdG2cQKYx.1#success" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
                                     <i class="fas fa-video text-xl"></i>
                                     <span class="text-xs mt-1">Zoom</span>
@@ -526,23 +893,16 @@
                                     <i class="fas fa-briefcase text-xl"></i>
                                     <span class="text-xs mt-1">EpicHire</span>
                                 </a>
-                                <!-- https://go.fiu.edu/CC-SCHEDULE -->
                                 <a href="https://docs.google.com/document/d/1ylVviQu2pvgRRjEJTpgttM6h-pgCoWCF72ATOZIyLnM/edit?tab=t.0#heading=h.lrix7ec7j0b3" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
                                     <i class="fas fa-book text-xl"></i>
                                     <span class="text-xs mt-1 text-center">Course Schedule</span>
                                 </a>
-                                 <!-- Attendance -->
-                                <!-- https://forms.gle/StgULTsytrcfZXBv6 -->                                   
                                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSevXbZJFyVygCM-jbfTrw_LxRR_CQSpjm-mFgitQDCTS48Fbw/viewform" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
                                     <i class="fas fa-clipboard-check text-xl"></i>
                                     <span class="text-xs mt-1">Attendance</span>
                                 </a>
-
-                                <!-- <i class="fas fa-link text-xl"></i> chain link icon -->
-                                
                             </div>
                         </div>
-
                     </div>
                     <div>
                         <h3 class="text-lg font-bold mb-4">Quick Links</h3>
@@ -570,31 +930,66 @@
                     <p class="text-sm opacity-80">
                         © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
                     </p>
+                    <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">
+                        Built with ❤️ for the FIU tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Brian Bazurto</a> | Powered by innovation and collaboration
+                    </p>
                 </div>
             </div>
         </footer>
 
-</div> <!-- Close the main content div that starts with <div class="pt-20"> -->
+    </div> <!-- Close the main content div that starts with <div class="pt-20"> -->
+
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        const hamburger = document.getElementById('hamburger-menu');
+        const slideMenu = document.getElementById('slide-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const closeMenu = document.getElementById('close-menu');
+
+        function openMenu() {
+            hamburger.classList.add('active');
+            slideMenu.classList.add('open');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenuFunc() {
+            hamburger.classList.remove('active');
+            slideMenu.classList.remove('open');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        hamburger.addEventListener('click', function() {
+            if (slideMenu.classList.contains('open')) {
+                closeMenuFunc();
+            } else {
+                openMenu();
+            }
         });
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mobile-menu').classList.add('hidden');
-            });
+        closeMenu.addEventListener('click', closeMenuFunc);
+        menuOverlay.addEventListener('click', closeMenuFunc);
+
+        // Close menu when clicking on menu links
+        document.querySelectorAll('.menu-item, .partner-link').forEach(link => {
+            link.addEventListener('click', closeMenuFunc);
+        });
+
+        // Prevent menu from closing when clicking inside the menu
+        slideMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
 
         // Smooth scrolling for anchor links - main page only
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 

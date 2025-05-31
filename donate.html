@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Hack University - Empowering Tomorrow's Tech Leaders</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f8fafc;
+            --card: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .partners {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .partner-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+
+        .partner-card:nth-child(1) { animation-delay: 0.6s; }
+        .partner-card:nth-child(2) { animation-delay: 0.8s; }
+        .partner-card:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
+        }
+
+        .partner-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px;
+        }
+
+        .partner-name {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .main-content {
+            display: grid;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInCard 0.8s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .impact-item {
+            padding: 24px;
+            background: rgba(37, 99, 235, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .impact-item:hover {
+            background: rgba(37, 99, 235, 0.06);
+            transform: translateX(4px);
+        }
+
+        .impact-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .impact-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .impact-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .donation-steps {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(245, 158, 11, 0.05));
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 30px;
+        }
+
+        .contact-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .contact-item strong {
+            min-width: 80px;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .tax-notice {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tax-notice h4 {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .tax-notice p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .quick-access {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .quick-access h3 {
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .zoom-wiki-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .zoom-wiki-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-light);
+        }
+
+        footer h3 {
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .partners {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .partner-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 32px 24px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="badge">FUNDRAISING INITIATIVE</div>
+                <h1>Hack University</h1>
+                <p class="subtitle">Empowering students from high schools to universities with the tools, mentorship, and opportunities to excel in technology</p>
+                
+                <div class="quick-access">
+                    <h3>🔗 Access Our Platform</h3>
+                    <a href="https://hack-university.vercel.app" class="zoom-wiki-btn" target="_blank">
+                        🚀 Visit Hack University Zoom & Wiki
+                    </a>
+                </div>
+                
+                <div class="partners">
+                    <a href="https://codecrunchglobal.vercel.app/" class="partner-card" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch Logo" class="partner-logo">
+                        <div class="partner-name">CODE CRUNCH | GLOBAL 🌍</div>
+                    </a>
+                    <a href="https://colorstackatfiu.vercel.app/" class="partner-card" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack Logo" class="partner-logo">
+                        <div class="partner-name">ColorStack at FIU</div>
+                    </a>
+                    <a href="https://cahsiatfiu.vercel.app/" class="partner-card" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI Logo" class="partner-logo">
+                        <div class="partner-name">CAHSI at FIU</div>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Our Mission</h2>
+                <p>Hack University is an ambitious initiative that brings together student organizations and industry partners to create unprecedented opportunities for emerging technologists. We're building pathways for students aged 16 and above—from community colleges to major research universities—to develop real-world skills and professional networks.</p>
+                
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <span class="impact-icon">🛠️</span>
+                        <h3>Hands-on Coding Workshops</h3>
+                        <p>Nationwide workshops covering modern technologies and industry best practices</p>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">🏆</span>
+                        <h3>Hackathons & Competitions</h3>
+                        <p>Multi-institutional events fostering collaboration and innovation</p>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">🤝</span>
+                        <h3>Professional Mentorship</h3>
+                        <p>Direct connections between students and industry professionals</p>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">💻</span>
+                        <h3>Technical Infrastructure</h3>
+                        <p>Access to cutting-edge hardware, software, and cloud computing resources</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>How to Support Our Mission</h2>
+                <p>Your contribution directly funds scholarships, technical resources, and program operations that make these opportunities accessible to students regardless of their economic background.</p>
+                
+                <div class="donation-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Check Payable To</strong>
+                            FIU Foundation
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>Reference Line</strong>
+                            Code Crunch Fundraiser
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Confirmation Required</strong>
+                            Email photo of check to codecrunch@fiu.edu and CC marilope@fiu.edu
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <strong>Mail or Deliver To</strong>
+                            Maria Lopez-Anon<br>
+                            FIU College of Engineering & Computing<br>
+                            10555 West Flagler St., EC 2400<br>
+                            Miami, FL 33174
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>Contact Information</h3>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <strong>Email:</strong> codecrunch@fiu.edu
+                        </div>
+                        <div class="contact-item">
+                            <strong>CC:</strong> marilope@fiu.edu
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cta-section">
+                <h2>Recognition & Partnership Opportunities</h2>
+                <p><strong>Upon request:</strong> Donors receive acknowledgment on our website and at events. We also offer custom sponsorship packages with enhanced visibility and engagement opportunities.</p>
+                
+                <div class="tax-notice">
+                    <h4>Tax Deductibility Information</h4>
+                    <p>Your contribution may be considered tax deductible, where allowed, to the fullest extent under the law as allowed by IRS regulations. Purchase of Ads are not considered charitable. Any and all net proceeds from this event, after payment of associated expenses, may be used to support Code Crunch student org through the FIU Foundation, Inc. The amount of your contribution that is deductible is limited to the excess of your contribution over the value of the goods and services provided to you. In accordance with Foundation policy, the Foundation may assess a one-time Advancement Initiative Fee in the amount of 3% of the Gift ("Initiative") to support the University's general fundraising and capital campaign expenditures. The Initiative will be collected with the first installment of the Gift (and any subsequent installment, if necessary) to fulfill the Initiative as soon as practicable.</p>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="https://ba-00001.github.io/codecrunchclub/cc-prospectus.html" class="btn btn-primary" target="_blank">
+                        📊 View Hackathon Prospectus
+                    </a>
+                    <a href="https://www.linkedin.com/company/code-crunch-club" class="btn btn-secondary" target="_blank">
+                        💬 Message Us on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3>Building Tomorrow's Tech Leaders Today</h3>
+            <p>Questions about Hack University? <a href="https://www.linkedin.com/company/code-crunch-club" target="_blank">Message us on LinkedIn</a> or reach out to our team.</p>
+        </footer>
+    </div>
+</body>
+</html>
