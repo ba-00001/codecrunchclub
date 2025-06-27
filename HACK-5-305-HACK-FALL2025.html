@@ -250,6 +250,118 @@
             font-size: 0.95rem;
             margin-bottom: 25px;
         }
+
+
+
+        /* Partner Logo Container Styling - Add this to your CSS */
+.partner-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.partner-logo-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Updated sponsor logo styling for partners section */
+.partner-logo-container .sponsor-logo {
+    max-width: 100%;
+    max-height: 90px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: all 0.3s ease;
+}
+
+.partner-logo-container:hover .sponsor-logo {
+    filter: grayscale(0%);
+}
+
+/* Keep existing sponsor tier styling for the sponsor sections below */
+.sponsor-tier {
+    margin-bottom: 40px;
+}
+
+.tier-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    color: var(--primary);
+}
+
+.tier-logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.tier-logos .sponsor-logo {
+    height: auto;
+    max-width: 100%;
+    transition: var(--transition);
+    filter: grayscale(100%);
+    max-height: 80px;
+    object-fit: contain;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.tier-1 .sponsor-logo {
+    max-width: 200px;
+}
+
+.tier-2 .sponsor-logo {
+    max-width: 160px;
+}
+
+.tier-3 .sponsor-logo,
+.tier-4 .sponsor-logo {
+    max-width: 120px;
+}
+
+.tier-logos .sponsor-logo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .partner-logo-container {
+        height: 100px;
+    }
+    
+    .partner-logo-container .sponsor-logo {
+        max-height: 70px;
+    }
+    
+    .tier-logos {
+        gap: 20px;
+    }
+    
+    .tier-logos .sponsor-logo {
+        max-height: 60px;
+        max-width: 150px;
+    }
+}
+
+
+
     </style>
 </head>
 
@@ -1217,226 +1329,135 @@
 
 
 
-
-
-
-
 <!-- Tracks Section with Inline JavaScript for Challenge Reveal -->
 <section id="tracks" class="section-padding">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Hackathon Tracks</h2>
-            <p class="section-subtitle">Choose from our diverse range of 18 tracks to showcase your skills and creativity. You can pick up to 2 tracks for your submission!</p>
+            <p class="section-subtitle">Choose 1 track to showcase your skills and creativity for your submission!</p>
         </div>
     
         <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(205, 92, 92, 0.15) 0%, rgba(255, 183, 3, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #CD5C5C;">
             <div style="font-size: 2rem; margin-bottom: 20px;">🔍</div>
             <h4 style="color: #CD5C5C; font-size: 1.5rem; margin-bottom: 20px;">Mystery Challenges Await!</h4>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature a unique, exciting challenge that will be automatically revealed when the hackathon begins on <strong>September 19, 2025 at 6:00 PM</strong>.</p>
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature a unique, exciting challenge that will be automatically revealed when the hackathon begins on <strong>September 19, 2025 at 11:00 PM</strong>.</p>
             <p style="font-style: italic; color: #A52A2A;">Build under pressure and think creatively to solve the mystery challenges! ⏱️🌆</p>
         </div>
         
-        <!-- Core Tracks -->
-        <h3 style="color: #CD5C5C; margin: 40px 0 20px; font-size: 1.5rem;">🏙️ Core Innovation Tracks</h3>
-        
+        <!-- Main Tracks -->
         <div class="row">
-            <div class="col-md-3 mb-4">
+            <!-- Track 1: Engineering & Physical Sciences -->
+            <div class="col-md-6 mb-4">
                 <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🌍 #01 Sustainability</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
+                    <div style="padding: 30px;">
+                        <h4 style="color: #CD5C5C; font-size: 1.4rem; margin-bottom: 15px;">🏗️ #01 Smart Infrastructure & Urban Engineering</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Building the physical foundation of tomorrow's smart cities through engineering innovation</p>
+                        
+                        <div class="major-tags">
+                            <span class="major-tag">🔬 Biomedical Engineering</span>
+                            <span class="major-tag">⚙️ Mechanical Engineering</span>
+                            <span class="major-tag">🔌 Electrical Engineering</span>
+                            <span class="major-tag">🌉 Civil Engineering</span>
+                            <span class="major-tag">🌍 Sustainability</span>
+                            <span class="major-tag">🏥 Healthcare</span>
+                            <span class="major-tag">☁️ Cloud & Infrastructure</span>
+                            <span class="major-tag">📊 Data Science</span>
+                        </div>
+                        
+                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 20px; border: 1px solid rgba(205, 92, 92, 0.2);">
                             <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-3 mb-4">
+            <!-- Track 2: Digital Innovation & Technology -->
+            <div class="col-md-6 mb-4">
                 <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🤖 #02 AI & Machine Learning</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
+                    <div style="padding: 30px;">
+                        <h4 style="color: #CD5C5C; font-size: 1.4rem; margin-bottom: 15px;">📱 #02 Smart City Tech & Digital Solutions</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Creating intelligent digital platforms and apps that power connected urban experiences</p>
+                        
+                        <div class="major-tags">
+                            <span class="major-tag">🤖 AI & Machine Learning</span>
+                            <span class="major-tag">💻 Software Development</span>
+                            <span class="major-tag">💰 Fintech</span>
+                            <span class="major-tag">🎮 Gaming</span>
+                            <span class="major-tag">🎭 Entertainment</span>
+                            <span class="major-tag">📱 Mobile Development</span>
+                            <span class="major-tag">🌐 Web Development</span>
+                            <span class="major-tag">🎨 UX/UI Design</span>
+                        </div>
+                        
+                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 20px; border: 1px solid rgba(205, 92, 92, 0.2);">
                             <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🔬 #03 Biomedical Engineering</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
+            <!-- Track 3: Tech Unicorn Track (No Code Required) -->
+            <div class="col-md-6 mb-4">
+                <div class="role-card" style="border: 2px solid rgba(138, 43, 226, 0.4); background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(138, 43, 226, 0.1) 100%); border-top: 4px solid #8A2BE2;">
+                    <div style="padding: 30px;">
+                        <h4 style="color: #8A2BE2; font-size: 1.4rem; margin-bottom: 15px;">🦄 #03 Tech Unicorn Track</h4>
+                        <p style="margin-bottom: 15px; color: #666;"><strong>No Code Required!</strong> Business strategy, innovation concepts, and entrepreneurial solutions for anyone with startup ideas</p>
+                        
+                        <div class="major-tags">
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">💼 Business Administration</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">💰 Finance</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📈 Marketing</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📊 Economics</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🚀 Entrepreneurship</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🎯 Management</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📋 Operations Management</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🔍 Market Research</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">💡 Innovation Management</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📱 Digital Marketing</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🌐 International Business</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📚 MBA Students</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🎓 Any Major</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📖 Liberal Arts</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🎨 Arts & Design</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">📺 Communications</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🧠 Psychology</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">⚖️ Law & Pre-Law</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">🌍 Social Sciences</span>
+                            <span class="major-tag" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2; border: 1px solid rgba(138, 43, 226, 0.2);">👩‍⚕️ Pre-Med & Health</span>
+                        </div>
+                        
+                        <div style="background: rgba(138, 43, 226, 0.1); border-radius: 10px; padding: 15px; margin-top: 20px; margin-bottom: 15px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #8A2BE2;"><i class="fas fa-lightbulb me-2"></i> Open to ALL majors! Perfect for anyone with startup ideas and entrepreneurial vision</p>
+                        </div>
+                        
+                        <div style="background: rgba(138, 43, 226, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #8A2BE2;"><i class="fas fa-users me-2"></i> Focus on business models, market analysis, and innovative concepts</p>
+                        </div>
+                        
+                        <div class="challenge-lock" style="background: rgba(138, 43, 226, 0.15); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(138, 43, 226, 0.3);">
+                            <p style="margin: 0; color: #8A2BE2;"><i class="fas fa-lock me-2"></i> <strong>Unicorn Challenge:</strong> Challenge locked until September 19</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">⚙️ #04 Mechanical Engineering</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🔌 #05 Electrical Engineering</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🌉 #06 Civil Engineering</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">💻 #07 Software Development</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">💰 #08 Fintech</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🏥 #09 Healthcare</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🎮 #10 Gaming</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🎭 #11 Entertainment</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">📱 #12 Mobile Development</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">☁️ #13 Cloud & Infrastructure</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">📊 #14 Data Science</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🌐 #15 Web Development</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-4">
-                <div class="role-card" style="border-top: 4px solid var(--primary);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #CD5C5C; font-size: 1.3rem; margin-bottom: 15px;">🎨 #16 UX/UI Design</h4>
-                        <div class="challenge-lock" style="background: rgba(205, 92, 92, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(205, 92, 92, 0.2);">
-                            <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until September 19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Featured Theme Tracks -->
-        <h3 style="color: #FFB90F; margin: 40px 0 20px; font-size: 1.5rem;">🎯 Featured Theme Tracks - Smart Cities Focus</h3>
-        <div class="row">
+            <!-- Track 4: Featured Theme Track -->
             <div class="col-md-6 mb-4">
                 <div class="role-card" style="border: 2px solid rgba(255, 185, 15, 0.4); background: linear-gradient(135deg, rgba(255, 185, 15, 0.05) 0%, rgba(255, 185, 15, 0.1) 100%); border-top: 4px solid var(--accent);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #FFB90F; font-size: 1.3rem; margin-bottom: 15px;">🏙️ #17 Smart Cities & Urban Innovation</h4>
-                        <div class="challenge-lock" style="background: rgba(255, 185, 15, 0.15); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255, 185, 15, 0.3);">
-                            <p style="margin: 0; color: #FFB90F;"><i class="fas fa-lock me-2"></i> <strong>Featured Challenge:</strong> Challenge locked until September 19 - Smart Cities focus with extra prizes!</p>
+                    <div style="padding: 30px;">
+                        <h4 style="color: #FFB90F; font-size: 1.4rem; margin-bottom: 15px;">🏙️ #04 Smart Cities & Future Innovation</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Advanced solutions for urban challenges, security, and next-generation infrastructure</p>
+                        
+                        <div style="background: rgba(255, 185, 15, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #FFB90F;"><i class="fas fa-city me-2"></i> Smart Cities & Urban Innovation focus</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6 mb-4">
-                <div class="role-card" style="border: 2px solid rgba(255, 185, 15, 0.4); background: linear-gradient(135deg, rgba(255, 185, 15, 0.05) 0%, rgba(255, 185, 15, 0.1) 100%); border-top: 4px solid var(--accent);">
-                    <div style="padding: 20px;">
-                        <h4 style="color: #FFB90F; font-size: 1.3rem; margin-bottom: 15px;">🔐 #18 DevOps, Cybersecurity & Blockchain</h4>
+                        
+                        <div style="background: rgba(255, 185, 15, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #FFB90F;"><i class="fas fa-shield-alt me-2"></i> DevOps, Cybersecurity & Blockchain integration</p>
+                        </div>
+                        
                         <div class="challenge-lock" style="background: rgba(255, 185, 15, 0.15); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255, 185, 15, 0.3);">
-                            <p style="margin: 0; color: #FFB90F;"><i class="fas fa-lock me-2"></i> <strong>Featured Challenge:</strong> Challenge locked until September 19 - DevOps & Security focus with extra prizes!</p>
+                            <p style="margin: 0; color: #FFB90F;"><i class="fas fa-lock me-2"></i> <strong>Featured Challenge:</strong> Challenge locked until September 19 - Extra prizes available!</p>
                         </div>
                     </div>
                 </div>
@@ -1447,21 +1468,28 @@
         <div style="background: linear-gradient(135deg, rgba(205, 92, 92, 0.1) 0%, rgba(255, 185, 15, 0.1) 100%); border-radius: 16px; padding: 30px; margin-top: 40px; border: 1px solid rgba(205, 92, 92, 0.2);">
             <h4 style="color: #CD5C5C; font-size: 1.4rem; margin-bottom: 20px;">📋 Track Selection Guidelines</h4>
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
-                        <p style="margin: 0; font-weight: 600;">Choose up to 2 tracks</p>
-                        <p style="margin: 0; font-size: 0.9rem; color: #A52A2A;">Mix and match any tracks</p>
+                        <p style="margin: 0; font-weight: 600;">Choose 1 track</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #A52A2A;">Focus on one specialization</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🦄</div>
+                        <p style="margin: 0; font-weight: 600;">Unicorn Track needs no code</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #A52A2A;">Perfect for business majors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">⭐</div>
-                        <p style="margin: 0; font-weight: 600;">Featured tracks have extra prizes</p>
-                        <p style="margin: 0; font-size: 0.9rem; color: #A52A2A;">Smart Cities & DevOps focus</p>
+                        <p style="margin: 0; font-weight: 600;">Featured track has extra prizes</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #A52A2A;">Smart Cities focus</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">🚀</div>
                         <p style="margin: 0; font-weight: 600;">Challenges revealed Sept 19</p>
@@ -1475,8 +1503,8 @@
     <!-- Inline JavaScript for Track Challenge Reveal -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Set the release date for challenges (September 19, 2025 at 6:00 PM)
-            const releaseDate = new Date('2025-09-19T18:00:00');
+            // Set the release date for challenges (September 19, 2025 at 11:00 PM)
+            const releaseDate = new Date('2025-09-19T23:00:00');
             const currentDate = new Date();
             
             // Check if current date is on or after release date
@@ -1491,7 +1519,7 @@
                 
                 // Show "Challenges Now Available" banner
                 const trackSection = document.getElementById('tracks');
-                const heading = trackSection.querySelector('h3');
+                const heading = trackSection.querySelector('.section-header');
                 
                 if (heading) {
                     const availableBanner = document.createElement('div');
@@ -1499,89 +1527,69 @@
                     availableBanner.innerHTML = `
                         <div style="font-size: 2rem; margin-bottom: 20px;">🎉</div>
                         <h4 style="color: #32cd32; font-size: 1.5rem; margin-bottom: 20px;">Track Challenges Now Available!</h4>
-                        <p style="font-size: 1.1rem; margin-bottom: 20px;">All track challenges have been revealed. Start building your innovative solutions for Smart Cities now!</p>
+                        <p style="font-size: 1.1rem; margin-bottom: 20px;">All track challenges have been revealed. Start building your innovative solutions now!</p>
                     `;
                     
-                    heading.parentNode.insertBefore(availableBanner, heading);
+                    heading.parentNode.insertBefore(availableBanner, heading.nextSibling);
                 }
                 
                 // Find all locked challenge sections
                 const lockedChallenges = document.querySelectorAll('.challenge-lock');
                 
-                // Define sample challenge descriptions for each track
+                // Define challenge descriptions for each track
                 const challengeDescriptions = {
-                    "Sustainability": "Design a smart city solution that promotes sustainable resource management and reduces urban environmental impact.",
-                    "AI & Machine Learning": "Create an AI-powered system that enhances smart city operations through predictive analytics or automation.",
-                    "Biomedical Engineering": "Develop a healthcare innovation that integrates with smart city infrastructure for better public health monitoring.",
-                    "Mechanical Engineering": "Build a mechanical system that improves urban infrastructure efficiency or citizen mobility.",
-                    "Electrical Engineering": "Design an energy-efficient electrical system for smart city applications or renewable energy integration.",
-                    "Civil Engineering": "Create resilient urban infrastructure solutions that enhance smart city connectivity and safety.",
-                    "Software Development": "Build software that solves urban challenges through innovative applications or platform solutions.",
-                    "Fintech": "Design financial technology that supports smart city commerce, payments, or economic development.",
-                    "Healthcare": "Develop health tech solutions that leverage smart city data for improved public health outcomes.",
-                    "Gaming": "Create an educational or awareness game that teaches smart city concepts or urban planning.",
-                    "Entertainment": "Build entertainment platforms that enhance community engagement in smart city environments.",
-                    "Mobile Development": "Create mobile apps that help citizens navigate and interact with smart city services.",
-                    "Cloud & Infrastructure": "Design cloud solutions that support smart city data management and scalable urban services.",
-                    "Data Science": "Analyze urban data to provide insights that improve smart city decision-making and planning.",
-                    "Web Development": "Build web platforms that facilitate citizen engagement with smart city services and governance.",
-                    "UX/UI Design": "Design user experiences that make smart city technologies accessible and intuitive for all citizens.",
-                    "Smart Cities": "Build innovative solutions for smart city infrastructure, IoT integration, traffic optimization, waste management, or citizen engagement platforms.",
-                    "DevOps": "Create cutting-edge solutions in automation, security protocols, blockchain applications, or DevOps tools for modern development workflows."
+                    "Engineering": "Design innovative engineering solutions that address real-world infrastructure, healthcare, or sustainability challenges using hardware, sensors, or physical systems.",
+                    "Digital": "Create cutting-edge software applications, platforms, or digital experiences that solve modern technology challenges through code, AI, or user interface innovation.",
+                    "Unicorn": "Develop a comprehensive business strategy and innovation concept for a tech startup that could become the next unicorn company - no coding required, focus on market analysis, business models, and entrepreneurial vision.",
+                    "SmartCities": "Build advanced solutions for smart city infrastructure, urban challenges, cybersecurity, or blockchain applications that will shape the future of how we live and work in cities."
                 };
                 
                 // Update each locked challenge with its description
                 lockedChallenges.forEach((element) => {
-                    // Determine which track this is
-                    const trackHeader = element.previousElementSibling;
-                    let trackName = "";
+                    // Determine which track this is based on the card content
+                    const trackCard = element.closest('.role-card');
+                    const trackHeader = trackCard.querySelector('h4');
+                    let trackKey = "";
                     
                     if (trackHeader) {
                         const text = trackHeader.textContent;
-                        if (text.includes("Sustainability")) trackName = "Sustainability";
-                        else if (text.includes("AI & Machine Learning")) trackName = "AI & Machine Learning";
-                        else if (text.includes("Biomedical")) trackName = "Biomedical Engineering";
-                        else if (text.includes("Mechanical")) trackName = "Mechanical Engineering";
-                        else if (text.includes("Electrical")) trackName = "Electrical Engineering";
-                        else if (text.includes("Civil")) trackName = "Civil Engineering";
-                        else if (text.includes("Software Development")) trackName = "Software Development";
-                        else if (text.includes("Fintech")) trackName = "Fintech";
-                        else if (text.includes("Healthcare")) trackName = "Healthcare";
-                        else if (text.includes("Gaming")) trackName = "Gaming";
-                        else if (text.includes("Entertainment")) trackName = "Entertainment";
-                        else if (text.includes("Mobile Development")) trackName = "Mobile Development";
-                        else if (text.includes("Cloud & Infrastructure")) trackName = "Cloud & Infrastructure";
-                        else if (text.includes("Data Science")) trackName = "Data Science";
-                        else if (text.includes("Web Development")) trackName = "Web Development";
-                        else if (text.includes("UX/UI Design")) trackName = "UX/UI Design";
-                        else if (text.includes("Smart Cities")) trackName = "Smart Cities";
-                        else if (text.includes("DevOps")) trackName = "DevOps";
+                        if (text.includes("Smart Infrastructure & Urban Engineering")) trackKey = "Engineering";
+                        else if (text.includes("Smart City Tech & Digital Solutions")) trackKey = "Digital";
+                        else if (text.includes("Tech Unicorn")) trackKey = "Unicorn";
+                        else if (text.includes("Smart Cities")) trackKey = "SmartCities";
                     }
                     
-                    // If we found a matching track, update its challenge description
-                    if (trackName && challengeDescriptions[trackName]) {
-                        // Check if this is a featured track (has golden styling)
-                        const isFeatureTrack = element.style.background.includes('255, 185, 15');
+                    // Update the challenge description
+                    if (trackKey && challengeDescriptions[trackKey]) {
+                        // Check if this is a special track (unicorn or featured)
+                        const isUnicornTrack = trackKey === "Unicorn";
+                        const isFeatureTrack = trackKey === "SmartCities";
                         
-                        if (isFeatureTrack) {
+                        if (isUnicornTrack) {
                             element.style.background = "rgba(50, 205, 50, 0.15)";
                             element.style.border = "1px solid rgba(50, 205, 50, 0.4)";
                             element.innerHTML = `
-                                <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #FFB90F; font-weight: bold;">Featured Challenge:</span> ${challengeDescriptions[trackName]}</p>
+                                <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #8A2BE2; font-weight: bold;">Unicorn Challenge:</span> ${challengeDescriptions[trackKey]}</p>
+                            `;
+                        } else if (isFeatureTrack) {
+                            element.style.background = "rgba(50, 205, 50, 0.15)";
+                            element.style.border = "1px solid rgba(50, 205, 50, 0.4)";
+                            element.innerHTML = `
+                                <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #FFB90F; font-weight: bold;">Featured Challenge:</span> ${challengeDescriptions[trackKey]}</p>
                             `;
                         } else {
                             element.style.background = "rgba(50, 205, 50, 0.1)";
                             element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
                             element.innerHTML = `
-                                <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #333; font-weight: bold;">Challenge:</span> ${challengeDescriptions[trackName]}</p>
+                                <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #333; font-weight: bold;">Challenge:</span> ${challengeDescriptions[trackKey]}</p>
                             `;
                         }
                     }
                 });
             } else {
-                console.log("Challenges will be revealed on September 19, 2025 at 6:00 PM");
-                // Calculate days until challenge reveal
-                const daysUntil = Math.ceil((releaseDate - currentDate) / (1000 * 60 * 60 * 24));
+                console.log("Challenges will be revealed on September 19, 2025 at 11:00 PM");
+                // Calculate time until challenge reveal
+                const mysteryBanner = document.getElementById('mysteryBanner');
                 
                 if (mysteryBanner) {
                     const countdownEl = document.createElement('p');
@@ -1608,6 +1616,26 @@
         });
     </script>
 </section>
+
+<style>
+    .major-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+    }
+    
+    .major-tag {
+        background: rgba(205, 92, 92, 0.1);
+        color: var(--primary);
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        border: 1px solid rgba(205, 92, 92, 0.2);
+    }
+</style>
+
+
 
 
 
@@ -2202,6 +2230,16 @@
         <div class="sponsor-types">
             <h3 class="sponsor-title">Partners</h3>
             <div class="row justify-content-center">
+                                <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
+                    <img src="https://github.com/user-attachments/assets/a2249f28-b564-4627-8927-bb8f51e3dce2" alt="Hub Office Logo" class="sponsor-logo">
+                </div>
+
+                                <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
+                    <img src="https://github.com/user-attachments/assets/837c802a-ba10-4d40-9574-9e79f98a5526" alt="Miami Tech Works Logo" class="sponsor-logo">
+                </div>
+
+
+
                 <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
                     <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack Logo" class="sponsor-logo">
                 </div>
@@ -2284,6 +2322,10 @@
         </div>
     </div>
 </section>
+
+
+
+
 
 <!-- Footer -->
 <footer class="footer">
