@@ -51,6 +51,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    padding-top: 80px; /* Default padding for desktop */
 }
 
 /* Smart City Animations */
@@ -112,6 +113,11 @@ body {
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 /* Smart City Background Elements */
@@ -228,13 +234,18 @@ body {
     filter: brightness(1.1);
 }
 
-/* Updated Navbar Styles */
+/* FIXED NAVBAR STYLES */
 .navbar-custom {
     background: rgba(15, 23, 42, 0.95);
     backdrop-filter: blur(10px);
     transition: var(--transition);
     padding: 15px 0;
     border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    z-index: 1050; /* Higher than Bootstrap's default z-index */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-scrolled {
@@ -274,6 +285,34 @@ body {
     width: 100%;
 }
 
+/* Bootstrap navbar toggler styling */
+.navbar-toggler {
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    z-index: 1051;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Bootstrap collapse menu styling */
+.navbar-collapse {
+    background: linear-gradient(135deg, #00acc1, #26a69a, #66bb6a, #42a5f5, #ff7043);
+    border-radius: 0 0 15px 15px;
+    margin-top: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 20px 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1049;
+}
+
 /* Header Donate Button */
 .header-donate-btn {
     display: inline-flex;
@@ -309,6 +348,8 @@ body {
     border-radius: 8px;
     transition: var(--transition);
     border: 1px solid rgba(59, 130, 246, 0.2);
+    z-index: 1053; /* Highest to always be clickable */
+    position: relative;
 }
 
 .hamburger:hover {
@@ -347,7 +388,7 @@ body {
     height: 100%;
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(8px);
-    z-index: 998;
+    z-index: 1051; /* Between navbar and slide menu */
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -366,7 +407,7 @@ body {
     width: 380px;
     height: 100vh;
     background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-    z-index: 999;
+    z-index: 1052; /* Higher than navbar */
     transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow-y: auto;
     box-shadow: -20px 0 40px rgba(0, 0, 0, 0.5);
@@ -817,33 +858,119 @@ body {
 }
 
 /* Track Styles with Smart City Enhancement */
+#tracks {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#tracks::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="smartcity" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><rect x="10" y="5" width="5" height="10" fill="%233b82f6" opacity="0.05"/><rect x="5" y="8" width="3" height="7" fill="%2310b981" opacity="0.05"/><rect x="16" y="3" width="4" height="12" fill="%238b5cf6" opacity="0.05"/><circle cx="12.5" cy="20" r="1" fill="%23f59e0b" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23smartcity)"/></svg>');
+    animation: pulse 10s ease-in-out infinite;
+}
+
 .major-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-top: 20px;
 }
 
 .major-tag {
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.15));
     color: var(--primary);
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    border-radius: 25px;
     font-size: 0.85rem;
     border: 1px solid rgba(30, 64, 175, 0.2);
     transition: var(--transition);
     animation: slideInUp 0.6s ease-out;
     animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.major-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: left 0.3s;
+    z-index: -1;
+}
+
+.major-tag:hover::before {
+    left: 0;
 }
 
 .major-tag:hover {
-    background: var(--gradient-primary);
     color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow);
+    border-color: var(--primary);
 }
 
-/* Timeline enhancements */
+/* Challenge lock styling */
+.challenge-lock {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(30, 64, 175, 0.15));
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 2px solid rgba(30, 64, 175, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: glow 3s infinite;
+}
+
+.challenge-lock::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* Mystery banner styling */
+#mysteryBanner {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.15) 0%, rgba(59, 130, 246, 0.25) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 50px;
+    border: 3px dashed var(--primary);
+    position: relative;
+    overflow: hidden;
+    animation: glow 4s infinite;
+}
+
+#mysteryBanner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+#mysteryBanner > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Timeline */
 .timeline {
     position: relative;
     padding: 40px 0;
@@ -1028,6 +1155,30 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 8px;
+}
+
+/* Enhanced past events section */
+.past-events {
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.past-events::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="timeline" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="%2310b981" opacity="0.1"/><line x1="15" y1="0" x2="15" y2="30" stroke="%233b82f6" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23timeline)"/></svg>');
+    animation: pulse 8s ease-in-out infinite;
+}
+
+.past-gallery {
+    padding-top: 60px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Participate Section */
@@ -1648,308 +1799,6 @@ body {
     box-shadow: var(--shadow-glow);
 }
 
-/* Footer with enhanced styling */
-.footer {
-    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e293b 100%);
-    color: white;
-    padding: 60px 0 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footergrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 0h20v20H0z" fill="none" stroke="%233b82f6" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23footergrid)"/></svg>');
-}
-
-.footer-logo {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    display: inline-block;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    z-index: 1;
-}
-
-.footer-text {
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.7);
-    position: relative;
-    z-index: 1;
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.footer-links li {
-    margin-bottom: 12px;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: var(--transition);
-    position: relative;
-}
-
-.footer-links a::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: white;
-    padding-left: 15px;
-}
-
-.footer-links a:hover::before {
-    width: 8px;
-}
-
-.footer-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 15px;
-    z-index: 1;
-    color: var(--accent);
-}
-
-.footer-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: var(--gradient-accent);
-    border-radius: 2px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
-}
-
-.contact-icon {
-    margin-right: 15px;
-    color: var(--accent);
-    font-size: 18px;
-    width: 25px;
-    animation: pulse 3s infinite;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(59, 130, 246, 0.1);
-    padding-top: 20px;
-    margin-top: 40px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 1;
-}
-
-/* Responsive Styles */
-@media (max-width: 991px) {
-    .navbar-custom {
-        background: rgba(15, 23, 42, 0.98);
-    }
-    
-    .hero-title {
-        font-size: 3rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.4rem;
-    }
-    
-    .section-title {
-        font-size: 2.4rem;
-    }
-    
-    .timeline::before {
-        left: 30px;
-    }
-    
-    .timeline-item {
-        width: 100%;
-        padding-left: 80px;
-        padding-right: 0;
-    }
-    
-    .timeline-item:nth-child(even) {
-        margin-left: 0;
-        padding-left: 80px;
-    }
-    
-    .timeline-item::before,
-    .timeline-item:nth-child(even)::before {
-        left: 22px;
-        right: auto;
-    }
-    
-    .smart-icon {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .section-padding {
-        padding: 70px 0;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .participate-tabs {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-    
-    .participate-tab {
-        width: 80%;
-        text-align: center;
-    }
-    
-    .social-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
-    }
-    
-    .slide-menu {
-        width: 100%;
-        right: -100%;
-    }
-    
-    .header-donate-btn {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-    
-    .location-info {
-        margin: 30px 0;
-        padding: 25px;
-    }
-    
-    .location-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .location-venue {
-        font-size: 1.3rem;
-    }
-    
-    .location-address {
-        font-size: 1rem;
-    }
-    
-    .location-icon {
-        font-size: 2rem;
-    }
-    
-    .step-item {
-        padding: 25px 25px 25px 80px;
-    }
-    
-    .step-item::before {
-        left: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-header {
-        padding: 50px 20px 20px;
-    }
-    
-    .menu-section {
-        padding: 0 20px 20px;
-    }
-    
-    .hamburger {
-        padding: 6px;
-    }
-    
-    .hamburger span {
-        width: 20px;
-        height: 2px;
-        margin: 2px 0;
-    }
-    
-    .location-venue {
-        font-size: 1.2rem;
-    }
-    
-    .location-address {
-        font-size: 0.95rem;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .step-item {
-        padding: 20px 20px 20px 75px;
-    }
-    
-    .step-item::before {
-        left: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-}
-
 /* Partner Logo Container Styling with Smart City Theme */
 .partner-logo-container {
     display: flex;
@@ -2102,146 +1951,340 @@ body {
     box-shadow: var(--shadow-glow);
 }
 
-/* Track Styles with enhanced smart city theme */
-#tracks {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-#tracks::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="smartcity" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><rect x="10" y="5" width="5" height="10" fill="%233b82f6" opacity="0.05"/><rect x="5" y="8" width="3" height="7" fill="%2310b981" opacity="0.05"/><rect x="16" y="3" width="4" height="12" fill="%238b5cf6" opacity="0.05"/><circle cx="12.5" cy="20" r="1" fill="%23f59e0b" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23smartcity)"/></svg>');
-    animation: pulse 10s ease-in-out infinite;
-}
-
-.major-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.major-tag {
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.15));
-    color: var(--primary);
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(30, 64, 175, 0.2);
-    transition: var(--transition);
-    animation: slideInUp 0.6s ease-out;
-    animation-fill-mode: both;
-    position: relative;
-    overflow: hidden;
-}
-
-.major-tag::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
-    transition: left 0.3s;
-    z-index: -1;
-}
-
-.major-tag:hover::before {
-    left: 0;
-}
-
-.major-tag:hover {
+/* Footer with enhanced styling */
+.footer {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e293b 100%);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-    border-color: var(--primary);
-}
-
-/* Challenge lock styling */
-.challenge-lock {
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(30, 64, 175, 0.15));
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 25px;
-    border: 2px solid rgba(30, 64, 175, 0.2);
-    position: relative;
-    overflow: hidden;
-    animation: glow 3s infinite;
-}
-
-.challenge-lock::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-/* Mystery banner styling */
-#mysteryBanner {
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.15) 0%, rgba(59, 130, 246, 0.25) 100%);
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 50px;
-    border: 3px dashed var(--primary);
-    position: relative;
-    overflow: hidden;
-    animation: glow 4s infinite;
-}
-
-#mysteryBanner::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-    animation: rotate 30s linear infinite;
-}
-
-#mysteryBanner > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* Enhanced past events section */
-.past-events {
-    background: white;
+    padding: 60px 0 20px;
     position: relative;
     overflow: hidden;
 }
 
-.past-events::before {
+.footer::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="timeline" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="%2310b981" opacity="0.1"/><line x1="15" y1="0" x2="15" y2="30" stroke="%233b82f6" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23timeline)"/></svg>');
-    animation: pulse 8s ease-in-out infinite;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footergrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 0h20v20H0z" fill="none" stroke="%233b82f6" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23footergrid)"/></svg>');
 }
 
-.past-gallery {
-    padding-top: 60px;
+.footer-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     position: relative;
     z-index: 1;
+}
+
+.footer-text {
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: 1;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 15px;
+}
+
+.footer-links a:hover::before {
+    width: 8px;
+}
+
+.footer-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+    z-index: 1;
+    color: var(--accent);
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-icon {
+    margin-right: 15px;
+    color: var(--accent);
+    font-size: 18px;
+    width: 25px;
+    animation: pulse 3s infinite;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    padding-top: 20px;
+    margin-top: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* RESPONSIVE STYLES WITH NAVBAR FIXES */
+@media (max-width: 991px) {
+    /* Fixed navbar for tablets */
+    body {
+        padding-top: 100px; /* Increase padding for tablets */
+    }
+    
+    .navbar-custom {
+        background: rgba(15, 23, 42, 0.98);
+        padding: 10px 0;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 2.4rem;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 80px;
+        padding-right: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 80px;
+    }
+    
+    .timeline-item::before,
+    .timeline-item:nth-child(even)::before {
+        left: 22px;
+        right: auto;
+    }
+    
+    .smart-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fixed navbar for mobile phones */
+    body {
+        padding-top: 110px; /* Further increase for mobile */
+    }
+    
+    .navbar-custom {
+        min-height: 70px;
+        padding: 8px 0;
+    }
+    
+    .navbar-collapse.show {
+        padding: 20px 15px 30px 15px;
+    }
+    
+    .section-padding {
+        padding: 70px 0;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .participate-tabs {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .participate-tab {
+        width: 80%;
+        text-align: center;
+    }
+    
+    .social-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .slide-menu {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .header-donate-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .location-info {
+        margin: 30px 0;
+        padding: 25px;
+    }
+    
+    .location-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .location-venue {
+        font-size: 1.3rem;
+    }
+    
+    .location-address {
+        font-size: 1rem;
+    }
+    
+    .location-icon {
+        font-size: 2rem;
+    }
+    
+    .step-item {
+        padding: 25px 25px 25px 80px;
+    }
+    
+    .step-item::before {
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    /* Ensure mobile menu items are properly spaced */
+    .navbar-nav .nav-item {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Extra fixes for very small screens */
+    body {
+        padding-top: 120px; /* Maximum padding for small screens */
+    }
+    
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+    
+    .menu-header {
+        padding: 50px 20px 20px;
+    }
+    
+    .menu-section {
+        padding: 0 20px 20px;
+    }
+    
+    .hamburger {
+        padding: 6px;
+    }
+    
+    .hamburger span {
+        width: 20px;
+        height: 2px;
+        margin: 2px 0;
+    }
+    
+    .location-venue {
+        font-size: 1.2rem;
+    }
+    
+    .location-address {
+        font-size: 0.95rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .step-item {
+        padding: 20px 20px 20px 75px;
+    }
+    
+    .step-item::before {
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
 }
 </style>
 
@@ -2367,7 +2410,15 @@ body {
             <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU Logo" height="40" class="me-1" />
         </a>
         
-        <!-- Right side: Donate button + Hamburger -->
+        <!-- Bootstrap toggler button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Right side: Donate button + Collapsible menu -->
+
+        
+        <!-- Custom hamburger menu (keep your existing one) -->
         <div class="d-flex align-items-center ms-auto">
             <!-- Compact donate button for larger screens -->
             <div class="d-none d-sm-block me-3">
@@ -2398,7 +2449,7 @@ body {
     
     <div class="hero-content">
         <h1 class="hero-title"><span class="hackathon-name">305 Fall Hackathon</span> <span class="text-accent hackathon-year">2025</span></h1>
-        <p class="hero-subtitle"><span class="hackathon-theme">Smart City Innovation</span> with Code Crunch  at FIU x ColorStack x CAHSI at FIU</p>
+        <p class="hero-subtitle"><span class="hackathon-theme">Smart City Innovation</span> with Code Crunch  at FIUx ColorStack x CAHSI at FIU</p>
         
         <!-- Location Information -->
         <div class="location-info">
@@ -2596,7 +2647,7 @@ body {
             <div class="col-md-6 mb-4">
                 <div class="role-card" style="border: 2px solid rgba(139, 92, 246, 0.4); background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0.1) 100%); border-top: 4px solid var(--secondary);">
                     <div style="padding: 30px;">
-                        <h4 style="color: var(--secondary); font-size: 1.4rem; margin-bottom: 15px;">🦄 #03 Smart City Business Innovation</h4>
+                        <h4 style="color: var(--secondary); font-size: 1.4rem; margin-bottom: 15px;">🦄 #03 Smart City Business Innovation [Tech Unicorn Track]</h4>
                         <p style="margin-bottom: 15px; color: #64748b;"><strong>No Code Required!</strong> Business strategies, urban planning concepts, and entrepreneurial solutions for smart city challenges</p>
                         
                         <div class="major-tags">
@@ -3385,7 +3436,19 @@ body {
                         <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors College Logo" class="sponsor-logo">
                     </div>
                 </div>
-                
+                <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
+                    <div class="partner-logo-container">
+                        <img src="https://github.com/user-attachments/assets/e4e9e02e-6a44-4fd4-8d8b-3f04cf10905d" alt="FIU Business" class="sponsor-logo">
+                    </div>
+                </div>
+                 <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
+                    <div class="partner-logo-container">
+                        <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU PINO GLOBAL" class="sponsor-logo">
+                    </div>
+                </div>
+
+
+
                 <div class="col-6 col-md-4 col-lg-3 text-center mb-4">
                     <div class="partner-logo-container">
                         <img src="https://github.com/user-attachments/assets/30dc5b3d-0879-4c39-8653-ed451e790676" alt="Cardano Logo" class="sponsor-logo">
@@ -3398,7 +3461,7 @@ body {
             <h3 class="sponsor-title">💎 Smart City Sponsors</h3>
             
             <!-- Tier 1 Sponsors -->
-            <div class="sponsor-tier tier-1 mb-5">
+            <!-- <div class="sponsor-tier tier-1 mb-5">
                 <h4 class="tier-title">🏙️ Platinum City Partners</h4>
                 <div class="tier-logos">
                     <img src="https://placehold.co/200x100?text=Smart+City+Sponsor" alt="Smart City Sponsor" class="sponsor-logo">
@@ -3407,9 +3470,9 @@ body {
                     <img src="https://placehold.co/200x100?text=City+Solutions" alt="City Solutions" class="sponsor-logo">
                 </div>
             </div>
-            
+             -->
             <!-- Tier 2 Sponsors -->
-            <div class="sponsor-tier tier-2 mb-5">
+            <!-- <div class="sponsor-tier tier-2 mb-5">
                 <h4 class="tier-title">🌟 Gold Innovation Partners</h4>
                 <div class="tier-logos">
                     <img src="https://placehold.co/200x100?text=Tech+Innovation" alt="Tech Innovation" class="sponsor-logo">
@@ -3417,10 +3480,10 @@ body {
                     <img src="https://placehold.co/200x100?text=Smart+Systems" alt="Smart Systems" class="sponsor-logo">
                     <img src="https://placehold.co/200x100?text=City+Tech" alt="City Tech" class="sponsor-logo">
                 </div>
-            </div>
+            </div> -->
             
             <!-- Tier 3 Sponsors -->
-            <div class="sponsor-tier tier-3 mb-5">
+            <!-- <div class="sponsor-tier tier-3 mb-5">
                 <h4 class="tier-title">🥈 Silver Urban Supporters</h4>
                 <div class="tier-logos">
                     <img src="https://placehold.co/200x100?text=Infrastructure+Tech" alt="Infrastructure Tech" class="sponsor-logo">
@@ -3428,18 +3491,16 @@ body {
                     <img src="https://placehold.co/200x100?text=Sustainable+Cities" alt="Sustainable Cities" class="sponsor-logo">
                     <img src="https://placehold.co/200x100?text=Digital+Gov" alt="Digital Gov" class="sponsor-logo">
                 </div>
-            </div>
+            </div> -->
             
             <!-- Tier 4 Sponsors -->
             <div class="sponsor-tier tier-4">
                 <h4 class="tier-title">🥉 Bronze Community Builders</h4>
                 <div class="tier-logos">
-                    <img src="https://github.com/user-attachments/assets/e4e9e02e-6a44-4fd4-8d8b-3f04cf10905d" alt="FIU Business" class="sponsor-logo">
-                    <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU PINO GLOBAL" class="sponsor-logo">
                     <img src="https://github.com/user-attachments/assets/e6278f06-8e35-422e-9c96-a27acaf8646e" alt="CodePath Logo" class="sponsor-logo">
-                    <img src="https://placehold.co/200x100?text=Community+Partner" alt="Community Partner" class="sponsor-logo">
+                    <!-- <img src="https://placehold.co/200x100?text=Community+Partner" alt="Community Partner" class="sponsor-logo">
                     <img src="https://placehold.co/200x100?text=Education+Supporter" alt="Education Supporter" class="sponsor-logo">
-                    <img src="https://placehold.co/200x100?text=Local+Business" alt="Local Business" class="sponsor-logo">
+                    <img src="https://placehold.co/200x100?text=Local+Business" alt="Local Business" class="sponsor-logo"> -->
                 </div>
             </div>
         </div>
@@ -3523,6 +3584,9 @@ body {
         
         <div class="footer-bottom">
             <p>&copy; <span class="hackathon-year">2025</span> <span class="hackathon-name">305 Fall Hackathon</span> - Theme: Smart City Innovation. All rights reserved.</p>
+                      <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">
+                        Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Brian Bazurto</a> | Powered by innovation and collaboration
+                    </p>
         </div>
     </div>
 </footer>
@@ -3855,6 +3919,70 @@ body {
     Interested in the code? Check out our GitHub:
     https://github.com/CODE-CRUNCH-CLUB
     `);
+
+
+    // Enhanced Navbar JavaScript with dual menu support
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const slideMenu = document.getElementById('slide-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const closeBtn = document.getElementById('close-menu');
+    const navbarCollapse = document.getElementById('navbarNav');
+
+    // Close Bootstrap navbar when custom menu opens
+    function closeBootstrapMenu() {
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+        }
+    }
+
+    // Open custom menu
+    hamburger.addEventListener('click', function() {
+        closeBootstrapMenu(); // Close Bootstrap menu first
+        hamburger.classList.add('active');
+        slideMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Close menu function
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        slideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close menu events
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+
+    // Close menu when clicking on menu items
+    document.querySelectorAll('.menu-item[href^="#"]').forEach(item => {
+        item.addEventListener('click', function() {
+            setTimeout(closeMenu, 300);
+        });
+    });
+
+    // Enhanced navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar-custom');
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            navbar.classList.remove('navbar-scrolled');
+        }
+    });
+});
+
+
+
+
 </script>
 </body>
 </html>
