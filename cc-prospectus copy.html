@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .doc-container {
+            width: 100%;
+            height: 85vh;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Doc Viewer</h2>
+        
+        <!-- Google Doc Viewer -->
+        <div class="doc-container">
+            <!-- Using Google Docs preview mode -->
+            <iframe src="https://docs.google.com/document/d/1IyGL_JRD_tGSjUNdijBi7EjHD41hwtQYFI9fmdgBJTo/preview" allowfullscreen></iframe>
+        </div>
+        
+        <div class="loading-message">
+            If the document doesn't load, please check your internet connection.
+        </div>
+    </div>
+</body>
+</html>
