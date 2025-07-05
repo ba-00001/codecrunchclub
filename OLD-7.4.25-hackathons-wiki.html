@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKs at FIU [Open to Any University, Any Major] | Ultimate Hacker's Guide</title>
+
+<!-- start form preview embedding -->
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="The ultimate hacker's guide and wiki for university students. Access exclusive resources, connect with mentors, and join the global tech community.">
+<meta name="keywords" content="hacks, programming, coding, hackathons, tech community, student resources, gaming, anime, university, students">
+<meta name="author" content="Code Crunch Global">
+
+<!-- Open Graph Meta Tags for Social Media Previews -->
+<meta property="og:title" content="HACKs at FIU [Open to Any University, Any Major] | Ultimate Hacker's Guide">
+<meta property="og:description" content="The ultimate hacker's guide and wiki for university students. Access exclusive resources, connect with mentors, and join the tech community.">
+<meta property="og:image" content="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a">
+<meta property="og:image:alt" content="HACKs at FIU - Matrix-style hacker interface with gaming elements">
+<meta property="og:url" content="https://hacks-at-fiu.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Code Crunch Global">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HACKs at FIU [Open to Any University, Any Major] | Ultimate Hacker's Guide">
+<meta name="twitter:description" content="The ultimate hacker's guide and wiki for university students. Access exclusive resources, mentorship, and join the tech community.">
+<meta name="twitter:image" content="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a">
+<meta name="twitter:image:alt" content="HACKs at FIU - Matrix-style hacker interface">
+<meta name="twitter:site" content="@codecrunchclub">
+<meta name="twitter:creator" content="@codecrunchclub">
+
+<!-- Additional Meta Tags -->
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#00ff41">
+<link rel="canonical" href="https://hacks-at-fiu.vercel.app/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a">
+<link rel="apple-touch-icon" href="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a">
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "HACKs at FIU [Open to Any University, Any Major] | Ultimate Hacker's Guide",
+  "description": "Your exclusive hackathon hub! Access hackathon resources, connect with fellow hackers, and level up your coding skills.",
+  "url": "https://hacks-at-fiu.vercel.app/",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Code Crunch Global",
+    "description": "A global tech community open to students from any university and any major. We focus on hackathons, programming, and collaborative learning.",
+    "url": "https://codecrunch.cs.fiu.edu",
+    "logo": "https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a",
+    "sameAs": [
+      "https://www.linkedin.com/company/code-crunch-club/",
+      "https://www.instagram.com/codecrunchclub/"
+    ]
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Brian Bazurto",
+    "url": "https://www.linkedin.com/in/iba001/"
+  }
+}
+</script>
+
+<!-- Preload Critical Resources -->
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" as="style">
+
+<!-- end form preview embedding -->
+
+
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary: #00ff41;
+            --primary-dark: #00cc33;
+            --primary-light: #33ff66;
+            --secondary: #ff0080;
+            --accent: #00d4ff;
+            --warning: #ffff00;
+            --danger: #ff3333;
+            
+            /* Hacker theme colors inspired by gaming/anime */
+            --matrix-green: #00ff41;
+            --cyber-blue: #00d4ff;
+            --neon-pink: #ff0080;
+            --electric-yellow: #ffff00;
+            --hacker-purple: #8a2be2;
+            --terminal-green: #39ff14;
+            
+            --bg-color: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-light: #1a1a1a;
+            --text-primary: #00ff41;
+            --text-secondary: #33ff66;
+            --text-light: #66ff99;
+            --border-color: #00ff41;
+            
+            --shadow-sm: 0 0 10px rgba(0, 255, 65, 0.3);
+            --shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            --shadow-md: 0 0 30px rgba(0, 255, 65, 0.5);
+            --shadow-lg: 0 0 40px rgba(0, 255, 65, 0.6);
+            --radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Matrix-style animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 79px, rgba(0, 255, 65, 0.03) 81px, rgba(0, 255, 65, 0.03) 82px, transparent 84px),
+                linear-gradient(rgba(0, 255, 65, 0.03) 50%, transparent 50%);
+            background-size: 85px 85px;
+            z-index: -2;
+            animation: matrix-bg 20s linear infinite;
+        }
+
+        @keyframes matrix-bg {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(85px); }
+        }
+
+        /* Glitch effect for terminal feel */
+        .glitch {
+            position: relative;
+            color: var(--matrix-green);
+            animation: glitch-skew 2s infinite linear alternate-reverse;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+            color: var(--cyber-blue);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-anim2 1s infinite linear alternate-reverse;
+            color: var(--neon-pink);
+            z-index: -2;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            2%, 64% { transform: skew(0deg); }
+            4%, 60% { transform: skew(2deg); }
+            62% { transform: skew(0deg) skew(5deg); }
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            border-bottom: 2px solid var(--matrix-green);
+        }
+
+        .navbar-custom {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom .nav-link.active,
+        .navbar-custom .nav-link:hover {
+            color: var(--matrix-green) !important;
+            text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+        }
+
+        /* Header Styles */
+        .hero-section {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            color: var(--matrix-green);
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 10px var(--matrix-green),
+                0 0 20px var(--matrix-green),
+                0 0 30px var(--matrix-green);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from {
+                text-shadow: 
+                    0 0 10px var(--matrix-green),
+                    0 0 20px var(--matrix-green),
+                    0 0 30px var(--matrix-green);
+            }
+            to {
+                text-shadow: 
+                    0 0 5px var(--matrix-green),
+                    0 0 10px var(--matrix-green),
+                    0 0 15px var(--matrix-green),
+                    0 0 20px var(--matrix-green);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .terminal-prompt {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--matrix-green);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            box-shadow: var(--shadow);
+        }
+
+        .terminal-line {
+            color: var(--matrix-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-line::before {
+            content: "$ ";
+            color: var(--cyber-blue);
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Hacker Badges */
+        .hacker-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-hacker {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-light));
+            border: 2px solid var(--matrix-green);
+            color: var(--matrix-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-hacker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .badge-hacker:hover::before {
+            left: 100%;
+        }
+
+        .badge-hacker:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        /* Main Content - Full Screen Embed */
+        .main-content {
+            padding: 1rem;
+            height: 100vh;
+            position: relative;
+        }
+
+        .embed-container {
+            width: calc(100% - 2rem);
+            height: calc(100vh - 120px); /* Subtract navbar height and padding */
+            position: relative;
+            border: 2px solid var(--matrix-green);
+            border-radius: var(--radius);
+            background: var(--bg-color);
+            box-shadow: var(--shadow);
+            margin: 0 auto;
+        }
+
+        .notion-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: calc(var(--radius) - 2px);
+            background: transparent;
+        }
+
+        /* Quick Access Buttons */
+        .quick-access {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .quick-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--matrix-green);
+            color: var(--matrix-green);
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .quick-btn:hover {
+            background: var(--matrix-green);
+            color: var(--bg-color);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.1);
+        }
+
+        /* Floating Hacker Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            color: var(--matrix-green);
+            font-family: 'Courier New', monospace;
+            animation: float-code 20s linear infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 30%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 40%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        .floating-icon:nth-child(4) {
+            bottom: 20%;
+            right: 5%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float-code {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.1; }
+            25% { transform: translateY(-20px) translateX(10px); opacity: 0.2; }
+            50% { transform: translateY(0px) translateX(20px); opacity: 0.1; }
+            75% { transform: translateY(-10px) translateX(10px); opacity: 0.15; }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            border-top: 2px solid var(--matrix-green);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--matrix-green);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .footer-link:hover {
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .quick-access {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                top: auto;
+                transform: none;
+                flex-direction: row;
+            }
+
+            .quick-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .embed-container {
+                height: calc(100vh - 60px);
+            }
+
+            .hacker-badges {
+                gap: 0.5rem;
+            }
+
+            .badge-hacker {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 2rem 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .terminal-prompt {
+                margin: 1rem;
+                padding: 0.75rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Hide default scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--matrix-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Hacker Elements -->
+    <div class="floating-elements">
+        <div class="floating-icon">{"hack":"world"}</div>
+        <div class="floating-icon">[SYSTEM BREACH]</div>
+        <div class="floating-icon">#!/bin/bash</div>
+        <div class="floating-icon">0x1337</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container-fluid px-lg-5">
+            <!-- Logos and Brand Names -->
+            <div class="d-flex align-items-center">
+                <!-- Code Crunch Logo -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">Code Crunch @ FIU</span>
+                </a>
+                
+                <!-- Color Stack Logo -->
+                <a class="navbar-brand me-3" href="https://go.fiu.edu/colorstackatfiu">
+                    <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> ColorStack @ FIU </span>
+                </a>
+                
+                <!-- CAHSI Logo -->
+                <a class="navbar-brand" href="https://go.fiu.edu/cahsiatfiu">
+                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU Logo" height="40" class="me-1" />
+                    <span class="d-none d-md-inline"> CAHSI @ FIU </span>
+                </a>
+            </div>
+        
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="hacks-toolkit.html">Hacks Toolkit</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quick Access Floating Buttons -->
+    <div class="quick-access">
+        <a href="witty-suede-4a1.notion.site/ebd/1ee7f868cc8c806183f4f8ede9d5d0a3" 
+           target="_blank" class="quick-btn" title="Open in New Tab">
+            <i class="bi bi-box-arrow-up-right"></i>
+        </a>
+        <button class="quick-btn" onclick="refreshEmbed()" title="Refresh">
+            <i class="bi bi-arrow-clockwise"></i>
+        </button>
+        <button class="quick-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+            <i class="bi bi-fullscreen"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section (Compact for full embed) -->
+    <header class="hero-section" style="padding: 2rem 0 1rem;">
+        <div class="container hero-content">
+            <h1 class="hero-title glitch" data-text="HACK THE MATRIX" style="font-size: 2.5rem; margin-bottom: 0.5rem;">HACK THE MATRIX</h1>
+            <p class="hero-subtitle" style="font-size: 1rem; margin-bottom: 1rem;">Ultimate Hacker's Guide & Wiki</p>
+            
+            <div class="terminal-prompt" style="margin: 1rem auto; padding: 0.75rem; font-size: 0.8rem;">
+                <div class="terminal-line">cd /hacks-at-fiu</div>
+                <div class="terminal-line">cat welcome.txt</div>
+                <div class="terminal-line" style="color: var(--text-secondary);">> Access granted. Welcome to the underground.<span class="cursor">_</span></div>
+            </div>
+
+            <div class="hacker-badges">
+                <span class="badge-hacker">💀 Elite Hacker</span>
+                <span class="badge-hacker">🛡️ Cyber Defense</span>
+                <span class="badge-hacker">⚡ Script Kiddie</span>
+                <span class="badge-hacker">🔥 Code Ninja</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content - Full Screen Notion Embed -->
+    <main class="main-content">
+        <div class="embed-container">
+            <iframe 
+                id="notionEmbed"
+                src="https://witty-suede-4a1.notion.site/ebd/1ee7f868cc8c806183f4f8ede9d5d0a3"
+                class="notion-iframe"
+                title="HACKs at FIU Wiki - Ultimate Hacker's Guide"
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">© Code Crunch Hackathons. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="mt-8 pt-8 border-t border-white/20 text-center" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0, 255, 65, 0.2); text-align: center;">
+                <p class="text-sm opacity-80" style="font-size: 0.875rem; opacity: 0.8; font-family: 'Courier New', monospace;">
+                    © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
+                </p>
+                <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem; font-family: 'Courier New', monospace;">
+                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Brian Bazurto</a> | Powered by innovation and collaboration
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+   // Refresh embed function
+   function refreshEmbed() {
+       const iframe = document.getElementById('notionEmbed');
+       iframe.src = iframe.src;
+   }
+
+   // Toggle fullscreen function
+   function toggleFullscreen() {
+       if (!document.fullscreenElement) {
+           document.documentElement.requestFullscreen().catch(err => {
+               console.log(`Error attempting to enable fullscreen: ${err.message}`);
+           });
+       } else {
+           if (document.exitFullscreen) {
+               document.exitFullscreen();
+           }
+       }
+   }
+
+   document.addEventListener('DOMContentLoaded', function() {
+       // Matrix rain effect
+       function createMatrixRain() {
+           const canvas = document.createElement('canvas');
+           const ctx = canvas.getContext('2d');
+           
+           canvas.style.position = 'fixed';
+           canvas.style.top = '0';
+           canvas.style.left = '0';
+           canvas.style.width = '100%';
+           canvas.style.height = '100%';
+           canvas.style.pointerEvents = 'none';
+           canvas.style.zIndex = '-1';
+           canvas.style.opacity = '0.1';
+           
+           document.body.appendChild(canvas);
+           
+           canvas.width = window.innerWidth;
+           canvas.height = window.innerHeight;
+           
+           const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+           const matrixArray = matrix.split("");
+           
+           const fontSize = 10;
+           const columns = canvas.width / fontSize;
+           
+           const drops = [];
+           for (let x = 0; x < columns; x++) {
+               drops[x] = 1;
+           }
+           
+           function draw() {
+               ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+               ctx.fillRect(0, 0, canvas.width, canvas.height);
+               
+               ctx.fillStyle = '#00ff41';
+               ctx.font = fontSize + 'px Courier New';
+               
+               for (let i = 0; i < drops.length; i++) {
+                   const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                   ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                   
+                   if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                       drops[i] = 0;
+                   }
+                   drops[i]++;
+               }
+           }
+           
+           setInterval(draw, 35);
+       }
+       
+       // Initialize matrix rain effect
+       setTimeout(createMatrixRain, 1000);
+       
+       // Glitch effect for floating elements
+       const floatingIcons = document.querySelectorAll('.floating-icon');
+       floatingIcons.forEach((icon, index) => {
+           setInterval(() => {
+               if (Math.random() > 0.95) {
+                   icon.style.color = ['#00ff41', '#00d4ff', '#ff0080'][Math.floor(Math.random() * 3)];
+                   setTimeout(() => {
+                       icon.style.color = '#00ff41';
+                   }, 100);
+               }
+           }, 2000 + (index * 500));
+       });
+       
+       // Terminal typing effect
+       const terminalLines = document.querySelectorAll('.terminal-line');
+       terminalLines.forEach((line, index) => {
+           const text = line.textContent;
+           line.textContent = '';
+           
+           setTimeout(() => {
+               let i = 0;
+               const typeInterval = setInterval(() => {
+                   if (i < text.length) {
+                       line.textContent += text.charAt(i);
+                       i++;
+                   } else {
+                       clearInterval(typeInterval);
+                   }
+               }, 50);
+           }, index * 1000);
+       });
+       
+       // Hacker badge hover effects
+       const badges = document.querySelectorAll('.badge-hacker');
+       badges.forEach(badge => {
+           badge.addEventListener('mouseenter', function() {
+               this.style.borderColor = ['#00ff41', '#00d4ff', '#ff0080', '#ffff00'][Math.floor(Math.random() * 4)];
+               this.style.boxShadow = `0 0 20px ${this.style.borderColor}`;
+           });
+           
+           badge.addEventListener('mouseleave', function() {
+               this.style.borderColor = '#00ff41';
+               this.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.4)';
+           });
+       });
+       
+       // Parallax effect for floating elements
+       window.addEventListener('scroll', function() {
+           const scrolled = window.pageYOffset;
+           const parallax = document.querySelector('.floating-elements');
+           const speed = scrolled * 0.2;
+           
+           if (parallax) {
+               parallax.style.transform = `translateY(${speed}px)`;
+           }
+       });
+       
+       // Keyboard shortcuts
+       document.addEventListener('keydown', function(e) {
+           // Ctrl/Cmd + R for refresh
+           if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+               e.preventDefault();
+               refreshEmbed();
+           }
+           
+           // F11 or Ctrl/Cmd + F for fullscreen
+           if (e.key === 'F11' || ((e.ctrlKey || e.metaKey) && e.key === 'f')) {
+               e.preventDefault();
+               toggleFullscreen();
+           }
+       });
+       
+       // Add loading animation for iframe
+       const iframe = document.getElementById('notionEmbed');
+       const container = document.querySelector('.embed-container');
+       
+       // Add loading screen
+       const loadingScreen = document.createElement('div');
+       loadingScreen.innerHTML = `
+           <div style="
+               position: absolute;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               color: #00ff41;
+               font-family: 'Courier New', monospace;
+               text-align: center;
+               z-index: 1000;
+           ">
+               <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse-glow 2s ease-in-out infinite alternate;">
+                   🔓
+               </div>
+               <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">
+                   ACCESSING MAINFRAME...
+               </div>
+               <div style="font-size: 0.9rem; opacity: 0.7;">
+                   Decrypting security protocols
+               </div>
+               <div style="margin-top: 1rem;">
+                   <span style="animation: blink 1s infinite;">▓</span>
+                   <span style="animation: blink 1s infinite 0.1s;">▓</span>
+                   <span style="animation: blink 1s infinite 0.2s;">▓</span>
+               </div>
+           </div>
+       `;
+       loadingScreen.style.cssText = `
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0, 0, 0, 0.9);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           z-index: 10;
+       `;
+       
+       container.appendChild(loadingScreen);
+       
+       iframe.addEventListener('load', function() {
+           setTimeout(() => {
+               loadingScreen.style.opacity = '0';
+               setTimeout(() => {
+                   loadingScreen.remove();
+               }, 500);
+           }, 2000);
+       });
+       
+       // Window resize handler for canvas
+       window.addEventListener('resize', function() {
+           const canvas = document.querySelector('canvas');
+           if (canvas) {
+               canvas.width = window.innerWidth;
+               canvas.height = window.innerHeight;
+           }
+       });
+   });
+</script>
+
+</body>
+</html>
