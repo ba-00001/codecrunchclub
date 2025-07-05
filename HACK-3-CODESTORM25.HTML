@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODESTORM Hack 2025 - Virtual Hackathon</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Global Styles - Storm Colors */
+        body {
+            background-color: #1A1A2E;
+            color: #F8F9FA;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+  
+        /* Flyer Container */
+        .flyer-container {
+            margin: 50px auto;
+        }
+
+        .flyer-container img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 198, 255, 0.5);
+        }
+
+        /* Apply Button */
+        .apply-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .apply-button:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 0 30px rgba(0, 198, 255, 0.8);
+            transform: translateY(-5px) scale(1.05);
+            color: white;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(18, 18, 40, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Storm Card */
+        .storm-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .storm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.2);
+        }
+
+        .card-title {
+            color: #00c6ff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .track-card {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.1) 0%, rgba(0, 198, 255, 0.1) 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .track-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .track-badge {
+            display: inline-block;
+            background: rgba(0, 114, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00c6ff;
+            font-weight: 500;
+            margin: 5px;
+        }
+
+        .special-track-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ffb800;
+            color: #1A1A2E;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-bottom-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 198, 255, 0.3);
+            padding: 15px 0;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.2);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 0 8px 8px;
+            margin-top: 2px;
+            line-height: 1.6;
+        }
+
+        /* Contributor Section */
+        .contributors-header {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00c6ff;
+        }
+
+        .window-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .window-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0072ff;
+        }
+
+        .contributors-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .contributor-card img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contributor-card img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+        }
+
+        .volunteer-btn, .prospectus-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            transition: all 0.3s ease-in-out;
+            margin: 15px 10px;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+        }
+
+        .volunteer-btn:hover, .prospectus-btn:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.5);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(180deg, #0072ff, #00c6ff);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            top: 15px;
+            border-radius: 50%;
+            background: #00c6ff;
+            box-shadow: 0 0 10px rgba(0, 198, 255, 0.8);
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            color: #00c6ff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        /* Stats */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            width: 220px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00c6ff;
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 40px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+            
+            .timeline-left::after, .timeline-right::after {
+                left: 28px;
+            }
+            
+            .timeline-right {
+                left: 0%;
+            }
+
+            .stat-item {
+                width: 160px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .flyer-container img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">CODESTORM HACK</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Code Crunch</a></li>
+                <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#submissions">Submissions</a></li>
+                <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODESTORM Hack 2025 - Virtual Hackathon</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Global Styles - Storm Colors */
+        body {
+            background-color: #1A1A2E;
+            color: #F8F9FA;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+  
+        /* Flyer Container */
+        .flyer-container {
+            margin: 50px auto;
+        }
+
+        .flyer-container img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 198, 255, 0.5);
+        }
+
+        /* Apply Button */
+        .apply-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .apply-button:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 0 30px rgba(0, 198, 255, 0.8);
+            transform: translateY(-5px) scale(1.05);
+            color: white;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(18, 18, 40, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Storm Card */
+        .storm-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .storm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.2);
+        }
+
+        .card-title {
+            color: #00c6ff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .track-card {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.1) 0%, rgba(0, 198, 255, 0.1) 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .track-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .track-badge {
+            display: inline-block;
+            background: rgba(0, 114, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00c6ff;
+            font-weight: 500;
+            margin: 5px;
+        }
+
+        .special-track-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ffb800;
+            color: #1A1A2E;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-bottom-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 198, 255, 0.3);
+            padding: 15px 0;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.2);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 0 8px 8px;
+            margin-top: 2px;
+            line-height: 1.6;
+        }
+
+        /* Contributor Section */
+        .contributors-header {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00c6ff;
+        }
+
+        .window-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .window-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0072ff;
+        }
+
+        .contributors-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .contributor-card img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contributor-card img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+        }
+
+        .volunteer-btn, .prospectus-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            transition: all 0.3s ease-in-out;
+            margin: 15px 10px;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+        }
+
+        .volunteer-btn:hover, .prospectus-btn:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.5);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(180deg, #0072ff, #00c6ff);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            top: 15px;
+            border-radius: 50%;
+            background: #00c6ff;
+            box-shadow: 0 0 10px rgba(0, 198, 255, 0.8);
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            color: #00c6ff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        /* Stats */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            width: 220px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00c6ff;
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 40px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+            
+            .timeline-left::after, .timeline-right::after {
+                left: 28px;
+            }
+            
+            .timeline-right {
+                left: 0%;
+            }
+
+            .stat-item {
+                width: 160px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .flyer-container img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">CODESTORM HACK</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link " href="hacks-toolkit.html">Hacks Toolkit</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hackathon Details -->
+<section id="about" class="content-section">
+    <h2>🌪️ CODESTORM Hack 2025</h2>
+    <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; color: #e0e0ff;">
+        Join this week-long virtual hackathon to team up, innovate, and build meaningful projects — no matter your major or experience level. Can you build under pressure? Time to prove it. ⏱️🌩️
+    </p>
+    
+    <div style="margin: 3rem 0; background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2);">
+        <h3 style="color: #00c6ff; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💻 FULLY VIRTUAL EVENT</h3>
+        <p style="text-align: center; margin-bottom: 1rem;">Participate from anywhere with an internet connection! No physical attendance required.</p>
+        <p style="text-align: center; margin-bottom: 1rem;">All mentorship and support provided online through the Club Server in dedicated hackathon channels.</p>
+        <p style="text-align: center; font-weight: bold; color: #e0e0ff;">🌍 Open to ALL majors from ANY university & High School Students (16+)!</p>
+    </div>
+
+    <div style="margin: 3rem 0; background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(50, 205, 50, 0.3);">
+        <h3 style="color: #32cd32; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">✅ REGISTRATION NOW OPEN!</h3>
+        <p style="text-align: center; margin-bottom: 1rem; font-size: 1.2rem;">Don't wait - secure your spot today and get early access to resources!</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                <i class="fas fa-rocket me-2"></i> Register Now
+            </a>
+            
+            <a href="https://www.notion.so/HACKS-at-FIU-Wiki-Students-only-1ee7f868cc8c806183f4f8ede9d5d0a3?pvs=4" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                <i class="fas fa-book me-2"></i> HACKS at FIU Wiki
+            </a>
+            <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                <i class="fas fa-toolbox me-2"></i> Hacks Toolkit
+
+            </a>
+        </div>
+    </div>
+    
+
+        <div style="margin: 3rem 0; background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(50, 205, 50, 0.3);">
+            <h3 style="color: #32cd32; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🌟 GET INVOLVED!</h3>
+            <p style="text-align: center; margin-bottom: 1rem; font-size: 1.2rem;">Join our hackathon! Whether you're an industry leader, student, fundraiser, or sponsor, your support drives innovation for tomorrow's cities.</p>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <!-- Industry Leaders - Volunteer -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog"
+                target="_blank"
+                class="apply-button"
+                style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                🤝 Industry Leader – Volunteer
+                </a>
+
+                <!-- Students - Volunteer -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkEhtLbNW8Yk4jIFUKfLirPbqjrNOwUZCEJ7d8hoFH8Y9nyw/viewform?usp=dialog"
+                target="_blank"
+                class="apply-button"
+                style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                🎓 Student – Volunteer
+                </a>
+
+                <!-- Industry Leaders – Fundraiser & Advisory Board -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1fUyF0lW0Be6W-r1tGUAv7JA5manybTqXN5Ql6RcUlgb7Kw/viewform?usp=dialog"
+                target="_blank"
+                class="apply-button"
+                style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                💼 Industry Leader – Fundraising Advisory Board
+                </a>
+
+                <!-- Become a Sponsor -->
+                <a href="https://hack-university-fundraiser.vercel.app/"
+                target="_blank"
+                class="apply-button"
+                style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                🌟 Become a Sponsor
+                </a>
+            </div>
+            </div>
+
+    
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <div class="stat-item">
+            <div class="stat-number">7+</div>
+            <div class="stat-text">2025 Hackathons</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">20+</div>
+            <div class="stat-text">Universities Represented</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">40+</div>
+            <div class="stat-text">Companies, Judges, Mentors & Workshop Hosts</div>
+        </div>
+    </div>
+    
+    <div style="margin: 3rem 0;">
+        <h3 style="color: #00c6ff; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2);">
+                <span style="font-size: 1.2rem;">📅</span> <strong>May 19-26, 2025</strong>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2);">
+                <span style="font-size: 1.2rem;">🚦</span> <strong>Start:</strong> Monday at 12:00 AM
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2);">
+                <span style="font-size: 1.2rem;">🏁</span> <strong>End:</strong> Monday at 11:59 PM
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2);">
+                <span style="font-size: 1.2rem;">⏱️</span> <strong>7 Days</strong> of non-stop innovation
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+    <div style="margin: 3rem 0;">
+        <h3 style="color: #00c6ff; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💫 Why CODESTORM Is Your Opportunity</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🌟</div>
+                    <h4 class="card-title">Inclusive Innovation</h4>
+                    <p>All skill levels welcome — from coding newbies to tech wizards. Open to ALL majors!</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">👩‍💼</div>
+                    <h4 class="card-title">Industry Mentorship</h4>
+                    <p>Learn directly from tech professionals through our virtual Discord channels</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="storm-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
+                    <h4 class="card-title">Recognition</h4>
+                    <p>Winner certificates and LinkedIn promotion for standout projects in each track</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Registration Steps Section -->
+<section id="registration-steps" class="content-section">
+    <h2>✅ Registration Checklist</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Follow all these steps to complete your registration for CODESTORM Hack 2025:</p>
+    
+    <div class="timeline-container">
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content" style="background: rgba(50, 205, 50, 0.1); border: 1px solid rgba(50, 205, 50, 0.3);">
+                <div class="timeline-title" style="color: #32cd32;">Step 1: Complete Registration Form</div>
+                <div class="timeline-date">Required</div>
+                <p><i class="fas fa-check-circle" style="color: #32cd32;"></i> Fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank">registration form</a> completely</p>
+                <p><i class="fas fa-info-circle" style="color: #00c6ff;"></i> If you need to update your registration for other hacks, simply refill the form</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Step 2: Join Discord</div>
+                <div class="timeline-date">Required</div>
+                <p><i class="fab fa-discord" style="color: #7289da;"></i> Join the <a target="_blank" style="color: #fff; text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff; font-weight: bold;">CodeCrunch Discord server</a> for updates, team formation, and networking</p>
+                <p><i class="fas fa-bell" style="color: #ffb800;"></i> Enable notifications to receive important announcements about the event</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Step 3: RSVP on Luma</div>
+                <div class="timeline-date">Required</div>
+                <p><i class="fas fa-calendar-check" style="color: #ff7675;"></i> Reserve your spot in the virtual event through our <a target="_blank" style="color: #fff; text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff; font-weight: bold;">Luma event page</a></p>
+                <p><i class="fas fa-calendar-plus" style="color: #00c6ff;"></i> Add the event to your calendar to receive reminders</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Step 4: Share on LinkedIn</div>
+                <div class="timeline-date">Recommended</div>
+                <p><i class="fab fa-linkedin" style="color: #0077b5;"></i> Help us spread the word—repost the <a target="_blank" style="color: #fff; text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff; font-weight: bold;">official LinkedIn event</a> with your thoughts</p>
+                <p><i class="fas fa-hashtag" style="color: #00c6ff;"></i> Use hashtag #CODESTORM2025 when you share</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Step 5: Register on Devpost</div>
+                <div class="timeline-date">Required by May 19</div>
+                <p><i class="fas fa-code" style="color: #74b9ff;"></i> Get your team set up on <a target="_blank" style="color: #fff; text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff; font-weight: bold;">Devpost</a> so you can submit projects as soon as the hackathon opens</p>
+                <p><i class="fas fa-users" style="color: #00c6ff;"></i> You can create or join a team on Devpost before or during the event</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content" style="background: rgba(0, 198, 255, 0.1); border: 1px solid rgba(0, 198, 255, 0.3);">
+                <div class="timeline-title" style="color: #00c6ff;">Access the Hackathon Wiki</div>
+                <div class="timeline-date">Resource Hub</div>
+                <p><i class="fas fa-book" style="color: #00c6ff;"></i> Find detailed instructions and resources on the <a href="https://go.fiu.edu/hacksatfiu" target="_blank">HACKS at FIU Wiki</a></p>
+                <p><i class="fas fa-star" style="color: #ffb800;"></i> The wiki contains all information you need to succeed in the hackathon!</p>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="https://go.fiu.edu/hacksatfiu" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+            <i class="fas fa-external-link-alt me-2"></i> Visit the HACKS at FIU Wiki
+        </a>
+    </div>
+</section>
+
+
+<!-- Timeline Section -->
+<section id="timeline" class="content-section">
+    <h2>Hackathon Timeline</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Mark these key dates in your calendar to stay on track throughout the event!</p>
+    
+    <div class="timeline-container">
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content" style="background: rgba(50, 205, 50, 0.1); border: 1px solid rgba(50, 205, 50, 0.3);">
+                <div class="timeline-title" style="color: #32cd32;">Registration Open</div>
+                <div class="timeline-date">Now through May 18, 2025</div>
+                <p><i class="fas fa-check-circle" style="color: #32cd32;"></i> Registration is currently open! Sign up early to secure your spot and get access to pre-hackathon resources</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Hacking Begins</div>
+                <div class="timeline-date">May 19, 2025 at 12:00 AM EST</div>
+                <p>Track challenges revealed! Start building your projects with your team</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Midweek Check-in</div>
+                <div class="timeline-date">May 22, 2025 at 6:00 PM EST</div>
+                <p>Optional progress update and mentorship session via Discord</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Submission Deadline</div>
+                <div class="timeline-date">May 26, 2025 at 11:59 PM EST</div>
+                <p>Final project submissions due on DevPost</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-left">
+            <div class="timeline-content">
+                <div class="timeline-title">Judging Period</div>
+                <div class="timeline-date">May 27-30, 2025</div>
+                <p>Projects reviewed by our panel of industry judges</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right">
+            <div class="timeline-content">
+                <div class="timeline-title">Winners Announced</div>
+                <div class="timeline-date">May 31, 2025</div>
+                <p>Track winners announced via email and social media</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Tracks Section with Inline JavaScript for Challenge Reveal -->
+<section id="tracks" class="content-section">
+    <h2>Hackathon Tracks</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Choose from our diverse range of tracks to showcase your skills and creativity. You can pick up to 2 tracks for your submission!</p>
+    
+    <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(0, 114, 255, 0.15) 0%, rgba(0, 198, 255, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #00c6ff;">
+        <div style="font-size: 2rem; margin-bottom: 20px;">🔍</div>
+        <h4 style="color: #00c6ff; font-size: 1.5rem; margin-bottom: 20px;">Mystery Challenges Await!</h4>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature a unique, exciting challenge that will be automatically revealed when the hackathon begins on <strong>May 19, 2025 at 12:00 AM</strong>.</p>
+        <p style="font-style: italic; color: #e0e0ff;">Build under pressure and think creatively to solve the mystery challenges! ⏱️🌩️</p>
+    </div>
+    
+    <!-- Main Track Categories -->
+    <h3 style="color: #00c6ff; margin: 40px 0 20px; font-size: 1.5rem;">🔹 Main Tracks</h3>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="storm-card">
+                <h4 style="color: #00c6ff; font-size: 1.3rem;">☁️ #01 Cloud 9 Surge</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Build innovative solutions in the cloud</p>
+                <div class="challenge-lock" style="background: rgba(0, 114, 255, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until May 19</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="storm-card">
+                <h4 style="color: #00c6ff; font-size: 1.3rem;">🧠 #02 Neural Net Flex</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">AI tools meet creativity</p>
+                <div class="challenge-lock" style="background: rgba(0, 114, 255, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until May 19</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="storm-card">
+                <h4 style="color: #00c6ff; font-size: 1.3rem;">🔗 #03 Block Party</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Decentralized apps & blockchain</p>
+                <div class="challenge-lock" style="background: rgba(0, 114, 255, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.2);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until May 19</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="storm-card" style="border: 2px solid rgba(255, 184, 0, 0.4);">
+                <h4 style="color: #ffb800; font-size: 1.3rem;">💼 #04 Tech Unicorn Track</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Startup Pitch Arena – pitch your startup idea & prototype it</p>
+                <div class="challenge-lock" style="background: rgba(255, 184, 0, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255, 184, 0, 0.3);">
+                    <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #ffb800;"></i> <span style="color: #ffb800;">Challenge locked until May 19</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Extra Awards Section -->
+    <h3 style="color: #00c6ff; margin: 40px 0 20px; font-size: 1.5rem;">🏆 Extra Awards</h3>
+    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">These special awards will be granted to outstanding submissions across all tracks:</p>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="storm-card" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.15) 100%); border: 1px solid rgba(255, 215, 0, 0.3);">
+                <h4 style="color: #ffd700; font-size: 1.3rem;">💡 Most Innovative</h4>
+                <p style="color: #e0e0ff; margin-top: 15px;">Recognizes the most creative and forward-thinking solution that breaks new ground in its approach.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="storm-card" style="background: linear-gradient(135deg, rgba(173, 216, 230, 0.05) 0%, rgba(173, 216, 230, 0.15) 100%); border: 1px solid rgba(173, 216, 230, 0.3);">
+                <h4 style="color: #add8e6; font-size: 1.3rem;">🎨 Best Design</h4>
+                <p style="color: #e0e0ff; margin-top: 15px;">Celebrates exceptional user experience, interface design, and visual aesthetics.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="storm-card" style="background: linear-gradient(135deg, rgba(144, 238, 144, 0.05) 0%, rgba(144, 238, 144, 0.15) 100%); border: 1px solid rgba(144, 238, 144, 0.3);">
+                <h4 style="color: #90ee90; font-size: 1.3rem;">🌱 Community Impact</h4>
+                <p style="color: #e0e0ff; margin-top: 15px;">Honors projects that demonstrate significant social good and positive impact on communities.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inline JavaScript for Track Challenge Reveal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set the release date for challenges
+            const releaseDate = new Date('2025-05-19T00:00:00');
+            const currentDate = new Date();
+            
+            // Check if current date is on or after release date
+            if (currentDate >= releaseDate) {
+                console.log("Challenges are now available!");
+                
+                // Hide the mystery banner
+                const mysteryBanner = document.getElementById('mysteryBanner');
+                if (mysteryBanner) {
+                    mysteryBanner.style.display = 'none';
+                }
+                
+                // Show "Challenges Now Available" banner
+                const trackSection = document.getElementById('tracks');
+                const heading = trackSection.querySelector('h3[style*="Main Tracks"]');
+                
+                if (heading) {
+                    const availableBanner = document.createElement('div');
+                    availableBanner.style = "background: linear-gradient(135deg, rgba(50, 205, 50, 0.15) 0%, rgba(50, 205, 50, 0.25) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px solid rgba(50, 205, 50, 0.4); text-align: center;";
+                    availableBanner.innerHTML = `
+                        <div style="font-size: 2rem; margin-bottom: 20px;">🎉</div>
+                        <h4 style="color: #32cd32; font-size: 1.5rem; margin-bottom: 20px;">Track Challenges Now Available!</h4>
+                        <p style="font-size: 1.1rem; margin-bottom: 20px;">All track challenges have been revealed. Start building your innovative solutions now!</p>
+                    `;
+                    
+                    heading.parentNode.insertBefore(availableBanner, heading);
+                }
+                
+                // Find all locked challenge sections
+                const lockedChallenges = document.querySelectorAll('.challenge-lock');
+                
+                                    // Define sample challenge descriptions for each track
+                const challengeDescriptions = {
+                    "Cloud 9 Surge": "Build a scalable cloud solution that addresses a real-world problem using serverless architecture or containerization.",
+                    "Neural Net Flex": "Create an AI-powered application that demonstrates creative problem-solving using machine learning or generative AI.",
+                    "Block Party": "Develop a decentralized application (dApp) that leverages blockchain technology to increase transparency, security, or efficiency.",
+                    "Tech Unicorn Track": "Design and prototype a startup idea with market potential, addressing a clear need with an innovative technical solution."
+                };
+                
+                // Update each locked challenge with its description
+                lockedChallenges.forEach((element) => {
+                    // Determine which track this is
+                    const trackHeader = element.previousElementSibling.previousElementSibling;
+                    let trackName = "";
+                    
+                    if (trackHeader) {
+                        const text = trackHeader.textContent;
+                        if (text.includes("Cloud 9 Surge")) trackName = "Cloud 9 Surge";
+                        else if (text.includes("Neural Net Flex")) trackName = "Neural Net Flex";
+                        else if (text.includes("Block Party")) trackName = "Block Party";
+                        else if (text.includes("Tech Unicorn Track")) trackName = "Tech Unicorn Track";
+                    }
+                    
+                    // If we found a matching track, update its challenge description
+                    if (trackName && challengeDescriptions[trackName]) {
+                        element.style.background = "rgba(50, 205, 50, 0.1)";
+                        element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
+                        element.innerHTML = `
+                            <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenge:</span> ${challengeDescriptions[trackName]}</p>
+                        `;
+                    }
+                });
+            } else {
+                console.log("Challenges will be revealed on May 19, 2025");
+                // Calculate days until challenge reveal
+                const daysUntil = Math.ceil((releaseDate - currentDate) / (1000 * 60 * 60 * 24));
+                
+                // Add countdown to mystery banner if it exists
+                const mysteryBanner = document.getElementById('mysteryBanner');
+                if (mysteryBanner) {
+                    const countdownEl = document.createElement('p');
+                    countdownEl.style = "font-size: 1.1rem; margin-top: 20px; font-weight: bold; color: #00c6ff;";
+                    countdownEl.innerHTML = `Challenges will be revealed in ${daysUntil} days!`;
+                    mysteryBanner.appendChild(countdownEl);
+                }
+            }
+        });
+    </script>
+</section>
+
+
+
+
+
+
+
+
+<!-- FAQ Section -->
+<section id="faq" class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Find answers to common questions about CODESTORM Hack 2025</p>
+    
+    <div class="faq-container">
+        <!-- Question 1 -->
+        <div class="faq-item">
+            <button class="faq-question">What is CODESTORM Hack 2025?</button>
+            <div class="faq-answer">
+                CODESTORM Hack is a week-long virtual hackathon hosted by Code Crunch at Florida International University. It's open to students from all universities and all majors. The event challenges participants to build innovative projects based on specific track challenges in just 7 days, with mentorship, workshops, and opportunities to win recognition.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-item">
+            <button class="faq-question">Who can participate in CODESTORM Hack?</button>
+            <div class="faq-answer">
+                <strong>All university students from ANY institution worldwide</strong> are welcome to participate! You don't need to be a computer science major - we welcome students from all disciplines and backgrounds. The hackathon is designed to be inclusive for all skill levels, from beginners to advanced coders.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-item">
+            <button class="faq-question">Do I need a team to participate?</button>
+            <div class="faq-answer">
+                You can register as an individual or with a team of up to 4 members. If you're registering solo, don't worry! We have a team formation channel in our Discord server where you can connect with other participants before the hackathon begins. Building with a team is encouraged but not required.
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-item">
+            <button class="faq-question">Is there a registration fee?</button>
+            <div class="faq-answer">
+                <strong>No!</strong> CODESTORM Hack is completely <strong>free</strong> for all participants. We are committed to making this event accessible to everyone.
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="faq-item">
+            <button class="faq-question">What kind of projects can I build?</button>
+            <div class="faq-answer">
+                You can build any project that aligns with one of our 16 tracks. We welcome web applications, mobile apps, hardware projects, data analysis, AI models, games, and more. The specific challenges will be revealed when the hackathon begins on May 19, but you can start planning your approach based on the track themes.
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="faq-item">
+            <button class="faq-question">How do the track challenges work?</button>
+            <div class="faq-answer">
+                Each track will have a specific challenge that will be revealed when the hackathon begins on May 19. You can choose up to 2 tracks to focus your project on. The Tech Unicorn Track (Startup Pitch Arena) details are already available, while the other track challenges will remain a mystery until the hackathon starts.
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="faq-item">
+            <button class="faq-question">What resources will be available during the hackathon?</button>
+            <div class="faq-answer">
+                Participants will have access to mentors through Discord, virtual workshops, starter code templates, technical documentation, and more. These resources are designed to help you overcome challenges and build successful projects. You'll receive all necessary links and access upon registration.
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="faq-item">
+            <button class="faq-question">How will projects be judged?</button>
+            <div class="faq-answer">
+                Projects will be evaluated based on innovation, technical complexity, adherence to track challenges, presentation quality, and overall impact. Each track will have dedicated judges with expertise in the respective field. For complete judging criteria, please visit our submissions requirements page.
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="faq-item">
+            <button class="faq-question">What do winners receive?</button>
+            <div class="faq-answer">
+                Track winners will receive recognition certificates, promotion on Code Crunch social media channels, and LinkedIn features. The Tech Unicorn Track winner will receive additional exposure through a special video feature. Most importantly, all participants gain valuable experience, portfolio projects, and networking opportunities.
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="faq-item">
+            <button class="faq-question">How can I prepare for CODESTORM Hack?</button>
+            <div class="faq-answer">
+                Start by registering early and joining our Discord community. Brush up on your coding skills, explore potential technologies you might want to use, and start thinking about which tracks interest you most. We'll also be sharing preparation resources and tips as we get closer to the event.
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Resources Section -->
+<section id="resources" class="content-section">
+    <h2>Hackathon Resources</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Access comprehensive resources to help you succeed in CODESTORM Hack 2025!</p>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2); margin-bottom: 30px; text-align: center;">
+        <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">🧰 Complete Resource Library</h3>
+        <p style="margin-bottom: 25px; font-size: 1.1rem;">For tutorials, starter code, tool recommendations, and more, visit our resources page:</p>
+        <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="font-size: 1.2rem; padding: 15px 30px;">
+            <i class="fas fa-external-link-alt me-2"></i> Hackathon Resources
+        </a>
+    </div>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(0, 198, 255, 0.2); margin-top: 30px;">
+        <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">🔗 Stay Connected</h3>
+        
+        <div class="contact-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+            <a href="https://codecrunch.cs.fiu.edu" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-globe me-2"></i> Website
+            </a>
+            <a href="mailto:codecrunch@fiu.edu" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-envelope me-2"></i> Email
+            </a>
+            <a href="https://www.linkedin.com/company/code-crunch-club/" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-linkedin me-2"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/codecrunchclub/" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-instagram me-2"></i> Instagram
+            </a>
+            <a href="https://forms.gle/PPyyu8zyCNP1TT8S8" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-whatsapp me-2"></i> WhatsApp
+            </a>
+            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-university me-2"></i> Panther Connect
+            </a>
+            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fab fa-youtube me-2"></i> YouTube
+            </a>
+            <a href="https://forms.gle/5JYyN4BEq95vgrG79" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                <i class="fas fa-file-alt me-2"></i> Resume Book
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h3 style="color: #00c6ff; font-size: 1.4rem; margin-bottom: 20px;">📚 Hackathon Support</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-handshake me-2"></i> Code of Conduct
+                </a>
+                <a href="hacks-toolkit.html" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-file-alt me-2"></i> Rules & Guidelines
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqByl0Yn3cWeDDuxhCu23O224rqE-aJgRPP6bz30pVpiXITA/viewform" class="btn btn-lg" style="background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; border-radius: 50px; padding: 12px 25px; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fab fa-discord me-2"></i> Discord Server
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contributors Section -->
+<section id="contributors" class="content-section">
+    <h2>Contributors & Sponsors</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">CODESTORM Hack 2025 is made possible by our amazing partners and supporters!</p>
+    
+    <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; margin: 30px auto; max-width: 800px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+        <div class="window-header" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; color: #00FFFF; text-align: center;">🌟 A Big Thanks To Our Partners</div>
+        <div class="contributors-logos" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;">
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="CodePath Logo" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Epic Logo" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Honors College" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="CEC" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="KFSCIS" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div class="contributor-card">
+                <img src="/api/placeholder/140/80" alt="Business" style="width: 140px; height: auto; border-radius: 12px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Interested in being a mentor, judge, workshop host, or organizer for CODESTORM?</p>
+                <div style="text-align: center;">
+                    <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="volunteer-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #9d4edd, #ff6b6b); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);">
+                        <i class="fas fa-hands-helping me-2"></i> Volunteer Form
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="window-box" style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; height: 100%; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">Want to support this event as a sponsor?</p>
+                <div style="text-align: center;">
+                    <a href="cc-prospectus.html" class="prospectus-btn" style="display: inline-block; padding: 14px 30px; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 50px; background: linear-gradient(45deg, #0072ff, #00c6ff); color: white; transition: all 0.3s ease-in-out; margin: 15px 10px; box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);">
+                        <i class="fas fa-file-download me-2"></i> Download Prospectus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer style="background: linear-gradient(135deg, rgba(15, 52, 96, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%); color: white; text-align: center; padding: 30px; margin-top: 60px; border-radius: 12px 12px 0 0;">
+    <div class="container">
+        <p>© 2025 CODESTORM Hack | Code Crunch Club</p>
+        <p>DM us on Discord <a style="color: #00c6ff;"> at @codecrunchclub</a></p>
+        <div style="margin-top: 15px;">
+            <a href="index.html" style="color: #00c6ff; margin: 0 10px; text-decoration: none;">Become a Code Crunch Member</a>
+            <a href="contact.html" style="color: #00c6ff; margin: 0 10px; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<script>
+    // First script for FAQ toggle functionality
+    document.addEventListener("DOMContentLoaded", function () {
+        const questions = document.querySelectorAll(".faq-question");
+    
+        questions.forEach(question => {
+            question.addEventListener("click", function () {
+                const answer = this.nextElementSibling;
+                
+                if (answer) {
+                    answer.style.display = (answer.style.display === "block") ? "none" : "block";
+                }
+            });
+        });
+    
+        // Challenge reveal functionality
+        const releaseDate = new Date('2025-05-19T00:00:00');
+        const currentDate = new Date();
+        
+        if (currentDate >= releaseDate) {
+            // If current date is on or after release date, show challenges
+            const lockedElements = document.querySelectorAll('.track-card .fa-lock');
+            const challengeLockMessages = document.querySelectorAll('.track-card div[style*="background: rgba(0, 114, 255, 0.1)"]');
+            
+            // Replace lock icons with unlock icons
+            lockedElements.forEach(element => {
+                element.classList.remove('fa-lock');
+                element.classList.add('fa-unlock');
+                element.style.color = '#32cd32'; // Green color for unlocked
+            });
+            
+            // Replace locked messages with challenge details
+            challengeLockMessages.forEach(element => {
+                // This would ideally be populated from a database or API
+                // But for demonstration, we're showing placeholder text
+                element.innerHTML = '<p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff;">Challenge now available!</span></p>';
+            });
+            
+            // Hide the "Mystery Challenges Await" banner
+            const mysteryBanner = document.querySelector('div[style*="border: 2px dashed #00c6ff"]');
+            if (mysteryBanner) {
+                mysteryBanner.style.display = 'none';
+            }
+            
+            // Add a "Challenges Now Available" banner
+            const trackSection = document.getElementById('tracks');
+            const heading = trackSection.querySelector('h3[style*="🔹 Default Tracks"]');
+            
+            if (heading) {
+                const availableBanner = document.createElement('div');
+                availableBanner.style = "background: linear-gradient(135deg, rgba(50, 205, 50, 0.15) 0%, rgba(50, 205, 50, 0.25) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px solid rgba(50, 205, 50, 0.4); text-align: center;";
+                availableBanner.innerHTML = `
+                    <div style="font-size: 2rem; margin-bottom: 20px;">🎉</div>
+                    <h4 style="color: #32cd32; font-size: 1.5rem; margin-bottom: 20px;">Track Challenges Now Available!</h4>
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">All track challenges have been revealed. Start building your innovative solutions now!</p>
+                `;
+                
+                heading.parentNode.insertBefore(availableBanner, heading.nextSibling);
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>
