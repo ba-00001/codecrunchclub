@@ -2286,6 +2286,542 @@ body {
         font-size: 1rem;
     }
 }
+
+/* Volunteers Showcase Section Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* Volunteers Showcase Section Styles */
+/* Volunteers Showcase Section Styles */
+.volunteers-showcase {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.volunteers-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="volunteers" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%233b82f6" opacity="0.1"/><circle cx="5" cy="5" r="0.5" fill="%2310b981" opacity="0.1"/><circle cx="15" cy="15" r="0.5" fill="%238b5cf6" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23volunteers)"/></svg>');
+    animation: pulse 10s ease-in-out infinite;
+}
+
+.volunteer-category {
+    position: relative;
+    z-index: 1;
+}
+
+.volunteer-category-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.volunteer-category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+    animation: glow 3s infinite;
+}
+
+.volunteer-profile-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+    text-align: center;
+    transition: var(--transition);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 0.8s ease-out;
+    animation-fill-mode: both;
+    border-top: 4px solid var(--primary);
+}
+
+.volunteer-profile-card:nth-child(1) { animation-delay: 0.1s; }
+.volunteer-profile-card:nth-child(2) { animation-delay: 0.2s; }
+.volunteer-profile-card:nth-child(3) { animation-delay: 0.3s; }
+.volunteer-profile-card:nth-child(4) { animation-delay: 0.4s; }
+.volunteer-profile-card:nth-child(5) { animation-delay: 0.5s; }
+.volunteer-profile-card:nth-child(6) { animation-delay: 0.6s; }
+
+.volunteer-profile-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.volunteer-profile-card:hover::before {
+    opacity: 1;
+    animation: rotate 20s linear infinite;
+}
+
+.volunteer-profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-glow);
+    border-top-color: var(--accent);
+}
+
+.volunteer-avatar {
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.volunteer-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.volunteer-profile-card:hover .volunteer-img {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.volunteer-role-badge {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulse 3s infinite;
+}
+
+.volunteer-role-badge.inperson {
+    background: var(--gradient-accent);
+}
+
+.volunteer-info {
+    position: relative;
+    z-index: 1;
+}
+
+.volunteer-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+.volunteer-experience {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* Online Team Section */
+.online-team-section {
+    position: relative;
+    z-index: 1;
+    margin-top: 60px;
+}
+
+.online-team-banner {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.2) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: glow 4s infinite;
+}
+
+.online-team-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+.online-team-banner > * {
+    position: relative;
+    z-index: 1;
+}
+
+.online-team-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--accent);
+}
+
+.online-team-description {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.online-team-stats {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.online-team-icon {
+    font-size: 4rem;
+    color: var(--accent);
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Devpost Link Section */
+.devpost-link-section {
+    margin-bottom: 60px;
+}
+
+.devpost-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.devpost-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.devpost-card:hover::before {
+    opacity: 1;
+    animation: rotate 15s linear infinite;
+}
+
+.devpost-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-glow);
+    border-left-color: var(--accent);
+}
+
+.devpost-icon {
+    font-size: 3rem;
+    color: var(--secondary);
+    flex-shrink: 0;
+    animation: pulse 3s infinite;
+}
+
+.devpost-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.devpost-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.devpost-description {
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Volunteer CTA Section */
+.volunteer-cta-section {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    border: 2px solid rgba(30, 64, 175, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: glow 4s infinite;
+}
+
+.volunteer-cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+.volunteer-cta-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.volunteer-cta-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.volunteer-cta-text {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .volunteer-category-title,
+    .online-team-title,
+    .volunteer-cta-title {
+        font-size: 1.5rem;
+    }
+    
+    .online-team-description,
+    .volunteer-cta-text {
+        font-size: 1rem;
+    }
+    
+    .online-team-stats {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .devpost-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .online-team-icon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .devpost-icon {
+        font-size: 2.5rem;
+    }
+}
+
+
+/* End Volunteers Showcase Section Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* End Volunteers Showcase Section Styles */
+
+
+/* .sponsor-support-card */
+/*  */
+/*  */
+/*  */
+/*  */
+/* .sponsor-support-card Styles */
+/* Additional CSS for Sponsor Support Cards */
+.sponsor-support-card {
+    background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition);
+    height: 100%;
+    border-top: 4px solid var(--warning);
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.sponsor-support-card:nth-child(1) { animation-delay: 0.1s; }
+.sponsor-support-card:nth-child(2) { animation-delay: 0.2s; }
+
+.sponsor-support-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.sponsor-support-card:hover::before {
+    opacity: 1;
+    animation: rotate 20s linear infinite;
+}
+
+.sponsor-support-card:hover {
+    transform: translateY(-15px);
+    box-shadow: var(--shadow-glow);
+    border-top-color: var(--accent);
+}
+
+.sponsor-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 32px;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.sponsor-support-card:nth-child(2) .sponsor-icon {
+    animation-delay: 0.5s;
+}
+
+.sponsor-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--warning);
+    position: relative;
+    z-index: 1;
+}
+
+.sponsor-text {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-sponsor {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-sponsor:hover {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    filter: brightness(1.1);
+    color: white;
+}
+
+.sponsor-contact {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 15px;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.sponsor-contact a {
+    color: var(--warning);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sponsor-contact a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for sponsor cards */
+@media (max-width: 768px) {
+    .sponsor-support-card {
+        margin-bottom: 30px;
+    }
+    
+    .sponsor-title {
+        font-size: 1.2rem;
+    }
+    
+    .sponsor-text {
+        font-size: 0.9rem;
+    }
+}
+/* End .sponsor-support-card Section Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* End .sponsor-support-card Section Styles */
+
+
+
+
 </style>
 
 <body>
@@ -2487,9 +3023,11 @@ body {
                     </div>
                     <h3 class="role-title">Hacker</h3>
                     <p class="role-description">Join as a participant to build innovative smart city solutions, collaborate with interdisciplinary teams, learn cutting-edge technologies, and compete for prizes. Perfect for students from all majors who want to shape urban futures.</p>
-                    <a href="#hackers" class="btn btn-custom d-block">🏗️ Register Now </a>
+                    <a href="#participate" class="btn btn-custom d-block">🏗️ Register Now </a>
                     <p></p>
                     <a href="https://hacksatfiu.vercel.app/" class="btn btn-custom d-block">🏗️ Hacker Guide </a>
+                    <p></p>
+                    <a href="https://305hackfall2025-devpost.vercel.app/" class="btn btn-custom d-block">Devpost - Submission Portal </a>
                 </div>
             </div>
             
@@ -2502,22 +3040,22 @@ body {
                     <p class="role-description">Join our 305 hackathon Fall 2025! Whether you're an industry leader, student, fundraiser, or sponsor, your support drives innovation for tomorrow's cities.</p>
 
                     <!-- Industry Leaders - Volunteer -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog" class="btn btn-custom btn-accent d-block mb-2">
+                    <a href="#participate" class="btn btn-custom btn-accent d-block mb-2">
                     🤝 Industry Leader – Volunteer
                     </a>
 
                     <!-- Students - Volunteer -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkEhtLbNW8Yk4jIFUKfLirPbqjrNOwUZCEJ7d8hoFH8Y9nyw/viewform?usp=dialog" class="btn btn-custom btn-accent d-block mb-2">
+                    <a href="#participate" class="btn btn-custom btn-accent d-block mb-2">
                     🎓 Student – Volunteer
                     </a>
 
                     <!-- Industry Leaders – Fundraiser & Advisory Board -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1fUyF0lW0Be6W-r1tGUAv7JA5manybTqXN5Ql6RcUlgb7Kw/viewform?usp=dialog" class="btn btn-custom btn-accent d-block mb-2">
+                    <a href="#participate" class="btn btn-custom btn-accent d-block mb-2">
                     💼 Industry Leader – Fundraising Advisory Board
                     </a>
 
                     <!-- Become a Sponsor -->
-                    <a href="https://hack-university-fundraiser.vercel.app/" class="btn btn-custom btn-accent d-block">
+                    <a href="#participate" class="btn btn-custom btn-accent d-block">
                     🌟 Become a Sponsor
                     </a>
                 </div>
@@ -3112,17 +3650,20 @@ body {
 </div>
 </section>
 
+
 <!-- How to Participate -->
 <section class="participate section-padding" id="participate">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Join the Smart City Revolution</h2>
-            <p class="section-subtitle">Participate in the <span class="hackathon-name">305 Hackathon Fall </span> as a Hacker builder or supporter</p>
+            <h2 class="section-title">Join the 305 Hackathon & Hack University Initiative</h2>
+            <p class="section-subtitle">Participate in the <span class="hackathon-name">305 Hackathon Fall</span> as a hacker, volunteer, supporter, or sponsor</p>
         </div>
         
         <div class="participate-tabs">
-            <button class="participate-tab active" data-target="hackers">🏗️ For City Builders</button>
-            <button class="participate-tab" data-target="volunteers">🤝 For Supporters</button>
+            <button class="participate-tab active" data-target="hackers">🏗️ For Student Hackers</button>
+            <button class="participate-tab" data-target="student-volunteers">🎓 For Student Volunteers</button>
+            <button class="participate-tab" data-target="volunteers">🤝 For Industry Supporters</button>
+            <button class="participate-tab" data-target="sponsors-support">💰 For Sponsors</button>
         </div>
         
         <!-- Hackers Section -->
@@ -3149,12 +3690,41 @@ body {
                 </div>
                 
                 <div class="text-center mt-5">
-                    <a href="https://forms.gle/9ejeRChF2xuQnWF27" target="_blank" class="btn btn-custom btn-lg">🚀 Register to Start Building 305 Hack Smart Cities projects</a>
+                    <a href="https://forms.gle/9ejeRChF2xuQnWF27" target="_blank" class="btn btn-custom btn-lg">🚀 Register to Start Building 305 Hack Smart Cities Projects</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Volunteers Section -->
+        <div class="participate-content" id="student-volunteers">
+            <div class="hackers-steps">
+                <div class="step-item">
+                    <h3 class="step-title">Apply to Join Our Team</h3>
+                    <p class="step-text">Fill out our student organizer application with your background, skills, and passion for hackathon events. We're looking for dedicated students who want to gain leadership experience while building amazing tech events.</p>
+                </div>
+                
+                <div class="step-item">
+                    <h3 class="step-title">Attend Organizer Onboarding</h3>
+                    <p class="step-text">Join our comprehensive training sessions where you'll learn event management, team coordination, and hackathon best practices. Get matched with your organizing team and specific responsibilities.</p>
+                </div>
+                
+                <div class="step-item">
+                    <h3 class="step-title">Lead & Make Impact</h3>
+                    <p class="step-text">Take ownership of your area (registration, logistics, social media, tech support, etc.), collaborate with industry professionals, and help create an unforgettable experience for hundreds of participants.</p>
+                </div>
+                
+                <div class="step-item">
+                    <h3 class="step-title">Build Your Network & Resume</h3>
+                    <p class="step-text">Gain valuable leadership experience, connect with industry mentors and sponsors, develop project management skills, and add prestigious hackathon organizing experience to your resume.</p>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkEhtLbNW8Yk4jIFUKfLirPbqjrNOwUZCEJ7d8hoFH8Y9nyw/viewform?usp=dialog" target="_blank" class="btn btn-custom btn-lg">🎯 Apply to Become a Student Organizer</a>
                 </div>
             </div>
         </div>
         
-        <!-- Volunteers Section -->
+        <!-- Industry Supporters Section -->
         <div class="participate-content" id="volunteers">
             <div class="row">
                 <!-- Mentor Card -->
@@ -3165,11 +3735,11 @@ body {
                         </div>
                         <h3 class="volunteer-title">Smart City Mentor</h3>
                         <p class="volunteer-text">Share your urban planning, technology, or engineering expertise. Guide teams through smart city challenges and provide insights on sustainable urban development.</p>
-                        <a href="https://forms.gle/rQ27QDLk6C4EDHon8" target="_blank" class="btn btn-custom">🏙️ Mentor Innovation</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog" target="_blank" class="btn btn-custom">🏙️ Mentor Innovation</a>
                     </div>
                 </div>
                 
-                <!-- Organizer Card -->
+                <!-- Event Organizer Card -->
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="volunteer-card">
                         <div class="volunteer-icon">
@@ -3177,11 +3747,11 @@ body {
                         </div>
                         <h3 class="volunteer-title">Event Organizer</h3>
                         <p class="volunteer-text">Be part of the team that orchestrates this smart city innovation event. Help with logistics, coordination, and ensuring everything runs smoothly.</p>
-                        <a href="https://forms.gle/B1ei13sVqV8dgQ7TA" target="_blank" class="btn btn-custom">⚙️ Join Organization</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog" target="_blank" class="btn btn-custom">⚙️ Join Organization</a>
                     </div>
                 </div>
                 
-                <!-- Partner Card -->
+                <!-- Innovation Partner Card -->
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="volunteer-card">
                         <div class="volunteer-icon">
@@ -3189,25 +3759,57 @@ body {
                         </div>
                         <h3 class="volunteer-title">Innovation Partner</h3>
                         <p class="volunteer-text">Collaborate with us as an organization, community group, or educational institution to support smart city innovation and urban technology development.</p>
-                        <a href="mailto:codecrunch@fiu.edu" class="btn btn-custom">🤝 Partner With Us</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog" target="_blank" class="btn btn-custom">🤝 Partner With Us</a>
                     </div>
                 </div>
                 
-                <!-- Sponsor Card -->
+                <!-- Fundraising Advisory Board Card -->
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="volunteer-card">
                         <div class="volunteer-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="volunteer-title">Fundraising Advisory Board</h3>
+                        <p class="volunteer-text">Join our strategic advisory board to help secure funding, build industry partnerships, and guide our hackathon series growth. Perfect for executives and business leaders.</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1fUyF0lW0Be6W-r1tGUAv7JA5manybTqXN5Ql6RcUlgb7Kw/viewform?usp=dialog" target="_blank" class="btn btn-custom">💼 Join Advisory Board</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sponsorship Section -->
+        <div class="participate-content" id="sponsors-support">
+            <div class="row justify-content-center">
+                <!-- Financial Sponsor Card -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="sponsor-support-card">
+                        <div class="sponsor-icon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <h3 class="volunteer-title">Smart City Sponsor</h3>
-                        <p class="volunteer-text">Support urban innovation financially or with resources. Connect with talented students building the future of cities and showcase your commitment to smart urban development.</p>
-                        <a href="cc-prospectus.html" class="btn btn-custom">🏢 Sponsor Innovation</a>
+                        <h3 class="sponsor-title">Financial Sponsor</h3>
+                        <p class="sponsor-text">Support urban innovation financially and connect with talented students building the future of cities. Showcase your commitment to smart urban development and tech education.</p>
+                        <a href="https://hack-university-fundraiser.vercel.app/" target="_blank" class="btn btn-custom btn-sponsor">🏢 Become a Sponsor</a>
+                        <p class="sponsor-contact">Questions? Email us at <a href="mailto:codecrunch@fiu.edu">codecrunch@fiu.edu</a></p>
+                    </div>
+                </div>
+                
+                <!-- In-Kind Sponsor Card -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="sponsor-support-card">
+                        <div class="sponsor-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="sponsor-title">In-Kind Sponsor</h3>
+                        <p class="sponsor-text">Provide resources, prizes, or services to support our smart city hackathon. Perfect for tech companies wanting to showcase products or services to students.</p>
+                        <a href="https://hack-university-fundraiser.vercel.app/" target="_blank" class="btn btn-custom btn-sponsor">🎁 Donate Resources</a>
+                        <p class="sponsor-contact">Let's discuss partnership opportunities!</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- During the Event -->
 <section class="event-section section-padding" id="event">
@@ -3335,6 +3937,190 @@ body {
         </div>
     </div>
 </section>
+
+<!-- Volunteer Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- Volunteer Section -->
+
+<!-- In-Person Volunteers & Online Team Section -->
+<section class="volunteers-showcase section-padding" id="volunteers-showcase">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Meet Our 305 Hack Team</h2>
+            <p class="section-subtitle">The amazing people making the <span class="hackathon-name">305 Hackathon Fall 2025</span> possible</p>
+        </div>
+        
+        <!-- In-Person Volunteers -->
+        <div class="volunteer-category mb-5">
+            <h3 class="volunteer-category-title">🤝 In-Person Volunteers</h3>
+            <div class="row">
+                <!-- Volunteer 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Alex Johnson" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Upendran Manickam</h4>
+                            <p class="volunteer-experience">Experience: Machine Learning Engineer at Meta</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Volunteer 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Maria Rodriguez" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Naveen Kumar</h4>
+                            <p class="volunteer-experience">Experience: Robotics Engineer at SwiftPOD LLC</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Volunteer 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="David Chen" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Vaibhav Misra</h4>
+                            <p class="volunteer-experience">Experience: Director at CapitalOne</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Volunteer 4 -->
+                <!-- <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Sarah Williams" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Sarah Williams</h4>
+                            <p class="volunteer-experience">UX Designer at Airbnb</p>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Volunteer 5 -->
+                <!-- <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Michael Park" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Michael Park</h4>
+                            <p class="volunteer-experience">DevOps Engineer at Amazon</p>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Volunteer 6 -->
+                <!-- <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="volunteer-profile-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Lisa Thompson" class="volunteer-img">
+                            <div class="volunteer-role-badge inperson">Volunteer</div>
+                        </div>
+                        <div class="volunteer-info">
+                            <h4 class="volunteer-name">Lisa Thompson</h4>
+                            <p class="volunteer-experience">Cybersecurity Analyst at IBM</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                
+            </div>
+        </div>
+        
+        <!-- Online Team Information -->
+        <div class="online-team-section">
+            <div class="online-team-banner">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h3 class="online-team-title">🌐 Meet Our Expert Online Team</h3>
+                        <p class="online-team-description">
+                            Our hackathon series features a powerful network of 50+ industry professionals, 25+ academic experts, and renowned thought leaders who participate as judges, mentors, and speakers across our events. This expert community has experience at leading Fortune 500 companies like Google, Microsoft, Meta, Amazon, and top universities, bringing unparalleled expertise to guide participants.
+                        </p>
+                        <div class="online-team-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">180+</div>
+                                <div class="stat-label">Expert Judges</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">30+</div>
+                                <div class="stat-label">Industry Mentors</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Keynote Speakers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="online-team-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Devpost Link -->
+            <div class="devpost-link-section">
+                <div class="devpost-card">
+                    <div class="devpost-icon">
+                        <i class="fab fa-dev"></i>
+                    </div>
+                    <div class="devpost-content">
+                        <h4 class="devpost-title">View Complete Team on Devpost</h4>
+                        <p class="devpost-description">
+                            Get to know our full roster of judges, mentors, and speakers on our official Devpost hackathon page. Discover their expertise, backgrounds, and what they bring to the smart city innovation challenge.
+                        </p>
+                        <a href="http://305hackfall2025-devpost.vercel.app/" class="btn btn-custom" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-dev me-2"></i>Visit Our Devpost Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Join the Team Call to Action -->
+        <div class="volunteer-cta-section">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="volunteer-cta-title">Want to Join Our Smart City Innovation Team?</h3>
+                    <p class="volunteer-cta-text">Help shape the future of urban technology by volunteering with us. Whether you're an industry expert, student, or passionate about smart cities, we have opportunities for both in-person and virtual participation!</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <a href="#participate" class="btn btn-custom btn-lg">
+                        <i class="fas fa-user-plus me-2"></i> Become a Volunteer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Volunteer Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- End Volunteer Section -->
+
+
+
+
 
 <!-- FAQ Section -->
 <section class="faq-section section-padding" id="faq">
@@ -3867,13 +4653,13 @@ body {
     // Enhanced Participate Tab Functionality
     const participateTabs = document.querySelectorAll('.participate-tab');
     const participateContents = document.querySelectorAll('.participate-content');
-    
+
     participateTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const target = tab.getAttribute('data-target');
             
             // Remove active class from all tabs and contents
-            participateTabs.forEach(tab => tab.classList.remove('active'));
+            participateTabs.forEach(t => t.classList.remove('active'));
             participateContents.forEach(content => content.classList.remove('active'));
             
             // Add active class to current tab and content
@@ -4119,7 +4905,126 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Enhanced JavaScript for Volunteers Showcase Section
+//**************
+//**************
+//**************
+//**************
+//**************
+// Enhanced JavaScript for Volunteers Showcase Section
+// Enhanced JavaScript for Volunteers Showcase Section
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate volunteer cards on scroll
+    const volunteerCards = document.querySelectorAll('.volunteer-profile-card');
+    const onlineTeamElements = document.querySelectorAll('.online-team-banner, .devpost-card, .volunteer-cta-section');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
+    const volunteerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Initialize volunteer cards with hidden state and observe them
+    volunteerCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        card.style.animationDelay = `${index * 0.1}s`;
+        volunteerObserver.observe(card);
+    });
+
+    // Initialize online team elements
+    onlineTeamElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        element.style.animationDelay = `${index * 0.2}s`;
+        volunteerObserver.observe(element);
+    });
+
+    // Enhanced hover effects for volunteer cards
+    volunteerCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) scale(1.02)';
+            
+            // Add extra glow to the avatar
+            const avatar = this.querySelector('.volunteer-img');
+            if (avatar) {
+                avatar.style.boxShadow = 'var(--shadow-glow)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            
+            // Remove extra glow from avatar
+            const avatar = this.querySelector('.volunteer-img');
+            if (avatar) {
+                avatar.style.boxShadow = '';
+            }
+        });
+    });
+
+    // Animate stats counter on scroll
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const finalValue = stat.textContent;
+                    const numericValue = parseInt(finalValue);
+                    
+                    if (!isNaN(numericValue)) {
+                        let currentValue = 0;
+                        const increment = numericValue / 30;
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= numericValue) {
+                                stat.textContent = finalValue;
+                                clearInterval(timer);
+                            } else {
+                                stat.textContent = Math.floor(currentValue) + '+';
+                            }
+                        }, 50);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.online-team-stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+
+    // Add floating effect to online team icon
+    const onlineIcon = document.querySelector('.online-team-icon i');
+    if (onlineIcon) {
+        setInterval(() => {
+            onlineIcon.style.transform = 'translateY(-10px) rotate(5deg)';
+            setTimeout(() => {
+                onlineIcon.style.transform = 'translateY(0) rotate(0deg)';
+            }, 1000);
+        }, 3000);
+    }
+});
+
+
+// End Enhanced JavaScript for Volunteers Showcase Section
+//**************
+//**************
+//**************
+//**************
+//**************
+// End Enhanced JavaScript for Volunteers Showcase Section
 
 </script>
 </body>
