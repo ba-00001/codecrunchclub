@@ -334,6 +334,220 @@
                 font-size: 2.5rem;
             }
         }
+
+
+        /* /* Volunteer Section Styles */ */
+        /*  */
+        /*  */
+        /*  */
+        /*  */
+        /* /* Volunteer Section Styles */ */
+        /* Volunteer Section Styles */
+        .volunteers-showcase {
+            padding: 60px 0;
+        }
+
+        .section-padding {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(18, 18, 40, 0.95) 0%, rgba(36, 16, 52, 0.95) 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .online-team-section {
+            margin-bottom: 40px;
+        }
+
+        .online-team-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .online-team-title {
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .online-team-description {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .online-team-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .online-team-stats .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            min-width: 140px;
+        }
+
+        .online-team-stats .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .online-team-stats .stat-label {
+            font-size: 1rem;
+            color: #e0e0ff;
+            font-weight: 500;
+        }
+
+        .online-team-icon {
+            font-size: 5rem;
+            color: #4ecdc4;
+            text-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+        }
+
+        .devpost-link-section {
+            margin: 40px 0;
+        }
+
+        .devpost-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .devpost-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.2);
+        }
+
+        .devpost-icon {
+            font-size: 3rem;
+            color: #4ecdc4;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .devpost-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .devpost-title {
+            font-size: 1.5rem;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .devpost-description {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+            color: white;
+        }
+
+        .volunteer-cta-section {
+            background: linear-gradient(135deg, rgba(255, 221, 89, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(255, 221, 89, 0.3);
+        }
+
+        .volunteer-cta-title {
+            font-size: 2rem;
+            color: #ffdd59;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .volunteer-cta-text {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .btn-lg {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design for Volunteer Section */
+        @media screen and (max-width: 768px) {
+            .online-team-stats {
+                justify-content: center;
+            }
+            
+            .devpost-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .devpost-content {
+                text-align: center;
+            }
+            
+            .volunteer-cta-section .row {
+                text-align: center;
+            }
+            
+            .volunteer-cta-section .col-lg-4 {
+                margin-top: 20px;
+            }
+        }
+
+        /* End ./* Volunteer Section Styles */ */
+        /*  */
+        /*  */
+        /*  */
+        /*  */
+        /* End /* Volunteer Section Styles */ */
+
+
+
     </style>
 </head>
 <body>
@@ -382,6 +596,9 @@
             
             <a href="https://hacksatfiu.vercel.app/" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
                 <i class="fas fa-book me-2"></i> Hacker Guide
+            </a>
+            <a href="https://SummerCodexHack2025-devpost.vercel.app/" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
+                <i class="fas fa-book me-2"></i> Devpost - Submission Portal
             </a>
             <a href="hacks-toolkit.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #32cd32, #00c6ff);">
                 <i class="fas fa-toolbox me-2"></i> Hacks Toolkit
@@ -716,6 +933,89 @@
         });
     </script>
 </section>
+
+<!-- Volunteer Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- Volunteer Section -->
+<!-- Volunteer Section -->
+<section class="volunteers-showcase section-padding" id="volunteers-showcase">
+    <div class="container">
+        <!-- Online Team Information -->
+        <div class="online-team-section">
+            <div class="online-team-banner">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h3 class="online-team-title">🌐 Meet Our Expert Online Team</h3>
+                        <p class="online-team-description">
+                            Our hackathon series features a powerful network of 50+ industry professionals, 25+ academic experts, and renowned thought leaders who participate as judges, mentors, and speakers across our events. This expert community has experience at leading Fortune 500 companies like Google, Microsoft, Meta, Amazon, and top universities, bringing unparalleled expertise to guide participants.
+                        </p>
+                        <div class="online-team-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">180+</div>
+                                <div class="stat-label">Expert Judges</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">30+</div>
+                                <div class="stat-label">Industry Mentors</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Keynote Speakers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="online-team-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Devpost Link -->
+            <div class="devpost-link-section">
+                <div class="devpost-card">
+                    <div class="devpost-icon">
+                        <i class="fab fa-dev"></i>
+                    </div>
+                    <div class="devpost-content">
+                        <h4 class="devpost-title">View Complete Team on Devpost</h4>
+                        <p class="devpost-description">
+                            Get to know our full roster of judges, mentors, and speakers on our official Devpost hackathon page. Discover their expertise, backgrounds, and what they bring to the XR and Web3 innovation challenge.
+                        </p>
+                        <a href="http://305hackfall2025-devpost.vercel.app/" class="btn btn-custom" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-dev me-2"></i>Visit Our Devpost Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Join the Team Call to Action -->
+        <div class="volunteer-cta-section">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="volunteer-cta-title">Want to Join Our XR & Web3 Innovation Team?</h3>
+                    <p class="volunteer-cta-text">Help shape the future of immersive technology by volunteering with us. Whether you're an industry expert, student, or passionate about XR and Web3, we have opportunities for both in-person and virtual participation!</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog" class="btn btn-custom btn-lg">
+                        <i class="fas fa-user-plus me-2"></i> Become an Industry Leader Volunteer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Volunteer Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- Volunteer Section -->
 
 <!-- FAQ Section -->
 <section id="faq" class="content-section">
