@@ -539,14 +539,55 @@
             }
         }
 
-        /* End ./* Volunteer Section Styles */ */
+        /* End  video */ 
         /*  */
         /*  */
         /*  */
         /*  */
-        /* End /* Volunteer Section Styles */ */
+        /* End  video*/ 
+        @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Hover effects for buttons */
+            #previous-success a:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4) !important;
+            }
+
+            /* Responsive design */
+            @media screen and (max-width: 768px) {
+                #previous-success .row {
+                    text-align: center;
+                }
+                
+                #previous-success .col-lg-4 {
+                    margin-top: 20px;
+                }
+                
+                #previous-success div[style*="display: flex"] {
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
 
 
+        /*  video */
+        /*  */
+        /*  */
+        /*  */
+        /*  */
+        /* End video */
+
+
+
+        /* End .sponsor-support-card Section Styles */
+        /*  */
+        /*  */
+        /*  */
+        /*  */
+        /* End .sponsor-support-card Section Styles */
 
     </style>
 </head>
@@ -714,6 +755,110 @@
         </div>
     </div>
 </section>
+
+<!--  Video Showcase Section-->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- Video Showcase Section -->
+
+<!-- Previous Hackathon Showcase Section (Add this after the Hackathon Details section) -->
+<section id="previous-success" class="content-section">
+    <h2>🎬 Previous Hackathon Success</h2>
+    <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; color: #e0e0ff;">
+        See how our previous hackathon participants built amazing projects! Watch highlights from 305 Hack Spring 2025 powered by <strong>Cardano</strong>.
+    </p>
+    
+    <div style="margin: 3rem 0; background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%); border-radius: 16px; padding: 40px; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.3); position: relative; overflow: hidden;">
+        
+        <!-- Background decoration matching SummerCodeX style -->
+        <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(78, 205, 196, 0.05) 0%, transparent 70%); animation: rotate 30s linear infinite;"></div>
+        
+        <!-- Content container -->
+        <div style="position: relative; z-index: 1;">
+            <div class="text-center mb-4">
+                <h3 style="color: #4ecdc4; font-size: 1.8rem; margin-bottom: 15px; font-weight: bold;">
+                    🌟 305 Hack Spring 2025 by Cardano
+                </h3>
+                <p style="color: #e0e0ff; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">
+                    Experience the innovation, creativity, and technology that made our Spring hackathon a success. This is what awaits you in SummerCodeX 2025!
+                </p>
+            </div>
+            
+            <!-- Video embed container with responsive design -->
+            <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; /* 16:9 aspect ratio */ border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3); margin-bottom: 30px;">
+                <iframe 
+                    src="https://www.youtube.com/embed/SBsMfHGYeVg?rel=0&modestbranding=1&showinfo=0" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
+                    allowfullscreen
+                    title="305 Hack Spring 2025 by Cardano - Innovation Highlights">
+                </iframe>
+            </div>
+            
+            <!-- Video description and stats -->
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <p style="color: #e0e0ff; font-size: 1rem; margin-bottom: 20px; line-height: 1.6;">
+                        Our previous hackathon brought together innovative minds to solve real-world challenges using cutting-edge technology. The projects showcased incredible creativity in blockchain, AI, and web development - setting the foundation for SummerCodeX's focus on XR, Web3, and decentralization.
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; backdrop-filter: blur(4px); border: 1px solid rgba(78, 205, 196, 0.2);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #4ecdc4; margin-bottom: 5px;">200+</div>
+                            <div style="font-size: 0.9rem; color: #e0e0ff;">Participants</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to action buttons -->
+            <div style="text-align: center; margin-top: 30px;">
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://305HackSpring2025.vercel.app" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: linear-gradient(135deg, #ff6b6b, #4ecdc4); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);">
+                        <i class="fas fa-external-link-alt"></i>
+                        View 305 Spring Event
+                    </a>
+                    <a href="#about" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: linear-gradient(135deg, #4ecdc4, #45b7d1); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);">
+                        <i class="fas fa-rocket"></i>
+                        Join SummerCodeX 2025
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Cardano acknowledgment -->
+            <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(78, 205, 196, 0.2);">
+                <p style="color: #4ecdc4; font-size: 0.9rem; margin: 0; font-style: italic;">
+                    Special thanks to <strong>Cardano</strong> for powering our Spring 2025 hackathon
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Transition to SummerCodeX -->
+    <div style="margin: 3rem 0; background: linear-gradient(135deg, rgba(255, 221, 89, 0.1) 0%, rgba(69, 183, 209, 0.1) 100%); border-radius: 16px; padding: 30px; backdrop-filter: blur(4px); border: 1px solid rgba(255, 221, 89, 0.3);">
+        <div class="text-center">
+            <h4 style="color: #ffdd59; font-size: 1.4rem; margin-bottom: 15px; font-weight: bold;">
+                🚀 Ready for the Next Chapter?
+            </h4>
+            <p style="color: #e0e0ff; font-size: 1.1rem; margin-bottom: 25px;">
+                SummerCodeX 2025 takes innovation to the next level with XR, Web3, Blockchain & Decentralization. Join us for a week of immersive technology exploration!
+            </p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform?usp=dialog" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: linear-gradient(135deg, #ffdd59, #45b7d1); color: #1a1a2e; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 221, 89, 0.4);">
+                <i class="fas fa-user-plus"></i>
+                Register for SummerCodeX Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- END Video Showcase Section-->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- Video Showcase Section -->
+
+
 
 <!-- Timeline Section -->
 <section id="timeline" class="content-section">
