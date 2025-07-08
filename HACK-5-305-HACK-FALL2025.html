@@ -2812,13 +2812,222 @@ body {
         font-size: 0.9rem;
     }
 }
-/* End .sponsor-support-card Section Styles */
+/* Enhanced Slide-out Menu  */
 /*  */
 /*  */
 /*  */
 /*  */
-/* End .sponsor-support-card Section Styles */
+/* Enhanced Slide-out Menu  */
+/* Enhanced Slide-out Menu */
+.slide-menu {
+    position: fixed;
+    top: 0;
+    right: -500px; /* Increased width */
+    width: 480px; /* Wider for more content */
+    height: 100vh;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    z-index: 1052; /* Higher than navbar */
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-y: auto;
+    box-shadow: -20px 0 40px rgba(0, 0, 0, 0.5);
+    border-left: 1px solid rgba(59, 130, 246, 0.2);
+}
 
+.slide-menu.active {
+    right: 0;
+}
+
+/* Menu Sections */
+.menu-section {
+    padding: 0 30px 30px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.05);
+}
+
+.menu-section:last-child {
+    border-bottom: none;
+    padding-bottom: 50px;
+}
+
+.menu-section-title {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.menu-section-title::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+/* Enhanced Hackathon Links */
+.hackathon-link {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+    padding: 15px 0 !important;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.hackathon-link:hover {
+    border-left-color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding-left: 20px !important;
+}
+
+.hackathon-main {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.nav-date {
+    font-size: 0.75rem !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    margin-left: 2.25rem !important;
+    font-style: italic !important;
+}
+
+.archived {
+    opacity: 0.6;
+}
+
+.archived:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+    background: rgba(102, 102, 102, 0.1) !important;
+}
+
+/* Active Mission Badge */
+.active-mission {
+    position: relative;
+}
+
+.active-mission::after {
+    content: '🚀';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+/* Menu Items */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.menu-item:hover {
+    color: white;
+    background: rgba(59, 130, 246, 0.1);
+    padding-left: 15px;
+    transform: translateX(5px);
+    text-decoration: none;
+}
+
+.menu-item i {
+    color: var(--accent);
+    font-size: 16px;
+    width: 20px;
+}
+
+/* Partner Links */
+.partner-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.partner-link:hover {
+    color: var(--accent);
+    padding-left: 10px;
+    transform: translateX(3px);
+    text-decoration: none;
+}
+
+.partner-link i {
+    color: var(--accent);
+    font-size: 14px;
+    width: 18px;
+    opacity: 0.7;
+}
+
+/* Donate Button in Menu */
+.donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--gradient-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    border: none;
+    cursor: pointer;
+}
+
+.donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .slide-menu {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-menu {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .slide-menu {
+        width: 350px;
+    }
+}
+/* End Enhanced Slide-out Menu  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* End Enhanced Slide-out Menu  */
 
 
 
@@ -2828,10 +3037,11 @@ body {
 <!-- Smart City Background Elements -->
 <div class="smart-city-bg" id="smartCityBg"></div>
 
+
 <!-- Menu Overlay -->
 <div class="menu-overlay" id="menu-overlay"></div>
 
-<!-- Slide-out Menu -->
+<!-- Enhanced Slide-out Menu with Discord Portal Navigation -->
 <div class="slide-menu" id="slide-menu">
     <button class="close-btn" id="close-menu">
         <i class="fas fa-times"></i>
@@ -2857,18 +3067,90 @@ body {
         </a>
     </div>
 
+    <!-- Main Navigation Section -->
     <div class="menu-section">
+        <div class="menu-section-title">MAIN NAVIGATION</div>
+        <a href="https://Hacks-at-fiu.vercel.app" target="_blank" class="menu-item">
+            <i class="bi bi-shield-check me-3"></i>Hacker Guide
+        </a>
+        <a href="hacks-toolkit.html" class="menu-item">
+            <i class="bi bi-tools me-3"></i>Hack Toolkit
+        </a>
+        <a href="hackathons.html" class="menu-item">
+            <i class="bi bi-calendar-event me-3"></i>All Hackathons
+        </a>
+        <a href="https://hacksatfiudiscord.vercel.app/" target="_blank" class="menu-item">
+            <i class="fab fa-discord me-3"></i>Discord Portal
+        </a>
+    </div>
+
+    <!-- Active Missions Section -->
+    <div class="menu-section">
+        <div class="menu-section-title">🚀 ACTIVE MISSIONS</div>
+        
+        <a href="https://summercodeX2025.vercel.app" class="menu-item hackathon-link active-mission">
+            <div class="hackathon-main">
+                <i class="bi bi-box"></i>
+                <span>SummerCodeX 2025</span>
+            </div>
+            <span class="nav-date">Jul 21-28, 2025</span>
+        </a>
+        
+        <a href="#home" class="menu-item hackathon-link active-mission" style="background: rgba(59, 130, 246, 0.15); border-left: 3px solid var(--accent);">
+            <div class="hackathon-main">
+                <i class="bi bi-buildings"></i>
+                <span>305 Hackathon: Fall 2025 (Current)</span>
+            </div>
+            <span class="nav-date">Sep 19-21, 2025</span>
+        </a>
+        
+        <a href="https://empowher2025.vercel.app" class="menu-item hackathon-link active-mission">
+            <div class="hackathon-main">
+                <i class="bi bi-person-hearts"></i>
+                <span>EmpowHER Hackathon 2025</span>
+            </div>
+            <span class="nav-date">Oct 13-20, 2025</span>
+        </a>
+        
+        <a href="https://codefest2025.vercel.app" class="menu-item hackathon-link active-mission">
+            <div class="hackathon-main">
+                <i class="bi bi-stars"></i>
+                <span>CodeFest 2025</span>
+            </div>
+            <span class="nav-date">Dec 8-15, 2025</span>
+        </a>
+        
+        <a href="https://hackfiestaamiami2026.vercel.app" class="menu-item hackathon-link active-mission">
+            <div class="hackathon-main">
+                <i class="bi bi-globe"></i>
+                <span>HackFiesta Miami 2026</span>
+            </div>
+            <span class="nav-date">Mar 9-15, 2026</span>
+        </a>
+        
+        <a href="https://305hackspring2026.vercel.app" class="menu-item hackathon-link active-mission">
+            <div class="hackathon-main">
+                <i class="bi bi-shield-shaded"></i>
+                <span>305 Hackathon: Spring 2026</span>
+            </div>
+            <span class="nav-date">Mar 20-22, 2026</span>
+        </a>
+    </div>
+
+    <!-- 305 Hack Quick Links -->
+    <div class="menu-section">
+        <div class="menu-section-title">305 HACK NAVIGATION</div>
         <a href="#about" class="menu-item">
-            <i class="fas fa-info-circle me-3"></i>About
+            <i class="fas fa-info-circle me-3"></i>About Smart City Innovation
         </a>
         <a href="#tracks" class="menu-item">
-            <i class="fas fa-road me-3"></i>305 Hack Smart City Tracks
+            <i class="fas fa-road me-3"></i>Smart City Tracks
         </a>
         <a href="#past-events" class="menu-item">
-            <i class="fas fa-history me-3"></i>Our Past
+            <i class="fas fa-history me-3"></i>Our Innovation Journey
         </a>
         <a href="#participate" class="menu-item">
-            <i class="fas fa-user-plus me-3"></i>How to Participate
+            <i class="fas fa-user-plus me-3"></i>Join the Revolution
         </a>
         <a href="#event" class="menu-item">
             <i class="fas fa-calendar-day me-3"></i>During the Event
@@ -2883,12 +3165,42 @@ body {
             <i class="fas fa-bell me-3"></i>Stay Tuned
         </a>
         <a href="#sponsors" class="menu-item">
-            <i class="fas fa-handshake me-3"></i>Sponsors
+            <i class="fas fa-handshake me-3"></i>Innovation Partners
         </a>
     </div>
 
+    <!-- Archived Operations Section -->
     <div class="menu-section">
-        <div class="menu-section-title">Code Crunch Links</div>
+        <div class="menu-section-title">📁 ARCHIVED OPERATIONS</div>
+        
+        <a href="https://codestorm2025.vercel.app" class="menu-item hackathon-link archived">
+            <div class="hackathon-main">
+                <i class="bi bi-cloud-lightning"></i>
+                <span>CodeStorm 2025</span>
+            </div>
+            <span class="nav-date">May 19-26, 2025</span>
+        </a>
+        
+        <a href="https://305hackspring2025.vercel.app" class="menu-item hackathon-link archived">
+            <div class="hackathon-main">
+                <i class="bi bi-shield-shaded"></i>
+                <span>305 Hack: Spring 2025</span>
+            </div>
+            <span class="nav-date">Mar 29-31, 2025</span>
+        </a>
+        
+        <a href="https://hackfiestamilami2025.vercel.app" class="menu-item hackathon-link archived">
+            <div class="hackathon-main">
+                <i class="bi bi-cpu"></i>
+                <span>HackFiesta Miami 2025</span>
+            </div>
+            <span class="nav-date">Mar 21-23, 2025</span>
+        </a>
+    </div>
+
+    <!-- Code Crunch Links Section -->
+    <div class="menu-section">
+        <div class="menu-section-title">CODE CRUNCH LINKS</div>
         <a href="index.html" class="partner-link">
             <i class="fas fa-home me-2"></i>Home
         </a>
@@ -2912,8 +3224,9 @@ body {
         </a>
     </div>
 
+    <!-- Partners Section -->
     <div class="menu-section">
-        <div class="menu-section-title">Partners</div>
+        <div class="menu-section-title">PARTNERS</div>
         <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" class="partner-link">
             ColorStack at FIU
         </a>
@@ -2952,9 +3265,6 @@ body {
         </button>
         
         <!-- Right side: Donate button + Collapsible menu -->
-
-        
-        <!-- Custom hamburger menu (keep your existing one) -->
         <div class="d-flex align-items-center ms-auto">
             <!-- Compact donate button for larger screens -->
             <div class="d-none d-sm-block me-3">
