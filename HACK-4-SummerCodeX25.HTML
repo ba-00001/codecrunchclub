@@ -581,13 +581,114 @@
         /* End video */
 
 
+            
+        /*  Tracks Section Styles  */
+        /*  */
+        /*  */
+        /*  */
+        /*  */
+        /* End  Tracks Section Styles */
 
-        /* End .sponsor-support-card Section Styles */
+            /* Tracks Section Styles */
+            .track-card {
+                background: linear-gradient(135deg, rgba(30, 39, 73, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+                border: 1px solid rgba(78, 205, 196, 0.3);
+                border-radius: 16px;
+                padding: 24px;
+                margin-bottom: 20px;
+                backdrop-filter: blur(10px);
+                transition: all 0.3s ease;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .track-card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(78, 205, 196, 0.6);
+                box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+            }
+
+            .track-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+                border-radius: 16px 16px 0 0;
+            }
+
+            .special-track-badge {
+                position: absolute;
+                top: -8px;
+                right: 20px;
+                background: linear-gradient(135deg, #ffdd59, #ffa726);
+                color: #1a1a2e;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                z-index: 10;
+            }
+
+            .special-track {
+                border: 2px solid rgba(255, 221, 89, 0.4) !important;
+            }
+
+            .special-track::before {
+                background: linear-gradient(90deg, #ffdd59, #ffa726) !important;
+            }
+
+            .special-track:hover {
+                border-color: rgba(255, 221, 89, 0.7) !important;
+                box-shadow: 0 20px 40px rgba(255, 221, 89, 0.2) !important;
+            }
+
+            .challenge-lock {
+                margin-top: auto;
+                border-radius: 12px;
+                padding: 16px;
+                text-align: center;
+                backdrop-filter: blur(5px);
+            }
+
+            .challenge-lock i {
+                margin-right: 8px;
+            }
+
+            #tracks .row {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 24px;
+                margin-bottom: 24px;
+            }
+
+            .full-width-track {
+                grid-column: 1 / -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Responsive Design for Tracks */
+            @media (max-width: 768px) {
+                #tracks .row {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+            }
+
+
+ 
+        /*  Tracks Section Styles  */
         /*  */
         /*  */
         /*  */
         /*  */
-        /* End .sponsor-support-card Section Styles */
+        /* End  Tracks Section Styles */
 
     </style>
 </head>
@@ -917,71 +1018,56 @@
 </section>
 
 <!-- Tracks Section -->
-<section id="tracks" class="content-section">
-    <h2>Hackathon Tracks 🧭</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Explore the themes below and pick your challenge - dive into the future of technology!</p>
-    
-    <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #4ecdc4;">
-        <div style="font-size: 2rem; margin-bottom: 20px;">🔓</div>
-        <h4 style="color: #4ecdc4; font-size: 1.5rem; margin-bottom: 20px;">Challenges Unlock Soon!</h4>
-        <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique challenges automatically revealed when the hackathon begins on <strong>July 21, 2025 at 12:00 AM</strong>.</p>
-        <p style="font-style: italic; color: #e0e0ff;">Get ready to innovate with cutting-edge technology! 🚀✨</p>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-6 mb-4">
+    <section id="tracks" class="content-section">
+        <h2>Hackathon Tracks 🧭</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Explore the themes below and pick your challenge - dive into the future of technology!</p>
+        
+        <div id="mysteryBanner" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%); border-radius: 16px; padding: 30px; margin-bottom: 40px; border: 2px dashed #4ecdc4;">
+            <div style="font-size: 2rem; margin-bottom: 20px;">🔓</div>
+            <h4 style="color: #4ecdc4; font-size: 1.5rem; margin-bottom: 20px;">Challenges Unlock Soon!</h4>
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique challenges automatically revealed when the hackathon begins on <strong>July 21, 2025 at 12:00 AM</strong>.</p>
+            <p style="font-style: italic; color: #e0e0ff;">Get ready to innovate with cutting-edge technology! 🚀✨</p>
+        </div>
+        
+        <div class="row">
             <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🥽 Track 1: Immersive Worlds</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Dive into AR/VR experiences—social hangouts, virtual concerts, or interactive learning.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+                <h4 style="color: #4ecdc4; font-size: 1.3rem; margin-bottom: 12px;">🥽🎮 Track 1: Immersive Gaming & Interactive Worlds</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem; line-height: 1.5;">Create AR/VR experiences, blockchain-powered games, or play-to-earn mechanics—from virtual concerts to tokenized gaming assets.</p>
+                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.2);">
+                    <p style="margin: 0; color: #e0e0ff;"><i class="fas fa-lock" style="color: #4ecdc4;"></i> Challenge locked until July 21</p>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <h4 style="color: #4ecdc4; font-size: 1.3rem; margin-bottom: 12px;">🤖 Track 2: AI-Powered Interactive Systems</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem; line-height: 1.5;">Leverage AI for chatbots, recommendation engines, or real-time image/speech recognition.</p>
+                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.2);">
+                    <p style="margin: 0; color: #e0e0ff;"><i class="fas fa-lock" style="color: #4ecdc4;"></i> Challenge locked until July 21</p>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <h4 style="color: #4ecdc4; font-size: 1.3rem; margin-bottom: 12px;">📱 Track 3: Scalable Web & Mobile Experiences</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem; line-height: 1.5;">Design and implement robust full-stack applications—responsive web or cross-platform mobile apps.</p>
+                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.2);">
+                    <p style="margin: 0; color: #e0e0ff;"><i class="fas fa-lock" style="color: #4ecdc4;"></i> Challenge locked until July 21</p>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-6 mb-4">
-            <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🎮 Track 2: Play-to-Earn & GameFi</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Combine blockchain and gaming by crafting tokenized assets or play-to-earn mechanics.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
+        <!-- Special Track -->
+        <div class="row">
+            <div class="track-card special-track full-width-track">
+                <div class="special-track-badge">Special Track</div>
+                <h4 style="color: #ffdd59; font-size: 1.3rem; margin-bottom: 12px; margin-top: 20px;">💼 Track 4: Tech Unicorn Track</h4>
+                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem; line-height: 1.5;"><strong>Startup Pitch Arena</strong> – pitch your startup idea & prototype it</p>
+                <p style="color: #ffdd59; font-style: italic; margin-top: 10px; font-size: 0.9rem;">Coding is <strong>not</strong> required for this track—you can use no-code/low-code tools or paper prototypes.</p>
+                <div class="challenge-lock" style="background: rgba(255, 221, 89, 0.1); border: 1px solid rgba(255, 221, 89, 0.3);">
+                    <p style="margin: 0;"><i class="fas fa-lock" style="color: #ffdd59;"></i> <span style="color: #ffdd59;">Challenge locked until July 21</span></p>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-6 mb-4">
-            <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">🤖 Track 3: AI-Powered Interactive Systems</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Leverage AI for chatbots, recommendation engines, or real-time image/speech recognition.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6 mb-4">
-            <div class="track-card">
-                <h4 style="color: #4ecdc4; font-size: 1.3rem;">📱 Track 4: Scalable Web & Mobile Experiences</h4>
-                <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;">Design and implement robust full-stack applications—responsive web or cross-platform mobile apps.</p>
-                <div class="challenge-lock" style="background: rgba(78, 205, 196, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(78, 205, 196, 0.2);">
-                    <p style="margin: 0;"><i class="fas fa-lock me-2"></i> Challenge locked until July 21</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Special Track -->
-    <div class="col-12 mb-4">
-        <div class="track-card" style="border: 2px solid rgba(255, 221, 89, 0.4);">
-            <div class="special-track-badge">Special Track</div>
-            <h4 style="color: #ffdd59; font-size: 1.3rem;">💼 Track #05: Tech Unicorn Track</h4>
-            <p style="color: #e0e0ff; margin-top: 8px; font-size: 0.95rem;"><strong>Startup Pitch Arena</strong> – pitch your startup idea & prototype it</p>
-            <p style="color: #ffdd59; font-style: italic; margin-top: 10px;">Coding is <strong>not</strong> required for this track—you can use no-code/low-code tools or paper prototypes.</p>
-            <div class="challenge-lock" style="background: rgba(255, 221, 89, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255, 221, 89, 0.3);">
-                <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #ffdd59;"></i> <span style="color: #ffdd59;">Challenge locked until July 21</span></p>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -1015,7 +1101,7 @@
                         element.style.background = "rgba(50, 205, 50, 0.1)";
                         element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
                         element.innerHTML = `
-                            <p style="margin: 0;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
+                            <p style="margin: 0;"><i class="fas fa-unlock" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
                         `;
                     });
                     
@@ -1077,7 +1163,7 @@
             setInterval(updateCountdown, 1000);
         });
     </script>
-</section>
+
 
 <!-- Volunteer Section -->
 <!-- ***************** -->
