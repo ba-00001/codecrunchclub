@@ -14,7 +14,52 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
     <style>
+
+         /* Add these CSS variable definitions at the very beginning of your style section */
+        /* CSS Variables - ADD AT THE VERY BEGINNING */
+        :root {
+            --primary: #00ff41;
+            --primary-dark: #00cc33;
+            --primary-light: #33ff66;
+            --secondary: #ff0080;
+            --accent: #00d4ff;
+            --warning: #ffff00;
+            --danger: #ff3333;
+            
+            /* Hacker theme colors inspired by gaming/anime */
+            --matrix-green: #00ff41;
+            --cyber-blue: #00d4ff;
+            --neon-pink: #ff0080;
+            --electric-yellow: #ffff00;
+            --hacker-purple: #8a2be2;
+            --terminal-green: #39ff14;
+            
+            --bg-color: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-light: #1a1a1a;
+            --text-primary: #00ff41;
+            --text-secondary: #33ff66;
+            --text-light: #66ff99;
+            --border-color: #00ff41;
+            
+            --shadow-sm: 0 0 10px rgba(0, 255, 65, 0.3);
+            --shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            --shadow-md: 0 0 30px rgba(0, 255, 65, 0.5);
+            --shadow-lg: 0 0 40px rgba(0, 255, 65, 0.6);
+            --radius: 0.75rem;
+            
+            /* Hackathon theme colors */
+            --virtual: #6366f1;
+            --hybrid: #8b5cf6;
+            --in-person: #ec4899;
+            --past-event: #666666;
+        }
+
         /* Global Styles - Summer XR Colors */
         body {
             background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
@@ -27,16 +72,38 @@
 
         /* Navbar */
         .navbar {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            border-bottom: 2px solid var(--matrix-green);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+
+        .navbar-custom {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
         }
 
         .navbar-brand {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
             font-size: 1.8rem;
             font-weight: bold;
-            color: white;
-            text-decoration: none;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand:hover {
+            color: var(--matrix-green) !important;
+            text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
         }
 
         .navbar-nav .nav-link {
@@ -47,7 +114,298 @@
         .navbar-nav .nav-link:hover {
             color: #ffdd59 !important;
         }
-        
+
+        /* Support Us Button */
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, var(--neon-pink), var(--hacker-purple));
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
+        }
+
+        .support-btn:hover {
+            background: linear-gradient(45deg, var(--hacker-purple), var(--neon-pink));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 0, 128, 0.6);
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            z-index: 1060 !important;
+            position: relative !important;
+        }
+
+        .hamburger-menu:focus {
+            box-shadow: 0 0 0 2px var(--matrix-green);
+            outline: none;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: var(--matrix-green);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+
+        .hamburger-menu:hover .hamburger-line {
+            background: var(--cyber-blue);
+            box-shadow: 0 0 10px var(--cyber-blue);
+        }
+
+        /* Fix for disappearing navigation menu */
+        .offcanvas.show {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .offcanvas {
+            background: rgba(0, 0, 0, 0.98) !important;
+            backdrop-filter: blur(15px) !important;
+            border-left: 2px solid var(--matrix-green) !important;
+            box-shadow: -10px 0 30px rgba(0, 255, 65, 0.3) !important;
+            width: 350px !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            z-index: 1055 !important;
+            transform: translateX(100%) !important;
+            transition: transform 0.3s ease-in-out !important;
+        }
+
+        .offcanvas-body {
+            padding: 1rem 1.5rem 2rem !important;
+            overflow-y: auto !important;
+            max-height: calc(100vh - 120px) !important;
+            flex-grow: 1 !important;
+            display: block !important;
+        }
+
+        .offcanvas-header {
+            border-bottom: 2px solid var(--matrix-green) !important;
+            padding: 1.5rem !important;
+            flex-shrink: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+
+        .offcanvas-title {
+            color: var(--matrix-green);
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--matrix-green);
+            margin: 0;
+        }
+
+        /* Ensure the backdrop doesn't interfere */
+        .offcanvas-backdrop {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            z-index: 1050 !important;
+        }
+
+        /* Close Button Fix */
+        .custom-close {
+            background: transparent !important;
+            border: 2px solid var(--matrix-green) !important;
+            border-radius: 50% !important;
+            width: 2rem !important;
+            height: 2rem !important;
+            opacity: 1 !important;
+            filter: none !important;
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .custom-close span {
+            color: var(--matrix-green) !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+        }
+
+        .custom-close:hover,
+        .custom-close:focus {
+            background: var(--matrix-green) !important;
+            transform: scale(1.1) !important;
+            opacity: 1 !important;
+        }
+
+        .custom-close:hover span,
+        .custom-close:focus span {
+            color: var(--bg-color) !important;
+        }
+
+        /* Navigation Menu Items - Prevent disappearing */
+        .nav-menu {
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .nav-section-title {
+            color: var(--cyber-blue);
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 1.5rem 0 0.75rem 0;
+            padding: 0.5rem;
+            border-left: 4px solid var(--cyber-blue);
+            background: rgba(0, 212, 255, 0.1);
+            text-shadow: 0 0 5px var(--cyber-blue);
+            transition: all 0.3s ease;
+        }
+
+        .nav-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem !important;
+            display: block !important;
+        }
+
+        .nav-link {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+            color: var(--text-secondary) !important;
+            text-decoration: none !important;
+            padding: 0.75rem !important;
+            border-radius: var(--radius) !important;
+            transition: all 0.3s ease !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 500 !important;
+            position: relative !important;
+            overflow: hidden !important;
+            width: 100% !important;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--matrix-green) !important;
+            background: rgba(0, 255, 65, 0.1) !important;
+            transform: translateX(5px) !important;
+            text-shadow: 0 0 10px var(--matrix-green) !important;
+            text-decoration: none !important;
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+            width: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Hackathon Link Improvements */
+        .hackathon-main {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hackathon-link {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.25rem !important;
+        }
+
+        .nav-date {
+            font-size: 0.75rem !important;
+            color: var(--text-light) !important;
+            margin-left: 2.25rem !important;
+            font-style: italic !important;
+        }
+
+        .archived {
+            opacity: 0.7;
+        }
+
+        .archived:hover {
+            color: var(--text-light) !important;
+            background: rgba(102, 102, 102, 0.1) !important;
+        }
+
+        /* Partner Logos in Menu */
+        .menu-partners {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--matrix-green);
+            flex-shrink: 0;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .partner-logos a {
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            padding: 0.5rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logos a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
+
         /* Apply Button */
         .apply-button {
             display: inline-block;
@@ -305,43 +663,6 @@
             margin-top: 20px;
         }
 
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            .timeline-container::after {
-                left: 40px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 80px;
-                padding-right: 20px;
-            }
-            
-            .timeline-left::after, .timeline-right::after {
-                left: 28px;
-            }
-            
-            .timeline-right {
-                left: 0%;
-            }
-
-            .stat-item {
-                width: 160px;
-                padding: 20px;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-        }
-
-
-        /* /* Volunteer Section Styles */ */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /* /* Volunteer Section Styles */ */
         /* Volunteer Section Styles */
         .volunteers-showcase {
             padding: 60px 0;
@@ -515,8 +836,333 @@
             font-size: 1.2rem;
         }
 
-        /* Responsive Design for Volunteer Section */
+        /* Animation */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Hover effects for buttons */
+        #previous-success a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4) !important;
+        }
+
+        /* Tracks Section Styles */
+        .track-card {
+            background: linear-gradient(135deg, rgba(30, 39, 73, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(78, 205, 196, 0.6);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+        }
+
+        .track-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .special-track-badge {
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffdd59, #ffa726);
+            color: #1a1a2e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .special-track {
+            border: 2px solid rgba(255, 221, 89, 0.4) !important;
+        }
+
+        .special-track::before {
+            background: linear-gradient(90deg, #ffdd59, #ffa726) !important;
+        }
+
+        .special-track:hover {
+            border-color: rgba(255, 221, 89, 0.7) !important;
+            box-shadow: 0 20px 40px rgba(255, 221, 89, 0.2) !important;
+        }
+
+        .challenge-lock {
+            margin-top: auto;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .challenge-lock i {
+            margin-right: 8px;
+        }
+
+        #tracks .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .full-width-track {
+            grid-column: 1 / -1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Navigation Styles for Hackathon Navigation Section */
+        .nav-section-title {
+            color: var(--cyber-blue);
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 1.5rem 0 0.75rem 0;
+            padding: 0.5rem;
+            border-left: 4px solid var(--cyber-blue);
+            background: rgba(0, 212, 255, 0.1);
+            text-shadow: 0 0 5px var(--cyber-blue);
+            transition: all 0.3s ease;
+        }
+
+        .nav-section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* Hackathon Navigation Section Specific Styling */
+        .nav-menu li:has(+ .nav-section-title:contains("🎯 HACKATHON NAVIGATION")) {
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced hover effects for hackathon navigation items */
+        .nav-menu .nav-item .nav-link:has(i.bi-info-circle),
+        .nav-menu .nav-item .nav-link:has(i.bi-signpost-split),
+        .nav-menu .nav-item .nav-link:has(i.bi-clock-history),
+        .nav-menu .nav-item .nav-link:has(i.bi-question-circle),
+        .nav-menu .nav-item .nav-link:has(i.bi-collection),
+        .nav-menu .nav-item .nav-link:has(i.bi-people) {
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-info-circle):hover {
+            border-color: #17a2b8;
+            box-shadow: 0 0 15px rgba(23, 162, 184, 0.3);
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-signpost-split):hover {
+            border-color: #ffc107;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-clock-history):hover {
+            border-color: #6f42c1;
+            box-shadow: 0 0 15px rgba(111, 66, 193, 0.3);
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-question-circle):hover {
+            border-color: #fd7e14;
+            box-shadow: 0 0 15px rgba(253, 126, 20, 0.3);
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-collection):hover {
+            border-color: #20c997;
+            box-shadow: 0 0 15px rgba(32, 201, 151, 0.3);
+        }
+
+        .nav-menu .nav-item .nav-link:has(i.bi-people):hover {
+            border-color: #e83e8c;
+            box-shadow: 0 0 15px rgba(232, 62, 140, 0.3);
+        }
+
+        /* Improved spacing for hackathon navigation section */
+        .nav-menu .nav-section-title + .nav-item {
+            margin-top: 0.5rem;
+        }
+
+        /* Animation for section titles */
+        .nav-section-title:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(3px);
+            border-left-width: 6px;
+        }
+
+        /* Smooth scroll behavior for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced glitch effect for hackathon navigation title */
+        .nav-section-title:nth-of-type(2) {
+            position: relative;
+            animation: hackathon-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes hackathon-glow {
+            from {
+                text-shadow: 0 0 5px var(--cyber-blue);
+                border-left-color: var(--cyber-blue);
+            }
+            to {
+                text-shadow: 
+                    0 0 5px var(--cyber-blue),
+                    0 0 10px var(--cyber-blue),
+                    0 0 15px var(--cyber-blue);
+                border-left-color: var(--matrix-green);
+            }
+        }
+
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+            color: var(--matrix-green);
+            animation: glitch-skew 2s infinite linear alternate-reverse;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+            color: var(--cyber-blue);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-anim2 1s infinite linear alternate-reverse;
+            color: var(--neon-pink);
+            z-index: -2;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            2%, 64% { transform: skew(0deg); }
+            4%, 60% { transform: skew(2deg); }
+            62% { transform: skew(0deg) skew(5deg); }
+        }
+
+        /* Accessibility improvements */
+        .nav-link:focus {
+            outline: 2px solid var(--matrix-green);
+            outline-offset: 2px;
+        }
+
+        .nav-section-title:focus {
+            outline: 2px solid var(--cyber-blue);
+            outline-offset: 2px;
+        }
+
+        /* Enhanced visual feedback for active states */
+        .nav-link:active {
+            transform: translateX(3px) scale(0.98);
+        }
+
+        /* Responsive Design */
         @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 40px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+            
+            .timeline-left::after, .timeline-right::after {
+                left: 28px;
+            }
+            
+            .timeline-right {
+                left: 0%;
+            }
+
+            .stat-item {
+                width: 160px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
             .online-team-stats {
                 justify-content: center;
             }
@@ -537,180 +1183,267 @@
             .volunteer-cta-section .col-lg-4 {
                 margin-top: 20px;
             }
-        }
 
-        /* End  video */ 
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /* End  video*/ 
-        @keyframes rotate {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-
-            /* Hover effects for buttons */
-            #previous-success a:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4) !important;
-            }
-
-            /* Responsive design */
-            @media screen and (max-width: 768px) {
-                #previous-success .row {
-                    text-align: center;
-                }
-                
-                #previous-success .col-lg-4 {
-                    margin-top: 20px;
-                }
-                
-                #previous-success div[style*="display: flex"] {
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-
-
-        /*  video */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /* End video */
-
-
-            
-        /*  Tracks Section Styles  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /* End  Tracks Section Styles */
-
-            /* Tracks Section Styles */
-            .track-card {
-                background: linear-gradient(135deg, rgba(30, 39, 73, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
-                border: 1px solid rgba(78, 205, 196, 0.3);
-                border-radius: 16px;
-                padding: 24px;
-                margin-bottom: 20px;
-                backdrop-filter: blur(10px);
-                transition: all 0.3s ease;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .track-card:hover {
-                transform: translateY(-8px);
-                border-color: rgba(78, 205, 196, 0.6);
-                box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
-            }
-
-            .track-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(90deg, #4ecdc4, #45b7d1);
-                border-radius: 16px 16px 0 0;
-            }
-
-            .special-track-badge {
-                position: absolute;
-                top: -8px;
-                right: 20px;
-                background: linear-gradient(135deg, #ffdd59, #ffa726);
-                color: #1a1a2e;
-                padding: 8px 16px;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-                z-index: 10;
-            }
-
-            .special-track {
-                border: 2px solid rgba(255, 221, 89, 0.4) !important;
-            }
-
-            .special-track::before {
-                background: linear-gradient(90deg, #ffdd59, #ffa726) !important;
-            }
-
-            .special-track:hover {
-                border-color: rgba(255, 221, 89, 0.7) !important;
-                box-shadow: 0 20px 40px rgba(255, 221, 89, 0.2) !important;
-            }
-
-            .challenge-lock {
-                margin-top: auto;
-                border-radius: 12px;
-                padding: 16px;
+            #previous-success .row {
                 text-align: center;
-                backdrop-filter: blur(5px);
             }
-
-            .challenge-lock i {
-                margin-right: 8px;
+            
+            #previous-success .col-lg-4 {
+                margin-top: 20px;
+            }
+            
+            #previous-success div[style*="display: flex"] {
+                flex-direction: column;
+                align-items: center;
             }
 
             #tracks .row {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 24px;
-                margin-bottom: 24px;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .full-width-track {
-                grid-column: 1 / -1;
-                max-width: 600px;
-                margin: 0 auto;
+            .nav-section-title {
+                font-size: 0.7rem;
+                padding: 0.4rem;
+                margin: 1rem 0 0.5rem 0;
             }
-
-            /* Responsive Design for Tracks */
-            @media (max-width: 768px) {
-                #tracks .row {
-                    grid-template-columns: 1fr;
-                    gap: 20px;
-                }
+            
+            .nav-menu .nav-item .nav-link {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
             }
+            
+            .nav-menu .nav-item .nav-link i {
+                font-size: 1rem;
+                width: 1.3rem;
+            }
+        }
 
-
- 
-        /*  Tracks Section Styles  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /* End  Tracks Section Styles */
+        @media (max-width: 576px) {
+            .offcanvas {
+                width: 300px !important;
+            }
+            
+            .support-btn span {
+                display: none !important;
+            }
+            
+            .navbar-brand span {
+                display: none !important;
+            }
+        }
 
     </style>
 </head>
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">SummerCodeX 2025</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
-                <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
-                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+<nav class="navbar navbar-dark navbar-custom">
+    <div class="container-fluid px-3">
+        <div class="d-flex align-items-center w-100">
+            <!-- Logo -->
+            <a class="navbar-brand me-3" href="index.html">
+                <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
+                <span class="d-none d-sm-inline">Code Crunch</span>
+            </a>
+            <a class="navbar-brand me-3" href="https://colorstackatfiu.vercel.app">
+                <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="50" class="me-1" />
+                <span class="d-none d-sm-inline">ColorStack at FIU</span>
+            </a>
+            <a class="navbar-brand me-3" href="https://cahsiatfiu.vercel.app/">
+                <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" height="50" class="me-1" />
+                <span class="d-none d-sm-inline">CAHSI at FIU</span>
+            </a>
+
+            <!-- Support Us Button -->
+            <a href="https://hack-university-fundraiser.vercel.app/" class="support-btn me-auto" target="_blank">
+                <i class="bi bi-heart-fill"></i>
+                <span class="d-none d-sm-inline">Support Us</span>
+            </a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="navbar-toggler hamburger-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" 
+                    aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Off-canvas Mobile Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title glitch" id="mobileMenuLabel" data-text="HACKER MENU">HACKER MENU</h5>
+            <button type="button" class="btn-close btn-close-white custom-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav-menu">
+                <!-- Main Navigation -->
+                <li class="nav-section-title">MAIN NAVIGATION</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://Hacks-at-fiu.vercel.app" target="_blank">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Hacker Guide</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://Hacksatfiu-toolkit.vercel.app">
+                        <i class="bi bi-tools"></i>
+                        <span>Hack Toolkit</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://ba-00001.github.io/codecrunchclub/hackathons.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>All Hackathons</span>
+                    </a>
+                </li>
+                
+                <!-- Hackathon Navigation -->
+                <li class="nav-section-title">🎯 HACKATHON NAVIGATION</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">
+                        <i class="bi bi-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tracks">
+                        <i class="bi bi-signpost-split"></i>
+                        <span>Tracks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#timeline">
+                        <i class="bi bi-clock-history"></i>
+                        <span>Timeline</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#faq">
+                        <i class="bi bi-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#resources">
+                        <i class="bi bi-collection"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contributors">
+                        <i class="bi bi-people"></i>
+                        <span>Contributors</span>
+                    </a>
+                </li>
+                
+                <!-- Active Missions -->
+                <li class="nav-section-title">🚀 ACTIVE MISSIONS</li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-4-SummerCodeX25.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-box"></i>
+                            <span>SummerCodeX 2025</span>
+                        </div>
+                        <span class="nav-date">Jul 21-28, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-5-305-HACK-FALL2025.html">
+                        <div class="hackathon-main">
+                            <i class="bi bi-buildings"></i>
+                            <span>305 Hackathon: Fall 2025 Siege</span>
+                        </div>
+                        <span class="nav-date">Sep 19-21, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-6-EmpowHER25.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-person-hearts"></i>
+                            <span>EmpowHER Hackathon 2025</span>
+                        </div>
+                        <span class="nav-date">Oct 13-20, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-7-CodeFest25.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-stars"></i>
+                            <span>CodeFest 2025</span>
+                        </div>
+                        <span class="nav-date">Dec 8-15, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-8-HackFiestaMiami26.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-globe"></i>
+                            <span>HackFiesta Miami 2026</span>
+                        </div>
+                        <span class="nav-date">Mar 9-15, 2026</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-9-305HackathonSpring26.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-shield-shaded"></i>
+                            <span>305 Hackathon: Spring 2026</span>
+                        </div>
+                        <span class="nav-date">Mar 20-22, 2026</span>
+                    </a>
+                </li>
+                
+                <!-- Archived Operations -->
+                <li class="nav-section-title">📁 ARCHIVED OPERATIONS</li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACK-3-CODESTORM25.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-cloud-lightning"></i>
+                            <span>CodeStorm 2025</span>
+                        </div>
+                        <span class="nav-date">May 19-26, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/305HACK-SPRING25.html">
+                        <div class="hackathon-main">
+                            <i class="bi bi-shield-shaded"></i>
+                            <span>305 Hack: Spring 2025</span>
+                        </div>
+                        <span class="nav-date">Mar 29-31, 2025</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACKFIESTA-SPRING25.HTML">
+                        <div class="hackathon-main">
+                            <i class="bi bi-cpu"></i>
+                            <span>HackFiesta Miami 2025</span>
+                        </div>
+                        <span class="nav-date">Mar 21-23, 2025</span>
+                    </a>
+                </li>
             </ul>
+            
+            <!-- Partner Logos in Menu -->
+            <div class="menu-partners">
+                <div class="partner-logos">
+                    <a href="https://codecrunchglobal.vercel.app/" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch" height="30">
+                    </a>
+                    <a href="https://colorstackatfiu.vercel.app" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack" height="30">
+                    </a>
+                    <a href="https://cahsiatfiu.vercel.app/" target="_blank">
+                        <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI" height="30">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -1456,19 +2189,606 @@
 
 <!-- FAQ Toggle Script -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const questions = document.querySelectorAll(".faq-question");
+// Complete JavaScript for SummerCodeX 2025 - Navigation and Functionality
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // ========================================
+    // COUNTDOWN FUNCTIONALITY FOR TRACKS
+    // ========================================
+    const releaseDate = new Date('2025-07-21T00:00:00');
+    
+    function updateCountdown() {
+        const currentDate = new Date();
+        const timeLeft = releaseDate - currentDate;
         
-        questions.forEach(question => {
-            question.addEventListener("click", function () {
-                const answer = this.nextElementSibling;
-                
-                if (answer) {
-                    answer.style.display = (answer.style.display === "block") ? "none" : "block";
-                }
+        if (timeLeft <= 0) {
+            // Hackathon has started - reveal challenges
+            console.log("Challenges are now available!");
+            
+            const mysteryBanner = document.getElementById('mysteryBanner');
+            if (mysteryBanner) {
+                mysteryBanner.style.display = 'none';
+            }
+            
+            // Update stats to show "LIVE NOW"
+            const daysCountdown = document.querySelector('.stat-item .stat-number');
+            const daysText = document.querySelector('.stat-item .stat-text');
+            if (daysCountdown && daysText) {
+                daysCountdown.textContent = "LIVE";
+                daysCountdown.style.color = "#32cd32";
+                daysText.textContent = "NOW ACTIVE!";
+            }
+            
+            // Update all challenge locks
+            const lockedChallenges = document.querySelectorAll('.challenge-lock');
+            lockedChallenges.forEach((element) => {
+                element.style.background = "rgba(50, 205, 50, 0.1)";
+                element.style.border = "1px solid rgba(50, 205, 50, 0.3)";
+                element.innerHTML = `
+                    <p style="margin: 0;"><i class="fas fa-unlock" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold;">Challenges Now Available!</span></p>
+                `;
             });
+            
+            return; // Stop the countdown
+        } else {
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // Update the days counter in stats
+            const daysCountdown = document.querySelector('.stat-item .stat-number');
+            if (daysCountdown) {
+                daysCountdown.textContent = days;
+            }
+            
+            // Update mystery banner with detailed countdown
+            const mysteryBanner = document.getElementById('mysteryBanner');
+            if (mysteryBanner) {
+                const existingCountdown = mysteryBanner.querySelector('.live-countdown');
+                if (existingCountdown) {
+                    existingCountdown.remove();
+                }
+                
+                const countdownEl = document.createElement('div');
+                countdownEl.className = 'live-countdown';
+                countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(78, 205, 196, 0.1); border-radius: 10px; border: 1px solid rgba(78, 205, 196, 0.3);";
+                countdownEl.innerHTML = `
+                    <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #4ecdc4;">Challenges unlock in:</p>
+                    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ff6b6b;">${days}</div>
+                            <div style="font-size: 0.9rem; color: #e0e0ff;">Days</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #4ecdc4;">${hours}</div>
+                            <div style="font-size: 0.9rem; color: #e0e0ff;">Hours</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #45b7d1;">${minutes}</div>
+                            <div style="font-size: 0.9rem; color: #e0e0ff;">Minutes</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffdd59;">${seconds}</div>
+                            <div style="font-size: 0.9rem; color: #e0e0ff;">Seconds</div>
+                        </div>
+                    </div>
+                `;
+                mysteryBanner.appendChild(countdownEl);
+            }
+        }
+    }
+    
+    // Update countdown immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ========================================
+    // FAQ TOGGLE FUNCTIONALITY
+    // ========================================
+    const questions = document.querySelectorAll(".faq-question");
+    
+    questions.forEach(question => {
+        question.addEventListener("click", function () {
+            const answer = this.nextElementSibling;
+            
+            if (answer) {
+                answer.style.display = (answer.style.display === "block") ? "none" : "block";
+            }
         });
     });
+
+    // ========================================
+    // NAVIGATION MENU FUNCTIONALITY
+    // ========================================
+    
+    // Fix for disappearing menu - Manual toggle control
+    const hamburgerBtn = document.querySelector('.hamburger-menu');
+    const offcanvasMenu = document.querySelector('#mobileMenu');
+    const closeBtn = document.querySelector('.custom-close');
+    
+    if (hamburgerBtn && offcanvasMenu) {
+        // Hamburger button click handler
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Toggle the menu manually
+            if (offcanvasMenu.classList.contains('show')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        // Close button click handler
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+        
+        // Function to open menu
+        function openMenu() {
+            offcanvasMenu.classList.add('show');
+            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+            
+            // Add backdrop
+            let backdrop = document.querySelector('.offcanvas-backdrop');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.className = 'offcanvas-backdrop fade show';
+                backdrop.addEventListener('click', closeMenu);
+                document.body.appendChild(backdrop);
+            }
+        }
+        
+        // Function to close menu
+        function closeMenu() {
+            offcanvasMenu.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            
+            // Remove backdrop
+            const backdrop = document.querySelector('.offcanvas-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+        
+        // Prevent menu from closing when clicking inside
+        offcanvasMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Close menu when clicking on navigation links
+        const navLinks = offcanvasMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Check if it's an anchor link (starts with #)
+                if (this.getAttribute('href').startsWith('#')) {
+                    // Small delay to allow navigation
+                    setTimeout(closeMenu, 100);
+                } else if (!this.getAttribute('target')) {
+                    // For internal links without target="_blank"
+                    setTimeout(closeMenu, 100);
+                }
+                // Don't close for external links (target="_blank")
+            });
+        });
+        
+        // Handle escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && offcanvasMenu.classList.contains('show')) {
+                closeMenu();
+            }
+        });
+    }
+
+    // ========================================
+    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // ========================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // ========================================
+    // ENHANCED VISUAL FEEDBACK FOR NAVIGATION
+    // ========================================
+    const allNavLinks = document.querySelectorAll('.nav-link');
+    allNavLinks.forEach(link => {
+        // Add ripple effect on click
+        link.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(0, 255, 65, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple-animation 0.6s ease-out;
+                pointer-events: none;
+                z-index: 1000;
+            `;
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // ========================================
+    // GLITCH EFFECTS
+    // ========================================
+    
+    // Glitch effect for elements with .glitch class
+    const glitchElements = document.querySelectorAll('.glitch');
+    glitchElements.forEach(element => {
+        const text = element.textContent;
+        element.setAttribute('data-text', text);
+        
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                element.style.animation = 'none';
+                setTimeout(() => {
+                    element.style.animation = 'glitch-skew 2s infinite linear alternate-reverse';
+                }, 100);
+            }
+        }, 3000);
+    });
+
+    // ========================================
+    // MATRIX RAIN EFFECT
+    // ========================================
+    function createMatrixRain() {
+        // Only create if not already exists
+        if (document.querySelector('.matrix-canvas')) return;
+        
+        const canvas = document.createElement('canvas');
+        canvas.className = 'matrix-canvas';
+        const ctx = canvas.getContext('2d');
+        
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1';
+        canvas.style.opacity = '0.1';
+        
+        document.body.appendChild(canvas);
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px Courier New';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 35);
+    }
+    
+    // Initialize matrix rain effect after a short delay
+    setTimeout(createMatrixRain, 1000);
+
+    // ========================================
+    // BUTTON HOVER EFFECTS
+    // ========================================
+    
+    // Apply button hover effects
+    const applyButtons = document.querySelectorAll('.apply-button');
+    applyButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Custom button hover effects
+    const customButtons = document.querySelectorAll('.btn-custom');
+    customButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // ========================================
+    // CARD HOVER EFFECTS
+    // ========================================
+    
+    // Storm cards hover effects
+    const stormCards = document.querySelectorAll('.storm-card');
+    stormCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 10px 30px rgba(78, 205, 196, 0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // Track cards hover effects
+    const trackCards = document.querySelectorAll('.track-card');
+    trackCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px)';
+            this.style.borderColor = 'rgba(78, 205, 196, 0.6)';
+            this.style.boxShadow = '0 20px 40px rgba(78, 205, 196, 0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.borderColor = 'rgba(78, 205, 196, 0.3)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // ========================================
+    // FLOATING ELEMENTS ANIMATION
+    // ========================================
+    function createFloatingElements() {
+        // Only create if not already exists
+        if (document.querySelector('.floating-elements')) return;
+        
+        const floatingContainer = document.createElement('div');
+        floatingContainer.className = 'floating-elements';
+        floatingContainer.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        
+        const symbols = ['{ }', '< >', '[ ]', '( )', '/* */', '&&', '||'];
+        
+        for (let i = 0; i < 6; i++) {
+            const element = document.createElement('div');
+            element.className = 'floating-icon';
+            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            element.style.cssText = `
+                position: absolute;
+                font-size: 1.5rem;
+                opacity: 0.1;
+                color: #00ff41;
+                font-family: 'Courier New', monospace;
+                animation: float-code 20s linear infinite;
+                animation-delay: ${i * -3}s;
+            `;
+            
+            // Random positioning
+            element.style.top = Math.random() * 100 + '%';
+            element.style.left = Math.random() * 100 + '%';
+            
+            floatingContainer.appendChild(element);
+        }
+        
+        document.body.appendChild(floatingContainer);
+    }
+    
+    // Initialize floating elements
+    setTimeout(createFloatingElements, 2000);
+
+    // ========================================
+    // PARALLAX SCROLL EFFECT
+    // ========================================
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.floating-elements');
+        
+        if (parallax) {
+            const speed = scrolled * 0.1;
+            parallax.style.transform = `translateY(${speed}px)`;
+        }
+    });
+
+    // ========================================
+    // WINDOW RESIZE HANDLERS
+    // ========================================
+    window.addEventListener('resize', function() {
+        // Update matrix canvas size
+        const canvas = document.querySelector('.matrix-canvas');
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        // Update floating elements positions
+        const floatingIcons = document.querySelectorAll('.floating-icon');
+        floatingIcons.forEach(icon => {
+            icon.style.top = Math.random() * 100 + '%';
+            icon.style.left = Math.random() * 100 + '%';
+        });
+    });
+
+    // ========================================
+    // BODY SCROLL MANAGEMENT
+    // ========================================
+    function toggleBodyScroll(disable) {
+        if (disable) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = '15px'; // Prevent layout shift
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }
+    }
+
+    // ========================================
+    // ENHANCED MENU VISIBILITY TRACKING
+    // ========================================
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const menu = mutation.target;
+                if (menu.classList.contains('show')) {
+                    console.log('Menu opened successfully');
+                    toggleBodyScroll(true);
+                } else {
+                    console.log('Menu closed');
+                    toggleBodyScroll(false);
+                }
+            }
+        });
+    });
+
+    if (offcanvasMenu) {
+        observer.observe(offcanvasMenu, { attributes: true });
+    }
+
+    // ========================================
+    // KEYBOARD NAVIGATION ENHANCEMENT
+    // ========================================
+    document.addEventListener('keydown', function(e) {
+        // Enhanced keyboard navigation
+        if (e.key === 'Tab') {
+            // Add visible focus indicators for keyboard navigation
+            document.body.classList.add('keyboard-nav');
+        }
+        
+        // Close menu with escape key
+        if (e.key === 'Escape' && offcanvasMenu && offcanvasMenu.classList.contains('show')) {
+            closeMenu();
+        }
+    });
+
+    // Remove keyboard navigation class on mouse use
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-nav');
+    });
+
+    // ========================================
+    // PERFORMANCE OPTIMIZATION
+    // ========================================
+    
+    // Throttle scroll events for better performance
+    let ticking = false;
+    function updateOnScroll() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                // Scroll-based animations here
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', updateOnScroll);
+
+    // ========================================
+    // CONSOLE WELCOME MESSAGE
+    // ========================================
+    console.log(`
+    ██████╗ ██████╗ ██████╗ ███████╗ ██████╗██████╗ ██╗   ██╗███╗   ██╗ ██████╗██╗  ██╗
+    ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██║   ██║████╗  ██║██╔════╝██║  ██║
+    ██║     ██║   ██║██║  ██║█████╗  ██║     ██████╔╝██║   ██║██╔██╗ ██║██║     ███████║
+    ██║     ██║   ██║██║  ██║██╔══╝  ██║     ██╔══██╗██║   ██║██║╚██╗██║██║     ██╔══██║
+    ╚██████╗╚██████╔╝██████╔╝███████╗╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╗██║  ██║
+     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝
+    
+    🌟 SummerCodeX 2025 - XR, Web3, Blockchain & Decentralization
+    🚀 Welcome to the future of innovation!
+    `);
+
+    console.log('🎯 Navigation system initialized successfully!');
+    console.log('⚡ All interactive features are now active!');
+    console.log('🔥 Ready to hack the future!');
+    
+});
+
+// ========================================
+// ADD RIPPLE ANIMATION CSS
+// ========================================
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    @keyframes ripple-animation {
+        to {
+            transform: scale(2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes float-code {
+        0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.1; }
+        25% { transform: translateY(-20px) translateX(10px); opacity: 0.2; }
+        50% { transform: translateY(0px) translateX(20px); opacity: 0.1; }
+        75% { transform: translateY(-10px) translateX(10px); opacity: 0.15; }
+    }
+    
+    .keyboard-nav *:focus {
+        outline: 2px solid #00ff41 !important;
+        outline-offset: 2px !important;
+    }
+`;
+document.head.appendChild(rippleStyle);
+
+
+
+
 </script>
 
 </body>
