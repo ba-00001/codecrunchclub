@@ -978,9 +978,177 @@ body::before {
 */
 
 
+/* faq Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* faq Styles */
 
+/* FAQ Section Styles */
+.faq-section {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--hacker-purple);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.6);
+    position: relative;
+}
 
+.faq-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--hacker-purple), var(--neon-pink), var(--cyber-blue));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
 
+.faq-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--hacker-purple);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--hacker-purple);
+    text-align: center;
+}
+
+.faq-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    font-style: italic;
+}
+
+.faq-container {
+    max-width: 100%;
+}
+
+.faq-item {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--hacker-purple);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.faq-question:hover {
+    color: var(--hacker-purple);
+    background: rgba(138, 43, 226, 0.05);
+}
+
+.faq-question::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.faq-question:hover::before {
+    left: 100%;
+}
+
+.faq-icon {
+    color: var(--neon-pink);
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.faq-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    color: var(--hacker-purple);
+}
+
+.faq-item.active .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-icon {
+    color: var(--hacker-purple);
+    transform: rotate(90deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: rgba(138, 43, 226, 0.02);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 1.25rem;
+}
+
+.faq-answer p {
+    color: var(--text-light);
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.faq-answer strong {
+    color: var(--neon-pink);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 1rem;
+    }
+    
+    .faq-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* faq Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* end faq Styles */
 
 
     </style>
@@ -1258,6 +1426,211 @@ body::before {
         <strong style="color: var(--accent-color);">Complete all required steps to be fully confirmed and ready to volunteer.</strong>
     </div>
 </section>
+
+
+<!-- faq Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- faq Section -->
+
+
+
+<section class="faq-section">
+    <h2 class="faq-title glitch" data-text="INDUSTRY PROFESSIONAL FAQ">INDUSTRY PROFESSIONAL FAQ</h2>
+    <p class="faq-subtitle">[ EXECUTIVE BRIEFING ] - Strategic information for industry professionals and tech experts</p>
+    
+    <div class="faq-container">
+                <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>I don't have access to Hack project evaluation "Judge EXPO file"</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Check <strong>Form No. 2</strong> to make sure you confirmed you will be a judge or that you completed the form correctly. If you are in the form and your selection is <strong>"Yes for judge"</strong> in the desired hackathon, reach out to us. Final access will be granted when the hackathon starts, so if your entries are correct in the form, please reach out. <strong>All communication after volunteer role confirmation is managed primarily on Discord</strong> - make sure you have done your intro on the server to be added to the private channel. Secondary channel is LinkedIn, and last channel is email (but not frequently monitored), so make sure to join Discord to stay in the loop.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>Where can I see my form submissions? I don't know if I submitted them.</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p><strong>Check your form submissions here:</strong><br><br>
+                • <strong>Interest Form (Form No. 1):</strong> <a href="https://codecrunchvolunteers-formno1-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno1-respon.vercel.app</a><br><br>
+                • <strong>Volunteer Confirmation (Form No. 2):</strong> <a href="https://codecrunchvolunteers-formno2-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno2-respon.vercel.app</a><br><br>
+                • <strong>Technical Workshop (Form No. 3):</strong> <a href="https://codecrunchvolunteers-formno3-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno3-respon.vercel.app</a><br><br>
+                • <strong>Mentor Availability (Form No. 4):</strong> <a href="https://codecrunchvolunteers-formno4-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno4-respon.vercel.app</a><br><br>
+                • <strong>Organizer Form (Form No. 5):</strong> <a href="https://codecrunchvolunteers-formno5-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno5-respon.vercel.app</a><br><br>
+                • <strong>Advisory Board/Fundraiser (Form No. 6):</strong> <a href="https://codecrunchvolunteers-formno6-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno6-respon.vercel.app</a><br><br>
+                <strong>Note:</strong> Some responses might not appear in the forms, but you will always receive a copy of your responses after each form submission - check your spam folder. For any questions, reach us on LinkedIn.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What projects will I evaluate as a judge, how many can I evaluate, and what track will be assigned?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Each judge will be assigned a <strong>minimum of 10 projects</strong> from random tracks to ensure fair evaluation across all submissions. If you wish to evaluate <strong>more projects or specific track projects</strong>, this is possible but must be informed with adequate time in advance. Your request will be approved on top of the 10 minimum projects, allowing you to contribute additional expertise where most valuable.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>When can I know the prompt for the hackathon?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>The <strong>challenge prompt will be unveiled on the day the hackathon starts</strong>. Each hackathon has track descriptions available beforehand, but the specific prompt is revealed at the event launch. Projects can vary by major since students choose their final focus for a specific area based on their interests and expertise.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>My name is missing on DevPost, or I haven't received updates about judge expo, workshop sessions, or mentorship hours. What should I do?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p><strong>If you're not listed on DevPost with your volunteer role:</strong> This means you didn't confirm with Form No. 2 and didn't join Discord.<br><br><strong>If you haven't received expo updates:</strong> Most likely you didn't complete Form No. 2.<br><br><strong>Check your responses:</strong><br>• Form No. 2 responses: <a href="https://codecrunchvolunteers-formno2-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno2-respon.vercel.app</a><br>• Form No. 3 responses: <a href="https://codecrunchvolunteers-formno3-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno3-respon.vercel.app</a><br>• Form No. 4 responses: <a href="https://codecrunchvolunteers-formno4-respon.vercel.app" target="_blank" style="color: var(--neon-pink);">codecrunchvolunteers-formno4-respon.vercel.app</a><br><br><strong>Missing speaker/mentor hours?</strong> You didn't fill Form No. 3 and Form No. 4, and didn't respond to Code Crunch team follow-ups to finalize your participation.</p>
+            </div>
+        </div>        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>Where can I find judging criteria and evaluation guidelines?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>All judge evaluation criteria and guidelines can be found in our <strong>Hack Toolkit</strong> accessible through the menu or directly at <a href="https://hackuniversityhacktoolkit.vercel.app" class="checklist-link" target="_blank" style="color: var(--neon-pink);">hackuniversityhacktoolkit.vercel.app</a>. This comprehensive resource includes scoring rubrics, evaluation frameworks, and best practices for fair and effective project assessment.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What unique opportunities are available for industry professionals?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Industry professionals can serve as <strong>judges, mentors, and technical workshop hosts</strong> to directly connect with students, help them grow, and support emerging talent. You also have exclusive access to advanced roles including <strong>Industry Leader Organizer</strong> (Form No. 5) where you help plan events, manage logistics, and develop partnerships. You can also join our <strong>Fundraising Advisory Board</strong> (Form No. 6) to support sponsorship outreach and strategic fundraising initiatives. These roles are perfect for those with a passion for leadership and student development.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>How can volunteering benefit my company or personal brand?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Volunteering with Code Crunch provides <strong>thought leadership opportunities</strong>, meaningful connections with passionate students, and the satisfaction of supporting new talent. You'll help students grow through direct mentorship, gain insights into student innovations and trends, and contribute to building the next generation of tech professionals. In-person volunteers are featured on event websites, and all volunteers are displayed on DevPost event pages for recognition.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What level of time commitment should I expect?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Industry professional roles are designed to be <strong>executive-friendly</strong>. Most commitments range from 2-5 hours per month for advisory roles, or 1-2 days for major hackathon events. Organizer roles may require 3-8 hours monthly depending on your involvement level. We work around your schedule and respect C-suite time constraints.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>Can I bring my team or company as co-sponsors?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Absolutely! Industry professionals often serve as <strong>sponsorship ambassadors</strong>, connecting Code Crunch with their professional networks. As a Fundraising Advisory Board member, you'll help identify partnership opportunities, facilitate corporate sponsorships, and leverage your industry connections to expand our resource base and student opportunities.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What expertise areas are most valuable?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>We particularly value professionals with expertise in <strong>AI/ML, cybersecurity, fintech, cloud computing, data science, product management, startup scaling, and emerging technologies</strong>. As an interdisciplinary club, we also welcome <strong>non-tech majors</strong> including business, design, marketing, psychology, and liberal arts professionals. We need strategic guidance in areas like corporate partnerships, event management, marketing, legal compliance, educational program development, and user experience design.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>How do I connect with students and support talent development?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Industry volunteers get <strong>early access to top student talent</strong> through mentoring relationships and project evaluations. Many companies recruit directly from our hackathons and workshops. You'll interact with students from FIU and universities worldwide, identifying potential interns, new graduates, and innovative thinkers before they hit the general job market.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What recognition and credentials will I receive?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Industry professionals receive <strong>executive-level recognition</strong> including featured profiles on our website (Only in-person volunteer), LinkedIn post mentions (If apliicable), speaker visibility for events, and Certificate for susecfull participation. Advisory board members receive official titles and can leverage this experience for board positions and industry leadership roles.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>Can I participate virtually or do I need to be in Miami?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Most industry professional roles are <strong>fully remote-friendly</strong>. Advisory board meetings are conducted virtually, and you can mentor/judge remotely. Organizer roles may benefit from occasional in-person participation for major Miami events, but virtual contribution is valued and accommodated for global industry professionals.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>How do I get added to the volunteer Discord and stay updated?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p>The link is sent after successful completion of Form No. 2.</p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span class="faq-icon">></span>
+                <span>What's the difference between organizer and advisory board roles?</span>
+                <i class="bi bi-chevron-down faq-arrow"></i>
+            </button>
+            <div class="faq-answer">
+                <p><strong>Industry Leader Organizers</strong> (Form No. 5): Hands-on event planning, logistics coordination, partnership development, and program strategy. More tactical involvement in day-to-day operations.<br><br><strong>Fundraising Advisory Board</strong> (Form No. 6): Strategic guidance on sponsorship strategy, network introductions, fundraising campaigns, and high-level partnership negotiations. Advisory board members also help with workshop creation and guidance, support student-led workshops, or lead them with the opportunity to provide students certificates upon completion. More strategic, advisory-focused role.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- faq Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- end faq Section -->
+
 
         <div id="wiki" class="embed-container relative">
             <div class="loading" id="loading">Loading Code Crunch Global Wiki</div>
@@ -1567,6 +1940,58 @@ function showError() {
 
 
 
+    // faq JavaScript
+    //**************
+    //**************
+    //**************
+    //**************
+    //**************
+    //**************
+            function toggleFAQ(button) {
+            const faqItem = button.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+            
+            // Add glitch effect occasionally
+            if (Math.random() > 0.7) {
+                button.style.animation = 'glitch-skew 0.5s';
+                setTimeout(() => {
+                    button.style.animation = '';
+                }, 500);
+            }
+        }
+
+        // Initialize FAQ animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.6s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        });
+
+    // END faq- navigation JavaScript
+    //**************
+    //**************
+    //**************
+    //**************
+    //**************
+    //**************
 
 
 
