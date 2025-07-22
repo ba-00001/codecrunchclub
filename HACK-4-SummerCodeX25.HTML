@@ -1448,6 +1448,336 @@
     </div>
 </nav>
 
+
+<!-- clock Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!--  Section -->
+<!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
+<!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
+<div id="time-bar" class="time-bar">
+    <div class="container-fluid">
+        <div class="time-zones">
+            <div class="time-zone">
+                <div class="timezone-label">🏆 Hackathon HQ</div>
+                <div class="timezone-time" id="hackathon-time"></div>
+                <div class="timezone-location">Miami, FL (EST)</div>
+            </div>
+            <div class="time-zone">
+                <div class="timezone-label">🇪🇺 Europe</div>
+                <div class="timezone-time" id="europe-time"></div>
+                <div class="timezone-location">London (GMT)</div>
+            </div>
+            <div class="time-zone">
+                <div class="timezone-label">🌍 Africa</div>
+                <div class="timezone-time" id="africa-time"></div>
+                <div class="timezone-location">Lagos (WAT)</div>
+            </div>
+            <div class="time-zone">
+                <div class="timezone-label">🌏 Asia</div>
+                <div class="timezone-time" id="asia-time"></div>
+                <div class="timezone-location">Tokyo (JST)</div>
+            </div>
+            <div class="time-zone">
+                <div class="timezone-label">🇦🇺 Australia</div>
+                <div class="timezone-time" id="australia-time"></div>
+                <div class="timezone-location">Sydney (AEDT)</div>
+            </div>
+            <div class="time-zone">
+                <div class="timezone-label">🇮🇳 India</div>
+                <div class="timezone-time" id="india-time"></div>
+                <div class="timezone-location">Mumbai (IST)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* International Time Clock Bar Styles */
+.time-bar {
+    position: fixed;
+    top: 82px; /* Adjust based on your navbar height */
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid var(--matrix-green, #00ff41);
+    z-index: 999;
+    padding: 8px 0;
+    box-shadow: 0 2px 20px rgba(0, 255, 65, 0.3);
+}
+
+.time-zones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.time-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+    text-align: center;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.time-zone:hover {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: rgba(0, 255, 65, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
+}
+
+.timezone-label {
+    font-size: 0.75rem;
+    color: var(--cyber-blue, #00d4ff);
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timezone-time {
+    font-size: 1rem;
+    color: var(--matrix-green, #00ff41);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.timezone-location {
+    font-size: 0.65rem;
+    color: #e0e0ff;
+    font-family: 'Courier New', monospace;
+    opacity: 0.8;
+    line-height: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .time-bar {
+        top: 70px; /* Adjust for mobile navbar height */
+        padding: 6px 0;
+    }
+    
+    .time-zones {
+        gap: 8px;
+        padding: 0 10px;
+    }
+    
+    .time-zone {
+        min-width: 90px;
+        padding: 4px 6px;
+    }
+    
+    .timezone-label {
+        font-size: 0.65rem;
+    }
+    
+    .timezone-time {
+        font-size: 0.85rem;
+    }
+    
+    .timezone-location {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .time-zones {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    
+    .time-zone {
+        min-width: 80px;
+        padding: 3px 5px;
+    }
+    
+    .timezone-label {
+        font-size: 0.6rem;
+    }
+    
+    .timezone-time {
+        font-size: 0.8rem;
+    }
+    
+    .timezone-location {
+        font-size: 0.55rem;
+    }
+}
+
+/* Animation for time updates */
+.timezone-time {
+    transition: all 0.3s ease;
+}
+
+.timezone-time.updating {
+    color: var(--cyber-blue, #00d4ff);
+    transform: scale(1.05);
+}
+
+/* Body padding adjustment to prevent content overlap */
+body {
+    padding-top: 130px !important; /* Adjust based on navbar + time bar height */
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 115px !important;
+    }
+}
+
+/* Glitch effect for hackathon time */
+.time-zone:first-child .timezone-time {
+    animation: time-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes time-glow {
+    from {
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+    to {
+        text-shadow: 
+            0 0 10px rgba(0, 255, 65, 0.8),
+            0 0 20px rgba(0, 255, 65, 0.6),
+            0 0 30px rgba(0, 255, 65, 0.4);
+    }
+}
+</style>
+
+<script>
+// International Time Clock Functionality
+function updateInternationalTimes() {
+    const now = new Date();
+    
+    // Time zones configuration
+    const timeZones = {
+        'hackathon-time': {
+            timezone: 'America/New_York', // Miami/EST
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        },
+        'europe-time': {
+            timezone: 'Europe/London', // GMT/BST
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        },
+        'africa-time': {
+            timezone: 'Africa/Lagos', // WAT (West Africa Time)
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        },
+        'asia-time': {
+            timezone: 'Asia/Tokyo', // JST
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        },
+        'australia-time': {
+            timezone: 'Australia/Sydney', // AEDT/AEST
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        },
+        'india-time': {
+            timezone: 'Asia/Kolkata', // IST
+            format: { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            }
+        }
+    };
+    
+    // Update each time zone
+    Object.keys(timeZones).forEach(elementId => {
+        const element = document.getElementById(elementId);
+        if (element) {
+            const config = timeZones[elementId];
+            
+            try {
+                const timeString = now.toLocaleTimeString('en-US', {
+                    timeZone: config.timezone,
+                    ...config.format
+                });
+                
+                // Add updating animation
+                element.classList.add('updating');
+                element.textContent = timeString;
+                
+                // Remove animation after update
+                setTimeout(() => {
+                    element.classList.remove('updating');
+                }, 300);
+                
+            } catch (error) {
+                console.error(`Error updating time for ${elementId}:`, error);
+                element.textContent = '--:--:--';
+            }
+        }
+    });
+}
+
+// Initialize time updates when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Update times immediately
+    updateInternationalTimes();
+    
+    // Update every second
+    setInterval(updateInternationalTimes, 1000);
+    
+    console.log('🌍 International Time Clock initialized successfully!');
+});
+
+// Handle visibility change to pause/resume updates when tab is not visible
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        // Resume updates when tab becomes visible
+        updateInternationalTimes();
+    }
+});
+</script>
+<!-- clock Section -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!-- ***************** -->
+<!--  end Section -->
+
+
+
 <!-- Hackathon Details -->
 <section id="about" class="content-section">
     <h2>🌟 SummerCodeX 2025</h2>
