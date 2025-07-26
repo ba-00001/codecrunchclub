@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dropdown from Google Sheet</title>
+</head>
+<body>
+  <h2>Select a Name</h2>
+  <select id="nameDropdown">
+    <option selected disabled>Loading names...</option>
+  </select>
+
+  <script>
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbwY5dCV8DxJdaD_4zGBt53LYP-AHVQlqAbNIHEGaMFW_iafR7p9JflGPrnpT6KfS3JU/exec';
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const dropdown = document.getElementById('nameDropdown');
+        dropdown.innerHTML = '<option selected disabled>Select a name</option>';
+        
+        data.forEach(name => {
+          const option = document.createElement('option');
+          option.value = name;
+          option.textContent = name;
+          dropdown.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error('Failed to fetch data:', error);
+        alert('Could not load names from Google Sheet.');
+      });
+  </script>
+</body>
+</html>
