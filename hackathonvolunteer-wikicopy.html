@@ -1692,7 +1692,7 @@ body::before {
   <h2 class="checklist-title glitch" data-text="CHECK VOLUNTEER STATUS">CHECK VOLUNTEER STATUS</h2>
   <p style="color: limegreen; font-family: monospace;">Enter your GitHub username or profile URL below to see your application status.</p>
   <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-    <input type="text" id="githubInput" placeholder="https://github.com/CODECRUNCH or just: CODECRUNCH" 
+    <input type="text" id="githubInput" placeholder="https://github.com/nimit-patel or just: nimit-patel" 
            style="flex: 1 1 300px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;" />
     <button onclick="checkGitHubStatus()" 
             style="padding: 0.5rem 1rem; font-size: 1rem; background: #00ff99; color: #000; border: none; border-radius: 5px; cursor: pointer;">
@@ -1754,7 +1754,6 @@ body::before {
         const apiUrl = "https://script.google.com/macros/s/AKfycbzLDAEJpj7_JV_bat7PaMhdLtX_YgE2KjhVQY1WCYWQBBiIbQAKpLty0hdAOnX4hcA/exec";
         
         try {
-            // Send the current page URL as referer for verification
             const currentUrl = window.location.href;
             const response = await fetch(`${apiUrl}?github=${encodeURIComponent(githubUsername)}&referer=${encodeURIComponent(currentUrl)}`);
             const data = await response.json();
@@ -1771,6 +1770,14 @@ body::before {
                     data.forEach((entry) => {
                         html += `• Status: ${entry.status}<br>`;
                         html += `• Submitted: ${entry.timestamp}<br>`;
+                        
+                        // Add Discord instructions if volunteer is found
+                        if (entry.discordInstructions) {
+                            html += `<br><div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99;">`;
+                            html += `<strong style="color: #00ff99;">🎉 Welcome to the team!</strong><br><br>`;
+                            html += entry.discordInstructions.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code style="background: #333; padding: 2px 4px; border-radius: 3px;">$1</code>');
+                            html += `</div>`;
+                        }
                     });
                 } else {
                     html += '• Status: No entry<br>';
@@ -1794,7 +1801,6 @@ body::before {
     });
   </script>
 </section>
-
 
 
 
