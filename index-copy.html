@@ -1364,11 +1364,34 @@
 
 .certificate-actions {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.certificate-actions .btn {
+    padding: 12px 24px;
+    font-size: 15px;
+    min-width: 160px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .certificate-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .certificate-actions .btn {
+        width: 100%;
+        max-width: 280px;
+    }
 }
 
 @media print {
