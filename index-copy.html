@@ -721,6 +721,20 @@
 
         <!-- Step 3: Certificate Display (Hidden initially) -->
         <div class="certificate-section hidden" id="step3">
+            <!-- Social Media Links for Certificate Page -->
+            <div class="certificate-social-section">
+                <h4>🌟 Don't forget to connect with our community!</h4>
+                <div class="social-buttons">
+                    <a href="#" id="discord-link-cert" class="social-btn discord" target="_blank">
+                        <span>💬 Join Discord</span>
+                    </a>
+                    <a href="#" id="groupme-link-cert" class="social-btn groupme" target="_blank">
+                        <span>📱 Join GroupMe</span>
+                    </a>
+                </div>
+                <p class="social-note">Connect with fellow Code Crunch members and stay updated on events!</p>
+            </div>
+
             <h3>Your Code Crunch Membership Certificate</h3>
             <div class="certificate-container">
                 <div class="certificate" id="certificate">
@@ -754,10 +768,14 @@
                             </div>
                             <div class="verification-code">
                                 <p><strong>Verification Code:</strong> <span id="verification-code"></span></p>
-                                <p><small>Share this on LinkedIn to showcase your membership!</small></p>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- LinkedIn Share Notice Below Certificate -->
+                <div class="linkedin-share-notice">
+                    <p>Share this on LinkedIn to showcase your membership!</p>
                 </div>
                 
                 <div class="certificate-actions">
@@ -803,23 +821,25 @@
                 </div>
 
                 <div class="join-actions">
-                    <a href="#become-a-member" class="btn primary large" id="signup-link">
+                    <a href="https://codecrunchglobal.vercel.app/community-access.html" class="btn primary large" id="signup-link">
                         🌟 Become a Member
                     </a>
                 </div>
 
-                <!-- Community Links for Non-Members -->
-                <div class="community-section">
-                    <h4>🌟 Connect with us while you consider joining!</h4>
-                    <div class="social-buttons">
-                        <a href="#" id="discord-link-notfound" class="social-btn discord" target="_blank">
-                            <span>💬 Join Discord</span>
-                        </a>
-                        <a href="#" id="groupme-link-notfound" class="social-btn groupme" target="_blank">
-                            <span>📱 Join GroupMe</span>
-                        </a>
+                <!-- No Community Links for Non-Members - Membership Required -->
+                <div class="membership-required-section">
+                    <h4>🔒 Community Access</h4>
+                    <p class="membership-note">Discord and GroupMe access is exclusive to verified Code Crunch members only. Join us to unlock community access!</p>
+                    <div class="membership-benefits">
+                        <p>✅ <strong>Members get:</strong></p>
+                        <ul>
+                            <li>🎯 Exclusive Discord community access</li>
+                            <li>📱 GroupMe for instant updates</li>
+                            <li>🤝 Direct networking with peers</li>
+                            <li>📚 Members-only resources</li>
+                            <li>🎉 Priority event access</li>
+                        </ul>
                     </div>
-                    <div class="social-instructions" id="discord-instructions-notfound"></div>
                 </div>
             </div>
         </div>
@@ -1019,15 +1039,53 @@
     margin: 30px 0;
 }
 
-.community-section {
+.community-section, .membership-required-section {
     margin-top: 40px;
-    padding-top: 30px;
+    padding: 25px;
     border-top: 2px solid #e5e7eb;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #f59e0b;
 }
 
-.community-section h4 {
+.membership-required-section h4 {
     color: #374151;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.membership-note {
+    color: #6b7280;
+    font-size: 1em;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.membership-benefits {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.membership-benefits p {
+    color: #374151;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.membership-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.membership-benefits li {
+    color: #6b7280;
+    margin-bottom: 8px;
+    padding-left: 5px;
 }
 
 /* Social Links Section */
@@ -1128,27 +1186,67 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
+/* Certificate Social Section */
+.certificate-social-section {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-left: 4px solid #4f46e5;
+}
+
+.certificate-social-section h4 {
+    color: #374151;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.social-note {
+    color: #6b7280;
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 .certificate {
     background: linear-gradient(135deg, #ffffff, #f8fafc);
-    border: 8px solid #4f46e5;
-    border-radius: 20px;
-    padding: 40px;
+    border: 6px solid #4f46e5;
+    border-radius: 16px;
+    padding: 40px 50px;
     margin: 20px auto;
-    max-width: 700px;
+    max-width: 850px;
+    min-height: 600px;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    aspect-ratio: 1.4 / 1;
 }
 
 .certificate::before {
     content: '';
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
     border: 2px solid #4f46e5;
-    border-radius: 12px;
+    border-radius: 8px;
     opacity: 0.3;
+}
+
+.linkedin-share-notice {
+    text-align: center;
+    margin: 15px 0 25px 0;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #0077b5, #005885);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.linkedin-share-notice p {
+    margin: 0;
+    font-size: 0.95em;
 }
 
 .certificate-header {
@@ -1274,7 +1372,7 @@
 }
 
 @media print {
-    .certificate-actions, .verification-step:not(.hidden), .social-links-section, .not-found-section {
+    .certificate-actions, .verification-step:not(.hidden), .social-links-section, .not-found-section, .certificate-social-section, .linkedin-share-notice {
         display: none !important;
     }
     
@@ -1353,6 +1451,9 @@ function showMemberVerified(memberData) {
     if (memberData.communityLinks) {
         document.getElementById('discord-link').href = memberData.communityLinks.discordJoinLink;
         document.getElementById('groupme-link').href = memberData.communityLinks.groupmeLink;
+        // Also set for certificate page
+        document.getElementById('discord-link-cert').href = memberData.communityLinks.discordJoinLink;
+        document.getElementById('groupme-link-cert').href = memberData.communityLinks.groupmeLink;
     }
     
     // Display Discord instructions from API
@@ -1366,21 +1467,8 @@ function showNotFoundSection(joinInfo) {
     document.getElementById('not-found-section').classList.remove('hidden');
     document.getElementById('step1').classList.remove('hidden');
     
-    // Set up social media links from API for non-members
-    if (joinInfo && joinInfo.communityLinks) {
-        document.getElementById('discord-link-notfound').href = joinInfo.communityLinks.discordJoinLink;
-        document.getElementById('groupme-link-notfound').href = joinInfo.communityLinks.groupmeLink;
-    }
-    
-    // Set up signup link from API
-    if (joinInfo && joinInfo.signUpLink) {
-        document.getElementById('signup-link').href = joinInfo.signUpLink;
-    }
-    
-    // Display social instructions for non-members from API
-    if (joinInfo && joinInfo.socialInstructions && joinInfo.socialInstructions.discord) {
-        document.getElementById('discord-instructions-notfound').textContent = joinInfo.socialInstructions.discord;
-    }
+    // No social media links for non-members - membership required
+    // The signup link is already set to the correct URL in HTML
 }
 
 function setLoadingState(loading) {
