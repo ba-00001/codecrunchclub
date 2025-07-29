@@ -970,6 +970,20 @@
 
         <!-- Step 3: Certificate Display (Hidden initially) -->
         <div class="certificate-section hidden" id="step3">
+            <!-- Social Media Links for Certificate Page -->
+            <div class="certificate-social-section">
+                <h4>🌟 Don't forget to connect with our community!</h4>
+                <div class="social-buttons">
+                    <a href="#" id="discord-link-cert" class="social-btn discord" target="_blank">
+                        <span>💬 Join Discord</span>
+                    </a>
+                    <a href="#" id="groupme-link-cert" class="social-btn groupme" target="_blank">
+                        <span>📱 Join GroupMe</span>
+                    </a>
+                </div>
+                <p class="social-note">Connect with fellow Code Crunch members and stay updated on events!</p>
+            </div>
+
             <h3>Your Code Crunch Membership Certificate</h3>
             <div class="certificate-container">
                 <div class="certificate" id="certificate">
@@ -1003,10 +1017,14 @@
                             </div>
                             <div class="verification-code">
                                 <p><strong>Verification Code:</strong> <span id="verification-code"></span></p>
-                                <p><small>Share this on LinkedIn to showcase your membership!</small></p>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- LinkedIn Share Notice Below Certificate -->
+                <div class="linkedin-share-notice">
+                    <p>Share this on LinkedIn to showcase your membership!</p>
                 </div>
                 
                 <div class="certificate-actions">
@@ -1626,7 +1644,7 @@
 }
 
 @media print {
-    .certificate-actions, .verification-step:not(.hidden), .social-links-section, .not-found-section {
+    .certificate-actions, .verification-step:not(.hidden), .social-links-section, .not-found-section, .certificate-social-section, .linkedin-share-notice {
         display: none !important;
     }
     
@@ -1705,6 +1723,9 @@ function showMemberVerified(memberData) {
     if (memberData.communityLinks) {
         document.getElementById('discord-link').href = memberData.communityLinks.discordJoinLink;
         document.getElementById('groupme-link').href = memberData.communityLinks.groupmeLink;
+        // Also set for certificate page
+        document.getElementById('discord-link-cert').href = memberData.communityLinks.discordJoinLink;
+        document.getElementById('groupme-link-cert').href = memberData.communityLinks.groupmeLink;
     }
     
     // Display Discord instructions from API
