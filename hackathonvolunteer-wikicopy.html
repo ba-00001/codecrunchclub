@@ -1931,12 +1931,6 @@ body::before {
 
 
 
-
-
-
-
-
-
 <section class="checklist-section" id="inperson-volunteer-status-checker" style="margin-top: 3rem;">
 
    <h2 class="checklist-title glitch" data-text="CHECK IN-PERSON VOLUNTEER STATUS">CHECK IN-PERSON VOLUNTEER STATUS</h2>
@@ -1947,15 +1941,15 @@ body::before {
    <p style="color: limegreen; font-family: monospace;">Check if you are confirmed for <strong>In-Person Attendance</strong> at 305 Hack Fall 2025 using your <strong>email address</strong> from Form 7:</p>
    
    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-       <input type="email" id="emailInput" placeholder="Enter your email address (any email provider)" 
+       <input type="email" id="emailInputForm7" placeholder="Enter your email address (any email provider)" 
            style="flex: 1 1 300px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;" />
-       <button onclick="checkInPersonVolunteerStatus()" 
+       <button onclick="checkInPersonVolunteerStatusForm7()" 
                style="padding: 0.5rem 1rem; font-size: 1rem; background: #00ff99; color: #000; border: none; border-radius: 5px; cursor: pointer;">
        🎯 Check In-Person Status
        </button>
    </div>
    
-   <div id="result" style="margin-top: 1.5rem; background-color: #222; padding: 1rem; border-radius: 8px; color: limegreen; font-family: monospace;">
+   <div id="resultForm7" style="margin-top: 1.5rem; background-color: #222; padding: 1rem; border-radius: 8px; color: limegreen; font-family: monospace;">
        <div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
        <strong style="color: #ffa500;">🎯 In-Person Verification - 305 Hack Fall 2025:</strong><br>
        • <strong>Event</strong>: 305 Hack Fall 2025 (Sep 19-21) in Downtown Miami<br>
@@ -1969,29 +1963,29 @@ body::before {
    </div>
 
    <script>
-       function checkDomain() {
+       function checkDomainForm7() {
            const allowedDomain = 'codecrunchglobal.vercel.app';
            const currentDomain = window.location.hostname;
            
            if (currentDomain !== allowedDomain) {
-               document.getElementById('result').innerHTML = 
+               document.getElementById('resultForm7').innerHTML = 
                    `❌ This tool only works on pages from ${allowedDomain}`;
                return false;
            }
            return true;
        }
 
-       async function checkInPersonVolunteerStatus() {
-           if (!checkDomain()) {
+       async function checkInPersonVolunteerStatusForm7() {
+           if (!checkDomainForm7()) {
                return;
            }
 
-           const inputField = document.getElementById("emailInput");
+           const inputField = document.getElementById("emailInputForm7");
            let email = inputField.value.trim();
-           const resultDiv = document.getElementById("result");
+           const resultDiv = document.getElementById("resultForm7");
            
            // Preserve the info box
-           const infoBox = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
+           const infoBoxForm7 = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
            <strong style="color: #ffa500;">🎯 In-Person Verification - 305 Hack Fall 2025:</strong><br>
            • <strong>Event</strong>: 305 Hack Fall 2025 (Sep 19-21) in Downtown Miami<br>
            • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, university emails, work emails, or any email address<br>
@@ -2002,34 +1996,34 @@ body::before {
            </div>`;
            
            if (!email) {
-               resultDiv.innerHTML = infoBox + '❌ Please enter your email address from Form 7.';
+               resultDiv.innerHTML = infoBoxForm7 + '❌ Please enter your email address from Form 7.';
                return;
            }
 
            // Email validation (any valid email format)
            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
            if (!emailRegex.test(email)) {
-               resultDiv.innerHTML = infoBox + '❌ Please enter a valid email address.';
+               resultDiv.innerHTML = infoBoxForm7 + '❌ Please enter a valid email address.';
                return;
            }
 
-           resultDiv.innerHTML = infoBox + '⏳ Checking email address in 305 Hack Fall 2025 in-person volunteer database (Form 7)...';
+           resultDiv.innerHTML = infoBoxForm7 + '⏳ Checking email address in 305 Hack Fall 2025 in-person volunteer database (Form 7)...';
 
            // Form 7 API endpoint
-           const apiUrl = "https://script.google.com/macros/s/AKfycbwgTRUb-xl_W3AP0z6wsf1_OPVQ9AYfcyX8wmUoutyDQD9kvHHZI9_VmBec8Q6KLQ9c/exec";
+           const apiUrlForm7 = "https://script.google.com/macros/s/AKfycbwgTRUb-xl_W3AP0z6wsf1_OPVQ9AYfcyX8wmUoutyDQD9kvHHZI9_VmBec8Q6KLQ9c/exec";
            
            try {
                const currentUrl = window.location.href;
-               const response = await fetch(`${apiUrl}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}&form=7`);
+               const response = await fetch(`${apiUrlForm7}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}&form=7`);
                const data = await response.json();
                
                if (data.error) {
-                   resultDiv.innerHTML = infoBox + `❌ Error: ${data.error}`;
+                   resultDiv.innerHTML = infoBoxForm7 + `❌ Error: ${data.error}`;
                    return;
                }
 
                if (Array.isArray(data)) {
-                   let html = infoBox + `<strong>305 Hack Fall 2025 In-Person Status for "🎯 <span style="color:white">${email}</span>":</strong><br>`;
+                   let html = infoBoxForm7 + `<strong>305 Hack Fall 2025 In-Person Status for "🎯 <span style="color:white">${email}</span>":</strong><br>`;
                    
                    if (data.length > 0 && data[0].status !== "No entry") {
                        data.forEach((entry) => {
@@ -2177,18 +2171,24 @@ body::before {
 
            } catch (error) {
                console.error('Error checking in-person status:', error);
-               resultDiv.innerHTML = infoBox + '❌ Failed to check 305 Hack Fall 2025 in-person volunteer status. Please try again later.';
+               resultDiv.innerHTML = infoBoxForm7 + '❌ Failed to check 305 Hack Fall 2025 in-person volunteer status. Please try again later.';
            }
        }
 
        // Allow Enter key to trigger search
-       document.getElementById('emailInput').addEventListener('keypress', function(e) {
+       document.getElementById('emailInputForm7').addEventListener('keypress', function(e) {
            if (e.key === 'Enter') {
-               checkInPersonVolunteerStatus();
+               checkInPersonVolunteerStatusForm7();
            }
        });
    </script>
 </section>
+
+
+
+
+
+
 
 
 
