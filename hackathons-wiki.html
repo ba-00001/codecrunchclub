@@ -1526,6 +1526,115 @@ document.addEventListener('visibilitychange', function() {
                         </div>
                     </li>
                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="registration-status-checker" style="padding: 2rem;">
+  <div class="container">
+    <h2 style="font-family: 'Courier New', monospace; text-align: center; color: #0047AB;">
+      🔍 Check Your Registration Status
+    </h2>
+
+    <form id="registrationForm" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 1rem 0;">
+      <input
+        type="email"
+        id="emailInput"
+        placeholder="Enter your email address"
+        required
+        style="flex: 1; padding: 10px; font-family: 'Courier New', monospace; border-radius: 8px; border: 1px solid #ccc;"
+      />
+      <button
+        type="submit"
+        style="padding: 10px 20px; font-family: 'Courier New', monospace; border: none; background: #0047AB; color: white; border-radius: 8px;">
+        Check Status
+      </button>
+    </form>
+
+    <div id="registrationResults" style="margin-top: 2rem; font-family: 'Courier New', monospace;"></div>
+  </div>
+</section>
+
+<script>
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
+
+  document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value.trim();
+    const resultsDiv = document.getElementById('registrationResults');
+    if (!email) {
+      resultsDiv.innerHTML = `<p style="color:red;">Please enter a valid email.</p>`;
+      return;
+    }
+
+    resultsDiv.innerHTML = `<p>🔍 Checking registration for <strong>${email}</strong>...</p>`;
+
+    try {
+      const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
+      const data = await res.json();
+
+      if (!data.success) {
+        resultsDiv.innerHTML = `<p style="color:red;">❌ ${data.error || 'No registration found.'}</p>`;
+        return;
+      }
+
+      const { userData } = data;
+      let html = `<h3 style="color: green;">✅ ${data.message}</h3>`;
+      html += `<p><strong>Email:</strong> ${userData.email}</p>`;
+      html += `<p><strong>Submitted At:</strong> ${userData.timestamp}</p>`;
+      html += `<hr><h4>📋 Your Full Response:</h4><ul style="padding-left: 1rem;">`;
+
+      for (const [label, value] of Object.entries(userData.additionalFields)) {
+        html += `<li><strong>${label}:</strong> ${value}</li>`;
+      }
+
+      html += `</ul>`;
+
+      if (data.discordLink || data.groupmeLink) {
+        html += `<hr><h4>🎯 Join Our Communities:</h4><ul style="padding-left: 1rem;">`;
+        if (data.discordLink) {
+          html += `<li><a href="${data.discordLink}" target="_blank">📎 Discord Invite Link</a></li>`;
+        }
+        if (data.groupmeLink) {
+          html += `<li><a href="${data.groupmeLink}" target="_blank">📎 GroupMe Invite Link</a></li>`;
+        }
+        html += `</ul>`;
+      }
+
+      resultsDiv.innerHTML = html;
+    } catch (err) {
+      resultsDiv.innerHTML = `<p style="color:red;">⚠️ Error connecting to server. Try again later.</p>`;
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+                    
                     <li class="checklist-item">
                         <div class="checklist-number">3</div>
                         <div class="checklist-text">
