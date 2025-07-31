@@ -1547,7 +1547,7 @@ document.addEventListener('visibilitychange', function() {
 
 <section id="registration-status-checker" style="padding: 2rem;">
   <div class="container">
-    <h2 style="font-family: 'Courier New', monospace; text-align: center; color: #0047AB;">
+    <h2 style="font-family: 'Courier New', monospace; text-align: center; color: #1A237E;">
       🔍 Check Your Registration Status
     </h2>
 
@@ -1557,11 +1557,11 @@ document.addEventListener('visibilitychange', function() {
         id="emailInput"
         placeholder="Enter your email address"
         required
-        style="flex: 1; padding: 10px; font-family: 'Courier New', monospace; border-radius: 8px; border: 1px solid #ccc;"
+        style="flex: 1; padding: 10px; font-family: 'Courier New', monospace; border-radius: 8px; border: 1px solid #bbb;"
       />
       <button
         type="submit"
-        style="padding: 10px 20px; font-family: 'Courier New', monospace; border: none; background: #0047AB; color: white; border-radius: 8px;">
+        style="padding: 10px 20px; font-family: 'Courier New', monospace; border: none; background: #1A237E; color: white; border-radius: 8px;">
         Check Status
       </button>
     </form>
@@ -1605,46 +1605,43 @@ document.addEventListener('visibilitychange', function() {
       }
 
       const { userData, discordLink, groupmeLink } = data;
-      let html = `<div style="border: 2px solid #4CAF50; border-radius: 10px; background-color: #f0fff0; padding: 20px;">`;
+      let html = `<div style="border: 2px solid #4CAF50; border-radius: 10px; background-color: #f4fff8; padding: 20px;">`;
       html += `<h3 style="color: #2e7d32;">✅ ${data.message}</h3>`;
-      html += `<p style="font-weight:bold; color: #0047AB;"><span style="background:#e0f7fa;padding:4px 8px;border-radius:4px;">Email:</span> ${userData.email}</p>`;
-      html += `<p><span style="background:#eeeeee;padding:4px 8px;border-radius:4px;">Submitted At:</span> ${format24HourTime(userData.timestamp)}</p>`;
+      html += `<p style="font-weight:bold; color: #1A237E;"><span style="background:#E3F2FD;padding:4px 8px;border-radius:4px;">Email:</span> ${userData.email}</p>`;
+      html += `<p><span style="background:#E8F5E9;padding:4px 8px;border-radius:4px;">Submitted At:</span> ${format24HourTime(userData.timestamp)}</p>`;
 
-      if (discordLink || groupmeLink) {
-        html += `<div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">`;
-        if (discordLink) {
-          html += `<a href="${discordLink}" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎯 Join Discord</a>`;
-        }
-        if (groupmeLink) {
-          html += `<a href="${groupmeLink}" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎯 Join GroupMe</a>`;
-        }
-        html += `</div>`;
+      html += `<h4 style="margin-top:20px; color:#1B5E20;">🎯 Join Our Communities:</h4><div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">`;
+      if (discordLink) {
+        html += `<a href="${discordLink}" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 Discord Invite Link</a>`;
       }
+      if (groupmeLink) {
+        html += `<a href="${groupmeLink}" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 GroupMe Invite Link</a>`;
+      }
+      html += `</div>`;
 
-      html += `<hr><h4>📋 Your Full Response:</h4><ul style="list-style-type:none;padding-left:0;">`;
+      html += `<h4 style="margin-top: 20px; color:#1B5E20;">📋 Your Full Response:</h4><ul style="list-style-type:none;padding-left:0;">`;
       for (const [label, value] of Object.entries(userData.additionalFields)) {
-        html += `<li style="margin-bottom:8px;"><strong>${label}:</strong> <span style="background:#f5f5f5;padding:4px 8px;border-radius:4px;">${value}</span></li>`;
+        html += `<li style="margin-bottom:8px;"><strong>${label}:</strong> <span style="background:#FAFAFA;padding:4px 8px;border-radius:4px; color: #2C3E50;">${value}</span></li>`;
       }
       html += `</ul>`;
 
-      // Final: 305 Hack RSVP + Banner + Caption
       html += `<hr><div style="margin-top: 20px;">`;
-      html += `<h4>📣 Help us spread the word!</h4>`;
-      html += `<img src="https://i.ibb.co/qy3RhHt/305-hack-banner.png" alt="305 Hack Banner" style="max-width:100%; border-radius:12px; margin-bottom: 15px; border: 1px solid #ddd;" />`;
+      html += `<h4 style="color:#6A1B9A;">📣 Spread the Word – Let Everyone Know You're Attending!</h4>`;
+      html += `<img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Banner" style="max-width:100%; border-radius:12px; margin-bottom: 15px; border: 1px solid #ddd;" />`;
 
-      html += `<p style="margin: 10px 0; background: #f8f8f8; padding: 12px; border-left: 4px solid #0047AB; font-size: 0.95rem; border-radius: 6px;">
+      html += `<p style="margin: 10px 0; background: #f3e5f5; padding: 12px; border-left: 4px solid #6A1B9A; font-size: 0.95rem; border-radius: 6px;">
         🎉 I’m attending <strong>305 Hackathon: Fall Edition</strong>, an official <strong>MLH 2026 Season</strong> event!<br>
         👉 Register now → <a href="https://305HackFall2025.vercel.app" target="_blank">305HackFall2025.vercel.app</a><br>
         📩 LinkedIn RSVP → <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank">305hackfall2025-linkedin.vercel.app</a><br>
         🌍 <strong>Worldwide</strong> — open to <strong>ALL majors</strong>, <strong>ALL universities</strong>, and high school students <strong>(16+)</strong>!
       </p>`;
 
-      html += `<a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#0047AB;color:white;padding:10px 15px;border-radius:6px;text-decoration:none; display: inline-block;">🎉 I’m Attending – Let Everyone Know</a>`;
+      html += `<a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#6A1B9A;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎉 I’m Attending – Share It!</a>`;
       html += `</div></div>`;
 
       resultsDiv.innerHTML = html;
     } catch (err) {
-      resultsDiv.innerHTML = `<p style="color:red;">⚠️ Error connecting to server. Try again later.</p>`;
+      resultsDiv.innerHTML = `<p style="color:red;">⚠️ Error connecting to server. Please try again later.</p>`;
     }
   });
 </script>
