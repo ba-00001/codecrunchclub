@@ -3030,10 +3030,65 @@ body {
 /* End Enhanced Slide-out Menu  */
 
 
+/* mlh  .sponsor-support-card Section Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* mlh .sponsor-support-card Section Styles */
+/* Floating Top Image */
+.floating-top-image {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 120px;
+    height: auto;
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
 
+.floating-top-image:hover {
+    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-top-image {
+        width: 80px;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .floating-top-image {
+        width: 60px;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+
+/* mlh  .sponsor-support-card Section Styles */
+/*  */
+/*  */
+/*  */
+/*  */
+/* End mlh .sponsor-support-card Section Styles */
 </style>
 
 <body>
+<!-- Floating Top Image -->
+<img src="https://github.com/user-attachments/assets/d90612ef-90d5-4d55-aac2-d7723c157152" 
+     alt="HackGT 12 Logo" 
+     class="floating-top-image">
+
+
 <!-- Smart City Background Elements -->
 <div class="smart-city-bg" id="smartCityBg"></div>
 
