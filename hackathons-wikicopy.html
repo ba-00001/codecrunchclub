@@ -1545,7 +1545,7 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-                    <li class="checklist-item">
+<li class="checklist-item">
     <div class="checklist-number">2.5</div>
     <div class="checklist-text">
         <strong>Check your registration status</strong> - Verify your registration for all Hack University events.<br>
@@ -1707,18 +1707,24 @@ document.addEventListener('visibilitychange', function() {
         // Show all additional fields from columns C onwards
         if (userData.additionalFields) {
             Object.entries(userData.additionalFields).forEach(([fieldName, fieldValue]) => {
-                if (fieldValue && fieldValue !== 'No Information' && fieldValue !== '') {
-                    html += `
-                        <div style="background: rgba(138, 43, 226, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(138, 43, 226, 0.3);">
-                            <div style="color: var(--hacker-purple); font-weight: 600; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
-                                <i class="bi bi-info-circle"></i> ${fieldName}
-                            </div>
-                            <div style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9rem; word-break: break-word;">
-                                ${fieldValue}
-                            </div>
+                // Display ALL fields, regardless of content
+                const displayValue = fieldValue || 'No response provided';
+                const isEmpty = !fieldValue || fieldValue === '' || fieldValue === 'No Information';
+                const cardColor = isEmpty ? 'rgba(255, 193, 7, 0.1)' : 'rgba(138, 43, 226, 0.1)';
+                const borderColor = isEmpty ? 'rgba(255, 193, 7, 0.3)' : 'rgba(138, 43, 226, 0.3)';
+                const iconColor = isEmpty ? 'var(--warning)' : 'var(--hacker-purple)';
+                const icon = isEmpty ? 'exclamation-circle' : 'info-circle';
+                
+                html += `
+                    <div style="background: ${cardColor}; padding: 1rem; border-radius: 8px; border: 1px solid ${borderColor};">
+                        <div style="color: ${iconColor}; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                            <i class="bi bi-${icon}"></i> ${fieldName}
                         </div>
-                    `;
-                }
+                        <div style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9rem; word-break: break-word; ${isEmpty ? 'font-style: italic; opacity: 0.7;' : ''}">
+                            ${displayValue}
+                        </div>
+                    </div>
+                `;
             });
         }
         
@@ -1843,8 +1849,6 @@ document.addEventListener('visibilitychange', function() {
         document.head.appendChild(style);
     }
 </script>
-
-
 
 
 
