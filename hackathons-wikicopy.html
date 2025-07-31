@@ -1533,342 +1533,264 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-<!-- Registration Checker Section using existing page CSS -->
-<section class="checklist-section" id="registration-checker-section">
-    <h2 class="checklist-title glitch" data-text="REGISTRATION STATUS CHECKER">REGISTRATION STATUS CHECKER</h2>
-    <p class="checklist-subtitle">Check your status for all Hack University events</p>
+function doGet(e) {
+  // Check if request is coming from the allowed domain
+  const allowedDomain = 'https://codecrunchglobal.vercel.app';
+  const referer = e.parameter.referer || '';
+  
+  if (!referer.startsWith(allowedDomain)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      error: "Access denied: This API can only be accessed from codecrunchglobal.vercel.app"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const email = e.parameter.email;
+  
+  if (!email) {
+    return ContentService.createTextOutput(JSON.stringify({
+      error: "Missing email address"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  // Basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      error: "Please provide a valid email address"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  // Links and constants
+  const discordJoinLink = "https://codecrunchglobal-discordserver.vercel.app/";
+  const codecrunchglobalgroupmelink = "https://codecrunchglobal-groupme.vercel.app/";
+  const hackerGuideLink = "https://hackuniversity.vercel.app";
+  const attendingImageLink = "https://hackuniversityiamattending.vercel.app";
+  
+  try {
+    // Replace 'YOUR_SHEET_ID' with your actual Google Sheet ID
+    const sheetId = '1-VQyZvW7s8r3eXQzrjQ5tQGVLXvbYzWfCT5eKRmI2fI';
+    const sheet = SpreadsheetApp.openById(sheetId).getActiveSheet();
     
-    <!-- Search Form -->
-    <div class="card mb-4">
-        <form id="registrationForm" style="display: flex; gap: 15px; max-width: 500px; margin: 0 auto; align-items: center;">
-            <input 
-                type="email" 
-                id="emailInput" 
-                placeholder="Enter your email address..." 
-                required
-                style="flex: 1; padding: 15px 20px; border: 2px solid var(--matrix-green); border-radius: 50px; font-size: 1rem; background: var(--bg-card); color: var(--text-primary); font-family: 'Courier New', monospace; transition: all 0.3s ease;"
-                onfocus="this.style.borderColor='var(--cyber-blue)'; this.style.boxShadow='0 0 10px rgba(0, 212, 255, 0.5)'"
-                onblur="this.style.borderColor='var(--matrix-green)'; this.style.boxShadow='none'"
-            >
-            <button 
-                type="submit" 
-                class="discord-button"
-                style="padding: 15px 30px; font-size: 1rem; border-radius: 50px;"
-                onmouseover="this.style.transform='translateY(-2px)'"
-                onmouseout="this.style.transform='translateY(0)'"
-            >
-                <i class="bi bi-search"></i> Check Status
-            </button>
-        </form>
-    </div>
-
-    <!-- Results Container -->
-    <div id="registrationResults">
-        <!-- Results will be populated here -->
-    </div>
-
-    <script>
-        const API_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // Replace with your deployed script URL
-        
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('emailInput').value.trim();
-            const resultsDiv = document.getElementById('registrationResults');
-            
-            if (!email) {
-                resultsDiv.innerHTML = '<div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger);"><h3><i class="bi bi-exclamation-triangle"></i> Invalid Email</h3><p>Please enter a valid email address.</p></div>';
-                return;
-            }
-            
-            // Show loading with existing page styles
-            resultsDiv.innerHTML = `
-                <div class="card" style="text-align: center; padding: 40px;">
-                    <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid rgba(0, 255, 65, 0.3); border-radius: 50%; border-top-color: var(--matrix-green); animation: spin 1s ease-in-out infinite; margin-bottom: 20px;"></div>
-                    <p class="card-description" style="font-size: 1.1rem; color: var(--text-primary);">Checking your registration status...</p>
-                </div>
-            `;
-            
-            try {
-                const response = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
-                const data = await response.json();
-                
-                displayRegistrationResults(data);
-                
-            } catch (error) {
-                console.error('Error:', error);
-                resultsDiv.innerHTML = `
-                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger);">
-                        <h3><i class="bi bi-exclamation-triangle"></i> Connection Error</h3>
-                        <p>Failed to check registration status. Please try again later.</p>
-                        <p><strong>For support:</strong> DM CodeCrunch Global on LinkedIn</p>
-                    </div>
-                `;
-            }
+    // Get all data from the sheet
+    const dataRange = sheet.getDataRange();
+    const values = dataRange.getValues();
+    
+    // Column indices based on your sheet structure (0-based)
+    const EMAIL_COL = 1; // Column B - Email Address
+    const GITHUB_COL = 2; // Column C - GitHub Profile Link
+    const DISCORD_COL = 3; // Column D - Discord username
+    const VIRTUAL_INPERSON_COL = 4; // Column E - Virtual/In-Person
+    const HACK_1_COL = 5; // Column F - HackFiesta Miami (March 21-23, 2025)
+    const HACK_2_COL = 6; // Column G - 305 Hackathon Edition: Spring 2025
+    const HACK_3_COL = 7; // Column H - CodeStorm (May 19-26, 2025)
+    const HACK_4_COL = 8; // Column I - SummerCodeX (July 21-28, 2025)
+    const HACK_5_COL = 9; // Column J - 305 Hackathon Edition: Fall (September 19-21, 2025)
+    const HACK_5_STATUS_COL = 10; // Column K - 305 HACK FALL Confirmation Status
+    const HACK_6_COL = 11; // Column L - EmpowHER Hackathon (October 13-20, 2025)
+    const HACK_7_COL = 12; // Column M - CodeFest (December 8-15, 2025)
+    const HACK_2026_1_COL = 13; // Column N - Hack Fiesta Miami 2026
+    const HACK_2026_2_COL = 14; // Column O - 305 Hackathon Edition SPRING 2026
+    
+    // Search for ALL entries with this email (there might be multiple)
+    let userRows = [];
+    
+    for (let i = 1; i < values.length; i++) {
+      if (values[i][EMAIL_COL] && values[i][EMAIL_COL].toString().toLowerCase().trim() === email.toLowerCase().trim()) {
+        userRows.push({
+          row: values[i],
+          index: i + 1 // Adding 1 for human-readable row number
         });
-        
-        function displayRegistrationResults(data) {
-            const resultsDiv = document.getElementById('registrationResults');
-            
-            if (data.error) {
-                resultsDiv.innerHTML = `
-                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger);">
-                        <h3><i class="bi bi-exclamation-triangle"></i> Error</h3>
-                        <p>${data.error}</p>
-                        <p><strong>Contact:</strong> ${data.contact || 'DM CodeCrunch Global on LinkedIn'}</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            if (!data.found) {
-                resultsDiv.innerHTML = `
-                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger);">
-                        <h3><i class="bi bi-envelope-x"></i> Email Not Found</h3>
-                        <p>${data.message}</p>
-                        <p><strong>Contact:</strong> ${data.contact}</p>
-                    </div>
-                    ${data.hackInfo305Fall ? generateInfoBox(data.hackInfo305Fall) : ''}
-                `;
-                return;
-            }
-            
-            let html = `
-                <div class="register-note" style="background: rgba(0, 255, 65, 0.1); border-color: var(--matrix-green); color: var(--matrix-green);">
-                    <h3><i class="bi bi-check-circle"></i> ${data.message}</h3>
-                    ${data.totalEntries ? `<p><strong>Total Entries Found:</strong> ${data.totalEntries}</p>` : ''}
-                </div>
-                
-                ${generateInfoBox(data.hackInfo305Fall)}
-                
-                ${generateProfileSection(data.userProfile)}
-                
-                ${generateHackRegistrations(data.hackRegistrationsSummary)}
-                
-                ${generateLinksSection(data)}
-                
-                ${data.hackRegistration ? generateInstructions(data.hackRegistration) : ''}
-                
-                ${data.allEntries && data.allEntries.length > 1 ? generateAllEntries(data.allEntries) : ''}
-            `;
-            
-            resultsDiv.innerHTML = html;
+      }
+    }
+    
+    if (userRows.length === 0) {
+      return ContentService.createTextOutput(JSON.stringify({
+        found: false,
+        message: "Email not found in our registration system. Please make sure you've registered for Hack University events.",
+        contact: "For any questions, please DM CodeCrunch Global on LinkedIn",
+        hackInfo305Fall: {
+          title: "🚀 305 HACK FALL 2025 - INFORMATION",
+          date: "September 19-21, 2025",
+          location: "In-Person Event",
+          description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
+          organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
         }
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Email found - prepare response
+    let response = {
+      found: true,
+      message: "Welcome to Hack University! 🚀",
+      totalEntries: userRows.length,
+      discordLink: discordJoinLink,
+      groupMeLink: codecrunchglobalgroupmelink,
+      hackerGuide: hackerGuideLink,
+      contact: "For any questions, please DM CodeCrunch Global on LinkedIn"
+    };
+    
+    // Add 305 Hack Fall 2025 information box
+    response.hackInfo305Fall = {
+      title: "🚀 305 HACK FALL 2025 - INFORMATION",
+      date: "September 19-21, 2025",
+      location: "In-Person Event",
+      description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
+      organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
+    };
+    
+    // Process all entries for this email
+    response.allEntries = [];
+    let hasAnyHackRegistration = false;
+    let latestProfile = null;
+    
+    // Hack event definitions
+    const hackEvents = [
+      { col: HACK_1_COL, name: "HackFiesta Miami", date: "March 21-23, 2025", type: "Virtual" },
+      { col: HACK_2_COL, name: "305 Hackathon Edition: Spring", date: "March 29-31, 2025", type: "In-Person" },
+      { col: HACK_3_COL, name: "CodeStorm", date: "May 19-26, 2025", type: "Virtual" },
+      { col: HACK_4_COL, name: "SummerCodeX", date: "July 21-28, 2025", type: "Virtual" },
+      { col: HACK_5_COL, name: "305 Hackathon Edition: Fall", date: "September 19-21, 2025", type: "In-Person" },
+      { col: HACK_6_COL, name: "EmpowHER Hackathon", date: "October 13-20, 2025", type: "Virtual" },
+      { col: HACK_7_COL, name: "CodeFest", date: "December 8-15, 2025", type: "TBD" },
+      { col: HACK_2026_1_COL, name: "Hack Fiesta Miami 2026", date: "March 9-15, 2026", type: "Virtual" },
+      { col: HACK_2026_2_COL, name: "305 Hackathon Edition Spring 2026", date: "March 20-22, 2026", type: "In-Person" }
+    ];
+    
+    userRows.forEach((userEntry, entryIndex) => {
+      const userRow = userEntry.row;
+      
+      // Keep the most recent profile info (last entry)
+      latestProfile = {
+        email: userRow[EMAIL_COL] || "",
+        github: userRow[GITHUB_COL] || "",
+        discord: userRow[DISCORD_COL] || "",
+        attendanceMode: userRow[VIRTUAL_INPERSON_COL] || "",
+        timestamp: userRow[0] || "", // Assuming timestamp is in first column
+        entryNumber: entryIndex + 1,
+        sheetRow: userEntry.index
+      };
+      
+      // Process hack registrations for this entry
+      let entryHackRegistrations = {};
+      
+      hackEvents.forEach(hackEvent => {
+        const registration = userRow[hackEvent.col] ? userRow[hackEvent.col].toString().trim() : "";
+        const isRegistered = registration && 
+                             registration !== "No Information" && 
+                             registration !== "No – I do not want to register" &&
+                             registration !== "";
         
-        function generateInfoBox(hackInfo) {
-            if (!hackInfo) return '';
-            
-            return `
-                <div class="card" style="background: linear-gradient(135deg, var(--cyber-blue), var(--matrix-green)); margin-bottom: 2rem;">
-                    <h3 class="card-title" style="color: white; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">${hackInfo.title}</h3>
-                    <div class="card-description" style="color: rgba(255, 255, 255, 0.95);">
-                        <p><strong><i class="bi bi-calendar-event"></i> Date:</strong> ${hackInfo.date}</p>
-                        <p><strong><i class="bi bi-geo-alt"></i> Location:</strong> ${hackInfo.location}</p>
-                        <p><strong><i class="bi bi-bullseye"></i> Focus:</strong> ${hackInfo.description}</p>
-                        <p><strong><i class="bi bi-building"></i> Organizers:</strong> ${hackInfo.organizers}</p>
-                    </div>
-                </div>
-            `;
-        }
+        entryHackRegistrations[hackEvent.name] = {
+          registered: isRegistered,
+          response: registration || "No Information",
+          eventDate: hackEvent.date,
+          eventType: hackEvent.type
+        };
         
-        function generateProfileSection(profile) {
-            if (!profile) return '';
-            
-            return `
-                <div class="card">
-                    <h3 class="card-title"><i class="bi bi-person-circle"></i> Your Profile Information</h3>
-                    <div class="card-description">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="checklist-item" style="margin-bottom: 0.5rem;">
-                                    <div class="checklist-number" style="background: var(--cyber-blue);"><i class="bi bi-envelope"></i></div>
-                                    <div class="checklist-text">
-                                        <strong>Email:</strong><br>
-                                        <code>${profile.email}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checklist-item" style="margin-bottom: 0.5rem;">
-                                    <div class="checklist-number" style="background: var(--matrix-green);"><i class="bi bi-github"></i></div>
-                                    <div class="checklist-text">
-                                        <strong>GitHub:</strong><br>
-                                        <code>${profile.github || 'Not provided'}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checklist-item" style="margin-bottom: 0.5rem;">
-                                    <div class="checklist-number" style="background: var(--neon-pink);"><i class="bi bi-discord"></i></div>
-                                    <div class="checklist-text">
-                                        <strong>Discord:</strong><br>
-                                        <code>${profile.discord || 'Not provided'}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checklist-item" style="margin-bottom: 0.5rem;">
-                                    <div class="checklist-number" style="background: var(--electric-yellow); color: var(--bg-color);"><i class="bi bi-geo"></i></div>
-                                    <div class="checklist-text">
-                                        <strong>Attendance Mode:</strong><br>
-                                        <code>${profile.attendanceMode || 'Not specified'}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            ${profile.timestamp ? `
-                                <div class="col-12">
-                                    <div class="checklist-item" style="margin-bottom: 0.5rem;">
-                                        <div class="checklist-number" style="background: var(--hacker-purple);"><i class="bi bi-clock"></i></div>
-                                        <div class="checklist-text">
-                                            <strong>Last Updated:</strong><br>
-                                            <code>${profile.timestamp}</code>
-                                        </div>
-                                    </div>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
+        if (isRegistered) {
+          hasAnyHackRegistration = true;
         }
+      });
+      
+      // Special handling for 305 Fall Hack status
+      const hackFallStatus = userRow[HACK_5_STATUS_COL] ? userRow[HACK_5_STATUS_COL].toString().trim() : "";
+      if (entryHackRegistrations["305 Hackathon Edition: Fall"]) {
+        entryHackRegistrations["305 Hackathon Edition: Fall"].confirmationStatus = hackFallStatus;
+      }
+      
+      response.allEntries.push({
+        entryNumber: entryIndex + 1,
+        sheetRow: userEntry.index,
+        timestamp: userRow[0] || "",
+        hackRegistrations: entryHackRegistrations
+      });
+    });
+    
+    // Add latest profile information
+    response.userProfile = latestProfile;
+    
+    // Create consolidated hack registrations summary
+    let consolidatedHacks = {};
+    hackEvents.forEach(hackEvent => {
+      let bestRegistration = null;
+      let isRegistered = false;
+      
+      // Look through all entries to find the best registration status for each hack
+      userRows.forEach(userEntry => {
+        const userRow = userEntry.row;
+        const registration = userRow[hackEvent.col] ? userRow[hackEvent.col].toString().trim() : "";
         
-        function generateHackRegistrations(hackRegistrations) {
-            if (!hackRegistrations) return '';
-            
-            let html = '<div class="card"><h3 class="card-title"><i class="bi bi-trophy"></i> Hack Event Registrations</h3><div class="row g-3">';
-            
-            Object.entries(hackRegistrations).forEach(([hackName, details]) => {
-                const isRegistered = details.registered;
-                const statusIcon = isRegistered ? 'check-circle-fill' : 'x-circle-fill';
-                const statusColor = isRegistered ? 'var(--matrix-green)' : 'var(--danger)';
-                const statusText = isRegistered ? 'Registered' : 'Not Registered';
-                const cardBorder = isRegistered ? 'var(--matrix-green)' : 'var(--danger)';
-                
-                html += `
-                    <div class="col-md-6 col-lg-4">
-                        <div class="checklist-item" style="border-left-color: ${cardBorder}; background: rgba(${isRegistered ? '0, 255, 65' : '255, 51, 51'}, 0.1); flex-direction: column; text-align: center; padding: 1.5rem;">
-                            <div class="checklist-number" style="background: ${statusColor}; margin-bottom: 1rem;">
-                                <i class="bi bi-${statusIcon}"></i>
-                            </div>
-                            <div class="checklist-text">
-                                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">${hackName}</h4>
-                                <p style="color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.875rem;">
-                                    <i class="bi bi-calendar"></i> ${details.eventDate}<br>
-                                    <i class="bi bi-geo-alt"></i> ${details.eventType}
-                                </p>
-                                <div style="display: inline-block; padding: 4px 12px; background: ${statusColor}; color: ${isRegistered ? 'var(--bg-color)' : 'white'}; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem;">
-                                    ${statusText}
-                                </div>
-                                ${details.confirmationStatus ? `<div style="display: inline-block; padding: 4px 12px; background: var(--cyber-blue); color: white; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; margin-left: 0.25rem;">Status: ${details.confirmationStatus}</div>` : ''}
-                                <p style="font-style: italic; color: var(--text-light); font-size: 0.8rem; margin-top: 0.5rem;">${details.response}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div></div>';
-            return html;
+        if (registration && 
+            registration !== "No Information" && 
+            registration !== "No – I do not want to register" &&
+            registration !== "") {
+          isRegistered = true;
+          bestRegistration = registration;
         }
-        
-        function generateLinksSection(data) {
-            return `
-                <div class="card" style="background: linear-gradient(135deg, var(--hacker-purple), var(--neon-pink));">
-                    <h3 class="card-title" style="color: white;"><i class="bi bi-link-45deg"></i> Quick Links</h3>
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <a href="${data.discordLink}" target="_blank" class="discord-button" style="width: 100%; padding: 1rem; font-size: 0.9rem;">
-                                <i class="bi bi-discord"></i> Join Discord
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="${data.groupMeLink}" target="_blank" class="discord-button" style="width: 100%; padding: 1rem; font-size: 0.9rem; background: linear-gradient(45deg, var(--matrix-green), var(--cyber-blue));">
-                                <i class="bi bi-people"></i> Join GroupMe
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="${data.hackerGuide}" target="_blank" class="discord-button" style="width: 100%; padding: 1rem; font-size: 0.9rem; background: linear-gradient(45deg, var(--cyber-blue), var(--matrix-green));">
-                                <i class="bi bi-book"></i> Hacker Guide
-                            </a>
-                        </div>
-                        ${data.hackRegistration && data.hackRegistration.downloadImage ? 
-                            `<div class="col-md-3">
-                                <a href="${data.hackRegistration.downloadImage}" target="_blank" class="discord-button" style="width: 100%; padding: 1rem; font-size: 0.9rem; background: linear-gradient(45deg, var(--electric-yellow), var(--neon-pink));">
-                                    <i class="bi bi-image"></i> Download Badge
-                                </a>
-                            </div>` : ''
-                        }
-                    </div>
-                </div>
-            `;
-        }
-        
-        function generateInstructions(hackRegistration) {
-            if (!hackRegistration.instructions) return '';
-            
-            return `
-                <div class="register-note" style="background: rgba(0, 212, 255, 0.1); border-color: var(--cyber-blue); color: var(--cyber-blue);">
-                    <h3><i class="bi bi-list-check"></i> Next Steps</h3>
-                    <p style="margin-bottom: 15px; font-weight: 600;">${hackRegistration.status}</p>
-                    <ol class="checklist" style="list-style: none; padding: 0;">
-                        ${hackRegistration.instructions.map((instruction, index) => `
-                            <li class="checklist-item" style="margin-bottom: 0.5rem;">
-                                <div class="checklist-number" style="background: var(--cyber-blue);">${index + 1}</div>
-                                <div class="checklist-text">${instruction}</div>
-                            </li>
-                        `).join('')}
-                    </ol>
-                </div>
-            `;
-        }
-        
-        function generateAllEntries(allEntries) {
-            let html = '<div class="card"><h3 class="card-title"><i class="bi bi-journal-text"></i> All Registration Entries</h3>';
-            
-            allEntries.forEach(entry => {
-                html += `
-                    <div class="checklist-item" style="flex-direction: column; align-items: flex-start; margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
-                            <span class="checklist-number" style="position: relative;">Entry #${entry.entryNumber}</span>
-                            <span style="color: var(--text-secondary); font-size: 0.875rem;">Sheet Row: ${entry.sheetRow}</span>
-                            <span style="color: var(--text-secondary); font-size: 0.875rem;">${entry.timestamp}</span>
-                        </div>
-                        <div class="row g-2" style="width: 100%;">
-                `;
-                
-                Object.entries(entry.hackRegistrations).forEach(([hackName, details]) => {
-                    if (details.registered) {
-                        html += `
-                            <div class="col-md-6 col-lg-4">
-                                <div style="background: rgba(0, 255, 65, 0.1); border: 1px solid var(--matrix-green); border-radius: 8px; padding: 1rem; text-align: center;">
-                                    <h5 style="color: var(--matrix-green); font-size: 0.9rem; margin-bottom: 0.5rem;">${hackName}</h5>
-                                    <div style="display: inline-block; padding: 4px 12px; background: var(--matrix-green); color: var(--bg-color); border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem;">
-                                        <i class="bi bi-check-circle"></i> Registered
-                                    </div>
-                                    <p style="font-style: italic; color: var(--text-light); font-size: 0.8rem; margin: 0;">${details.response}</p>
-                                </div>
-                            </div>
-                        `;
-                    }
-                });
-                
-                html += '</div></div>';
-            });
-            
-            html += '</div>';
-            return html;
-        }
-
-        // Add spin animation for loading spinner
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes spin {
-                to { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</section>
+      });
+      
+      consolidatedHacks[hackEvent.name] = {
+        registered: isRegistered,
+        response: bestRegistration || "Not registered",
+        eventDate: hackEvent.date,
+        eventType: hackEvent.type
+      };
+      
+      // Add confirmation status for 305 Fall
+      if (hackEvent.name === "305 Hackathon Edition: Fall") {
+        const latestStatus = userRows[userRows.length - 1].row[HACK_5_STATUS_COL];
+        consolidatedHacks[hackEvent.name].confirmationStatus = latestStatus ? latestStatus.toString().trim() : "Not Registered";
+      }
+    });
+    
+    response.hackRegistrationsSummary = consolidatedHacks;
+    
+    // Special 305 Fall 2025 section for backward compatibility
+    const hack305Fall = consolidatedHacks["305 Hackathon Edition: Fall"];
+    response.hack305Fall2025 = {
+      registered: hack305Fall.registered,
+      answer: hack305Fall.response,
+      registrationStatus: hack305Fall.confirmationStatus || "Not Registered",
+      venue: hack305Fall.registered ? "The HUB @ Office Logic, 1501 Biscayne Blvd Suite 501, Miami, FL 33132" : null,
+      checkIn: hack305Fall.registered ? "TBD - Check-in times will be announced closer to the event" : null
+    };
+    
+    // Overall hack registration status
+    if (hasAnyHackRegistration) {
+      response.hackRegistration = {
+        status: "You are registered for hack events!",
+        downloadImage: attendingImageLink,
+        instructions: [
+          "📥 Download your 'I am attending' image from: " + attendingImageLink,
+          "🌐 Check the specific hack website you registered for",
+          "📚 Review the hacker guide at: " + hackerGuideLink
+        ]
+      };
+    } else {
+      response.hackRegistration = {
+        status: "No hack event registrations found",
+        message: "Consider registering for upcoming hack events!"
+      };
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    Logger.log('Error: ' + error.toString());
+    return ContentService.createTextOutput(JSON.stringify({
+      error: "An error occurred while checking registration. Please try again later.",
+      contact: "For any questions, please DM CodeCrunch Global on LinkedIn",
+      hackInfo305Fall: {
+        title: "🚀 305 HACK FALL 2025 - INFORMATION",
+        date: "September 19-21, 2025",
+        location: "In-Person Event",
+        description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
+        organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
+      }
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
 
 
