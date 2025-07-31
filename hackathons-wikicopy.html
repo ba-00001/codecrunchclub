@@ -1545,80 +1545,72 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-<!-- 🔍 REGISTRATION STATUS CHECKER SECTION -->
-<section id="registration-status-checker" style="padding: 2rem 0;">
+<section id="registration-status-checker" style="padding: 2rem;">
   <div class="container">
-    <h2 style="font-family: 'Courier New', monospace; color: var(--cyber-blue); text-align: center; margin-bottom: 2rem;">
-      <i class="bi bi-search"></i> Check Your Registration Status
+    <h2 style="font-family: 'Courier New', monospace; text-align: center; color: #0047AB;">
+      🔍 Check Your Registration Status
     </h2>
 
-    <div class="card" style="background: var(--bg-card-light); border: 2px solid var(--cyber-blue); padding: 2rem; border-radius: 12px;">
-      <form id="registrationForm" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
-        <input 
-          type="email" 
-          id="emailInput" 
-          placeholder="Enter your email address..." 
-          required
-          style="flex: 1; min-width: 250px; padding: 12px 18px; border: 2px solid var(--matrix-green); border-radius: 25px; font-size: 0.9rem; background: var(--bg-card); color: var(--text-primary); font-family: 'Courier New', monospace;"
-        >
-        <button 
-          type="submit" 
-          style="padding: 12px 24px; background: linear-gradient(45deg, var(--cyber-blue), var(--matrix-green)); color: white; border: none; border-radius: 25px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: 'Courier New', monospace;"
-        >
-          <i class="bi bi-search"></i> Check Status
-        </button>
-      </form>
+    <form id="registrationForm" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 1rem 0;">
+      <input
+        type="email"
+        id="emailInput"
+        placeholder="Enter your email address"
+        required
+        style="flex: 1; padding: 10px; font-family: 'Courier New', monospace; border-radius: 8px; border: 1px solid #ccc;"
+      />
+      <button
+        type="submit"
+        style="padding: 10px 20px; font-family: 'Courier New', monospace; border: none; background: #0047AB; color: white; border-radius: 8px;">
+        Check Status
+      </button>
+    </form>
 
-      <div id="registrationResults" style="margin-top: 2rem;"></div>
-    </div>
+    <div id="registrationResults" style="margin-top: 2rem; font-family: 'Courier New', monospace;"></div>
   </div>
 </section>
 
 <script>
   const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
 
-  document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+  document.getElementById('registrationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value.trim();
     const resultsDiv = document.getElementById('registrationResults');
-
     if (!email) {
-      resultsDiv.innerHTML = `<div style="color: red;">Please enter a valid email.</div>`;
+      resultsDiv.innerHTML = `<p style="color:red;">Please enter a valid email.</p>`;
       return;
     }
 
-    resultsDiv.innerHTML = `<p>🔍 Checking registration status for: <strong>${email}</strong></p>`;
+    resultsDiv.innerHTML = `<p>🔍 Checking registration for <strong>${email}</strong>...</p>`;
 
     try {
-      const response = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
-      const data = await response.json();
+      const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
+      const data = await res.json();
 
       if (!data.success) {
-        resultsDiv.innerHTML = `<p style="color:red;">❌ ${data.error}</p>`;
+        resultsDiv.innerHTML = `<p style="color:red;">❌ ${data.error || 'No registration found.'}</p>`;
         return;
       }
 
-      const user = data.userData;
-      let html = `<div style="font-family: 'Courier New', monospace;">`;
-      html += `<h3 style="color: green;">✅ ${data.message}</h3>`;
-      html += `<p><strong>Email:</strong> ${user.email}</p>`;
-      html += `<p><strong>Submitted At:</strong> ${user.timestamp}</p>`;
-      html += `<hr>`;
-      html += `<h4 style="margin-top:1rem;">📄 Full Form Response:</h4>`;
-      html += `<ul style="list-style-type: none; padding-left: 0;">`;
+      const { userData } = data;
+      let html = `<h3 style="color: green;">✅ ${data.message}</h3>`;
+      html += `<p><strong>Email:</strong> ${userData.email}</p>`;
+      html += `<p><strong>Submitted At:</strong> ${userData.timestamp}</p>`;
+      html += `<hr><h4>📋 Your Full Response:</h4><ul style="padding-left: 1rem;">`;
 
-      for (const [key, value] of Object.entries(user.additionalFields)) {
-        html += `<li style="margin-bottom: 8px;"><strong>${key}:</strong> ${value}</li>`;
+      for (const [label, value] of Object.entries(userData.additionalFields)) {
+        html += `<li><strong>${label}:</strong> ${value}</li>`;
       }
 
-      html += `</ul></div>`;
+      html += `</ul>`;
       resultsDiv.innerHTML = html;
-
     } catch (err) {
-      resultsDiv.innerHTML = `<p style="color:red;">⚠️ Could not connect to server. Try again later.</p>`;
+      resultsDiv.innerHTML = `<p style="color:red;">⚠️ Error connecting to server. Try again later.</p>`;
     }
   });
 </script>
+
 
 
 
