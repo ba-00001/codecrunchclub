@@ -1531,7 +1531,21 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-<li class="checklist-item">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <li class="checklist-item">
     <div class="checklist-number">2.5</div>
     <div class="checklist-text">
         <strong>Check your registration status</strong> - Verify your registration for all Hack University events.<br>
@@ -1575,19 +1589,40 @@ document.addEventListener('visibilitychange', function() {
         const resultsDiv = document.getElementById('registrationResults');
         
         if (!email) {
-            resultsDiv.innerHTML = '<div style="background: rgba(255, 51, 51, 0.1); border: 2px solid red; padding: 1rem; margin-top: 1rem; border-radius: 8px;"><h4>❌ Invalid Email</h4><p>Please enter a valid email address.</p></div>';
+            resultsDiv.innerHTML = `
+                <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid var(--danger); padding: 1.5rem; margin-top: 1rem; border-radius: var(--radius); color: var(--danger);">
+                    <h4 style="color: var(--danger); margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                        <i class="bi bi-exclamation-triangle"></i> Invalid Email
+                    </h4>
+                    <p style="color: var(--text-light); margin: 0;">Please enter a valid email address.</p>
+                </div>
+            `;
             return;
         }
         
-        // Show loading
-        resultsDiv.innerHTML = '<div style="text-align: center; padding: 2rem; margin-top: 1rem;"><p>🔍 Checking your registration status...</p></div>';
+        // Show loading with page theme
+        resultsDiv.innerHTML = `
+            <div style="text-align: center; padding: 2rem; margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--matrix-green); border-radius: var(--radius);">
+                <div style="display: inline-block; width: 30px; height: 30px; border: 3px solid rgba(0, 255, 65, 0.3); border-radius: 50%; border-top-color: var(--matrix-green); animation: spin 1s ease-in-out infinite; margin-bottom: 15px;"></div>
+                <p style="font-size: 1rem; color: var(--text-primary); font-family: 'Courier New', monospace; margin: 0;">
+                    <i class="bi bi-search"></i> Scanning registration database...
+                </p>
+            </div>
+        `;
         
         try {
             const response = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
             const data = await response.json();
             displayResults(data);
         } catch (error) {
-            resultsDiv.innerHTML = '<div style="background: rgba(255, 51, 51, 0.1); border: 2px solid red; padding: 1rem; margin-top: 1rem; border-radius: 8px;"><h4>❌ Connection Error</h4><p>Failed to check registration status. Please try again later.</p></div>';
+            resultsDiv.innerHTML = `
+                <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid var(--danger); padding: 1.5rem; margin-top: 1rem; border-radius: var(--radius); color: var(--danger);">
+                    <h4 style="color: var(--danger); margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                        <i class="bi bi-exclamation-triangle"></i> Connection Error
+                    </h4>
+                    <p style="color: var(--text-light); margin: 0;">Failed to check registration status. Please try again later.</p>
+                </div>
+            `;
         }
     });
     
@@ -1596,9 +1631,11 @@ document.addEventListener('visibilitychange', function() {
         
         if (data.error) {
             resultsDiv.innerHTML = `
-                <div style="background: rgba(255, 51, 51, 0.1); border: 2px solid red; padding: 1rem; margin-top: 1rem; border-radius: 8px;">
-                    <h4>❌ Error</h4>
-                    <p>${data.error}</p>
+                <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid var(--danger); padding: 1.5rem; margin-top: 1rem; border-radius: var(--radius); color: var(--danger);">
+                    <h4 style="color: var(--danger); margin-bottom: 1rem; font-family: 'Courier New', monospace;">
+                        <i class="bi bi-exclamation-triangle"></i> Error
+                    </h4>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">${data.error}</p>
                     ${showCommunityLinks(data.communityLinks)}
                 </div>
             `;
@@ -1607,9 +1644,11 @@ document.addEventListener('visibilitychange', function() {
         
         if (!data.success) {
             resultsDiv.innerHTML = `
-                <div style="background: rgba(255, 51, 51, 0.1); border: 2px solid red; padding: 1rem; margin-top: 1rem; border-radius: 8px;">
-                    <h4>❌ Registration Not Found</h4>
-                    <p>Email not found in our records.</p>
+                <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid var(--danger); padding: 1.5rem; margin-top: 1rem; border-radius: var(--radius); color: var(--danger);">
+                    <h4 style="color: var(--danger); margin-bottom: 1rem; font-family: 'Courier New', monospace;">
+                        <i class="bi bi-envelope-x"></i> Registration Not Found
+                    </h4>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">Email not found in our records.</p>
                     ${showCommunityLinks(data.communityLinks)}
                     ${show305HackInfo(data.hack305Fall2025)}
                 </div>
@@ -1619,9 +1658,14 @@ document.addEventListener('visibilitychange', function() {
         
         // Registration found
         resultsDiv.innerHTML = `
-            <div style="background: rgba(0, 255, 65, 0.1); border: 2px solid green; padding: 1rem; margin-top: 1rem; border-radius: 8px;">
-                <h4>✅ ${data.message}</h4>
-                <p><strong>Status:</strong> ${data.status}</p>
+            <div style="background: rgba(0, 255, 65, 0.15); border: 2px solid var(--matrix-green); padding: 1.5rem; margin-top: 1rem; border-radius: var(--radius);">
+                <h4 style="color: var(--matrix-green); margin-bottom: 1rem; font-family: 'Courier New', monospace; text-shadow: 0 0 10px var(--matrix-green);">
+                    <i class="bi bi-check-circle-fill"></i> ${data.message}
+                </h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-family: 'Courier New', monospace;">
+                    <strong>Status:</strong> ${data.status}
+                </p>
+                ${showUserData(data.userData)}
                 ${showCommunityLinks(data.communityLinks)}
                 ${show305HackInfo(data.hack305Fall2025)}
                 ${showQuickLinks(data.links)}
@@ -1629,15 +1673,78 @@ document.addEventListener('visibilitychange', function() {
         `;
     }
     
+    function showUserData(userData) {
+        if (!userData) return '';
+        
+        let html = `
+            <div style="background: var(--bg-card); border: 1px solid var(--cyber-blue); padding: 1.5rem; margin: 1rem 0; border-radius: var(--radius); border-left: 4px solid var(--cyber-blue);">
+                <h5 style="color: var(--cyber-blue); margin-bottom: 1rem; font-family: 'Courier New', monospace; text-shadow: 0 0 5px var(--cyber-blue);">
+                    <i class="bi bi-person-circle"></i> Your Registration Data
+                </h5>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        `;
+        
+        // Show timestamp and email first
+        html += `
+            <div style="background: rgba(0, 255, 65, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 65, 0.3);">
+                <div style="color: var(--matrix-green); font-weight: 600; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                    <i class="bi bi-clock"></i> Registration Time
+                </div>
+                <div style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                    ${userData.timestamp || 'Not available'}
+                </div>
+            </div>
+            <div style="background: rgba(0, 212, 255, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                <div style="color: var(--cyber-blue); font-weight: 600; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                    <i class="bi bi-envelope"></i> Email Address
+                </div>
+                <div style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9rem; word-break: break-word;">
+                    ${userData.email || 'Not available'}
+                </div>
+            </div>
+        `;
+        
+        // Show all additional fields from columns C onwards
+        if (userData.additionalFields) {
+            Object.entries(userData.additionalFields).forEach(([fieldName, fieldValue]) => {
+                if (fieldValue && fieldValue !== 'No Information' && fieldValue !== '') {
+                    html += `
+                        <div style="background: rgba(138, 43, 226, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(138, 43, 226, 0.3);">
+                            <div style="color: var(--hacker-purple); font-weight: 600; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                                <i class="bi bi-info-circle"></i> ${fieldName}
+                            </div>
+                            <div style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9rem; word-break: break-word;">
+                                ${fieldValue}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        html += '</div></div>';
+        return html;
+    }
+    
     function showCommunityLinks(communityLinks) {
         if (!communityLinks) return '';
         
         return `
-            <div style="background: linear-gradient(135deg, var(--cyber-blue), var(--matrix-green)); margin: 1rem 0; padding: 1rem; border-radius: 8px; color: white;">
-                <h4>👥 Join Our Community</h4>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    ${communityLinks.discord ? `<a href="${communityLinks.discord.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: bold;">${communityLinks.discord.label}</a>` : ''}
-                    ${communityLinks.groupme ? `<a href="${communityLinks.groupme.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: bold;">${communityLinks.groupme.label}</a>` : ''}
+            <div style="background: linear-gradient(135deg, var(--cyber-blue), var(--matrix-green)); margin: 1rem 0; padding: 1.5rem; border-radius: var(--radius); color: white; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);">
+                <h4 style="color: white; margin-bottom: 1rem; font-family: 'Courier New', monospace; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+                    <i class="bi bi-people-fill"></i> Join Our Community
+                </h4>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    ${communityLinks.discord ? `
+                        <a href="${communityLinks.discord.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-discord"></i> ${communityLinks.discord.label}
+                        </a>
+                    ` : ''}
+                    ${communityLinks.groupme ? `
+                        <a href="${communityLinks.groupme.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-people"></i> ${communityLinks.groupme.label}
+                        </a>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -1647,20 +1754,45 @@ document.addEventListener('visibilitychange', function() {
         if (!hack305Data) return '';
         
         const isRegistered = hack305Data.registered;
-        const bgColor = isRegistered ? 'rgba(0, 255, 65, 0.1)' : 'rgba(0, 212, 255, 0.1)';
-        const borderColor = isRegistered ? 'green' : 'blue';
-        const statusText = isRegistered ? '✅ You are registered!' : '📋 Registration Available';
+        const bgColor = isRegistered ? 'rgba(0, 255, 65, 0.15)' : 'rgba(0, 212, 255, 0.15)';
+        const borderColor = isRegistered ? 'var(--matrix-green)' : 'var(--cyber-blue)';
+        const statusColor = isRegistered ? 'var(--matrix-green)' : 'var(--cyber-blue)';
+        const statusText = isRegistered ? 'You are registered!' : 'Registration Available';
+        const statusIcon = isRegistered ? 'check-circle-fill' : 'info-circle';
         
         return `
-            <div style="background: ${bgColor}; border: 2px solid ${borderColor}; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-                <h4>🚀 305 HACK FALL 2025</h4>
-                <p><strong>${statusText}</strong></p>
+            <div style="background: ${bgColor}; border: 2px solid ${borderColor}; padding: 1.5rem; margin: 1rem 0; border-radius: var(--radius);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 3rem; height: 3rem; background: ${statusColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; box-shadow: 0 0 15px ${statusColor};">
+                        <i class="bi bi-${statusIcon}"></i>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-primary); margin: 0; font-family: 'Courier New', monospace; text-shadow: 0 0 10px ${statusColor};">
+                            🚀 305 HACK FALL 2025
+                        </h4>
+                        <p style="color: ${statusColor}; margin: 0; font-weight: 600; font-family: 'Courier New', monospace;">
+                            <i class="bi bi-${statusIcon}"></i> ${statusText}
+                        </p>
+                    </div>
+                </div>
                 ${hack305Data.eventInfo ? `
-                    <p>📅 <strong>Date:</strong> ${hack305Data.eventInfo.date}</p>
-                    <p>📍 <strong>Location:</strong> ${hack305Data.eventInfo.location}</p>
-                    <p>🎯 <strong>Focus:</strong> ${hack305Data.eventInfo.description}</p>
+                    <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; border-left: 4px solid ${statusColor};">
+                        <div style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
+                            <p style="margin-bottom: 0.5rem;"><strong style="color: ${statusColor};">📅 Date:</strong> ${hack305Data.eventInfo.date}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong style="color: ${statusColor};">📍 Location:</strong> ${hack305Data.eventInfo.location}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong style="color: ${statusColor};">🎯 Focus:</strong> ${hack305Data.eventInfo.description}</p>
+                            ${hack305Data.eventInfo.organizers ? `<p style="margin: 0;"><strong style="color: ${statusColor};">👥 Organizers:</strong> ${hack305Data.eventInfo.organizers}</p>` : ''}
+                        </div>
+                    </div>
                 ` : ''}
-                ${isRegistered && hack305Data.venue ? `<p>🏢 <strong>Venue:</strong> ${hack305Data.venue}</p>` : ''}
+                ${isRegistered && hack305Data.venue ? `
+                    <div style="background: rgba(0, 255, 65, 0.2); padding: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid var(--matrix-green);">
+                        <h5 style="color: var(--matrix-green); margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">📍 Registration Details:</h5>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem; font-family: 'Courier New', monospace;"><strong>Status:</strong> ${hack305Data.registrationStatus}</p>
+                        <p style="color: var(--text-secondary); margin: 0; font-family: 'Courier New', monospace;"><strong>Venue:</strong> ${hack305Data.venue}</p>
+                        ${hack305Data.checkIn ? `<p style="color: var(--text-secondary); margin: 0; font-family: 'Courier New', monospace;"><strong>Check-in:</strong> ${hack305Data.checkIn}</p>` : ''}
+                    </div>
+                ` : ''}
             </div>
         `;
     }
@@ -1669,16 +1801,46 @@ document.addEventListener('visibilitychange', function() {
         if (!links) return '';
         
         return `
-            <div style="background: linear-gradient(135deg, var(--hacker-purple), var(--neon-pink)); padding: 1rem; margin: 1rem 0; border-radius: 8px; color: white;">
-                <h4>🔗 Quick Links</h4>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    ${links.discord ? `<a href="${links.discord}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">🎮 Discord</a>` : ''}
-                    ${links.groupme ? `<a href="${links.groupme}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">💬 GroupMe</a>` : ''}
-                    ${links.hackerGuide ? `<a href="${links.hackerGuide}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">📚 Hacker Guide</a>` : ''}
-                    ${links.attendingImage ? `<a href="${links.attendingImage}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">🖼️ Download Badge</a>` : ''}
+            <div style="background: linear-gradient(135deg, var(--hacker-purple), var(--neon-pink)); padding: 1.5rem; margin: 1rem 0; border-radius: var(--radius); color: white; box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);">
+                <h4 style="color: white; margin-bottom: 1rem; font-family: 'Courier New', monospace; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+                    <i class="bi bi-link-45deg"></i> Quick Links
+                </h4>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    ${links.discord ? `
+                        <a href="${links.discord}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-discord"></i> Discord
+                        </a>
+                    ` : ''}
+                    ${links.groupme ? `
+                        <a href="${links.groupme}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-people"></i> GroupMe
+                        </a>
+                    ` : ''}
+                    ${links.hackerGuide ? `
+                        <a href="${links.hackerGuide}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-book"></i> Hacker Guide
+                        </a>
+                    ` : ''}
+                    ${links.attendingImage ? `
+                        <a href="${links.attendingImage}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-family: 'Courier New', monospace; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-image"></i> Download Badge
+                        </a>
+                    ` : ''}
                 </div>
             </div>
         `;
+    }
+
+    // Add CSS animation for loading spinner
+    if (!document.querySelector('#registration-spinner-style')) {
+        const style = document.createElement('style');
+        style.id = 'registration-spinner-style';
+        style.textContent = `
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     }
 </script>
 
