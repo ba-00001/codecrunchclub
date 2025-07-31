@@ -1604,13 +1604,24 @@ document.addEventListener('visibilitychange', function() {
       }
 
       html += `</ul>`;
+
+      if (data.discordLink || data.groupmeLink) {
+        html += `<hr><h4>🎯 Join Our Communities:</h4><ul style="padding-left: 1rem;">`;
+        if (data.discordLink) {
+          html += `<li><a href="${data.discordLink}" target="_blank">📎 Discord Invite Link</a></li>`;
+        }
+        if (data.groupmeLink) {
+          html += `<li><a href="${data.groupmeLink}" target="_blank">📎 GroupMe Invite Link</a></li>`;
+        }
+        html += `</ul>`;
+      }
+
       resultsDiv.innerHTML = html;
     } catch (err) {
       resultsDiv.innerHTML = `<p style="color:red;">⚠️ Error connecting to server. Try again later.</p>`;
     }
   });
 </script>
-
 
 
 
