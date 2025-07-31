@@ -1543,7 +1543,6 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-
 <!-- Simplified Registration Status Checker Section -->
 <li class="checklist-item">
     <div class="checklist-number">3</div>
@@ -1743,13 +1742,39 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
         const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
         const data = await res.json();
 
+        // Always show community buttons and 305 info regardless of registration status
+        const communityButtons = generateSimpleCommunityButtons(
+            data.links?.discord || 'https://HackUniversityDiscord.vercel.app', 
+            data.links?.groupme || 'https://HackUniversityGroupMe.vercel.app'
+        );
+        
+        const hack305Info = generateSimple305Info({
+            registered: data.hack305Fall2025?.registered || false,
+            eventInfo: {
+                date: 'September 19-21, 2025',
+                location: 'Worldwide Virtual + In-Person Miami',
+                description: 'Official MLH 2026 Season Event'
+            }
+        });
+
         if (!data.success) {
             resultsDiv.innerHTML = `
                 <div class="reg-error">
                     <h4 style="margin: 0 0 1rem 0;">❌ Registration Not Found</h4>
                     <p style="margin: 0 0 1rem 0;">${data.error || 'Email not found in our records.'}</p>
-                    ${generateSimpleCommunityButtons(data.links?.discord, data.links?.groupme)}
-                    ${generateSimple305Info(data.hack305Fall2025)}
+                    
+                    ${communityButtons}
+                    ${hack305Info}
+                    
+                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--warning); padding: 1rem; border-radius: var(--radius); margin-top: 1rem;">
+                        <h5 style="color: var(--warning); margin: 0 0 0.5rem 0;">⚠️ Want to Join?</h5>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">
+                            Complete registration to get Discord access and participate in all hackathons!<br>
+                            <a href="https://Codecrunchglobalform-no3.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; font-weight: 600;">
+                                📝 Register Now → Codecrunchglobalform-no3.vercel.app
+                            </a>
+                        </p>
+                    </div>
                 </div>
             `;
             return;
@@ -1765,10 +1790,17 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
                 </h3>
                 <p style="margin: 0 0 1rem 0;"><strong>Status:</strong> ${data.status}</p>
                 
-                ${generateSimpleCommunityButtons(links?.discord, links?.groupme)}
+                ${communityButtons}
+                ${generateSimple305Info(hack305Fall2025 || {
+                    registered: false,
+                    eventInfo: {
+                        date: 'September 19-21, 2025',
+                        location: 'Worldwide Virtual + In-Person Miami',
+                        description: 'Official MLH 2026 Season Event'
+                    }
+                })}
                 ${generateSimpleUserData(userData)}
                 ${generateSimpleHackRegistrations(hackRegistrationsSummary)}
-                ${generateSimple305Info(hack305Fall2025)}
             </div>
         `;
         
@@ -1843,37 +1875,51 @@ function generateSimpleCommunityButtons(discordLink, groupmeLink) {
 }
 
 function generateSimple305Info(hack305Data) {
-    if (!hack305Data) return '';
-    
-    const isRegistered = hack305Data.registered;
+    const isRegistered = hack305Data?.registered || false;
     const statusColor = isRegistered ? 'var(--matrix-green)' : 'var(--cyber-blue)';
+    const eventInfo = hack305Data?.eventInfo || {
+        date: 'September 19-21, 2025',
+        location: 'Worldwide Virtual + In-Person Miami',
+        description: 'Official MLH 2026 Season Event'
+    };
     
     return `
         <div style="background: rgba(0, 212, 255, 0.1); border: 2px solid ${statusColor}; padding: 1rem; margin: 1rem 0; border-radius: var(--radius);">
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <div style="font-size: 2rem;">${isRegistered ? '✅' : 'ℹ️'}</div>
+                <div style="font-size: 2rem;">${isRegistered ? '✅' : '🚀'}</div>
                 <div>
                     <h4 style="color: var(--text-primary); margin: 0;">🚀 305 HACK FALL 2025</h4>
                     <p style="color: ${statusColor}; margin: 0; font-weight: 600;">
-                        ${isRegistered ? 'You are registered!' : 'Registration Available'}
+                        ${isRegistered ? 'You are registered!' : 'Registration Open - Join Now!'}
                     </p>
                 </div>
             </div>
-            ${hack305Data.eventInfo ? `
-                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 212, 255, 0.3);">
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">
-                        📅 ${hack305Data.eventInfo.date} | 📍 ${hack305Data.eventInfo.location}
-                    </p>
-                </div>
-            ` : ''}
             
-            <!-- Simplified Share Section -->
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 212, 255, 0.3);">
+                <p style="color: var(--text-secondary); margin: 0 0 1rem 0; font-size: 0.9rem;">
+                    📅 ${eventInfo.date} | 📍 ${eventInfo.location}<br>
+                    🎯 ${eventInfo.description}
+                </p>
+                
+                ${!isRegistered ? `
+                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--warning); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                        <p style="color: var(--warning); margin: 0; font-size: 0.9rem;">
+                            <strong>⚡ Not registered yet?</strong> Join the biggest hackathon of the season!<br>
+                            <a href="https://305HackFall2025.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; font-weight: 600;">
+                                🎯 Register for 305 Hack → 305HackFall2025.vercel.app
+                            </a>
+                        </p>
+                    </div>
+                ` : ''}
+            </div>
+            
+            <!-- Share Section - Always Show -->
             <div style="margin-top: 1rem; text-align: center;">
                 <p style="color: var(--text-secondary); margin: 0 0 1rem 0; font-size: 0.9rem;">
-                    🎉 <strong>Share that you're attending!</strong>
+                    🎉 <strong>${isRegistered ? "Share that you're attending!" : "Share and invite others!"}</strong>
                 </p>
                 <a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" class="community-btn" style="background: linear-gradient(45deg, var(--hacker-purple), var(--neon-pink));">
-                    🎉 I'm Attending – Share It!
+                    🎉 ${isRegistered ? "I'm Attending – Share It!" : "Share 305 Hack!"}
                 </a>
                 <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank" class="community-btn" style="background: #0077B5;">
                     💼 Share on LinkedIn
@@ -1883,6 +1929,19 @@ function generateSimple305Info(hack305Data) {
     `;
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
