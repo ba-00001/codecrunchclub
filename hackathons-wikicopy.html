@@ -1532,265 +1532,339 @@ document.addEventListener('visibilitychange', function() {
 
 
 
+<li class="checklist-item">
+                        <div class="checklist-number">2.5</div>
+                        <div class="checklist-text">
+                            <strong>Check your registration status</strong> - Verify your registration for all Hack University events.<br>
+                            
+                            <!-- Registration Checker Section -->
+                            <div class="card mt-3" style="background: var(--bg-card-light); border: 2px solid var(--cyber-blue); padding: 1.5rem;">
+                                <h4 class="card-title" style="color: var(--cyber-blue); font-size: 1.2rem; margin-bottom: 1rem;">
+                                    <i class="bi bi-search"></i> Registration Status Checker
+                                </h4>
+                                
+                                <!-- Search Form -->
+                                <form id="registrationForm" style="display: flex; gap: 15px; margin-bottom: 1.5rem; align-items: center; flex-wrap: wrap;">
+                                    <input 
+                                        type="email" 
+                                        id="emailInput" 
+                                        placeholder="Enter your email address..." 
+                                        required
+                                        style="flex: 1; min-width: 250px; padding: 12px 18px; border: 2px solid var(--matrix-green); border-radius: 25px; font-size: 0.9rem; background: var(--bg-card); color: var(--text-primary); font-family: 'Courier New', monospace; transition: all 0.3s ease;"
+                                        onfocus="this.style.borderColor='var(--cyber-blue)'; this.style.boxShadow='0 0 10px rgba(0, 212, 255, 0.5)'"
+                                        onblur="this.style.borderColor='var(--matrix-green)'; this.style.boxShadow='none'"
+                                    >
+                                    <button 
+                                        type="submit" 
+                                        style="padding: 12px 24px; background: linear-gradient(45deg, var(--cyber-blue), var(--matrix-green)); color: white; border: none; border-radius: 25px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Courier New', monospace; display: flex; align-items: center; gap: 8px;"
+                                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 212, 255, 0.4)'"
+                                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                                    >
+                                        <i class="bi bi-search"></i> Check Status
+                                    </button>
+                                </form>
 
-function doGet(e) {
-  // Check if request is coming from the allowed domain
-  const allowedDomain = 'https://codecrunchglobal.vercel.app';
-  const referer = e.parameter.referer || '';
-  
-  if (!referer.startsWith(allowedDomain)) {
-    return ContentService.createTextOutput(JSON.stringify({
-      error: "Access denied: This API can only be accessed from codecrunchglobal.vercel.app"
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  const email = e.parameter.email;
-  
-  if (!email) {
-    return ContentService.createTextOutput(JSON.stringify({
-      error: "Missing email address"
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  // Basic email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return ContentService.createTextOutput(JSON.stringify({
-      error: "Please provide a valid email address"
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  // Links and constants
-  const discordJoinLink = "https://codecrunchglobal-discordserver.vercel.app/";
-  const codecrunchglobalgroupmelink = "https://codecrunchglobal-groupme.vercel.app/";
-  const hackerGuideLink = "https://hackuniversity.vercel.app";
-  const attendingImageLink = "https://hackuniversityiamattending.vercel.app";
-  
-  try {
-    // Replace 'YOUR_SHEET_ID' with your actual Google Sheet ID
-    const sheetId = '1-VQyZvW7s8r3eXQzrjQ5tQGVLXvbYzWfCT5eKRmI2fI';
-    const sheet = SpreadsheetApp.openById(sheetId).getActiveSheet();
-    
-    // Get all data from the sheet
-    const dataRange = sheet.getDataRange();
-    const values = dataRange.getValues();
-    
-    // Column indices based on your sheet structure (0-based)
-    const EMAIL_COL = 1; // Column B - Email Address
-    const GITHUB_COL = 2; // Column C - GitHub Profile Link
-    const DISCORD_COL = 3; // Column D - Discord username
-    const VIRTUAL_INPERSON_COL = 4; // Column E - Virtual/In-Person
-    const HACK_1_COL = 5; // Column F - HackFiesta Miami (March 21-23, 2025)
-    const HACK_2_COL = 6; // Column G - 305 Hackathon Edition: Spring 2025
-    const HACK_3_COL = 7; // Column H - CodeStorm (May 19-26, 2025)
-    const HACK_4_COL = 8; // Column I - SummerCodeX (July 21-28, 2025)
-    const HACK_5_COL = 9; // Column J - 305 Hackathon Edition: Fall (September 19-21, 2025)
-    const HACK_5_STATUS_COL = 10; // Column K - 305 HACK FALL Confirmation Status
-    const HACK_6_COL = 11; // Column L - EmpowHER Hackathon (October 13-20, 2025)
-    const HACK_7_COL = 12; // Column M - CodeFest (December 8-15, 2025)
-    const HACK_2026_1_COL = 13; // Column N - Hack Fiesta Miami 2026
-    const HACK_2026_2_COL = 14; // Column O - 305 Hackathon Edition SPRING 2026
-    
-    // Search for ALL entries with this email (there might be multiple)
-    let userRows = [];
-    
-    for (let i = 1; i < values.length; i++) {
-      if (values[i][EMAIL_COL] && values[i][EMAIL_COL].toString().toLowerCase().trim() === email.toLowerCase().trim()) {
-        userRows.push({
-          row: values[i],
-          index: i + 1 // Adding 1 for human-readable row number
-        });
-      }
-    }
-    
-    if (userRows.length === 0) {
-      return ContentService.createTextOutput(JSON.stringify({
-        found: false,
-        message: "Email not found in our registration system. Please make sure you've registered for Hack University events.",
-        contact: "For any questions, please DM CodeCrunch Global on LinkedIn",
-        hackInfo305Fall: {
-          title: "🚀 305 HACK FALL 2025 - INFORMATION",
-          date: "September 19-21, 2025",
-          location: "In-Person Event",
-          description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
-          organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
-        }
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
-    
-    // Email found - prepare response
-    let response = {
-      found: true,
-      message: "Welcome to Hack University! 🚀",
-      totalEntries: userRows.length,
-      discordLink: discordJoinLink,
-      groupMeLink: codecrunchglobalgroupmelink,
-      hackerGuide: hackerGuideLink,
-      contact: "For any questions, please DM CodeCrunch Global on LinkedIn"
-    };
-    
-    // Add 305 Hack Fall 2025 information box
-    response.hackInfo305Fall = {
-      title: "🚀 305 HACK FALL 2025 - INFORMATION",
-      date: "September 19-21, 2025",
-      location: "In-Person Event",
-      description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
-      organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
-    };
-    
-    // Process all entries for this email
-    response.allEntries = [];
-    let hasAnyHackRegistration = false;
-    let latestProfile = null;
-    
-    // Hack event definitions
-    const hackEvents = [
-      { col: HACK_1_COL, name: "HackFiesta Miami", date: "March 21-23, 2025", type: "Virtual" },
-      { col: HACK_2_COL, name: "305 Hackathon Edition: Spring", date: "March 29-31, 2025", type: "In-Person" },
-      { col: HACK_3_COL, name: "CodeStorm", date: "May 19-26, 2025", type: "Virtual" },
-      { col: HACK_4_COL, name: "SummerCodeX", date: "July 21-28, 2025", type: "Virtual" },
-      { col: HACK_5_COL, name: "305 Hackathon Edition: Fall", date: "September 19-21, 2025", type: "In-Person" },
-      { col: HACK_6_COL, name: "EmpowHER Hackathon", date: "October 13-20, 2025", type: "Virtual" },
-      { col: HACK_7_COL, name: "CodeFest", date: "December 8-15, 2025", type: "TBD" },
-      { col: HACK_2026_1_COL, name: "Hack Fiesta Miami 2026", date: "March 9-15, 2026", type: "Virtual" },
-      { col: HACK_2026_2_COL, name: "305 Hackathon Edition Spring 2026", date: "March 20-22, 2026", type: "In-Person" }
-    ];
-    
-    userRows.forEach((userEntry, entryIndex) => {
-      const userRow = userEntry.row;
-      
-      // Keep the most recent profile info (last entry)
-      latestProfile = {
-        email: userRow[EMAIL_COL] || "",
-        github: userRow[GITHUB_COL] || "",
-        discord: userRow[DISCORD_COL] || "",
-        attendanceMode: userRow[VIRTUAL_INPERSON_COL] || "",
-        timestamp: userRow[0] || "", // Assuming timestamp is in first column
-        entryNumber: entryIndex + 1,
-        sheetRow: userEntry.index
-      };
-      
-      // Process hack registrations for this entry
-      let entryHackRegistrations = {};
-      
-      hackEvents.forEach(hackEvent => {
-        const registration = userRow[hackEvent.col] ? userRow[hackEvent.col].toString().trim() : "";
-        const isRegistered = registration && 
-                             registration !== "No Information" && 
-                             registration !== "No – I do not want to register" &&
-                             registration !== "";
-        
-        entryHackRegistrations[hackEvent.name] = {
-          registered: isRegistered,
-          response: registration || "No Information",
-          eventDate: hackEvent.date,
-          eventType: hackEvent.type
-        };
-        
-        if (isRegistered) {
-          hasAnyHackRegistration = true;
-        }
-      });
-      
-      // Special handling for 305 Fall Hack status
-      const hackFallStatus = userRow[HACK_5_STATUS_COL] ? userRow[HACK_5_STATUS_COL].toString().trim() : "";
-      if (entryHackRegistrations["305 Hackathon Edition: Fall"]) {
-        entryHackRegistrations["305 Hackathon Edition: Fall"].confirmationStatus = hackFallStatus;
-      }
-      
-      response.allEntries.push({
-        entryNumber: entryIndex + 1,
-        sheetRow: userEntry.index,
-        timestamp: userRow[0] || "",
-        hackRegistrations: entryHackRegistrations
-      });
-    });
-    
-    // Add latest profile information
-    response.userProfile = latestProfile;
-    
-    // Create consolidated hack registrations summary
-    let consolidatedHacks = {};
-    hackEvents.forEach(hackEvent => {
-      let bestRegistration = null;
-      let isRegistered = false;
-      
-      // Look through all entries to find the best registration status for each hack
-      userRows.forEach(userEntry => {
-        const userRow = userEntry.row;
-        const registration = userRow[hackEvent.col] ? userRow[hackEvent.col].toString().trim() : "";
-        
-        if (registration && 
-            registration !== "No Information" && 
-            registration !== "No – I do not want to register" &&
-            registration !== "") {
-          isRegistered = true;
-          bestRegistration = registration;
-        }
-      });
-      
-      consolidatedHacks[hackEvent.name] = {
-        registered: isRegistered,
-        response: bestRegistration || "Not registered",
-        eventDate: hackEvent.date,
-        eventType: hackEvent.type
-      };
-      
-      // Add confirmation status for 305 Fall
-      if (hackEvent.name === "305 Hackathon Edition: Fall") {
-        const latestStatus = userRows[userRows.length - 1].row[HACK_5_STATUS_COL];
-        consolidatedHacks[hackEvent.name].confirmationStatus = latestStatus ? latestStatus.toString().trim() : "Not Registered";
-      }
-    });
-    
-    response.hackRegistrationsSummary = consolidatedHacks;
-    
-    // Special 305 Fall 2025 section for backward compatibility
-    const hack305Fall = consolidatedHacks["305 Hackathon Edition: Fall"];
-    response.hack305Fall2025 = {
-      registered: hack305Fall.registered,
-      answer: hack305Fall.response,
-      registrationStatus: hack305Fall.confirmationStatus || "Not Registered",
-      venue: hack305Fall.registered ? "The HUB @ Office Logic, 1501 Biscayne Blvd Suite 501, Miami, FL 33132" : null,
-      checkIn: hack305Fall.registered ? "TBD - Check-in times will be announced closer to the event" : null
-    };
-    
-    // Overall hack registration status
-    if (hasAnyHackRegistration) {
-      response.hackRegistration = {
-        status: "You are registered for hack events!",
-        downloadImage: attendingImageLink,
-        instructions: [
-          "📥 Download your 'I am attending' image from: " + attendingImageLink,
-          "🌐 Check the specific hack website you registered for",
-          "📚 Review the hacker guide at: " + hackerGuideLink
-        ]
-      };
-    } else {
-      response.hackRegistration = {
-        status: "No hack event registrations found",
-        message: "Consider registering for upcoming hack events!"
-      };
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify(response))
-      .setMimeType(ContentService.MimeType.JSON);
-      
-  } catch (error) {
-    Logger.log('Error: ' + error.toString());
-    return ContentService.createTextOutput(JSON.stringify({
-      error: "An error occurred while checking registration. Please try again later.",
-      contact: "For any questions, please DM CodeCrunch Global on LinkedIn",
-      hackInfo305Fall: {
-        title: "🚀 305 HACK FALL 2025 - INFORMATION",
-        date: "September 19-21, 2025",
-        location: "In-Person Event",
-        description: "Tech Unicorn Challenge focusing on Smart Cities, DevOps, Cybersecurity & Blockchain",
-        organizers: "Hosted by CodeCrunch Global x ColorStack at FIU x CAHSI at FIU"
-      }
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
+                                <!-- Results Container -->
+                                <div id="registrationResults">
+                                    <!-- Results will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <script>
+                        const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
+                        
+                        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            
+                            const email = document.getElementById('emailInput').value.trim();
+                            const resultsDiv = document.getElementById('registrationResults');
+                            
+                            if (!email) {
+                                resultsDiv.innerHTML = '<div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger); margin-top: 1rem;"><h4><i class="bi bi-exclamation-triangle"></i> Invalid Email</h4><p>Please enter a valid email address.</p></div>';
+                                return;
+                            }
+                            
+                            // Show loading with existing page styles
+                            resultsDiv.innerHTML = `
+                                <div style="text-align: center; padding: 2rem; margin-top: 1rem;">
+                                    <div style="display: inline-block; width: 30px; height: 30px; border: 3px solid rgba(0, 255, 65, 0.3); border-radius: 50%; border-top-color: var(--matrix-green); animation: spin 1s ease-in-out infinite; margin-bottom: 15px;"></div>
+                                    <p style="font-size: 1rem; color: var(--text-primary); font-family: 'Courier New', monospace;">Checking your registration status...</p>
+                                </div>
+                            `;
+                            
+                            try {
+                                const response = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
+                                const data = await response.json();
+                                
+                                displayRegistrationResults(data);
+                                
+                            } catch (error) {
+                                console.error('Error:', error);
+                                resultsDiv.innerHTML = `
+                                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger); margin-top: 1rem;">
+                                        <h4><i class="bi bi-exclamation-triangle"></i> Connection Error</h4>
+                                        <p>Failed to check registration status. Please try again later.</p>
+                                        <p><strong>For support:</strong> DM CodeCrunch Global on LinkedIn</p>
+                                    </div>
+                                `;
+                            }
+                        });
+                        
+                        function displayRegistrationResults(data) {
+                            const resultsDiv = document.getElementById('registrationResults');
+                            
+                            if (data.error) {
+                                resultsDiv.innerHTML = `
+                                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger); margin-top: 1rem;">
+                                        <h4><i class="bi bi-exclamation-triangle"></i> Error</h4>
+                                        <p>${data.error}</p>
+                                        <p><strong>Contact:</strong> ${data.contact || 'DM CodeCrunch Global on LinkedIn'}</p>
+                                    </div>
+                                `;
+                                return;
+                            }
+                            
+                            if (!data.found) {
+                                resultsDiv.innerHTML = `
+                                    <div class="register-note" style="background: rgba(255, 51, 51, 0.1); border-color: var(--danger); color: var(--danger); margin-top: 1rem;">
+                                        <h4><i class="bi bi-envelope-x"></i> Email Not Found</h4>
+                                        <p>${data.message}</p>
+                                        <p><strong>Contact:</strong> ${data.contact}</p>
+                                    </div>
+                                    ${data.hackInfo305Fall ? generateInfoBox(data.hackInfo305Fall) : ''}
+                                `;
+                                return;
+                            }
+                            
+                            let html = `
+                                <div class="register-note" style="background: rgba(0, 255, 65, 0.1); border-color: var(--matrix-green); color: var(--matrix-green); margin-top: 1rem;">
+                                    <h4><i class="bi bi-check-circle"></i> ${data.message}</h4>
+                                    ${data.totalEntries ? `<p><strong>Total Entries Found:</strong> ${data.totalEntries}</p>` : ''}
+                                </div>
+                                
+                                ${generateInfoBox(data.hackInfo305Fall)}
+                                
+                                ${generateProfileSection(data.userProfile)}
+                                
+                                ${generateHackRegistrations(data.hackRegistrationsSummary)}
+                                
+                                ${generateLinksSection(data)}
+                                
+                                ${data.hackRegistration ? generateInstructions(data.hackRegistration) : ''}
+                                
+                                ${data.allEntries && data.allEntries.length > 1 ? generateAllEntries(data.allEntries) : ''}
+                            `;
+                            
+                            resultsDiv.innerHTML = html;
+                        }
+                        
+                        function generateInfoBox(hackInfo) {
+                            if (!hackInfo) return '';
+                            
+                            return `
+                                <div style="background: linear-gradient(135deg, var(--cyber-blue), var(--matrix-green)); margin: 1rem 0; padding: 1.5rem; border-radius: var(--radius); color: white;">
+                                    <h4 style="color: white; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; font-family: 'Courier New', monospace;">${hackInfo.title}</h4>
+                                    <div style="color: rgba(255, 255, 255, 0.95); font-family: 'Courier New', monospace;">
+                                        <p style="margin-bottom: 0.5rem;"><strong><i class="bi bi-calendar-event"></i> Date:</strong> ${hackInfo.date}</p>
+                                        <p style="margin-bottom: 0.5rem;"><strong><i class="bi bi-geo-alt"></i> Location:</strong> ${hackInfo.location}</p>
+                                        <p style="margin-bottom: 0.5rem;"><strong><i class="bi bi-bullseye"></i> Focus:</strong> ${hackInfo.description}</p>
+                                        <p style="margin-bottom: 0;"><strong><i class="bi bi-building"></i> Organizers:</strong> ${hackInfo.organizers}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        
+                        function generateProfileSection(profile) {
+                            if (!profile) return '';
+                            
+                            return `
+                                <div style="background: var(--bg-card); border: 1px solid var(--matrix-green); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0;">
+                                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-family: 'Courier New', monospace;"><i class="bi bi-person-circle"></i> Your Profile Information</h4>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: rgba(0, 255, 65, 0.1); border-radius: 8px;">
+                                            <div style="width: 2rem; height: 2rem; background: var(--cyber-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                                <i class="bi bi-envelope"></i>
+                                            </div>
+                                            <div>
+                                                <strong style="color: var(--text-primary);">Email:</strong><br>
+                                                <code style="color: var(--text-secondary);">${profile.email}</code>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: rgba(0, 255, 65, 0.1); border-radius: 8px;">
+                                            <div style="width: 2rem; height: 2rem; background: var(--matrix-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg-color);">
+                                                <i class="bi bi-github"></i>
+                                            </div>
+                                            <div>
+                                                <strong style="color: var(--text-primary);">GitHub:</strong><br>
+                                                <code style="color: var(--text-secondary);">${profile.github || 'Not provided'}</code>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: rgba(0, 255, 65, 0.1); border-radius: 8px;">
+                                            <div style="width: 2rem; height: 2rem; background: var(--neon-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                                <i class="bi bi-discord"></i>
+                                            </div>
+                                            <div>
+                                                <strong style="color: var(--text-primary);">Discord:</strong><br>
+                                                <code style="color: var(--text-secondary);">${profile.discord || 'Not provided'}</code>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: rgba(0, 255, 65, 0.1); border-radius: 8px;">
+                                            <div style="width: 2rem; height: 2rem; background: var(--electric-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg-color);">
+                                                <i class="bi bi-geo"></i>
+                                            </div>
+                                            <div>
+                                                <strong style="color: var(--text-primary);">Mode:</strong><br>
+                                                <code style="color: var(--text-secondary);">${profile.attendanceMode || 'Not specified'}</code>
+                                            </div>
+                                        </div>
+                                        ${profile.timestamp ? `
+                                            <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: rgba(0, 255, 65, 0.1); border-radius: 8px;">
+                                                <div style="width: 2rem; height: 2rem; background: var(--hacker-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                                    <i class="bi bi-clock"></i>
+                                                </div>
+                                                <div>
+                                                    <strong style="color: var(--text-primary);">Last Updated:</strong><br>
+                                                    <code style="color: var(--text-secondary);">${profile.timestamp}</code>
+                                                </div>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        
+                        function generateHackRegistrations(hackRegistrations) {
+                            if (!hackRegistrations) return '';
+                            
+                            let html = '<div style="background: var(--bg-card); border: 1px solid var(--matrix-green); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0;"><h4 style="color: var(--text-primary); margin-bottom: 1rem; font-family: \'Courier New\', monospace;"><i class="bi bi-trophy"></i> Hack Event Registrations</h4><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">';
+                            
+                            Object.entries(hackRegistrations).forEach(([hackName, details]) => {
+                                const isRegistered = details.registered;
+                                const statusIcon = isRegistered ? 'check-circle-fill' : 'x-circle-fill';
+                                const statusColor = isRegistered ? 'var(--matrix-green)' : 'var(--danger)';
+                                const statusText = isRegistered ? 'Registered' : 'Not Registered';
+                                const cardBorder = isRegistered ? 'var(--matrix-green)' : 'var(--danger)';
+                                const bgColor = isRegistered ? 'rgba(0, 255, 65, 0.1)' : 'rgba(255, 51, 51, 0.1)';
+                                
+                                html += `
+                                    <div style="border: 2px solid ${cardBorder}; background: ${bgColor}; border-radius: 12px; padding: 1rem; text-align: center;">
+                                        <div style="width: 3rem; height: 3rem; background: ${statusColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: white;">
+                                            <i class="bi bi-${statusIcon}"></i>
+                                        </div>
+                                        <h5 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: 'Courier New', monospace;">${hackName}</h5>
+                                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.8rem;">
+                                            <i class="bi bi-calendar"></i> ${details.eventDate}<br>
+                                            <i class="bi bi-geo-alt"></i> ${details.eventType}
+                                        </p>
+                                        <div style="display: inline-block; padding: 4px 12px; background: ${statusColor}; color: ${isRegistered ? 'var(--bg-color)' : 'white'}; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem;">
+                                            ${statusText}
+                                        </div>
+                                        ${details.confirmationStatus ? `<div style="display: inline-block; padding: 4px 12px; background: var(--cyber-blue); color: white; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; margin-left: 0.25rem;">Status: ${details.confirmationStatus}</div>` : ''}
+                                        <p style="font-style: italic; color: var(--text-light); font-size: 0.75rem; margin-top: 0.5rem; word-break: break-word;">${details.response}</p>
+                                    </div>
+                                `;
+                            });
+                            
+                            html += '</div></div>';
+                            return html;
+                        }
+                        
+                        function generateLinksSection(data) {
+                            return `
+                                <div style="background: linear-gradient(135deg, var(--hacker-purple), var(--neon-pink)); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0; color: white;">
+                                    <h4 style="color: white; margin-bottom: 1rem; font-family: 'Courier New', monospace;"><i class="bi bi-link-45deg"></i> Quick Links</h4>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                        <a href="${data.discordLink}" target="_blank" style="display: block; padding: 1rem; background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 12px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+                                            <i class="bi bi-discord"></i> Join Discord
+                                        </a>
+                                        <a href="${data.groupMeLink}" target="_blank" style="display: block; padding: 1rem; background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 12px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+                                            <i class="bi bi-people"></i> Join GroupMe
+                                        </a>
+                                        <a href="${data.hackerGuide}" target="_blank" style="display: block; padding: 1rem; background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 12px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+                                            <i class="bi bi-book"></i> Hacker Guide
+                                        </a>
+                                        ${data.hackRegistration && data.hackRegistration.downloadImage ? 
+                                            `<a href="${data.hackRegistration.downloadImage}" target="_blank" style="display: block; padding: 1rem; background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 12px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+                                                <i class="bi bi-image"></i> Download Badge
+                                            </a>` : ''
+                                        }
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        
+                        function generateInstructions(hackRegistration) {
+                            if (!hackRegistration.instructions) return '';
+                            
+                            return `
+                                <div class="register-note" style="background: rgba(0, 212, 255, 0.1); border-color: var(--cyber-blue); color: var(--cyber-blue); margin: 1rem 0;">
+                                    <h4><i class="bi bi-list-check"></i> Next Steps</h4>
+                                    <p style="margin-bottom: 15px; font-weight: 600;">${hackRegistration.status}</p>
+                                    <ol style="list-style: none; padding: 0; margin: 0;">
+                                        ${hackRegistration.instructions.map((instruction, index) => `
+                                            <li style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; padding: 0.75rem; background: rgba(0, 212, 255, 0.1); border-left: 4px solid var(--cyber-blue); border-radius: 0 8px 8px 0;">
+                                                <div style="width: 2rem; height: 2rem; background: var(--cyber-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; flex-shrink: 0;">${index + 1}</div>
+                                                <div style="color: var(--text-secondary); font-family: 'Courier New', monospace;">${instruction}</div>
+                                            </li>
+                                        `).join('')}
+                                    </ol>
+                                </div>
+                            `;
+                        }
+                        
+                        function generateAllEntries(allEntries) {
+                            let html = '<div style="background: var(--bg-card); border: 1px solid var(--matrix-green); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0;"><h4 style="color: var(--text-primary); margin-bottom: 1rem; font-family: \'Courier New\', monospace;"><i class="bi bi-journal-text"></i> All Registration Entries</h4>';
+                            
+                            allEntries.forEach(entry => {
+                                html += `
+                                    <div style="background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(0, 255, 65, 0.2);">
+                                            <span style="color: var(--matrix-green); font-weight: 700;">Entry #${entry.entryNumber}</span>
+                                            <span style="color: var(--text-secondary); font-size: 0.875rem;">Sheet Row: ${entry.sheetRow}</span>
+                                            <span style="color: var(--text-secondary); font-size: 0.875rem;">${entry.timestamp}</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem;">
+                                `;
+                                
+                                Object.entries(entry.hackRegistrations).forEach(([hackName, details]) => {
+                                    if (details.registered) {
+                                        html += `
+                                            <div style="background: rgba(0, 255, 65, 0.1); border: 1px solid var(--matrix-green); border-radius: 8px; padding: 0.75rem; text-align: center;">
+                                                <h6 style="color: var(--matrix-green); font-size: 0.8rem; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">${hackName}</h6>
+                                                <div style="display: inline-block; padding: 3px 8px; background: var(--matrix-green); color: var(--bg-color); border-radius: 15px; font-size: 0.65rem; font-weight: 600; margin-bottom: 0.5rem;">
+                                                    <i class="bi bi-check-circle"></i> Registered
+                                                </div>
+                                                <p style="font-style: italic; color: var(--text-light); font-size: 0.7rem; margin: 0; word-break: break-word;">${details.response}</p>
+                                            </div>
+                                        `;
+                                    }
+                                });
+                                
+                                html += '</div></div>';
+                            });
+                            
+                            html += '</div>';
+                            return html;
+                        }
+
+                        // Add spin animation for loading spinner
+                        if (!document.querySelector('#registration-spinner-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'registration-spinner-style';
+                            style.textContent = `
+                                @keyframes spin {
+                                    to { transform: rotate(360deg); }
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
+                    </script>
+
+
+
+
 
 
 
