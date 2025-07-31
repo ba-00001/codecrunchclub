@@ -1633,16 +1633,33 @@ document.addEventListener('visibilitychange', function() {
           <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid #ff3333; padding: 1.5rem; border-radius: 12px; color: #ff3333;">
             <h4 style="margin: 0 0 1rem 0;"><span style="font-size: 1.2rem;">❌</span> Registration Not Found</h4>
             <p style="margin: 0 0 1rem 0; color: #ffcccc;">${data.error || 'Email not found in our records.'}</p>
-            ${generateCommunityButtons(data.discordLink, data.groupmeLink)}
-            ${generate305HackInfo(data.hack305Fall2025)}
-            ${generate305ShareSection()}
+            
+            <!-- Show Discord/GroupMe even for not found -->
+            <h4 style="color:#1B5E20;">🎯 Join Our Communities:</h4>
+            <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://codecrunchglobal-discordserver.vercel.app/" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 Discord Invite Link</a>
+              <a href="https://codecrunchglobal-groupme.vercel.app/" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 GroupMe Invite Link</a>
+            </div>
+            
+            <!-- Show 305 info even for not found -->
+            <hr><div style="margin-top: 20px;">
+            <h4 style="color:#6A1B9A;">📣 Spread the Word – Let Everyone Know You're Attending!</h4>
+            <img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Banner" style="max-width:100%; border-radius:12px; margin-bottom: 15px; border: 1px solid #ddd; filter: blur(1px) brightness(0.9);" />
+            <p style="margin: 10px 0; background: #f3e5f5; padding: 12px; border-left: 4px solid #6A1B9A; font-size: 0.95rem; border-radius: 6px;">
+              🎉 I'm attending <strong>305 Hackathon: Fall Edition</strong>, an official <strong>MLH 2026 Season</strong> event!<br>
+              👉 Register now → <a href="https://305HackFall2025.vercel.app" target="_blank">305HackFall2025.vercel.app</a><br>
+              📩 LinkedIn RSVP → <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank">305hackfall2025-linkedin.vercel.app</a><br>
+              🌍 <strong>Worldwide</strong> — open to <strong>ALL majors</strong>, <strong>ALL universities</strong>, and high school students <strong>(16+)</strong>!
+            </p>
+            <a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#6A1B9A;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎉 I'm Attending – Share It!</a>
+            </div>
           </div>
         `;
         return;
       }
 
       // Success - generate complete results
-      const { userData, hackRegistrationsSummary, communityLinks, hack305Fall2025, links } = data;
+      const { userData, discordLink, groupmeLink } = data;
       
       let html = `
         <div style="background: rgba(0, 255, 65, 0.15); border: 2px solid #00ff41; border-radius: 12px; padding: 1.5rem;">
@@ -1652,15 +1669,33 @@ document.addEventListener('visibilitychange', function() {
           <p style="color: #66ff99; margin: 0 0 1.5rem 0;">
             <strong>Status:</strong> ${data.status}
           </p>
-          
-          ${generateCommunityButtons(data.discordLink, data.groupmeLink)}
-          ${generateUserData(userData)}
-          ${generateHackRegistrations(hackRegistrationsSummary)}
-          ${generate305HackInfo(hack305Fall2025)}
-          ${generateQuickLinks(links)}
-          ${generate305ShareSection()}
-        </div>
       `;
+
+      // Add Discord/GroupMe buttons right after status
+      html += `<h4 style="margin-top:20px; color:#1B5E20;">🎯 Join Our Communities:</h4><div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">`;
+      if (discordLink) {
+        html += `<a href="${discordLink}" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 Discord Invite Link</a>`;
+      }
+      if (groupmeLink) {
+        html += `<a href="${groupmeLink}" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">📎 GroupMe Invite Link</a>`;
+      }
+      html += `</div>`;
+
+      // Add user data
+      html += generateUserDataSimple(userData);
+
+      // Add sharing section at the end
+      html += `<hr><div style="margin-top: 20px;">`;
+      html += `<h4 style="color:#6A1B9A;">📣 Spread the Word – Let Everyone Know You're Attending!</h4>`;
+      html += `<img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Banner" style="max-width:100%; border-radius:12px; margin-bottom: 15px; border: 1px solid #ddd; filter: blur(1px) brightness(0.9);" />`;
+      html += `<p style="margin: 10px 0; background: #f3e5f5; padding: 12px; border-left: 4px solid #6A1B9A; font-size: 0.95rem; border-radius: 6px;">
+        🎉 I'm attending <strong>305 Hackathon: Fall Edition</strong>, an official <strong>MLH 2026 Season</strong> event!<br>
+        👉 Register now → <a href="https://305HackFall2025.vercel.app" target="_blank">305HackFall2025.vercel.app</a><br>
+        📩 LinkedIn RSVP → <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank">305hackfall2025-linkedin.vercel.app</a><br>
+        🌍 <strong>Worldwide</strong> — open to <strong>ALL majors</strong>, <strong>ALL universities</strong>, and high school students <strong>(16+)</strong>!
+      </p>`;
+      html += `<a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#6A1B9A;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎉 I'm Attending – Share It!</a>`;
+      html += `</div></div>`;
 
       resultsDiv.innerHTML = html;
       
@@ -1785,6 +1820,26 @@ document.addEventListener('visibilitychange', function() {
     return html;
   }
 
+  function generateUserDataSimple(userData) {
+    if (!userData) return '';
+    
+    let html = `<h4 style="margin-top: 20px; color:#1B5E20;">📋 Your Full Response:</h4><ul style="list-style-type:none;padding-left:0;">`;
+    
+    // Add timestamp and email first
+    html += `<li style="margin-bottom:8px;"><strong>Submitted At:</strong> <span style="background:#FAFAFA;padding:4px 8px;border-radius:4px; color: #2C3E50;">${format24HourTime(userData.timestamp)}</span></li>`;
+    html += `<li style="margin-bottom:8px;"><strong>Email:</strong> <span style="background:#FAFAFA;padding:4px 8px;border-radius:4px; color: #2C3E50;">${userData.email}</span></li>`;
+    
+    // Add all additional fields
+    if (userData.additionalFields) {
+      for (const [label, value] of Object.entries(userData.additionalFields)) {
+        html += `<li style="margin-bottom:8px;"><strong>${label}:</strong> <span style="background:#FAFAFA;padding:4px 8px;border-radius:4px; color: #2C3E50;">${value}</span></li>`;
+      }
+    }
+    
+    html += `</ul>`;
+    return html;
+  }
+
   function generateCommunityButtons(discordLink, groupmeLink) {
     if (!discordLink && !groupmeLink) return '';
     
@@ -1818,8 +1873,12 @@ document.addEventListener('visibilitychange', function() {
         
         <!-- 305 Hack Banner with Blur Effect -->
         <div style="position: relative; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #00d4ff; box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">
-          <img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Fall 2025 Banner" style="width: 100%; height: auto; display: block; filter: blur(0.5px) brightness(0.9);" />
-          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(0, 255, 65, 0.1), rgba(0, 212, 255, 0.1)); backdrop-filter: blur(1px);"></div>
+          <img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Fall 2025 Banner" style="width: 100%; height: auto; display: block; filter: blur(1px) brightness(0.8) contrast(1.1);" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='<p style=color:#ff6b6b;text-align:center;padding:2rem;>Banner image could not be loaded</p>'" />
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(0, 255, 65, 0.15), rgba(0, 212, 255, 0.15), rgba(138, 43, 226, 0.1)); backdrop-filter: blur(2px);"></div>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
+            <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 0; font-size: 1.5rem;">🚀 305 HACK FALL 2025</h3>
+            <p style="color: #00ff41; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); margin: 0.5rem 0 0 0; font-weight: 600;">September 19-21, 2025</p>
+          </div>
         </div>
         
         <!-- Share Message Box -->
@@ -1961,6 +2020,8 @@ document.addEventListener('visibilitychange', function() {
     document.head.appendChild(style);
   }
 </script>
+
+
 
 
 
