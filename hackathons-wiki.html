@@ -1545,50 +1545,219 @@ document.addEventListener('visibilitychange', function() {
 
 
 
-<section id="registration-status-checker" style="padding: 2rem 0; background: rgba(0, 0, 0, 0.95); color: #00ff41;">
-  <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
-    <!-- Header -->
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <h2 style="font-family: 'Courier New', monospace; color: #00ff41; font-size: 2rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px #00ff41;">
-        🔍 Check Your Registration Status
-      </h2>
-      <p style="color: #66ff99; font-family: 'Courier New', monospace; opacity: 0.8;">
-        Verify your registration for all Hack University events
-      </p>
-    </div>
+<!-- Updated Registration Status Checker Section -->
+<li class="checklist-item">
+    <div class="checklist-number">3</div>
+    <div class="checklist-text">
+        <strong>Check Your Registration Status</strong> - Verify your registration for all Hack University events.<br>
+        <div class="mt-3">
+            <!-- Registration Status Card -->
+            <div class="card" style="margin-bottom: 1rem; background: rgba(17, 17, 17, 0.95); border: 2px solid var(--cyber-blue);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--cyber-blue); font-family: 'Courier New', monospace; margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--cyber-blue);">
+                        🔍 Registration Status Portal
+                    </h4>
+                    <p style="color: var(--text-secondary); font-family: 'Courier New', monospace; opacity: 0.9; font-size: 0.9rem;">
+                        Enter your email to verify registration status across all hackathons
+                    </p>
+                </div>
 
-    <!-- Registration Form -->
-    <div style="background: rgba(17, 17, 17, 0.9); border: 2px solid #00d4ff; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">
-      <form id="registrationForm" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
-        <input
-          type="email"
-          id="emailInput"
-          placeholder="Enter your email address..."
-          required
-          style="flex: 1; min-width: 250px; padding: 12px 18px; font-family: 'Courier New', monospace; border: 2px solid #00ff41; border-radius: 25px; background: #111; color: #00ff41; font-size: 0.9rem; transition: all 0.3s ease;"
-          onfocus="this.style.borderColor='#00d4ff'; this.style.boxShadow='0 0 10px rgba(0, 212, 255, 0.5)'"
-          onblur="this.style.borderColor='#00ff41'; this.style.boxShadow='none'"
-        />
-        <button
-          type="submit"
-          style="padding: 12px 24px; font-family: 'Courier New', monospace; border: none; background: linear-gradient(45deg, #00d4ff, #00ff41); color: white; border-radius: 25px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;"
-          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 212, 255, 0.4)'"
-          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
-        >
-          <span>🔍</span> Check Status
-        </button>
-      </form>
-    </div>
+                <!-- Registration Form -->
+                <form id="registrationForm" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin-bottom: 1.5rem;">
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="Enter your email address..."
+                        required
+                        style="flex: 1; min-width: 250px; padding: 12px 18px; font-family: 'Courier New', monospace; border: 2px solid var(--matrix-green); border-radius: 25px; background: var(--bg-card); color: var(--matrix-green); font-size: 0.9rem; transition: all 0.3s ease;"
+                        onfocus="this.style.borderColor='var(--cyber-blue)'; this.style.boxShadow='0 0 10px rgba(0, 212, 255, 0.5)'"
+                        onblur="this.style.borderColor='var(--matrix-green)'; this.style.boxShadow='none'"
+                    />
+                    <button
+                        type="submit"
+                        class="discord-button"
+                        style="padding: 12px 24px; font-family: 'Courier New', monospace; border: none; background: linear-gradient(45deg, var(--cyber-blue), var(--matrix-green)); color: white; border-radius: 25px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: normal;"
+                    >
+                        <span>🔍</span> Check Status
+                    </button>
+                </form>
 
-    <!-- Results Container -->
-    <div id="registrationResults" style="font-family: 'Courier New', monospace;"></div>
-  </div>
-</section>
+                <!-- Results Container -->
+                <div id="registrationResults" style="font-family: 'Courier New', monospace;"></div>
+            </div>
+        </div>
+    </div>
+</li>
+
+<style>
+/* Enhanced styles for the registration section */
+#registrationForm input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4) !important;
+    border-color: var(--cyber-blue) !important;
+}
+
+#registrationForm button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4) !important;
+    background: linear-gradient(45deg, var(--matrix-green), var(--cyber-blue)) !important;
+}
+
+/* Results styling using page variables */
+.registration-success {
+    background: rgba(0, 255, 65, 0.15) !important;
+    border: 2px solid var(--matrix-green) !important;
+    border-radius: var(--radius) !important;
+    padding: 1.5rem !important;
+    color: var(--matrix-green) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+.registration-error {
+    background: rgba(255, 51, 51, 0.15) !important;
+    border: 2px solid var(--danger) !important;
+    border-radius: var(--radius) !important;
+    padding: 1.5rem !important;
+    color: var(--danger) !important;
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.3) !important;
+}
+
+.registration-loading {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--matrix-green);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 255, 65, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--matrix-green);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.community-buttons {
+    background: linear-gradient(135deg, var(--cyber-blue), var(--matrix-green)) !important;
+    margin: 0 0 2rem 0 !important;
+    padding: 1.5rem !important;
+    border-radius: var(--radius) !important;
+    color: white !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.community-button {
+    background: rgba(255,255,255,0.2) !important;
+    color: white !important;
+    padding: 12px 20px !important;
+    border-radius: var(--radius) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: 'Courier New', monospace !important;
+    border: 2px solid transparent !important;
+}
+
+.community-button:hover {
+    background: rgba(255,255,255,0.3) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.user-data-section {
+    background: var(--bg-card-light) !important;
+    border: 1px solid var(--cyber-blue) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    border-radius: var(--radius) !important;
+    border-left: 4px solid var(--cyber-blue) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.hackathon-registration-card {
+    background: var(--bg-card-light) !important;
+    border: 2px solid var(--matrix-green) !important;
+    padding: 1rem !important;
+    border-radius: var(--radius) !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.hackathon-registration-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+.status-badge {
+    display: inline-block !important;
+    padding: 4px 12px !important;
+    border-radius: 15px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.status-registered {
+    background: var(--matrix-green) !important;
+    color: var(--bg-color) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3) !important;
+}
+
+.status-not-registered {
+    background: var(--danger) !important;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.3) !important;
+}
+
+.quick-links-section {
+    background: linear-gradient(135deg, var(--hacker-purple), var(--neon-pink)) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    border-radius: var(--radius) !important;
+    color: white !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #registrationForm {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    
+    #registrationForm input {
+        min-width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+    
+    #registrationForm button {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+</style>
 
 <script>
-  const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
 
-  function format24HourTime(datetimeString) {
+function format24HourTime(datetimeString) {
     const date = new Date(datetimeString);
     if (isNaN(date)) return datetimeString;
     const yyyy = date.getFullYear();
@@ -1597,373 +1766,337 @@ document.addEventListener('visibilitychange', function() {
     const hh = String(date.getHours()).padStart(2, '0');
     const min = String(date.getMinutes()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
-  }
+}
 
-  document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+document.getElementById('registrationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value.trim();
     const resultsDiv = document.getElementById('registrationResults');
     
     if (!email) {
-      resultsDiv.innerHTML = `
-        <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid #ff3333; padding: 1.5rem; border-radius: 12px; color: #ff3333;">
-          <h4 style="margin: 0 0 0.5rem 0;"><span style="font-size: 1.2rem;">❌</span> Invalid Email</h4>
-          <p style="margin: 0; color: #ffcccc;">Please enter a valid email address.</p>
-        </div>
-      `;
-      return;
+        resultsDiv.innerHTML = `
+            <div class="registration-error">
+                <h4 style="margin: 0 0 0.5rem 0;"><span style="font-size: 1.2rem;">❌</span> Invalid Email</h4>
+                <p style="margin: 0; opacity: 0.9;">Please enter a valid email address.</p>
+            </div>
+        `;
+        return;
     }
 
     // Loading state
     resultsDiv.innerHTML = `
-      <div style="text-align: center; padding: 2rem; background: rgba(17, 17, 17, 0.9); border: 1px solid #00ff41; border-radius: 12px;">
-        <div style="display: inline-block; width: 30px; height: 30px; border: 3px solid rgba(0, 255, 65, 0.3); border-radius: 50%; border-top-color: #00ff41; animation: spin 1s ease-in-out infinite; margin-bottom: 15px;"></div>
-        <p style="color: #00ff41; margin: 0; font-size: 1rem;">
-          <span style="font-size: 1.2rem;">🔍</span> Scanning registration database for <strong>${email}</strong>...
-        </p>
-      </div>
+        <div class="registration-loading">
+            <div class="loading-spinner"></div>
+            <p style="color: var(--matrix-green); margin: 0; font-size: 1rem;">
+                <span style="font-size: 1.2rem;">🔍</span> Scanning registration database for <strong>${email}</strong>...
+            </p>
+        </div>
     `;
 
     try {
-      const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
-      const data = await res.json();
+        const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
+        const data = await res.json();
 
-      if (!data.success) {
-        resultsDiv.innerHTML = `
-          <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid #ff3333; padding: 1.5rem; border-radius: 12px; color: #ff3333;">
-            <h4 style="margin: 0 0 1rem 0;"><span style="font-size: 1.2rem;">❌</span> Registration Not Found</h4>
-            <p style="margin: 0 0 1rem 0; color: #ffcccc;">${data.error || 'Email not found in our records.'}</p>
-            ${generateCommunityButtons(data.links?.discord, data.links?.groupme)}
-            ${generate305HackInfo(data.hack305Fall2025)}
-            ${generate305ShareSection()}
-          </div>
+        if (!data.success) {
+            resultsDiv.innerHTML = `
+                <div class="registration-error">
+                    <h4 style="margin: 0 0 1rem 0;"><span style="font-size: 1.2rem;">❌</span> Registration Not Found</h4>
+                    <p style="margin: 0 0 1rem 0; opacity: 0.9;">${data.error || 'Email not found in our records.'}</p>
+                    ${generateCommunityButtons(data.links?.discord, data.links?.groupme)}
+                    ${generate305HackInfo(data.hack305Fall2025)}
+                    ${generate305ShareSection()}
+                </div>
+            `;
+            return;
+        }
+
+        // Success - generate complete results
+        const { userData, hackRegistrationsSummary, communityLinks, hack305Fall2025, links } = data;
+        
+        let html = `
+            <div class="registration-success">
+                <h3 style="color: var(--matrix-green); margin: 0 0 1rem 0; text-shadow: 0 0 10px var(--matrix-green);">
+                    <span style="font-size: 1.2rem;">✅</span> ${data.message}
+                </h3>
+                <p style="color: var(--text-secondary); margin: 0 0 1.5rem 0;">
+                    <strong>Status:</strong> ${data.status}
+                </p>
+                
+                ${generateCommunityButtons(links?.discord, links?.groupme)}
+                ${generateUserData(userData)}
+                ${generateHackRegistrations(hackRegistrationsSummary)}
+                ${generate305HackInfo(hack305Fall2025)}
+                ${generateQuickLinks(links)}
+                ${generate305ShareSection()}
+            </div>
         `;
-        return;
-      }
 
-      // Success - generate complete results
-      const { userData, hackRegistrationsSummary, communityLinks, hack305Fall2025, links } = data;
-      
-      let html = `
-        <div style="background: rgba(0, 255, 65, 0.15); border: 2px solid #00ff41; border-radius: 12px; padding: 1.5rem;">
-          <h3 style="color: #00ff41; margin: 0 0 1rem 0; text-shadow: 0 0 10px #00ff41;">
-            <span style="font-size: 1.2rem;">✅</span> ${data.message}
-          </h3>
-          <p style="color: #66ff99; margin: 0 0 1.5rem 0;">
-            <strong>Status:</strong> ${data.status}
-          </p>
-          
-          ${generateCommunityButtons(links?.discord, links?.groupme)}
-          ${generateUserData(userData)}
-          ${generateHackRegistrations(hackRegistrationsSummary)}
-          ${generate305HackInfo(hack305Fall2025)}
-          ${generateQuickLinks(links)}
-          ${generate305ShareSection()}
-        </div>
-      `;
-
-      resultsDiv.innerHTML = html;
-      
+        resultsDiv.innerHTML = html;
+        
     } catch (err) {
-      resultsDiv.innerHTML = `
-        <div style="background: rgba(255, 51, 51, 0.15); border: 2px solid #ff3333; padding: 1.5rem; border-radius: 12px; color: #ff3333;">
-          <h4 style="margin: 0 0 0.5rem 0;"><span style="font-size: 1.2rem;">⚠️</span> Connection Error</h4>
-          <p style="margin: 0; color: #ffcccc;">Error connecting to server. Please try again later.</p>
-        </div>
-      `;
+        resultsDiv.innerHTML = `
+            <div class="registration-error">
+                <h4 style="margin: 0 0 0.5rem 0;"><span style="font-size: 1.2rem;">⚠️</span> Connection Error</h4>
+                <p style="margin: 0; opacity: 0.9;">Error connecting to server. Please try again later.</p>
+            </div>
+        `;
     }
-  });
+});
 
-  function generateCommunityLinks(communityLinks) {
+function generateUserData(userData) {
     if (!userData) return '';
     
     let html = `
-      <div style="background: rgba(17, 17, 17, 0.8); border: 1px solid #00d4ff; padding: 1.5rem; margin: 1rem 0; border-radius: 12px; border-left: 4px solid #00d4ff;">
-        <h5 style="color: #00d4ff; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00d4ff;">
-          <span style="font-size: 1.1rem;">👤</span> Your Registration Data
-        </h5>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div class="user-data-section">
+            <h5 style="color: var(--cyber-blue); margin: 0 0 1rem 0; text-shadow: 0 0 5px var(--cyber-blue);">
+                <span style="font-size: 1.1rem;">👤</span> Your Registration Data
+            </h5>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
     `;
     
     // Timestamp and Email
     html += `
-      <div style="background: rgba(0, 255, 65, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 65, 0.3);">
-        <div style="color: #00ff41; font-weight: 600; margin-bottom: 0.5rem;">
-          <span style="font-size: 1rem;">🕐</span> Registration Time
+        <div style="background: rgba(0, 255, 65, 0.1); padding: 1rem; border-radius: var(--radius); border: 1px solid rgba(0, 255, 65, 0.3);">
+            <div style="color: var(--matrix-green); font-weight: 600; margin-bottom: 0.5rem;">
+                <span style="font-size: 1rem;">🕐</span> Registration Time
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                ${userData.timestamp || 'Not available'}
+            </div>
         </div>
-        <div style="color: #66ff99; font-size: 0.9rem;">
-          ${userData.timestamp || 'Not available'}
+        <div style="background: rgba(0, 212, 255, 0.1); padding: 1rem; border-radius: var(--radius); border: 1px solid rgba(0, 212, 255, 0.3);">
+            <div style="color: var(--cyber-blue); font-weight: 600; margin-bottom: 0.5rem;">
+                <span style="font-size: 1rem;">📧</span> Email Address
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; word-break: break-word;">
+                ${userData.email || 'Not available'}
+            </div>
         </div>
-      </div>
-      <div style="background: rgba(0, 212, 255, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0, 212, 255, 0.3);">
-        <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">
-          <span style="font-size: 1rem;">📧</span> Email Address
-        </div>
-        <div style="color: #66ffff; font-size: 0.9rem; word-break: break-word;">
-          ${userData.email || 'Not available'}
-        </div>
-      </div>
     `;
     
     // Additional fields
     if (userData.additionalFields) {
-      Object.entries(userData.additionalFields).forEach(([fieldName, fieldValue]) => {
-        const displayValue = fieldValue || 'No response provided';
-        const isEmpty = !fieldValue || fieldValue === '' || fieldValue === 'No Information';
-        const cardColor = isEmpty ? 'rgba(255, 193, 7, 0.1)' : 'rgba(138, 43, 226, 0.1)';
-        const borderColor = isEmpty ? 'rgba(255, 193, 7, 0.3)' : 'rgba(138, 43, 226, 0.3)';
-        const iconColor = isEmpty ? '#ffd700' : '#8a2be2';
-        const textColor = isEmpty ? '#ffeb3b' : '#ba68c8';
-        const icon = isEmpty ? '⚠️' : 'ℹ️';
-        
-        html += `
-          <div style="background: ${cardColor}; padding: 1rem; border-radius: 8px; border: 1px solid ${borderColor};">
-            <div style="color: ${iconColor}; font-weight: 600; margin-bottom: 0.5rem;">
-              <span style="font-size: 1rem;">${icon}</span> ${fieldName}
-            </div>
-            <div style="color: ${textColor}; font-size: 0.9rem; word-break: break-word; ${isEmpty ? 'font-style: italic; opacity: 0.8;' : ''}">
-              ${displayValue}
-            </div>
-          </div>
-        `;
-      });
+        Object.entries(userData.additionalFields).forEach(([fieldName, fieldValue]) => {
+            const displayValue = fieldValue || 'No response provided';
+            const isEmpty = !fieldValue || fieldValue === '' || fieldValue === 'No Information';
+            const cardColor = isEmpty ? 'rgba(255, 193, 7, 0.1)' : 'rgba(138, 43, 226, 0.1)';
+            const borderColor = isEmpty ? 'rgba(255, 193, 7, 0.3)' : 'rgba(138, 43, 226, 0.3)';
+            const iconColor = isEmpty ? 'var(--warning)' : 'var(--hacker-purple)';
+            const textColor = isEmpty ? 'var(--warning)' : 'var(--text-secondary)';
+            const icon = isEmpty ? '⚠️' : 'ℹ️';
+            
+            html += `
+                <div style="background: ${cardColor}; padding: 1rem; border-radius: var(--radius); border: 1px solid ${borderColor};">
+                    <div style="color: ${iconColor}; font-weight: 600; margin-bottom: 0.5rem;">
+                        <span style="font-size: 1rem;">${icon}</span> ${fieldName}
+                    </div>
+                    <div style="color: ${textColor}; font-size: 0.9rem; word-break: break-word; ${isEmpty ? 'font-style: italic; opacity: 0.8;' : ''}">
+                        ${displayValue}
+                    </div>
+                </div>
+            `;
+        });
     }
     
     html += '</div></div>';
     return html;
-  }
+}
 
-  function generateHackRegistrations(hackRegistrations) {
+function generateHackRegistrations(hackRegistrations) {
     if (!hackRegistrations || Object.keys(hackRegistrations).length === 0) return '';
     
     let html = `
-      <div style="background: rgba(17, 17, 17, 0.8); border: 1px solid #00d4ff; padding: 1.5rem; margin: 1rem 0; border-radius: 12px; border-left: 4px solid #00d4ff;">
-        <h5 style="color: #00d4ff; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00d4ff;">
-          <span style="font-size: 1.1rem;">🏆</span> Hackathon Registrations
-        </h5>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+        <div class="user-data-section">
+            <h5 style="color: var(--cyber-blue); margin: 0 0 1rem 0; text-shadow: 0 0 5px var(--cyber-blue);">
+                <span style="font-size: 1.1rem;">🏆</span> Hackathon Registrations
+            </h5>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
     `;
     
     Object.entries(hackRegistrations).forEach(([hackName, details]) => {
-      const isRegistered = details.registered;
-      const statusColor = isRegistered ? '#00ff41' : '#ff3333';
-      const statusIcon = isRegistered ? '✅' : '❌';
-      const statusText = isRegistered ? 'Registered' : 'Not Registered';
-      const bgColor = isRegistered ? 'rgba(0, 255, 65, 0.1)' : 'rgba(255, 51, 51, 0.1)';
-      const borderColor = isRegistered ? '#00ff41' : '#ff3333';
-      
-      html += `
-        <div style="background: ${bgColor}; border: 2px solid ${borderColor}; padding: 1rem; border-radius: 12px; text-align: center;">
-          <div style="width: 2.5rem; height: 2.5rem; background: ${statusColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; box-shadow: 0 0 10px ${statusColor};">
-            <span style="font-size: 1.2rem;">${statusIcon}</span>
-          </div>
-          <h6 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 0.9rem; font-weight: 600;">
-            ${hackName}
-          </h6>
-          <div style="margin-bottom: 0.75rem;">
-            <div style="display: inline-block; padding: 4px 10px; background: ${statusColor}; color: ${isRegistered ? '#000' : '#fff'}; border-radius: 15px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem;">
-              ${statusText}
+        const isRegistered = details.registered;
+        const statusClass = isRegistered ? 'status-registered' : 'status-not-registered';
+        const statusIcon = isRegistered ? '✅' : '❌';
+        const statusText = isRegistered ? 'Registered' : 'Not Registered';
+        
+        html += `
+            <div class="hackathon-registration-card">
+                <div style="width: 2.5rem; height: 2.5rem; background: ${isRegistered ? 'var(--matrix-green)' : 'var(--danger)'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; box-shadow: 0 0 10px ${isRegistered ? 'var(--matrix-green)' : 'var(--danger)'};">
+                    <span style="font-size: 1.2rem;">${statusIcon}</span>
+                </div>
+                <h6 style="color: var(--text-primary); margin: 0 0 0.5rem 0; font-size: 0.9rem; font-weight: 600;">
+                    ${hackName}
+                </h6>
+                <div style="margin-bottom: 0.75rem;">
+                    <div class="status-badge ${statusClass}">
+                        ${statusText}
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 0.75rem;">
+                        📅 ${details.eventDate}<br>
+                        📍 ${details.eventType}
+                    </div>
+                </div>
+                ${details.confirmationStatus && details.confirmationStatus !== 'Not Registered' ? `
+                    <div style="display: inline-block; padding: 3px 8px; background: var(--cyber-blue); color: white; border-radius: 15px; font-size: 0.65rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        Status: ${details.confirmationStatus}
+                    </div>
+                ` : ''}
+                <div style="color: var(--text-light); font-size: 0.7rem; font-style: italic; margin-top: 0.5rem; word-break: break-word;">
+                    "${details.response}"
+                </div>
             </div>
-            <div style="color: #66ff99; font-size: 0.75rem;">
-              📅 ${details.eventDate}<br>
-              📍 ${details.eventType}
-            </div>
-          </div>
-          ${details.confirmationStatus && details.confirmationStatus !== 'Not Registered' ? `
-            <div style="display: inline-block; padding: 3px 8px; background: #00d4ff; color: #000; border-radius: 15px; font-size: 0.65rem; font-weight: 600; margin-bottom: 0.5rem;">
-              Status: ${details.confirmationStatus}
-            </div>
-          ` : ''}
-          <div style="color: #99ccff; font-size: 0.7rem; font-style: italic; margin-top: 0.5rem; word-break: break-word;">
-            "${details.response}"
-          </div>
-        </div>
-      `;
+        `;
     });
     
     html += '</div></div>';
     return html;
-  }
+}
 
-  function generateCommunityButtons(discordLink, groupmeLink) {
+function generateCommunityButtons(discordLink, groupmeLink) {
     if (!discordLink && !groupmeLink) return '';
     
     return `
-      <div style="background: linear-gradient(135deg, #00d4ff, #00ff41); margin: 0 0 2rem 0; padding: 1.5rem; border-radius: 12px; color: white; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);">
-        <h4 style="color: white; margin: 0 0 1rem 0; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); text-align: center;">
-          <span style="font-size: 1.2rem;">🎯</span> Join Our Communities
-        </h4>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-          ${discordLink ? `
-            <a href="${discordLink}" target="_blank" style="background: #5865F2; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-family: 'Courier New', monospace;" onmouseover="this.style.background='#4752C4'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(88, 101, 242, 0.4)'" onmouseout="this.style.background='#5865F2'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-              <span style="font-size: 1.2rem;">🎮</span> Discord Invite Link
-            </a>
-          ` : ''}
-          ${groupmeLink ? `
-            <a href="${groupmeLink}" target="_blank" style="background: #00AFF0; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-family: 'Courier New', monospace;" onmouseover="this.style.background='#0099CC'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 175, 240, 0.4)'" onmouseout="this.style.background='#00AFF0'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-              <span style="font-size: 1.2rem;">💬</span> GroupMe Invite Link
-            </a>
-          ` : ''}
+        <div class="community-buttons">
+            <h4 style="color: white; margin: 0 0 1rem 0; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); text-align: center;">
+                <span style="font-size: 1.2rem;">🎯</span> Join Our Communities
+            </h4>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                ${discordLink ? `
+                    <a href="${discordLink}" target="_blank" class="community-button">
+                        <span style="font-size: 1.2rem;">🎮</span> Discord Invite Link
+                    </a>
+                ` : ''}
+                ${groupmeLink ? `
+                    <a href="${groupmeLink}" target="_blank" class="community-button">
+                        <span style="font-size: 1.2rem;">💬</span> GroupMe Invite Link
+                    </a>
+                ` : ''}
+            </div>
         </div>
-      </div>
     `;
-  }
+}
 
-  function generate305ShareSection() {
+function generate305ShareSection() {
     return `
-      <div style="background: rgba(17, 17, 17, 0.8); border: 1px solid #8a2be2; padding: 1.5rem; margin: 1rem 0; border-radius: 12px; border-left: 4px solid #8a2be2;">
-        <h4 style="color: #8a2be2; margin: 0 0 1rem 0; text-shadow: 0 0 5px #8a2be2;">
-          <span style="font-size: 1.2rem;">📣</span> Spread the Word – Let Everyone Know You're Attending!
-        </h4>
-        
-        <!-- 305 Hack Banner with Blur Effect -->
-        <div style="position: relative; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #00d4ff; box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">
-          <img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Fall 2025 Banner" style="width: 100%; height: auto; display: block; filter: blur(1px) brightness(0.8) contrast(1.1);" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='<p style=color:#ff6b6b;text-align:center;padding:2rem;>Banner image could not be loaded</p>'" />
-          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(0, 255, 65, 0.15), rgba(0, 212, 255, 0.15), rgba(138, 43, 226, 0.1)); backdrop-filter: blur(2px);"></div>
-          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
-            <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 0; font-size: 1.5rem;">🚀 305 HACK FALL 2025</h3>
-            <p style="color: #00ff41; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); margin: 0.5rem 0 0 0; font-weight: 600;">September 19-21, 2025</p>
-          </div>
+        <div class="user-data-section" style="border-left-color: var(--hacker-purple);">
+            <h4 style="color: var(--hacker-purple); margin: 0 0 1rem 0; text-shadow: 0 0 5px var(--hacker-purple);">
+                <span style="font-size: 1.2rem;">📣</span> Spread the Word – Let Everyone Know You're Attending!
+            </h4>
+            
+            <!-- 305 Hack Banner with Blur Effect -->
+            <div style="position: relative; margin-bottom: 1.5rem; border-radius: var(--radius); overflow: hidden; border: 2px solid var(--cyber-blue); box-shadow: var(--shadow);">
+                <img src="https://305hackfall2025iamattending.vercel.app/banner.png" alt="305 Hack Fall 2025 Banner" style="width: 100%; height: auto; display: block; filter: blur(1px) brightness(0.8) contrast(1.1);" onerror="this.style.display='none';" />
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(0, 255, 65, 0.15), rgba(0, 212, 255, 0.15), rgba(138, 43, 226, 0.1)); backdrop-filter: blur(2px);"></div>
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
+                    <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin: 0; font-size: 1.5rem;">🚀 305 HACK FALL 2025</h3>
+                    <p style="color: var(--matrix-green); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); margin: 0.5rem 0 0 0; font-weight: 600;">September 19-21, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Share Message Box -->
+            <div style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 0, 128, 0.2)); padding: 1.5rem; border-left: 4px solid var(--hacker-purple); border-radius: var(--radius); margin-bottom: 1.5rem; backdrop-filter: blur(5px);">
+                <p style="margin: 0 0 1rem 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+                    <span style="font-size: 1.2rem;">🎉</span> I'm attending <strong style="color: var(--hacker-purple);">305 Hackathon: Fall Edition</strong>, an official <strong style="color: var(--hacker-purple);">MLH 2026 Season</strong> event!<br><br>
+                    <span style="font-size: 1rem;">👉</span> <strong>Register now:</strong> <a href="https://305HackFall2025.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; border-bottom: 1px solid var(--cyber-blue);">305HackFall2025.vercel.app</a><br>
+                    <span style="font-size: 1rem;">📩</span> <strong>LinkedIn RSVP:</strong> <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; border-bottom: 1px solid var(--cyber-blue);">305hackfall2025-linkedin.vercel.app</a><br>
+                    <span style="font-size: 1rem;">🌍</span> <strong style="color: var(--text-secondary);">Worldwide</strong> — open to <strong style="color: var(--text-secondary);">ALL majors</strong>, <strong style="color: var(--text-secondary);">ALL universities</strong>, and high school students <strong style="color: var(--text-secondary);">(16+)</strong>!
+                </p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                <a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" class="community-button" style="background: linear-gradient(45deg, var(--hacker-purple), var(--neon-pink)) !important;">
+                    <span style="font-size: 1.2rem;">🎉</span> I'm Attending – Share It!
+                </a>
+                
+                <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank" class="community-button" style="background: #0077B5 !important;">
+                    <span style="font-size: 1.2rem;">💼</span> Share on LinkedIn
+                </a>
+            </div>
         </div>
-        
-        <!-- Share Message Box -->
-        <div style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 0, 128, 0.2)); padding: 1.5rem; border-left: 4px solid #8a2be2; border-radius: 8px; margin-bottom: 1.5rem; backdrop-filter: blur(5px);">
-          <p style="margin: 0 0 1rem 0; color: #e1bee7; font-size: 0.95rem; line-height: 1.5;">
-            <span style="font-size: 1.2rem;">🎉</span> I'm attending <strong style="color: #ba68c8;">305 Hackathon: Fall Edition</strong>, an official <strong style="color: #ba68c8;">MLH 2026 Season</strong> event!<br><br>
-            <span style="font-size: 1rem;">👉</span> <strong>Register now:</strong> <a href="https://305HackFall2025.vercel.app" target="_blank" style="color: #00d4ff; text-decoration: none; border-bottom: 1px solid #00d4ff;">305HackFall2025.vercel.app</a><br>
-            <span style="font-size: 1rem;">📩</span> <strong>LinkedIn RSVP:</strong> <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank" style="color: #00d4ff; text-decoration: none; border-bottom: 1px solid #00d4ff;">305hackfall2025-linkedin.vercel.app</a><br>
-            <span style="font-size: 1rem;">🌍</span> <strong style="color: #66ff99;">Worldwide</strong> — open to <strong style="color: #66ff99;">ALL majors</strong>, <strong style="color: #66ff99;">ALL universities</strong>, and high school students <strong style="color: #66ff99;">(16+)</strong>!
-          </p>
-        </div>
-        
-        <!-- Action Buttons -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-          <a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background: linear-gradient(45deg, #8a2be2, #ff0080); color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-family: 'Courier New', monospace; border: 2px solid transparent;" onmouseover="this.style.background='linear-gradient(45deg, #9c27b0, #e91e63)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(138, 43, 226, 0.4)'" onmouseout="this.style.background='linear-gradient(45deg, #8a2be2, #ff0080)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-            <span style="font-size: 1.2rem;">🎉</span> I'm Attending – Share It!
-          </a>
-          
-          <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank" style="background: #0077B5; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-family: 'Courier New', monospace;" onmouseover="this.style.background='#005885'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 119, 181, 0.4)'" onmouseout="this.style.background='#0077B5'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-            <span style="font-size: 1.2rem;">💼</span> Share on LinkedIn
-          </a>
-        </div>
-      </div>
     `;
-  }
-    if (!communityLinks) return '';
-    
-    return `
-      <div style="background: linear-gradient(135deg, #00d4ff, #00ff41); margin: 1rem 0; padding: 1.5rem; border-radius: 12px; color: white; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);">
-        <h4 style="color: white; margin: 0 0 1rem 0; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
-          <span style="font-size: 1.2rem;">👥</span> Join Our Community
-        </h4>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-          ${communityLinks.discord ? `
-            <a href="${communityLinks.discord.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              ${communityLinks.discord.label}
-            </a>
-          ` : ''}
-          ${communityLinks.groupme ? `
-            <a href="${communityLinks.groupme.url}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              ${communityLinks.groupme.label}
-            </a>
-          ` : ''}
-        </div>
-      </div>
-    `;
-  }
+}
 
-  function generate305HackInfo(hack305Data) {
+function generate305HackInfo(hack305Data) {
     if (!hack305Data) return '';
     
     const isRegistered = hack305Data.registered;
     const bgColor = isRegistered ? 'rgba(0, 255, 65, 0.15)' : 'rgba(0, 212, 255, 0.15)';
-    const borderColor = isRegistered ? '#00ff41' : '#00d4ff';
-    const statusColor = isRegistered ? '#00ff41' : '#00d4ff';
+    const borderColor = isRegistered ? 'var(--matrix-green)' : 'var(--cyber-blue)';
+    const statusColor = isRegistered ? 'var(--matrix-green)' : 'var(--cyber-blue)';
     const statusText = isRegistered ? 'You are registered!' : 'Registration Available';
     const statusIcon = isRegistered ? '✅' : 'ℹ️';
     
     return `
-      <div style="background: ${bgColor}; border: 2px solid ${borderColor}; padding: 1.5rem; margin: 1rem 0; border-radius: 12px;">
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-          <div style="width: 3rem; height: 3rem; background: ${statusColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; box-shadow: 0 0 15px ${statusColor};">
-            ${statusIcon}
-          </div>
-          <div>
-            <h4 style="color: #ffffff; margin: 0; text-shadow: 0 0 10px ${statusColor};">
-              🚀 305 HACK FALL 2025
-            </h4>
-            <p style="color: ${statusColor}; margin: 0; font-weight: 600;">
-              ${statusIcon} ${statusText}
-            </p>
-          </div>
-        </div>
-        ${hack305Data.eventInfo ? `
-          <div style="background: rgba(17, 17, 17, 0.6); padding: 1rem; border-radius: 8px; border-left: 4px solid ${statusColor};">
-            <div style="color: #66ff99;">
-              <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">📅 Date:</strong> ${hack305Data.eventInfo.date}</p>
-              <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">📍 Location:</strong> ${hack305Data.eventInfo.location}</p>
-              <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">🎯 Focus:</strong> ${hack305Data.eventInfo.description}</p>
-              ${hack305Data.eventInfo.organizers ? `<p style="margin: 0;"><strong style="color: ${statusColor};">👥 Organizers:</strong> ${hack305Data.eventInfo.organizers}</p>` : ''}
+        <div style="background: ${bgColor}; border: 2px solid ${borderColor}; padding: 1.5rem; margin: 1rem 0; border-radius: var(--radius); box-shadow: var(--shadow);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <div style="width: 3rem; height: 3rem; background: ${statusColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; box-shadow: 0 0 15px ${statusColor};">
+                    ${statusIcon}
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); margin: 0; text-shadow: 0 0 10px ${statusColor};">
+                        🚀 305 HACK FALL 2025
+                    </h4>
+                    <p style="color: ${statusColor}; margin: 0; font-weight: 600;">
+                        ${statusIcon} ${statusText}
+                    </p>
+                </div>
             </div>
-          </div>
-        ` : ''}
-        ${isRegistered && hack305Data.venue ? `
-          <div style="background: rgba(0, 255, 65, 0.2); padding: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #00ff41;">
-            <h5 style="color: #00ff41; margin: 0 0 0.5rem 0;">📍 Registration Details:</h5>
-            <p style="color: #66ff99; margin: 0 0 0.5rem 0;"><strong>Status:</strong> ${hack305Data.registrationStatus}</p>
-            <p style="color: #66ff99; margin: 0;"><strong>Venue:</strong> ${hack305Data.venue}</p>
-            ${hack305Data.checkIn ? `<p style="color: #66ff99; margin: 0;"><strong>Check-in:</strong> ${hack305Data.checkIn}</p>` : ''}
-          </div>
-        ` : ''}
-      </div>
+            ${hack305Data.eventInfo ? `
+                <div style="background: var(--bg-card); padding: 1rem; border-radius: var(--radius); border-left: 4px solid ${statusColor};">
+                    <div style="color: var(--text-secondary);">
+                        <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">📅 Date:</strong> ${hack305Data.eventInfo.date}</p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">📍 Location:</strong> ${hack305Data.eventInfo.location}</p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong style="color: ${statusColor};">🎯 Focus:</strong> ${hack305Data.eventInfo.description}</p>
+                        ${hack305Data.eventInfo.organizers ? `<p style="margin: 0;"><strong style="color: ${statusColor};">👥 Organizers:</strong> ${hack305Data.eventInfo.organizers}</p>` : ''}
+                    </div>
+                </div>
+            ` : ''}
+            ${isRegistered && hack305Data.venue ? `
+                <div style="background: rgba(0, 255, 65, 0.2); padding: 1rem; margin-top: 1rem; border-radius: var(--radius); border: 1px solid var(--matrix-green);">
+                    <h5 style="color: var(--matrix-green); margin: 0 0 0.5rem 0;">📍 Registration Details:</h5>
+                    <p style="color: var(--text-secondary); margin: 0 0 0.5rem 0;"><strong>Status:</strong> ${hack305Data.registrationStatus}</p>
+                    <p style="color: var(--text-secondary); margin: 0;"><strong>Venue:</strong> ${hack305Data.venue}</p>
+                    ${hack305Data.checkIn ? `<p style="color: var(--text-secondary); margin: 0;"><strong>Check-in:</strong> ${hack305Data.checkIn}</p>` : ''}
+                </div>
+            ` : ''}
+        </div>
     `;
-  }
+}
 
-  function generateQuickLinks(links) {
+function generateQuickLinks(links) {
     if (!links) return '';
     
     return `
-      <div style="background: linear-gradient(135deg, #8a2be2, #ff0080); padding: 1.5rem; margin: 1rem 0; border-radius: 12px; color: white; box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);">
-        <h4 style="color: white; margin: 0 0 1rem 0; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
-          <span style="font-size: 1.2rem;">🔗</span> Quick Links
-        </h4>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-          ${links.discord ? `
-            <a href="${links.discord}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              🎮 Discord
-            </a>
-          ` : ''}
-          ${links.groupme ? `
-            <a href="${links.groupme}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              💬 GroupMe
-            </a>
-          ` : ''}
-          ${links.hackerGuide ? `
-            <a href="${links.hackerGuide}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              📚 Hacker Guide
-            </a>
-          ` : ''}
-          ${links.attendingImage ? `
-            <a href="${links.attendingImage}" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
-              🖼️ Download Badge
-            </a>
-          ` : ''}
+        <div class="quick-links-section">
+            <h4 style="color: white; margin: 0 0 1rem 0; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+                <span style="font-size: 1.2rem;">🔗</span> Quick Links
+            </h4>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                ${links.discord ? `
+                    <a href="${links.discord}" target="_blank" class="community-button">
+                        🎮 Discord
+                    </a>
+                ` : ''}
+                ${links.groupme ? `
+                    <a href="${links.groupme}" target="_blank" class="community-button">
+                        💬 GroupMe
+                    </a>
+                ` : ''}
+                ${links.hackerGuide ? `
+                    <a href="${links.hackerGuide}" target="_blank" class="community-button">
+                        📚 Hacker Guide
+                    </a>
+                ` : ''}
+                ${links.attendingImage ? `
+                    <a href="${links.attendingImage}" target="_blank" class="community-button">
+                        🖼️ Download Badge
+                    </a>
+                ` : ''}
+            </div>
         </div>
-      </div>
     `;
-  }
-
-  // Add CSS animation for loading spinner
-  if (!document.querySelector('#registration-spinner-style')) {
-    const style = document.createElement('style');
-    style.id = 'registration-spinner-style';
-    style.textContent = `
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-    `;
-    document.head.appendChild(style);
-  }
+}
 </script>
 
 
