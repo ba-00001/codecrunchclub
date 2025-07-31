@@ -1573,6 +1573,17 @@ document.addEventListener('visibilitychange', function() {
 <script>
   const API_URL = 'https://script.google.com/macros/s/AKfycbyZC9BaienF2yDj6emfq-rYYPQGCG7obyUEtlKpD3H0gnsTv8luiHoBGMxcu_-DOzw/exec';
 
+  function format24HourTime(datetimeString) {
+    const date = new Date(datetimeString);
+    if (isNaN(date)) return datetimeString;
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const hh = String(date.getHours()).padStart(2, '0');
+    const min = String(date.getMinutes()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+  }
+
   document.getElementById('registrationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value.trim();
@@ -1597,43 +1608,38 @@ document.addEventListener('visibilitychange', function() {
       let html = `<div style="border: 2px solid #4CAF50; border-radius: 10px; background-color: #f0fff0; padding: 20px;">`;
       html += `<h3 style="color: #2e7d32;">✅ ${data.message}</h3>`;
       html += `<p style="font-weight:bold; color: #0047AB;"><span style="background:#e0f7fa;padding:4px 8px;border-radius:4px;">Email:</span> ${userData.email}</p>`;
-      html += `<p><span style="background:#eeeeee;padding:4px 8px;border-radius:4px;">Submitted At:</span> ${userData.timestamp}</p>`;
-      html += `<hr><h4>📋 Your Full Response:</h4>`;
-      html += `<div style="padding-left: 1rem;"><ul style="list-style-type: none; padding-left: 0;">`;
+      html += `<p><span style="background:#eeeeee;padding:4px 8px;border-radius:4px;">Submitted At:</span> ${format24HourTime(userData.timestamp)}</p>`;
 
-      for (const [label, value] of Object.entries(userData.additionalFields)) {
-        html += `<li style="margin-bottom: 8px;">
-                  <span style="font-weight:bold; color: #333;">${label}:</span>
-                  <span style="color: #444; background: #f9f9f9; padding: 4px 8px; border-radius: 5px;">${value}</span>
-                 </li>`;
-      }
-
-      html += `</ul></div>`;
-
-      // Community Links
       if (discordLink || groupmeLink) {
-        html += `<hr><h4>🎯 Join Our Communities:</h4><div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">`;
-
+        html += `<div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">`;
         if (discordLink) {
-          html += `<a href="${discordLink}" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">Join Discord Server</a>`;
+          html += `<a href="${discordLink}" target="_blank" style="background:#5865F2;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎯 Join Discord</a>`;
         }
-
         if (groupmeLink) {
-          html += `<a href="${groupmeLink}" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">Join GroupMe Chat</a>`;
+          html += `<a href="${groupmeLink}" target="_blank" style="background:#00AFF0;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎯 Join GroupMe</a>`;
         }
-
         html += `</div>`;
       }
 
-      // "I am attending" section
+      html += `<hr><h4>📋 Your Full Response:</h4><ul style="list-style-type:none;padding-left:0;">`;
+      for (const [label, value] of Object.entries(userData.additionalFields)) {
+        html += `<li style="margin-bottom:8px;"><strong>${label}:</strong> <span style="background:#f5f5f5;padding:4px 8px;border-radius:4px;">${value}</span></li>`;
+      }
+      html += `</ul>`;
+
+      // Final: 305 Hack RSVP + Banner + Caption
       html += `<hr><div style="margin-top: 20px;">`;
-      html += `<a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#0047AB;color:white;padding:10px 15px;border-radius:6px;text-decoration:none;">🎉 I'm Attending 305 Hackathon</a>`;
-      html += `<p style="margin-top: 10px; font-size: 0.95rem; background:#f5f5f5; padding:10px; border-radius:8px;">
-        🎉 I’m attending 305 Hackathon: Fall Edition, an official MLH 2026 Season event!<br>
+      html += `<h4>📣 Help us spread the word!</h4>`;
+      html += `<img src="https://i.ibb.co/qy3RhHt/305-hack-banner.png" alt="305 Hack Banner" style="max-width:100%; border-radius:12px; margin-bottom: 15px; border: 1px solid #ddd;" />`;
+
+      html += `<p style="margin: 10px 0; background: #f8f8f8; padding: 12px; border-left: 4px solid #0047AB; font-size: 0.95rem; border-radius: 6px;">
+        🎉 I’m attending <strong>305 Hackathon: Fall Edition</strong>, an official <strong>MLH 2026 Season</strong> event!<br>
         👉 Register now → <a href="https://305HackFall2025.vercel.app" target="_blank">305HackFall2025.vercel.app</a><br>
         📩 LinkedIn RSVP → <a href="https://305hackfall2025-linkedin.vercel.app" target="_blank">305hackfall2025-linkedin.vercel.app</a><br>
-        🌍 Worldwide — open to <strong>ALL majors</strong>, <strong>ALL universities</strong>, and high school students <strong>(16+)</strong>!
+        🌍 <strong>Worldwide</strong> — open to <strong>ALL majors</strong>, <strong>ALL universities</strong>, and high school students <strong>(16+)</strong>!
       </p>`;
+
+      html += `<a href="https://305hackfall2025iamattending.vercel.app/" target="_blank" style="background:#0047AB;color:white;padding:10px 15px;border-radius:6px;text-decoration:none; display: inline-block;">🎉 I’m Attending – Let Everyone Know</a>`;
       html += `</div></div>`;
 
       resultsDiv.innerHTML = html;
