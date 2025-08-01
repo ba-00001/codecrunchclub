@@ -1,0 +1,444 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Document Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .doc-container {
+            width: 100%;
+            height: 85vh;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+
+ <!-- Menu Overlay -->
+    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999;"></div>
+
+    <!-- Slide-out Menu -->
+    <div id="slide-menu" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100vh; background: linear-gradient(180deg, #2463EB 0%, #1e40af 100%); box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3); transition: right 0.3s ease-in-out; z-index: 1000; overflow-y: auto;">
+        <button id="close-menu" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 8px; border-radius: 50%; transition: all 0.3s ease;">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div style="padding: 24px; border-bottom: 2px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05);">
+            <div class="flex items-center mb-4">
+                <div style="height: 48px; width: 48px; background-color: #F59E0B; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 8px; margin-right: 12px;">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" style="height: 100%; width: 100%; object-fit: contain;" />
+                </div>
+                <div class="flex flex-col">
+                    <span style="font-size: 1.25rem; font-weight: bold; line-height: 1; color: white;">CODE</span>
+                    <span style="font-size: 0.875rem; color: #F59E0B; font-weight: 500;">CRUNCH GLOBAL</span>
+                </div>
+            </div>
+            <a href="https://hack-university-fundraiser.vercel.app/" style="background: linear-gradient(135deg, #F59E0B, #EF4444); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); animation: pulse-glow 3s ease-in-out infinite; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; width: 100%; justify-content: center;">
+                <i class="fas fa-heart"></i>
+                Support Hack University
+            </a>
+            <a href="https://hack-university.vercel.app/" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); animation: pulse-glow 3s ease-in-out infinite; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; width: 100%; justify-content: center; margin-top: 12px;">
+                <i class="fas fa-graduation-cap"></i>
+                Visit Hack University
+            </a>
+        </div>
+
+        <div style="padding: 8px 0;">
+            <a href="https://codecrunchglobal.vercel.app/" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-home mr-3"></i>Home
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#mission" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-bullseye mr-3"></i>Mission
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#events" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-calendar mr-3"></i>Events
+            </a>
+            <a href="https://codecrunchglobal-wiki.vercel.app" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-book mr-3"></i>Wiki
+            </a>
+            <a href="https://ba-00001.github.io/codecrunchclub/hackathons.html" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-code mr-3"></i>Hackathons
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/community-access.html" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-users mr-3"></i>Become a Member
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScOA6IBnLxnxEnk-BOaXYyPXpJ3dU6Cu4OOrPJ7ErOgKvIdEQ/viewform?usp=dialog" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-user-tie mr-3"></i>Join Executive Board
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#team" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-user-friends mr-3"></i>Our Team
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#gallery" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-images mr-3"></i>Gallery
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#resources" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-tools mr-3"></i>Resources
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/#connect" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-link mr-3"></i>Connect
+            </a>
+            <a href="https://lu.ma/CODECRUNCH" target="_blank" rel="noopener noreferrer" style="display: block; padding: 16px 24px; color: white; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; font-weight: 500;">
+                <i class="fas fa-calendar-alt mr-3"></i>Event Calendar
+            </a>
+        </div>
+
+        <div style="padding: 8px 0;">
+            <div style="padding: 12px 24px 8px; color: #F59E0B; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Partners</div>
+            <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px 32px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">
+                ColorStack at FIU
+            </a>
+            <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px 32px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">
+                CAHSI at FIU
+            </a>
+            <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px 32px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">
+                FIU Business - Supporter
+            </a>
+            <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px 32px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">
+                FIU Honors College - Supporter
+            </a>
+            <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px 32px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">
+                FIU College of Engineering and Computing - Supporter
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav style="background-color: #2463EB; color: white; width: 100%; z-index: 50;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div style="height: 48px; width: 48px; background-color: #F59E0B; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 8px;">
+                            <div style="height: 48px; width: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" style="height: 100%; width: 100%; object-fit: contain;" />
+                            </div>
+                        </div>
+                        <div style="margin-left: 12px; display: flex; flex-direction: column;">
+                            <span style="font-size: 1.25rem; font-weight: bold; line-height: 1;">CODE</span>
+                            <span style="font-size: 0.875rem; color: #F59E0B; font-weight: 500;">CRUNCH GLOBAL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right side: Donate button + Hamburger -->
+                <div class="flex items-center space-x-4">
+                    <!-- Compact donate button for larger screens -->
+                    <div class="hidden sm:block">
+                        <a href="https://hack-university-fundraiser.vercel.app/" style="background: linear-gradient(135deg, #F59E0B, #EF4444); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.875rem; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);">
+                            <i class="fas fa-heart"></i>
+                            <span class="hidden md:inline">Donate</span>
+                            <span class="md:hidden">Support</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Hamburger menu button -->
+                    <div id="hamburger-menu" style="cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.3s ease;">
+                        <span style="display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: 0.3s; border-radius: 2px;"></span>
+                        <span style="display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: 0.3s; border-radius: 2px;"></span>
+                        <span style="display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: 0.3s; border-radius: 2px;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        (function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const slideMenu = document.getElementById('slide-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const closeMenu = document.getElementById('close-menu');
+
+            // Hover effects
+            hamburger.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            });
+            hamburger.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+            });
+
+            closeMenu.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                this.style.transform = 'rotate(90deg)';
+            });
+            closeMenu.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.transform = 'rotate(0deg)';
+            });
+
+            // Menu functionality
+            function openMenu() {
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                
+                slideMenu.style.right = '0';
+                menuOverlay.style.opacity = '1';
+                menuOverlay.style.visibility = 'visible';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenuFunc() {
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+                
+                slideMenu.style.right = '-400px';
+                menuOverlay.style.opacity = '0';
+                menuOverlay.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+            }
+
+            hamburger.addEventListener('click', function() {
+                if (slideMenu.style.right === '0px') {
+                    closeMenuFunc();
+                } else {
+                    openMenu();
+                }
+            });
+
+            closeMenu.addEventListener('click', closeMenuFunc);
+            menuOverlay.addEventListener('click', closeMenuFunc);
+
+            // Add hover effects to menu items
+            const menuItems = slideMenu.querySelectorAll('a[style*="padding: 16px 24px"]');
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.paddingLeft = '32px';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                    this.style.paddingLeft = '24px';
+                });
+                item.addEventListener('click', closeMenuFunc);
+            });
+
+            // Add hover effects to partner links
+            const partnerLinks = slideMenu.querySelectorAll('a[style*="padding: 12px 32px"]');
+            partnerLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.paddingLeft = '40px';
+                    this.style.color = 'white';
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                    this.style.paddingLeft = '32px';
+                    this.style.color = 'rgba(255, 255, 255, 0.9)';
+                });
+                link.addEventListener('click', closeMenuFunc);
+            });
+
+            // Prevent menu from closing when clicking inside the menu
+            slideMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Mobile responsive
+            function checkMobile() {
+                if (window.innerWidth <= 480) {
+                    slideMenu.style.width = '100vw';
+                    if (slideMenu.style.right === '0px') {
+                        slideMenu.style.right = '0';
+                    } else {
+                        slideMenu.style.right = '-100vw';
+                    }
+                } else {
+                    slideMenu.style.width = '350px';
+                    if (slideMenu.style.right === '0px') {
+                        slideMenu.style.right = '0';
+                    } else {
+                        slideMenu.style.right = '-400px';
+                    }
+                }
+            }
+
+            window.addEventListener('resize', checkMobile);
+            checkMobile();
+        })();
+    </script>
+
+
+
+
+
+
+    <div class="container">
+        <h2>Doc Viewer - PROSPECTUS / Sponsorship Club Package</h2>
+        
+        <!-- Google Doc Viewer -->
+        <div class="doc-container">
+            <!-- Using Google Docs preview mode -->
+            <iframe src="https://docs.google.com/document/d/19I7oV5lomlf_ecoX2zwg2vdmhLlNC6yGIxW4vxrDraY/preview" allowfullscreen></iframe>
+        </div>
+        
+        <div class="loading-message">
+            If the document doesn't load, please check your internet connection.
+        </div>
+    </div>
+
+
+
+
+  <!-- Footer -->
+    <footer id="connect" style="background-color: #2463EB; color: white; padding: 48px 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 style="font-size: 1.125rem; font-weight: bold; margin-bottom: 16px;">
+                        Code Crunch Global 
+                        <span style="position: relative; display: inline-block; color: #F59E0B; font-size: 1.5rem; margin: 0 8px;">✨</span>
+                    </h3>
+                    <p style="font-size: 0.875rem; opacity: 0.8;">
+                        An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
+                    </p>
+                    <p style="font-size: 0.875rem; margin-top: 8px;">
+                        <a href="https://codecrunchglobal.vercel.app" style="color: white; text-decoration: underline; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">codecrunchglobal.vercel.app</a>
+                    </p>
+                    
+                    <!-- Social Media Links Grid -->
+                    <div style="margin-top: 24px;">
+                        <h4 style="font-size: 0.875rem; font-weight: bold; margin-bottom: 12px;">Connect With Us:</h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <a href="https://www.linkedin.com/company/code-crunch-club" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fab fa-linkedin text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">LinkedIn</span>
+                            </a>
+                            <a href="https://www.instagram.com/codecrunchclub/" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fab fa-instagram text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">Instagram</span>
+                            </a>
+                            <a href="https://github.com/CODE-CRUNCH-CLUB" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fab fa-github text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">GitHub</span>
+                            </a>
+                            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fab fa-youtube text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">YouTube</span>
+                            </a>
+                            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-university text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px; text-align: center;">Panther Connect</span>
+                            </a>
+                            <a href="https://codecrunchglobal.vercel.app/community-access.html" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fab fa-discord text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">Discord</span>
+                            </a>
+                            <a href="https://codecrunchglobal.vercel.app/community-access.html" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-users text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">GroupMe</span>
+                            </a>
+                            <a href="https://hack-university.vercel.app/" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-video text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">Zoom</span>
+                            </a>
+                            <a href="https://lu.ma/CODECRUNCH" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="far fa-calendar-alt text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px; text-align: center;">Event Calendar</span>
+                            </a>
+                            <a href="https://app.epichire.com/clubs/809/invite?code=mXjh9s" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-briefcase text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">EpicHire</span>
+                            </a>
+                            <a href="https://codecrunchglobal-wiki.vercel.app/" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-book text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px; text-align: center;">Course Schedule</span>
+                            </a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScOA6IBnLxnxEnk-BOaXYyPXpJ3dU6Cu4OOrPJ7ErOgKvIdEQ/viewform?usp=dialog" style="display: flex; flex-direction: column; align-items: center; color: white; transition: color 0.2s ease; text-decoration: none;" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='white'">
+                                <i class="fas fa-clipboard-check text-xl"></i>
+                                <span style="font-size: 0.75rem; margin-top: 4px;">Attendance</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.125rem; font-weight: bold; margin-bottom: 16px;">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://codecrunchglobal.vercel.app/#mission" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Mission</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/#events" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Events</a></li>
+                        <li><a href="https://ba-00001.github.io/codecrunchclub/hackathons.html" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Hackathons</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/community-access.html" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Membership</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScOA6IBnLxnxEnk-BOaXYyPXpJ3dU6Cu4OOrPJ7ErOgKvIdEQ/viewform?usp=dialog" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Join E-Board</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/#resources" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Resources</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/#connect" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Connect</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/community-access.html" target="_blank" rel="noopener noreferrer" style="font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Join Discord</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.125rem; font-weight: bold; margin-bottom: 16px;">Contact</h3>
+                    <p style="font-size: 0.875rem; opacity: 0.8;">
+                        Florida International University<br>
+                        Miami, FL<br>
+                        <a href="mailto:codecrunchclub@gmail.com" style="color: white; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">codecrunchclub@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.2); text-align: center;">
+                <p style="font-size: 0.875rem; opacity: 0.8;">
+                    © <span id="current-year"></span> Code Crunch Global. All rights reserved.
+                </p>
+                <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 16px;">
+                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.color='#5eead4'" onmouseout="this.style.color='#4ecdc4'">Brian Bazurto</a> | Powered by innovation and collaboration
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+
+
+</body>
+</html>
