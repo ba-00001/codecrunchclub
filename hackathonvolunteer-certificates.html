@@ -1908,9 +1908,16 @@ body::before {
 
 
 
+
+
+
+
+
+
+
 <!-- =========================
    CERTIFICATE GENERATOR (Drop-in)
-   Robust, accessible, XSS-safe, multi-certificate support
+   Robust, accessible, XSS-safe, multi-certificate support with participation validation
    ========================= -->
 <section class="checklist-section" id="certificate-generator" style="margin-top:3rem;">
   <h2 class="checklist-title glitch" data-text="GENERATE YOUR CERTIFICATE">GENERATE YOUR CERTIFICATE for SummerCodex 2025</h2>
@@ -1929,6 +1936,7 @@ body::before {
     .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
     .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
     .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
+    .alert-warning{color:#856404;background:#fff3cd;border-color:#ffeaa7}
 
     /* Certificate preview canvas (A4 landscape at ~96dpi) */
     .certificate-container{
@@ -1948,6 +1956,20 @@ body::before {
     .btn-blue{padding:15px 30px;background:#2196f3;color:#fff;border:none;border-radius:8px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
     .btn-blue:hover{background:#1976d2;transform:translateY(-2px)}
     .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
+    
+    .non-participant-card{
+      background:#fff3cd;
+      border:2px solid #ffc107;
+      border-radius:12px;
+      padding:2rem;
+      margin:2rem 0;
+      text-align:center;
+    }
+    
+    .non-participant-icon{
+      font-size:4rem;
+      margin-bottom:1rem;
+    }
     
     @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
     @media (max-width:900px){.certificate-container{transform:scale(.65)}}
@@ -1983,6 +2005,35 @@ function rolesToText(roles, rolesText) {
   return roles || 'Contributor';
 }
 
+// NEW: Function to check if user participated
+function checkParticipationStatus(cert) {
+  const roles = cert?.roles || cert?.rolesText || '';
+  const participationStatus = cert?.participationStatus || cert?.status || '';
+  
+  // Convert to lowercase for case-insensitive checking
+  const rolesLower = String(roles).toLowerCase();
+  const statusLower = String(participationStatus).toLowerCase();
+  
+  // Check for non-participation indicators
+  const nonParticipationIndicators = [
+    'signed up as a judge but did not participate',
+    'did not participate',
+    'not participate',
+    'no participation',
+    'absent',
+    'no show',
+    'not attended',
+    'not started'
+  ];
+  
+  // Check if any non-participation indicator is found in roles or status
+  const hasNonParticipationFlag = nonParticipationIndicators.some(indicator => 
+    rolesLower.includes(indicator) || statusLower.includes(indicator)
+  );
+  
+  return !hasNonParticipationFlag;
+}
+
 function normalizeCert(cert) {
   return {
     participantName: esc(cert?.participantName || 'Participant'),
@@ -1990,7 +2041,9 @@ function normalizeCert(cert) {
     date: esc(cert?.date || 'Date'),
     location: esc(cert?.location || 'Location'),
     rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
-    hackLogoUrl: cert?.hackLogoUrl || ''
+    hackLogoUrl: cert?.hackLogoUrl || '',
+    roles: cert?.roles || '',
+    participationStatus: cert?.participationStatus || cert?.status || ''
   };
 }
 
@@ -2002,13 +2055,16 @@ function infoBoxHTML() {
     • <strong>Any Valid Email</strong>: Use the email from your participation records<br>
     • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
     • <strong>Verification</strong>: Certificates include official verification details<br>
-    • <strong>Recognition</strong>: Professional certificate for your portfolio
+    • <strong>Recognition</strong>: Professional certificate for your portfolio<br>
+    • <strong>Participation Required</strong>: Certificates only for active participants
   </div>`;
 }
 
 function setStatus(type, html) {
   const resultDiv = document.getElementById('certificateResult');
-  const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
+  const cls = type === 'ok' ? 'alert-ok' : 
+              type === 'error' ? 'alert-error' : 
+              type === 'warning' ? 'alert-warning' : 'alert-info';
   resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
 }
 
@@ -2079,7 +2135,31 @@ async function generateCertificate() {
       return;
     }
 
-    showCertificatesFound(validCerts);
+    // NEW: Check participation status for each certificate
+    const participatedCerts = [];
+    const nonParticipatedCerts = [];
+    
+    validCerts.forEach(cert => {
+      const certData = cert.certificateData || cert;
+      if (checkParticipationStatus(certData)) {
+        participatedCerts.push(cert);
+      } else {
+        nonParticipatedCerts.push(cert);
+      }
+    });
+
+    // Handle different scenarios
+    if (participatedCerts.length > 0 && nonParticipatedCerts.length === 0) {
+      // All certificates are for participants
+      showCertificatesFound(participatedCerts);
+    } else if (participatedCerts.length === 0 && nonParticipatedCerts.length > 0) {
+      // All are non-participants
+      showNonParticipantMessage(nonParticipatedCerts);
+    } else {
+      // Mixed - show both
+      showMixedParticipationResults(participatedCerts, nonParticipatedCerts);
+    }
+
   } catch (err) {
     console.error(err);
     setStatus('error', '❌ Failed to check records. Please try again later.');
@@ -2087,6 +2167,94 @@ async function generateCertificate() {
     clearTimeout(to);
     toggleButton(false);
   }
+}
+
+// NEW: Show message for non-participants
+function showNonParticipantMessage(nonParticipatedCerts) {
+  const displayDiv = document.getElementById('certificatesDisplay');
+  const count = nonParticipatedCerts.length;
+  const events = nonParticipatedCerts.map(cert => {
+    const certData = cert.certificateData || cert;
+    return certData.hackathonName || 'Event';
+  }).join(', ');
+
+  setStatus('warning', 
+    `<strong>⚠️ VOLUNTEER REGISTRATION FOUND</strong><br>
+     We found your volunteer registration${count > 1 ? 's' : ''} but unfortunately you did not participate in the event${count > 1 ? 's' : ''}.<br><br>
+     <strong>Event${count > 1 ? 's' : ''}:</strong> ${events}`
+  );
+
+  const html = `
+    <div class="non-participant-card">
+      <div class="non-participant-icon">📋</div>
+      <h3 style="color:#856404;margin-bottom:1rem;font-family:'Courier New',monospace">
+        Thank You for Volunteering!
+      </h3>
+      <p style="font-size:1.1rem;color:#856404;margin-bottom:1.5rem;font-family:'Courier New',monospace">
+        You signed up as a volunteer for this hackathon, but unfortunately you did not participate, 
+        so we cannot provide you with a certificate at this time.
+      </p>
+      <div style="background:#fff;padding:1.5rem;border-radius:8px;margin:1rem 0;border:1px solid #ffc107">
+        <h4 style="color:#856404;margin-bottom:1rem">📝 Your Registration Details:</h4>
+        ${nonParticipatedCerts.map((cert, index) => {
+          const certData = cert.certificateData || cert;
+          return `
+            <div style="margin-bottom:1rem;padding:1rem;background:#fffbf0;border-radius:6px">
+              <strong>Event:</strong> ${esc(certData.hackathonName || 'Event')}<br>
+              <strong>Role:</strong> ${esc(rolesToText(certData.roles, certData.rolesText))}<br>
+              <strong>Status:</strong> ${esc(certData.participationStatus || 'Did not participate')}
+            </div>
+          `;
+        }).join('')}
+      </div>
+      <p style="color:#856404;font-style:italic;margin-top:1.5rem">
+        We appreciate your interest in volunteering! Please make sure to participate in future events to earn your certificate.
+      </p>
+      <div style="margin-top:2rem">
+        <p style="color:#666;font-size:0.9rem">
+          <strong>Questions?</strong> Contact the organizers if you believe this is an error.
+        </p>
+      </div>
+    </div>
+  `;
+
+  displayDiv.innerHTML = html;
+  displayDiv.style.display = 'block';
+  
+  setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+}
+
+// NEW: Show mixed results (some participated, some didn't)
+function showMixedParticipationResults(participatedCerts, nonParticipatedCerts) {
+  const displayDiv = document.getElementById('certificatesDisplay');
+  
+  // Show certificates for participated events
+  showCertificatesFound(participatedCerts);
+  
+  // Add warning section for non-participated events
+  const nonParticipatedHtml = `
+    <div style="margin-top:3rem;padding:2rem;background:#fff3cd;border:2px solid #ffc107;border-radius:12px">
+      <h4 style="color:#856404;margin-bottom:1rem;text-align:center">⚠️ Additional Registrations Found</h4>
+      <p style="color:#856404;text-align:center;margin-bottom:1.5rem">
+        We also found volunteer registrations where you did not participate:
+      </p>
+      ${nonParticipatedCerts.map(cert => {
+        const certData = cert.certificateData || cert;
+        return `
+          <div style="background:#fff;padding:1rem;margin:0.5rem 0;border-radius:6px;border:1px solid #ffc107">
+            <strong>Event:</strong> ${esc(certData.hackathonName || 'Event')}<br>
+            <strong>Status:</strong> Registered but did not participate
+          </div>
+        `;
+      }).join('')}
+      <p style="color:#856404;font-style:italic;text-align:center;margin-top:1rem">
+        Certificates are only available for events where you actively participated.
+      </p>
+    </div>
+  `;
+  
+  // Append to existing display
+  displayDiv.innerHTML += nonParticipatedHtml;
 }
 
 function showCertificatesFound(certificatesArr) {
@@ -2257,67 +2425,21 @@ function generateCertificateWindow(certRaw) {
     @media print{
       body{background:#fff!important;padding:0!important;margin:0!important}
       .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
-      .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
-      .controls{display:none!important}
-      .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
-      .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
-      .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
-    }
-  </style>
-</head>
-<body>
-  <div class="controls">
-    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
-    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
-  </div>
-  <div class="wrap">
-    <div class="sheet">
-      ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
-      <div class="hdr"><div class="ttl">CERTIFICATE</div><div class="sub">OF ACHIEVEMENT</div></div>
-      <div class="presented">This certificate is presented to</div>
-      <div class="name">${c.participantName}</div>
-      <div class="rec">In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-        <strong>${c.hackathonName}</strong>.
-      </div>
-      <div class="info">${c.date} — ${c.location}</div>
-      <div class="impact">Your insights helped shape a fair and impactful competition experience for all participants.</div>
-      <div class="footer">
-        <div class="left" style="flex:1;display:flex;align-items:center">
-          <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors">
-          <img src="https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34" alt="FIU Pino Global">
-          <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business">
-        </div>
-        <div class="sig">
-          <div class="sig-line"></div>
-          <div class="sig-name">BRIAN BAZURTO</div>
-          <div class="sig-title">Code Crunch President<br>Hack University Initiative</div>
-        </div>
-        <div class="right" style="flex:1;display:flex;justify-content:flex-end;align-items:center">
-          <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
-          <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU">
-          <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU">
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>`;
+      .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;
 
-  const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
-  if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
-  w.opener = null; // security
-  w.document.write(html);
-  w.document.close();
-}
 
-/* Enter key triggers generation */
-document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('certificateEmailInput');
-  input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
-  // initial info box
-  document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
-});
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
