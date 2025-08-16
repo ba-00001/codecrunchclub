@@ -1988,17 +1988,6 @@ function rolesToText(roles, rolesText) {
   return roles || 'Contributor';
 }
 
-/* === NEW: role parsing & disqualification === */
-function roleString(cert) {
-  const r = cert?.rolesText ?? (Array.isArray(cert?.roles) ? cert.roles.join(', ') : cert?.roles ?? '');
-  return String(r).trim();
-}
-
-function isNoParticipationRole(cert) {
-  const r = roleString(cert).toLowerCase();
-  return r === 'signed up as a judge but did not participate' || r.includes('not participate');
-}
-
 function normalizeCert(cert) {
   return {
     participantName: esc(cert?.participantName || 'Participant'),
@@ -2085,25 +2074,22 @@ async function generateCertificate() {
     }
 
     // Base validity (status/data)
-    const baseValid = certificatesArr.filter(cert => 
-      cert?.status === "Certificate Available" && 
+    const baseValid = certificatesArr.filter(cert =>
+      cert?.status === "Certificate Available" &&
       (cert?.certificateData || cert?.participantName)
     );
 
-    // Disqualify non-participants by role
-    const disqualified = baseValid.filter(isNoParticipationRole);
-    const validCerts = baseValid.filter(c => !isNoParticipationRole(c));
+    // 🚫 Disqualify by role text
+    const validCerts = baseValid.filter(cert => {
+      const role = String(cert?.rolesText || '').toLowerCase().trim();
+      if (role === 'signed up as a judge but did not participate') return false;
+      if (role.includes('not participate')) return false;
+      return true;
+    });
 
     if (!validCerts.length) {
       showCertificateError('You signed as volunteer for this hack but unfortunately you did not participate, so we cannot give you a certificate.');
       return;
-    }
-
-    // Optional heads-up if some were excluded
-    if (disqualified.length) {
-      setStatus('info',
-        `ℹ️ Some records were excluded because they indicate non-participation (e.g., “Signed up as a judge but did not participate”).`
-      );
     }
 
     showCertificatesFound(validCerts);
