@@ -2490,7 +2490,8 @@ body::before {
         </div>
     </main>
 
-    <!-- Certificate Generator Section -->
+    
+<!-- Certificate Generator Section -->
 <section class="checklist-section" id="certificate-generator" style="margin-top: 3rem;">
     <h2 class="checklist-title glitch" data-text="GENERATE YOUR CERTIFICATE">GENERATE YOUR CERTIFICATE</h2>
     <p class="checklist-subtitle">[ OFFICIAL PARTICIPATION CERTIFICATE ] - Download your volunteer certificate using your email address</p>
@@ -2517,66 +2518,63 @@ body::before {
     </div>
 
     <!-- Certificate Preview (Hidden by default) -->
-    <div id="certificatePreview" style="display: none; margin-top: 2rem; background: white; border: 8px solid #B8860B; border-radius: 10px; padding: 2rem; color: #333; font-family: 'Times New Roman', serif; position: relative;">
-        <div id="hackLogo" style="position: absolute; top: 20px; right: 20px; max-width: 120px; max-height: 80px;"></div>
-        
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 2px; color: #333;">CERTIFICATE</h1>
-            <p style="font-size: 1rem; color: #666; letter-spacing: 3px;">OF ACHIEVEMENT</p>
-        </div>
-        
-        <p style="text-align: center; font-style: italic; margin: 1.5rem 0;">This certificate is presented to</p>
-        
-        <h2 id="participantName" style="text-align: center; font-size: 2rem; font-weight: bold; margin: 1.5rem 0; font-style: italic; color: #333;">Participant Name</h2>
-        
-        <div id="certificateBody" style="text-align: center; font-size: 1rem; line-height: 1.6; margin: 1.5rem 0; color: #555;">
-            <p>In recognition of your outstanding contributions as a <strong id="participantRoles">Role</strong> at the <strong id="hackathonName">Hackathon Name</strong>.</p>
-            <br>
-            <p><strong id="eventDate">Date</strong> - <span id="eventLocation">Location</span></p>
-            <br>
-            <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
-        </div>
-        
-        <!-- Bottom logos and signature section -->
-        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <!-- Left side - FIU logos -->
-                <div style="display: flex; gap: 15px; align-items: center;">
-                    <div style="text-align: center;">
-                        <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width: 40px; height: 40px; object-fit: contain;">
-                        <p style="font-size: 0.6rem; margin: 2px 0 0 0; color: #666;">Honors College</p>
+    <div id="certificatePreview" style="display: none; margin-top: 2rem;">
+        <!-- A4 Landscape Certificate (297mm x 210mm = 1123px x 794px at 96dpi) -->
+        <div style="width: 1123px; height: 794px; background: white; border: 8px solid #B8860B; border-radius: 10px; padding: 40px; color: #333; font-family: 'Times New Roman', serif; position: relative; margin: 0 auto; box-sizing: border-box;">
+            <div id="hackLogo" style="position: absolute; top: 30px; right: 30px; max-width: 150px; max-height: 80px;"></div>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 3px; color: #333;">CERTIFICATE</h1>
+                <p style="font-size: 1.2rem; color: #666; letter-spacing: 4px;">OF ACHIEVEMENT</p>
+            </div>
+            
+            <p style="text-align: center; font-style: italic; margin: 30px 0; font-size: 1.1rem;">This certificate is presented to</p>
+            
+            <h2 id="participantName" style="text-align: center; font-size: 3rem; font-weight: bold; margin: 40px 0; font-style: italic; color: #333;">Participant Name</h2>
+            
+            <div id="certificateBody" style="text-align: center; font-size: 1.1rem; line-height: 1.8; margin: 30px 0; color: #555;">
+                <p>In recognition of your outstanding contributions as a <strong id="participantRoles">Role</strong> at the <strong id="hackathonName">Hackathon Name</strong>.</p>
+                <br>
+                <p><strong id="eventDate">Date</strong> - <span id="eventLocation">Location</span></p>
+                <br>
+                <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+            </div>
+            
+            <!-- Bottom logos and signature section -->
+            <div style="position: absolute; bottom: 30px; left: 40px; right: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <!-- Left side - FIU logos (no names) -->
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width: 50px; height: 50px; object-fit: contain;">
+                        <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU Pino Global" style="width: 50px; height: 50px; object-fit: contain;">
+                        <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width: 50px; height: 50px; object-fit: contain;">
                     </div>
-                    <div style="text-align: center;">
-                        <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU Pino Global" style="width: 40px; height: 40px; object-fit: contain;">
-                        <p style="font-size: 0.6rem; margin: 2px 0 0 0; color: #666;">Pino Global<br>Entrepreneurship</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width: 40px; height: 40px; object-fit: contain;">
-                        <p style="font-size: 0.6rem; margin: 2px 0 0 0; color: #666;">Business</p>
-                    </div>
-                </div>
 
-                <!-- Center - Signature -->
-                <div style="text-align: center;">
-                    <div style="border-top: 1px solid #333; width: 200px; margin: 0 auto 10px;"></div>
-                    <p style="font-size: 0.9rem; font-weight: bold; margin-bottom: 0;">BRIAN BAZURTO</p>
-                    <p style="font-size: 0.8rem; font-style: italic; margin: 0;">Code Crunch President</p>
-                    <p style="font-size: 0.8rem; font-style: italic; margin: 0;">Hack University Initiative</p>
-                </div>
+                    <!-- Center - Signature -->
+                    <div style="text-align: center;">
+                        <div style="border-top: 2px solid #333; width: 250px; margin: 0 auto 15px;"></div>
+                        <p style="font-size: 1rem; font-weight: bold; margin-bottom: 5px;">BRIAN BAZURTO</p>
+                        <p style="font-size: 0.9rem; font-style: italic; margin: 0;">Code Crunch President</p>
+                        <p style="font-size: 0.9rem; font-style: italic; margin: 0;">Hack University Initiative</p>
+                    </div>
 
-                <!-- Right side - Partner logos -->
-                <div style="display: flex; gap: 10px; align-items: center;">
-                    <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width: 35px; height: 35px; object-fit: contain; border-radius: 4px;">
-                    <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width: 35px; height: 35px; object-fit: contain; border-radius: 4px;">
-                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width: 35px; height: 35px; object-fit: contain; border-radius: 4px;">
+                    <!-- Right side - Partner logos -->
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width: 45px; height: 45px; object-fit: contain; border-radius: 4px;">
+                        <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width: 45px; height: 45px; object-fit: contain; border-radius: 4px;">
+                        <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width: 45px; height: 45px; object-fit: contain; border-radius: 4px;">
+                    </div>
                 </div>
             </div>
         </div>
         
-        <button onclick="downloadCertificate()" 
-                style="display: block; margin: 2rem auto 0; padding: 1rem 2rem; background: linear-gradient(45deg, #28a745, #20c997); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
-            📄 Download Certificate
-        </button>
+        <!-- Download button below certificate -->
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="downloadCertificate()" 
+                    style="padding: 15px 30px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                📄 Download Certificate
+            </button>
+        </div>
     </div>
 </section>
 
@@ -2885,6 +2883,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+
+
+
 
     <footer class="footer">
         <div class="container footer-container">
