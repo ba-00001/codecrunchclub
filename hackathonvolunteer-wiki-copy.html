@@ -2491,9 +2491,6 @@ body::before {
     </main>
 
     
-<!-- =========================
-   CERTIFICATE GENERATOR (reads ALL matches)
-   ========================= -->
 <section id="certificate-generator" style="margin-top:3rem;">
   <h2>GENERATE YOUR CERTIFICATE</h2>
   <p>[ OFFICIAL PARTICIPATION CERTIFICATE ] — Download your volunteer certificate using your email address</p>
@@ -2511,12 +2508,12 @@ body::before {
     .err{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
     .info{background:#e3f2fd;border-color:#bbdefb;color:#0b5ed7}
 
-    /* A4-ish preview canvas */
+    /* Preview (A4-ish) */
     #certificatePreview .sheet{width:1123px;height:794px;border:8px solid #B8860B;border-radius:10px;margin:0 auto;padding:40px;position:relative;font-family:"Times New Roman",serif}
+    #hackLogo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
     #certificatePreview h1{font-size:3.2rem;margin:0 0 .5rem}
     #certificatePreview .sub{letter-spacing:4px;color:#666;margin:0 0 30px}
     #certificatePreview .name{font-size:2.4rem;font-weight:700;font-style:italic;margin:20px 0}
-    #hackLogo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
     @media (max-width:1200px){#certificatePreview .sheet{transform:scale(.8);transform-origin:top center}}
     @media (max-width:900px){#certificatePreview .sheet{transform:scale(.65)}}
   </style>
@@ -2529,6 +2526,7 @@ body::before {
 
   <div id="result" class="card"></div>
 
+  <!-- Single certificate preview -->
   <div id="certificatePreview" style="display:none;margin-top:2rem;">
     <div class="sheet">
       <div id="hackLogo"></div>
@@ -2571,24 +2569,29 @@ body::before {
 </section>
 
 <script>
-/* ---------- Config ---------- */
-const API_URL = 'https://script.google.com/macros/s/AKfycbwp3xDZno3iMGp_T_A_QmRHapDTJipoe2FMh28UzVD1lDuOHF0kjldQlSREQW74iMWMGw/exec';
+/* ===== Config ===== */
+const API_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
 
-/* ---------- State ---------- */
-let singleCert = null;               // for single preview/download
-let allCerts = [];                   // for multiple
+/* ===== State ===== */
+let singleCert = null;     // last single result
+let allCerts = [];         // when many
 
-/* ---------- Utils ---------- */
+/* ===== Utils ===== */
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const rolesText = (r, t) => t || (Array.isArray(r) ? r.join(', ') : (r || 'Contributor'));
-const box = (html, cls) => `
-  <div class="infobox">
-    <strong style="color:#28a745">🏆 Certificate Generator</strong><br>
-    • <b>Official Certificates</b> for confirmed participants • <b>PDF-ready</b> • <b>Includes verification</b>
-  </div>
-  <div class="alert ${cls}">${html}</div>`;
+const box = (html, cls) =>
+  `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator</strong><br>
+   • <b>Official Certificates</b> • <b>PDF-ready</b> • <b>Includes verification</b></div>
+   <div class="alert ${cls}">${html}</div>`;
 
-/* ---------- Main ---------- */
+function normalizeResponse(payload){
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.certificates)) return payload.certificates;
+  if (payload?.certificateData) return [payload];
+  return [];
+}
+
+/* ===== Main ===== */
 async function generateCertificate() {
   const emailEl = document.getElementById('email');
   const resEl = document.getElementById('result');
@@ -2596,9 +2599,8 @@ async function generateCertificate() {
   const btn = document.getElementById('go');
 
   const email = (emailEl.value || '').trim();
-  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!email) return resEl.innerHTML = box('❌ Please enter your email address.','err');
-  if (!valid) return resEl.innerHTML = box('❌ Please enter a valid email address.','err');
+  if (!email) { resEl.innerHTML = box('❌ Please enter your email address.','err'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { resEl.innerHTML = box('❌ Please enter a valid email address.','err'); return; }
 
   resEl.innerHTML = box('⏳ Checking for available certificates…','info');
   preview.style.display = 'none';
@@ -2607,19 +2609,14 @@ async function generateCertificate() {
   try {
     const r = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`);
     const payload = await r.json();
-
-    // Normalize to array of entries (supports multiple shapes)
-    let certs = [];
-    if (Array.isArray(payload)) certs = payload;
-    else if (Array.isArray(payload?.certificates)) certs = payload.certificates;
-    else if (payload?.certificateData) certs = [payload];
+    const certs = normalizeResponse(payload);
+    console.log('payload:', payload, 'cert count:', certs.length);
 
     if (!certs.length || certs[0]?.status === 'No certificate found') {
       resEl.innerHTML = box('❌ No participation record found according to our records.','err');
       return;
     }
 
-    // Single vs multiple
     if (certs.length === 1) {
       const cert = certs[0].certificateData || certs[0];
       singleCert = cert;
@@ -2628,7 +2625,6 @@ async function generateCertificate() {
       allCerts = certs.map(x => x.certificateData || x);
       renderMultiple(certs);
     }
-
   } catch (e) {
     console.error(e);
     resEl.innerHTML = box('❌ Failed to check records. Please try again later.','err');
@@ -2637,7 +2633,7 @@ async function generateCertificate() {
   }
 }
 
-/* ---------- Renderers ---------- */
+/* ===== Renderers ===== */
 function renderSingle(cert) {
   const resEl = document.getElementById('result');
   const preview = document.getElementById('certificatePreview');
@@ -2653,15 +2649,10 @@ function renderSingle(cert) {
 
   resEl.innerHTML = box(
     `<b>✅ CERTIFICATE FOUND!</b><br>
-     • Participant: ${safe.name}<br>
-     • Role: ${safe.roles}<br>
-     • Event: ${safe.hack}<br>
-     • Date: ${safe.date}<br>
-     • Location: ${safe.loc}`,
+     • Participant: ${safe.name}<br>• Role: ${safe.roles}<br>• Event: ${safe.hack}<br>• Date: ${safe.date}<br>• Location: ${safe.loc}`,
     'ok'
   );
 
-  // Fill preview
   document.getElementById('hackLogo').innerHTML = safe.logo ? `<img src="${safe.logo}" alt="Hack Logo" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display='none'">` : '';
   document.getElementById('pName').textContent = safe.name;
   document.getElementById('pRoles').textContent = safe.roles;
@@ -2670,7 +2661,7 @@ function renderSingle(cert) {
   document.getElementById('eLoc').textContent  = safe.loc;
 
   preview.style.display = 'block';
-  setTimeout(()=>preview.scrollIntoView({behavior:'smooth',block:'center'}),150);
+  setTimeout(() => preview.scrollIntoView({behavior:'smooth',block:'center'}), 150);
 }
 
 function renderMultiple(certs) {
@@ -2678,11 +2669,7 @@ function renderMultiple(certs) {
   const preview = document.getElementById('certificatePreview');
   preview.style.display = 'none';
 
-  let html = box(
-    `<b>✅ MULTIPLE CERTIFICATES FOUND!</b><br>Found ${certs.length} matching certificates.`,
-    'ok'
-  );
-
+  let html = box(`<b>✅ MULTIPLE CERTIFICATES FOUND!</b><br>Found ${certs.length} matching certificates.`, 'ok');
   html += `<div id="multipleCertificates" style="margin-top:1rem;display:grid;gap:1rem">`;
 
   certs.forEach((c, i) => {
@@ -2695,49 +2682,30 @@ function renderMultiple(certs) {
       loc:  esc(cert.location || 'Location'),
       logo: cert.hackLogoUrl || ''
     };
-
     html += `
-    <div style="border:2px solid #ddd;border-radius:10px;padding:1rem;background:#fff">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        ${safe.logo ? `<img src="${safe.logo}" alt="" style="width:56px;height:36px;object-fit:contain" onerror="this.style.display='none'">` : ''}
-        <div style="font-weight:700">${safe.hack}</div>
-        <div style="color:#666">• ${safe.date} — ${safe.loc}</div>
-      </div>
-      <div style="margin:.5rem 0 1rem;color:#333">👤 ${safe.name} • ${safe.roles}</div>
-      <button class="btn" style="background:#28a745" onclick="downloadSpecificCertificate(${i})">📄 Download This Certificate</button>
-    </div>`;
+      <div style="border:2px solid #ddd;border-radius:10px;padding:1rem;background:#fff">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          ${safe.logo ? `<img src="${safe.logo}" alt="" style="width:56px;height:36px;object-fit:contain" onerror="this.style.display='none'">` : ''}
+          <div style="font-weight:700">${safe.hack}</div>
+          <div style="color:#666">• ${safe.date} — ${safe.loc}</div>
+        </div>
+        <div style="margin:.5rem 0 1rem;color:#333">👤 ${safe.name} • ${safe.roles}</div>
+        <button class="btn" style="background:#28a745" onclick="downloadSpecificCertificate(${i})">📄 Download This Certificate</button>
+      </div>`;
   });
 
   html += `
     <div style="text-align:center;margin-top:8px">
       <button class="btn" onclick="downloadAllCertificates()">📦 Download All Certificates</button>
-      <div style="color:#555;margin-top:6px;font-size:.9rem">Opens each certificate in a new tab (allow pop-ups)</div>
+      <div style="color:#555;margin-top:6px;font-size:.9rem">Opens all in a single printable window</div>
     </div>
   </div>`;
 
   resEl.innerHTML = html;
 }
 
-/* ---------- Download / Print ---------- */
-function downloadCertificate() {
-  if (!singleCert) return alert('Certificate data not available');
-  openCertWindow(singleCert);
-}
-function downloadSpecificCertificate(i){
-  const cert = allCerts?.[i];
-  if (!cert) return alert('Certificate data not available');
-  openCertWindow(cert);
-}
-function downloadAllCertificates(){
-  if (!allCerts?.length) return alert('Certificate data not available');
-  allCerts.forEach((c, i)=> setTimeout(()=> openCertWindow(c), i*400));
-}
-
-function openCertWindow(cert){
-  const w = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
-  if (!w){ alert('Please allow pop-ups to view/print your certificate.'); return; }
-  w.opener = null;
-
+/* ===== Print / Download ===== */
+function certificateMarkup(cert) {
   const safe = {
     name: esc(cert.participantName || 'Participant'),
     roles: esc(rolesText(cert.roles, cert.rolesText)),
@@ -2746,39 +2714,71 @@ function openCertWindow(cert){
     loc:  esc(cert.location || 'Location'),
     logo: cert.hackLogoUrl || ''
   };
-
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Certificate - ${safe.name}</title>
-  <style>
-    @page{size:A4 landscape;margin:10mm}
-    body{font-family:"Times New Roman",serif;background:#f5f5f5;margin:0;padding:20px}
-    .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
-    .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
-    .hdr{text-align:center;margin-bottom:30px}
-    .ttl{font-size:3.6rem;font-weight:700;margin:0}
-    .sub{color:#666;letter-spacing:4px}
-    .name{font-size:2.6rem;font-weight:700;font-style:italic;margin:24px 0;text-align:center}
-    .txt{text-align:center;color:#555;line-height:1.7}
-    .info{text-align:center;margin-top:18px;font-weight:700}
-    .logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
-    .controls{text-align:center;margin:12px 0}
-    .btn{padding:10px 18px;border:0;border-radius:6px;background:#007bff;color:#fff;cursor:pointer;font-weight:700}
-    @media print {.controls{display:none}.wrap{box-shadow:none;padding:0}.sheet{width:277mm;height:190mm;border:8mm solid #B8860B;padding:15mm}}
-  </style></head><body>
-  <div class="controls"><button class="btn" onclick="print()">🖨️ Print</button> <button class="btn" style="background:#6c757d" onclick="close()">Close</button></div>
-  <div class="wrap"><div class="sheet">
+  return `
+  <section class="sheet">
     ${safe.logo ? `<img class="logo" src="${safe.logo}" onerror="this.style.display='none'">` : ''}
-    <div class="hdr"><div class="ttl">CERTIFICATE</div><div class="sub">OF ACHIEVEMENT</div></div>
-    <div class="txt">This certificate is presented to</div>
-    <div class="name">${safe.name}</div>
-    <div class="txt">In recognition of your outstanding contributions as a <b>${safe.roles}</b> at the <b>${safe.hack}</b>.</div>
-    <div class="info">${safe.date} — ${safe.loc}</div>
-    <div class="txt" style="margin-top:14px"><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></div>
-  </div></div>
+    <div class="hdr" style="text-align:center;margin-bottom:30px">
+      <div class="ttl" style="font-size:3.6rem;font-weight:700;margin:0">CERTIFICATE</div>
+      <div class="sub" style="color:#666;letter-spacing:4px">OF ACHIEVEMENT</div>
+    </div>
+    <div class="txt" style="text-align:center;color:#555;line-height:1.7">This certificate is presented to</div>
+    <div class="name" style="font-size:2.6rem;font-weight:700;font-style:italic;margin:24px 0;text-align:center">${safe.name}</div>
+    <div class="txt" style="text-align:center;color:#555;line-height:1.7">
+      In recognition of your outstanding contributions as a <b>${safe.roles}</b> at the <b>${safe.hack}</b>.
+    </div>
+    <div class="info" style="text-align:center;margin-top:18px;font-weight:700">${safe.date} — ${safe.loc}</div>
+    <div class="txt" style="text-align:center;margin-top:14px"><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></div>
+  </section>`;
+}
+
+function openMultiWindow(certs) {
+  const w = window.open('', '_blank', 'width=1200,height=900,scrollbars=yes,resizable=yes');
+  if (!w){ alert('Please allow pop-ups to view/print your certificates.'); return; }
+  w.opener = null;
+
+  const pages = certs.map(certificateMarkup).join('<div class="pagebreak"></div>');
+
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>All Certificates (${certs.length})</title>
+  <style>
+    @page { size: A4 landscape; margin: 10mm; }
+    body { font-family: "Times New Roman", serif; background:#f5f5f5; margin:0; padding:20px; }
+    .wrap { max-width:1200px; margin:0 auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,.1); }
+    .controls { text-align:center; margin:12px 0 20px; }
+    .btn { padding:10px 18px; border:0; border-radius:6px; background:#007bff; color:#fff; cursor:pointer; font-weight:700; }
+    .sheet { width:100%; max-width:1000px; min-height:700px; margin:0 auto 24px; border:15px solid #B8860B; padding:40px; background:#fff; position:relative; }
+    .logo { position:absolute; top:20px; right:20px; max-width:120px; max-height:70px; object-fit:contain; }
+    .pagebreak { page-break-after: always; }
+    @media print {
+      body { background:#fff; padding:0; }
+      .wrap { box-shadow:none; padding:0; }
+      .controls { display:none; }
+      .sheet { width:277mm; height:190mm; border:8mm solid #B8860B; padding:15mm; margin:0; }
+    }
+  </style></head><body>
+    <div class="controls">
+      <button class="btn" onclick="print()">🖨️ Print / Save as PDF</button>
+      <button class="btn" style="background:#6c757d" onclick="close()">Close</button>
+    </div>
+    <div class="wrap">${pages}</div>
   </body></html>`);
   w.document.close();
 }
 
-/* Enter key support + initial info */
+function downloadCertificate() {
+  if (!singleCert) return alert('Certificate data not available');
+  openMultiWindow([singleCert]);
+}
+function downloadSpecificCertificate(i){
+  const cert = allCerts?.[i];
+  if (!cert) return alert('Certificate data not available');
+  openMultiWindow([cert]);
+}
+function downloadAllCertificates(){
+  if (!allCerts?.length) return alert('Certificate data not available');
+  openMultiWindow(allCerts);
+}
+
+/* Enter key + initial message */
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('result').innerHTML = box('Enter your email above to check for available certificates…','info');
   document.getElementById('email').addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
