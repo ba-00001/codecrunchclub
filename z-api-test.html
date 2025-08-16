@@ -1,0 +1,410 @@
+<!-- =========================
+   CERTIFICATE GENERATOR (Drop-in)
+   Robust, accessible, XSS-safe, multi-certificate support
+   ========================= -->
+<section class="checklist-section" id="certificate-generator" style="margin-top:3rem;">
+  <h2 class="checklist-title glitch" data-text="GENERATE YOUR CERTIFICATE">GENERATE YOUR CERTIFICATE</h2>
+  <p class="checklist-subtitle">[ OFFICIAL PARTICIPATION CERTIFICATE ] — Download your volunteer certificate using your email address</p>
+
+  <style>
+    /* ---- Small utility styles (kept inline to be drop-in) ---- */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
+    .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
+    .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
+    .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
+    .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
+    .alert{padding:.75rem;border-radius:4px;border:1px solid}
+    .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
+    .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
+    .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
+
+    /* Certificate preview canvas (A4 landscape at ~96dpi) */
+    .certificate-container{
+      width:1123px;height:794px;background:#fff;border:8px solid #B8860B;border-radius:10px;padding:40px;color:#333;
+      font-family:"Times New Roman",serif;position:relative;margin:0 auto 20px;box-sizing:border-box
+    }
+    .certificate-container h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
+    .certificate-container .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
+    .certificate-container .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center}
+    .certificate-container .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center}
+    .certificate-container .body{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
+    .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
+    
+    .certificates-grid{display:grid;gap:3rem;margin-top:2rem}
+    .btn-green{padding:12px 24px;background:#28a745;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
+    .btn-green:hover{background:#218838;transform:translateY(-2px)}
+    .btn-blue{padding:15px 30px;background:#2196f3;color:#fff;border:none;border-radius:8px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
+    .btn-blue:hover{background:#1976d2;transform:translateY(-2px)}
+    .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
+    
+    @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
+    @media (max-width:900px){.certificate-container{transform:scale(.65)}}
+    @media (max-width:700px){.certificate-container{transform:scale(.55)}}
+  </style>
+
+  <label for="certificateEmailInput" class="sr-only">Registered email address</label>
+  <div class="cg-row">
+    <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" />
+    <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
+  </div>
+
+  <div id="certificateResult" class="cg-card" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Certificates Display Area -->
+  <div id="certificatesDisplay" style="display:none;margin-top:2rem;"></div>
+</section>
+
+<script>
+/* ======================
+   Helpers (sanitization, UI)
+   ====================== */
+const API_URL = 'https://script.google.com/macros/s/AKfycbwp3xDZno3iMGp_T_A_QmRHapDTJipoe2FMh28UzVD1lDuOHF0kjldQlSREQW74iMWMGw/exec';
+let allCertificatesData = [];
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
+);
+
+function rolesToText(roles, rolesText) {
+  if (rolesText) return String(rolesText);
+  if (Array.isArray(roles)) return roles.join(', ');
+  return roles || 'Contributor';
+}
+
+function normalizeCert(cert) {
+  return {
+    participantName: esc(cert?.participantName || 'Participant'),
+    hackathonName: esc(cert?.hackathonName || 'Hackathon'),
+    date: esc(cert?.date || 'Date'),
+    location: esc(cert?.location || 'Location'),
+    rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
+    hackLogoUrl: cert?.hackLogoUrl || ''
+  };
+}
+
+function infoBoxHTML() {
+  return `
+  <div class="infobox">
+    <strong style="color:#28a745">🏆 Certificate Generator:</strong><br>
+    • <strong>Official Certificates</strong>: Available for confirmed participants<br>
+    • <strong>Any Valid Email</strong>: Use the email from your participation records<br>
+    • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
+    • <strong>Verification</strong>: Certificates include official verification details<br>
+    • <strong>Recognition</strong>: Professional certificate for your portfolio
+  </div>`;
+}
+
+function setStatus(type, html) {
+  const resultDiv = document.getElementById('certificateResult');
+  const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
+  resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
+}
+
+function toggleButton(loading) {
+  const btn = document.getElementById('generateBtn');
+  if (!btn) return;
+  btn.disabled = !!loading;
+  btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+}
+
+/* ======================
+   Main flow
+   ====================== */
+async function generateCertificate() {
+  const emailInput = document.getElementById('certificateEmailInput');
+  const displayDiv = document.getElementById('certificatesDisplay');
+  const email = (emailInput?.value || '').trim();
+
+  // Validate email
+  if (!email) {
+    setStatus('error', '❌ Please enter your email address.');
+    displayDiv.style.display = 'none';
+    return;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setStatus('error', '❌ Please enter a valid email address.');
+    displayDiv.style.display = 'none';
+    return;
+  }
+
+  setStatus('info', '⏳ Checking for available certificates...');
+  displayDiv.style.display = 'none';
+  toggleButton(true);
+
+  // fetch with timeout/abort
+  const ac = new AbortController();
+  const to = setTimeout(() => ac.abort(), 10000);
+
+  try {
+    const currentUrl = window.location.href;
+    const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`, { signal: ac.signal });
+    const payload = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(payload?.error || res.statusText);
+
+    // Accept multiple shapes: array, {certificates:[...]}, single object
+    let certificatesArr = [];
+    if (Array.isArray(payload)) {
+      certificatesArr = payload;
+    } else if (Array.isArray(payload?.certificates)) {
+      certificatesArr = payload.certificates;
+    } else if (payload?.certificateData) {
+      certificatesArr = [payload];
+    } else if (payload?.length) {
+      certificatesArr = payload;
+    } else if (payload?.[0]) {
+      certificatesArr = [payload[0]];
+    }
+
+    // Filter valid certificates
+    const validCerts = certificatesArr.filter(cert => 
+      cert?.status === "Certificate Available" && 
+      (cert?.certificateData || cert?.participantName)
+    );
+
+    if (!validCerts.length) {
+      showCertificateError('No participation record found according to our records.');
+      return;
+    }
+
+    showCertificatesFound(validCerts);
+  } catch (err) {
+    console.error(err);
+    setStatus('error', '❌ Failed to check records. Please try again later.');
+  } finally {
+    clearTimeout(to);
+    toggleButton(false);
+  }
+}
+
+function showCertificatesFound(certificatesArr) {
+  const displayDiv = document.getElementById('certificatesDisplay');
+  
+  // Store all certificates
+  allCertificatesData = certificatesArr.map(c => c.certificateData || c);
+  
+  const count = certificatesArr.length;
+  const plural = count > 1 ? 's' : '';
+  
+  setStatus('ok',
+    `<strong>✅ ${count} CERTIFICATE${plural.toUpperCase()} FOUND!</strong><br>
+     ${count === 1 ? 'Your certificate is ready for download.' : `Great news! You have participated in ${count} events. Each certificate is displayed below.`}<br><br>
+     <strong>Found ${count} certificate${plural} for your email address.</strong>`
+  );
+
+  // Generate individual certificate previews
+  let html = `
+    <div style="text-align:center;margin-bottom:2rem">
+      <h3 class="certificate-title">📜 Your Certificate${plural}</h3>
+      ${count > 1 ? '<p style="color:#666;font-family:\'Courier New\',monospace">Each certificate is displayed individually with its own download button</p>' : ''}
+    </div>
+    <div class="certificates-grid">`;
+
+  allCertificatesData.forEach((rawCert, index) => {
+    const cert = normalizeCert(rawCert);
+    
+    html += `
+      <div style="text-align:center">
+        <h4 class="certificate-title">🏆 Certificate ${index + 1}${count > 1 ? ` - ${cert.hackathonName}` : ''}</h4>
+        
+        <!-- Individual Certificate Preview -->
+        <div class="certificate-container">
+          ${cert.hackLogoUrl ? `<img src="${cert.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
+          
+          <div style="text-align:center;margin-bottom:40px">
+            <h1>CERTIFICATE</h1>
+            <p class="sub">OF ACHIEVEMENT</p>
+          </div>
+          
+          <p class="presented">This certificate is presented to</p>
+          <h2 class="participant-name">${cert.participantName}</h2>
+          
+          <div class="body">
+            <p>In recognition of your outstanding contributions as a <strong>${cert.rolesText}</strong> at the
+              <strong>${cert.hackathonName}</strong>.
+            </p><br>
+            <p><strong>${cert.date}</strong> — <span>${cert.location}</span></p><br>
+            <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+          </div>
+
+          <!-- Bottom logos and signature -->
+          <div style="position:absolute;bottom:30px;left:40px;right:40px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+              <div style="display:flex;gap:20px;align-items:center">
+                <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width:50px;height:50px;object-fit:contain">
+                <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU Pino Global" style="width:50px;height:50px;object-fit:contain">
+                <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width:50px;height:50px;object-fit:contain">
+              </div>
+              <div style="text-align:center">
+                <div style="border-top:2px solid #333;width:250px;margin:0 auto 15px"></div>
+                <p style="font-size:1rem;font-weight:700;margin-bottom:5px">BRIAN BAZURTO</p>
+                <p style="font-size:.9rem;font-style:italic;margin:0">Code Crunch President</p>
+                <p style="font-size:.9rem;font-style:italic;margin:0">Hack University Initiative</p>
+              </div>
+              <div style="display:flex;gap:15px;align-items:center">
+                <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+                <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+                <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Download button for this specific certificate -->
+        <div style="margin-top:10px">
+          <button class="btn-green" onclick="downloadSpecificCertificate(${index})">
+            📄 Download This Certificate
+          </button>
+        </div>
+        
+        <!-- Certificate details -->
+        <div style="margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;text-align:left;font-family:'Courier New',monospace;font-size:.9rem">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div><strong>Participant:</strong> ${cert.participantName}</div>
+            <div><strong>Role:</strong> ${cert.rolesText}</div>
+            <div><strong>Event:</strong> ${cert.hackathonName}</div>
+            <div><strong>Date:</strong> ${cert.date}</div>
+            <div><strong>Location:</strong> ${cert.location}</div>
+            <div><strong>Certificate #:</strong> ${index + 1}</div>
+          </div>
+        </div>
+      </div>`;
+  });
+
+  html += `</div>`;
+
+  // Add download all option if multiple certificates
+  if (count > 1) {
+    html += `
+      <div style="text-align:center;margin-top:3rem;padding:2rem;background:#e3f2fd;border-radius:8px;border:2px solid #2196f3">
+        <h4 style="color:#1976d2;margin-bottom:1rem;font-family:'Courier New',monospace">📚 Download All Certificates</h4>
+        <button class="btn-blue" onclick="downloadAllCertificates()">📦 Download All ${count} Certificates</button>
+        <p style="color:#555;font-size:.9rem;margin-top:.5rem;font-family:'Courier New',monospace">This will open each certificate in a separate tab</p>
+      </div>`;
+  }
+
+  displayDiv.innerHTML = html;
+  displayDiv.style.display = 'block';
+  
+  setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+}
+
+function downloadSpecificCertificate(index) {
+  const cert = allCertificatesData?.[index];
+  if (!cert) return alert('Certificate data not available');
+  generateCertificateWindow(cert);
+}
+
+function downloadAllCertificates() {
+  if (!allCertificatesData?.length) return alert('Certificate data not available');
+  allCertificatesData.forEach((cert, i) => setTimeout(() => generateCertificateWindow(cert), i * 500));
+}
+
+function showCertificateError(message) {
+  document.getElementById('certificatesDisplay').style.display = 'none';
+  setStatus('error', `${esc(message)}<br><br><strong>If you believe this is an error, please contact the organizers with your email address.</strong>`);
+}
+
+/* ======================
+   Print/Download windows
+   ====================== */
+function generateCertificateWindow(certRaw) {
+  const c = normalizeCert(certRaw);
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Certificate - ${c.participantName}</title>
+  <style>
+    @page { size:A4 landscape; margin:10mm }
+    *{box-sizing:border-box}
+    body{font-family:"Times New Roman",serif;background:#f5f5f5;padding:20px;margin:0}
+    .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+    .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
+    .hack-logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
+    .hdr{text-align:center;margin-bottom:40px}
+    .ttl{font-size:4rem;font-weight:700;letter-spacing:4px;color:#333;margin-bottom:10px;line-height:1}
+    .sub{font-size:1.2rem;letter-spacing:4px;color:#666;text-transform:uppercase}
+    .presented{font-size:1.1rem;font-style:italic;margin:50px 0 0;text-align:center;color:#555}
+    .name{font-size:3rem;font-weight:700;font-style:italic;color:#333;margin:30px 0;text-align:center}
+    .rec{font-size:1.1rem;line-height:1.6;color:#555;margin:30px auto;max-width:80%;text-align:center}
+    .info{font-size:1.1rem;font-weight:700;color:#333;margin:30px 0;text-align:center}
+    .impact{font-size:1rem;font-style:italic;color:#666;margin-top:20px;text-align:center}
+    .footer{margin-top:60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+    .left img{width:40px;height:40px;object-fit:contain;margin-right:15px}
+    .sig{text-align:center;flex:1}
+    .sig-line{border-top:2px solid #333;width:200px;margin:0 auto 10px}
+    .sig-name{font-size:1rem;font-weight:700;color:#333;margin-bottom:3px}
+    .sig-title{font-size:.9rem;font-style:italic;color:#666;line-height:1.3}
+    .right img{width:35px;height:35px;object-fit:contain;border-radius:3px;margin-left:12px}
+    .controls{text-align:center;margin:20px 0;padding:15px;background:#f8f9fa;border-radius:8px}
+    .btn{padding:12px 24px;font-size:1rem;cursor:pointer;border:0;border-radius:6px;margin:0 10px;font-weight:700;transition:all .3s ease}
+    .btn-primary{background:#007bff;color:#fff}.btn-secondary{background:#6c757d;color:#fff}.btn:hover{transform:translateY(-2px)}
+    @media print{
+      body{background:#fff!important;padding:0!important;margin:0!important}
+      .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
+      .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
+      .controls{display:none!important}
+      .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
+      .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
+      .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+  </div>
+  <div class="wrap">
+    <div class="sheet">
+      ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
+      <div class="hdr"><div class="ttl">CERTIFICATE</div><div class="sub">OF ACHIEVEMENT</div></div>
+      <div class="presented">This certificate is presented to</div>
+      <div class="name">${c.participantName}</div>
+      <div class="rec">In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
+        <strong>${c.hackathonName}</strong>.
+      </div>
+      <div class="info">${c.date} — ${c.location}</div>
+      <div class="impact">Your insights helped shape a fair and impactful competition experience for all participants.</div>
+      <div class="footer">
+        <div class="left" style="flex:1;display:flex;align-items:center">
+          <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors">
+          <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU Pino Global">
+          <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business">
+        </div>
+        <div class="sig">
+          <div class="sig-line"></div>
+          <div class="sig-name">BRIAN BAZURTO</div>
+          <div class="sig-title">Code Crunch President<br>Hack University Initiative</div>
+        </div>
+        <div class="right" style="flex:1;display:flex;justify-content:flex-end;align-items:center">
+          <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
+          <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU">
+          <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
+  if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
+  w.opener = null; // security
+  w.document.write(html);
+  w.document.close();
+}
+
+/* Enter key triggers generation */
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('certificateEmailInput');
+  input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
+  // initial info box
+  document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
+});
+</script>
