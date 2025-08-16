@@ -2642,9 +2642,9 @@ async function generateCertificate() {
 function showCertificateSuccess(certificateInfo) {
     const resultDiv = document.getElementById('certificateResult');
     const previewDiv = document.getElementById('certificatePreview');
-    const cert = certificateInfo.certificateData;
     
-    certificateData = cert;
+    // Check if this is an array of multiple certificates
+    const certificates = Array.isArray(certificateInfo) ? certificateInfo : [certificateInfo];
     
     const infoBox = `<div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #28a745; margin-bottom: 1rem;">
     <strong style="color: #28a745;">🏆 Certificate Generator:</strong><br>
@@ -2655,18 +2655,44 @@ function showCertificateSuccess(certificateInfo) {
     • <strong>Recognition</strong>: Professional certificate for your portfolio
     </div>`;
     
-    resultDiv.innerHTML = infoBox + `
-        <div style="background-color: #d4edda; padding: 1rem; border-radius: 8px; border: 1px solid #c3e6cb; color: #155724;">
-            <strong style="color: #155724;">✅ CERTIFICATE FOUND!</strong><br>
-            ${certificateInfo.message}<br><br>
-            <strong style="color: #155724;">Certificate Details:</strong><br>
-            • Participant: ${cert.participantName}<br>
-            • Role: ${cert.rolesText || cert.roles.join(', ')}<br>
-            • Event: ${cert.hackathonName}<br>
-            • Date: ${cert.date}<br>
-            • Location: ${cert.location}
-        </div>
-    `;
+    if (certificates.length === 1) {
+        // Single certificate - existing behavior
+        const cert = certificates[0].certificateData;
+        certificateData = cert;
+        
+        resultDiv.innerHTML = infoBox + `
+            <div style="background-color: #d4edda; padding: 1rem; border-radius: 8px; border: 1px solid #c3e6cb; color: #155724;">
+                <strong style="color: #155724;">✅ CERTIFICATE FOUND!</strong><br>
+                ${certificates[0].message}<br><br>
+                <strong style="color: #155724;">Certificate Details:</strong><br>
+                • Participant: ${cert.participantName}<br>
+                • Role: ${cert.rolesText || cert.roles.join(', ')}<br>
+                • Event: ${cert.hackathonName}<br>
+                • Date: ${cert.date}<br>
+                • Location: ${cert.location}
+            </div>
+        `;
+        
+        // Show single certificate preview
+        showSingleCertificatePreview(cert);
+        
+    } else {
+        // Multiple certificates - show selection interface
+        resultDiv.innerHTML = infoBox + `
+            <div style="background-color: #d4edda; padding: 1rem; border-radius: 8px; border: 1px solid #c3e6cb; color: #155724;">
+                <strong style="color: #155724;">✅ MULTIPLE CERTIFICATES FOUND!</strong><br>
+                Great news! You have participated in multiple events. You can generate certificates for any of the events below:<br><br>
+                <strong style="color: #155724;">Found ${certificates.length} certificates for your email address.</strong>
+            </div>
+        `;
+        
+        // Show multiple certificate options
+        showMultipleCertificateOptions(certificates);
+    }
+}
+
+function showSingleCertificatePreview(cert) {
+    const previewDiv = document.getElementById('certificatePreview');
     
     // Update certificate preview
     if (cert.hackLogoUrl) {
@@ -2685,6 +2711,157 @@ function showCertificateSuccess(certificateInfo) {
     setTimeout(() => {
         previewDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 300);
+}
+
+function showMultipleCertificateOptions(certificates) {
+    const previewDiv = document.getElementById('certificatePreview');
+    
+    // Hide the single certificate preview
+    previewDiv.style.display = 'none';
+    
+    // Create multiple certificate display
+    let multipleHtml = `
+        <div id="multipleCertificates" style="margin-top: 2rem;">
+            <h3 style="text-align: center; color: #333; margin-bottom: 2rem; font-family: 'Courier New', monospace;">
+                📜 Select Certificate to Generate
+            </h3>
+            <div style="display: grid; gap: 2rem;">
+    `;
+    
+    certificates.forEach((certInfo, index) => {
+        const cert = certInfo.certificateData;
+        
+        multipleHtml += `
+            <div style="background: white; border: 2px solid #ddd; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: all 0.3s ease;" 
+                 onmouseover="this.style.borderColor='#007bff'; this.style.transform='translateY(-2px)'" 
+                 onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)'">
+                
+                <!-- Mini certificate preview -->
+                <div style="width: 100%; max-width: 600px; height: 200px; background: white; border: 4px solid #B8860B; border-radius: 8px; padding: 20px; margin: 0 auto 1rem; position: relative; font-family: 'Times New Roman', serif; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    
+                    ${cert.hackLogoUrl ? `<img src="${cert.hackLogoUrl}" alt="Hack Logo" style="position: absolute; top: 10px; right: 10px; max-width: 60px; max-height: 40px; object-fit: contain;" onerror="this.style.display='none'">` : ''}
+                    
+                    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; color: #333; text-align: center;">CERTIFICATE</h2>
+                    <p style="font-size: 0.8rem; color: #666; letter-spacing: 2px; margin-bottom: 1rem;">OF ACHIEVEMENT</p>
+                    
+                    <h3 style="font-size: 1.2rem; font-weight: bold; font-style: italic; color: #333; margin-bottom: 0.5rem; text-align: center;">${cert.participantName}</h3>
+                    <p style="font-size: 0.7rem; color: #555; text-align: center; line-height: 1.4;">
+                        <strong>${cert.rolesText || cert.roles.join(', ')}</strong> at <strong>${cert.hackathonName}</strong><br>
+                        ${cert.date} - ${cert.location}
+                    </p>
+                    
+                    <!-- Mini logos at bottom -->
+                    <div style="position: absolute; bottom: 10px; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 8px;">
+                            <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width: 15px; height: 15px; object-fit: contain;">
+                            <img src="https://github.com/user-attachments/assets/0ec6e3cd-fbec-4356-9625-6cdad830daa2" alt="FIU Pino Global" style="width: 15px; height: 15px; object-fit: contain;">
+                            <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width: 15px; height: 15px; object-fit: contain;">
+                        </div>
+                        <div style="font-size: 0.5rem; color: #666; text-align: center;">
+                            <strong>BRIAN BAZURTO</strong><br>Code Crunch President
+                        </div>
+                        <div style="display: flex; gap: 6px;">
+                            <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width: 12px; height: 12px; object-fit: contain; border-radius: 2px;">
+                            <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width: 12px; height: 12px; object-fit: contain; border-radius: 2px;">
+                            <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width: 12px; height: 12px; object-fit: contain; border-radius: 2px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate details -->
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <h4 style="color: #333; margin-bottom: 0.5rem; font-family: 'Courier New', monospace;">
+                        🏆 ${cert.hackathonName}
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; background: #f8f9fa; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                        <div><strong>Participant:</strong> ${cert.participantName}</div>
+                        <div><strong>Role:</strong> ${cert.rolesText || cert.roles.join(', ')}</div>
+                        <div><strong>Date:</strong> ${cert.date}</div>
+                        <div><strong>Location:</strong> ${cert.location}</div>
+                    </div>
+                </div>
+                
+                <!-- Download button for this certificate -->
+                <div style="text-align: center;">
+                    <button onclick="downloadSpecificCertificate(${index})" 
+                            style="padding: 12px 24px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; font-family: 'Courier New', monospace;"
+                            onmouseover="this.style.background='#218838'; this.style.transform='translateY(-2px)'"
+                            onmouseout="this.style.background='#28a745'; this.style.transform='translateY(0)'">
+                        📄 Download This Certificate
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    multipleHtml += `
+            </div>
+            
+            <!-- Download all certificates option -->
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: #e3f2fd; border-radius: 8px; border: 2px solid #2196f3;">
+                <h4 style="color: #1976d2; margin-bottom: 1rem; font-family: 'Courier New', monospace;">
+                    📚 Want all certificates?
+                </h4>
+                <button onclick="downloadAllCertificates()" 
+                        style="padding: 15px 30px; background: #2196f3; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; font-family: 'Courier New', monospace;"
+                        onmouseover="this.style.background='#1976d2'; this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='#2196f3'; this.style.transform='translateY(0)'">
+                    📦 Download All Certificates
+                </button>
+                <p style="color: #555; font-size: 0.9rem; margin-top: 0.5rem; font-family: 'Courier New', monospace;">
+                    This will open each certificate in a separate tab
+                </p>
+            </div>
+        </div>
+    `;
+    
+    // Add the multiple certificates display to the page
+    const existingMultiple = document.getElementById('multipleCertificates');
+    if (existingMultiple) {
+        existingMultiple.remove();
+    }
+    
+    previewDiv.insertAdjacentHTML('afterend', multipleHtml);
+    
+    // Store certificates data globally for download functions
+    window.multipleCertificatesData = certificates.map(certInfo => certInfo.certificateData);
+    
+    // Smooth scroll to options
+    setTimeout(() => {
+        document.getElementById('multipleCertificates').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+}
+
+function downloadSpecificCertificate(index) {
+    if (!window.multipleCertificatesData || !window.multipleCertificatesData[index]) {
+        alert('Certificate data not available');
+        return;
+    }
+    
+    const cert = window.multipleCertificatesData[index];
+    generateCertificateWindow(cert);
+}
+
+function downloadAllCertificates() {
+    if (!window.multipleCertificatesData) {
+        alert('Certificate data not available');
+        return;
+    }
+    
+    // Open each certificate in a separate tab with a small delay
+    window.multipleCertificatesData.forEach((cert, index) => {
+        setTimeout(() => {
+            generateCertificateWindow(cert);
+        }, index * 500); // 500ms delay between each window
+    });
+}
+
+function generateCertificateWindow(cert) {
+    // Use the existing downloadCertificate logic but with specific cert data
+    const originalCertData = window.certificateData;
+    window.certificateData = cert;
+    downloadCertificate();
+    window.certificateData = originalCertData;
 }
 
 function showCertificateError(message) {
@@ -2883,6 +3060,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
 
 
 
