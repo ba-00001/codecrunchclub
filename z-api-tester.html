@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Crunch Membership API Tester</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f9fafb;
+      color: #111;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: .5rem; }
+    input, button {
+      padding: .6rem;
+      margin: .2rem 0;
+      border-radius: .4rem;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #111;
+      color: white;
+      cursor: pointer;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
+      border-radius: .5rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Code Crunch Membership API Tester</h1>
+  <p>Enter an email from the sheet and click <strong>Test</strong> to see the raw JSON response.</p>
+
+  <form id="test-form">
+    <input id="email" type="email" placeholder="email@gmail.com" style="width:70%;" required />
+    <button type="submit">Test</button>
+  </form>
+
+  <h2>Response:</h2>
+  <pre id="output">Nothing yet...</pre>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxPg0Oa8W0Xxx8FTCsfcblxM6W6GKNKNxf183IQ68pl2LTEkkS6xz4xErv_MdwNP0_Zbw/exec";
+
+    document.getElementById("test-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      if (!email) return;
+
+      const output = document.getElementById("output");
+      output.textContent = "Fetching...";
+
+      try {
+        const url = `${GAS_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.origin)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
