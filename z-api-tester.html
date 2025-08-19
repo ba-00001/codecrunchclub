@@ -242,5 +242,184 @@ Stack Trace: ${error.stack}
             }
         });
     </script>
+
+
+
+
+
+
+<div class="container">
+        <h1>🧪 Membership Certificate API Test</h1>
+        <p>Use this page to test your membership certificate API and debug any issues.</p>
+        
+        <div class="input-group">
+            <label for="apiUrl">API URL:</label>
+            <input type="text" id="apiUrl" value="https://script.google.com/macros/s/AKfycbzbrSqm4O2KxuK9Viih4-C1-h0ILCL4EUA6t-JaQ9G0TLU3jWMC3K1TnNbgXzkplifC/exec">
+        </div>
+        
+        <div class="input-group">
+            <label for="testEmail">Test Email:</label>
+            <input type="email" id="testEmail" placeholder="Enter email to test" value="aliciagiro3@gmail.com">
+        </div>
+        
+        <button onclick="testAPI()">🔍 Test API</button>
+        <button onclick="testWithoutReferer()">🔓 Test Without Referer</button>
+        <button onclick="clearResults()">🗑️ Clear Results</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function showResult(type, title, message, debug = null) {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${type}`;
+            
+            let html = `<h3>${title}</h3><p>${message}</p>`;
+            
+            if (debug) {
+                html += `<div class="debug"><strong>Debug Info:</strong><pre>${debug}</pre></div>`;
+            }
+            
+            resultDiv.innerHTML = html;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        async function testAPI(includeReferer = true) {
+            const apiUrl = document.getElementById('apiUrl').value.trim();
+            const email = document.getElementById('testEmail').value.trim();
+            
+            if (!apiUrl) {
+                showResult('error', '❌ Missing API URL', 'Please enter the API URL');
+                return;
+            }
+            
+            if (!email) {
+                showResult('error', '❌ Missing Email', 'Please enter an email to test');
+                return;
+            }
+
+            showResult('info', '⏳ Testing...', 'Sending request to API...');
+
+            try {
+                // Build URL with parameters
+                const currentUrl = window.location.href;
+                let testUrl = `${apiUrl}?email=${encodeURIComponent(email)}`;
+                
+                if (includeReferer) {
+                    testUrl += `&referer=${encodeURIComponent(currentUrl)}`;
+                }
+
+                console.log('Making request to:', testUrl);
+
+                const startTime = Date.now();
+                const response = await fetch(testUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    }
+                });
+                const endTime = Date.now();
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', [...response.headers.entries()]);
+
+                const responseText = await response.text();
+                console.log('Raw response:', responseText);
+
+                let responseData;
+                try {
+                    responseData = JSON.parse(responseText);
+                } catch (e) {
+                    throw new Error(`Invalid JSON response: ${responseText}`);
+                }
+
+                const debugInfo = `
+Request URL: ${testUrl}
+Response Status: ${response.status}
+Response Time: ${endTime - startTime}ms
+Response Headers: ${JSON.stringify([...response.headers.entries()], null, 2)}
+Raw Response: ${responseText}
+`;
+
+                if (response.ok) {
+                    if (responseData.error) {
+                        showResult('error', '❌ API Error', responseData.error, debugInfo);
+                    } else if (responseData.certificates && responseData.certificates.length > 0) {
+                        const cert = responseData.certificates[0];
+                        const message = `
+✅ Certificate found!
+📧 Email: ${cert.email}
+👤 Name: ${cert.certificateData.participantName}
+🆔 Membership ID: ${cert.certificateData.membershipId}
+📅 Member Since: ${cert.certificateData.joinDate}
+🏢 Organization: ${cert.certificateData.orgName}
+💬 Discord: ${cert.certificateData.discordJoinLink ? 'Available' : 'Not provided'}
+📱 GroupMe: ${cert.certificateData.groupmeLink ? 'Available' : 'Not provided'}
+`;
+                        showResult('success', '🎉 Success!', message, debugInfo);
+                    } else {
+                        showResult('error', '⚠️ No Certificate Found', 'No membership certificate found for this email address.', debugInfo);
+                    }
+                } else {
+                    showResult('error', `❌ HTTP Error ${response.status}`, `Server returned status ${response.status}`, debugInfo);
+                }
+
+            } catch (error) {
+                console.error('Test error:', error);
+                
+                const debugInfo = `
+Error Type: ${error.name}
+Error Message: ${error.message}
+Stack Trace: ${error.stack}
+`;
+                
+                if (error.message.includes('CORS')) {
+                    showResult('error', '🚫 CORS Error', 
+                        'Cross-Origin Request Blocked. This might be due to domain restrictions in your Apps Script. Try the "Test Without Referer" button.',
+                        debugInfo);
+                } else if (error.message.includes('Failed to fetch')) {
+                    showResult('error', '🌐 Network Error', 
+                        'Failed to connect to the API. Check your internet connection and API URL.',
+                        debugInfo);
+                } else {
+                    showResult('error', '❌ Test Failed', error.message, debugInfo);
+                }
+            }
+        }
+
+        function testWithoutReferer() {
+            testAPI(false);
+        }
+
+        // Auto-focus email input
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('testEmail').focus();
+        });
+
+        // Allow Enter key to trigger test
+        document.getElementById('testEmail').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                testAPI();
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
