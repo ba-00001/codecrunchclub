@@ -1710,24 +1710,20 @@ async function verifyMembership() {
 
     try {
         // Call your Google Apps Script API for Code Crunch member verification
-        const response = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.origin)}`);
-        const data = await response.json();
+        const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}`, { mode: 'cors' });
+        const data = await res.json();
 
-        if (data.error) {
-            showError(data.error);
-            return;
-        }
+        if (data.error) return showError(data.error);
 
-        if (data.success && data.membershipStatus === 'verified') {
-            // Success - show step 2
-            currentMemberData = data.memberData;
-            showMemberVerified(data.memberData);
+        if (data.success && data.membershipStatus === 'verified' && data.memberData) {
+        currentMemberData = data.memberData;
+        showMemberVerified(currentMemberData);
         } else if (data.membershipStatus === 'not_found') {
-            // Show join section with Discord/GroupMe links from API
-            showNotFoundSection(data.joinInfo);
+        showNotFoundSection(data.joinInfo || {});
         } else {
-            showError('Unexpected response from server. Please try again.');
+        showError('Unexpected response from server. Please try again.');
         }
+
     } catch (error) {
         console.error('Verification error:', error);
         showError('Unable to verify membership. Please check your internet connection and try again.');
