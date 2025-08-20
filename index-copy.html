@@ -926,14 +926,17 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
 );
 
 function normalizeCert(cert) {
+  // Handle both nested certificateData and flat structure
+  const data = cert?.certificateData || cert;
+  
   return {
-    participantName: esc(cert?.participantName || 'Member'),
-    membershipID: esc(cert?.membershipID || 'N/A'),
-    memberDateSince: esc(cert?.memberDateSince || 'Date'),
-    orgName: esc(cert?.orgName || 'Code Crunch'),
-    orgLogoUrl: cert?.orgLogoUrl || '',
-    discordJoinLink: cert?.discordJoinLink || '',
-    groupmeLink: cert?.groupmeLink || ''
+    participantName: esc(data?.participantName || 'Member'),
+    membershipID: esc(data?.membershipID || 'N/A'),
+    memberDateSince: esc(data?.memberDateSince || 'Date'),
+    orgName: esc(data?.orgName || 'Code Crunch'),
+    orgLogoUrl: data?.orgLogoUrl || '',
+    discordJoinLink: data?.discordJoinLink || '',
+    groupmeLink: data?.groupmeLink || ''
   };
 }
 
@@ -965,7 +968,7 @@ function toggleButton(loading) {
 async function generateCertificate() {
   const emailInput = document.getElementById('certificateEmailInput');
   const displayDiv = document.getElementById('certificatesDisplay');
-  const email = (emailInput?.value || '').trim();
+  const email = (emailInput?.value || '').trim().toLowerCase(); // Normalize to lowercase
 
   // Validate email
   if (!email) {
@@ -986,7 +989,8 @@ async function generateCertificate() {
 
   // Add debugging
   console.log('🔍 Debug Info:');
-  console.log('Email:', email);
+  console.log('Original Email Input:', emailInput?.value);
+  console.log('Normalized Email:', email);
   console.log('Current URL:', window.location.href);
   console.log('API URL:', API_URL);
 
@@ -1033,9 +1037,22 @@ async function generateCertificate() {
     }
 
     const validCerts = certificatesArr.filter(cert => {
-      const hasCorrectStatus = cert?.status === "Code Crunch Global Membership Certificate Available";
-      const hasData = cert?.certificateData || cert?.participantName || cert?.membershipID;
-      console.log(`🔎 Checking cert: status="${cert?.status}", hasData=${!!hasData}`);
+      // Normalize status for comparison (remove extra spaces, case-insensitive)
+      const certStatus = (cert?.status || '').trim();
+      const expectedStatus = "Code Crunch Global Membership Certificate Available";
+      const hasCorrectStatus = certStatus === expectedStatus;
+      
+      // Check for data in multiple possible locations
+      const hasData = !!(cert?.certificateData || cert?.participantName || cert?.membershipID);
+      
+      console.log(`🔎 Checking cert: 
+        - Status: "${certStatus}" 
+        - Expected: "${expectedStatus}"
+        - Status Match: ${hasCorrectStatus}
+        - Has Data: ${hasData}
+        - Participant: ${cert?.certificateData?.participantName || cert?.participantName}
+        - MemberID: ${cert?.certificateData?.membershipID || cert?.membershipID}`);
+      
       return hasCorrectStatus && hasData;
     });
 
