@@ -850,361 +850,655 @@
 
 
 
-<!-- Updated Certificate Generator Section -->
-<section class="checklist-section" id="certificate-generator" style="margin-top:3rem;">
-  <h2 class="checklist-title glitch" data-text="GENERATE YOUR MEMBERSHIP CERTIFICATE">GENERATE YOUR MEMBERSHIP CERTIFICATE</h2>
-  <p class="checklist-subtitle">[ OFFICIAL CODE CRUNCH MEMBERSHIP CERTIFICATE ] — Download your membership certificate and access community links</p>
 
-  <!-- Same styles as before... -->
-  <style>
-    /* All your existing styles stay the same */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
-    .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
-    .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
-    .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
-    .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
-    .alert{padding:.75rem;border-radius:4px;border:1px solid}
-    .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
-    .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
-    .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
-    .certificate-container{width:1123px;height:794px;background:#fff;border:8px solid #B8860B;border-radius:10px;padding:40px;color:#333;font-family:"Times New Roman",serif;position:relative;margin:0 auto 20px;box-sizing:border-box}
-    .certificate-container h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
-    .certificate-container .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
-    .certificate-container .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center}
-    .certificate-container .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center}
-    .certificate-container .body{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
-    .org-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
-    .btn-green{padding:12px 24px;background:#28a745;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
-    .btn-green:hover{background:#218838;transform:translateY(-2px)}
-    .btn-discord{padding:12px 24px;background:#5865F2;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace;text-decoration:none;display:inline-block}
-    .btn-discord:hover{background:#4752C4;transform:translateY(-2px);color:#fff;text-decoration:none}
-    .btn-groupme{padding:12px 24px;background:#00AFF0;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace;text-decoration:none;display:inline-block}
-    .btn-groupme:hover{background:#0088CC;transform:translateY(-2px);color:#fff;text-decoration:none}
-    .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
-    .community-links{margin-top:2rem;padding:1.5rem;background:#f8f9fa;border-radius:8px;border:2px solid #28a745;text-align:center}
-    @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
-    @media (max-width:900px){.certificate-container{transform:scale(.65)}}
-    @media (max-width:700px){.certificate-container{transform:scale(.55)}}
-  </style>
 
-  <label for="certificateEmailInput" class="sr-only">Registered email address</label>
-  <div class="cg-row">
-    <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" />
-    <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<!-- COMPLETE MEMBERSHIP CERTIFICATE SECTION -->
+<!-- Replace your existing certificate generator section with this code -->
+
+<section class="certificate-section" id="certificate-generator" style="margin-top: 3rem; padding: 2rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold cc-blue-text mb-4">🏆 Generate Your Membership Certificate</h2>
+      <p class="text-lg text-gray-600">Official Code Crunch membership verification and certificate download</p>
+    </div>
+
+    <!-- Certificate Generator Form -->
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+      <div class="certificate-info-box" style="background: #e8f4fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2463EB; margin-bottom: 2rem;">
+        <h3 style="color: #2463EB; margin-bottom: 1rem; font-weight: bold;">🎯 Membership Certificate Benefits</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-size: 0.95rem;">
+          <div>• <strong>Official Verification:</strong> Confirmed Code Crunch member status</div>
+          <div>• <strong>Community Access:</strong> Discord and GroupMe invitation links</div>
+          <div>• <strong>Professional Recognition:</strong> High-quality certificate for portfolio</div>
+          <div>• <strong>Instant Download:</strong> Ready-to-print PDF certificate</div>
+        </div>
+      </div>
+
+      <!-- Email Input Form -->
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; align-items: end;">
+        <div style="flex: 1; min-width: 300px;">
+          <label for="certificateEmailInput" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">
+            Enter Your Registered Email Address:
+          </label>
+          <input 
+            type="email" 
+            id="certificateEmailInput" 
+            placeholder="your.email@example.com" 
+            style="width: 100%; padding: 0.75rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: 'Courier New', monospace;"
+            required
+          >
+        </div>
+        <button 
+          id="generateBtn" 
+          onclick="generateCertificate()" 
+          style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #2463EB, #1e40af); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Courier New', monospace;">
+          🏆 Generate Certificate
+        </button>
+      </div>
+
+      <!-- Results Display -->
+      <div id="certificateResult" style="margin-bottom: 2rem;" aria-live="polite"></div>
+      <div id="certificatesDisplay" style="display: none;"></div>
+    </div>
   </div>
-
-  <div id="certificateResult" class="cg-card" aria-live="polite" aria-atomic="true"></div>
-  <div id="certificatesDisplay" style="display:none;margin-top:2rem;"></div>
 </section>
 
+<style>
+/* Certificate Section Styles */
+.certificate-section {
+  font-family: 'Courier New', monospace;
+}
+
+.certificate-container {
+  width: 1123px;
+  height: 794px;
+  background: #fff;
+  border: 8px solid #B8860B;
+  border-radius: 10px;
+  padding: 40px;
+  color: #333;
+  font-family: "Times New Roman", serif;
+  position: relative;
+  margin: 0 auto 20px;
+  box-sizing: border-box;
+}
+
+.certificate-container h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 3px;
+  color: #333;
+  text-align: center;
+}
+
+.certificate-container .sub {
+  font-size: 1.2rem;
+  color: #666;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+.certificate-container .presented {
+  font-style: italic;
+  margin: 30px 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.certificate-container .participant-name {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 40px 0;
+  font-style: italic;
+  text-align: center;
+}
+
+.certificate-container .body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 30px 0;
+  color: #555;
+  text-align: center;
+}
+
+.org-logo {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  max-width: 150px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.status-alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.status-success {
+  background: #d4edda;
+  color: #155724;
+  border: 2px solid #c3e6cb;
+}
+
+.status-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+}
+
+.status-info {
+  background: #d1ecf1;
+  color: #0c5460;
+  border: 2px solid #bee5eb;
+}
+
+.community-links {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  border: 2px solid #28a745;
+  text-align: center;
+}
+
+.community-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 0.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+}
+
+.btn-discord {
+  background: linear-gradient(135deg, #5865F2, #4752C4);
+  color: white;
+}
+
+.btn-groupme {
+  background: linear-gradient(135deg, #00AFF0, #0088CC);
+  color: white;
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.community-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  color: white;
+  text-decoration: none;
+}
+
+#generateBtn:hover {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  transform: translateY(-2px);
+}
+
+#generateBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .certificate-container {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 900px) {
+  .certificate-container {
+    transform: scale(0.65);
+  }
+}
+
+@media (max-width: 700px) {
+  .certificate-container {
+    transform: scale(0.55);
+  }
+}
+</style>
+
 <script>
-/* ======================
-   🔥 FIXED API URL - Updated to your new deployment
-   ====================== */
+/**
+ * COMPLETE CERTIFICATE GENERATOR JAVASCRIPT
+ * Updated for your Code Crunch membership system
+ */
+
+// API Configuration - UPDATE THIS URL TO YOUR DEPLOYED GOOGLE APPS SCRIPT
 const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
-let allCertificatesData = [];
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
-  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-);
+let currentCertificateData = null;
 
-function normalizeCert(cert) {
-  // Handle both nested certificateData and flat structure
-  const data = cert?.certificateData || cert;
-  
-  return {
-    participantName: esc(data?.participantName || 'Member'),
-    membershipID: esc(data?.membershipID || 'N/A'),
-    memberDateSince: esc(data?.memberDateSince || 'Date'),
-    orgName: esc(data?.orgName || 'Code Crunch'),
-    orgLogoUrl: data?.orgLogoUrl || '',
-    discordJoinLink: data?.discordJoinLink || '',
-    groupmeLink: data?.groupmeLink || ''
-  };
+// Utility function to escape HTML
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
-function infoBoxHTML() {
-  return `
-  <div class="infobox">
-    <strong style="color:#28a745">🏆 Membership Certificate Generator:</strong><br>
-    • <strong>Official Membership</strong>: Available for confirmed Code Crunch members<br>
-    • <strong>Verification</strong>: Enter your registered email to verify membership<br>
-    • <strong>Community Access</strong>: Get Discord and GroupMe links after verification<br>
-    • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
-    • <strong>Professional Recognition</strong>: Official membership certificate for your portfolio
-  </div>`;
-}
-
-function setStatus(type, html) {
-  const resultDiv = document.getElementById('certificateResult');
-  const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
-  resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-}
-
-function toggleButton(loading) {
-  const btn = document.getElementById('generateBtn');
-  if (!btn) return;
-  btn.disabled = !!loading;
-  btn.textContent = loading ? '⏳ Verifying…' : '🏆 Generate Certificate';
-}
-
+// Main certificate generation function
 async function generateCertificate() {
   const emailInput = document.getElementById('certificateEmailInput');
+  const resultDiv = document.getElementById('certificateResult');
   const displayDiv = document.getElementById('certificatesDisplay');
-  const email = (emailInput?.value || '').trim().toLowerCase(); // Normalize to lowercase
-
-  // Validate email
+  const generateBtn = document.getElementById('generateBtn');
+  
+  const email = emailInput.value.trim().toLowerCase();
+  
+  // Validation
   if (!email) {
-    setStatus('error', '❌ Please enter your email address.');
-    displayDiv.style.display = 'none';
+    showStatus('error', '❌ Please enter your email address.');
     return;
   }
+  
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    setStatus('error', '❌ Please enter a valid email address.');
-    displayDiv.style.display = 'none';
+    showStatus('error', '❌ Please enter a valid email address.');
     return;
   }
-
-  setStatus('info', '⏳ Verifying membership status...');
+  
+  // Show loading state
+  showStatus('info', '⏳ Verifying your Code Crunch membership...');
   displayDiv.style.display = 'none';
   toggleButton(true);
-
-  // Add debugging
-  console.log('🔍 Debug Info:');
-  console.log('Original Email Input:', emailInput?.value);
-  console.log('Normalized Email:', email);
+  
+  // Debug logging
+  console.log('🔍 Certificate Generation Debug:');
+  console.log('Email:', email);
   console.log('Current URL:', window.location.href);
   console.log('API URL:', API_URL);
-
-  const ac = new AbortController();
-  const to = setTimeout(() => ac.abort(), 15000); // Increased timeout
-
+  
   try {
     const currentUrl = window.location.href;
     const requestUrl = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`;
+    
     console.log('📡 Request URL:', requestUrl);
     
-    const res = await fetch(requestUrl, { signal: ac.signal });
-    console.log('📊 Response Status:', res.status, res.statusText);
-    
-    const payload = await res.json().catch(err => {
-      console.error('❌ JSON Parse Error:', err);
-      return {};
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      }
     });
-    console.log('📄 API Response:', payload);
     
-    if (!res.ok) throw new Error(payload?.error || res.statusText);
-
-    // Debug the response structure
-    console.log('🔍 Response Analysis:');
-    console.log('- Is Array?', Array.isArray(payload));
-    console.log('- Has certificates?', payload?.certificates);
-    console.log('- Certificates length:', payload?.certificates?.length);
-    console.log('- First certificate:', payload?.certificates?.[0]);
-
+    console.log('📊 Response Status:', response.status, response.statusText);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log('📄 API Response:', data);
+    
     // Handle response
-    let certificatesArr = [];
-    if (Array.isArray(payload)) {
-      certificatesArr = payload;
-    } else if (Array.isArray(payload?.certificates)) {
-      certificatesArr = payload.certificates;
-    } else if (payload?.certificateData) {
-      certificatesArr = [payload];
+    if (data.error) {
+      throw new Error(data.error);
     }
-
-    console.log('🎯 Certificates found:', certificatesArr.length);
-    if (certificatesArr.length > 0) {
-      console.log('📋 First certificate details:', certificatesArr[0]);
-      console.log('📋 Certificate status:', certificatesArr[0]?.status);
-    }
-
-    const validCerts = certificatesArr.filter(cert => {
-      // Normalize status for comparison (remove extra spaces, case-insensitive)
-      const certStatus = (cert?.status || '').trim();
-      const expectedStatus = "Code Crunch Global Membership Certificate Available";
-      const hasCorrectStatus = certStatus === expectedStatus;
-      
-      // Check for data in multiple possible locations
-      const hasData = !!(cert?.certificateData || cert?.participantName || cert?.membershipID);
-      
-      console.log(`🔎 Checking cert: 
-        - Status: "${certStatus}" 
-        - Expected: "${expectedStatus}"
-        - Status Match: ${hasCorrectStatus}
-        - Has Data: ${hasData}
-        - Participant: ${cert?.certificateData?.participantName || cert?.participantName}
-        - MemberID: ${cert?.certificateData?.membershipID || cert?.membershipID}`);
-      
-      return hasCorrectStatus && hasData;
-    });
-
-    console.log('✅ Valid certificates:', validCerts.length);
-
-    if (!validCerts.length) {
-      showMembershipError('No membership found for this email address. Please ensure you have registered as a Code Crunch member.');
-      return;
-    }
-
-    showMembershipFound(validCerts);
-  } catch (err) {
-    console.error('❌ Fetch Error:', err);
-    if (err.name === 'AbortError') {
-      setStatus('error', '❌ Request timed out. Please try again.');
+    
+    if (data.certificates && data.certificates.length > 0) {
+      const certificate = data.certificates[0];
+      if (certificate.status === 'Code Crunch Global Membership Certificate Available') {
+        showMembershipVerified(certificate);
+      } else {
+        showStatus('error', '❌ No valid membership certificate found for this email address.');
+      }
     } else {
-      setStatus('error', '❌ Failed to verify membership. Please try again later.');
+      showStatus('error', `❌ No membership found for email: ${email}<br><br>
+        <strong>If you believe this is an error:</strong><br>
+        • Ensure you're using the same email address you registered with<br>
+        • Contact the organizers if you need to register or update your information`);
+    }
+    
+  } catch (error) {
+    console.error('❌ Certificate Generation Error:', error);
+    
+    if (error.message.includes('Access denied')) {
+      showStatus('error', `❌ ${error.message}<br><br>
+        <strong>This usually means:</strong><br>
+        • The website domain is not authorized to access the certificate system<br>
+        • Please contact the administrators to resolve this issue`);
+    } else {
+      showStatus('error', `❌ Unable to verify membership: ${error.message}<br><br>
+        Please try again later or contact support if the problem persists.`);
     }
   } finally {
-    clearTimeout(to);
     toggleButton(false);
   }
 }
 
-function showMembershipFound(certificatesArr) {
+// Show status messages
+function showStatus(type, html) {
+  const resultDiv = document.getElementById('certificateResult');
+  const statusClass = type === 'success' ? 'status-success' : 
+                     type === 'error' ? 'status-error' : 'status-info';
+  
+  resultDiv.innerHTML = `<div class="status-alert ${statusClass}">${html}</div>`;
+}
+
+// Toggle button state
+function toggleButton(loading) {
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = loading;
+  btn.textContent = loading ? '⏳ Verifying...' : '🏆 Generate Certificate';
+}
+
+// Show verified membership and certificate
+function showMembershipVerified(certificate) {
+  const cert = certificate.certificateData;
+  currentCertificateData = cert;
+  
+  showStatus('success', `
+    <strong>✅ MEMBERSHIP VERIFIED!</strong><br>
+    Welcome to Code Crunch Global, ${escapeHtml(cert.participantName)}!<br><br>
+    <strong>Member since:</strong> ${escapeHtml(cert.memberDateSince)}<br>
+    <strong>Membership ID:</strong> ${escapeHtml(cert.membershipID)}
+  `);
+  
   const displayDiv = document.getElementById('certificatesDisplay');
-  allCertificatesData = certificatesArr.map(c => c.certificateData || c);
-  const cert = normalizeCert(allCertificatesData[0]);
+  displayDiv.innerHTML = generateCertificateHTML(cert);
+  displayDiv.style.display = 'block';
   
-  setStatus('ok',
-    `<strong>✅ MEMBERSHIP VERIFIED!</strong><br>
-     Welcome to Code Crunch Global! Your membership has been confirmed.<br><br>
-     <strong>Member since:</strong> ${cert.memberDateSince}<br>
-     <strong>Membership ID:</strong> ${cert.membershipID}`
-  );
+  // Smooth scroll to certificate
+  setTimeout(() => {
+    displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 500);
+}
 
-  let html = `
-    <div style="text-align:center;margin-bottom:2rem">
-      <h3 class="certificate-title">🎯 Code Crunch Global Membership</h3>
-      <p style="color:#666;font-family:'Courier New',monospace">Your official membership certificate and community access</p>
+// Generate the complete certificate HTML
+function generateCertificateHTML(cert) {
+  return `
+    <div style="text-align: center; margin: 2rem 0;">
+      <h3 style="color: #2463EB; font-size: 2rem; margin-bottom: 1rem;">🎯 Your Code Crunch Membership</h3>
+      <p style="color: #666; font-size: 1.1rem;">Official membership certificate and community access</p>
     </div>
-    
+
+    ${generateCommunityLinks(cert)}
+    ${generateCertificateDisplay(cert)}
+    ${generateMembershipSummary(cert)}
+  `;
+}
+
+// Generate community links section
+function generateCommunityLinks(cert) {
+  return `
     <div class="community-links">
-      <h4 style="color:#28a745;margin-bottom:1rem;font-family:'Courier New',monospace">🌟 Join Our Community</h4>
-      <p style="color:#666;margin-bottom:1.5rem;font-family:'Courier New',monospace">Access exclusive Discord and GroupMe communities for Code Crunch members</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">`;
-
-  if (cert.discordJoinLink) {
-    html += `<a href="${cert.discordJoinLink}" target="_blank" class="btn-discord">💬 Join Discord Server</a>`;
-  }
-  
-  if (cert.groupmeLink) {
-    html += `<a href="${cert.groupmeLink}" target="_blank" class="btn-groupme">👥 Join GroupMe</a>`;
-  }
-
-  html += `
+      <h4 style="color: #28a745; margin-bottom: 1rem; font-size: 1.5rem;">🌟 Join Our Community</h4>
+      <p style="color: #666; margin-bottom: 1.5rem; font-size: 1.1rem;">
+        Connect with fellow Code Crunch members, get event updates, and collaborate on projects!
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        ${cert.discordJoinLink ? `
+          <a href="${cert.discordJoinLink}" target="_blank" rel="noopener noreferrer" class="community-btn btn-discord">
+            💬 Join Discord Server
+          </a>
+        ` : ''}
+        ${cert.groupmeLink ? `
+          <a href="${cert.groupmeLink}" target="_blank" rel="noopener noreferrer" class="community-btn btn-groupme">
+            👥 Join GroupMe Chat
+          </a>
+        ` : ''}
       </div>
-      <p style="color:#555;font-size:.9rem;margin-top:1rem;font-family:'Courier New',monospace">Connect with fellow members, get event updates, and collaborate on projects!</p>
+      <p style="color: #555; font-size: 0.9rem; margin: 0;">
+        Use these links to access exclusive member-only channels and stay connected with the community.
+      </p>
     </div>
+  `;
+}
 
-    <div style="text-align:center;margin-top:2rem">
+// Generate certificate display
+function generateCertificateDisplay(cert) {
+  return `
+    <div style="text-align: center; margin: 2rem 0;">
       <div class="certificate-container">
-        ${cert.orgLogoUrl ? `<img src="${cert.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" onerror="this.style.display='none'">` : ''}
+        ${cert.orgLogoUrl ? `
+          <img src="${cert.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" 
+               onerror="this.style.display='none'">
+        ` : ''}
         
-        <div style="text-align:center;margin-bottom:40px">
+        <div style="text-align: center; margin-bottom: 40px;">
           <h1>MEMBERSHIP CERTIFICATE</h1>
           <p class="sub">CODE CRUNCH GLOBAL</p>
         </div>
         
         <p class="presented">This certificate confirms that</p>
-        <h2 class="participant-name">${cert.participantName}</h2>
+        <h2 class="participant-name">${escapeHtml(cert.participantName)}</h2>
         
         <div class="body">
-          <p>Is an official member of <strong>${cert.orgName}</strong>, recognized for their commitment to collaborative coding, innovation, and community building.</p><br>
-          <p><strong>Member Since:</strong> ${cert.memberDateSince}</p>
-          <p><strong>Membership ID:</strong> ${cert.membershipID}</p><br>
+          <p>Is an official member of <strong>${escapeHtml(cert.orgName)}</strong>, 
+             recognized for their commitment to collaborative coding, innovation, and community building.</p>
+          <br>
+          <p><strong>Member Since:</strong> ${escapeHtml(cert.memberDateSince)}</p>
+          <p><strong>Membership ID:</strong> ${escapeHtml(cert.membershipID)}</p>
+          <br>
           <p><em>Join us in shaping the future of technology through collaboration, learning, and innovation.</em></p>
         </div>
 
-        <div style="position:absolute;bottom:30px;left:40px;right:40px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-            <div style="flex:1"></div>
-            <div style="text-align:center">
-              <div style="border-top:2px solid #333;width:250px;margin:0 auto 15px"></div>
-              <p style="font-size:1rem;font-weight:700;margin-bottom:5px">BRIAN BAZURTO</p>
-              <p style="font-size:.9rem;font-style:italic;margin:0">Code Crunch President</p>
+        <div style="position: absolute; bottom: 30px; left: 40px; right: 40px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1;"></div>
+            <div style="text-align: center;">
+              <div style="border-top: 2px solid #333; width: 250px; margin: 0 auto 15px;"></div>
+              <p style="font-size: 1rem; font-weight: 700; margin-bottom: 5px;">BRIAN BAZURTO</p>
+              <p style="font-size: 0.9rem; font-style: italic; margin: 0;">Code Crunch President</p>
             </div>
-            <div style="display:flex;gap:15px;align-items:center">
-              <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+            <div style="display: flex; gap: 15px; align-items: center;">
+              <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" 
+                   alt="Code Crunch" style="width: 45px; height: 45px; object-fit: contain; border-radius: 4px;">
             </div>
           </div>
         </div>
       </div>
       
-      <div style="margin-top:10px">
-        <button class="btn-green" onclick="downloadMembershipCertificate()">📄 Download Membership Certificate</button>
+      <div style="margin-top: 20px;">
+        <button onclick="downloadMembershipCertificate()" class="community-btn btn-download">
+          📄 Download Certificate (PDF)
+        </button>
       </div>
-      
-      <div style="margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;text-align:left;font-family:'Courier New',monospace;font-size:.9rem">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div><strong>Member Name:</strong> ${cert.participantName}</div>
-          <div><strong>Organization:</strong> ${cert.orgName}</div>
-          <div><strong>Member Since:</strong> ${cert.memberDateSince}</div>
-          <div><strong>Membership ID:</strong> ${cert.membershipID}</div>
-          <div><strong>Status:</strong> Active Member</div>
-          <div><strong>Type:</strong> Global Membership</div>
-        </div>
-      </div>
-    </div>`;
-
-  displayDiv.innerHTML = html;
-  displayDiv.style.display = 'block';
-  setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+    </div>
+  `;
 }
 
+// Generate membership summary
+function generateMembershipSummary(cert) {
+  return `
+    <div style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border: 2px solid #e9ecef;">
+      <h4 style="color: #333; margin-bottom: 1rem; text-align: center;">📋 Membership Summary</h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-family: 'Courier New', monospace; font-size: 0.95rem;">
+        <div><strong>Member Name:</strong> ${escapeHtml(cert.participantName)}</div>
+        <div><strong>Organization:</strong> ${escapeHtml(cert.orgName)}</div>
+        <div><strong>Member Since:</strong> ${escapeHtml(cert.memberDateSince)}</div>
+        <div><strong>Membership ID:</strong> ${escapeHtml(cert.membershipID)}</div>
+        <div><strong>Status:</strong> Active Member</div>
+        <div><strong>Type:</strong> Global Membership</div>
+      </div>
+    </div>
+  `;
+}
+
+// Download certificate function
 function downloadMembershipCertificate() {
-  const cert = allCertificatesData?.[0];
-  if (!cert) return alert('Certificate data not available');
-  generateCertificateWindow(cert);
-}
-
-function showMembershipError(message) {
-  document.getElementById('certificatesDisplay').style.display = 'none';
-  setStatus('error', `${esc(message)}<br><br><strong>If you believe this is an error or need to register, please contact the organizers.</strong>`);
-}
-
-function generateCertificateWindow(certRaw) {
-  const c = normalizeCert(certRaw);
+  if (!currentCertificateData) {
+    alert('Certificate data not available. Please regenerate your certificate.');
+    return;
+  }
   
-  const html = `
+  generateCertificateWindow(currentCertificateData);
+}
+
+// Generate certificate window for printing/downloading
+function generateCertificateWindow(cert) {
+  const certificateHTML = `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Code Crunch Membership Certificate - ${c.participantName}</title>
+  <title>Code Crunch Membership Certificate - ${escapeHtml(cert.participantName)}</title>
   <style>
-    @page { size:A4 landscape; margin:10mm }
-    *{box-sizing:border-box}
-    body{font-family:"Times New Roman",serif;background:#f5f5f5;padding:20px;margin:0}
-    .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
-    .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
-    .org-logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
-    .hdr{text-align:center;margin-bottom:40px}
-    .ttl{font-size:4rem;font-weight:700;letter-spacing:4px;color:#333;margin-bottom:10px;line-height:1}
-    .sub{font-size:1.2rem;letter-spacing:4px;color:#666;text-transform:uppercase}
-    .presented{font-size:1.1rem;font-style:italic;margin:50px 0 0;text-align:center;color:#555}
-    .name{font-size:3rem;font-weight:700;font-style:italic;color:#333;margin:30px 0;text-align:center}
-    .rec{font-size:1.1rem;line-height:1.6;color:#555;margin:30px auto;max-width:80%;text-align:center}
-    .info{font-size:1.1rem;font-weight:700;color:#333;margin:30px 0;text-align:center}
-    .impact{font-size:1rem;font-style:italic;color:#666;margin-top:20px;text-align:center}
-    .footer{margin-top:60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
-    .sig{text-align:center;flex:1}
-    .sig-line{border-top:2px solid #333;width:200px;margin:0 auto 10px}
-    .sig-name{font-size:1rem;font-weight:700;color:#333;margin-bottom:3px}
-    .sig-title{font-size:.9rem;font-style:italic;color:#666;line-height:1.3}
-    .right img{width:35px;height:35px;object-fit:contain;border-radius:3px;margin-left:12px}
-    .controls{text-align:center;margin:20px 0;padding:15px;background:#f8f9fa;border-radius:8px}
-    .btn{padding:12px 24px;font-size:1rem;cursor:pointer;border:0;border-radius:6px;margin:0 10px;font-weight:700;transition:all .3s ease}
-    .btn-primary{background:#007bff;color:#fff}.btn-secondary{background:#6c757d;color:#fff}.btn:hover{transform:translateY(-2px)}
-    @media print{
-      body{background:#fff!important;padding:0!important;margin:0!important}
-      .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
-      .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
-      .controls{display:none!important}
-      .org-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
-      .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
-      .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
+    @page { size: A4 landscape; margin: 10mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: "Times New Roman", serif; 
+      background: #f5f5f5; 
+      padding: 20px; 
+      line-height: 1.4;
+    }
+    .container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      background: #fff; 
+      padding: 20px; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+    }
+    .certificate { 
+      width: 100%; 
+      max-width: 1000px; 
+      min-height: 700px; 
+      margin: 0 auto; 
+      border: 15px solid #B8860B; 
+      padding: 40px; 
+      background: #fff; 
+      position: relative; 
+    }
+    .org-logo { 
+      position: absolute; 
+      top: 20px; 
+      right: 20px; 
+      max-width: 120px; 
+      max-height: 70px; 
+      object-fit: contain; 
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    .title { 
+      font-size: 4rem; 
+      font-weight: 700; 
+      letter-spacing: 4px; 
+      color: #333; 
+      margin-bottom: 10px; 
+      line-height: 1; 
+    }
+    .subtitle { 
+      font-size: 1.2rem; 
+      letter-spacing: 4px; 
+      color: #666; 
+      text-transform: uppercase; 
+    }
+    .presented { 
+      font-size: 1.1rem; 
+      font-style: italic; 
+      margin: 50px 0 0; 
+      text-align: center; 
+      color: #555; 
+    }
+    .name { 
+      font-size: 3rem; 
+      font-weight: 700; 
+      font-style: italic; 
+      color: #333; 
+      margin: 30px 0; 
+      text-align: center; 
+    }
+    .content { 
+      font-size: 1.1rem; 
+      line-height: 1.6; 
+      color: #555; 
+      margin: 30px auto; 
+      max-width: 80%; 
+      text-align: center; 
+    }
+    .info { 
+      font-size: 1.1rem; 
+      font-weight: 700; 
+      color: #333; 
+      margin: 30px 0; 
+      text-align: center; 
+    }
+    .footer { 
+      margin-top: 60px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-end; 
+      flex-wrap: wrap; 
+      gap: 20px; 
+    }
+    .signature { text-align: center; flex: 1; }
+    .sig-line { 
+      border-top: 2px solid #333; 
+      width: 200px; 
+      margin: 0 auto 10px; 
+    }
+    .sig-name { 
+      font-size: 1rem; 
+      font-weight: 700; 
+      color: #333; 
+      margin-bottom: 3px; 
+    }
+    .sig-title { 
+      font-size: 0.9rem; 
+      font-style: italic; 
+      color: #666; 
+      line-height: 1.3; 
+    }
+    .controls { 
+      text-align: center; 
+      margin: 20px 0; 
+      padding: 15px; 
+      background: #f8f9fa; 
+      border-radius: 8px; 
+    }
+    .btn { 
+      padding: 12px 24px; 
+      font-size: 1rem; 
+      cursor: pointer; 
+      border: 0; 
+      border-radius: 6px; 
+      margin: 0 10px; 
+      font-weight: 700; 
+      transition: all 0.3s ease; 
+    }
+    .btn-primary { background: #007bff; color: #fff; }
+    .btn-secondary { background: #6c757d; color: #fff; }
+    .btn:hover { transform: translateY(-2px); }
+    
+    @media print {
+      body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+      .container { max-width: none !important; padding: 0 !important; box-shadow: none !important; background: #fff !important; }
+      .certificate { max-width: none !important; width: 277mm !important; height: 190mm !important; border: 8mm solid #B8860B !important; padding: 15mm !important; margin: 0 !important; page-break-inside: avoid !important; }
+      .controls { display: none !important; }
+      .org-logo { top: 8mm !important; right: 8mm !important; max-width: 30mm !important; max-height: 18mm !important; }
+      .title { font-size: 16mm !important; }
+      .subtitle { font-size: 4mm !important; }
+      .name { font-size: 12mm !important; }
+      .presented, .content, .info { font-size: 3.5mm !important; }
     }
   </style>
 </head>
@@ -1213,24 +1507,43 @@ function generateCertificateWindow(certRaw) {
     <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
     <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
   </div>
-  <div class="wrap">
-    <div class="sheet">
-      ${c.orgLogoUrl ? `<img src="${c.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" onerror="this.style.display='none'">` : ''}
-      <div class="hdr"><div class="ttl">MEMBERSHIP CERTIFICATE</div><div class="sub">CODE CRUNCH GLOBAL</div></div>
+  
+  <div class="container">
+    <div class="certificate">
+      ${cert.orgLogoUrl ? `<img src="${cert.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" onerror="this.style.display='none'">` : ''}
+      
+      <div class="header">
+        <div class="title">MEMBERSHIP CERTIFICATE</div>
+        <div class="subtitle">CODE CRUNCH GLOBAL</div>
+      </div>
+      
       <div class="presented">This certificate confirms that</div>
-      <div class="name">${c.participantName}</div>
-      <div class="rec">Is an official member of <strong>${c.orgName}</strong>, recognized for their commitment to collaborative coding, innovation, and community building.</div>
-      <div class="info">Member Since: ${c.memberDateSince}<br>Membership ID: ${c.membershipID}</div>
-      <div class="impact">Join us in shaping the future of technology through collaboration, learning, and innovation.</div>
+      <div class="name">${escapeHtml(cert.participantName)}</div>
+      
+      <div class="content">
+        Is an official member of <strong>${escapeHtml(cert.orgName)}</strong>, 
+        recognized for their commitment to collaborative coding, innovation, and community building.
+      </div>
+      
+      <div class="info">
+        Member Since: ${escapeHtml(cert.memberDateSince)}<br>
+        Membership ID: ${escapeHtml(cert.membershipID)}
+      </div>
+      
+      <div class="content" style="font-style: italic; margin-top: 20px;">
+        Join us in shaping the future of technology through collaboration, learning, and innovation.
+      </div>
+      
       <div class="footer">
-        <div style="flex:1"></div>
-        <div class="sig">
+        <div style="flex: 1;"></div>
+        <div class="signature">
           <div class="sig-line"></div>
           <div class="sig-name">BRIAN BAZURTO</div>
           <div class="sig-title">Code Crunch President</div>
         </div>
-        <div style="flex:1;display:flex;justify-content:flex-end;align-items:center">
-          <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
+        <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+          <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" 
+               alt="Code Crunch" style="width: 35px; height: 35px; object-fit: contain; border-radius: 3px;">
         </div>
       </div>
     </div>
@@ -1238,37 +1551,31 @@ function generateCertificateWindow(certRaw) {
 </body>
 </html>`;
 
-  const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
-  if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
-  w.opener = null;
-  w.document.write(html);
-  w.document.close();
+  const newWindow = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
+  if (!newWindow) {
+    alert('Please allow pop-ups to view and print your certificate.');
+    return;
+  }
+  
+  newWindow.document.write(certificateHTML);
+  newWindow.document.close();
+  newWindow.focus();
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('certificateEmailInput');
-  input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
-  document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to verify membership and access community links...';
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const emailInput = document.getElementById('certificateEmailInput');
+  if (emailInput) {
+    emailInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        generateCertificate();
+      }
+    });
+  }
+  
+  console.log('🚀 Certificate Generator initialized');
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
 
 
 
