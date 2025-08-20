@@ -3,1475 +3,701 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Crunch</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <!-- Font Awesome CDN for social icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Code Crunch - Membership Certificate Generator</title>
     <style>
-        :root {
-            --cc-blue: #2463EB;
-            --cc-orange: #F59E0B;
-            --cc-dark: #111827;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .cc-blue { background-color: var(--cc-blue); }
-        .cc-blue-text { color: var(--cc-blue); }
-        .cc-orange { background-color: var(--cc-orange); }
-        .cc-orange-text { color: var(--cc-orange); }
-        
-        /* Gold star accent */
-        .star {
-            position: relative;
-            display: inline-block;
-            color: var(--cc-orange);
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
-        
-        /* Hamburger menu styles */
-        .hamburger {
-            cursor: pointer;
-            padding: 8px;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563EB, #1e40af);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #F59E0B;
+            border-radius: 12px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
             border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .hamburger:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 5px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
 
-        /* Slide-out menu styles */
-        .slide-menu {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--cc-blue) 0%, #1e40af 100%);
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
-            transition: right 0.3s ease-in-out;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .slide-menu.open {
-            right: 0;
-        }
-        
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-        
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        /* Donate button styles */
-        .donate-btn {
-            background: linear-gradient(135deg, var(--cc-orange), #EF4444);
+        .btn {
+            background: linear-gradient(135deg, #2563EB, #1e40af);
             color: white;
+            padding: 15px 30px;
             border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-            animation: pulse-glow 3s ease-in-out infinite;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .donate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            background: linear-gradient(135deg, #EF4444, var(--cc-orange));
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5); }
-        }
-
-        .menu-item {
-            display: block;
-            padding: 16px 24px;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .menu-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 32px;
-        }
-
-        .menu-section {
-            padding: 8px 0;
-        }
-
-        .menu-section-title {
-            padding: 12px 24px 8px;
-            color: var(--cc-orange);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .partner-link {
-            display: block;
-            padding: 12px 32px;
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .partner-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 40px;
-            color: white;
-        }
-
-        .menu-header {
-            padding: 24px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
             transition: all 0.3s ease;
+            width: 100%;
         }
 
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(90deg);
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
         }
 
-        /* Compact header donate button */
-        .header-donate-btn {
-            background: linear-gradient(135deg, var(--cc-orange), #EF4444);
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .certificate-result {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .community-links {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .community-links h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        .link-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .discord-btn {
+            background: #5865F2;
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.875rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
             text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
         }
 
-        .header-donate-btn:hover {
+        .discord-btn:hover {
+            background: #4752C4;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
         }
 
-        /* Animation for fade-in elements */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+        .groupme-btn {
+            background: #00AFF0;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .fade-in-up.opacity-100 {
-            opacity: 1;
-            transform: translateY(0);
+        .groupme-btn:hover {
+            background: #0088CC;
+            transform: translateY(-1px);
         }
 
-        @media (max-width: 480px) {
-            .slide-menu {
-                width: 100vw;
-                right: -100vw;
+        .download-btn {
+            background: #10b981;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .download-btn:hover {
+            background: #059669;
+        }
+
+        .member-info {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .member-info h3 {
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .info-item {
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .debug-info {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .link-buttons {
+                flex-direction: column;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CC</div>
+            <h1>Code Crunch</h1>
+            <p class="subtitle">Membership Certificate Generator</p>
+        </div>
 
-<body class="min-h-screen bg-gray-50">
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menu-overlay"></div>
-
-    <!-- Slide-out Menu -->
-    <div class="slide-menu" id="slide-menu">
-        <button class="close-btn" id="close-menu">
-            <i class="fas fa-times"></i>
-        </button>
-        
-        <div class="menu-header">
-            <div class="flex items-center mb-4">
-                <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2 mr-3">
-                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" class="h-full w-full object-contain" />
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xl font-bold leading-none text-white">CODE</span>
-                    <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
-                </div>
+        <div class="content">
+            <div class="form-group">
+                <label for="email">Enter your registered email address:</label>
+                <input type="email" id="email" placeholder="your.email@example.com" />
             </div>
-            <a href="https://hack-university-fundraiser.vercel.app/" class="donate-btn w-full justify-center">
-                <i class="fas fa-heart"></i>
-                Support Hack University
-            </a>
-            <a href="https://hack-university.vercel.app/" target="_blank" rel="noopener noreferrer" class="donate-btn w-full justify-center mt-3" style="background: linear-gradient(135deg, #10b981, #059669);">
-                <i class="fas fa-graduation-cap"></i>
-                Visit Hack University
-            </a>
-        </div>
 
-        <div class="menu-section">
-            <a href="index.html" class="menu-item">
-                <i class="fas fa-home mr-3"></i>Home
-            </a>
-            <a href="index.html#mission" class="menu-item">
-                <i class="fas fa-bullseye mr-3"></i>Mission
-            </a>
-            <a href="index.html#events" class="menu-item">
-                <i class="fas fa-calendar mr-3"></i>Events
-            </a>
-            <a href="https://witty-suede-4a1.notion.site/ebd/1fe7f868cc8c8042b1ebfebc42034954" class="menu-item">
-                <i class="fas fa-book mr-3"></i>Wiki
-            </a>
-            <a href="hackathons.html" class="menu-item">
-                <i class="fas fa-code mr-3"></i>Hackathons
-            </a>
-            <a href="community-access.html" class="menu-item">
-                <i class="fas fa-users mr-3"></i>Become a Member
-            </a>
-            <a href="all-eboard.html" class="menu-item">
-                <i class="fas fa-user-tie mr-3"></i>Join Executive Board
-            </a>
-            <a href="index.html#resources" class="menu-item">
-                <i class="fas fa-user-friends mr-3"></i>Our Team
-            </a>
-            <a href="index.html#resources" class="menu-item">
-                <i class="fas fa-images mr-3"></i>Gallery
-            </a>
-            <a href="index.html#resources" class="menu-item">
-                <i class="fas fa-tools mr-3"></i>Resources
-            </a>
-            <a href="index.html#connect" class="menu-item">
-                <i class="fas fa-link mr-3"></i>Connect
-            </a>
-            <a href="https://hack-university.vercel.app/" target="_blank" rel="noopener noreferrer" class="menu-item">
-                <i class="fas fa-graduation-cap mr-3"></i>Hack University Portal
-            </a>
-        </div>
+            <button class="btn" onclick="generateCertificate()" id="generateBtn">
+                🏆 Generate My Certificate
+            </button>
 
-        <div class="menu-section">
-            <div class="menu-section-title">Partners</div>
-            <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer" class="partner-link">
-                ColorStack at FIU
-            </a>
-            <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer" class="partner-link">
-                CAHSI at FIU
-            </a>
-            <a href="https://business.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                FIU Business - Supporter
-            </a>
-            <a href="https://honors.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                FIU Honors College - Supporter
-            </a>
-            <a href="https://cec.fiu.edu/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                FIU College of Engineering and Computing - Supporter
-            </a>
-            <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Eugenio Pino and Family Global Entrepreneurship Center - Supporter
-            </a>
-            <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/blackstone-launchpad-at-fiu/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Blackstone LaunchPad at FIU - Supporter
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Tech Partners
-            </a>
+            <div class="status" id="status"></div>
+
+            <div class="certificate-result" id="result">
+                <!-- Results will be populated here -->
+            </div>
+
+            <div class="debug-info" id="debug">
+                <!-- Debug info will appear here -->
+            </div>
         </div>
     </div>
 
-    <!-- Main Navigation -->
-    <nav class="cc-blue text-white fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0 flex items-center">
-                        <div class="h-12 w-12 cc-orange rounded-lg flex items-center justify-center p-2">
-                            <div class="h-12 w-12 rounded-lg flex items-center justify-center">
-                                <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Logo" class="h-full w-full object-contain" />
-                            </div>
-                        </div>
-                        <div class="ml-3 flex flex-col">
-                            <span class="text-xl font-bold leading-none">CODE</span>
-                            <span class="text-sm cc-orange-text font-medium">CRUNCH</span>
-                        </div>
-                    </div>
-                </div>
+    <script>
+        // Configuration
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
+        let membershipData = null;
+
+        // Debug logging
+        function debug(message, data = null) {
+            console.log(message, data);
+            const debugDiv = document.getElementById('debug');
+            debugDiv.style.display = 'block';
+            debugDiv.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            if (data) {
+                debugDiv.innerHTML += `<div style="margin-left: 20px; color: #666;">${JSON.stringify(data, null, 2)}</div>`;
+            }
+            debugDiv.scrollTop = debugDiv.scrollHeight;
+        }
+
+        // Show status message
+        function showStatus(type, message) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+            statusDiv.style.display = 'block';
+        }
+
+        // Hide status
+        function hideStatus() {
+            document.getElementById('status').style.display = 'none';
+        }
+
+        // Toggle button state
+        function toggleButton(loading) {
+            const btn = document.getElementById('generateBtn');
+            if (loading) {
+                btn.textContent = '⏳ Verifying Membership...';
+                btn.disabled = true;
+            } else {
+                btn.textContent = '🏆 Generate My Certificate';
+                btn.disabled = false;
+            }
+        }
+
+        // Main function
+        async function generateCertificate() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim().toLowerCase();
+            
+            // Clear previous results
+            document.getElementById('result').style.display = 'none';
+            hideStatus();
+            
+            // Debug
+            debug('Starting certificate generation', { originalEmail: emailInput.value, normalizedEmail: email });
+
+            // Validate email
+            if (!email) {
+                showStatus('error', '❌ Please enter your email address.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showStatus('error', '❌ Please enter a valid email address.');
+                return;
+            }
+
+            // Show loading
+            showStatus('info', '⏳ Checking membership status...');
+            toggleButton(true);
+
+            try {
+                // Build request URL
+                const currentUrl = window.location.href;
+                const requestUrl = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`;
                 
-                <!-- Right side: Donate button + Hamburger -->
-                <div class="flex items-center space-x-4">
-                    <!-- Compact donate button for larger screens -->
-                    <div class="hidden sm:block">
-                        <a href="https://hack-university-fundraiser.vercel.app/" class="header-donate-btn">
-                            <i class="fas fa-heart"></i>
-                            <span class="hidden md:inline">Support Us</span>
-                            <span class="md:hidden">Donate</span>
-                        </a>
-                    </div>
-                    
-                    <!-- Hamburger menu button -->
-                    <div class="hamburger" id="hamburger-menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+                debug('Making API request', { url: requestUrl, currentUrl });
 
-    <!-- Main Content -->
-    <div class="pt-20">
-        <!-- Hero Section -->
-        <section id="home" class="cc-blue text-white py-20 md:py-32">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-3xl">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                        Code Crunch <span class="star">✨</span>
-                    </h1>
-                    <p class="text-xl mb-8">
-                        An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. <span class="font-bold">Open to high school students (16+), all majors, and any university.</span>
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="community-access.html" class="inline-block cc-orange cc-blue-text px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-bold">
-                            Join Code Crunch
-                        </a>
-                        <a href="hackathons.html" class="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-md hover:bg-white hover:text-[#2463EB] transition-colors font-bold">
-                            Upcoming Hackathons
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                // Make request with timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-        <!-- Mission Section -->
-        <section id="mission" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Mission & Purpose <span class="star">✨</span></h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Our Mission</h3>
-                        <p class="text-gray-700">
-                            Code Crunch is an interdisciplinary club connecting students across all majors, high schools (16+), and universities through technology and innovation. We empower students through coding workshops, technical interview prep, and project-based learning.
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Connecting All Disciplines & Education Levels</h3>
-                        <p class="text-gray-700 mb-4">
-                            We welcome students from diverse academic backgrounds and education levels including:
-                        </p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    High School Students (16+)
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Computer Science
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Mechanical Engineering
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Civil Engineering
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Business
-                                </li>
-                            </ul>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    College/University Students
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Biomedical Engineering
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Health Sciences
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    Law
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="h-2 w-2 cc-blue rounded-full mr-3"></span>
-                                    And many more!
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <p class="text-lg text-gray-700">
-                        At Code Crunch, we believe that the most innovative solutions come from collaboration across disciplines.
-                    </p>
-                </div>
-            </div>
-        </section>
-        
+                const response = await fetch(requestUrl, {
+                    signal: controller.signal,
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
 
+                clearTimeout(timeoutId);
 
+                debug('API Response received', { 
+                    status: response.status, 
+                    statusText: response.statusText,
+                    ok: response.ok 
+                });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
 
+                const data = await response.json();
+                debug('API Data parsed', data);
 
+                // Check for API errors
+                if (data.error) {
+                    throw new Error(data.error);
+                }
 
-        <!-- Events Section -->
-        <section id="events" class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Upcoming Events <span class="star">✨</span></h2>
-                <div class="bg-white rounded-lg shadow p-8">
-                    <p class="text-lg mb-6">
-                        Stay connected with our upcoming coding challenges, workshops, and tech talks:
-                    </p>
-                    
-                    <!-- Luma Calendar Embed -->
-                    <div class="flex justify-center mb-8">
-                        <iframe src="https://lu.ma/embed/calendar/cal-NbgEYtPLuqBJhtM/events?compact=true&lt=light" 
-                                width="100%" height="450" frameborder="0" 
-                                style="border: 1px solid #bfcbda88; border-radius: 4px; max-width: 800px;" 
-                                allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                    </div>
-                    
-                    <div class="text-center">
-                        <a href="https://lu.ma/CODECRUNCH" target="_blank" rel="noopener noreferrer" 
-                           class="inline-block cc-blue text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors font-bold">
-                            View All Events
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                // Process certificates
+                const certificates = data.certificates || [];
+                debug('Certificates found', { count: certificates.length, certificates });
 
-        <!-- Join Us Section -->
-        <section id="join" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Join Our Club <span class="star">✨</span></h2>
-                <div class="bg-gray-50 rounded-lg p-8">
-                    <div class="max-w-3xl mx-auto">
-                        <p class="text-lg mb-6 text-center">
-                            Becoming a member of Code Crunch connects you with a diverse community of peers, 
-                            mentors, and resources to help you succeed in technology and innovation. Open to high school students (16+), all majors, and any university.
-                        </p>
-                        <div class="grid md:grid-cols-2 gap-6 mb-8">
-                            <div class="bg-white rounded-lg p-6 shadow">
-                                <h3 class="text-xl font-bold mb-3 cc-blue-text">Membership Benefits</h3>
-                                <ul class="space-y-2">
-                                    <li class="flex items-start">
-                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>Access to all club events and workshops</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>Mentorship from experienced students and professionals</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>Networking with industry professionals and peers</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>Leadership and volunteer opportunities</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <svg class="h-5 w-5 cc-blue-text mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>Hackathon participation and team building</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="bg-white rounded-lg p-6 shadow">
-                                <h3 class="text-xl font-bold mb-3 cc-blue-text">How to Join</h3>
-                                <p class="mb-4">
-                                    Membership is open to all students interested in technology and innovation, 
-                                    including high school students (16+), college students from any major, and from any university worldwide.
-                                </p>
-                                <p class="mb-4">
-                                    To become a member, simply fill out the membership form and join our community events.
-                                    <span class="font-bold">Free Membership.</span>
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    Questions about membership? Message us on <a href="https://www.linkedin.com/company/code-crunch-club" target="_blank" class="text-blue-600 hover:underline font-medium">LinkedIn</a> or DM us on <a href="community-access.html" class="text-blue-600 hover:underline font-medium">Discord @codecrunchclub</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <a href="community-access.html" 
-                               class="inline-block cc-orange cc-blue-text px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-bold">
-                                Join Code Crunch Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                if (certificates.length === 0) {
+                    showStatus('error', '❌ No membership found for this email address. Please ensure you have registered as a Code Crunch member.');
+                    return;
+                }
 
-        <!-- Hackathons Section -->
-        <section id="hackathons" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Hackathons <span class="star">✨</span></h2>
+                // Show success
+                const cert = certificates[0];
+                const certData = cert.certificateData || cert;
+                membershipData = certData;
+
+                debug('Certificate data extracted', certData);
+
+                showMembershipFound(certData);
+
+            } catch (error) {
+                debug('Error occurred', { error: error.message, stack: error.stack });
                 
-                <!-- 7 Hacks Collaboration Banner -->
-                <div class="mb-8 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg p-6 text-white">
-                    <div class="flex flex-col md:flex-row items-center justify-between">
-                        <div class="mb-4 md:mb-0 md:mr-6">
-                            <h3 class="text-2xl font-bold mb-2">7 Hacks: Code Crunch GLOBAL x ColorStack @ FIU x CAHSI @ FIU</h3>
-                            <p class="text-lg mb-2">Join our series of 7 hackathons designed to challenge and inspire students across multiple disciplines!</p>
-                            <p class="font-medium mb-2">Open to ALL majors and ANY skill level</p>
-                            <ul class="list-disc list-inside opacity-90 mb-4">
-                                <li>No coding experience required</li>
-                                <li>Great for beginners and experienced coders alike</li>
-                                <li>Build your portfolio and network with industry professionals</li>
-                            </ul>
-                            
-                            <!-- Simple text list of tracks -->
-                            <div class="mt-4">
-                                <p class="font-medium mb-2">Specialized Tracks:</p>
-                                <p class="text-sm">
-                                    Engineering: Civil, Electrical, Mechanical, Biomedical<br>
-                                    Business: Finance, Marketing, Management, Entrepreneurship<br>
-                                    Computer Science, Data Science, AI/ML, Cybersecurity
-                                </p>
-                            </div>
+                if (error.name === 'AbortError') {
+                    showStatus('error', '❌ Request timed out. Please try again.');
+                } else {
+                    showStatus('error', `❌ Error: ${error.message}`);
+                }
+            } finally {
+                toggleButton(false);
+            }
+        }
+
+        // Show membership found
+        function showMembershipFound(data) {
+            showStatus('success', '✅ Membership verified! Welcome to Code Crunch Global!');
+
+            const resultDiv = document.getElementById('result');
+            
+            let html = `
+                <div class="member-info">
+                    <h3>🎉 Your Membership Details</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Name:</div>
+                            <div>${data.participantName || 'Member'}</div>
                         </div>
-                        
-                        <a href="hackathons.html" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors font-bold text-center">
-                            Join 7 Hacks Now
-                        </a>
+                        <div class="info-item">
+                            <div class="info-label">Member Since:</div>
+                            <div>${data.memberDateSince || 'N/A'}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Membership ID:</div>
+                            <div>${data.membershipID || 'N/A'}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Organization:</div>
+                            <div>${data.orgName || 'Code Crunch'}</div>
+                        </div>
                     </div>
                 </div>
+            `;
+
+            // Add community links if available
+            if (data.discordJoinLink || data.groupmeLink) {
+                html += `
+                    <div class="community-links">
+                        <h3>🌟 Join Our Community</h3>
+                        <p>Connect with fellow members and stay updated on events!</p>
+                        <div class="link-buttons">
+                `;
                 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Why Participate?</h3>
-                        <p class="text-gray-700 mb-4">
-                            Our hackathons provide unique opportunities to:
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <span class="h-5 w-5 cc-blue rounded-full mr-3 flex-shrink-0 mt-1 flex items-center justify-center">
-                                    <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold">Build Real-World Skills</h4>
-                                    <p class="text-gray-600">Gain practical experience solving complex problems under time constraints</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="h-5 w-5 cc-blue rounded-full mr-3 flex-shrink-0 mt-1 flex items-center justify-center">
-                                    <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold">Expand Your Network</h4>
-                                    <p class="text-gray-600">Connect with peers, mentors, and industry professionals</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="h-5 w-5 cc-blue rounded-full mr-3 flex-shrink-0 mt-1 flex items-center justify-center">
-                                    <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold">Win Exciting Prizes</h4>
-                                    <p class="text-gray-600">Compete for awards, tech gadgets, and career opportunities</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="text-2xl font-bold mb-4 cc-blue-text">Specialized Tracks</h3>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h4 class="font-bold text-lg">Tech Unicorn Track</h4>
-                                <p class="text-gray-600">Perfect for entrepreneurs and business students - no coding required!</p>
-                                <p class="text-gray-600">Develop a startup idea and pitch to industry judges</p>
-                            </div>
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h4 class="font-bold text-lg">Startup Pitch Arena</h4>
-                                <p class="text-gray-600">Transform your ideas into compelling business pitches</p>
-                                <p class="text-gray-600">Receive feedback from successful entrepreneurs and investors</p>
-                            </div>
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h4 class="font-bold text-lg">Cross-Disciplinary Challenges</h4>
-                                <p class="text-gray-600">Collaborate with students from other majors on real-world problems</p>
-                                <p class="text-gray-600">Technical and non-technical roles available for all participants</p>
-                            </div>
-                            <a href="hackathons.html" class="cc-blue text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium inline-block mt-4">
-                                Explore All the Hacks
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Resources Section -->
-        <section id="resources" class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold cc-blue-text">Resources <span class="star">✨</span></h2>
-                    <p class="mt-4 text-lg text-gray-600">Access our curated collection of resources to enhance your skills and prepare for hackathons</p>
-                </div>
+                if (data.discordJoinLink) {
+                    html += `<a href="${data.discordJoinLink}" target="_blank" class="discord-btn">💬 Join Discord</a>`;
+                }
                 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Learning Resources Card -->
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-3 cc-blue-text">Learning Paths</h3>
-                        <p class="text-gray-600 mb-4">Discover guided learning paths for various tech disciplines, from beginner to advanced.</p>
-                        <a href="technical-learning.html" class="text-blue-600 font-medium hover:text-blue-800">
-                            Explore learning paths <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                    
-                    <!-- Hackathon Prep Card -->
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-3 cc-blue-text">Hackathon Toolkit</h3>
-                        <p class="text-gray-600 mb-4">Get templates, starter code, and guides to maximize your hackathon experience.</p>
-                        <a href="hacks-toolkit.html" class="text-blue-600 font-medium hover:text-blue-800">
-                            Hack toolkit <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                    
-                    <!-- Mentor Connect Card -->
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-3 cahsi-blue-text">Mentor Connect</h3>
-                        <p class="text-gray-600 mb-4">Connect with industry professionals and experienced developers for guidance and advice.</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdyNQCvXIRRWOSmLvwT2jzM8apkmuC7Hp1J-knhPUHnC8DRmA/viewform?usp=dialog" class="text-blue-600 font-medium hover:text-blue-800">
-                            Find a mentor <span aria-hidden="true">→</span>
-                        </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section id="team" class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Meet Our Team <span class="star">✨</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <!-- Team Member 1 -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="h-48 bg-gray-200 flex items-center justify-center">
-                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">
-                                <a href="https://www.linkedin.com/in/brian-bazurto/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
-                                    Brian Bazurto
-                                </a>
-                            </h3>
-                            <p class="text-sm text-gray-600">President</p>
-                            <p class="text-xs mt-2 text-gray-500">Computer Science student</p>
+                if (data.groupmeLink) {
+                    html += `<a href="${data.groupmeLink}" target="_blank" class="groupme-btn">👥 Join GroupMe</a>`;
+                }
+                
+                html += `
                         </div>
                     </div>
-                    
-                    <!-- Team Member 2 -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="h-48 bg-gray-200 flex items-center justify-center">
-                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">
-                                <a href="https://www.linkedin.com/in/jhoan-gonzalez/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
-                                    Jhoan Gonzalez
-                                </a>
-                            </h3>
-                            <p class="text-sm text-gray-600">Vice President</p>
-                            <p class="text-xs mt-2 text-gray-500">Biomedical Engineering student</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 3 -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="h-48 bg-gray-200 flex items-center justify-center">
-                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">
-                                <a href="https://www.linkedin.com/in/bryan-garcia/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
-                                    Bryan Garcia
-                                </a>
-                            </h3>
-                            <p class="text-sm text-gray-600">Treasurer</p>
-                            <p class="text-xs mt-2 text-gray-500">Computer Science student @ FIU</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 4 -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="h-48 bg-gray-200 flex items-center justify-center">
-                            <svg class="h-24 w-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">
-                                <a href="https://www.linkedin.com/in/ruben-otano/" target="_blank" rel="noopener noreferrer" class="cc-blue-text hover:text-blue-800 transition-colors">
-                                    Ruben Otano
-                                </a>
-                            </h3>
-                            <p class="text-sm text-gray-600">Program Manager</p>
-                            <p class="text-xs mt-2 text-gray-500">Computer Science student @ Miami Dade College </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <a href="all-eboard.html" class="cc-blue text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium">
-                        View All Executive Board Members
-                    </a>
-                </div>
-            </div>
-        </section>
+                `;
+            }
 
-        <!-- Gallery Section -->
-        <section id="gallery" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Club Gallery <span class="star">✨</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <!-- Gallery Image 1 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Workshop Photo</span>
-                    </div>
-                    <!-- Gallery Image 2 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Networking Event</span>
-                    </div>
-                    <!-- Gallery Image 3 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Hackathon</span>
-                    </div>
-                    <!-- Gallery Image 4 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Social Gathering</span>
-                    </div>
-                    <!-- Gallery Image 5 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Tech Talk</span>
-                    </div>
-                    <!-- Gallery Image 6 -->
-                    <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span class="text-gray-500 text-sm">Industry Visit</span>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <a href="#" class="inline-block cc-blue text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors font-medium">
-                        View All Photos
-                    </a>
-                </div>
-            </div>
-        </section>
+            // Add download button
+            html += `<button class="download-btn" onclick="downloadCertificate()">📄 Download Certificate</button>`;
 
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = 'block';
 
+            // Scroll to results
+            setTimeout(() => {
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
 
+        // Download certificate
+        function downloadCertificate() {
+            if (!membershipData) {
+                alert('No certificate data available. Please generate your certificate first.');
+                return;
+            }
 
+            debug('Generating certificate download', membershipData);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Updated Certificate Generator Section -->
-<section class="checklist-section" id="certificate-generator" style="margin-top:3rem;">
-  <h2 class="checklist-title glitch" data-text="GENERATE YOUR MEMBERSHIP CERTIFICATE">GENERATE YOUR MEMBERSHIP CERTIFICATE</h2>
-  <p class="checklist-subtitle">[ OFFICIAL CODE CRUNCH MEMBERSHIP CERTIFICATE ] — Download your membership certificate and access community links</p>
-
-  <!-- Same styles as before... -->
-  <style>
-    /* All your existing styles stay the same */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
-    .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
-    .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
-    .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
-    .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
-    .alert{padding:.75rem;border-radius:4px;border:1px solid}
-    .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
-    .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
-    .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
-    .certificate-container{width:1123px;height:794px;background:#fff;border:8px solid #B8860B;border-radius:10px;padding:40px;color:#333;font-family:"Times New Roman",serif;position:relative;margin:0 auto 20px;box-sizing:border-box}
-    .certificate-container h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
-    .certificate-container .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
-    .certificate-container .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center}
-    .certificate-container .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center}
-    .certificate-container .body{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
-    .org-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
-    .btn-green{padding:12px 24px;background:#28a745;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
-    .btn-green:hover{background:#218838;transform:translateY(-2px)}
-    .btn-discord{padding:12px 24px;background:#5865F2;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace;text-decoration:none;display:inline-block}
-    .btn-discord:hover{background:#4752C4;transform:translateY(-2px);color:#fff;text-decoration:none}
-    .btn-groupme{padding:12px 24px;background:#00AFF0;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace;text-decoration:none;display:inline-block}
-    .btn-groupme:hover{background:#0088CC;transform:translateY(-2px);color:#fff;text-decoration:none}
-    .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
-    .community-links{margin-top:2rem;padding:1.5rem;background:#f8f9fa;border-radius:8px;border:2px solid #28a745;text-align:center}
-    @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
-    @media (max-width:900px){.certificate-container{transform:scale(.65)}}
-    @media (max-width:700px){.certificate-container{transform:scale(.55)}}
-  </style>
-
-  <label for="certificateEmailInput" class="sr-only">Registered email address</label>
-  <div class="cg-row">
-    <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" />
-    <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
-  </div>
-
-  <div id="certificateResult" class="cg-card" aria-live="polite" aria-atomic="true"></div>
-  <div id="certificatesDisplay" style="display:none;margin-top:2rem;"></div>
-</section>
-
-<script>
-/* ======================
-   🔥 FIXED API URL - Updated to your new deployment
-   ====================== */
-const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
-let allCertificatesData = [];
-
-const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
-  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-);
-
-function normalizeCert(cert) {
-  // Handle both nested certificateData and flat structure
-  const data = cert?.certificateData || cert;
-  
-  return {
-    participantName: esc(data?.participantName || 'Member'),
-    membershipID: esc(data?.membershipID || 'N/A'),
-    memberDateSince: esc(data?.memberDateSince || 'Date'),
-    orgName: esc(data?.orgName || 'Code Crunch'),
-    orgLogoUrl: data?.orgLogoUrl || '',
-    discordJoinLink: data?.discordJoinLink || '',
-    groupmeLink: data?.groupmeLink || ''
-  };
-}
-
-function infoBoxHTML() {
-  return `
-  <div class="infobox">
-    <strong style="color:#28a745">🏆 Membership Certificate Generator:</strong><br>
-    • <strong>Official Membership</strong>: Available for confirmed Code Crunch members<br>
-    • <strong>Verification</strong>: Enter your registered email to verify membership<br>
-    • <strong>Community Access</strong>: Get Discord and GroupMe links after verification<br>
-    • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
-    • <strong>Professional Recognition</strong>: Official membership certificate for your portfolio
-  </div>`;
-}
-
-function setStatus(type, html) {
-  const resultDiv = document.getElementById('certificateResult');
-  const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
-  resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-}
-
-function toggleButton(loading) {
-  const btn = document.getElementById('generateBtn');
-  if (!btn) return;
-  btn.disabled = !!loading;
-  btn.textContent = loading ? '⏳ Verifying…' : '🏆 Generate Certificate';
-}
-
-async function generateCertificate() {
-  const emailInput = document.getElementById('certificateEmailInput');
-  const displayDiv = document.getElementById('certificatesDisplay');
-  const email = (emailInput?.value || '').trim().toLowerCase(); // Normalize to lowercase
-
-  // Validate email
-  if (!email) {
-    setStatus('error', '❌ Please enter your email address.');
-    displayDiv.style.display = 'none';
-    return;
-  }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    setStatus('error', '❌ Please enter a valid email address.');
-    displayDiv.style.display = 'none';
-    return;
-  }
-
-  setStatus('info', '⏳ Verifying membership status...');
-  displayDiv.style.display = 'none';
-  toggleButton(true);
-
-  // Add debugging
-  console.log('🔍 Debug Info:');
-  console.log('Original Email Input:', emailInput?.value);
-  console.log('Normalized Email:', email);
-  console.log('Current URL:', window.location.href);
-  console.log('API URL:', API_URL);
-
-  const ac = new AbortController();
-  const to = setTimeout(() => ac.abort(), 15000); // Increased timeout
-
-  try {
-    const currentUrl = window.location.href;
-    const requestUrl = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`;
-    console.log('📡 Request URL:', requestUrl);
-    
-    const res = await fetch(requestUrl, { signal: ac.signal });
-    console.log('📊 Response Status:', res.status, res.statusText);
-    
-    const payload = await res.json().catch(err => {
-      console.error('❌ JSON Parse Error:', err);
-      return {};
-    });
-    console.log('📄 API Response:', payload);
-    
-    if (!res.ok) throw new Error(payload?.error || res.statusText);
-
-    // Debug the response structure
-    console.log('🔍 Response Analysis:');
-    console.log('- Is Array?', Array.isArray(payload));
-    console.log('- Has certificates?', payload?.certificates);
-    console.log('- Certificates length:', payload?.certificates?.length);
-    console.log('- First certificate:', payload?.certificates?.[0]);
-
-    // Handle response
-    let certificatesArr = [];
-    if (Array.isArray(payload)) {
-      certificatesArr = payload;
-    } else if (Array.isArray(payload?.certificates)) {
-      certificatesArr = payload.certificates;
-    } else if (payload?.certificateData) {
-      certificatesArr = [payload];
-    }
-
-    console.log('🎯 Certificates found:', certificatesArr.length);
-    if (certificatesArr.length > 0) {
-      console.log('📋 First certificate details:', certificatesArr[0]);
-      console.log('📋 Certificate status:', certificatesArr[0]?.status);
-    }
-
-    const validCerts = certificatesArr.filter(cert => {
-      // Normalize status for comparison (remove extra spaces, case-insensitive)
-      const certStatus = (cert?.status || '').trim();
-      const expectedStatus = "Code Crunch Global Membership Certificate Available";
-      const hasCorrectStatus = certStatus === expectedStatus;
-      
-      // Check for data in multiple possible locations
-      const hasData = !!(cert?.certificateData || cert?.participantName || cert?.membershipID);
-      
-      console.log(`🔎 Checking cert: 
-        - Status: "${certStatus}" 
-        - Expected: "${expectedStatus}"
-        - Status Match: ${hasCorrectStatus}
-        - Has Data: ${hasData}
-        - Participant: ${cert?.certificateData?.participantName || cert?.participantName}
-        - MemberID: ${cert?.certificateData?.membershipID || cert?.membershipID}`);
-      
-      return hasCorrectStatus && hasData;
-    });
-
-    console.log('✅ Valid certificates:', validCerts.length);
-
-    if (!validCerts.length) {
-      showMembershipError('No membership found for this email address. Please ensure you have registered as a Code Crunch member.');
-      return;
-    }
-
-    showMembershipFound(validCerts);
-  } catch (err) {
-    console.error('❌ Fetch Error:', err);
-    if (err.name === 'AbortError') {
-      setStatus('error', '❌ Request timed out. Please try again.');
-    } else {
-      setStatus('error', '❌ Failed to verify membership. Please try again later.');
-    }
-  } finally {
-    clearTimeout(to);
-    toggleButton(false);
-  }
-}
-
-function showMembershipFound(certificatesArr) {
-  const displayDiv = document.getElementById('certificatesDisplay');
-  allCertificatesData = certificatesArr.map(c => c.certificateData || c);
-  const cert = normalizeCert(allCertificatesData[0]);
-  
-  setStatus('ok',
-    `<strong>✅ MEMBERSHIP VERIFIED!</strong><br>
-     Welcome to Code Crunch Global! Your membership has been confirmed.<br><br>
-     <strong>Member since:</strong> ${cert.memberDateSince}<br>
-     <strong>Membership ID:</strong> ${cert.membershipID}`
-  );
-
-  let html = `
-    <div style="text-align:center;margin-bottom:2rem">
-      <h3 class="certificate-title">🎯 Code Crunch Global Membership</h3>
-      <p style="color:#666;font-family:'Courier New',monospace">Your official membership certificate and community access</p>
-    </div>
-    
-    <div class="community-links">
-      <h4 style="color:#28a745;margin-bottom:1rem;font-family:'Courier New',monospace">🌟 Join Our Community</h4>
-      <p style="color:#666;margin-bottom:1.5rem;font-family:'Courier New',monospace">Access exclusive Discord and GroupMe communities for Code Crunch members</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">`;
-
-  if (cert.discordJoinLink) {
-    html += `<a href="${cert.discordJoinLink}" target="_blank" class="btn-discord">💬 Join Discord Server</a>`;
-  }
-  
-  if (cert.groupmeLink) {
-    html += `<a href="${cert.groupmeLink}" target="_blank" class="btn-groupme">👥 Join GroupMe</a>`;
-  }
-
-  html += `
-      </div>
-      <p style="color:#555;font-size:.9rem;margin-top:1rem;font-family:'Courier New',monospace">Connect with fellow members, get event updates, and collaborate on projects!</p>
-    </div>
-
-    <div style="text-align:center;margin-top:2rem">
-      <div class="certificate-container">
-        ${cert.orgLogoUrl ? `<img src="${cert.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" onerror="this.style.display='none'">` : ''}
-        
-        <div style="text-align:center;margin-bottom:40px">
-          <h1>MEMBERSHIP CERTIFICATE</h1>
-          <p class="sub">CODE CRUNCH GLOBAL</p>
-        </div>
-        
-        <p class="presented">This certificate confirms that</p>
-        <h2 class="participant-name">${cert.participantName}</h2>
-        
-        <div class="body">
-          <p>Is an official member of <strong>${cert.orgName}</strong>, recognized for their commitment to collaborative coding, innovation, and community building.</p><br>
-          <p><strong>Member Since:</strong> ${cert.memberDateSince}</p>
-          <p><strong>Membership ID:</strong> ${cert.membershipID}</p><br>
-          <p><em>Join us in shaping the future of technology through collaboration, learning, and innovation.</em></p>
-        </div>
-
-        <div style="position:absolute;bottom:30px;left:40px;right:40px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-            <div style="flex:1"></div>
-            <div style="text-align:center">
-              <div style="border-top:2px solid #333;width:250px;margin:0 auto 15px"></div>
-              <p style="font-size:1rem;font-weight:700;margin-bottom:5px">BRIAN BAZURTO</p>
-              <p style="font-size:.9rem;font-style:italic;margin:0">Code Crunch President</p>
-            </div>
-            <div style="display:flex;gap:15px;align-items:center">
-              <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div style="margin-top:10px">
-        <button class="btn-green" onclick="downloadMembershipCertificate()">📄 Download Membership Certificate</button>
-      </div>
-      
-      <div style="margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;text-align:left;font-family:'Courier New',monospace;font-size:.9rem">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div><strong>Member Name:</strong> ${cert.participantName}</div>
-          <div><strong>Organization:</strong> ${cert.orgName}</div>
-          <div><strong>Member Since:</strong> ${cert.memberDateSince}</div>
-          <div><strong>Membership ID:</strong> ${cert.membershipID}</div>
-          <div><strong>Status:</strong> Active Member</div>
-          <div><strong>Type:</strong> Global Membership</div>
-        </div>
-      </div>
-    </div>`;
-
-  displayDiv.innerHTML = html;
-  displayDiv.style.display = 'block';
-  setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-}
-
-function downloadMembershipCertificate() {
-  const cert = allCertificatesData?.[0];
-  if (!cert) return alert('Certificate data not available');
-  generateCertificateWindow(cert);
-}
-
-function showMembershipError(message) {
-  document.getElementById('certificatesDisplay').style.display = 'none';
-  setStatus('error', `${esc(message)}<br><br><strong>If you believe this is an error or need to register, please contact the organizers.</strong>`);
-}
-
-function generateCertificateWindow(certRaw) {
-  const c = normalizeCert(certRaw);
-  
-  const html = `
+            const data = membershipData;
+            const html = `
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Code Crunch Membership Certificate - ${c.participantName}</title>
-  <style>
-    @page { size:A4 landscape; margin:10mm }
-    *{box-sizing:border-box}
-    body{font-family:"Times New Roman",serif;background:#f5f5f5;padding:20px;margin:0}
-    .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
-    .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
-    .org-logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
-    .hdr{text-align:center;margin-bottom:40px}
-    .ttl{font-size:4rem;font-weight:700;letter-spacing:4px;color:#333;margin-bottom:10px;line-height:1}
-    .sub{font-size:1.2rem;letter-spacing:4px;color:#666;text-transform:uppercase}
-    .presented{font-size:1.1rem;font-style:italic;margin:50px 0 0;text-align:center;color:#555}
-    .name{font-size:3rem;font-weight:700;font-style:italic;color:#333;margin:30px 0;text-align:center}
-    .rec{font-size:1.1rem;line-height:1.6;color:#555;margin:30px auto;max-width:80%;text-align:center}
-    .info{font-size:1.1rem;font-weight:700;color:#333;margin:30px 0;text-align:center}
-    .impact{font-size:1rem;font-style:italic;color:#666;margin-top:20px;text-align:center}
-    .footer{margin-top:60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
-    .sig{text-align:center;flex:1}
-    .sig-line{border-top:2px solid #333;width:200px;margin:0 auto 10px}
-    .sig-name{font-size:1rem;font-weight:700;color:#333;margin-bottom:3px}
-    .sig-title{font-size:.9rem;font-style:italic;color:#666;line-height:1.3}
-    .right img{width:35px;height:35px;object-fit:contain;border-radius:3px;margin-left:12px}
-    .controls{text-align:center;margin:20px 0;padding:15px;background:#f8f9fa;border-radius:8px}
-    .btn{padding:12px 24px;font-size:1rem;cursor:pointer;border:0;border-radius:6px;margin:0 10px;font-weight:700;transition:all .3s ease}
-    .btn-primary{background:#007bff;color:#fff}.btn-secondary{background:#6c757d;color:#fff}.btn:hover{transform:translateY(-2px)}
-    @media print{
-      body{background:#fff!important;padding:0!important;margin:0!important}
-      .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
-      .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
-      .controls{display:none!important}
-      .org-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
-      .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
-      .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>Code Crunch Membership Certificate - ${data.participantName || 'Member'}</title>
+    <style>
+        @page { size: A4 landscape; margin: 10mm; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: "Times New Roman", serif; 
+            background: #f5f5f5; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .certificate {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 700px;
+            margin: 0 auto;
+            background: white;
+            border: 15px solid #B8860B;
+            padding: 40px;
+            position: relative;
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .title { 
+            font-size: 4rem; 
+            font-weight: 700; 
+            letter-spacing: 4px; 
+            color: #333; 
+            margin-bottom: 10px; 
+        }
+        .subtitle { 
+            font-size: 1.2rem; 
+            letter-spacing: 4px; 
+            color: #666; 
+            text-transform: uppercase; 
+        }
+        .presented { 
+            font-size: 1.1rem; 
+            font-style: italic; 
+            margin: 50px 0 0; 
+            text-align: center; 
+            color: #555; 
+        }
+        .name { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            font-style: italic; 
+            color: #333; 
+            margin: 30px 0; 
+            text-align: center; 
+        }
+        .content { 
+            font-size: 1.1rem; 
+            line-height: 1.6; 
+            color: #555; 
+            margin: 30px auto; 
+            max-width: 80%; 
+            text-align: center; 
+        }
+        .info { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #333; 
+            margin: 30px 0; 
+            text-align: center; 
+        }
+        .signature { 
+            position: absolute; 
+            bottom: 40px; 
+            right: 40px; 
+            text-align: center; 
+        }
+        .signature-line { 
+            border-top: 2px solid #333; 
+            width: 200px; 
+            margin-bottom: 10px; 
+        }
+        .signature-name { 
+            font-size: 1rem; 
+            font-weight: 700; 
+            color: #333; 
+            margin-bottom: 3px; 
+        }
+        .signature-title { 
+            font-size: 0.9rem; 
+            font-style: italic; 
+            color: #666; 
+        }
+        .logo { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            width: 80px; 
+            height: 80px; 
+        }
+        .controls { 
+            text-align: center; 
+            margin: 20px 0; 
+            padding: 15px; 
+            background: #f8f9fa; 
+            border-radius: 8px; 
+        }
+        .btn { 
+            padding: 12px 24px; 
+            margin: 0 10px; 
+            font-size: 1rem; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 700; 
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .controls { display: none !important; }
+            .certificate { 
+                width: 277mm !important; 
+                height: 190mm !important; 
+                border: 8mm solid #B8860B !important; 
+                padding: 15mm !important; 
+                margin: 0 !important; 
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="controls">
-    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
-    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
-  </div>
-  <div class="wrap">
-    <div class="sheet">
-      ${c.orgLogoUrl ? `<img src="${c.orgLogoUrl}" alt="Code Crunch Logo" class="org-logo" onerror="this.style.display='none'">` : ''}
-      <div class="hdr"><div class="ttl">MEMBERSHIP CERTIFICATE</div><div class="sub">CODE CRUNCH GLOBAL</div></div>
-      <div class="presented">This certificate confirms that</div>
-      <div class="name">${c.participantName}</div>
-      <div class="rec">Is an official member of <strong>${c.orgName}</strong>, recognized for their commitment to collaborative coding, innovation, and community building.</div>
-      <div class="info">Member Since: ${c.memberDateSince}<br>Membership ID: ${c.membershipID}</div>
-      <div class="impact">Join us in shaping the future of technology through collaboration, learning, and innovation.</div>
-      <div class="footer">
-        <div style="flex:1"></div>
-        <div class="sig">
-          <div class="sig-line"></div>
-          <div class="sig-name">BRIAN BAZURTO</div>
-          <div class="sig-title">Code Crunch President</div>
-        </div>
-        <div style="flex:1;display:flex;justify-content:flex-end;align-items:center">
-          <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
-        </div>
-      </div>
+    <div class="controls">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+        <button class="btn btn-secondary" onclick="window.close()">✕ Close</button>
     </div>
-  </div>
+    
+    <div class="certificate">
+        ${data.orgLogoUrl ? `<img src="${data.orgLogoUrl}" alt="Code Crunch Logo" class="logo">` : ''}
+        
+        <div class="header">
+            <div class="title">MEMBERSHIP CERTIFICATE</div>
+            <div class="subtitle">CODE CRUNCH GLOBAL</div>
+        </div>
+        
+        <div class="presented">This certificate confirms that</div>
+        <div class="name">${data.participantName || 'Member'}</div>
+        
+        <div class="content">
+            Is an official member of <strong>${data.orgName || 'Code Crunch'}</strong>, 
+            recognized for their commitment to collaborative coding, innovation, and community building.
+        </div>
+        
+        <div class="info">
+            Member Since: ${data.memberDateSince || 'N/A'}<br>
+            Membership ID: ${data.membershipID || 'N/A'}
+        </div>
+        
+        <div class="content" style="font-style: italic; margin-top: 40px;">
+            Join us in shaping the future of technology through collaboration, learning, and innovation.
+        </div>
+        
+        <div class="signature">
+            <div class="signature-line"></div>
+            <div class="signature-name">BRIAN BAZURTO</div>
+            <div class="signature-title">Code Crunch President</div>
+        </div>
+    </div>
 </body>
 </html>`;
 
-  const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
-  if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
-  w.opener = null;
-  w.document.write(html);
-  w.document.close();
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('certificateEmailInput');
-  input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
-  document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to verify membership and access community links...';
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        <!-- Footer -->
-        <footer id="connect" class="cc-blue text-white py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div>
-                        <h3 class="text-lg font-bold mb-4">Code Crunch <span class="star">✨</span></h3>
-                        <p class="text-sm opacity-80">
-                            An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
-                        </p>
-                        <p class="text-sm mt-2">
-                            <a href="http://codecrunch.cs.fiu.edu" class="text-white underline hover:opacity-90">codecrunch.cs.fiu.edu</a>
-                        </p>
-                        
-                        <!-- Social Media Links Grid -->
-                        <div class="mt-6">
-                            <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                            <div class="grid grid-cols-3 gap-3">
-                                <a href="https://www.linkedin.com/company/code-crunch-club" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fab fa-linkedin text-xl"></i>
-                                    <span class="text-xs mt-1">LinkedIn</span>
-                                </a>
-                                <a href="https://www.instagram.com/codecrunchclub/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fab fa-instagram text-xl"></i>
-                                    <span class="text-xs mt-1">Instagram</span>
-                                </a>
-                                <a href="https://github.com/CODE-CRUNCH-CLUB" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fab fa-github text-xl"></i>
-                                    <span class="text-xs mt-1">GitHub</span>
-                                </a>
-                                <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fab fa-youtube text-xl"></i>
-                                    <span class="text-xs mt-1">YouTube</span>
-                                </a>
-                                <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-university text-xl"></i>
-                                    <span class="text-xs mt-1 text-center">Panther Connect</span>
-                                </a>
-                                <a href="community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fab fa-discord text-xl"></i>
-                                    <span class="text-xs mt-1">Discord</span>
-                                </a>
-                                <a href="community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-users text-xl"></i>
-                                    <span class="text-xs mt-1">GroupMe</span>
-                                </a>
-                                <a href="https://hack-university.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-video text-xl"></i>
-                                    <span class="text-xs mt-1">Zoom</span>
-                                </a>
-                                <a href="https://lu.ma/CODECRUNCH" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="far fa-calendar-alt text-xl"></i>
-                                    <span class="text-xs mt-1 text-center">Event Calendar</span>
-                                </a>
-                                <a href="https://app.epichire.com/clubs/809/invite?code=mXjh9s" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-briefcase text-xl"></i>
-                                    <span class="text-xs mt-1">EpicHire</span>
-                                </a>
-                                <a href="https://witty-suede-4a1.notion.site/ebd/1fe7f868cc8c8042b1ebfebc42034954" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-book text-xl"></i>
-                                    <span class="text-xs mt-1 text-center">Course Schedule</span>
-                                </a>
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScOA6IBnLxnxEnk-BOaXYyPXpJ3dU6Cu4OOrPJ7ErOgKvIdEQ/viewform?usp=dialog" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                    <i class="fas fa-clipboard-check text-xl"></i>
-                                    <span class="text-xs mt-1">Attendance</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                        <ul class="space-y-2">
-                            <li><a href="index.html#mission" class="text-sm opacity-80 hover:opacity-100">Mission</a></li>
-                            <li><a href="index.html#events" class="text-sm opacity-80 hover:opacity-100">Events</a></li>
-                            <li><a href="https://ba-00001.github.io/codecrunchclub/hackathons.html" class="text-sm opacity-80 hover:opacity-100">Hackathons</a></li>
-                            <li><a href="community-access.html" class="text-sm opacity-80 hover:opacity-100">Membership</a></li>
-                            <li><a href="#" class="text-sm opacity-80 hover:opacity-100">Join E-Board</a></li>
-                            <li><a href="index.html#resources" class="text-sm opacity-80 hover:opacity-100">Resources</a></li>
-                            <li><a href="index.html#connect" class="text-sm opacity-80 hover:opacity-100">Connect</a></li>
-                            <li><a href="community-access.html" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100">Join Discord</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-4">Contact</h3>
-                        <p class="text-sm opacity-80">
-                            Florida International University<br>
-                            Miami, FL<br>
-                            <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100">codecrunchclub@gmail.com</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="mt-8 pt-8 border-t border-white/20 text-center">
-                    <p class="text-sm opacity-80">
-                        © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
-                    </p>
-                    <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">
-                        Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Brian Bazurto</a> | Powered by innovation and collaboration
-                    </p>
-                </div>
-            </div>
-        </footer>
-
-    </div> <!-- Close the main content div that starts with <div class="pt-20"> -->
-
-    <script>
-        const hamburger = document.getElementById('hamburger-menu');
-        const slideMenu = document.getElementById('slide-menu');
-        const menuOverlay = document.getElementById('menu-overlay');
-        const closeMenu = document.getElementById('close-menu');
-
-        function openMenu() {
-            hamburger.classList.add('active');
-            slideMenu.classList.add('open');
-            menuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenuFunc() {
-            hamburger.classList.remove('active');
-            slideMenu.classList.remove('open');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        hamburger.addEventListener('click', function() {
-            if (slideMenu.classList.contains('open')) {
-                closeMenuFunc();
+            const newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes');
+            if (newWindow) {
+                newWindow.document.write(html);
+                newWindow.document.close();
             } else {
-                openMenu();
+                alert('Please allow pop-ups to view your certificate.');
             }
-        });
+        }
 
-        closeMenu.addEventListener('click', closeMenuFunc);
-        menuOverlay.addEventListener('click', closeMenuFunc);
-
-        // Close menu when clicking on menu links
-        document.querySelectorAll('.menu-item, .partner-link').forEach(link => {
-            link.addEventListener('click', closeMenuFunc);
-        });
-
-        // Prevent menu from closing when clicking inside the menu
-        slideMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // Smooth scrolling for anchor links - main page only
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add animation classes on scroll - all eboard page
+        // Enter key support
         document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in-up');
-            fadeElements.forEach(element => {
-                element.classList.add('opacity-100');
+            document.getElementById('email').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    generateCertificate();
+                }
             });
         });
     </script>
