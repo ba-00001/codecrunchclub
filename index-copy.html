@@ -1009,6 +1009,13 @@ async function generateCertificate() {
     
     if (!res.ok) throw new Error(payload?.error || res.statusText);
 
+    // Debug the response structure
+    console.log('🔍 Response Analysis:');
+    console.log('- Is Array?', Array.isArray(payload));
+    console.log('- Has certificates?', payload?.certificates);
+    console.log('- Certificates length:', payload?.certificates?.length);
+    console.log('- First certificate:', payload?.certificates?.[0]);
+
     // Handle response
     let certificatesArr = [];
     if (Array.isArray(payload)) {
@@ -1020,11 +1027,19 @@ async function generateCertificate() {
     }
 
     console.log('🎯 Certificates found:', certificatesArr.length);
+    if (certificatesArr.length > 0) {
+      console.log('📋 First certificate details:', certificatesArr[0]);
+      console.log('📋 Certificate status:', certificatesArr[0]?.status);
+    }
 
-    const validCerts = certificatesArr.filter(cert =>
-      cert?.status === "Code Crunch Global Membership Certificate Available" &&
-      (cert?.certificateData || cert?.participantName || cert?.membershipID)
-    );
+    const validCerts = certificatesArr.filter(cert => {
+      const hasCorrectStatus = cert?.status === "Code Crunch Global Membership Certificate Available";
+      const hasData = cert?.certificateData || cert?.participantName || cert?.membershipID;
+      console.log(`🔎 Checking cert: status="${cert?.status}", hasData=${!!hasData}`);
+      return hasCorrectStatus && hasData;
+    });
+
+    console.log('✅ Valid certificates:', validCerts.length);
 
     if (!validCerts.length) {
       showMembershipError('No membership found for this email address. Please ensure you have registered as a Code Crunch member.');
