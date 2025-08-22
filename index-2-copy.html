@@ -1,6 +1,3 @@
-Here's the complete fixed frontend HTML code:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -436,6 +433,7 @@ Here's the complete fixed frontend HTML code:
     color:#6b7280;
     font-size:0.9rem;
     cursor:pointer;
+    display:none; /* Hidden by default - controlled by backend */
   }
   
   /* Club membership section styles */
@@ -514,6 +512,23 @@ Here's the complete fixed frontend HTML code:
     color: #10b981;
     font-size: 0.85rem;
     font-weight: 600;
+  }
+  
+  .club-logo-fallback {
+    width: 48px;
+    height: 48px;
+    background: #f59e0b;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 10px;
+    color: white;
+    text-align: center;
+    line-height: 1.1;
+    padding: 4px;
+    margin: 0 auto 12px;
   }
   
   @media (max-width:640px){
@@ -722,16 +737,17 @@ Here's the complete fixed frontend HTML code:
           </div>
         </div>
 
-        <button class="debug-toggle" onclick="toggleDebug()">🔧 Toggle Debug Info</button>
+        <button id="debug-toggle-btn" class="debug-toggle" onclick="toggleDebug()">🔧 Toggle Debug Info</button>
         <div id="debug" class="debug"></div>
       </div>
     </div>
   </div>
 
 <script>
-  // ====== CONFIG - YOUR DEPLOYED GOOGLE APPS SCRIPT URL ======
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
+  // ====== CONFIG - UPDATE WITH YOUR NEW DEPLOYMENT URL ======
+  const API_URL = 'YOUR_NEW_DEPLOYMENT_URL_HERE';
   let certData = null;
+  let debugModeEnabled = false; // Will be set by backend response
 
   // UI helpers
   const el = id => document.getElementById(id);
@@ -749,6 +765,8 @@ Here's the complete fixed frontend HTML code:
   };
   
   const debug = (label, data) => {
+    if (!debugModeEnabled) return; // Only log if debug is enabled
+    
     const d = el('debug');
     const timestamp = new Date().toLocaleTimeString();
     d.innerHTML += `<div style="color:#60a5fa;font-weight:bold;">[${timestamp}] ${label}</div>`;
@@ -760,13 +778,27 @@ Here's the complete fixed frontend HTML code:
   
   const escapeHtml = s => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-  // Toggle debug panel
+  // Toggle debug panel (only visible if enabled by backend)
   function toggleDebug() {
     const d = el('debug');
     d.style.display = d.style.display === 'none' ? 'block' : 'none';
   }
 
-  // Display club memberships function
+  // Enable/disable debug mode based on backend response
+  function setDebugMode(enabled) {
+    debugModeEnabled = enabled;
+    const debugToggle = el('debug-toggle-btn');
+    
+    if (enabled) {
+      debugToggle.style.display = 'block';
+      debug('🔧 Debug mode enabled by backend');
+    } else {
+      debugToggle.style.display = 'none';
+      el('debug').style.display = 'none';
+    }
+  }
+
+  // Display club memberships function with image fallbacks
   function displayClubMemberships(clubs) {
     const clubSection = el('club-memberships');
     const clubsGrid = el('clubs-grid');
@@ -791,9 +823,14 @@ Here's the complete fixed frontend HTML code:
       
       clubCard.innerHTML = `
         <div style="margin-bottom: 12px;">
-          <img src="${escapeHtml(club.logo)}" alt="${escapeHtml(club.name)} Logo" 
-               class="club-logo"
-               onerror="this.style.display='none'">
+          <div style="width: 48px; height: 48px; margin: 0 auto 12px; position: relative;">
+            <img src="${escapeHtml(club.logo)}" alt="${escapeHtml(club.name)} Logo" 
+                 class="club-logo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="club-logo-fallback" style="display: none;">
+              ${escapeHtml(club.textFallback || club.name)}
+            </div>
+          </div>
         </div>
         <div class="club-name">
           ${escapeHtml(club.name)}
@@ -821,35 +858,42 @@ Here's the complete fixed frontend HTML code:
     const allClubsGrid = el('all-clubs-grid');
     
     if (!allClubLinks || allClubLinks.length === 0) {
-      clubLinksSection.style.display = 'none';
-      return;
-    }
-    
-    // Clear previous content
-    allClubsGrid.innerHTML = '';
-    
-    // Create club link cards for each club
-    allClubLinks.forEach(club => {
-      const clubLinkCard = document.createElement('div');
-      clubLinkCard.style.cssText = `
-        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        border: 2px solid #0ea5e9;
-        border-radius: 16px;
-        padding: 20px;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(14,165,233,0.1);
-      `;
-      
-      clubLinkCard.innerHTML = `
-        <div style="margin-bottom: 16px;">
-          <img src="${escapeHtml(club.logo)}" alt="${escapeHtml(club.name)} Logo" 
-               style="width: 64px; height: 64px; object-fit: contain; border-radius: 12px; margin-bottom: 12px;"
-               onerror="this.style.display='none'">
-          <div style="font-weight: 800; color: #0369a1; font-size: 1.1rem; margin-bottom: 4px;">
-            ${escapeHtml(club.name)}
-          </div>
-          ${club.description ? `
+      clubLinksSection.clubLinksSection.style.display = 'none';
+     return;
+   }
+   
+   // Clear previous content
+   allClubsGrid.innerHTML = '';
+   
+   // Create club link cards for each club
+   allClubLinks.forEach(club => {
+     const clubLinkCard = document.createElement('div');
+     clubLinkCard.style.cssText = `
+       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+       border: 2px solid #0ea5e9;
+       border-radius: 16px;
+       padding: 20px;
+       text-align: center;
+       transition: all 0.3s ease;
+       box-shadow: 0 4px 12px rgba(14,165,233,0.1);
+     `;
+     
+     clubLinkCard.innerHTML = `
+       <div style="margin-bottom: 16px;">
+         <div style="width: 64px; height: 64px; margin: 0 auto 12px; position: relative;">
+           <img src="${escapeHtml(club.logo)}" alt="${escapeHtml(club.name)} Logo" 
+                style="width: 64px; height: 64px; object-fit: contain; border-radius: 12px;"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div style="display: none; width: 64px; height: 64px; background: #0ea5e9; border-radius: 12px; 
+                       align-items: center; justify-content: center; font-weight: 700; font-size: 12px; 
+                       color: white; text-align: center; line-height: 1.1; padding: 6px;">
+             ${escapeHtml(club.textFallback || club.name)}
+           </div>
+         </div>
+         <div style="font-weight: 800; color: #0369a1; font-size: 1.1rem; margin-bottom: 4px;">
+           ${escapeHtml(club.name)}
+         </div>
+         ${club.description ? `
            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 12px; line-height: 1.4;">
              ${escapeHtml(club.description)}
            </div>
@@ -947,6 +991,11 @@ Here's the complete fixed frontend HTML code:
      const data = await res.json();
      debug('📄 Response Data', data);
 
+     // Check if backend has debug mode enabled and set it
+     if (data.debugMode !== undefined) {
+       setDebugMode(data.debugMode);
+     }
+
      // Handle both success/error response formats
      if (data.error) throw new Error(data.error);
      if (!data.success && data.certificates === undefined) throw new Error('Invalid response format');
@@ -1032,7 +1081,7 @@ Here's the complete fixed frontend HTML code:
    }
  }
 
- // Certificate download function
+ // Certificate download function with enhanced club text
  function download() {
    if (!certData) {
      alert('Please generate your certificate first by entering your email address above.');
@@ -1163,13 +1212,13 @@ Here's the complete fixed frontend HTML code:
  .signature-area { 
    text-align: center; 
    flex: 1;
-   max-width: 250px;
+   max-width: 300px;
    margin: 0 auto;
  }
  
  .sig-line { 
    border-top: 2px solid #333; 
-   width: 180px; 
+   width: 200px; 
    margin: 0 auto 8px; 
  }
  
@@ -1183,6 +1232,7 @@ Here's the complete fixed frontend HTML code:
    font-style: italic; 
    color: #666; 
    font-size: 0.85rem;
+   line-height: 1.3;
  }
  
  .logo { 
@@ -1228,39 +1278,6 @@ Here's the complete fixed frontend HTML code:
    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
  }
  
- /* Responsive scaling */
- @media (max-width: 1200px) {
-   .sheet {
-     transform: scale(0.9);
-     transform-origin: center top;
-     margin-bottom: -50px;
-   }
- }
- 
- @media (max-width: 900px) {
-   .sheet {
-     transform: scale(0.75);
-     transform-origin: center top;
-     margin-bottom: -100px;
-   }
-   .title { font-size: 3rem; }
-   .name { font-size: 2.4rem; }
- }
- 
- @media (max-width: 700px) {
-   .container { padding: 8px; }
-   .sheet {
-     transform: scale(0.65);
-     transform-origin: center top;
-     margin-bottom: -150px;
-     border-width: 8px;
-     padding: 20px;
-   }
-   .title { font-size: 2.5rem; }
-   .name { font-size: 2rem; }
- }
- 
- /* Print styles */
  @media print {
    body { 
      background: #fff !important; 
@@ -1290,37 +1307,6 @@ Here's the complete fixed frontend HTML code:
    .controls { 
      display: none !important; 
    }
-   
-   .logo { 
-     top: 8mm !important; 
-     right: 8mm !important; 
-     width: 25mm !important; 
-     height: 25mm !important; 
-   }
-   
-   .title { 
-     font-size: 16mm !important; 
-   }
-   
-   .subtitle { 
-     font-size: 4mm !important; 
-   }
-   
-   .name { 
-     font-size: 12mm !important; 
-   }
-   
-   .presented, .content, .info { 
-     font-size: 3.5mm !important; 
-   }
-   
-   .sig-name {
-     font-size: 3mm !important;
-   }
-   
-   .sig-title {
-     font-size: 2.5mm !important;
-   }
  }
 </style>
 </head>
@@ -1332,7 +1318,7 @@ Here's the complete fixed frontend HTML code:
  
  <div class="container">
    <div class="sheet">
-     ${c.orgLogoUrl ? `<img class="logo" src="${escapeHtml(c.orgLogoUrl)}" alt="Code Crunch Logo" onerror="this.style.display='none'">` : ''}
+     ${c.orgLogoUrl ? `<img class="logo" src="${escapeHtml(c.orgLogoUrl)}" alt="Logo" onerror="this.style.display='none'">` : ''}
      
      <div class="header">
        <div class="title">MEMBERSHIP CERTIFICATE</div>
@@ -1341,10 +1327,10 @@ Here's the complete fixed frontend HTML code:
      
      <div class="main-content">
        <div class="presented">This certificate confirms that</div>
-       <div class="name">${escapeHtml(c.participantName || 'Code Crunch Member')}</div>
+       <div class="name">${escapeHtml(c.participantName || 'Hack University Member')}</div>
        
        <div class="content">
-         Is an official member of <strong>${escapeHtml(c.orgName || 'Hack University Initiative')}</strong>, 
+         Is an official member of <strong>${escapeHtml(c.clubText || 'Hack University Initiative')}</strong>, 
          recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
        </div>
        
@@ -1363,7 +1349,7 @@ Here's the complete fixed frontend HTML code:
        <div class="signature-area">
          <div class="sig-line"></div>
          <div class="sig-name">BRIAN BAZURTO</div>
-         <div class="sig-title">Hack University Initiative Coordinator</div>
+         <div class="sig-title">President of ${escapeHtml(c.signatureClubText || 'Hack University Initiative')}</div>
        </div>
        <div style="flex: 1;"></div>
      </div>
@@ -1395,7 +1381,7 @@ Here's the complete fixed frontend HTML code:
  });
  el('dl').addEventListener('click', download);
 
- // Initialize debug
+ // Initialize - debug mode will be determined by first API response
  debug('🚀 Certificate Generator initialized', { 
    apiUrl: API_URL, 
    timestamp: new Date().toISOString(),
