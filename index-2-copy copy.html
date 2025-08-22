@@ -1,0 +1,727 @@
+/**
+ * ================================================================================================
+ * CODE CRUNCH GLOBAL MEMBERSHIP CERTIFICATE GENERATOR - GOOGLE APPS SCRIPT
+ * ================================================================================================
+ * 
+ * This script provides a web API endpoint for verifying Code Crunch memberships and generating
+ * official membership certificates. It reads membership data from a Google Spreadsheet and
+ * returns certificate information for verified members.
+ * 
+ * DEPLOYMENT INSTRUCTIONS:
+ * 1. Open Google Apps Script (script.google.com)
+ * 2. Create a new project
+ * 3. Replace all default code with this complete script
+ * 4. Update the CONFIG section below with your specific settings
+ * 5. Save the project (Ctrl+S)
+ * 6. Deploy as Web App:
+ *    - Click "Deploy" > "New deployment"
+ *    - Choose type: "Web app"
+ *    - Execute as: "Me (your email)"
+ *    - Who has access: "Anyone"
+ *    - Click "Deploy"
+ * 7. Copy the generated Web App URL
+ * 8. Update your HTML frontend with this URL
+ * 
+ * TESTING:
+ * - Run the testMembershipLookup() function to test with sample data
+ * - Run debugSpreadsheetStructure() to verify your spreadsheet setup
+ * - Check the execution logs for debugging information
+ * 
+ * VERSION: 2.0
+ * LAST UPDATED: January 2025
+ * AUTHOR: Code Crunch Team
+ * ================================================================================================
+ */
+
+/***** CONFIGURATION SECTION - UPDATE THESE VALUES *****/
+const CONFIG = {
+  // Exact name of your spreadsheet tab (case-sensitive)
+  TAB_NAME: 'Sheet1',
+  
+  // Allowed domains that can access this API (add your actual domains)
+  ALLOWED_DOMAINS: [
+    'https://codecrunchglobal.vercel.app',
+    'https://ba-00001.github.io',
+    'https://your-custom-domain.com',  // Add your domain here
+    'http://localhost',                // For local development
+    'https://localhost',               // For local HTTPS development
+    'http://127.0.0.1',               // Alternative localhost
+    'https://127.0.0.1'               // Alternative localhost HTTPS
+  ],
+  
+  // Organization branding and links
+  ORG: {
+    name: 'Code Crunch',
+    logo: 'https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e',
+    discordLink: 'https://codecrunchglobal-discordserver.vercel.app/',
+    groupmeLink: 'https://codecrunchglobal-groupme.vercel.app/'
+  },
+  
+  // Certificate status message
+  CERTIFICATE_STATUS: 'Code Crunch Global Membership Certificate Available',
+  
+  // Debug mode (set to false for production)
+  DEBUG_MODE: true
+};
+
+/***** MAIN API ENDPOINT *****/
+
+/**
+ * Main entry point for web app requests
+ * Handles GET requests with email and referer parameters
+ * 
+ * Expected URL format:
+ * https://script.google.com/macros/s/SCRIPT_ID/exec?email=user@example.com&referer=https://yoursite.com
+ * 
+ * @param {Object} e - Event object containing request parameters
+ * @returns {ContentService.TextOutput} JSON response
+ */
+function doGet(e) {
+  const startTime = new Date();
+  
+  try {
+    // Log incoming request for debugging
+    if (CONFIG.DEBUG_MODE) {
+      console.log('🚀 Incoming API Request:', {
+        timestamp: startTime.toISOString(),
+        parameters: e?.parameter || {},
+        userAgent: e?.parameter?.userAgent || 'Unknown'
+      });
+    }
+    
+    // Extract and validate parameters
+    const email = extractEmail(e?.parameter?.email);
+    const referer = extractReferer(e?.parameter?.referer);
+    
+    // Validate email format
+    if (!email) {
+      return createErrorResponse('Missing or invalid email address parameter');
+    }
+    
+    if (!isValidEmail(email)) {
+      return createErrorResponse('Please provide a valid email address format');
+    }
+    
+    // Validate referer domain for security
+    if (!isValidReferer(referer)) {
+      const allowedDomains = CONFIG.ALLOWED_DOMAINS.join(', ');
+      return createErrorResponse(
+        `Access denied: Request must come from an authorized domain. ` +
+        `Allowed domains: ${allowedDomains}. ` +
+        `Current referer: ${referer || 'None provided'}`
+      );
+    }
+    
+    // Search for membership data
+    const membershipResults = searchMembershipData(email);
+    
+    // Prepare response
+    const response = {
+      success: true,
+      certificates: membershipResults,
+      message: membershipResults.length > 0 
+        ? `Found ${membershipResults.length} certificate(s) for ${email}`
+        : `No membership found for email: ${email}`,
+      timestamp: new Date().toISOString(),
+      processingTime: `${new Date() - startTime}ms`
+    };
+    
+    if (CONFIG.DEBUG_MODE) {
+      console.log('✅ Successful API Response:', {
+        email: email,
+        certificatesFound: membershipResults.length,
+        processingTime: response.processingTime
+      });
+    }
+    
+    return createSuccessResponse(response);
+    
+  } catch (error) {
+    console.error('❌ API Error:', {
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      processingTime: `${new Date() - startTime}ms`
+    });
+    
+    return createErrorResponse(`Internal server error: ${error.message}`);
+  }
+}
+
+/***** CORE FUNCTIONS *****/
+
+/**
+ * Search for membership data in the spreadsheet
+ * @param {string} email - Normalized email address to search for
+ * @returns {Array} Array of membership objects
+ */
+function searchMembershipData(email) {
+  try {
+    // Get spreadsheet and worksheet
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const worksheet = spreadsheet.getSheetByName(CONFIG.TAB_NAME);
+    
+    if (!worksheet) {
+      throw new Error(`Worksheet "${CONFIG.TAB_NAME}" not found in spreadsheet "${spreadsheet.getName()}"`);
+    }
+    
+    // Get all data using display values (handles IMPORTRANGE, formulas, dates)
+    const dataRange = worksheet.getDataRange();
+    const allValues = dataRange.getDisplayValues();
+    
+    if (allValues.length < 2) {
+      console.log('⚠️ No data rows found in spreadsheet');
+      return [];
+    }
+    
+    if (CONFIG.DEBUG_MODE) {
+      console.log('📊 Spreadsheet Info:', {
+        name: spreadsheet.getName(),
+        worksheet: CONFIG.TAB_NAME,
+        totalRows: allValues.length,
+        totalColumns: allValues[0]?.length || 0,
+        headers: allValues[0]
+      });
+    }
+    
+    // Map headers to column indices
+    const headerRow = allValues[0];
+    const columnMapping = createColumnMapping(headerRow);
+    
+    if (CONFIG.DEBUG_MODE) {
+      console.log('🗺️ Column Mapping:', columnMapping);
+    }
+    
+    // Search through data rows
+    const membershipMatches = [];
+    
+    for (let rowIndex = 1; rowIndex < allValues.length; rowIndex++) {
+      const dataRow = allValues[rowIndex] || [];
+      const rowEmail = normalizeEmail(dataRow[columnMapping.email]);
+      
+      // Skip rows without valid email
+      if (!rowEmail) continue;
+      
+      // Check for email match
+      if (rowEmail === email) {
+        const membershipData = createMembershipObject(dataRow, columnMapping, email);
+        membershipMatches.push(membershipData);
+        
+        if (CONFIG.DEBUG_MODE) {
+          console.log(`✅ Membership found at row ${rowIndex + 1}:`, {
+            email: email,
+            name: membershipData.certificateData.participantName,
+            memberSince: membershipData.certificateData.memberDateSince,
+            membershipId: membershipData.certificateData.membershipID
+          });
+        }
+      }
+    }
+    
+    console.log(`🔍 Search completed: ${membershipMatches.length} matches found for ${email}`);
+    return membershipMatches;
+    
+  } catch (error) {
+    console.error('❌ Error searching membership data:', error);
+    throw new Error(`Failed to search membership data: ${error.message}`);
+  }
+}
+
+/**
+ * Create column mapping from header row
+ * @param {Array} headers - Array of header strings
+ * @returns {Object} Object mapping field names to column indices
+ */
+function createColumnMapping(headers) {
+  const normalizedHeaders = headers.map(h => String(h).trim().toLowerCase());
+  
+  const findColumnIndex = (searchTerms) => {
+    for (const term of searchTerms) {
+      const index = normalizedHeaders.findIndex(header => 
+        header.includes(term.toLowerCase())
+      );
+      if (index !== -1) return index;
+    }
+    return -1;
+  };
+  
+  const mapping = {
+    email: findColumnIndex(['email address', 'email', 'mail', 'e-mail']),
+    name: findColumnIndex([
+      'first and last name', 
+      'full name', 
+      'name', 
+      'participant name',
+      'member name',
+      'student name'
+    ]),
+    timestamp: findColumnIndex([
+      'timestamp', 
+      'date', 
+      'time', 
+      'created', 
+      'submitted',
+      'registration date'
+    ]),
+    membershipId: findColumnIndex([
+      'membership id', 
+      'member id', 
+      'id', 
+      'user id',
+      'participant id'
+    ])
+  };
+  
+  // Fallback to positional mapping if specific headers not found
+  // This handles spreadsheets with generic column names
+  if (mapping.email === -1) {
+    // Look for first column that might contain emails
+    for (let i = 0; i < normalizedHeaders.length; i++) {
+      if (normalizedHeaders[i].includes('@') || normalizedHeaders[i].includes('email')) {
+        mapping.email = i;
+        break;
+      }
+    }
+    // Final fallback to position
+    if (mapping.email === -1) mapping.email = 0;
+  }
+  
+  if (mapping.timestamp === -1) mapping.timestamp = 1;
+  if (mapping.name === -1) mapping.name = 2;
+  if (mapping.membershipId === -1) mapping.membershipId = 3;
+  
+  return mapping;
+}
+
+/**
+ * Create membership object from spreadsheet row data
+ * @param {Array} rowData - Array of cell values from spreadsheet row
+ * @param {Object} columnMapping - Mapping of field names to column indices
+ * @param {string} email - Email address for this membership
+ * @returns {Object} Formatted membership object
+ */
+function createMembershipObject(rowData, columnMapping, email) {
+  // Extract data with fallbacks
+  const participantName = extractParticipantName(rowData[columnMapping.name]);
+  const memberDateSince = formatMemberDate(rowData[columnMapping.timestamp]);
+  const membershipID = extractMembershipId(rowData[columnMapping.membershipId]);
+  
+  return {
+    email: email,
+    status: CONFIG.CERTIFICATE_STATUS,
+    message: 'Congratulations! Your Code Crunch membership certificate is ready for download.',
+    certificateData: {
+      participantName: participantName,
+      memberDateSince: memberDateSince,
+      membershipID: membershipID,
+      orgName: CONFIG.ORG.name,
+      orgLogoUrl: CONFIG.ORG.logo,
+      discordJoinLink: CONFIG.ORG.discordLink,
+      groupmeLink: CONFIG.ORG.groupmeLink
+    }
+  };
+}
+
+/***** VALIDATION AND UTILITY FUNCTIONS *****/
+
+/**
+ * Extract and normalize email from parameter
+ * @param {string} emailParam - Raw email parameter
+ * @returns {string} Normalized email or empty string
+ */
+function extractEmail(emailParam) {
+  if (!emailParam) return '';
+  return String(emailParam).trim().toLowerCase();
+}
+
+/**
+ * Extract and decode referer from parameter
+ * @param {string} refererParam - Raw referer parameter
+ * @returns {string} Decoded referer URL
+ */
+function extractReferer(refererParam) {
+  if (!refererParam) return '';
+  
+  try {
+    return decodeURIComponent(String(refererParam));
+  } catch (error) {
+    console.warn('Failed to decode referer URL:', refererParam);
+    return String(refererParam);
+  }
+}
+
+/**
+ * Validate email format using regex
+ * @param {string} email - Email address to validate
+ * @returns {boolean} True if valid email format
+ */
+function isValidEmail(email) {
+  if (!email) return false;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Validate referer domain against allowed domains
+ * @param {string} referer - Referer URL to validate
+ * @returns {boolean} True if referer is from allowed domain
+ */
+function isValidReferer(referer) {
+  if (!referer) return false;
+  
+  // Check against each allowed domain
+  for (const allowedDomain of CONFIG.ALLOWED_DOMAINS) {
+    if (referer.startsWith(allowedDomain)) {
+      return true;
+    }
+  }
+  
+  // Additional checks for development environments
+  const devPatterns = [
+    'localhost',
+    '127.0.0.1',
+    'file://',
+    'chrome-extension://'
+  ];
+  
+  return devPatterns.some(pattern => referer.includes(pattern));
+}
+
+/**
+ * Normalize email address from spreadsheet cell
+ * @param {string} emailValue - Raw email value from spreadsheet
+ * @returns {string} Normalized email or empty string
+ */
+function normalizeEmail(emailValue) {
+  if (!emailValue) return '';
+  
+  const cleaned = String(emailValue)
+    .replace(/\u00A0/g, ' ')  // Replace non-breaking spaces
+    .replace(/\s+/g, ' ')     // Replace multiple spaces with single space
+    .trim()
+    .toLowerCase();
+  
+  // Only return if it looks like an email
+  return cleaned.includes('@') && cleaned.includes('.') ? cleaned : '';
+}
+
+/**
+ * Extract and clean participant name
+ * @param {string} nameValue - Raw name value from spreadsheet
+ * @returns {string} Cleaned participant name
+ */
+function extractParticipantName(nameValue) {
+  if (!nameValue) return 'Code Crunch Member';
+  
+  const cleaned = String(nameValue)
+    .replace(/\u00A0/g, ' ')  // Replace non-breaking spaces
+    .replace(/\s+/g, ' ')     // Replace multiple spaces with single space
+    .trim();
+  
+  return cleaned || 'Code Crunch Member';
+}
+
+/**
+ * Format member date from various possible formats
+ * @param {string} dateValue - Raw date value from spreadsheet
+ * @returns {string} Formatted date string
+ */
+function formatMemberDate(dateValue) {
+  if (!dateValue) {
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+  
+  try {
+    // Handle various date formats
+    let date;
+    
+    if (dateValue instanceof Date) {
+      date = dateValue;
+    } else {
+      // Try parsing as string
+      const dateString = String(dateValue).trim();
+      date = new Date(dateString);
+      
+      // If that fails, try manual parsing for common formats
+      if (isNaN(date.getTime())) {
+        // Try MM/DD/YYYY format
+        const dateMatch = dateString.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+        if (dateMatch) {
+          date = new Date(dateMatch[3], dateMatch[1] - 1, dateMatch[2]);
+        }
+      }
+    }
+    
+    // Validate parsed date
+    if (isNaN(date.getTime())) {
+      console.warn('Could not parse date:', dateValue);
+      return String(dateValue).trim();
+    }
+    
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+  } catch (error) {
+    console.warn('Error formatting date:', dateValue, error);
+    return String(dateValue).trim();
+  }
+}
+
+/**
+ * Extract or generate membership ID
+ * @param {string} idValue - Raw ID value from spreadsheet
+ * @returns {string} Membership ID
+ */
+function extractMembershipId(idValue) {
+  if (idValue && String(idValue).trim()) {
+    return String(idValue).trim();
+  }
+  
+  // Generate ID if not present
+  return generateMembershipId();
+}
+
+/**
+ * Generate a unique membership ID
+ * @returns {string} Generated membership ID
+ */
+function generateMembershipId() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+  return `CC${year}${month}${day}${hours}${minutes}${seconds}`;
+}
+
+/***** RESPONSE CREATION FUNCTIONS *****/
+
+/**
+ * Create successful JSON response
+ * @param {Object} data - Response data object
+ * @returns {ContentService.TextOutput} JSON response with success data
+ */
+function createSuccessResponse(data) {
+  return ContentService
+    .createTextOutput(JSON.stringify(data, null, 2))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    .setHeader('Cache-Control', 'no-cache');
+}
+
+/**
+ * Create error JSON response
+ * @param {string} errorMessage - Error message to return
+ * @returns {ContentService.TextOutput} JSON response with error
+ */
+function createErrorResponse(errorMessage) {
+  const errorResponse = {
+    success: false,
+    error: errorMessage,
+    timestamp: new Date().toISOString()
+  };
+  
+  return ContentService
+    .createTextOutput(JSON.stringify(errorResponse, null, 2))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    .setHeader('Cache-Control', 'no-cache');
+}
+
+/***** TESTING AND DEBUG FUNCTIONS *****/
+
+/**
+ * Test function to verify the membership lookup system
+ * Run this function in the Apps Script editor to test your setup
+ */
+function testMembershipLookup() {
+  console.log('🧪 Starting membership lookup test...');
+  
+  // Test with first email from your spreadsheet
+  const testEmail = 'aliciagiro3@gmail.com'; // Update this with a real email from your sheet
+  const testReferer = CONFIG.ALLOWED_DOMAINS[0] + '/index.html';
+  
+  console.log('📧 Test Parameters:', {
+    email: testEmail,
+    referer: testReferer
+  });
+  
+  const mockEvent = {
+    parameter: {
+      email: testEmail,
+      referer: testReferer
+    }
+  };
+  
+  try {
+    const result = doGet(mockEvent);
+    const responseText = result.getContent();
+    const response = JSON.parse(responseText);
+    
+    console.log('📄 Test Response:', response);
+    
+    if (response.success && response.certificates.length > 0) {
+      console.log('✅ TEST PASSED! Certificate found for:', response.certificates[0].certificateData.participantName);
+      console.log('📋 Certificate Data:', response.certificates[0].certificateData);
+    } else if (response.success && response.certificates.length === 0) {
+      console.log('⚠️ TEST RESULT: No certificates found for test email');
+      console.log('💡 This might be expected if the email is not in your spreadsheet');
+    } else {
+      console.log('❌ TEST FAILED:', response.error);
+    }
+    
+  } catch (error) {
+    console.error('❌ TEST ERROR:', error);
+  }
+  
+  console.log('🏁 Test completed');
+}
+
+/**
+ * Debug function to analyze spreadsheet structure
+ * Run this to understand how your spreadsheet is organized
+ */
+function debugSpreadsheetStructure() {
+  console.log('🔍 Analyzing spreadsheet structure...');
+  
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    console.log('📊 Spreadsheet Name:', spreadsheet.getName());
+    console.log('📊 Spreadsheet ID:', spreadsheet.getId());
+    
+    // List all sheets
+    const allSheets = spreadsheet.getSheets();
+    console.log('📄 Available Sheets:', allSheets.map(sheet => sheet.getName()));
+    
+    // Analyze the target sheet
+    const targetSheet = spreadsheet.getSheetByName(CONFIG.TAB_NAME);
+    if (!targetSheet) {
+      console.error(`❌ Target sheet "${CONFIG.TAB_NAME}" not found!`);
+      console.log('💡 Available sheets:', allSheets.map(s => s.getName()));
+      return;
+    }
+    
+    const range = targetSheet.getDataRange();
+    const values = range.getDisplayValues();
+    
+    console.log('📋 Sheet Analysis:', {
+      name: CONFIG.TAB_NAME,
+      totalRows: values.length,
+      totalColumns: values[0]?.length || 0,
+      dataRows: values.length - 1,
+      lastRow: targetSheet.getLastRow(),
+      lastColumn: targetSheet.getLastColumn()
+    });
+    
+    // Show headers
+    if (values.length > 0) {
+      console.log('📄 Headers (Row 1):', values[0]);
+      
+      // Show column mapping
+      const columnMapping = createColumnMapping(values[0]);
+      console.log('🗺️ Column Mapping:', columnMapping);
+      
+      // Show sample data
+      if (values.length > 1) {
+        console.log('📄 Sample Data (Row 2):', values[1]);
+        
+        // Test email extraction from sample row
+        const sampleEmail = normalizeEmail(values[1][columnMapping.email]);
+        console.log('📧 Sample Email Extracted:', sampleEmail);
+      }
+      
+      // Count rows with valid emails
+      let validEmailCount = 0;
+      for (let i = 1; i < values.length; i++) {
+        const email = normalizeEmail(values[i][columnMapping.email]);
+        if (email) validEmailCount++;
+      }
+      console.log('📊 Rows with Valid Emails:', validEmailCount);
+    }
+    
+  } catch (error) {
+    console.error('❌ Debug Error:', error);
+  }
+  
+  console.log('🏁 Debug analysis completed');
+}
+
+/**
+ * Get deployment information
+ * Run this after deploying to get your web app URL
+ */
+function getDeploymentInfo() {
+  console.log('🚀 Deployment Information:');
+  console.log('================================');
+  console.log('📁 Script ID:', ScriptApp.getScriptId());
+  console.log('🔗 Web App URL: https://script.google.com/macros/s/' + ScriptApp.getScriptId() + '/exec');
+  console.log('⚙️ Current Configuration:');
+  console.log('   📋 Tab Name:', CONFIG.TAB_NAME);
+  console.log('   🌐 Allowed Domains:', CONFIG.ALLOWED_DOMAINS);
+  console.log('   🏢 Organization:', CONFIG.ORG.name);
+  console.log('   🐛 Debug Mode:', CONFIG.DEBUG_MODE);
+  console.log('================================');
+  console.log('💡 Next Steps:');
+  console.log('   1. Copy the Web App URL above');
+  console.log('   2. Update your HTML frontend with this URL');
+  console.log('   3. Test with testMembershipLookup() function');
+  console.log('   4. Deploy your website and test end-to-end');
+}
+
+/**
+ * Comprehensive system test
+ * Run this to test all components
+ */
+function runFullSystemTest() {
+  console.log('🔬 Running Full System Test...');
+  console.log('================================');
+  
+  // Test 1: Configuration
+  console.log('1️⃣ Testing Configuration...');
+  console.log('✅ CONFIG object loaded');
+  console.log('✅ Tab name set:', CONFIG.TAB_NAME);
+  console.log('✅ Allowed domains configured:', CONFIG.ALLOWED_DOMAINS.length);
+  
+  // Test 2: Spreadsheet Access
+  console.log('\n2️⃣ Testing Spreadsheet Access...');
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    console.log('✅ Spreadsheet accessible:', ss.getName());
+    
+    const sheet = ss.getSheetByName(CONFIG.TAB_NAME);
+    if (sheet) {
+      console.log('✅ Target sheet found:', CONFIG.TAB_NAME);
+      const data = sheet.getDataRange().getDisplayValues();
+      console.log('✅ Data readable:', data.length, 'rows');
+    } else {
+      console.log('❌ Target sheet not found:', CONFIG.TAB_NAME);
+    }
+  } catch (error) {
+    console.log('❌ Spreadsheet error:', error.message);
+  }
+  
+  // Test 3: API Endpoint
+  console.log('\n3️⃣ Testing API Endpoint...');
+  try {
+    testMembershipLookup();
+  } catch (error) {
+    console.log('❌ API test failed:', error.message);
+  }
+  
+  console.log('\n🏁 Full System Test Completed');
+  console.log('================================');
+}

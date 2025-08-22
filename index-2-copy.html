@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Code Crunch – Member & Hacker Multipurpose Tool</title>
+<title>Hack University – Member & Hacker Multipurpose Tool</title>
 <style>
   :root{
     --brand:#1e40af;
@@ -449,8 +449,8 @@
   <div class="container">
     <div class="card">
       <div class="header">
-        <div class="logo">CC</div>
-        <h1>Code Crunch</h1>
+        <div class="logo">HU</div>
+        <h1>Hack University</h1>
         <p>Member & Hacker Multipurpose Tool</p>
       </div>
       
@@ -458,10 +458,10 @@
         <!-- Benefits Section -->
         <div class="info-section">
           <div class="info-title">
-            🚀 Member & Hacker Verification Portal
+            🚀 Hack University Initiative Portal
           </div>
           <p style="color:#64748b;margin-bottom:20px;font-size:1.1rem;">
-            Your gateway to Code Crunch membership verification, hackathon participation, and exclusive community access
+            Your gateway to Hack University membership verification, multi-club participation, and exclusive community access
           </p>
           
           <div class="info-title" style="font-size:1.1rem;margin-top:24px;">
@@ -539,10 +539,10 @@
               🎯 Perfect For:
             </div>
             <div style="color:#92400e;font-size:0.95rem;line-height:1.5;">
-              • <strong>Code Crunch Members</strong> - Full access to all community features and resources<br>
-              • <strong>Hack University Participants</strong> - Educational resources and hackathon preparation<br>
+              • <strong>Hack University Members</strong> - Full access to all initiative features and resources<br>
+              • <strong>Multi-Club Participants</strong> - Members of Code Crunch, ColorStack, CAHSI, GDG, and more<br>
               • <strong>Hackathon Participants</strong> - Team collaboration tools and competition resources<br>
-              • <strong>Aspiring Developers</strong> - Learning materials and mentorship opportunities
+              • <strong>Student Developers</strong> - Learning materials and mentorship opportunities across all clubs
             </div>
           </div>
         </div>
@@ -551,7 +551,7 @@
         <div class="form-section">
           <div class="form-title">Enter Your Registered Email Address:</div>
           <p style="color:#6b7280;font-size:0.9rem;margin-bottom:12px;">
-            Use the same email you registered with for Code Crunch membership or Hack University hackathons
+            Use the same email you registered with for any Hack University Initiative club or program
           </p>
           <div class="input-group">
             <input id="email" type="email" placeholder="your.email@example.com" />
@@ -565,7 +565,7 @@
         <div id="result" class="result">
           <div class="result-header">
             <div class="result-title">🎉 Access Granted!</div>
-            <div class="result-subtitle">Welcome to the Code Crunch Ecosystem</div>
+            <div class="result-subtitle">Welcome to the Hack University Initiative</div>
           </div>
           
           <div class="member-info">
@@ -577,6 +577,26 @@
               <div class="info-item">
                 <div class="info-label">Member Since</div>
                 <div class="info-value" id="r_since">—</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Membership ID</div>
+                <div class="info-value" id="r_id">—</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Organization</div>
+                <div class="info-value" id="r_org">Hack University Initiative</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Club Memberships Section -->
+          <div id="club-memberships" style="display:none;">
+            <div style="text-align:center;margin-bottom:20px;">
+              <h3 style="color:#1f2937;font-size:1.4rem;font-weight:800;margin-bottom:8px;">🏢 Your Club Memberships</h3>
+              <p style="color:#6b7280;font-size:1rem;">You are an active member of the following clubs under the Hack University Initiative:</p>
+            </div>
+            <div id="clubs-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;"></div>
+          </div>="info-value" id="r_since">—</div>
               </div>
               <div class="info-item">
                 <div class="info-label">Membership ID</div>
@@ -661,11 +681,70 @@
     d.style.display = d.style.display === 'none' ? 'block' : 'none';
   }
 
+  // Display club memberships function
+  function displayClubMemberships(clubs) {
+    const clubSection = el('club-memberships');
+    const clubsGrid = el('clubs-grid');
+    
+    if (!clubs || clubs.length === 0) {
+      clubSection.style.display = 'none';
+      return;
+    }
+    
+    // Clear previous content
+    clubsGrid.innerHTML = '';
+    
+    // Create club cards
+    clubs.forEach(club => {
+      const clubCard = document.createElement('div');
+      clubCard.style.cssText = `
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      `;
+      
+      clubCard.innerHTML = `
+        <div style="margin-bottom: 12px;">
+          <img src="${escapeHtml(club.logo)}" alt="${escapeHtml(club.name)} Logo" 
+               style="width: 48px; height: 48px; object-fit: contain; border-radius: 8px;"
+               onerror="this.style.display='none'">
+        </div>
+        <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px; font-size: 0.95rem;">
+          ${escapeHtml(club.name)}
+        </div>
+        <div style="color: #10b981; font-size: 0.85rem; font-weight: 600;">
+          ✅ Active Member
+        </div>
+      `;
+      
+      // Add hover effect
+      clubCard.addEventListener('mouseenter', () => {
+        clubCard.style.transform = 'translateY(-2px)';
+        clubCard.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+        clubCard.style.borderColor = '#3b82f6';
+      });
+      
+      clubCard.addEventListener('mouseleave', () => {
+        clubCard.style.transform = 'translateY(0)';
+        clubCard.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+        clubCard.style.borderColor = '#e2e8f0';
+      });
+      
+      clubsGrid.appendChild(clubCard);
+    });
+    
+    clubSection.style.display = 'block';
+  }
+
   // Main certificate generation function
   async function go() {
     const email = el('email').value.trim().toLowerCase();
     el('result').style.display = 'none';
-    status('info', '⏳ Verifying your Code Crunch membership...<br><small>Please wait while we check our records</small>');
+    status('info', '⏳ Verifying your Hack University Initiative membership...<br><small>Please wait while we check our records across all clubs</small>');
     el('go').disabled = true;
 
     if (!email) { 
@@ -725,10 +804,13 @@
       debug('✅ Certificate found', c);
 
       // Populate member information
-      el('r_name').textContent = c.participantName || 'Code Crunch Member';
+      el('r_name').textContent = c.participantName || 'Hack University Member';
       el('r_since').textContent = c.memberDateSince || 'Not specified';
       el('r_id').textContent = c.membershipID || 'Not available';
-      el('r_org').textContent = c.orgName || 'Code Crunch';
+      el('r_org').textContent = c.orgName || 'Hack University Initiative';
+
+      // Handle club memberships display
+      displayClubMemberships(c.clubs || []);
 
       // Always show community links for verified members/participants
       const linksSection = el('links');
@@ -750,7 +832,7 @@
       linksSection.style.display = 'block';
 
       status('ok', `🎉 <strong>Access Granted!</strong><br>
-        Welcome to the Code Crunch ecosystem, ${escapeHtml(c.participantName || 'Member')}!<br>
+        Welcome to the Hack University Initiative, ${escapeHtml(c.participantName || 'Member')}!<br>
         <small>Your membership certificate and exclusive community access are ready below.</small>`);
       
       el('result').style.display = 'block';
@@ -797,138 +879,280 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Code Crunch Membership Certificate - ${escapeHtml(c.participantName || 'Member')}</title>
+<title>Hack University Initiative Membership Certificate - ${escapeHtml(c.participantName || 'Member')}</title>
 <style>
-  @page { size: A4 landscape; margin: 10mm; }
+  @page { size: A4 landscape; margin: 8mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  
   body { 
     font-family: "Times New Roman", serif; 
     background: #f5f5f5; 
     margin: 0; 
-    padding: 20px; 
+    padding: 15px; 
     line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
+  
   .container { 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     max-width: 1200px; 
     margin: 0 auto; 
     background: #fff; 
-    padding: 20px; 
-    border-radius: 10px; 
+    padding: 15px; 
+    border-radius: 8px; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
   }
+  
   .sheet { 
+    flex: 1;
     width: 100%; 
-    max-width: 1000px; 
-    min-height: 700px; 
+    min-height: 650px;
     margin: 0 auto; 
     background: #fff; 
-    border: 15px solid #B8860B; 
-    padding: 40px; 
+    border: 12px solid #B8860B; 
+    padding: 30px; 
     position: relative; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .header { text-align: center; margin-bottom: 40px; }
+  
+  .header { 
+    text-align: center; 
+    margin-bottom: 30px; 
+  }
+  
   .title { 
-    font-size: 4rem; 
+    font-size: 3.5rem; 
     font-weight: 700; 
-    letter-spacing: 4px; 
+    letter-spacing: 3px; 
     color: #333; 
-    margin: 0 0 10px; 
-    line-height: 1; 
+    margin: 0 0 8px; 
+    line-height: 1.1; 
   }
+  
   .subtitle { 
-    font-size: 1.2rem; 
-    letter-spacing: 4px; 
+    font-size: 1.1rem; 
+    letter-spacing: 3px; 
     color: #666; 
     text-transform: uppercase; 
+    margin: 0;
   }
+  
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
   .presented { 
-    font-size: 1.1rem; 
+    font-size: 1rem; 
     font-style: italic; 
-    margin: 50px 0 0; 
-    text-align: center; 
     color: #555; 
+    margin-bottom: 20px;
   }
+  
   .name { 
-    font-size: 3rem; 
+    font-size: 2.8rem; 
     font-weight: 700; 
     font-style: italic; 
     color: #333; 
-    margin: 30px 0; 
-    text-align: center; 
+    margin: 20px 0; 
+    line-height: 1.2;
+    word-wrap: break-word;
   }
+  
   .content { 
-    font-size: 1.1rem; 
-    line-height: 1.6; 
+    font-size: 1rem; 
+    line-height: 1.5; 
     color: #555; 
-    margin: 30px auto; 
-    max-width: 80%; 
-    text-align: center; 
+    margin: 20px auto; 
+    max-width: 85%; 
   }
+  
   .info { 
-    font-size: 1.1rem; 
+    font-size: 1rem; 
     font-weight: 700; 
     color: #333; 
-    margin: 30px 0; 
-    text-align: center; 
+    margin: 20px 0; 
+    line-height: 1.4;
   }
-  .signature-section { 
-    position: absolute; 
-    right: 40px; 
-    bottom: 40px; 
-    text-align: center; 
+  
+  .footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 30px;
+    min-height: 80px;
   }
+  
+  .signature-area { 
+    text-align: center; 
+    flex: 1;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
   .sig-line { 
     border-top: 2px solid #333; 
-    width: 200px; 
-    margin-bottom: 10px; 
+    width: 180px; 
+    margin: 0 auto 8px; 
   }
+  
   .sig-name { 
     font-weight: 700; 
-    margin-bottom: 3px; 
+    margin-bottom: 2px; 
+    font-size: 0.95rem;
   }
+  
   .sig-title { 
     font-style: italic; 
     color: #666; 
+    font-size: 0.85rem;
   }
+  
   .logo { 
     position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    width: 80px; 
-    height: 80px; 
+    top: 15px; 
+    right: 15px; 
+    width: 60px; 
+    height: 60px; 
     object-fit: contain; 
   }
+  
   .controls { 
     text-align: center; 
-    margin: 20px 0; 
-    padding: 15px; 
+    margin: 10px 0 15px; 
+    padding: 12px; 
     background: #f8f9fa; 
-    border-radius: 8px; 
+    border-radius: 6px; 
   }
+  
   .btn { 
-    padding: 12px 24px; 
-    font-size: 1rem; 
+    padding: 10px 20px; 
+    font-size: 0.95rem; 
     cursor: pointer; 
     border: 0; 
-    border-radius: 6px; 
-    margin: 0 10px; 
-    font-weight: 700; 
+    border-radius: 5px; 
+    margin: 0 8px; 
+    font-weight: 600; 
     transition: all 0.3s ease; 
   }
-  .btn-primary { background: #007bff; color: #fff; }
-  .btn-secondary { background: #6c757d; color: #fff; }
-  .btn:hover { transform: translateY(-2px); }
   
+  .btn-primary { 
+    background: #007bff; 
+    color: #fff; 
+  }
+  
+  .btn-secondary { 
+    background: #6c757d; 
+    color: #fff; 
+  }
+  
+  .btn:hover { 
+    transform: translateY(-1px); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  /* Responsive scaling */
+  @media (max-width: 1200px) {
+    .sheet {
+      transform: scale(0.9);
+      transform-origin: center top;
+      margin-bottom: -50px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .sheet {
+      transform: scale(0.75);
+      transform-origin: center top;
+      margin-bottom: -100px;
+    }
+    .title { font-size: 3rem; }
+    .name { font-size: 2.4rem; }
+  }
+  
+  @media (max-width: 700px) {
+    .container { padding: 8px; }
+    .sheet {
+      transform: scale(0.65);
+      transform-origin: center top;
+      margin-bottom: -150px;
+      border-width: 8px;
+      padding: 20px;
+    }
+    .title { font-size: 2.5rem; }
+    .name { font-size: 2rem; }
+  }
+  
+  /* Print styles */
   @media print {
-    body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
-    .container { max-width: none !important; padding: 0 !important; box-shadow: none !important; background: #fff !important; }
-    .sheet { max-width: none !important; width: 277mm !important; height: 190mm !important; border: 8mm solid #B8860B !important; padding: 15mm !important; margin: 0 !important; page-break-inside: avoid !important; }
-    .controls { display: none !important; }
-    .logo { top: 8mm !important; right: 8mm !important; width: 30mm !important; height: 18mm !important; }
-    .title { font-size: 16mm !important; }
-    .subtitle { font-size: 4mm !important; }
-    .name { font-size: 12mm !important; }
-    .presented, .content, .info { font-size: 3.5mm !important; }
+    body { 
+      background: #fff !important; 
+      padding: 0 !important; 
+      margin: 0 !important; 
+    }
+    
+    .container { 
+      max-width: none !important; 
+      padding: 0 !important; 
+      box-shadow: none !important; 
+      background: #fff !important; 
+    }
+    
+    .sheet { 
+      transform: none !important;
+      max-width: none !important; 
+      width: 277mm !important; 
+      height: 190mm !important; 
+      border: 8mm solid #B8860B !important; 
+      padding: 15mm !important; 
+      margin: 0 !important; 
+      page-break-inside: avoid !important; 
+      min-height: auto !important;
+    }
+    
+    .controls { 
+      display: none !important; 
+    }
+    
+    .logo { 
+      top: 8mm !important; 
+      right: 8mm !important; 
+      width: 25mm !important; 
+      height: 25mm !important; 
+    }
+    
+    .title { 
+      font-size: 16mm !important; 
+    }
+    
+    .subtitle { 
+      font-size: 4mm !important; 
+    }
+    
+    .name { 
+      font-size: 12mm !important; 
+    }
+    
+    .presented, .content, .info { 
+      font-size: 3.5mm !important; 
+    }
+    
+    .sig-name {
+      font-size: 3mm !important;
+    }
+    
+    .sig-title {
+      font-size: 2.5mm !important;
+    }
   }
 </style>
 </head>
@@ -944,30 +1168,36 @@
       
       <div class="header">
         <div class="title">MEMBERSHIP CERTIFICATE</div>
-        <div class="subtitle">CODE CRUNCH GLOBAL</div>
+        <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
       </div>
       
-      <div class="presented">This certificate confirms that</div>
-      <div class="name">${escapeHtml(c.participantName || 'Code Crunch Member')}</div>
-      
-      <div class="content">
-        Is an official member of <strong>${escapeHtml(c.orgName || 'Code Crunch')}</strong>, 
-        recognized for their commitment to collaborative coding, innovation, and community building.
+      <div class="main-content">
+        <div class="presented">This certificate confirms that</div>
+        <div class="name">${escapeHtml(c.participantName || 'Code Crunch Member')}</div>
+        
+        <div class="content">
+          Is an official member of <strong>${escapeHtml(c.orgName || 'Hack University Initiative')}</strong>, 
+          recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
+        </div>
+        
+        <div class="info">
+          Member Since: ${escapeHtml(c.memberDateSince || 'Not specified')}<br>
+          Membership ID: ${escapeHtml(c.membershipID || 'Not available')}
+        </div>
+        
+        <div class="content" style="font-style: italic; margin-top: 20px; font-size: 0.95rem;">
+          Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
+        </div>
       </div>
       
-      <div class="info">
-        Member Since: ${escapeHtml(c.memberDateSince || 'Not specified')}<br>
-        Membership ID: ${escapeHtml(c.membershipID || 'Not available')}
-      </div>
-      
-      <div class="content" style="font-style: italic; margin-top: 20px;">
-        Join us in shaping the future of technology through collaboration, learning, and innovation.
-      </div>
-      
-      <div class="signature-section">
-        <div class="sig-line"></div>
-        <div class="sig-name">BRIAN BAZURTO</div>
-        <div class="sig-title">Code Crunch President</div>
+      <div class="footer-section">
+        <div style="flex: 1;"></div>
+        <div class="signature-area">
+          <div class="sig-line"></div>
+          <div class="sig-name">BRIAN BAZURTO</div>
+          <div class="sig-title">Hack University Initiative Coordinator</div>
+        </div>
+        <div style="flex: 1;"></div>
       </div>
     </div>
   </div>
