@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Code Crunch – Member & Hacker Multipurpose Tool</title>
+<style>
+  :root{
+    --brand:#1e40af;
+    --brand2:#2563EB;
+    --accent:#F59E0B;
+    --success:#10b981;
+    --error:#ef4444;
+  }
+  
+  *{box-sizing:border-box} 
+  
+  body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    min-height:100vh;
+    margin:0;
+    padding:24px;
+    line-height:1.6;
+  }
+  
+  .container{
+    max-width:900px;
+    margin:0 auto;
+  }
+  
+  .card{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 25px 50px rgba(0,0,0,.15);
+    overflow:hidden;
+    margin-bottom:20px;
+  }
+  
+  .header{
+    padding:40px 32px;
+    background:linear-gradient(135deg,var(--brand2) 0%,var(--brand) 100%);
+    color:#fff;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  
+  .header::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    opacity:0.3;
+  }
+  
+  .logo{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    background:var(--accent);
+    margin:0 auto 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:24px;
+    color:#fff;
+    position:relative;
+    z-index:1;
+  }
+  
+  .header h1{
+    margin:0 0 8px;
+    font-size:2.5rem;
+    font-weight:800;
+    position:relative;
+    z-index:1;
+  }
+  
+  .header p{
+    margin:0;
+    font-size:1.1rem;
+    opacity:0.9;
+    position:relative;
+    z-index:1;
+  }
+  
+  .body{
+    padding:40px 32px;
+  }
+  
+  .info-section{
+    background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:32px;
+    border-left:6px solid var(--brand2);
+  }
+  
+  .info-title{
+    color:var(--brand2);
+    font-size:1.3rem;
+    font-weight:700;
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  
+  .benefits-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+    margin-top:16px;
+  }
+  
+  .benefit-item{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:12px;
+    background:rgba(255,255,255,0.7);
+    border-radius:12px;
+    border:1px solid rgba(37,99,235,0.1);
+  }
+  
+  .benefit-icon{
+    width:24px;
+    height:24px;
+    border-radius:6px;
+    background:var(--brand2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:12px;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  
+  .benefit-content{
+    flex:1;
+  }
+  
+  .benefit-title{
+    font-weight:600;
+    color:#1f2937;
+    margin-bottom:4px;
+  }
+  
+  .benefit-desc{
+    font-size:0.9rem;
+    color:#6b7280;
+    line-height:1.4;
+  }
+  
+  .form-section{
+    margin-bottom:32px;
+  }
+  
+  .form-title{
+    font-size:1.1rem;
+    font-weight:600;
+    color:#374151;
+    margin-bottom:8px;
+  }
+  
+  .input-group{
+    position:relative;
+  }
+  
+  input{
+    width:100%;
+    padding:16px 20px;
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    font-size:16px;
+    transition:all 0.3s ease;
+    background:#fff;
+  }
+  
+  input:focus{
+    outline:none;
+    border-color:var(--brand2);
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+    transform:translateY(-1px);
+  }
+  
+  .btn{
+    margin-top:16px;
+    width:100%;
+    padding:16px 24px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--brand2) 0%,var(--brand) 100%);
+    color:#fff;
+    font-weight:700;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  
+  .btn::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    transition:left 0.5s;
+  }
+  
+  .btn:hover::before{
+    left:100%;
+  }
+  
+  .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(37,99,235,0.3);
+  }
+  
+  .btn[disabled]{
+    opacity:0.6;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+  }
+  
+  .btn[disabled]:hover::before{
+    left:-100%;
+  }
+  
+  .status{
+    margin-top:20px;
+    padding:16px 20px;
+    border-radius:12px;
+    display:none;
+    font-weight:600;
+    border:2px solid transparent;
+  }
+  
+  .status.info{
+    background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
+    color:#1e40af;
+    border-color:#93c5fd;
+  }
+  
+  .status.ok{
+    background:linear-gradient(135deg,#d1fae5 0%,#a7f3d0 100%);
+    color:#065f46;
+    border-color:#6ee7b7;
+  }
+  
+  .status.err{
+    background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);
+    color:#991b1b;
+    border-color:#fca5a5;
+  }
+  
+  .result{
+    display:none;
+    margin-top:32px;
+    animation:slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  
+  .result-header{
+    text-align:center;
+    margin-bottom:24px;
+  }
+  
+  .result-title{
+    font-size:1.8rem;
+    font-weight:800;
+    color:var(--success);
+    margin-bottom:8px;
+  }
+  
+  .result-subtitle{
+    color:#6b7280;
+    font-size:1.1rem;
+  }
+  
+  .member-info{
+    background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 100%);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:24px;
+    border:2px solid #e2e8f0;
+  }
+  
+  .info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+  }
+  
+  .info-item{
+    text-align:center;
+    padding:16px;
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+  }
+  
+  .info-label{
+    color:#6b7280;
+    font-weight:600;
+    font-size:0.9rem;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:8px;
+  }
+  
+  .info-value{
+    color:#1f2937;
+    font-weight:700;
+    font-size:1.1rem;
+    word-break:break-word;
+  }
+  
+  .community-section{
+    background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:24px;
+    border:2px solid #0ea5e9;
+    text-align:center;
+  }
+  
+  .community-title{
+    color:#0369a1;
+    font-size:1.4rem;
+    font-weight:800;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  
+  .community-desc{
+    color:#075985;
+    margin-bottom:20px;
+    font-size:1.1rem;
+  }
+  
+  .community-links{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  
+  .community-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 20px;
+    border-radius:25px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    transition:all 0.3s ease;
+    min-width:140px;
+    justify-content:center;
+  }
+  
+  .community-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    color:#fff;
+    text-decoration:none;
+  }
+  
+  .discord{background:linear-gradient(135deg,#5865F2 0%,#4752C4 100%)}
+  .groupme{background:linear-gradient(135deg,#00AFF0 0%,#0088CC 100%)}
+  
+  .download-section{
+    text-align:center;
+  }
+  
+  .download{
+    width:100%;
+    max-width:400px;
+    padding:16px 24px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--success) 0%,#059669 100%);
+    color:#fff;
+    font-weight:700;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    margin:0 auto;
+    display:block;
+  }
+  
+  .download:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(16,185,129,0.3);
+  }
+  
+  .debug{
+    margin-top:24px;
+    font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:#1f2937;
+    color:#10b981;
+    padding:16px;
+    border-radius:12px;
+    max-height:300px;
+    overflow:auto;
+    display:none;
+  }
+  
+  .debug-toggle{
+    margin-top:16px;
+    padding:8px 16px;
+    background:transparent;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    color:#6b7280;
+    font-size:0.9rem;
+    cursor:pointer;
+  }
+  
+  @media (max-width:640px){
+    .container{padding:16px}
+    .body{padding:24px 20px}
+    .benefits-grid{grid-template-columns:1fr}
+    .info-grid{grid-template-columns:1fr}
+    .community-links{flex-direction:column;align-items:center}
+    .community-btn{min-width:200px}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="logo">CC</div>
+        <h1>Code Crunch</h1>
+        <p>Member & Hacker Multipurpose Tool</p>
+      </div>
+      
+      <div class="body">
+        <!-- Benefits Section -->
+        <div class="info-section">
+          <div class="info-title">
+            🚀 Member & Hacker Verification Portal
+          </div>
+          <p style="color:#64748b;margin-bottom:20px;font-size:1.1rem;">
+            Your gateway to Code Crunch membership verification, hackathon participation, and exclusive community access
+          </p>
+          
+          <div class="info-title" style="font-size:1.1rem;margin-top:24px;">
+            🎯 What You'll Get After Verification
+          </div>
+          
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon">🏆</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Official Membership Certificate</div>
+                <div class="benefit-desc">Downloadable PDF certificate for your portfolio and professional recognition</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">💬</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Discord Server Access</div>
+                <div class="benefit-desc">Join our exclusive Discord community for real-time collaboration and networking</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">👥</div>
+              <div class="benefit-content">
+                <div class="benefit-title">GroupMe Chat Access</div>
+                <div class="benefit-desc">Connect with fellow hackers and members through our mobile-friendly chat platform</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">🎓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Hack University Resources</div>
+                <div class="benefit-desc">Access exclusive workshops, coding tutorials, and hackathon preparation materials</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">⚡</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Hackathon Priority Access</div>
+                <div class="benefit-desc">Early registration and priority spots for Code Crunch hackathon events</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">🌟</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Mentorship Opportunities</div>
+                <div class="benefit-desc">Connect with industry professionals and experienced developers for guidance</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">💼</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Career Resources</div>
+                <div class="benefit-desc">Access to job boards, interview prep sessions, and career development workshops</div>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">🛠️</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Technical Resources</div>
+                <div class="benefit-desc">Exclusive coding templates, project starter kits, and development tools</div>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top:24px;padding:20px;background:linear-gradient(135deg,#fef3c7 0%,#fcd34d 100%);border-radius:12px;border-left:4px solid #f59e0b;">
+            <div style="font-weight:700;color:#92400e;margin-bottom:8px;">
+              🎯 Perfect For:
+            </div>
+            <div style="color:#92400e;font-size:0.95rem;line-height:1.5;">
+              • <strong>Code Crunch Members</strong> - Full access to all community features and resources<br>
+              • <strong>Hack University Participants</strong> - Educational resources and hackathon preparation<br>
+              • <strong>Hackathon Participants</strong> - Team collaboration tools and competition resources<br>
+              • <strong>Aspiring Developers</strong> - Learning materials and mentorship opportunities
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+          <div class="form-title">Enter Your Registered Email Address:</div>
+          <p style="color:#6b7280;font-size:0.9rem;margin-bottom:12px;">
+            Use the same email you registered with for Code Crunch membership or Hack University hackathons
+          </p>
+          <div class="input-group">
+            <input id="email" type="email" placeholder="your.email@example.com" />
+          </div>
+          <button id="go" class="btn">🚀 Verify & Access Resources</button>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <!-- Results Section -->
+        <div id="result" class="result">
+          <div class="result-header">
+            <div class="result-title">🎉 Access Granted!</div>
+            <div class="result-subtitle">Welcome to the Code Crunch Ecosystem</div>
+          </div>
+          
+          <div class="member-info">
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-label">Member Name</div>
+                <div class="info-value" id="r_name">—</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Member Since</div>
+                <div class="info-value" id="r_since">—</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Membership ID</div>
+                <div class="info-value" id="r_id">—</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Organization</div>
+                <div class="info-value" id="r_org">Code Crunch</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="community-section" id="links">
+            <div class="community-title">
+              🌟 Your Exclusive Community Access
+            </div>
+            <div class="community-desc">
+              As a verified member or hacker, you now have access to our exclusive community platforms and resources!
+            </div>
+            <div class="community-links">
+              <a id="lnk_discord" class="community-btn discord" target="_blank" rel="noopener">
+                💬 Join Discord Server
+              </a>
+              <a id="lnk_groupme" class="community-btn groupme" target="_blank" rel="noopener">
+                👥 Join GroupMe Chat
+              </a>
+            </div>
+            <p style="color:#075985;font-size:0.95rem;margin-top:16px;">
+              🚀 <strong>Next Steps:</strong> Join both platforms to access hackathon teams, mentorship, job opportunities, and exclusive workshops!
+            </p>
+          </div>
+          
+          <div class="download-section">
+            <button id="dl" class="download">📄 Download Your Official Certificate</button>
+            <p style="color:#6b7280;font-size:0.9rem;margin-top:8px;">
+              Perfect for LinkedIn, portfolios, and professional recognition
+            </p>
+          </div>
+        </div>
+
+        <button class="debug-toggle" onclick="toggleDebug()">🔧 Toggle Debug Info</button>
+        <div id="debug" class="debug"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ====== CONFIG - YOUR DEPLOYED GOOGLE APPS SCRIPT URL ======
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
+  let certData = null;
+
+  // UI helpers
+  const el = id => document.getElementById(id);
+  
+  const status = (type, msg) => {
+    const box = el('status');
+    box.className = 'status ' + (type==='ok'?'ok':type==='err'?'err':'info');
+    box.innerHTML = msg;
+    box.style.display = 'block';
+    
+    // Auto-scroll to status
+    setTimeout(() => {
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  };
+  
+  const debug = (label, data) => {
+    const d = el('debug');
+    const timestamp = new Date().toLocaleTimeString();
+    d.innerHTML += `<div style="color:#60a5fa;font-weight:bold;">[${timestamp}] ${label}</div>`;
+    if (data) {
+      d.innerHTML += `<pre style="margin:4px 0 12px 0;color:#34d399;">${escapeHtml(JSON.stringify(data,null,2))}</pre>`;
+    }
+    d.scrollTop = d.scrollHeight;
+  };
+  
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  // Toggle debug panel
+  function toggleDebug() {
+    const d = el('debug');
+    d.style.display = d.style.display === 'none' ? 'block' : 'none';
+  }
+
+  // Main certificate generation function
+  async function go() {
+    const email = el('email').value.trim().toLowerCase();
+    el('result').style.display = 'none';
+    status('info', '⏳ Verifying your Code Crunch membership...<br><small>Please wait while we check our records</small>');
+    el('go').disabled = true;
+
+    if (!email) { 
+      status('err','❌ Please enter your email address.'); 
+      el('go').disabled=false; 
+      return; 
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status('err','❌ Please enter a valid email address.<br><small>Format: your.name@example.com</small>'); 
+      el('go').disabled=false; 
+      return;
+    }
+
+    debug('🚀 Starting certificate generation', { email, timestamp: new Date().toISOString() });
+
+    try {
+      const referer = window.location.href;
+      const url = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(referer)}`;
+      debug('📡 API Request', { url, referer });
+
+      const ac = new AbortController();
+      const timeout = setTimeout(() => ac.abort(), 15000);
+      
+      const res = await fetch(url, { 
+        signal: ac.signal, 
+        headers: { 'Accept':'application/json' }
+      });
+      
+      clearTimeout(timeout);
+      debug('📊 Response Status', { status: res.status, ok: res.ok, statusText: res.statusText });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+
+      const data = await res.json();
+      debug('📄 Response Data', data);
+
+      // Handle both success/error response formats
+      if (data.error) throw new Error(data.error);
+      if (!data.success && data.certificates === undefined) throw new Error('Invalid response format');
+
+      const certificates = Array.isArray(data.certificates) ? data.certificates : [];
+      if (!certificates.length) { 
+        status('err', `❌ No membership found for this email address.<br><br>
+          <strong>If you believe this is an error:</strong><br>
+          • Ensure you're using the same email address you registered with<br>
+          • Contact the organizers if you need to register or update your information<br>
+          • Check if you have a typo in your email address`); 
+        debug('❌ No certificates found', { email, response: data });
+        return; 
+      }
+
+      const certificate = certificates[0];
+      const c = certificate.certificateData || certificate;
+      certData = c;
+
+      debug('✅ Certificate found', c);
+
+      // Populate member information
+      el('r_name').textContent = c.participantName || 'Code Crunch Member';
+      el('r_since').textContent = c.memberDateSince || 'Not specified';
+      el('r_id').textContent = c.membershipID || 'Not available';
+      el('r_org').textContent = c.orgName || 'Code Crunch';
+
+      // Always show community links for verified members/participants
+      const linksSection = el('links');
+      const discordLink = el('lnk_discord');
+      const groupmeLink = el('lnk_groupme');
+
+      // Use provided links or default community links
+      const discordUrl = c.discordJoinLink || 'https://codecrunchglobal-discordserver.vercel.app/';
+      const groupmeUrl = c.groupmeLink || 'https://codecrunchglobal-groupme.vercel.app/';
+
+      // Always show both buttons for verified members
+      discordLink.href = discordUrl;
+      discordLink.style.display = 'inline-flex';
+      
+      groupmeLink.href = groupmeUrl;
+      groupmeLink.style.display = 'inline-flex';
+      
+      // Always show community section for verified members
+      linksSection.style.display = 'block';
+
+      status('ok', `🎉 <strong>Access Granted!</strong><br>
+        Welcome to the Code Crunch ecosystem, ${escapeHtml(c.participantName || 'Member')}!<br>
+        <small>Your membership certificate and exclusive community access are ready below.</small>`);
+      
+      el('result').style.display = 'block';
+      
+      // Smooth scroll to results
+      setTimeout(() => {
+        el('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+
+    } catch (err) {
+      debug('❌ Error occurred', { message: err.message, stack: err.stack });
+      
+      let errorMessage = `❌ ${err.message}`;
+      
+      if (err.name === 'AbortError') {
+        errorMessage = '❌ Request timed out. Please check your internet connection and try again.';
+      } else if (err.message.includes('Access denied')) {
+        errorMessage = `❌ ${err.message}<br><br>
+          <strong>This usually means:</strong><br>
+          • The website domain is not authorized to access the certificate system<br>
+          • Please contact the administrators to resolve this issue`;
+      } else if (err.message.includes('Failed to fetch')) {
+        errorMessage = '❌ Unable to connect to the certificate system.<br><small>Please check your internet connection and try again.</small>';
+      }
+      
+      status('err', errorMessage);
+    } finally {
+      el('go').disabled = false;
+    }
+  }
+
+  // Certificate download function
+  function download() {
+    if (!certData) {
+      alert('Please generate your certificate first by entering your email address above.');
+      return;
+    }
+
+    debug('📄 Generating certificate download', certData);
+
+    const c = certData;
+    const certificateHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Code Crunch Membership Certificate - ${escapeHtml(c.participantName || 'Member')}</title>
+<style>
+  @page { size: A4 landscape; margin: 10mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { 
+    font-family: "Times New Roman", serif; 
+    background: #f5f5f5; 
+    margin: 0; 
+    padding: 20px; 
+    line-height: 1.4;
+  }
+  .container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    background: #fff; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+  }
+  .sheet { 
+    width: 100%; 
+    max-width: 1000px; 
+    min-height: 700px; 
+    margin: 0 auto; 
+    background: #fff; 
+    border: 15px solid #B8860B; 
+    padding: 40px; 
+    position: relative; 
+  }
+  .header { text-align: center; margin-bottom: 40px; }
+  .title { 
+    font-size: 4rem; 
+    font-weight: 700; 
+    letter-spacing: 4px; 
+    color: #333; 
+    margin: 0 0 10px; 
+    line-height: 1; 
+  }
+  .subtitle { 
+    font-size: 1.2rem; 
+    letter-spacing: 4px; 
+    color: #666; 
+    text-transform: uppercase; 
+  }
+  .presented { 
+    font-size: 1.1rem; 
+    font-style: italic; 
+    margin: 50px 0 0; 
+    text-align: center; 
+    color: #555; 
+  }
+  .name { 
+    font-size: 3rem; 
+    font-weight: 700; 
+    font-style: italic; 
+    color: #333; 
+    margin: 30px 0; 
+    text-align: center; 
+  }
+  .content { 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    color: #555; 
+    margin: 30px auto; 
+    max-width: 80%; 
+    text-align: center; 
+  }
+  .info { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: #333; 
+    margin: 30px 0; 
+    text-align: center; 
+  }
+  .signature-section { 
+    position: absolute; 
+    right: 40px; 
+    bottom: 40px; 
+    text-align: center; 
+  }
+  .sig-line { 
+    border-top: 2px solid #333; 
+    width: 200px; 
+    margin-bottom: 10px; 
+  }
+  .sig-name { 
+    font-weight: 700; 
+    margin-bottom: 3px; 
+  }
+  .sig-title { 
+    font-style: italic; 
+    color: #666; 
+  }
+  .logo { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    width: 80px; 
+    height: 80px; 
+    object-fit: contain; 
+  }
+  .controls { 
+    text-align: center; 
+    margin: 20px 0; 
+    padding: 15px; 
+    background: #f8f9fa; 
+    border-radius: 8px; 
+  }
+  .btn { 
+    padding: 12px 24px; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    border: 0; 
+    border-radius: 6px; 
+    margin: 0 10px; 
+    font-weight: 700; 
+    transition: all 0.3s ease; 
+  }
+  .btn-primary { background: #007bff; color: #fff; }
+  .btn-secondary { background: #6c757d; color: #fff; }
+  .btn:hover { transform: translateY(-2px); }
+  
+  @media print {
+    body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+    .container { max-width: none !important; padding: 0 !important; box-shadow: none !important; background: #fff !important; }
+    .sheet { max-width: none !important; width: 277mm !important; height: 190mm !important; border: 8mm solid #B8860B !important; padding: 15mm !important; margin: 0 !important; page-break-inside: avoid !important; }
+    .controls { display: none !important; }
+    .logo { top: 8mm !important; right: 8mm !important; width: 30mm !important; height: 18mm !important; }
+    .title { font-size: 16mm !important; }
+    .subtitle { font-size: 4mm !important; }
+    .name { font-size: 12mm !important; }
+    .presented, .content, .info { font-size: 3.5mm !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+  </div>
+  
+  <div class="container">
+    <div class="sheet">
+      ${c.orgLogoUrl ? `<img class="logo" src="${escapeHtml(c.orgLogoUrl)}" alt="Code Crunch Logo" onerror="this.style.display='none'">` : ''}
+      
+      <div class="header">
+        <div class="title">MEMBERSHIP CERTIFICATE</div>
+        <div class="subtitle">CODE CRUNCH GLOBAL</div>
+      </div>
+      
+      <div class="presented">This certificate confirms that</div>
+      <div class="name">${escapeHtml(c.participantName || 'Code Crunch Member')}</div>
+      
+      <div class="content">
+        Is an official member of <strong>${escapeHtml(c.orgName || 'Code Crunch')}</strong>, 
+        recognized for their commitment to collaborative coding, innovation, and community building.
+      </div>
+      
+      <div class="info">
+        Member Since: ${escapeHtml(c.memberDateSince || 'Not specified')}<br>
+        Membership ID: ${escapeHtml(c.membershipID || 'Not available')}
+      </div>
+      
+      <div class="content" style="font-style: italic; margin-top: 20px;">
+        Join us in shaping the future of technology through collaboration, learning, and innovation.
+      </div>
+      
+      <div class="signature-section">
+        <div class="sig-line"></div>
+        <div class="sig-name">BRIAN BAZURTO</div>
+        <div class="sig-title">Code Crunch President</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+    if (!newWindow) {
+      alert('Please allow pop-ups to view and print your certificate.');
+      return;
+    }
+    
+    newWindow.document.write(certificateHTML);
+    newWindow.document.close();
+    newWindow.focus();
+    
+    debug('✅ Certificate window opened successfully');
+  }
+
+  // Event listeners
+  el('go').addEventListener('click', go);
+  el('email').addEventListener('keydown', e => { 
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      go();
+    }
+  });
+  el('dl').addEventListener('click', download);
+
+  // Initialize debug
+  debug('🚀 Certificate Generator initialized', { 
+    apiUrl: API_URL, 
+    timestamp: new Date().toISOString(),
+    userAgent: navigator.userAgent,
+    currentUrl: window.location.href
+  });
+</script>
+</body>
+</html>
