@@ -744,8 +744,8 @@
   </div>
 
 <script>
-  // ====== CONFIG - UPDATE WITH YOUR NEW DEPLOYMENT URL ======
-  const API_URL = 'YOUR_NEW_DEPLOYMENT_URL_HERE';
+  // ====== CONFIG - REPLACE WITH YOUR ACTUAL DEPLOYMENT URL ======
+  const API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_HERE/exec';
   let certData = null;
   let debugModeEnabled = false; // Will be set by backend response
 
@@ -840,25 +840,24 @@
             ${escapeHtml(club.description)}
           </div>
         ` : ''}
-        <div class="club-status">
-          ✅ Active Member ${club.status && club.status !== 'Yes' ? `(${escapeHtml(club.status)})` : ''}
-        </div>
-      `;
-      
-      clubsGrid.appendChild(clubCard);
-    });
-    
-    clubSection.style.display = 'block';
-    debug('✅ Club memberships section displayed with', clubs.length, 'clubs');
-  }
+        <div class="club-status">✅ Active Member ${club.status && club.status !== 'Yes' ? `(${escapeHtml(club.status)})` : ''}
+       </div>
+     `;
+     
+     clubsGrid.appendChild(clubCard);
+   });
+   
+   clubSection.style.display = 'block';
+   debug('✅ Club memberships section displayed with', clubs.length, 'clubs');
+ }
 
-  // Display ALL club Discord and GroupMe links
-  function displayAllClubLinks(allClubLinks) {
-    const clubLinksSection = el('all-club-links');
-    const allClubsGrid = el('all-clubs-grid');
-    
-    if (!allClubLinks || allClubLinks.length === 0) {
-      clubLinksSection.clubLinksSection.style.display = 'none';
+ // Display ALL club Discord and GroupMe links
+ function displayAllClubLinks(allClubLinks) {
+   const clubLinksSection = el('all-club-links');
+   const allClubsGrid = el('all-clubs-grid');
+   
+   if (!allClubLinks || allClubLinks.length === 0) {
+     clubLinksSection.style.display = 'none';  // ✅ FIXED: Removed duplicate
      return;
    }
    
