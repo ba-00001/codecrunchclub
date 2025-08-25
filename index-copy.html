@@ -494,26 +494,101 @@
                 <p class="text-green-700 text-lg">Welcome <span id="welcome-name" class="font-bold"></span>!</p>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="grid md:grid-cols-3 gap-4">
+            <!-- Main Action Buttons - More Prominent -->
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
                 <button 
                     id="download-certificate" 
-                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2">
-                    <i class="fas fa-download"></i>
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3">
+                    <i class="fas fa-download text-xl"></i>
                     Download Certificate
                 </button>
                 <a id="cert-discord-link" 
                    href="https://codecrunchglobal-discordserver.vercel.app/" target="_blank" rel="noopener"
-                   class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 text-decoration-none">
-                    <i class="fab fa-discord"></i>
-                    Join Discord
+                   class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none">
+                    <i class="fab fa-discord text-xl"></i>
+                    Join Main Discord
                 </a>
                 <a id="cert-groupme-link" 
                    href="https://codecrunchglobal-groupme.vercel.app/" target="_blank" rel="noopener"
-                   class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 text-decoration-none">
-                    <i class="fas fa-users"></i>
-                    Join GroupMe
+                   class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none">
+                    <i class="fas fa-users text-xl"></i>
+                    Join Main GroupMe
                 </a>
+            </div>
+
+            <!-- Organization-Specific Communities -->
+            <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
+                <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">🌐 Join Organization-Specific Communities</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <!-- ColorStack at FIU -->
+                    <div class="text-center">
+                        <h5 class="font-semibold text-gray-700 mb-2 text-sm">ColorStack at FIU</h5>
+                        <div class="flex gap-2 justify-center">
+                            <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener"
+                               class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fab fa-discord text-sm"></i>Discord
+                            </a>
+                            <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener"
+                               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fas fa-users text-sm"></i>GroupMe
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CAHSI at FIU -->
+                    <div class="text-center">
+                        <h5 class="font-semibold text-gray-700 mb-2 text-sm">CAHSI at FIU</h5>
+                        <div class="flex gap-2 justify-center">
+                            <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener"
+                               class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fab fa-discord text-sm"></i>Discord
+                            </a>
+                            <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener"
+                               class="bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fas fa-users text-sm"></i>GroupMe
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Google Developer Group at FIU -->
+                    <div class="text-center">
+                        <h5 class="font-semibold text-gray-700 mb-2 text-sm">GDG at FIU</h5>
+                        <div class="flex gap-2 justify-center">
+                            <a href="#" target="_blank" rel="noopener"
+                               class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fab fa-discord text-sm"></i>Discord
+                            </a>
+                            <a href="#" target="_blank" rel="noopener"
+                               class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fas fa-users text-sm"></i>GroupMe
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Raspberry Pi Code Crunch -->
+                    <div class="text-center">
+                        <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
+                        <div class="flex gap-2 justify-center">
+                            <a href="#" target="_blank" rel="noopener"
+                               class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fab fa-discord text-sm"></i>Discord
+                            </a>
+                            <a href="#" target="_blank" rel="noopener"
+                               class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
+                                <i class="fas fa-users text-sm"></i>GroupMe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User's Club Memberships Display -->
+            <div id="user-club-memberships" class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">🏢 Your Active Club Memberships</h4>
+                <div id="user-clubs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- User's clubs will be populated here dynamically -->
+                </div>
+                <p class="text-blue-600 text-sm text-center mt-4 italic">Based on our records for your email address</p>
             </div>
         </div>
     </div>
@@ -523,6 +598,48 @@
 /* Additional styles for the certificate section */
 .text-decoration-none {
     text-decoration: none !important;
+}
+
+// Function to display user's club memberships
+function displayUserClubMemberships(clubs) {
+    const clubsGrid = document.getElementById('user-clubs-grid');
+    const clubSection = document.getElementById('user-club-memberships');
+    
+    if (!clubs || clubs.length === 0) {
+        clubsGrid.innerHTML = '<div class="col-span-full text-center text-blue-600 italic">No specific club memberships found in our records.</div>';
+        return;
+    }
+    
+    // Clear previous content
+    clubsGrid.innerHTML = '';
+    
+    // Create club cards for user's memberships
+    clubs.forEach((club) => {
+        const clubCard = document.createElement('div');
+        clubCard.className = 'bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow';
+        
+        clubCard.innerHTML = `
+            <div class="mb-3">
+                ${club.logo ? `
+                    <img src="${club.logo}" alt="${club.name} Logo" 
+                         class="w-12 h-12 mx-auto rounded-lg object-contain mb-2"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight" style="display: none;">
+                        ${club.textFallback || club.name}
+                    </div>
+                ` : `
+                    <div class="w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight">
+                        ${club.textFallback || club.name}
+                    </div>
+                `}
+            </div>
+            <div class="font-semibold text-gray-800 text-sm mb-1">${club.name}</div>
+            ${club.description ? `<div class="text-xs text-gray-600 mb-2">${club.description}</div>` : ''}
+            <div class="text-xs font-medium text-green-600">✅ Active Member</div>
+        `;
+        
+        clubsGrid.appendChild(clubCard);
+    });
 }
 
 .text-decoration-none:hover {
@@ -638,6 +755,9 @@ async function generateCertificate() {
         
         document.getElementById('cert-discord-link').href = discordUrl;
         document.getElementById('cert-groupme-link').href = groupmeUrl;
+        
+        // Display user's club memberships
+        displayUserClubMemberships(c.clubs || []);
         
         // Show success and results
         showStatus('success', `🎉 Access granted! Your certificate and community links are ready.`);
