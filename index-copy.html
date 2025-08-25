@@ -420,7 +420,7 @@
 
 
 
-        <!-- Membership & Certificate Section -->
+        <!-- Membership & Certificate Section (Auto-fit Print + Branded Buttons) -->
 <section id="membership-certificate" class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8 text-center">
@@ -428,20 +428,18 @@
       <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
     </h2>
 
-    <!-- Single Information Paragraph -->
+    <!-- Info -->
     <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg p-8 text-white mb-8">
-      <div class="text-center">
-        <p class="text-xl leading-relaxed">
-          <strong>Join our Discord community and GroupMe chat, get your official membership certificate!</strong>
-          Not a member yet or haven't registered for our interdisciplinary hackathons?
-          <strong>Become a member and register here - all in one single form below.</strong>
-          Already a member? Simply enter your email to generate your certificate and access all community platforms instantly.
-        </p>
-      </div>
+      <p class="text-xl leading-relaxed text-center">
+        <strong>Join our Discord community and GroupMe chat, get your official membership certificate!</strong>
+        Not a member yet or haven't registered for our interdisciplinary hackathons?
+        <strong>Become a member and register here - all in one single form below.</strong>
+        Already a member? Enter your email to generate your certificate and unlock community access.
+      </p>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-8">
-      <!-- New Member Registration -->
+      <!-- New Member -->
       <div class="bg-gray-50 rounded-lg p-8 shadow-md">
         <div class="text-center mb-6">
           <div class="w-16 h-16 cc-orange rounded-lg mx-auto mb-4 flex items-center justify-center">
@@ -464,7 +462,7 @@
         </div>
       </div>
 
-      <!-- Certificate Generation for Existing Members -->
+      <!-- Existing Member -->
       <div class="bg-gray-50 rounded-lg p-8 shadow-md">
         <div class="text-center mb-6">
           <div class="w-16 h-16 cc-blue rounded-lg mx-auto mb-4 flex items-center justify-center">
@@ -473,7 +471,6 @@
           <h3 class="text-2xl font-bold cc-blue-text mb-3">Existing Members</h3>
         </div>
 
-        <!-- Certificate Generation Form -->
         <form class="space-y-4" id="cert-form" novalidate>
           <label for="member-email" class="sr-only">Registered email address</label>
           <input
@@ -495,7 +492,6 @@
             🏆 Get Certificate & Community Access
           </button>
 
-          <!-- Status Message (accessibility: live region) -->
           <div
             id="cert-status"
             class="hidden p-4 rounded-lg border-2 text-center font-medium"
@@ -506,7 +502,7 @@
       </div>
     </div>
 
-    <!-- Certificate Result Display -->
+    <!-- Result -->
     <div
       id="certificate-result"
       class="hidden mt-8 bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-8 border-2 border-green-200"
@@ -516,12 +512,9 @@
           <i class="fas fa-check text-3xl text-white" aria-hidden="true"></i>
         </div>
         <h3 class="text-2xl font-bold text-green-800 mb-2">🎉 Access Granted!</h3>
-        <p class="text-green-700 text-lg">
-          Welcome <span id="welcome-name" class="font-bold"></span>!
-        </p>
+        <p class="text-green-700 text-lg">Welcome <span id="welcome-name" class="font-bold"></span>!</p>
       </div>
 
-      <!-- Main Action Buttons -->
       <div class="grid md:grid-cols-3 gap-4 mb-8">
         <button
           id="download-certificate"
@@ -531,119 +524,86 @@
           <i class="fas fa-download text-xl" aria-hidden="true"></i>
           Download Certificate
         </button>
+
+        <!-- UPDATED: Main Discord button label + official colors -->
         <a
           id="cert-discord-link"
           href="https://codecrunchglobal-discordserver.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
+          class="btn-discord px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
         >
           <i class="fab fa-discord text-xl" aria-hidden="true"></i>
-          Join Main Discord
+          Join Code Crunch & Hackathon Discord
         </a>
+
         <a
           id="cert-groupme-link"
           href="https://codecrunchglobal-groupme.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
+          class="btn-groupme px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
         >
           <i class="fas fa-users text-xl" aria-hidden="true"></i>
           Join Main GroupMe
         </a>
       </div>
 
-      <!-- Organization-Specific Communities -->
+      <!-- Organization links -->
       <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
         <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">🌐 Join Organization-Specific Communities</h4>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <!-- ColorStack at FIU -->
           <div class="text-center">
             <h5 class="font-semibold text-gray-700 mb-2 text-sm">ColorStack at FIU</h5>
             <div class="flex gap-2 justify-center">
-              <a
-                href="https://go.fiu.edu/colorstackatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer"
+                 class="btn-discord px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
               </a>
-              <a
-                href="https://go.fiu.edu/colorstackatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="https://go.fiu.edu/colorstackatfiu" target="_blank" rel="noopener noreferrer"
+                 class="btn-groupme px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
               </a>
             </div>
           </div>
 
-          <!-- CAHSI at FIU -->
           <div class="text-center">
             <h5 class="font-semibold text-gray-700 mb-2 text-sm">CAHSI at FIU</h5>
             <div class="flex gap-2 justify-center">
-              <a
-                href="https://go.fiu.edu/cahsiatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer"
+                 class="btn-discord px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
               </a>
-              <a
-                href="https://go.fiu.edu/cahsiatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="https://go.fiu.edu/cahsiatfiu" target="_blank" rel="noopener noreferrer"
+                 class="btn-groupme px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
               </a>
             </div>
           </div>
 
-          <!-- Google Developer Group at FIU -->
           <div class="text-center">
             <h5 class="font-semibold text-gray-700 mb-2 text-sm">GDG at FIU</h5>
             <div class="flex gap-2 justify-center">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="#" target="_blank" rel="noopener noreferrer"
+                 class="btn-discord px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
               </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="#" target="_blank" rel="noopener noreferrer"
+                 class="btn-groupme px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
               </a>
             </div>
           </div>
 
-          <!-- Raspberry Pi Code Crunch -->
           <div class="text-center">
             <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
             <div class="flex gap-2 justify-center">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="#" target="_blank" rel="noopener noreferrer"
+                 class="btn-discord px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
               </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
+              <a href="#" target="_blank" rel="noopener noreferrer"
+                 class="btn-groupme px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1">
                 <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
               </a>
             </div>
@@ -651,7 +611,7 @@
         </div>
       </div>
 
-      <!-- User's Club Memberships Display -->
+      <!-- User Clubs -->
       <div id="user-club-memberships" class="bg-blue-50 rounded-lg p-6 border border-blue-200">
         <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">🏢 Your Active Club Memberships</h4>
         <div id="user-clubs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -662,366 +622,252 @@
 </section>
 
 <style>
-/* Utility to preserve no-underline on Tailwind hover transitions */
-.text-decoration-none { text-decoration: none !important; }
-.text-decoration-none:hover { text-decoration: none !important; }
+/* Utilities */
+.text-decoration-none{ text-decoration:none !important; }
+.text-decoration-none:hover{ text-decoration:none !important; }
 
-/* Status styles */
-#cert-status.info {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  color: #1e40af;
-  border-color: #93c5fd;
-}
-#cert-status.success {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  color: #065f46;
-  border-color: #6ee7b7;
-}
-#cert-status.error {
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  color: #991b1b;
-  border-color: #fca5a5;
-}
+/* Official brand colors */
+.btn-discord{ background:#5865F2; color:#fff; }
+.btn-discord:hover{ background:#4752C4; }
+.btn-groupme{ background:#00AFF0; color:#fff; }
+.btn-groupme:hover{ background:#0094cc; }
 
-/* Fun little twinkle for the star */
-@keyframes twinkle { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.6; transform:scale(1.1)} }
-.star { animation: twinkle 1.8s ease-in-out infinite; }
+/* status colors */
+#cert-status.info{ background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%); color:#1e40af; border-color:#93c5fd; }
+#cert-status.success{ background:linear-gradient(135deg,#d1fae5 0%,#a7f3d0 100%); color:#065f46; border-color:#6ee7b7; }
+#cert-status.error{ background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%); color:#991b1b; border-color:#fca5a5; }
+
+/* twinkle */
+@keyframes twinkle { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.1)} }
+.star{ animation:twinkle 1.8s ease-in-out infinite; }
 </style>
 
 <script>
-/* ------------ Config ------------ */
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec";
-
+/* ---------------- Config ---------------- */
+const API_URL = "https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec";
 let certificateData = null;
 
-/* ------------ UI Helpers ------------ */
-function showStatus(type, message) {
-  const statusEl = document.getElementById("cert-status");
-  statusEl.className = `p-4 rounded-lg border-2 text-center font-medium ${type}`;
-  statusEl.textContent = ""; // prevent residual HTML
-  // Allow simple emojis & punctuation:
-  statusEl.append(document.createTextNode(message));
-  statusEl.classList.remove("hidden");
-  // Auto-scroll to status
-  setTimeout(() => statusEl.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
-}
-
-function hideStatus() {
+/* ---------------- Helpers ---------------- */
+function showStatus(type, message){
   const el = document.getElementById("cert-status");
-  el.classList.add("hidden");
-  el.textContent = "";
+  el.className = `p-4 rounded-lg border-2 text-center font-medium ${type}`;
+  el.textContent = message;
+  el.classList.remove("hidden");
+  setTimeout(()=>el.scrollIntoView({behavior:"smooth", block:"center"}),80);
+}
+function hideStatus(){
+  const el = document.getElementById("cert-status");
+  el.classList.add("hidden"); el.textContent="";
+}
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
-/* ------------ Clubs Renderer (safe) ------------ */
-function displayUserClubMemberships(clubs) {
-  const clubsGrid = document.getElementById("user-clubs-grid");
-  if (!clubsGrid) return;
-
-  if (!Array.isArray(clubs) || clubs.length === 0) {
-    clubsGrid.innerHTML =
-      '<div class="col-span-full text-center text-blue-600 italic">No specific club memberships found in our records.</div>';
+/* ---------------- Clubs ---------------- */
+function displayUserClubMemberships(clubs){
+  const grid = document.getElementById("user-clubs-grid");
+  if(!grid) return;
+  if(!Array.isArray(clubs) || !clubs.length){
+    grid.innerHTML = '<div class="col-span-full text-center text-blue-600 italic">No specific club memberships found in our records.</div>';
     return;
   }
-
-  clubsGrid.innerHTML = "";
-
-  clubs.forEach((club) => {
+  grid.innerHTML = "";
+  clubs.forEach(club=>{
     const card = document.createElement("div");
-    card.className =
-      "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "mb-3";
-
-    if (club.logo) {
+    card.className = "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
+    const box = document.createElement("div"); box.className="mb-3";
+    if(club.logo){
       const img = document.createElement("img");
-      img.src = club.logo;
-      img.alt = (club.name || "Club") + " Logo";
-      img.className = "w-12 h-12 mx-auto rounded-lg object-contain mb-2";
-      img.onerror = function () {
-        this.style.display = "none";
-        fallback.style.display = "flex";
-      };
-
+      img.src = club.logo; img.alt = (club.name||"Club")+" Logo";
+      img.className="w-12 h-12 mx-auto rounded-lg object-contain mb-2";
       const fallback = document.createElement("div");
-      fallback.style.display = "none";
-      fallback.className =
-        "w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
+      fallback.style.display="none";
+      fallback.className="w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
       fallback.textContent = club.textFallback || club.name || "Club";
-
-      wrapper.appendChild(img);
-      wrapper.appendChild(fallback);
-    } else {
+      img.onerror = ()=>{ img.style.display="none"; fallback.style.display="flex"; };
+      box.appendChild(img); box.appendChild(fallback);
+    }else{
       const fallback = document.createElement("div");
-      fallback.className =
-        "w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
+      fallback.className="w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
       fallback.textContent = club.textFallback || club.name || "Club";
-      wrapper.appendChild(fallback);
+      box.appendChild(fallback);
     }
-
     const name = document.createElement("div");
-    name.className = "font-semibold text-gray-800 text-sm mb-1";
+    name.className="font-semibold text-gray-800 text-sm mb-1";
     name.textContent = club.name || "Club";
-
-    const desc = document.createElement("div");
-    if (club.description) {
-      desc.className = "text-xs text-gray-600 mb-2";
-      desc.textContent = club.description;
-    }
-
     const badge = document.createElement("div");
-    badge.className = "text-xs font-medium text-green-600";
-    badge.textContent = "✅ Active Member";
-
-    card.appendChild(wrapper);
-    card.appendChild(name);
-    if (club.description) card.appendChild(desc);
+    badge.className="text-xs font-medium text-green-600";
+    badge.textContent="✅ Active Member";
+    card.appendChild(box); card.appendChild(name);
+    if(club.description){ const d=document.createElement("div"); d.className="text-xs text-gray-600 mb-2"; d.textContent=club.description; card.appendChild(d); }
     card.appendChild(badge);
-    clubsGrid.appendChild(card);
+    grid.appendChild(card);
   });
 }
 
-/* ------------ Certificate Generation ------------ */
-async function generateCertificate(evt) {
-  if (evt) evt.preventDefault();
-
+/* ---------------- Generate ---------------- */
+async function generateCertificate(e){
+  if(e) e.preventDefault();
   const emailInput = document.getElementById("member-email");
-  const generateBtn = document.getElementById("generate-certificate");
-  const resultSection = document.getElementById("certificate-result");
+  const btn = document.getElementById("generate-certificate");
+  const result = document.getElementById("certificate-result");
 
-  // Reset view
-  resultSection.classList.add("hidden");
-  hideStatus();
+  result.classList.add("hidden"); hideStatus();
+  const email = (emailInput.value||"").trim().toLowerCase();
+  if(!email){ showStatus("error","❌ Please enter your email address."); emailInput.focus(); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showStatus("error","❌ Please enter a valid email address."); emailInput.focus(); return; }
 
-  const email = (emailInput.value || "").trim().toLowerCase();
-  if (!email) {
-    showStatus("error", "❌ Please enter your email address.");
-    emailInput.focus();
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showStatus("error", "❌ Please enter a valid email address.");
-    emailInput.focus();
-    return;
-  }
+  btn.disabled = true; const prev = btn.textContent;
+  btn.textContent = "⏳ Verifying membership..."; showStatus("info","⏳ Checking your membership across all Hack University clubs...");
 
-  // Loading state
-  generateBtn.disabled = true;
-  const originalBtnText = generateBtn.textContent;
-  generateBtn.textContent = "⏳ Verifying membership...";
-  showStatus("info", "⏳ Checking your membership across all Hack University clubs...");
+  try{
+    const ac = new AbortController(); const to = setTimeout(()=>ac.abort(),15000);
+    const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`, {signal:ac.signal, headers:{Accept:"application/json"}});
+    clearTimeout(to);
+    if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    const data = await res.json();
+    if(data?.error) throw new Error(data.error);
 
-  try {
-    const url =
-      API_URL +
-      `?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`;
+    const list = Array.isArray(data?.certificates) ? data.certificates : [];
+    if(!list.length){ showStatus("error","❌ No membership found for this email. Please register using the form on the left."); return; }
 
-    const ac = new AbortController();
-    const timeout = setTimeout(() => ac.abort(), 15000);
+    const c = list.map(x=>x.certificateData||x)
+                  .sort((a,b)=>new Date(b.memberDateSince||0)-new Date(a.memberDateSince||0))[0] || {};
+    certificateData = c;
 
-    const response = await fetch(url, { signal: ac.signal, headers: { Accept: "application/json" } });
-    clearTimeout(timeout);
+    document.getElementById("welcome-name").textContent = c.participantName || "Member";
+    document.getElementById("cert-discord-link").href = c.discordJoinLink || "https://codecrunchglobal-discordserver.vercel.app/";
+    document.getElementById("cert-groupme-link").href = c.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
+    displayUserClubMemberships(c.clubs || []);
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    if (data && data.error) throw new Error(data.error);
-
-    const certificates = Array.isArray(data?.certificates) ? data.certificates : [];
-    if (certificates.length === 0) {
-      showStatus(
-        "error",
-        "❌ No membership found for this email address. Please register as a new member using the form on the left, or contact us if you believe this is an error."
-      );
-      return;
-    }
-
-    // Use first certificate; if multiple exist, prefer the most recent if provided
-    const chosen =
-      certificates
-        .map((c) => c.certificateData || c)
-        .sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
-
-    certificateData = chosen;
-
-    // Welcome text (safe)
-    document.getElementById("welcome-name").textContent =
-      chosen.participantName || "Member";
-
-    // Community links (fallbacks)
-    document.getElementById("cert-discord-link").href =
-      chosen.discordJoinLink || "https://codecrunchglobal-discordserver.vercel.app/";
-    document.getElementById("cert-groupme-link").href =
-      chosen.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
-
-    // Clubs
-    displayUserClubMemberships(chosen.clubs || []);
-
-    showStatus("success", "🎉 Access granted! Your certificate and community links are ready.");
-    resultSection.classList.remove("hidden");
-
-    setTimeout(() => {
-      resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 200);
-  } catch (err) {
-    let msg = `❌ ${err?.message || "Unexpected error"}`;
-    if (err?.name === "AbortError") msg = "❌ Request timed out. Please try again.";
-    else if (String(err?.message || "").includes("Failed to fetch")) {
-      msg = "❌ Connection error. Please check your internet and try again.";
-    }
+    showStatus("success","🎉 Access granted! Your certificate and community links are ready.");
+    result.classList.remove("hidden");
+    setTimeout(()=>result.scrollIntoView({behavior:"smooth", block:"start"}),150);
+  }catch(err){
+    const msg = (err?.name==="AbortError")
+      ? "❌ Request timed out. Please try again."
+      : (String(err?.message||"").includes("Failed to fetch")
+          ? "❌ Connection error. Please check your internet and try again."
+          : `❌ ${err?.message||"Unexpected error"}`);
     showStatus("error", msg);
-  } finally {
-    generateBtn.disabled = false;
-    generateBtn.textContent = originalBtnText;
+  }finally{
+    btn.disabled = false; btn.textContent = prev;
   }
 }
 
-/* ------------ Download Certificate ------------ */
-function downloadCertificate() {
-  if (!certificateData) {
-    alert("Please generate your certificate first.");
-    return;
-  }
+/* ---------------- Download (Auto-fit) ---------------- */
+function downloadCertificate(){
+  if(!certificateData){ alert("Please generate your certificate first."); return; }
   const c = certificateData;
 
-  const certificateHTML = `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Hack University Initiative Membership Certificate - ${escapeHtml(
-    c.participantName || "Member"
-  )}</title>
+<title>Hack University Initiative Membership Certificate - ${escapeHtml(c.participantName||"Member")}</title>
 <style>
-@page { size: A4 landscape; margin: 0; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; margin: 0; padding: 0; font-family: "Times New Roman", serif; background: #f8f9fa; line-height: 1.4; }
-.container { display:flex; flex-direction:column; max-width:1100px; margin:0 auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12); }
-.sheet { width:100%; height:750px; margin:0 auto; background:#fff; border:15px solid #B8860B; padding:40px; position:relative; display:flex; flex-direction:column; justify-content:space-between; }
-.header { text-align:center; margin-bottom:40px; }
-.title { font-size:3.2rem; font-weight:700; letter-spacing:4px; color:#2c3e50; margin:0 0 12px; line-height:1.1; text-shadow:1px 1px 2px rgba(0,0,0,0.1); }
-.subtitle { font-size:1.2rem; letter-spacing:3px; color:#7f8c8d; text-transform:uppercase; margin:0; font-weight:500; }
-.main-content { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; padding:20px 0; }
-.presented { font-size:1.1rem; font-style:italic; color:#5d6d7e; margin-bottom:25px; }
-.name { font-size:3.0rem; font-weight:700; font-style:italic; color:#2c3e50; margin:25px 0; line-height:1.2; word-wrap:break-word; text-shadow:1px 1px 3px rgba(0,0,0,0.1); }
-.content { font-size:1.1rem; line-height:1.6; color:#5d6d7e; margin:25px auto; max-width:85%; }
-.info { font-size:1.1rem; font-weight:700; color:#34495e; margin:25px 0; line-height:1.5; }
-.footer-section { display:flex; justify-content:center; align-items:flex-end; margin-top:40px; min-height:90px; }
-.signature-area { text-align:center; max-width:350px; }
-.sig-line { border-top:2px solid #34495e; width:250px; margin:0 auto 10px; }
-.sig-name { font-weight:700; margin-bottom:4px; font-size:1.0rem; color:#2c3e50; }
-.sig-title { font-style:italic; color:#7f8c8d; font-size:0.9rem; line-height:1.4; }
-.controls { text-align:center; margin:15px 0 20px; padding:15px; background:#f8f9fa; border-radius:8px; border:1px solid #dee2e6; }
-.btn { padding:12px 24px; font-size:1.0rem; cursor:pointer; border:0; border-radius:6px; margin:0 10px; font-weight:600; transition:all .3s ease; }
-.btn-primary { background:#007bff; color:#fff; }
-.btn-secondary { background:#6c757d; color:#fff; }
-.btn:hover { transform:translateY(-2px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-@media print {
-  html, body { width:297mm!important; height:210mm!important; margin:0!important; padding:0!important; background:#fff!important; print-color-adjust:exact!important; -webkit-print-color-adjust:exact!important; }
-  .controls { display:none!important; }
-  .container { position:fixed!important; inset:0!important; width:297mm!important; height:210mm!important; max-width:none!important; padding:0!important; margin:0!important; box-shadow:none!important; background:#fff!important; border-radius:0!important; display:flex!important; align-items:center!important; justify-content:center!important; }
-  .sheet { width:277mm!important; height:190mm!important; border:10mm solid #B8860B!important; padding:20mm!important; page-break-inside:avoid!important; display:flex!important; flex-direction:column!important; justify-content:space-between!important; background:#fff!important; }
-  .header { margin-bottom:15mm!important; }
-  .title { font-size:2.8rem!important; margin-bottom:8mm!important; }
-  .subtitle { font-size:1.0rem!important; }
-  .name { font-size:2.5rem!important; margin:15mm 0!important; }
-  .content { font-size:1.0rem!important; margin:12mm auto!important; }
-  .info { font-size:1.0rem!important; margin:12mm 0!important; }
-  .sig-line { width:200px!important; }
-}
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { width:297mm; height:210mm; background:#fff; font-family:"Times New Roman", serif; line-height:1.4; }
+  .controls { text-align:center; margin:12px 0; padding:12px; }
+  .btn { padding:10px 18px; border:0; border-radius:6px; font-weight:600; cursor:pointer; }
+  .btn-primary { background:#007bff; color:#fff; }
+  .btn-secondary { background:#6c757d; color:#fff; margin-left:8px; }
+  .print-surface { width:297mm; height:210mm; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .sheet {
+    width:277mm; height:190mm; border:10mm solid #B8860B; padding:20mm;
+    display:flex; flex-direction:column; justify-content:space-between; background:#fff; transform-origin: top left;
+  }
+  .header { text-align:center; margin-bottom:16px; }
+  .title { font-size:3.1rem; font-weight:700; letter-spacing:4px; color:#2c3e50; margin:0 0 10px; }
+  .subtitle { font-size:1.1rem; letter-spacing:3px; color:#7f8c8d; text-transform:uppercase; }
+  .main-content { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .presented { font-size:1.05rem; font-style:italic; color:#5d6d7e; margin-bottom:18px; }
+  .name { font-size:2.9rem; font-weight:700; font-style:italic; color:#2c3e50; margin:18px 0; word-wrap:break-word; }
+  .content { font-size:1.05rem; color:#5d6d7e; margin:18px auto; max-width:85%; }
+  .info { font-size:1.05rem; font-weight:700; color:#34495e; margin:18px 0; }
+  .footer-section { display:flex; justify-content:center; align-items:flex-end; margin-top:18px; min-height:70px; }
+  .signature-area { text-align:center; max-width:340px; }
+  .sig-line { border-top:2px solid #34495e; width:240px; margin:0 auto 8px; }
+  .sig-name { font-weight:700; margin-bottom:4px; }
+  .sig-title { font-style:italic; color:#7f8c8d; }
+  @media print { .controls { display:none !important; } html, body { print-color-adjust:exact; -webkit-print-color-adjust:exact; } }
 </style>
 </head>
 <body>
-<div class="controls">
-  <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
-  <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
-</div>
-<div class="container">
-  <div class="sheet">
-    <div class="header">
-      <div class="title">MEMBERSHIP CERTIFICATE</div>
-      <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
-    </div>
-    <div class="main-content">
-      <div class="presented">This certificate confirms that</div>
-      <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
-      <div class="content">
-        Is an official member of <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>,
-        recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
+  <div class="controls">
+    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+  </div>
+  <div class="print-surface">
+    <div class="sheet" id="sheet">
+      <div class="header">
+        <div class="title">MEMBERSHIP CERTIFICATE</div>
+        <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
       </div>
-      <div class="info">
-        Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>
-        Membership ID: ${escapeHtml(c.membershipID || "Not available")}
+      <div class="main-content">
+        <div class="presented">This certificate confirms that</div>
+        <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
+        <div class="content">
+          Is an official member of <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>,
+          recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
+        </div>
+        <div class="info">
+          Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>
+          Membership ID: ${escapeHtml(c.membershipID || "Not available")}
+        </div>
+        <div class="content" style="font-style:italic;">
+          Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
+        </div>
       </div>
-      <div class="content" style="font-style: italic; margin-top: 20px; font-size: 0.95rem;">
-        Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
+      <div class="footer-section">
+        <div style="flex:1;"></div>
+        <div class="signature-area">
+          <div class="sig-line"></div>
+          <div class="sig-name">BRIAN BAZURTO</div>
+          <div class="sig-title">President of ${escapeHtml(c.signatureClubText || "Hack University Initiative")}</div>
+        </div>
+        <div style="flex:1;"></div>
       </div>
-    </div>
-    <div class="footer-section">
-      <div style="flex:1;"></div>
-      <div class="signature-area">
-        <div class="sig-line"></div>
-        <div class="sig-name">BRIAN BAZURTO</div>
-        <div class="sig-title">President of ${escapeHtml(c.signatureClubText || "Hack University Initiative")}</div>
-      </div>
-      <div style="flex:1;"></div>
     </div>
   </div>
-</div>
+
+<script>
+  // Auto-fit scaling so the sheet always fits inside the page frame
+  function fit() {
+    const sheet = document.getElementById('sheet');
+    const surface = document.querySelector('.print-surface');
+    sheet.style.transform = 'scale(1)';
+    const scale = Math.min(surface.clientWidth / sheet.scrollWidth, surface.clientHeight / sheet.scrollHeight);
+    sheet.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+  window.matchMedia('print').addEventListener('change', e => { if (!e.matches) setTimeout(fit, 50); });
+</script>
 </body>
 </html>`;
 
   const win = window.open("", "_blank", "width=1200,height=800,scrollbars=yes,resizable=yes");
-  if (!win) {
-    alert("Please allow pop-ups to view and print your certificate.");
-    return;
-  }
-  win.document.write(certificateHTML);
+  if(!win){ alert("Please allow pop-ups to view and print your certificate."); return; }
+  win.document.write(html);
   win.document.close();
   win.focus();
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
 }
 
-/* Small util for the template call above (hoisted outside in real use) */
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-/* ------------ Wire up ------------ */
+/* ---------------- Wire Up ---------------- */
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cert-form");
   const emailInput = document.getElementById("member-email");
   const downloadBtn = document.getElementById("download-certificate");
 
-  if (form) form.addEventListener("submit", generateCertificate);
-
-  if (emailInput) {
-    emailInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        generateCertificate(e);
-      }
-    });
+  if(form) form.addEventListener("submit", generateCertificate);
+  if(emailInput){
+    emailInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter"){ e.preventDefault(); generateCertificate(e);} });
   }
-
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", downloadCertificate);
-  }
+  if(downloadBtn) downloadBtn.addEventListener("click", downloadCertificate);
 });
 </script>
 
