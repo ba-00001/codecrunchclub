@@ -415,58 +415,480 @@
 
 
 
-<!-- Hack University Initiative Section -->
-<section class="hack-university-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0; color: white;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
-    <div style="margin-bottom: 40px;">
-      <div style="width: 80px; height: 80px; background: #F59E0B; border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 32px; color: white;">
-        HU
-      </div>
-      <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 16px; line-height: 1.2;">
-        Hack University Initiative
-      </h2>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Verify your membership across multiple student tech organizations and access exclusive resources
-      </p>
+
+
+<!-- Membership & Certificate Section -->
+<section id="membership-certificate" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Join Our Community & Get Your Certificate <span class="star">✨</span></h2>
+        
+        <!-- Single Information Paragraph -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg p-8 text-white mb-8">
+            <div class="text-center">
+                <p class="text-xl leading-relaxed">
+                    <strong>Join our Discord community and GroupMe chat, get your official membership certificate!</strong> Not a member yet or haven't registered for our interdisciplinary hackathons? <strong>Become a member and register here - all in one single form below.</strong> Already a member? Simply enter your email to generate your certificate and access all community platforms instantly.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- New Member Registration -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-md">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 cc-orange rounded-lg mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user-plus text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold cc-blue-text mb-3">New Member Registration</h3>
+                </div>
+                
+                <div class="text-center">
+                    <a href="https://codecrunchglobal.vercel.app/community-access.html" 
+                       class="inline-block w-full cc-orange cc-blue-text px-8 py-4 rounded-md hover:bg-yellow-400 transition-colors font-bold text-lg">
+                        🚀 Register & Become a Member
+                    </a>
+                    <p class="text-sm text-gray-600 mt-3">
+                        Free membership • All majors welcome • Interdisciplinary hackathons • Discord & GroupMe access
+                    </p>
+                </div>
+            </div>
+
+            <!-- Certificate Generation for Existing Members -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-md">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 cc-blue rounded-lg mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-certificate text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold cc-blue-text mb-3">Existing Members</h3>
+                </div>
+
+                <!-- Certificate Generation Form -->
+                <div class="space-y-4">
+                    <div>
+                        <input 
+                            id="member-email" 
+                            type="email" 
+                            placeholder="Enter your registered email address"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                        />
+                    </div>
+                    
+                    <button 
+                        id="generate-certificate" 
+                        class="w-full cc-blue text-white px-8 py-4 rounded-md hover:bg-blue-700 transition-colors font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                        🏆 Get Certificate & Community Access
+                    </button>
+                    
+                    <!-- Status Message -->
+                    <div id="cert-status" class="hidden p-4 rounded-lg border-2 text-center font-medium"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate Result Display -->
+        <div id="certificate-result" class="hidden mt-8 bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-8 border-2 border-green-200">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <i class="fas fa-check text-3xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-green-800 mb-2">🎉 Access Granted!</h3>
+                <p class="text-green-700 text-lg">Welcome <span id="welcome-name" class="font-bold"></span>!</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid md:grid-cols-3 gap-4">
+                <button 
+                    id="download-certificate" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i>
+                    Download Certificate
+                </button>
+                <a id="cert-discord-link" 
+                   href="https://codecrunchglobal-discordserver.vercel.app/" target="_blank" rel="noopener"
+                   class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 text-decoration-none">
+                    <i class="fab fa-discord"></i>
+                    Join Discord
+                </a>
+                <a id="cert-groupme-link" 
+                   href="https://codecrunchglobal-groupme.vercel.app/" target="_blank" rel="noopener"
+                   class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 text-decoration-none">
+                    <i class="fas fa-users"></i>
+                    Join GroupMe
+                </a>
+            </div>
+        </div>
     </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px;">
-      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.2);">
-        <div style="font-size: 3rem; margin-bottom: 16px;">🏆</div>
-        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">Official Certificates</h3>
-        <p style="opacity: 0.9; line-height: 1.5;">Get verified membership certificates for your portfolio and professional recognition</p>
-      </div>
-      
-      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.2);">
-        <div style="font-size: 3rem; margin-bottom: 16px;">🌐</div>
-        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">Multi-Club Access</h3>
-        <p style="opacity: 0.9; line-height: 1.5;">Access Discord and GroupMe communities across Code Crunch, ColorStack, CAHSI, GDG, and more</p>
-      </div>
-      
-      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.2);">
-        <div style="font-size: 3rem; margin-bottom: 16px;">🚀</div>
-        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">Exclusive Resources</h3>
-        <p style="opacity: 0.9; line-height: 1.5;">Get priority access to hackathons, workshops, mentorship, and career development opportunities</p>
-      </div>
-    </div>
-    
-    <div style="margin-bottom: 30px;">
-      <a href="index-multipurposetool.html" 
-         style="display: inline-flex; align-items: center; gap: 12px; padding: 18px 36px; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(245,158,11,0.3);"
-         onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 35px rgba(245,158,11,0.4)'"
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(245,158,11,0.3)'">
-        🎓 Verify Your Membership
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </a>
-    </div>
-    
-    <p style="font-size: 0.95rem; opacity: 0.8;">
-      Members of Code Crunch Global, ColorStack at FIU, CAHSI at FIU, Google Developer Group at FIU, and Raspberry Pi Code Crunch
-    </p>
-  </div>
 </section>
+
+<style>
+/* Additional styles for the certificate section */
+.text-decoration-none {
+    text-decoration: none !important;
+}
+
+.text-decoration-none:hover {
+    text-decoration: none !important;
+}
+
+#cert-status.info {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e40af;
+    border-color: #93c5fd;
+}
+
+#cert-status.success {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border-color: #6ee7b7;
+}
+
+#cert-status.error {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-color: #fca5a5;
+}
+</style>
+
+<script>
+// Certificate generation functionality
+const API_URL = 'https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec';
+let certificateData = null;
+
+// UI Helper functions
+function showStatus(type, message) {
+    const statusEl = document.getElementById('cert-status');
+    statusEl.className = `p-4 rounded-lg border-2 text-center font-medium ${type}`;
+    statusEl.innerHTML = message;
+    statusEl.classList.remove('hidden');
+    
+    // Auto-scroll to status
+    setTimeout(() => {
+        statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+}
+
+function hideStatus() {
+    document.getElementById('cert-status').classList.add('hidden');
+}
+
+// Generate certificate function
+async function generateCertificate() {
+    const email = document.getElementById('member-email').value.trim().toLowerCase();
+    const generateBtn = document.getElementById('generate-certificate');
+    const resultSection = document.getElementById('certificate-result');
+    
+    // Hide previous results
+    resultSection.classList.add('hidden');
+    hideStatus();
+    
+    if (!email) {
+        showStatus('error', '❌ Please enter your email address.');
+        return;
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showStatus('error', '❌ Please enter a valid email address.');
+        return;
+    }
+    
+    // Show loading state
+    generateBtn.disabled = true;
+    generateBtn.textContent = '⏳ Verifying membership...';
+    showStatus('info', '⏳ Checking your membership across all Hack University clubs...');
+    
+    try {
+        const referer = window.location.href;
+        const url = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(referer)}`;
+        
+        const ac = new AbortController();
+        const timeout = setTimeout(() => ac.abort(), 15000);
+        
+        const response = await fetch(url, {
+            signal: ac.signal,
+            headers: { 'Accept': 'application/json' }
+        });
+        
+        clearTimeout(timeout);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        const certificates = Array.isArray(data.certificates) ? data.certificates : [];
+        if (!certificates.length) {
+            showStatus('error', `❌ No membership found for this email address. Please register as a new member using the form on the left, or contact us if you believe this is an error.`);
+            return;
+        }
+        
+        const certificate = certificates[0];
+        const c = certificate.certificateData || certificate;
+        certificateData = c;
+        
+        // Update welcome message
+        document.getElementById('welcome-name').textContent = c.participantName || 'Member';
+        
+        // Set up community links
+        const discordUrl = c.discordJoinLink || 'https://codecrunchglobal-discordserver.vercel.app/';
+        const groupmeUrl = c.groupmeLink || 'https://codecrunchglobal-groupme.vercel.app/';
+        
+        document.getElementById('cert-discord-link').href = discordUrl;
+        document.getElementById('cert-groupme-link').href = groupmeUrl;
+        
+        // Show success and results
+        showStatus('success', `🎉 Access granted! Your certificate and community links are ready.`);
+        
+        resultSection.classList.remove('hidden');
+        
+        // Smooth scroll to results
+        setTimeout(() => {
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+        
+    } catch (error) {
+        let errorMessage = `❌ ${error.message}`;
+        
+        if (error.name === 'AbortError') {
+            errorMessage = '❌ Request timed out. Please try again.';
+        } else if (error.message.includes('Failed to fetch')) {
+            errorMessage = '❌ Connection error. Please check your internet and try again.';
+        }
+        
+        showStatus('error', errorMessage);
+    } finally {
+        generateBtn.disabled = false;
+        generateBtn.textContent = '🏆 Get Certificate & Community Access';
+    }
+}
+
+// Download certificate function
+function downloadCertificate() {
+    if (!certificateData) {
+        alert('Please generate your certificate first.');
+        return;
+    }
+    
+    const c = certificateData;
+    const certificateHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hack University Initiative Membership Certificate - ${c.participantName || 'Member'}</title>
+<style>
+@page { size: A4 landscape; margin: 8mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  font-family: "Times New Roman", serif; 
+  background: #f5f5f5; 
+  margin: 0; 
+  padding: 15px; 
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.container { 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px; 
+  margin: 0 auto; 
+  background: #fff; 
+  padding: 15px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+}
+.sheet { 
+  flex: 1;
+  width: 100%; 
+  min-height: 650px;
+  margin: 0 auto; 
+  background: #fff; 
+  border: 12px solid #B8860B; 
+  padding: 30px; 
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header { text-align: center; margin-bottom: 30px; }
+.title { 
+  font-size: 3.5rem; 
+  font-weight: 700; 
+  letter-spacing: 3px; 
+  color: #333; 
+  margin: 0 0 8px; 
+  line-height: 1.1; 
+}
+.subtitle { 
+  font-size: 1.1rem; 
+  letter-spacing: 3px; 
+  color: #666; 
+  text-transform: uppercase; 
+  margin: 0;
+}
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.presented { font-size: 1rem; font-style: italic; color: #555; margin-bottom: 20px; }
+.name { 
+  font-size: 2.8rem; 
+  font-weight: 700; 
+  font-style: italic; 
+  color: #333; 
+  margin: 20px 0; 
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+.content { 
+  font-size: 1rem; 
+  line-height: 1.5; 
+  color: #555; 
+  margin: 20px auto; 
+  max-width: 85%; 
+}
+.info { 
+  font-size: 1rem; 
+  font-weight: 700; 
+  color: #333; 
+  margin: 20px 0; 
+  line-height: 1.4;
+}
+.footer-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 30px;
+  min-height: 80px;
+}
+.signature-area { text-align: center; flex: 1; max-width: 300px; margin: 0 auto; }
+.sig-line { border-top: 2px solid #333; width: 200px; margin: 0 auto 8px; }
+.sig-name { font-weight: 700; margin-bottom: 2px; font-size: 0.95rem; }
+.sig-title { font-style: italic; color: #666; font-size: 0.85rem; line-height: 1.3; }
+.controls { 
+  text-align: center; 
+  margin: 10px 0 15px; 
+  padding: 12px; 
+  background: #f8f9fa; 
+  border-radius: 6px; 
+}
+.btn { 
+  padding: 10px 20px; 
+  font-size: 0.95rem; 
+  cursor: pointer; 
+  border: 0; 
+  border-radius: 5px; 
+  margin: 0 8px; 
+  font-weight: 600; 
+  transition: all 0.3s ease; 
+}
+.btn-primary { background: #007bff; color: #fff; }
+.btn-secondary { background: #6c757d; color: #fff; }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+@media print {
+  body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+  .container { max-width: none !important; padding: 0 !important; box-shadow: none !important; background: #fff !important; }
+  .sheet { 
+    transform: none !important; max-width: none !important; width: 277mm !important; height: 190mm !important; 
+    border: 8mm solid #B8860B !important; padding: 15mm !important; margin: 0 !important; 
+    page-break-inside: avoid !important; min-height: auto !important;
+  }
+  .controls { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="controls">
+  <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+  <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+</div>
+<div class="container">
+  <div class="sheet">
+    <div class="header">
+      <div class="title">MEMBERSHIP CERTIFICATE</div>
+      <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
+    </div>
+    <div class="main-content">
+      <div class="presented">This certificate confirms that</div>
+      <div class="name">${c.participantName || 'Hack University Member'}</div>
+      <div class="content">
+        Is an official member of <strong>${c.clubText || 'Hack University Initiative'}</strong>, 
+        recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
+      </div>
+      <div class="info">
+        Member Since: ${c.memberDateSince || 'Not specified'}<br>
+        Membership ID: ${c.membershipID || 'Not available'}
+      </div>
+      <div class="content" style="font-style: italic; margin-top: 20px; font-size: 0.95rem;">
+        Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
+      </div>
+    </div>
+    <div class="footer-section">
+      <div style="flex: 1;"></div>
+      <div class="signature-area">
+        <div class="sig-line"></div>
+        <div class="sig-name">BRIAN BAZURTO</div>
+        <div class="sig-title">President of ${c.signatureClubText || 'Hack University Initiative'}</div>
+      </div>
+      <div style="flex: 1;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+
+    const newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+    if (!newWindow) {
+        alert('Please allow pop-ups to view and print your certificate.');
+        return;
+    }
+    
+    newWindow.document.write(certificateHTML);
+    newWindow.document.close();
+    newWindow.focus();
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const generateBtn = document.getElementById('generate-certificate');
+    const emailInput = document.getElementById('member-email');
+    const downloadBtn = document.getElementById('download-certificate');
+    
+    if (generateBtn) {
+        generateBtn.addEventListener('click', generateCertificate);
+    }
+    
+    if (emailInput) {
+        emailInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generateCertificate();
+            }
+        });
+    }
+    
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', downloadCertificate);
+    }
+});
+</script>
+
+
+
+
+
+
+
+
 
 
 
