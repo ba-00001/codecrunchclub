@@ -1421,32 +1421,208 @@ body::before {
 
 
 
-    <header class="header">
+<header class="header">
         <div class="container header-container">
-            <h1 class="header-title glitch" data-text="HACK DISCORD PORTAL">HACK UNIVERSITY DISCORD PORTAL</h1>
-            <p class="header-subtitle">Join the elite hacker collective and gain access to our Discord community. Complete registration to receive your invite and start your mission. Open to all students, any university, major, high school (16+). Exclusions for some countries / territories apply based on Devpost restrictions. Complete registration to receive your invite and start your mission.</p>
+            <h1 class="header-title glitch" data-text="HACK UNIVERSITY PORTAL">HACK UNIVERSITY DISCORD PORTAL</h1>
+            <p class="header-subtitle">Join our elite hackathon community! Choose your path below to access our Discord server and connect with fellow innovators from around the world.</p>
         </div>
     </header>
 
     <main class="content">
         <div class="container">
-            <!-- Discord Join Section -->
-            <section class="discord-section">
-                <div class="card">
-                    <h2 class="card-title glitch" data-text="JOIN DISCORD COMMUNITY">JOIN DISCORD COMMUNITY</h2>
-                    <p class="card-description">Connect with fellow hackers, get real-time updates, and access exclusive resources. The Discord invite is sent automatically after completing your hackathon registration.</p>
+            <!-- Discord Access Section -->
+            <section class="discord-access-section">
+                <!-- Registered Participants -->
+                <div class="access-card">
+                    <div class="card-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+                    <h2 class="card-title">Already Registered?</h2>
+                    <p class="card-description">
+                        If you've already registered for our upcoming hackathon as a participant, enter your email below to get instant Discord access.
+                    </p>
                     
-                    <a href="https://Codecrunchglobalform-no3.vercel.app" class="discord-button" target="_blank">
-                        <i class="bi bi-discord discord-icon"></i>
-                        COMPLETE REGISTRATION FIRST
-                    </a>
+                    <div class="email-section">
+                        <form class="email-form" id="participant-form">
+                            <input 
+                                type="email" 
+                                class="email-input" 
+                                id="participant-email"
+                                placeholder="Enter your registered email address"
+                                required
+                            >
+                            <button type="submit" class="discord-button" id="join-discord-btn">
+                                <i class="bi bi-discord discord-icon"></i>
+                                Join Discord
+                            </button>
+                        </form>
+                        
+                        <div id="participant-status" class="status-message"></div>
+                        
+                        <div class="note">
+                            <i class="bi bi-info-circle"></i>
+                            <span>Discord invite will be sent to your email instantly after verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Registration -->
+                <div class="access-card">
+                    <div class="card-icon">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+                    <h2 class="card-title">New to Our Hackathons?</h2>
+                    <p class="card-description">
+                        Haven't registered yet? Join our hackathon community! Complete registration to access Discord and participate in upcoming events.
+                    </p>
                     
-                    <div class="register-note">
-                        <i class="bi bi-info-circle"></i>
-                        <strong>Note:</strong> Discord invite link is automatically sent via email after you complete the hackathon registration form.
+                    <div class="email-section">
+                        <a href="https://Codecrunchglobalform-no3.vercel.app" class="discord-button register-button" target="_blank">
+                            <i class="bi bi-arrow-right discord-icon"></i>
+                            Register for Hackathon
+                        </a>
+                        
+                        <div class="note">
+                            <i class="bi bi-info-circle"></i>
+                            <span>Free registration • All majors welcome • Discord access included</span>
+                        </div>
                     </div>
                 </div>
             </section>
+        </div>
+    </main>
+
+    <script>
+        // Discord access functionality
+        const API_URL = "https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec";
+
+        function showStatus(type, message, elementId) {
+            const statusEl = document.getElementById(elementId);
+            statusEl.className = `status-message status-${type}`;
+            statusEl.textContent = message;
+            statusEl.style.display = 'block';
+            
+            // Auto-scroll to status
+            setTimeout(() => {
+                statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            // Auto-hide success/info messages after 8 seconds
+            if (type === 'success' || type === 'info') {
+                setTimeout(() => {
+                    statusEl.style.display = 'none';
+                }, 8000);
+            }
+        }
+
+        function hideStatus(elementId) {
+            const statusEl = document.getElementById(elementId);
+            statusEl.style.display = 'none';
+        }
+
+        async function handleDiscordAccess(event) {
+            event.preventDefault();
+            
+            const emailInput = document.getElementById('participant-email');
+            const joinBtn = document.getElementById('join-discord-btn');
+            const statusId = 'participant-status';
+            
+            // Reset status
+            hideStatus(statusId);
+            
+            const email = emailInput.value.trim().toLowerCase();
+            if (!email) {
+                showStatus('error', '❌ Please enter your email address.', statusId);
+                emailInput.focus();
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showStatus('error', '❌ Please enter a valid email address.', statusId);
+                emailInput.focus();
+                return;
+            }
+
+            // Loading state
+            joinBtn.disabled = true;
+            const originalText = joinBtn.innerHTML;
+            joinBtn.innerHTML = '<i class="bi bi-hourglass-split discord-icon"></i>Verifying...';
+            showStatus('info', '⏳ Checking your registration and sending Discord invite...', statusId);
+
+            try {
+                const url = `${API_URL}?email=${encodeURIComponent(email)}&action=discord_access&referer=${encodeURIComponent(window.location.href)}`;
+                
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 15000);
+                
+                const response = await fetch(url, { 
+                    signal: controller.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                clearTimeout(timeout);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (data && data.error) {
+                    throw new Error(data.error);
+                }
+
+                if (data && data.success) {
+                    showStatus('success', 
+                        `🎉 Success! Discord invite sent to ${email}. Check your inbox and spam folder. Welcome to the community!`, 
+                        statusId
+                    );
+                    emailInput.value = '';
+                } else {
+                    throw new Error('Registration not found for this email address');
+                }
+
+            } catch (error) {
+                let message = `❌ ${error.message}`;
+                
+                if (error.name === 'AbortError') {
+                    message = '❌ Request timed out. Please try again.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    message = '❌ Connection error. Please check your internet and try again.';
+                } else if (error.message.includes('not found')) {
+                    message = '❌ Email not found in our hackathon registrations. Please register first using the form on the right.';
+                }
+                
+                showStatus('error', message, statusId);
+            } finally {
+                joinBtn.disabled = false;
+                joinBtn.innerHTML = originalText;
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const participantForm = document.getElementById('participant-form');
+            const participantEmail = document.getElementById('participant-email');
+
+            if (participantForm) {
+                participantForm.addEventListener('submit', handleDiscordAccess);
+            }
+
+            if (participantEmail) {
+                participantEmail.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleDiscordAccess(e);
+                    }
+                });
+            }
+        });
+    </script>
+
+
+
+            
             <!-- Participant Checklist -->
                <!-- Hack Checklist Section -->
             <section class="checklist-section" >
