@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+
     
     <style>
         :root {
@@ -914,6 +916,201 @@ body::before {
 
 
 
+
+
+/* === Membership & Certificate (Bootstrap-only) === */
+#membership-certificate{
+  background: var(--bg-secondary);
+  border-top: 2px solid var(--matrix-green);
+  border-bottom: 2px solid var(--matrix-green);
+  padding: 3rem 0;
+}
+
+#membership-certificate .mc-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#membership-certificate .mc-title{
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--matrix-green);
+  text-shadow: 0 0 10px var(--matrix-green);
+  margin-bottom: 1.25rem;
+}
+
+#membership-certificate .mc-star{
+  display: inline-block;
+  vertical-align: -0.2em;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+/* info banner */
+#membership-certificate .mc-banner{
+  background: linear-gradient(90deg,#0ea5e9 0%,#1d4ed8 100%);
+  color:#fff;
+  border:2px solid rgba(255,255,255,.15);
+  border-radius: var(--radius);
+  box-shadow: 0 0 25px rgba(14,165,233,.35);
+  padding: 1.75rem;
+  margin: 0 auto 1.75rem;
+  text-align:center;
+  max-width: 980px;
+}
+#membership-certificate .mc-banner p{
+  font-size:1.1rem;
+  line-height:1.7;
+}
+
+/* two-column layout */
+#membership-certificate .mc-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 992px){
+  #membership-certificate .mc-grid{ grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+/* cards */
+#membership-certificate .mc-card{
+  background: var(--bg-card);
+  border: 2px solid rgba(0,255,65,.25);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+#membership-certificate .mc-card h3{
+  color: var(--text-primary);
+  text-shadow: 0 0 8px var(--matrix-green);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: .75rem 0 1rem;
+  text-align:center;
+}
+#membership-certificate .mc-icon{
+  width: 64px; height: 64px;
+  border-radius: .75rem;
+  margin: 0 auto .75rem;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 0 18px rgba(0,0,0,.35);
+}
+#membership-certificate .mc-icon.orange{
+  background: linear-gradient(135deg,#f59e0b,#f97316);
+  border: 2px solid rgba(245,158,11,.4);
+}
+#membership-certificate .mc-icon.blue{
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  border: 2px solid rgba(37,99,235,.4);
+}
+
+/* inputs & buttons */
+#membership-certificate .mc-input{
+  width:100%;
+  background: var(--bg-card-light);
+  color: var(--text-light);
+  border: 2px solid rgba(255,255,255,.15);
+  border-radius: .6rem;
+  padding: .8rem 1rem;
+  outline: none;
+  transition: all .2s ease;
+}
+#membership-certificate .mc-input::placeholder{ color: #9fe3b5; opacity:.75; }
+#membership-certificate .mc-input:focus{
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 12px rgba(0,255,65,.35);
+}
+
+#membership-certificate .btn-mc{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%;
+  gap:.5rem;
+  padding: .85rem 1rem;
+  border-radius: .6rem;
+  border: 2px solid transparent;
+  font-weight: 800;
+  letter-spacing:.5px;
+  text-decoration:none !important;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+#membership-certificate .btn-orange{
+  background: linear-gradient(135deg,#f59e0b,#f97316);
+  color:#111;
+  border-color: rgba(245,158,11,.6);
+}
+#membership-certificate .btn-orange:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(245,158,11,.5);
+}
+
+#membership-certificate .btn-blue{
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  border-color: rgba(37,99,235,.6);
+}
+#membership-certificate .btn-blue:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(37,99,235,.55);
+}
+
+/* status box + hidden util */
+#membership-certificate .status{ display:none; }
+#membership-certificate .status.show{ display:block; }
+.hidden{ display:none !important; }
+
+/* certificate result area */
+#membership-certificate #certificate-result{
+  background: linear-gradient(90deg, rgba(16,185,129,.12), rgba(5,150,105,.12));
+  border: 2px solid rgba(16,185,129,.35);
+  border-radius: var(--radius);
+  box-shadow: 0 0 22px rgba(16,185,129,.25);
+}
+#membership-certificate .result-badge{
+  width:80px; height:80px; border-radius:50%;
+  margin: 0 auto .75rem;
+  background: linear-gradient(135deg,#10b981,#059669);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:1.6rem;
+  box-shadow: 0 0 18px rgba(16,185,129,.45);
+}
+#membership-certificate .result-title{
+  text-align:center; color:#d1fae5; font-weight:900; font-size:1.5rem;
+  text-shadow: 0 0 10px rgba(16,185,129,.5);
+}
+
+/* action buttons in result */
+#membership-certificate .result-actions .btn{
+  font-weight:800;
+  border-width:2px;
+}
+
+/* org tiles */
+#membership-certificate .org-tile{
+  background: #0b1220;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:.65rem;
+  padding:.75rem;
+  text-align:center;
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+#membership-certificate .org-tile:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(0,212,255,.25);
+}
+#membership-certificate .org-tile h5{
+  color:#d8eafe;
+  font-size:.95rem;
+  margin:.35rem 0 .5rem;
+}
+
+/* small helper text */
+#membership-certificate .muted{
+  color:#9cc3ff; opacity:.85; font-size:.85rem; text-align:center;
+}
+
+
     </style>
 </head>
 <body>
@@ -1442,246 +1639,145 @@ body::before {
 
 
 
-<!-- Membership & Certificate Section -->
-<section id="membership-certificate" class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold mb-8 text-center">
+<section id="membership-certificate">
+  <div class="mc-wrap">
+    <h2 class="mc-title">
       Join Our Community & Get Your Certificate
-      <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
+      <span class="mc-star">✨</span>
     </h2>
 
-    <!-- Single Information Paragraph -->
-    <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg p-8 text-white mb-8">
-      <div class="text-center">
-        <p class="text-xl leading-relaxed">
-          <strong>Join our Discord community and GroupMe chat, get your official membership certificate!</strong>
-          Not a member yet or haven't registered for our interdisciplinary hackathons?
-          <strong>Become a member and register here - all in one single form below.</strong>
-          Already a member? Simply enter your email to generate your certificate and access all community platforms instantly.
-        </p>
-      </div>
+    <div class="mc-banner">
+      <p>
+        <strong>Join our Discord community and GroupMe chat, then grab your official membership certificate.</strong>
+        Not a member yet? <strong>Become a member and register below.</strong>
+        Already a member? Enter your email to generate your certificate and unlock community links instantly.
+      </p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-8">
+    <div class="mc-grid">
       <!-- New Member Registration -->
-      <div class="bg-gray-50 rounded-lg p-8 shadow-md">
-        <div class="text-center mb-6">
-          <div class="w-16 h-16 cc-orange rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <i class="fas fa-user-plus text-2xl text-white" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-2xl font-bold cc-blue-text mb-3">New Member Registration</h3>
+      <div class="mc-card">
+        <div class="text-center mb-3">
+          <div class="mc-icon orange"><i class="bi bi-person-plus-fill fs-3 text-white"></i></div>
+          <h3>New Member Registration</h3>
         </div>
 
         <div class="text-center">
-          <a
-            href="https://codecrunchglobal.vercel.app/community-access.html"
-            class="inline-block w-full cc-orange cc-blue-text px-8 py-4 rounded-md hover:bg-yellow-400 transition-colors font-bold text-lg text-decoration-none"
-            rel="noopener noreferrer"
-          >
+          <a href="https://codecrunchglobal.vercel.app/community-access.html"
+             class="btn-mc btn-orange">
             🚀 Register & Become a Member
           </a>
-          <p class="text-sm text-gray-600 mt-3">
+          <p class="muted mt-2">
             Free membership • All majors welcome • Interdisciplinary hackathons • Discord & GroupMe access
           </p>
         </div>
       </div>
 
-      <!-- Certificate Generation for Existing Members -->
-      <div class="bg-gray-50 rounded-lg p-8 shadow-md">
-        <div class="text-center mb-6">
-          <div class="w-16 h-16 cc-blue rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <i class="fas fa-certificate text-2xl text-white" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-2xl font-bold cc-blue-text mb-3">Existing Members</h3>
+      <!-- Existing Members -->
+      <div class="mc-card">
+        <div class="text-center mb-3">
+          <div class="mc-icon blue"><i class="bi bi-award-fill fs-3 text-white"></i></div>
+          <h3>Existing Members</h3>
         </div>
 
-        <!-- Certificate Generation Form -->
-        <form class="space-y-4" id="cert-form" novalidate>
-          <label for="member-email" class="sr-only">Registered email address</label>
-          <input
-            id="member-email"
-            type="email"
-            inputmode="email"
-            autocomplete="email"
-            placeholder="Enter your registered email address"
-            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
-            aria-describedby="cert-status"
-            required
-          />
+        <form id="cert-form" novalidate>
+          <label for="member-email" class="visually-hidden">Registered email address</label>
+          <input id="member-email" type="email" inputmode="email" autocomplete="email"
+                 placeholder="Enter your registered email address"
+                 class="mc-input mb-3" required />
 
-          <button
-            id="generate-certificate"
-            type="submit"
-            class="w-full cc-blue text-white px-8 py-4 rounded-md hover:bg-blue-700 transition-colors font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <button id="generate-certificate" type="submit" class="btn-mc btn-blue">
             🏆 Get Certificate & Community Access
           </button>
 
-          <!-- Status Message (accessibility: live region) -->
-          <div
-            id="cert-status"
-            class="hidden p-4 rounded-lg border-2 text-center font-medium"
-            role="status"
-            aria-live="polite"
-          ></div>
+          <div id="cert-status" class="status mt-3" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
 
-    <!-- Certificate Result Display -->
-    <div
-      id="certificate-result"
-      class="hidden mt-8 bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-8 border-2 border-green-200"
-    >
-      <div class="text-center mb-6">
-        <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-          <i class="fas fa-check text-3xl text-white" aria-hidden="true"></i>
+    <!-- Certificate Result -->
+    <div id="certificate-result" class="hidden mt-4 p-4">
+      <div class="text-center mb-3">
+        <div class="result-badge"><i class="bi bi-check2-circle"></i></div>
+        <div class="result-title">🎉 Access Granted!</div>
+        <p class="muted fs-6">Welcome <span id="welcome-name" class="fw-bold"></span>!</p>
+      </div>
+
+      <div class="row g-3 result-actions mb-3">
+        <div class="col-md-4">
+          <button id="download-certificate" type="button" class="btn w-100 btn-success fw-bold">
+            <i class="bi bi-download"></i> Download Certificate
+          </button>
         </div>
-        <h3 class="text-2xl font-bold text-green-800 mb-2">🎉 Access Granted!</h3>
-        <p class="text-green-700 text-lg">
-          Welcome <span id="welcome-name" class="font-bold"></span>!
-        </p>
+        <div class="col-md-4">
+          <a id="cert-discord-link" href="https://codecrunchglobal-discordserver.vercel.app/"
+             target="_blank" rel="noopener noreferrer" class="btn w-100 btn-primary fw-bold text-decoration-none">
+            <i class="bi bi-discord"></i> Join Discord
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a id="cert-groupme-link" href="https://codecrunchglobal-groupme.vercel.app/"
+             target="_blank" rel="noopener noreferrer" class="btn w-100 btn-warning fw-bold text-decoration-none">
+            <i class="bi bi-people-fill"></i> Join GroupMe
+          </a>
+        </div>
       </div>
 
-      <!-- Main Action Buttons -->
-      <div class="grid md:grid-cols-3 gap-4 mb-8">
-        <button
-          id="download-certificate"
-          type="button"
-          class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3"
-        >
-          <i class="fas fa-download text-xl" aria-hidden="true"></i>
-          Download Certificate
-        </button>
-        <a
-          id="cert-discord-link"
-          href="https://codecrunchglobal-discordserver.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
-        >
-          <i class="fab fa-discord text-xl" aria-hidden="true"></i>
-          Join Code Crunch & Hackathon Discord 
-        </a>
-        <a
-          id="cert-groupme-link"
-          href="https://codecrunchglobal-groupme.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-green-600 hover:bg-orange-600 text-white px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
-        >
-          <i class="fas fa-users text-xl" aria-hidden="true"></i>
-          Join Code Crunch & Hackathon GroupMe
-        </a>
-      </div>
-
-      <!-- Organization-Specific Communities -->
-      <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
-        <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">🌐 Join Organization-Specific Communities</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <!-- ColorStack at FIU -->
-          <div class="text-center">
-            <h5 class="font-semibold text-gray-700 mb-2 text-sm">ColorStack at FIU</h5>
-            <div class="flex gap-2 justify-center">
-              <a
-                href="https://go.fiu.edu/colorstackatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
-              </a>
-              <a
-                href="https://go.fiu.edu/colorstackatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
-              </a>
+      <!-- Orgs -->
+      <div class="mc-card" style="border-color: rgba(0,212,255,.35);">
+        <h4 class="text-center mb-3" style="color:var(--cyber-blue); text-shadow:0 0 8px var(--cyber-blue);">
+          🌐 Join Organization-Specific Communities
+        </h4>
+        <div class="row g-2">
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>ColorStack at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary" target="_blank" href="https://go.fiu.edu/colorstackatfiu">Discord</a>
+                <a class="btn btn-sm btn-info" target="_blank" href="https://go.fiu.edu/colorstackatfiu">GroupMe</a>
+              </div>
             </div>
           </div>
-
-          <!-- CAHSI at FIU -->
-          <div class="text-center">
-            <h5 class="font-semibold text-gray-700 mb-2 text-sm">CAHSI at FIU</h5>
-            <div class="flex gap-2 justify-center">
-              <a
-                href="https://go.fiu.edu/cahsiatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-purple-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
-              </a>
-              <a
-                href="https://go.fiu.edu/cahsiatfiu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-blue-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
-              </a>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>CAHSI at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary" target="_blank" href="https://go.fiu.edu/cahsiatfiu">Discord</a>
+                <a class="btn btn-sm btn-info" target="_blank" href="https://go.fiu.edu/cahsiatfiu">GroupMe</a>
+              </div>
             </div>
           </div>
-
-          <!-- Google Developer Group at FIU -->
-          <div class="text-center">
-            <h5 class="font-semibold text-gray-700 mb-2 text-sm">GDG at FIU</h5>
-            <div class="flex gap-2 justify-center">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-purple-600 hover:bg-red-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-blue-500 hover:bg-green-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
-              </a>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>GDG at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary disabled">Discord</a>
+                <a class="btn btn-sm btn-info disabled">GroupMe</a>
+              </div>
             </div>
           </div>
-
-          <!-- Raspberry Pi Code Crunch -->
-          <div class="text-center">
-            <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
-            <div class="flex gap-2 justify-center">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-purple-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-blue-500 hover:bg-rose-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
-              >
-                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
-              </a>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>Raspberry Pi CC</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary disabled">Discord</a>
+                <a class="btn btn-sm btn-info disabled">GroupMe</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- User's Club Memberships Display -->
-      <div id="user-club-memberships" class="bg-blue-50 rounded-lg p-6 border border-blue-200">
-        <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">🏢 Your Active Club Memberships</h4>
-        <div id="user-clubs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-        <p class="text-blue-600 text-sm text-center mt-4 italic">Based on our records for your email address</p>
+      <!-- Dynamic memberships -->
+      <div class="mc-card mt-3" style="border-color: rgba(37,99,235,.35);">
+        <h4 class="text-center mb-2" style="color:#9cc3ff;">🏢 Your Active Club Memberships</h4>
+        <div id="user-clubs-grid" class="row g-2"></div>
+        <p class="muted mt-2">Based on our records for your email address</p>
       </div>
     </div>
   </div>
 </section>
+
 
 <style>
 /* Utility to preserve no-underline on Tailwind hover transitions */
