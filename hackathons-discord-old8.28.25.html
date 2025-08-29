@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Discord Portal | HACK UNIVERSITY Matrix</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+    
+    <style>
+        :root {
+    --primary: #00ff41;
+    --primary-dark: #00cc33;
+    --primary-light: #33ff66;
+    --secondary: #ff0080;
+    --accent: #00d4ff;
+    --warning: #ffff00;
+    --danger: #ff3333;
+    
+    /* Hacker theme colors inspired by gaming/anime */
+    --matrix-green: #00ff41;
+    --cyber-blue: #00d4ff;
+    --neon-pink: #ff0080;
+    --electric-yellow: #ffff00;
+    --hacker-purple: #8a2be2;
+    --terminal-green: #39ff14;
+    
+    --bg-color: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: #111111;
+    --bg-card-light: #1a1a1a;
+    --text-primary: #00ff41;
+    --text-secondary: #33ff66;
+    --text-light: #66ff99;
+    --border-color: #00ff41;
+    
+    --shadow-sm: 0 0 10px rgba(0, 255, 65, 0.3);
+    --shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    --shadow-md: 0 0 30px rgba(0, 255, 65, 0.5);
+    --shadow-lg: 0 0 40px rgba(0, 255, 65, 0.6);
+    --radius: 0.75rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 80px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Matrix-style animated background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 79px, rgba(0, 255, 65, 0.03) 81px, rgba(0, 255, 65, 0.03) 82px, transparent 84px),
+        linear-gradient(rgba(0, 255, 65, 0.03) 50%, transparent 50%);
+    background-size: 85px 85px;
+    z-index: -2;
+    animation: matrix-bg 20s linear infinite;
+}
+
+@keyframes matrix-bg {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(85px); }
+}
+
+/* Glitch effect */
+.glitch {
+    position: relative;
+    color: var(--matrix-green);
+    animation: glitch-skew 2s infinite linear alternate-reverse;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    animation: glitch-anim 0.5s infinite linear alternate-reverse;
+    color: var(--cyber-blue);
+    z-index: -1;
+}
+
+.glitch::after {
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+    color: var(--neon-pink);
+    z-index: -2;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    5% { clip: rect(12px, 9999px, 59px, 0); }
+    10% { clip: rect(48px, 9999px, 29px, 0); }
+    15% { clip: rect(42px, 9999px, 73px, 0); }
+    20% { clip: rect(63px, 9999px, 27px, 0); }
+    25% { clip: rect(34px, 9999px, 55px, 0); }
+    30% { clip: rect(86px, 9999px, 73px, 0); }
+    35% { clip: rect(20px, 9999px, 20px, 0); }
+    40% { clip: rect(26px, 9999px, 60px, 0); }
+    45% { clip: rect(25px, 9999px, 66px, 0); }
+    50% { clip: rect(57px, 9999px, 98px, 0); }
+    55% { clip: rect(5px, 9999px, 46px, 0); }
+    60% { clip: rect(82px, 9999px, 31px, 0); }
+    65% { clip: rect(54px, 9999px, 27px, 0); }
+    70% { clip: rect(28px, 9999px, 99px, 0); }
+    75% { clip: rect(45px, 9999px, 69px, 0); }
+    80% { clip: rect(23px, 9999px, 85px, 0); }
+    85% { clip: rect(54px, 9999px, 84px, 0); }
+    90% { clip: rect(45px, 9999px, 47px, 0); }
+    95% { clip: rect(37px, 9999px, 20px, 0); }
+    100% { clip: rect(4px, 9999px, 91px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    5% { clip: rect(52px, 9999px, 74px, 0); }
+    10% { clip: rect(79px, 9999px, 85px, 0); }
+    15% { clip: rect(75px, 9999px, 5px, 0); }
+    20% { clip: rect(67px, 9999px, 61px, 0); }
+    25% { clip: rect(14px, 9999px, 79px, 0); }
+    30% { clip: rect(1px, 9999px, 66px, 0); }
+    35% { clip: rect(86px, 9999px, 30px, 0); }
+    40% { clip: rect(23px, 9999px, 98px, 0); }
+    45% { clip: rect(85px, 9999px, 72px, 0); }
+    50% { clip: rect(71px, 9999px, 75px, 0); }
+    55% { clip: rect(2px, 9999px, 48px, 0); }
+    60% { clip: rect(30px, 9999px, 16px, 0); }
+    65% { clip: rect(59px, 9999px, 50px, 0); }
+    70% { clip: rect(41px, 9999px, 62px, 0); }
+    75% { clip: rect(2px, 9999px, 82px, 0); }
+    80% { clip: rect(47px, 9999px, 73px, 0); }
+    85% { clip: rect(3px, 9999px, 27px, 0); }
+    90% { clip: rect(26px, 9999px, 55px, 0); }
+    95% { clip: rect(42px, 9999px, 97px, 0); }
+    100% { clip: rect(38px, 9999px, 49px, 0); }
+}
+
+@keyframes glitch-skew {
+    2%, 64% { transform: skew(0deg); }
+    4%, 60% { transform: skew(2deg); }
+    62% { transform: skew(0deg) skew(5deg); }
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Navigation Styles */
+.navbar {
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+    border-bottom: 2px solid var(--matrix-green);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.75rem 0;
+}
+
+.navbar-custom {
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    color: var(--text-secondary) !important;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand:hover {
+    color: var(--matrix-green) !important;
+    text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+}
+
+/* Support Us Button */
+.support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(45deg, var(--neon-pink), var(--hacker-purple));
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
+}
+
+.support-btn:hover {
+    background: linear-gradient(45deg, var(--hacker-purple), var(--neon-pink));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 0, 128, 0.6);
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    z-index: 1060 !important;
+    position: relative !important;
+}
+
+.hamburger-menu:focus {
+    box-shadow: 0 0 0 2px var(--matrix-green);
+    outline: none;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background: var(--matrix-green);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px var(--matrix-green);
+}
+
+.hamburger-menu:hover .hamburger-line {
+    background: var(--cyber-blue);
+    box-shadow: 0 0 10px var(--cyber-blue);
+}
+
+/* Fix for disappearing navigation menu */
+.offcanvas.show {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.offcanvas {
+    background: rgba(0, 0, 0, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
+    border-left: 2px solid var(--matrix-green) !important;
+    box-shadow: -10px 0 30px rgba(0, 255, 65, 0.3) !important;
+    width: 350px !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 1055 !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease-in-out !important;
+}
+
+.offcanvas-body {
+    padding: 1rem 1.5rem 2rem !important;
+    overflow-y: auto !important;
+    max-height: calc(100vh - 120px) !important;
+    flex-grow: 1 !important;
+    display: block !important;
+}
+
+.offcanvas-header {
+    border-bottom: 2px solid var(--matrix-green) !important;
+    padding: 1.5rem !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.offcanvas-title {
+    color: var(--matrix-green);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--matrix-green);
+    margin: 0;
+}
+
+/* Ensure the backdrop doesn't interfere */
+.offcanvas-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 1050 !important;
+}
+
+/* Close Button Fix */
+.custom-close {
+    background: transparent !important;
+    border: 2px solid var(--matrix-green) !important;
+    border-radius: 50% !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    opacity: 1 !important;
+    filter: none !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.custom-close span {
+    color: var(--matrix-green) !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+}
+
+.custom-close:hover,
+.custom-close:focus {
+    background: var(--matrix-green) !important;
+    transform: scale(1.1) !important;
+    opacity: 1 !important;
+}
+
+.custom-close:hover span,
+.custom-close:focus span {
+    color: var(--bg-color) !important;
+}
+
+/* Navigation Menu Items - Prevent disappearing */
+.nav-menu {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.nav-section-title {
+    color: var(--cyber-blue);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 1.5rem 0 0.75rem 0;
+    padding: 0.5rem;
+    border-left: 4px solid var(--cyber-blue);
+    background: rgba(0, 212, 255, 0.1);
+    text-shadow: 0 0 5px var(--cyber-blue);
+}
+
+.nav-section-title:first-child {
+    margin-top: 0;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+.nav-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    padding: 0.75rem !important;
+    border-radius: var(--radius) !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    width: 100% !important;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.nav-link:hover::before {
+    left: 100%;
+}
+
+.nav-link:hover {
+    color: var(--matrix-green) !important;
+    background: rgba(0, 255, 65, 0.1) !important;
+    transform: translateX(5px) !important;
+    text-shadow: 0 0 10px var(--matrix-green) !important;
+    text-decoration: none !important;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    width: 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Hackathon Link Improvements */
+.hackathon-main {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hackathon-link {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+}
+
+.nav-date {
+    font-size: 0.75rem !important;
+    color: var(--text-light) !important;
+    margin-left: 2.25rem !important;
+    font-style: italic !important;
+}
+
+.archived {
+    opacity: 0.7;
+}
+
+.archived:hover {
+    color: var(--text-light) !important;
+    background: rgba(102, 102, 102, 0.1) !important;
+}
+
+/* Partner Logos in Menu */
+.menu-partners {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--matrix-green);
+    flex-shrink: 0;
+}
+
+.partner-logos {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.partner-logos a {
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    padding: 0.5rem;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--matrix-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-logos a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--matrix-green);
+}
+
+/* Header Styles */
+.header {
+    padding: 3.5rem 0 2rem;
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--matrix-green);
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 
+        0 0 10px var(--matrix-green),
+        0 0 20px var(--matrix-green),
+        0 0 30px var(--matrix-green);
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+    from {
+        text-shadow: 
+            0 0 10px var(--matrix-green),
+            0 0 20px var(--matrix-green),
+            0 0 30px var(--matrix-green);
+    }
+    to {
+        text-shadow: 
+            0 0 5px var(--matrix-green),
+            0 0 10px var(--matrix-green),
+            0 0 15px var(--matrix-green),
+            0 0 20px var(--matrix-green);
+    }
+}
+
+.header-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    font-family: 'Courier New', monospace;
+    margin: 0 auto;
+}
+
+/* Main Content */
+.content {
+    padding: 2rem 0 4rem;
+}
+
+.card {
+    background: rgba(17, 17, 17, 0.9);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--matrix-green);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--matrix-green), var(--cyber-blue), var(--neon-pink), var(--electric-yellow));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--matrix-green), var(--cyber-blue));
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--matrix-green);
+}
+
+.card-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Discord Join Button */
+.discord-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.discord-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #5865F2, #7289da);
+    color: white;
+    font-weight: 700;
+    padding: 1.5rem 3rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 1rem;
+    font-size: 1.25rem;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 3px solid #5865F2;
+    box-shadow: 0 0 25px rgba(88, 101, 242, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.discord-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.discord-button:hover::before {
+    left: 100%;
+}
+
+.discord-button:hover {
+    background: linear-gradient(45deg, #4752C4, #5865F2);
+    color: white;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 40px rgba(88, 101, 242, 0.8);
+}
+
+.discord-icon {
+    font-size: 2rem;
+}
+
+.register-note {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 193, 7, 0.1);
+    border: 2px solid var(--warning);
+    border-radius: var(--radius);
+    color: var(--warning);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+
+/* Checklist Section */
+.checklist-section {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--cyber-blue);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+    position: relative;
+}
+
+.checklist-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cyber-blue), var(--matrix-green), var(--neon-pink));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.checklist-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--cyber-blue);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--cyber-blue);
+    text-align: center;
+}
+
+.checklist-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    font-style: italic;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border-left: 4px solid var(--cyber-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.checklist-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--cyber-blue);
+    color: var(--bg-color);
+    border-radius: 50%;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px var(--cyber-blue);
+}
+
+.checklist-text {
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+    line-height: 1.5;
+}
+
+.checklist-link {
+    color: var(--cyber-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.checklist-link:hover {
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+/* Footer Styles */
+.footer {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem 0;
+    border-top: 2px solid var(--matrix-green);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.footer-container {
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-description {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.footer-website {
+    margin-bottom: 1rem;
+}
+
+.footer-website-link {
+    color: var(--matrix-green);
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.footer-website-link:hover {
+    color: var(--cyber-blue);
+    text-shadow: 0 0 10px var(--cyber-blue);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--matrix-green);
+    transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.footer-link:hover {
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+.footer-copyright {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.footer-credits {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-family: 'Courier New', monospace;
+}
+
+.footer-credits-link {
+    color: var(--cyber-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-credits-link:hover {
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 2.5rem;
+    }
+
+    .discord-button {
+        padding: 1.25rem 2rem;
+        font-size: 1rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-title {
+        font-size: 2rem;
+    }
+
+    .discord-button {
+        padding: 1rem 1.5rem;
+        font-size: 0.875rem;
+    }
+
+    .checklist-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .offcanvas {
+        width: 300px !important;
+    }
+    
+    .support-btn span {
+        display: none !important;
+    }
+    
+    .navbar-brand span {
+        display: none !important;
+    }
+}
+
+
+
+
+
+/* === Membership & Certificate (Bootstrap-only) === */
+#membership-certificate{
+  background: var(--bg-secondary);
+  border-top: 2px solid var(--matrix-green);
+  border-bottom: 2px solid var(--matrix-green);
+  padding: 3rem 0;
+}
+
+#membership-certificate .mc-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#membership-certificate .mc-title{
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--matrix-green);
+  text-shadow: 0 0 10px var(--matrix-green);
+  margin-bottom: 1.25rem;
+}
+
+#membership-certificate .mc-star{
+  display: inline-block;
+  vertical-align: -0.2em;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+/* info banner */
+#membership-certificate .mc-banner{
+  background: linear-gradient(90deg,#0ea5e9 0%,#1d4ed8 100%);
+  color:#fff;
+  border:2px solid rgba(255,255,255,.15);
+  border-radius: var(--radius);
+  box-shadow: 0 0 25px rgba(14,165,233,.35);
+  padding: 1.75rem;
+  margin: 0 auto 1.75rem;
+  text-align:center;
+  max-width: 980px;
+}
+#membership-certificate .mc-banner p{
+  font-size:1.1rem;
+  line-height:1.7;
+}
+
+/* two-column layout */
+#membership-certificate .mc-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 992px){
+  #membership-certificate .mc-grid{ grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+/* cards */
+#membership-certificate .mc-card{
+  background: var(--bg-card);
+  border: 2px solid rgba(0,255,65,.25);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+#membership-certificate .mc-card h3{
+  color: var(--text-primary);
+  text-shadow: 0 0 8px var(--matrix-green);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: .75rem 0 1rem;
+  text-align:center;
+}
+#membership-certificate .mc-icon{
+  width: 64px; height: 64px;
+  border-radius: .75rem;
+  margin: 0 auto .75rem;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 0 18px rgba(0,0,0,.35);
+}
+#membership-certificate .mc-icon.orange{
+  background: linear-gradient(135deg,#f59e0b,#f97316);
+  border: 2px solid rgba(245,158,11,.4);
+}
+#membership-certificate .mc-icon.blue{
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  border: 2px solid rgba(37,99,235,.4);
+}
+
+/* inputs & buttons */
+#membership-certificate .mc-input{
+  width:100%;
+  background: var(--bg-card-light);
+  color: var(--text-light);
+  border: 2px solid rgba(255,255,255,.15);
+  border-radius: .6rem;
+  padding: .8rem 1rem;
+  outline: none;
+  transition: all .2s ease;
+}
+#membership-certificate .mc-input::placeholder{ color: #9fe3b5; opacity:.75; }
+#membership-certificate .mc-input:focus{
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 12px rgba(0,255,65,.35);
+}
+
+#membership-certificate .btn-mc{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%;
+  gap:.5rem;
+  padding: .85rem 1rem;
+  border-radius: .6rem;
+  border: 2px solid transparent;
+  font-weight: 800;
+  letter-spacing:.5px;
+  text-decoration:none !important;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+#membership-certificate .btn-orange{
+  background: linear-gradient(135deg,#f59e0b,#f97316);
+  color:#111;
+  border-color: rgba(245,158,11,.6);
+}
+#membership-certificate .btn-orange:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(245,158,11,.5);
+}
+
+#membership-certificate .btn-blue{
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  border-color: rgba(37,99,235,.6);
+}
+#membership-certificate .btn-blue:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(37,99,235,.55);
+}
+
+/* status box + hidden util */
+#membership-certificate .status{ display:none; }
+#membership-certificate .status.show{ display:block; }
+.hidden{ display:none !important; }
+
+/* certificate result area */
+#membership-certificate #certificate-result{
+  background: linear-gradient(90deg, rgba(16,185,129,.12), rgba(5,150,105,.12));
+  border: 2px solid rgba(16,185,129,.35);
+  border-radius: var(--radius);
+  box-shadow: 0 0 22px rgba(16,185,129,.25);
+}
+#membership-certificate .result-badge{
+  width:80px; height:80px; border-radius:50%;
+  margin: 0 auto .75rem;
+  background: linear-gradient(135deg,#10b981,#059669);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:1.6rem;
+  box-shadow: 0 0 18px rgba(16,185,129,.45);
+}
+#membership-certificate .result-title{
+  text-align:center; color:#d1fae5; font-weight:900; font-size:1.5rem;
+  text-shadow: 0 0 10px rgba(16,185,129,.5);
+}
+
+/* action buttons in result */
+#membership-certificate .result-actions .btn{
+  font-weight:800;
+  border-width:2px;
+}
+
+/* org tiles */
+#membership-certificate .org-tile{
+  background: #0b1220;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:.65rem;
+  padding:.75rem;
+  text-align:center;
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+#membership-certificate .org-tile:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(0,212,255,.25);
+}
+#membership-certificate .org-tile h5{
+  color:#d8eafe;
+  font-size:.95rem;
+  margin:.35rem 0 .5rem;
+}
+
+/* small helper text */
+#membership-certificate .muted{
+  color:#9cc3ff; opacity:.85; font-size:.85rem; text-align:center;
+}
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-custom">
+        <div class="container-fluid px-3">
+            <div class="d-flex align-items-center w-100">
+                <!-- Logo -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">Code Crunch</span>
+                </a>
+                              <a class="navbar-brand me-3" href="https://colorstackatfiu.vercel.app">
+                    <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">ColorStack at FIU</span>
+                </a>
+                              <a class="navbar-brand me-3" href="https://cahsiatfiu.vercel.app/">
+                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" height="50" class="me-1" />
+                    <span class="d-none d-sm-inline">CAHSI at FIU</span>
+                </a>
+
+                
+                <!-- Support Us Button -->
+                <a href="https://hack-university-fundraiser.vercel.app/" class="support-btn me-auto" target="_blank">
+                    <i class="bi bi-heart-fill"></i>
+                    <span class="d-none d-sm-inline">Support Us</span>
+                </a>
+                
+                <!-- Hamburger Menu Button -->
+                <button class="navbar-toggler hamburger-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" 
+                        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Off-canvas Mobile Menu -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title glitch" id="mobileMenuLabel" data-text="HACKER MENU">HACKER MENU</h5>
+                <button type="button" class="btn-close btn-close-white custom-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav-menu">
+                    <!-- Main Navigation -->
+                    <li class="nav-section-title">MAIN NAVIGATION</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://Hacks-at-fiu.vercel.app" target="_blank">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Hacker Guide</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://Hacksatfiu-toolkit.vercel.app">
+                            <i class="bi bi-tools"></i>
+                            <span>Hack Toolkit</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://ba-00001.github.io/codecrunchclub/hackathons.html">
+                            <i class="bi bi-calendar-event"></i>
+                            <span>All Hackathons</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Active Missions -->
+                    <li class="nav-section-title">🚀 ACTIVE MISSIONS</li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-4-SummerCodeX25.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-box"></i>
+                                <span>SummerCodeX 2025</span>
+                            </div>
+                            <span class="nav-date">Jul 21-28, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-5-305-HACK-FALL2025.html">
+                            <div class="hackathon-main">
+                                <i class="bi bi-buildings"></i>
+                                <span>305 Hackathon: Fall 2025 Siege</span>
+                            </div>
+                            <span class="nav-date">Sep 19-21, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-6-EmpowHER25.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-person-hearts"></i>
+                                <span>EmpowHER Hackathon 2025</span>
+                            </div>
+                            <span class="nav-date">Oct 13-20, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-7-CodeFest25.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-stars"></i>
+                                <span>CodeFest 2025</span>
+                            </div>
+                            <span class="nav-date">Dec 8-15, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-8-HackFiestaMiami26.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-globe"></i>
+                                <span>HackFiesta Miami 2026</span>
+                            </div>
+                            <span class="nav-date">Mar 9-15, 2026</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-9-305HackathonSpring26.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-shield-shaded"></i>
+                                <span>305 Hackathon: Spring 2026</span>
+                            </div>
+                            <span class="nav-date">Mar 20-22, 2026</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Archived Operations -->
+                    <li class="nav-section-title">📁 ARCHIVED OPERATIONS</li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACK-3-CODESTORM25.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-cloud-lightning"></i>
+                                <span>CodeStorm 2025</span>
+                            </div>
+                            <span class="nav-date">May 19-26, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/305HACK-SPRING25.html">
+                            <div class="hackathon-main">
+                                <i class="bi bi-shield-shaded"></i>
+                                <span>305 Hack: Spring 2025</span>
+                            </div>
+                            <span class="nav-date">Mar 29-31, 2025</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACKFIESTA-SPRING25.HTML">
+                            <div class="hackathon-main">
+                                <i class="bi bi-cpu"></i>
+                                <span>HackFiesta Miami 2025</span>
+                            </div>
+                            <span class="nav-date">Mar 21-23, 2025</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Partner Logos in Menu -->
+                <div class="menu-partners">
+                    <div class="partner-logos">
+                        <a href="https://codecrunchglobal.vercel.app/" target="_blank">
+                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch" height="30">
+                        </a>
+                        <a href="https://colorstackatfiu.vercel.app" target="_blank">
+                            <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack" height="30">
+                        </a>
+                        <a href="https://cahsiatfiu.vercel.app/" target="_blank">
+                            <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI" height="30">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+            <!-- clock Section -->
+        <!-- ***************** -->
+        <!-- ***************** -->
+        <!-- ***************** -->
+        <!--  Section -->
+        <!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
+        <!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
+        <div id="time-bar" class="time-bar">
+            <div class="container-fluid">
+                <div class="time-zones">
+                    <div class="time-zone">
+                        <div class="timezone-label">🏆 Hackathon HQ</div>
+                        <div class="timezone-time" id="hackathon-time"></div>
+                        <div class="timezone-location">Miami, FL (EST)</div>
+                    </div>
+                    <div class="time-zone">
+                        <div class="timezone-label">🇪🇺 Europe</div>
+                        <div class="timezone-time" id="europe-time"></div>
+                        <div class="timezone-location">London (GMT)</div>
+                    </div>
+                    <div class="time-zone">
+                        <div class="timezone-label">🌍 Africa</div>
+                        <div class="timezone-time" id="africa-time"></div>
+                        <div class="timezone-location">Lagos (WAT)</div>
+                    </div>
+                    <div class="time-zone">
+                        <div class="timezone-label">🌏 Asia</div>
+                        <div class="timezone-time" id="asia-time"></div>
+                        <div class="timezone-location">Tokyo (JST)</div>
+                    </div>
+                    <div class="time-zone">
+                        <div class="timezone-label">🇦🇺 Australia</div>
+                        <div class="timezone-time" id="australia-time"></div>
+                        <div class="timezone-location">Sydney (AEDT)</div>
+                    </div>
+                    <div class="time-zone">
+                        <div class="timezone-label">🇮🇳 India</div>
+                        <div class="timezone-time" id="india-time"></div>
+                        <div class="timezone-location">Mumbai (IST)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        /* International Time Clock Bar Styles */
+        .time-bar {
+            position: fixed;
+            top: 82px; /* Adjust based on your navbar height */
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--matrix-green, #00ff41);
+            z-index: 999;
+            padding: 8px 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .time-zones {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 0 15px;
+        }
+
+        .time-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+            text-align: center;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .time-zone:hover {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: rgba(0, 255, 65, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .timezone-label {
+            font-size: 0.75rem;
+            color: var(--cyber-blue, #00d4ff);
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timezone-time {
+            font-size: 1rem;
+            color: var(--matrix-green, #00ff41);
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .timezone-location {
+            font-size: 0.65rem;
+            color: #e0e0ff;
+            font-family: 'Courier New', monospace;
+            opacity: 0.8;
+            line-height: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .time-bar {
+                top: 70px; /* Adjust for mobile navbar height */
+                padding: 6px 0;
+            }
+            
+            .time-zones {
+                gap: 8px;
+                padding: 0 10px;
+            }
+            
+            .time-zone {
+                min-width: 90px;
+                padding: 4px 6px;
+            }
+            
+            .timezone-label {
+                font-size: 0.65rem;
+            }
+            
+            .timezone-time {
+                font-size: 0.85rem;
+            }
+            
+            .timezone-location {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .time-zones {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            
+            .time-zone {
+                min-width: 80px;
+                padding: 3px 5px;
+            }
+            
+            .timezone-label {
+                font-size: 0.6rem;
+            }
+            
+            .timezone-time {
+                font-size: 0.8rem;
+            }
+            
+            .timezone-location {
+                font-size: 0.55rem;
+            }
+        }
+
+        /* Animation for time updates */
+        .timezone-time {
+            transition: all 0.3s ease;
+        }
+
+        .timezone-time.updating {
+            color: var(--cyber-blue, #00d4ff);
+            transform: scale(1.05);
+        }
+
+        /* Body padding adjustment to prevent content overlap */
+        body {
+            padding-top: 130px !important; /* Adjust based on navbar + time bar height */
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 115px !important;
+            }
+        }
+
+        /* Glitch effect for hackathon time */
+        .time-zone:first-child .timezone-time {
+            animation: time-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes time-glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px rgba(0, 255, 65, 0.8),
+                    0 0 20px rgba(0, 255, 65, 0.6),
+                    0 0 30px rgba(0, 255, 65, 0.4);
+            }
+        }
+        </style>
+
+        <script>
+        // International Time Clock Functionality
+        function updateInternationalTimes() {
+            const now = new Date();
+            
+            // Time zones configuration
+            const timeZones = {
+                'hackathon-time': {
+                    timezone: 'America/New_York', // Miami/EST
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                },
+                'europe-time': {
+                    timezone: 'Europe/London', // GMT/BST
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                },
+                'africa-time': {
+                    timezone: 'Africa/Lagos', // WAT (West Africa Time)
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                },
+                'asia-time': {
+                    timezone: 'Asia/Tokyo', // JST
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                },
+                'australia-time': {
+                    timezone: 'Australia/Sydney', // AEDT/AEST
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                },
+                'india-time': {
+                    timezone: 'Asia/Kolkata', // IST
+                    format: { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit',
+                        hour12: true
+                    }
+                }
+            };
+            
+            // Update each time zone
+            Object.keys(timeZones).forEach(elementId => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    const config = timeZones[elementId];
+                    
+                    try {
+                        const timeString = now.toLocaleTimeString('en-US', {
+                            timeZone: config.timezone,
+                            ...config.format
+                        });
+                        
+                        // Add updating animation
+                        element.classList.add('updating');
+                        element.textContent = timeString;
+                        
+                        // Remove animation after update
+                        setTimeout(() => {
+                            element.classList.remove('updating');
+                        }, 300);
+                        
+                    } catch (error) {
+                        console.error(`Error updating time for ${elementId}:`, error);
+                        element.textContent = '--:--:--';
+                    }
+                }
+            });
+        }
+
+        // Initialize time updates when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update times immediately
+            updateInternationalTimes();
+            
+            // Update every second
+            setInterval(updateInternationalTimes, 1000);
+            
+            console.log('🌍 International Time Clock initialized successfully!');
+        });
+
+        // Handle visibility change to pause/resume updates when tab is not visible
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // Resume updates when tab becomes visible
+                updateInternationalTimes();
+            }
+        });
+        </script>
+        <!-- clock Section -->
+        <!-- ***************** -->
+        <!-- ***************** -->
+        <!-- ***************** -->
+        <!--  end Section -->
+
+
+
+
+
+
+
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="header-title glitch" data-text="HACK DISCORD PORTAL">HACK UNIVERSITY DISCORD PORTAL</h1>
+            <p class="header-subtitle">Join the elite hacker collective and gain access to our Discord community. Complete registration to receive your invite and start your mission. Open to all students, any university, major, high school (16+). Exclusions for some countries / territories apply based on Devpost restrictions. Complete registration to receive your invite and start your mission.</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+
+            
+            <!-- Discord Join Section -->
+
+
+
+
+
+
+
+
+
+<section id="membership-certificate">
+  <div class="mc-wrap">
+    <h2 class="mc-title">
+      Join Our Community & Get Your Certificate
+      <span class="mc-star">✨</span>
+    </h2>
+
+    <div class="mc-banner">
+      <p>
+        <strong>Join our Discord community and GroupMe chat, then grab your official membership certificate.</strong>
+        Not a member yet? <strong>Become a member and register below.</strong>
+        Already a member? Enter your email to generate your certificate and unlock community links instantly.
+      </p>
+    </div>
+
+    <div class="mc-grid">
+      <!-- New Member Registration -->
+      <div class="mc-card">
+        <div class="text-center mb-3">
+          <div class="mc-icon orange"><i class="bi bi-person-plus-fill fs-3 text-white"></i></div>
+          <h3>New Member Registration</h3>
+        </div>
+
+        <div class="text-center">
+          <a href="https://codecrunchglobal.vercel.app/community-access.html"
+             class="btn-mc btn-orange">
+            🚀 Register & Become a Member
+          </a>
+          <p class="muted mt-2">
+            Free membership • All majors welcome • Interdisciplinary hackathons • Discord & GroupMe access
+          </p>
+        </div>
+      </div>
+
+      <!-- Existing Members -->
+      <div class="mc-card">
+        <div class="text-center mb-3">
+          <div class="mc-icon blue"><i class="bi bi-award-fill fs-3 text-white"></i></div>
+          <h3>Existing Members</h3>
+        </div>
+
+        <form id="cert-form" novalidate>
+          <label for="member-email" class="visually-hidden">Registered email address</label>
+          <input id="member-email" type="email" inputmode="email" autocomplete="email"
+                 placeholder="Enter your registered email address"
+                 class="mc-input mb-3" required />
+
+          <button id="generate-certificate" type="submit" class="btn-mc btn-blue">
+            🏆 Get Certificate & Community Access
+          </button>
+
+          <div id="cert-status" class="status mt-3" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Certificate Result -->
+    <div id="certificate-result" class="hidden mt-4 p-4">
+      <div class="text-center mb-3">
+        <div class="result-badge"><i class="bi bi-check2-circle"></i></div>
+        <div class="result-title">🎉 Access Granted!</div>
+        <p class="muted fs-6">Welcome <span id="welcome-name" class="fw-bold"></span>!</p>
+      </div>
+
+      <div class="row g-3 result-actions mb-3">
+        <div class="col-md-4">
+          <button id="download-certificate" type="button" class="btn w-100 btn-success fw-bold">
+            <i class="bi bi-download"></i> Download Certificate
+          </button>
+        </div>
+        <div class="col-md-4">
+          <a id="cert-discord-link" href="https://codecrunchglobal-discordserver.vercel.app/"
+             target="_blank" rel="noopener noreferrer" class="btn w-100 btn-primary fw-bold text-decoration-none">
+            <i class="bi bi-discord"></i> Join Discord
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a id="cert-groupme-link" href="https://codecrunchglobal-groupme.vercel.app/"
+             target="_blank" rel="noopener noreferrer" class="btn w-100 btn-warning fw-bold text-decoration-none">
+            <i class="bi bi-people-fill"></i> Join GroupMe
+          </a>
+        </div>
+      </div>
+
+      <!-- Orgs -->
+      <div class="mc-card" style="border-color: rgba(0,212,255,.35);">
+        <h4 class="text-center mb-3" style="color:var(--cyber-blue); text-shadow:0 0 8px var(--cyber-blue);">
+          🌐 Join Organization-Specific Communities
+        </h4>
+        <div class="row g-2">
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>ColorStack at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary" target="_blank" href="https://go.fiu.edu/colorstackatfiu">Discord</a>
+                <a class="btn btn-sm btn-info" target="_blank" href="https://go.fiu.edu/colorstackatfiu">GroupMe</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>CAHSI at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary" target="_blank" href="https://go.fiu.edu/cahsiatfiu">Discord</a>
+                <a class="btn btn-sm btn-info" target="_blank" href="https://go.fiu.edu/cahsiatfiu">GroupMe</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>GDG at FIU</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary disabled">Discord</a>
+                <a class="btn btn-sm btn-info disabled">GroupMe</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="org-tile">
+              <h5>Raspberry Pi CC</h5>
+              <div class="d-flex justify-content-center gap-2">
+                <a class="btn btn-sm btn-primary disabled">Discord</a>
+                <a class="btn btn-sm btn-info disabled">GroupMe</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic memberships -->
+      <div class="mc-card mt-3" style="border-color: rgba(37,99,235,.35);">
+        <h4 class="text-center mb-2" style="color:#9cc3ff;">🏢 Your Active Club Memberships</h4>
+        <div id="user-clubs-grid" class="row g-2"></div>
+        <p class="muted mt-2">Based on our records for your email address</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* Utility to preserve no-underline on Tailwind hover transitions */
+.text-decoration-none { text-decoration: none !important; }
+.text-decoration-none:hover { text-decoration: none !important; }
+
+/* Status styles */
+#cert-status.info {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  border-color: #93c5fd;
+}
+#cert-status.success {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border-color: #6ee7b7;
+}
+#cert-status.error {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+/* Fun little twinkle for the star */
+@keyframes twinkle { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.6; transform:scale(1.1)} }
+.star { animation: twinkle 1.8s ease-in-out infinite; }
+</style>
+
+<script>
+/* ------------ Config ------------ */
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec";
+
+let certificateData = null;
+
+/* ------------ UI Helpers ------------ */
+function showStatus(type, message) {
+  const statusEl = document.getElementById("cert-status");
+  statusEl.className = `p-4 rounded-lg border-2 text-center font-medium ${type}`;
+  statusEl.textContent = ""; // prevent residual HTML
+  // Allow simple emojis & punctuation:
+  statusEl.append(document.createTextNode(message));
+  statusEl.classList.remove("hidden");
+  // Auto-scroll to status
+  setTimeout(() => statusEl.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
+}
+
+function hideStatus() {
+  const el = document.getElementById("cert-status");
+  el.classList.add("hidden");
+  el.textContent = "";
+}
+
+/* ------------ Clubs Renderer (safe) ------------ */
+function displayUserClubMemberships(clubs) {
+  const clubsGrid = document.getElementById("user-clubs-grid");
+  if (!clubsGrid) return;
+
+  if (!Array.isArray(clubs) || clubs.length === 0) {
+    clubsGrid.innerHTML =
+      '<div class="col-span-full text-center text-blue-600 italic">No specific club memberships found in our records.</div>';
+    return;
+  }
+
+  clubsGrid.innerHTML = "";
+
+  clubs.forEach((club) => {
+    const card = document.createElement("div");
+    card.className =
+      "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "mb-3";
+
+    if (club.logo) {
+      const img = document.createElement("img");
+      img.src = club.logo;
+      img.alt = (club.name || "Club") + " Logo";
+      img.className = "w-12 h-12 mx-auto rounded-lg object-contain mb-2";
+      img.onerror = function () {
+        this.style.display = "none";
+        fallback.style.display = "flex";
+      };
+
+      const fallback = document.createElement("div");
+      fallback.style.display = "none";
+      fallback.className =
+        "w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
+      fallback.textContent = club.textFallback || club.name || "Club";
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(fallback);
+    } else {
+      const fallback = document.createElement("div");
+      fallback.className =
+        "w-12 h-12 mx-auto rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center leading-tight";
+      fallback.textContent = club.textFallback || club.name || "Club";
+      wrapper.appendChild(fallback);
+    }
+
+    const name = document.createElement("div");
+    name.className = "font-semibold text-gray-800 text-sm mb-1";
+    name.textContent = club.name || "Club";
+
+    const desc = document.createElement("div");
+    if (club.description) {
+      desc.className = "text-xs text-gray-600 mb-2";
+      desc.textContent = club.description;
+    }
+
+    const badge = document.createElement("div");
+    badge.className = "text-xs font-medium text-green-600";
+    badge.textContent = "✅ Active Member";
+
+    card.appendChild(wrapper);
+    card.appendChild(name);
+    if (club.description) card.appendChild(desc);
+    card.appendChild(badge);
+    clubsGrid.appendChild(card);
+  });
+}
+
+/* ------------ Certificate Generation ------------ */
+async function generateCertificate(evt) {
+  if (evt) evt.preventDefault();
+
+  const emailInput = document.getElementById("member-email");
+  const generateBtn = document.getElementById("generate-certificate");
+  const resultSection = document.getElementById("certificate-result");
+
+  // Reset view
+  resultSection.classList.add("hidden");
+  hideStatus();
+
+  const email = (emailInput.value || "").trim().toLowerCase();
+  if (!email) {
+    showStatus("error", "❌ Please enter your email address.");
+    emailInput.focus();
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showStatus("error", "❌ Please enter a valid email address.");
+    emailInput.focus();
+    return;
+  }
+
+  // Loading state
+  generateBtn.disabled = true;
+  const originalBtnText = generateBtn.textContent;
+  generateBtn.textContent = "⏳ Verifying membership...";
+  showStatus("info", "⏳ Checking your membership across all Hack University clubs...");
+
+  try {
+    const url =
+      API_URL +
+      `?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`;
+
+    const ac = new AbortController();
+    const timeout = setTimeout(() => ac.abort(), 15000);
+
+    const response = await fetch(url, { signal: ac.signal, headers: { Accept: "application/json" } });
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    if (data && data.error) throw new Error(data.error);
+
+    const certificates = Array.isArray(data?.certificates) ? data.certificates : [];
+    if (certificates.length === 0) {
+      showStatus(
+        "error",
+        "❌ No membership found for this email address. Please register as a new member using the form on the left, or contact us if you believe this is an error."
+      );
+      return;
+    }
+
+    // Use first certificate; if multiple exist, prefer the most recent if provided
+    const chosen =
+      certificates
+        .map((c) => c.certificateData || c)
+        .sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
+
+    certificateData = chosen;
+
+    // Welcome text (safe)
+    document.getElementById("welcome-name").textContent =
+      chosen.participantName || "Member";
+
+    // Community links (fallbacks)
+    document.getElementById("cert-discord-link").href =
+      chosen.discordJoinLink || "https://codecrunchglobal-discordserver.vercel.app/";
+    document.getElementById("cert-groupme-link").href =
+      chosen.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
+
+    // Clubs
+    displayUserClubMemberships(chosen.clubs || []);
+
+    showStatus("success", "🎉 Access granted! Your certificate and community links are ready.");
+    resultSection.classList.remove("hidden");
+
+    setTimeout(() => {
+      resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 200);
+  } catch (err) {
+    let msg = `❌ ${err?.message || "Unexpected error"}`;
+    if (err?.name === "AbortError") msg = "❌ Request timed out. Please try again.";
+    else if (String(err?.message || "").includes("Failed to fetch")) {
+      msg = "❌ Connection error. Please check your internet and try again.";
+    }
+    showStatus("error", msg);
+  } finally {
+    generateBtn.disabled = false;
+    generateBtn.textContent = originalBtnText;
+  }
+}
+
+/* ------------ Download Certificate ------------ */
+function downloadCertificate() {
+  if (!certificateData) {
+    alert("Please generate your certificate first.");
+    return;
+  }
+  const c = certificateData;
+
+  const certificateHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hack University Initiative Membership Certificate - ${escapeHtml(
+    c.participantName || "Member"
+  )}</title>
+<style>
+@page { size: A4 landscape; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; font-family: "Times New Roman", serif; background: #f8f9fa; line-height: 1.4; }
+.container { display:flex; flex-direction:column; max-width:1100px; margin:0 auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12); }
+.sheet { width:100%; height:750px; margin:0 auto; background:#fff; border:15px solid #B8860B; padding:40px; position:relative; display:flex; flex-direction:column; justify-content:space-between; }
+.header { text-align:center; margin-bottom:40px; }
+.title { font-size:3.2rem; font-weight:700; letter-spacing:4px; color:#2c3e50; margin:0 0 12px; line-height:1.1; text-shadow:1px 1px 2px rgba(0,0,0,0.1); }
+.subtitle { font-size:1.2rem; letter-spacing:3px; color:#7f8c8d; text-transform:uppercase; margin:0; font-weight:500; }
+.main-content { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; padding:20px 0; }
+.presented { font-size:1.1rem; font-style:italic; color:#5d6d7e; margin-bottom:25px; }
+.name { font-size:3.0rem; font-weight:700; font-style:italic; color:#2c3e50; margin:25px 0; line-height:1.2; word-wrap:break-word; text-shadow:1px 1px 3px rgba(0,0,0,0.1); }
+.content { font-size:1.1rem; line-height:1.6; color:#5d6d7e; margin:25px auto; max-width:85%; }
+.info { font-size:1.1rem; font-weight:700; color:#34495e; margin:25px 0; line-height:1.5; }
+.footer-section { display:flex; justify-content:center; align-items:flex-end; margin-top:40px; min-height:90px; }
+.signature-area { text-align:center; max-width:350px; }
+.sig-line { border-top:2px solid #34495e; width:250px; margin:0 auto 10px; }
+.sig-name { font-weight:700; margin-bottom:4px; font-size:1.0rem; color:#2c3e50; }
+.sig-title { font-style:italic; color:#7f8c8d; font-size:0.9rem; line-height:1.4; }
+.controls { text-align:center; margin:15px 0 20px; padding:15px; background:#f8f9fa; border-radius:8px; border:1px solid #dee2e6; }
+.btn { padding:12px 24px; font-size:1.0rem; cursor:pointer; border:0; border-radius:6px; margin:0 10px; font-weight:600; transition:all .3s ease; }
+.btn-primary { background:#007bff; color:#fff; }
+.btn-secondary { background:#6c757d; color:#fff; }
+.btn:hover { transform:translateY(-2px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
+@media print {
+  html, body { width:297mm!important; height:210mm!important; margin:0!important; padding:0!important; background:#fff!important; print-color-adjust:exact!important; -webkit-print-color-adjust:exact!important; }
+  .controls { display:none!important; }
+  .container { position:fixed!important; inset:0!important; width:297mm!important; height:210mm!important; max-width:none!important; padding:0!important; margin:0!important; box-shadow:none!important; background:#fff!important; border-radius:0!important; display:flex!important; align-items:center!important; justify-content:center!important; }
+  .sheet { width:277mm!important; height:190mm!important; border:10mm solid #B8860B!important; padding:20mm!important; page-break-inside:avoid!important; display:flex!important; flex-direction:column!important; justify-content:space-between!important; background:#fff!important; }
+  .header { margin-bottom:15mm!important; }
+  .title { font-size:2.8rem!important; margin-bottom:8mm!important; }
+  .subtitle { font-size:1.0rem!important; }
+  .name { font-size:2.5rem!important; margin:15mm 0!important; }
+  .content { font-size:1.0rem!important; margin:12mm auto!important; }
+  .info { font-size:1.0rem!important; margin:12mm 0!important; }
+  .sig-line { width:200px!important; }
+}
+</style>
+</head>
+<body>
+<div class="controls">
+  <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+  <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+</div>
+<div class="container">
+  <div class="sheet">
+    <div class="header">
+      <div class="title">MEMBERSHIP CERTIFICATE</div>
+      <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
+    </div>
+    <div class="main-content">
+      <div class="presented">This certificate confirms that</div>
+      <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
+      <div class="content">
+        Is an official member of <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>,
+        recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
+      </div>
+      <div class="info">
+        Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>
+        Membership ID: ${escapeHtml(c.membershipID || "Not available")}
+      </div>
+      <div class="content" style="font-style: italic; margin-top: 20px; font-size: 0.95rem;">
+        Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
+      </div>
+    </div>
+    <div class="footer-section">
+      <div style="flex:1;"></div>
+      <div class="signature-area">
+        <div class="sig-line"></div>
+        <div class="sig-name">BRIAN BAZURTO</div>
+        <div class="sig-title">President of ${escapeHtml(c.signatureClubText || "Hack University Initiative")}</div>
+      </div>
+      <div style="flex:1;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+
+  const win = window.open("", "_blank", "width=1200,height=800,scrollbars=yes,resizable=yes");
+  if (!win) {
+    alert("Please allow pop-ups to view and print your certificate.");
+    return;
+  }
+  win.document.write(certificateHTML);
+  win.document.close();
+  win.focus();
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+}
+
+/* Small util for the template call above (hoisted outside in real use) */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* ------------ Wire up ------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("cert-form");
+  const emailInput = document.getElementById("member-email");
+  const downloadBtn = document.getElementById("download-certificate");
+
+  if (form) form.addEventListener("submit", generateCertificate);
+
+  if (emailInput) {
+    emailInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        generateCertificate(e);
+      }
+    });
+  }
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", downloadCertificate);
+  }
+});
+</script>
+
+
+
+            
+            <!-- Participant Checklist -->
+               <!-- Hack Checklist Section -->
+            <section class="checklist-section" >
+                <h2 class="checklist-title glitch" data-text="HACKER PARTICIPATION CHECKLIST">HACKER PARTICIPATION CHECKLIST</h2>
+                <p class="checklist-subtitle"><strong>[ Only Students ]</strong> - Essential steps for every hackathon mission, make sure you:</p>
+                
+                <ol class="checklist">
+                    <li class="checklist-item">
+                        <div class="checklist-number">1</div>
+                        <div class="checklist-text">
+                            <strong>Review the Hacker Guide</strong> - Essential preparation and guidelines for all hackathons.<br>
+                            <a href="#hacker-guide-section" class="checklist-link" target="_blank">
+                                <i class="bi bi-shield-check"></i> Hacks-at-fiu.vercel.app
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="checklist-item">
+                        <div class="checklist-number">2</div>
+                        <div class="checklist-text">
+                            <strong>Complete the registration form</strong> once or resubmit if any changes.<br>
+                            <a href="https://Codecrunchglobalform-no3.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-link-45deg"></i> Codecrunchglobalform-no3.vercel.app
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li class="checklist-item">
+                        <div class="checklist-number">3</div>
+                        <div class="checklist-text">
+                            <strong>Subscribe to Luma Calendar</strong> to keep track of live events updates for each hack's sessions if applicable.<br>
+                            <span style="color: var(--text-light);">Each hackathon has its own special events — check the Luma calendar closer to the hackathon date for updates.</span><br>
+                            <a href="https://LU.MA/CODECRUNCH" class="checklist-link" target="_blank">
+                                <i class="bi bi-calendar"></i> LU.MA/CODECRUNCH
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li class="checklist-item">
+                        <div class="checklist-number">4</div>
+                        <div class="checklist-text">
+                            <strong>Join the Discord community</strong> - invite sent after registration.<br>
+                            <span style="color: var(--text-light);">Check your email for the exclusive Discord server invite.</span><br>
+                            <a href="https://HackUniversityDiscord.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-discord"></i> HackUniversityDiscord.vercel.app
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li class="checklist-item">
+                        <div class="checklist-number">5</div>
+                        <div class="checklist-text">
+                            <strong>Share your Participation for each Hack on LinkedIn!</strong> Repost the official event and share your thoughts!<br>
+                            <a href="https://HackUniversityLinkedIn.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-linkedin"></i> HackUniversityLinkedIn.vercel.app
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li class="checklist-item">
+                        <div class="checklist-number">6</div>
+                        <div class="checklist-text">
+                            <strong>Register your project on Devpost</strong> (Project Submission Portal).<br>
+                            <a href="https://HackUniversityDevpost.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-code-square"></i> HackUniversityDevpost.vercel.app
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="checklist-item">
+                        <div class="checklist-number">7</div>
+                        <div class="checklist-text">
+                            <strong>Submit your track selection and Solo or team contact information</strong> for each hack you participate.<br>
+                            <a href="https://Codecrunchglobalform-no3-1.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-people"></i> Codecrunchglobalform-no3-1.vercel.app
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="checklist-item">
+                        <div class="checklist-number">8</div>
+                        <div class="checklist-text">
+                            <strong>Required to submit on Devpost</strong> your project before hackathon ends.<br>
+                            <span style="color: var(--text-light);">Each hackathon has its own Devpost page - details shared closer to event dates.</span><br>
+                            <a href="https://HackUniversityDevpost.vercel.app" class="checklist-link" target="_blank">
+                                <i class="bi bi-upload"></i> HackUniversityDevpost.vercel.app
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-content">
+                <p class="footer-description">
+                    An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
+                </p>
+                <p class="footer-website">
+                    <a href="http://codecrunch.cs.fiu.edu" class="footer-website-link">codecrunch.cs.fiu.edu</a>
+                </p>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <p class="footer-copyright">
+                    © <span id="current-year"></span> Code Crunch. All rights reserved.
+                </p>
+                <p class="footer-credits">
+                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="footer-credits-link">Brian Bazurto</a> | Powered by innovation and collaboration
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Matrix Effects Script -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix for disappearing menu - Manual toggle control
+    const hamburgerBtn = document.querySelector('.hamburger-menu');
+    const offcanvasMenu = document.querySelector('#mobileMenu');
+    const closeBtn = document.querySelector('.custom-close');
+    
+    if (hamburgerBtn && offcanvasMenu) {
+        // Hamburger button click handler
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Toggle the menu manually
+            if (offcanvasMenu.classList.contains('show')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        // Close button click handler
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+        
+        // Function to open menu
+        function openMenu() {
+            offcanvasMenu.classList.add('show');
+            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+            
+            // Add backdrop
+            let backdrop = document.querySelector('.offcanvas-backdrop');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.className = 'offcanvas-backdrop fade show';
+                backdrop.addEventListener('click', closeMenu);
+                document.body.appendChild(backdrop);
+            }
+        }
+        
+        // Function to close menu
+        function closeMenu() {
+            offcanvasMenu.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            
+            // Remove backdrop
+            const backdrop = document.querySelector('.offcanvas-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+        
+        // Prevent menu from closing when clicking inside
+        offcanvasMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Close menu when clicking on navigation links
+        const navLinks = offcanvasMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Small delay to allow navigation
+                setTimeout(closeMenu, 100);
+            });
+        });
+        
+        // Handle escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && offcanvasMenu.classList.contains('show')) {
+                closeMenu();
+            }
+        });
+    }
+
+    // Matrix rain effect
+    function createMatrixRain() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1';
+        canvas.style.opacity = '0.1';
+        
+        document.body.appendChild(canvas);
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px Courier New';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 35);
+    }
+    
+    // Initialize matrix rain effect
+    setTimeout(createMatrixRain, 1000);
+
+    // Glitch effect for elements
+    const glitchElements = document.querySelectorAll('.glitch');
+    glitchElements.forEach(element => {
+        const text = element.textContent;
+        element.setAttribute('data-text', text);
+        
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                element.style.animation = 'none';
+                setTimeout(() => {
+                    element.style.animation = 'glitch-skew 2s infinite linear alternate-reverse';
+                }, 100);
+            }
+        }, 3000);
+    });
+
+    // Discord button animation
+    const discordButton = document.querySelector('.discord-button');
+    if (discordButton) {
+        discordButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        discordButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    }
+
+    // Checklist item animations
+    const checklistItems = document.querySelectorAll('.checklist-item');
+    checklistItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-50px)';
+        
+        setTimeout(() => {
+            item.style.transition = 'all 0.6s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateX(0)';
+        }, 200 * (index + 1));
+    });
+
+    // Window resize handler for canvas
+    window.addEventListener('resize', function() {
+        const canvas = document.querySelector('canvas');
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Additional smooth scroll behavior for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Prevent body scroll when menu is open
+    function toggleBodyScroll(disable) {
+        if (disable) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = '15px'; // Prevent layout shift
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }
+    }
+
+    // Enhanced menu visibility tracking
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const menu = mutation.target;
+                if (menu.classList.contains('show')) {
+                    console.log('Menu opened successfully');
+                    toggleBodyScroll(true);
+                } else {
+                    console.log('Menu closed');
+                    toggleBodyScroll(false);
+                }
+            }
+        });
+    });
+
+    if (offcanvasMenu) {
+        observer.observe(offcanvasMenu, { attributes: true });
+    }
+});
+    </script>
+
+</body>
+</html>
