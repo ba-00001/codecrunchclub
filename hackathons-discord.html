@@ -1923,12 +1923,45 @@ body::before {
             statusEl.style.display = 'none';
         }
 
+        function showStatus(type, message, elementId) {
+            const statusEl = document.getElementById(elementId);
+            if (!statusEl) {
+                console.error('Status element not found:', elementId);
+                return;
+            }
+            statusEl.className = `status-message status-${type}`;
+            statusEl.innerHTML = message; // Changed from textContent to innerHTML
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            if (type === 'success' || type === 'info') {
+                setTimeout(() => {
+                    if (type === 'info') { // Only auto-hide info messages, not success
+                        statusEl.style.display = 'none';
+                    }
+                }, 8000);
+            }
+        }
+
+        function hideStatus(elementId) {
+            const statusEl = document.getElementById(elementId);
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerHTML = '';
+            }
+        }
+
         async function handleDiscordAccess(event) {
             event.preventDefault();
             
             const emailInput = document.getElementById('participant-email');
             const joinBtn = document.getElementById('join-discord-btn');
             const statusId = 'participant-status';
+            
+            console.log('Form submitted, email:', emailInput?.value);
             
             hideStatus(statusId);
             
@@ -1948,45 +1981,55 @@ body::before {
             joinBtn.disabled = true;
             const originalText = joinBtn.innerHTML;
             joinBtn.innerHTML = '<i class="bi bi-hourglass-split discord-icon"></i>Verifying...';
-            showStatus('info', 'Scanning database for registration status...', statusId);
+            showStatus('info', `Scanning database for <strong>${email}</strong>...`, statusId);
 
             try {
-                const res = await fetch(`${REGISTRATION_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`);
+                const url = `${REGISTRATION_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`;
+                console.log('Fetching URL:', url);
+                
+                const res = await fetch(url);
+                console.log('Response status:', res.status);
+                
                 const data = await res.json();
+                console.log('Response data:', data);
+
+                // Always show community buttons and 305 info regardless of registration status
+                const communityButtons = generateSimpleCommunityButtons(
+                    data.links?.discord || 'https://HackUniversityDiscord.vercel.app', 
+                    data.links?.groupme || 'https://HackUniversityGroupMe.vercel.app'
+                );
+                
+                const hack305Info = generateSimple305Info({
+                    registered: data.hack305Fall2025?.registered || false,
+                    eventInfo: {
+                        date: 'September 19-21, 2025',
+                        location: 'Worldwide Virtual + In-Person Miami',
+                        description: 'Official MLH 2026 Season Event'
+                    }
+                });
 
                 if (!data.success) {
-                    // Registration not found - show error with community buttons and registration prompt
-                    const communityButtons = generateSimpleCommunityButtons(
-                        data.links?.discord || 'https://HackUniversityDiscord.vercel.app', 
-                        data.links?.groupme || 'https://HackUniversityGroupMe.vercel.app'
-                    );
-                    
-                    const hack305Info = generateSimple305Info({
-                        registered: false,
-                        eventInfo: {
-                            date: 'September 19-21, 2025',
-                            location: 'Worldwide Virtual + In-Person Miami',
-                            description: 'Official MLH 2026 Season Event'
-                        }
-                    });
-
-                    showStatus('error', `Registration not found for ${email}. You can still access communities or register now.`, statusId);
-                    
-                    const statusEl = document.getElementById(statusId);
-                    statusEl.innerHTML += `
-                        ${communityButtons}
-                        ${hack305Info}
-                        
-                        <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--warning); padding: 1rem; border-radius: var(--radius); margin-top: 1rem;">
-                            <h5 style="color: var(--warning); margin: 0 0 0.5rem 0;">Want to Join?</h5>
-                            <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">
-                                Complete registration to get full Discord access and participate in all hackathons!<br>
-                                <a href="https://Codecrunchglobalform-no3.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; font-weight: 600;">
-                                    Register Now → Codecrunchglobalform-no3.vercel.app
-                                </a>
-                            </p>
+                    const errorHtml = `
+                        <div class="reg-error" style="background: var(--bg-card-light); border: 2px solid var(--danger); border-radius: var(--radius); padding: 1.5rem; color: var(--danger); font-family: 'Courier New', monospace;">
+                            <h4 style="margin: 0 0 1rem 0;">Registration Not Found</h4>
+                            <p style="margin: 0 0 1rem 0;">${data.error || 'Email not found in our records.'}</p>
+                            
+                            ${communityButtons}
+                            ${hack305Info}
+                            
+                            <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--warning); padding: 1rem; border-radius: var(--radius); margin-top: 1rem;">
+                                <h5 style="color: var(--warning); margin: 0 0 0.5rem 0;">Want to Join?</h5>
+                                <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">
+                                    Complete registration to get full Discord access and participate in all hackathons!<br>
+                                    <a href="https://Codecrunchglobalform-no3.vercel.app" target="_blank" style="color: var(--cyber-blue); text-decoration: none; font-weight: 600;">
+                                        Register Now → Codecrunchglobalform-no3.vercel.app
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     `;
+                    
+                    showStatus('error', errorHtml, statusId);
                     emailInput.value = '';
                     return;
                 }
@@ -1994,31 +2037,32 @@ body::before {
                 // Success - show full registration data with community access
                 const { userData, hackRegistrationsSummary, hack305Fall2025, links } = data;
                 
-                showStatus('success', `Registration verified for ${email}! Here's your status and community access.`, statusId);
-                
-                const statusEl = document.getElementById(statusId);
-                statusEl.innerHTML += `
-                    <p style="margin: 0.5rem 0 1rem 0;"><strong>Status:</strong> ${data.status}</p>
-                    
-                    ${generateSimpleCommunityButtons(
-                        links?.discord || 'https://HackUniversityDiscord.vercel.app', 
-                        links?.groupme || 'https://HackUniversityGroupMe.vercel.app'
-                    )}
-                    ${generateSimple305Info(hack305Fall2025 || {
-                        registered: false,
-                        eventInfo: {
-                            date: 'September 19-21, 2025',
-                            location: 'Worldwide Virtual + In-Person Miami',
-                            description: 'Official MLH 2026 Season Event'
-                        }
-                    })}
-                    ${generateSimpleUserData(userData)}
-                    ${generateSimpleHackRegistrations(hackRegistrationsSummary)}
+                const successHtml = `
+                    <div class="reg-success" style="background: var(--bg-card-light); border: 2px solid var(--matrix-green); border-radius: var(--radius); padding: 1.5rem; color: var(--text-primary); font-family: 'Courier New', monospace;">
+                        <h3 style="color: var(--matrix-green); margin: 0 0 1rem 0;">
+                            ${data.message || 'Registration Verified!'}
+                        </h3>
+                        <p style="margin: 0 0 1rem 0;"><strong>Status:</strong> ${data.status}</p>
+                        
+                        ${communityButtons}
+                        ${generateSimple305Info(hack305Fall2025 || {
+                            registered: false,
+                            eventInfo: {
+                                date: 'September 19-21, 2025',
+                                location: 'Worldwide Virtual + In-Person Miami',
+                                description: 'Official MLH 2026 Season Event'
+                            }
+                        })}
+                        ${generateSimpleUserData(userData)}
+                        ${generateSimpleHackRegistrations(hackRegistrationsSummary)}
+                    </div>
                 `;
                 
+                showStatus('success', successHtml, statusId);
                 emailInput.value = '';
                 
             } catch (error) {
+                console.error('Error:', error);
                 let message = 'Connection error. Please try again later.';
                 
                 if (error.name === 'AbortError') {
