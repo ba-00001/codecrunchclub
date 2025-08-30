@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hack University Initiative | Join Our Global Community</title>
+
+  <!-- Tailwind via CDN (swap for your build pipeline if needed) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome (icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    .cc-blue { background:#2563eb; }
+    .cc-blue-text { color:#1e40af; }
+    .cc-orange { background:#f59e0b; }
+    .text-decoration-none { text-decoration: none !important; }
+    .text-decoration-none:hover { text-decoration: none !important; }
+    @keyframes twinkle { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.6; transform:scale(1.1)} }
+    .star { animation: twinkle 1.8s ease-in-out infinite; }
+
+    /* Live status styles */
+    #cert-status.info    { background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%); color:#1e40af; border-color:#93c5fd; }
+    #cert-status.success { background:linear-gradient(135deg,#d1fae5 0%,#a7f3d0 100%); color:#065f46; border-color:#6ee7b7; }
+    #cert-status.error   { background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%); color:#991b1b; border-color:#fca5a5; }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- About Hack University Initiative Section -->
+<section class="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4 text-gray-900">
+        Hack University Initiative
+        <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Empowering the next generation of innovators, developers, and leaders through collaboration across disciplines and borders
+      </p>
+    </div>
+
+    <!-- About Description -->
+    <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">About the Initiative</h2>
+        <p class="text-lg leading-relaxed text-gray-700 mb-6">
+          Founded in <strong>August 2024</strong>, the <strong>Hack University Initiative</strong> is a collaborative effort uniting multiple student organizations and global communities with a mission to <strong>empower the next generation of innovators, developers, and leaders</strong>. Through workshops, hackathons, and mentorship, Hack University drives <strong>innovation and collaboration</strong> across disciplines and borders.
+        </p>
+
+        <!-- Partner Organizations -->
+        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Partner Organizations</h3>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0"></div>
+              <div>
+                <strong>Google Developer Club at FIU (GDG FIU)</strong> – A Google Developer Group focused on building community and sharing knowledge around Google technologies and software development. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-orange-500 rounded-full mt-3 flex-shrink-0"></div>
+              <div>
+                <strong>Code Crunch Global</strong> – An interdisciplinary tech club dedicated to coding, technical interview prep, and hackathons. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0"></div>
+              <div>
+                <strong>ColorStack at FIU</strong> – Part of a national network of 120+ chapters, focused on mentorship, community, and career pathways for underrepresented students in tech. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0"></div>
+              <div>
+                <strong>Raspberry Pi Code Crunch</strong> – A hands-on, project-based club and learning platform featuring structured learning paths, video tutorials, certificates, and resources in coding, AI, and electronics. <em>Open Worldwide | All Universities | All Majors | High School Students (13+)</em>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mt-3 flex-shrink-0"></div>
+              <div>
+                <strong>CAHSI at FIU</strong> – Part of the Computing Alliance of Hispanic-Serving Institutions (CAHSI) network across 60+ universities, expanding access to computing research and tech careers. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Membership Benefits -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-blue-900 mb-4">Membership Benefits ✨</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Access to 7 annual interdisciplinary hackathons</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Technical interview preparation and resume reviews</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Startup pitch development and entrepreneurship mentoring</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Executive Board application opportunities</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Networking with students from diverse academic disciplines</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-gray-700">Connections to industry partners and job opportunities</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-purple-900 mb-4">Community Access ✨</h3>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-1">Discord</h4>
+                <p class="text-sm text-gray-600">Get access to coding help, project teams, and mentorship opportunities. Secure access after form completion to avoid bots and scammers.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-1">GroupMe</h4>
+                <p class="text-sm text-gray-600">Connect with peers and stay updated on announcements. Protected community access after registration.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-1">IG Group</h4>
+                <p class="text-sm text-gray-600">Follow updates, success stories, and networking opportunities. Verified member access only.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Who Can Join -->
+        <div class="bg-gradient-to-r from-green-50 to-emerald-100 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-green-900 mb-4 text-center">Who Can Join? ✨</h3>
+          <p class="text-center text-gray-700 mb-4">
+            <strong>All academic backgrounds welcome! No coding experience required - we welcome beginners and experts alike!</strong>
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-center">
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">💻</div>
+              <div class="text-sm font-medium">Computer Science</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">⚙️</div>
+              <div class="text-sm font-medium">Engineering</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">💼</div>
+              <div class="text-sm font-medium">Business</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🏥</div>
+              <div class="text-sm font-medium">Health Sciences</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">⚖️</div>
+              <div class="text-sm font-medium">Law</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🎨</div>
+              <div class="text-sm font-medium">Design</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">📚</div>
+              <div class="text-sm font-medium">Education</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🧬</div>
+              <div class="text-sm font-medium">Biology</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🧮</div>
+              <div class="text-sm font-medium">Mathematics</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🔬</div>
+              <div class="text-sm font-medium">Chemistry</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🌍</div>
+              <div class="text-sm font-medium">Environmental Science</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">💰</div>
+              <div class="text-sm font-medium">Finance</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">📈</div>
+              <div class="text-sm font-medium">Marketing</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🎭</div>
+              <div class="text-sm font-medium">Arts</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🎵</div>
+              <div class="text-sm font-medium">Music</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🧠</div>
+              <div class="text-sm font-medium">Psychology</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🌐</div>
+              <div class="text-sm font-medium">Communications</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm">
+              <div class="text-2xl mb-1">🌟</div>
+              <div class="text-sm font-medium">Any Major!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership & Certificate Section -->
+<section id="membership-certificate" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold mb-8 text-center">
+      Join the Movement - Registration & Member Access
+      <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
+    </h2>
+
+    <!-- Enhanced Information Section -->
+    <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl shadow-lg p-8 text-white mb-8">
+      <div class="text-center max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold mb-4">Ready to Transform Your Future?</h3>
+        <p class="text-lg leading-relaxed mb-6">
+          Join our global community of innovators from all disciplines and get access to exclusive opportunities, mentorship, and cutting-edge resources. Whether you're interested in hackathons, technical growth, or leadership opportunities, we have a place for you.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6 text-left">
+          <div>
+            <h4 class="font-bold mb-2">🚀 New Members</h4>
+            <p class="text-blue-100">Register to become a member of all 5 Hack University organizations, gain access to 7 annual hackathons, and apply for Executive Board positions.</p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">🏆 Existing Members</h4>
+            <p class="text-blue-100">Get your official membership certificates for your resume and instant access to all community platforms.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- New Member Registration -->
+      <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-lg border-2 border-orange-200">
+        <div class="text-center mb-6">
+          <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+            <i class="fas fa-rocket text-3xl text-white" aria-hidden="true"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-orange-800 mb-3">New Member Registration</h3>
+          <p class="text-orange-700 mb-4">Join all 5 Hack University organizations in one simple step</p>
+        </div>
+
+        <!-- Benefits List -->
+        <div class="mb-6 space-y-2">
+          <div class="flex items-center space-x-2">
+            <span class="text-green-500 text-lg">🎯</span>
+            <span class="text-sm text-gray-700">Membership in all 5 organizations</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-green-500 text-lg">🏅</span>
+            <span class="text-sm text-gray-700">Access to 7 annual hackathons</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-green-500 text-lg">👥</span>
+            <span class="text-sm text-gray-700">Discord, GroupMe & IG community access</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-green-500 text-lg">⭐</span>
+            <span class="text-sm text-gray-700">Executive Board application eligibility</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-green-500 text-lg">📜</span>
+            <span class="text-sm text-gray-700">Official membership certificates</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a
+            href="https://codecrunchglobal.vercel.app/community-access.html"
+            class="inline-block w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-bold text-lg text-decoration-none"
+            rel="noopener noreferrer"
+          >
+            🚀 Start Your Journey - Register Now
+          </a>
+          <p class="text-sm text-gray-600 mt-3">
+            100% Free • Open to All Majors • Global Community • Instant Access
+          </p>
+        </div>
+      </div>
+
+      <!-- Certificate Generation for Existing Members -->
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg border-2 border-blue-200">
+        <div class="text-center mb-6">
+          <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+            <i class="fas fa-certificate text-3xl text-white" aria-hidden="true"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-blue-800 mb-3">Existing Members Access</h3>
+          <p class="text-blue-700 mb-4">Get your certificates and community links instantly</p>
+        </div>
+
+        <!-- Certificate Generation Form -->
+        <form class="space-y-4" id="cert-form" novalidate>
+          <label for="member-email" class="sr-only">Registered email address</label>
+          <input
+            id="member-email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="Enter your registered email address"
+            class="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors bg-white"
+            aria-describedby="cert-status"
+            required
+          />
+
+          <button
+            id="generate-certificate"
+            type="submit"
+            class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            🏆 Get Certificates & Community Access
+          </button>
+
+          <!-- Status Message (accessibility: live region) -->
+          <div
+            id="cert-status"
+            class="hidden p-4 rounded-lg border-2 text-center font-medium"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">
+            Already registered but need to update your information? 
+            <a href="https://codecrunchglobal.vercel.app/community-access.html" class="text-blue-600 hover:text-blue-800 font-medium">Update your profile here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate Result Display -->
+    <div
+      id="certificate-result"
+      class="hidden mt-8 bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-8 border-2 border-green-200 shadow-lg"
+    >
+      <div class="text-center mb-8">
+        <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
+          <i class="fas fa-check text-4xl text-white" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-3xl font-bold text-green-800 mb-2">Welcome to the Community!</h3>
+        <p class="text-green-700 text-xl">
+          Hello <span id="welcome-name" class="font-bold"></span>! Your access is ready.
+        </p>
+      </div>
+
+      <!-- Main Action Buttons -->
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <button
+          id="download-certificate"
+          type="button"
+          class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3"
+        >
+          <i class="fas fa-download text-xl" aria-hidden="true"></i>
+          Download Certificate
+        </button>
+        <a
+          id="cert-discord-link"
+          href="https://codecrunchglobal-discordserver.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
+        >
+          <i class="fab fa-discord text-xl" aria-hidden="true"></i>
+          Join Discord Community
+        </a>
+        <a
+          id="cert-groupme-link"
+          href="https://codecrunchglobal-groupme.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-gradient-to-r from-green-600 to-orange-600 hover:from-green-700 hover:to-orange-700 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3 text-decoration-none"
+        >
+          <i class="fas fa-users text-xl" aria-hidden="true"></i>
+          Join GroupMe Chat
+        </a>
+      </div>
+
+      <!-- Organization-Specific Communities -->
+      <div class="bg-white rounded-xl p-6 border border-green-200 mb-6 shadow-sm">
+        <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">🌐 Organization-Specific Communities</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- ColorStack at FIU -->
+          <div class="text-center bg-purple-50 rounded-lg p-4">
+            <h5 class="font-semibold text-purple-700 mb-2 text-sm">ColorStack at FIU</h5>
+            <div class="flex gap-2 justify-center">
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
+              </a>
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
+              </a>
+            </div>
+          </div>
+
+          <!-- CAHSI at FIU -->
+          <div class="text-center bg-teal-50 rounded-lg p-4">
+            <h5 class="font-semibold text-teal-700 mb-2 text-sm">CAHSI at FIU</h5>
+            <div class="flex gap-2 justify-center">
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
+              </a>
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Developer Group at FIU -->
+          <div class="text-center bg-red-50 rounded-lg p-4">
+            <h5 class="font-semibold text-red-700 mb-2 text-sm">GDG at FIU</h5>
+            <div class="flex gap-2 justify-center">
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
+              </a>
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
+              </a>
+            </div>
+          </div>
+
+          <!-- Raspberry Pi Code Crunch -->
+          <div class="text-center bg-pink-50 rounded-lg p-4">
+            <h5 class="font-semibold text-pink-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
+            <div class="flex gap-2 justify-center">
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fab fa-discord text-sm" aria-hidden="true"></i>Discord
+              </a>
+              <a
+                href="https://codecrunchglobal-discordserver.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-1"
+              >
+                <i class="fas fa-users text-sm" aria-hidden="true"></i>GroupMe
+              </a>
+            </div>
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User's Club Memberships Display -->
+      <div id="user-club-memberships" class="bg-white rounded-xl p-6 border border-green-200 shadow-sm">
+        <h4 class="text-xl font-bold text-green-800 mb-4 text-center">🏢 Your Active Club Memberships</h4>
+        <div id="user-clubs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <p class="text-green-600 text-sm text-center mt-4 italic">Based on our records for your email address</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-16 bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold mb-4">Ready to Join the Future?</h2>
+    <p class="text-xl mb-8 opacity-90">
+      Connect with innovators, build amazing projects, and shape tomorrow's technology landscape
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+        <h3 class="text-xl font-bold mb-2">New to Hack University?</h3>
+        <p class="mb-4 opacity-90">Start your journey with us today</p>
+        
+          href="https://codecrunchglobal.vercel.app/community-access.html"
+          class="inline-block bg-white text-indigo-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+        >
+          Register Now
+        </a>
+      </div>
+      <div class="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+        <h3 class="text-xl font-bold mb-2">Already a Member?</h3>
+        <p class="mb-4 opacity-90">Access your certificates and communities</p>
+        <button
+          onclick="document.getElementById('member-email').focus()"
+          class="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors"
+        >
+          Get Access
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
