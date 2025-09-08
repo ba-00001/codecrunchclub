@@ -3800,172 +3800,383 @@ body {
 
 <!-- Our Past Events -->
 <!-- Our Past Events -->
-<section class="past-events section-padding" id="past-events">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Innovation Journey</h2>
-        <p class="section-subtitle">A timeline of our hackathons building towards smart city solutions.</p>
-      </div>
-      
-      <div class="timeline">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Timeline</title>
+    <style>
+        /* Unique Timeline Hover Styles */
+        .hover-timeline-section {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hover-timeline-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hover-timeline-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hover-timeline-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .hover-timeline-container {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .hover-timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .hover-timeline-group {
+            margin-bottom: 40px;
+        }
+
+        .hover-timeline-group-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .hover-timeline-group-title::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .hover-timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hover-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .hover-timeline-item:hover::before {
+            transform: scale(1.3);
+            background: #667eea;
+            box-shadow: 0 0 0 6px rgba(102, 126, 234, 0.2);
+        }
+
+        .hover-timeline-item-content {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hover-timeline-item:hover .hover-timeline-item-content {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .hover-timeline-date {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .hover-timeline-event-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .hover-timeline-event-title a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .hover-timeline-event-title a:hover {
+            color: #667eea;
+        }
+
+        .hover-timeline-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin-top: 15px;
+        }
+
+        .hover-timeline-item:hover .hover-timeline-description {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .hover-timeline-item-content::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .hover-timeline-item:hover .hover-timeline-item-content::after {
+            transform: scaleX(1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hover-timeline-section {
+                padding: 30px 15px;
+            }
+
+            .hover-timeline-title {
+                font-size: 2rem;
+            }
+
+            .hover-timeline-container {
+                padding-left: 20px;
+            }
+
+            .hover-timeline-item {
+                padding-left: 30px;
+            }
+
+            .hover-timeline-item-content {
+                padding: 15px;
+            }
+        }
+
+        /* Animation for timeline appearance */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover-timeline-item {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .hover-timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .hover-timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .hover-timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .hover-timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .hover-timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .hover-timeline-item:nth-child(6) { animation-delay: 0.6s; }
+        .hover-timeline-item:nth-child(7) { animation-delay: 0.7s; }
+        .hover-timeline-item:nth-child(8) { animation-delay: 0.8s; }
+        .hover-timeline-item:nth-child(9) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body>
+
+<!-- Our Past Events -->
+<section class="hover-timeline-section" id="past-events">
+    <div class="hover-timeline-header">
+        <h2 class="hover-timeline-title">Our Innovation Journey</h2>
+        <p class="hover-timeline-subtitle">A timeline of our hackathons building towards smart city solutions.</p>
+    </div>
+    
+    <div class="hover-timeline-container">
         <!-- Past Events -->
-        <div class="timeline-section">
-          
-          
-          <!-- Timeline Item Past Events -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-section-title">Past Events</h3>
+        <div class="hover-timeline-group">
+            <h3 class="hover-timeline-group-title">Past Events</h3>
+            
+            <!-- Timeline Item 1 - Hack Fiesta Miami 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">March 21-23, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://HackFiestaMiami2025.vercel.app" target="_blank">🎉 Hack Fiesta Miami 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        Our signature spring virtual hackathon introduced foundational tech concepts, bringing together innovators from across South Florida with focus on AI, fintech, and web technologies - laying groundwork for smart city innovation.
+                    </p>
+                </div>
+            </div>
 
+            <!-- Timeline Item 2 - 305 Hack Spring 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">March 28-31, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://305HackSpring2025.vercel.app" target="_blank">🌴 305 Hack Spring 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        A vibrant hybrid hackathon in Miami emphasizing interdisciplinary collaboration across sustainability, health tech, and cybersecurity - key components for smart city infrastructure.
+                    </p>
+                </div>
             </div>
-          </div>
 
-
-          <!-- Timeline Item 1 - Hack Fiesta Miami 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">March 21-23, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://HackFiestaMiami2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🎉 Hack Fiesta Miami 2025</a>
-              </h3>
-              <p class="timeline-text">
-                Our signature spring virtual hackathon introduced foundational tech concepts, bringing together innovators from across South Florida with focus on AI, fintech, and web technologies - laying groundwork for smart city innovation.
-              </p>
+            <!-- Timeline Item 3 - Code Storm Hack 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">May 19-26, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://CodeStormHack2025.vercel.app" target="_blank">⚡ Code Storm Hack 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        A virtual hackathon connecting students and industry experts through technical challenges and mentorship, advancing skills needed for complex urban technology solutions.
+                    </p>
+                </div>
             </div>
-          </div>
-    
-          <!-- Timeline Item 2 - 305 Hack Spring 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">March 28-31, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://305HackSpring2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🌴 305 Hack Spring 2025</a>
-              </h3>
-              <p class="timeline-text">
-                A vibrant hybrid hackathon in Miami emphasizing interdisciplinary collaboration across sustainability, health tech, and cybersecurity - key components for smart city infrastructure.
-              </p>
-            </div>
-          </div>
-    
-          <!-- Timeline Item 3 - Code Storm Hack 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">May 19-26, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://CodeStormHack2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">⚡ Code Storm Hack 2025</a>
-              </h3>
-              <p class="timeline-text">
-                A virtual hackathon connecting students and industry experts through technical challenges and mentorship, advancing skills needed for complex urban technology solutions.
-              </p>
-            </div>
-          </div>
         </div>
 
         <!-- Upcoming Events -->
-        <div class="timeline-section">
-          
-                      <!-- Timeline Item Upcoming Events -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-section-title">Upcoming Events</h3>
+        <div class="hover-timeline-group">
+            <h3 class="hover-timeline-group-title">Upcoming Events</h3>
 
+            <!-- Timeline Item 4 - SummerCodeX Hack 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">July 19-26, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://SummerCodexHack2025.vercel.app" target="_blank">☀️ SummerCodeX Hack 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        An intensive virtual summer hackathon focusing on beginner-friendly tracks, mobile app development, and cloud solutions - building the technical foundation for smart city applications.
+                    </p>
+                </div>
             </div>
-          </div>
 
-
-
-
-          <!-- Timeline Item 4 - SummerCodeX Hack 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">July 19-26, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://SummerCodexHack2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">☀️ SummerCodeX Hack 2025</a>
-              </h3>
-              <p class="timeline-text">
-                An intensive virtual summer hackathon focusing on beginner-friendly tracks, mobile app development, and cloud solutions - building the technical foundation for smart city applications.
-              </p>
+            <!-- Timeline Item 5 - 305 Hack Fall 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">September 20-22, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://305hackfall2025.vercel.app" target="_blank">🍂 305 Hack Fall 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        Fall edition of our popular 305 Hack series, focusing on advanced web development, IoT solutions, and data analytics - essential technologies for smart city ecosystems.
+                    </p>
+                </div>
             </div>
-          </div>
 
-          <!-- Timeline Item 5 - 305 Hack Fall 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">September 20-22, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://305hackfall2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🍂 305 Hack Fall 2025</a>
-              </h3>
-              <p class="timeline-text">
-                Fall edition of our popular 305 Hack series, focusing on advanced web development, IoT solutions, and data analytics - essential technologies for smart city ecosystems.
-              </p>
+            <!-- Timeline Item 6 - EmpowHER Hackathon 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">October 18-20, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://EmpowHerHack2025.vercel.app" target="_blank">👩‍💻 EmpowHER Hackathon 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        A dedicated hackathon celebrating women in tech, promoting diversity and inclusion in the development of innovative solutions for social impact and urban challenges.
+                    </p>
+                </div>
             </div>
-          </div>
 
-          <!-- Timeline Item 6 - EmpowHER Hackathon 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">October 18-20, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://EmpowHerHack2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">👩‍💻 EmpowHER Hackathon 2025</a>
-              </h3>
-              <p class="timeline-text">
-                A dedicated hackathon celebrating women in tech, promoting diversity and inclusion in the development of innovative solutions for social impact and urban challenges.
-              </p>
+            <!-- Timeline Item 7 - CodeFest 2025 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">December 12-14, 2025</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://CodeFestHack2025.vercel.app" target="_blank">🎊 CodeFest 2025</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        Year-end celebration hackathon bringing together all our community members for a grand finale of innovation, featuring advanced challenges in machine learning and blockchain technology.
+                    </p>
+                </div>
             </div>
-          </div>
-
-          <!-- Timeline Item 7 - CodeFest 2025 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">December 12-14, 2025</span>
-              <h3 class="timeline-title">
-                <a href="https://CodeFestHack2025.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🎊 CodeFest 2025</a>
-              </h3>
-              <p class="timeline-text">
-                Year-end celebration hackathon bringing together all our community members for a grand finale of innovation, featuring advanced challenges in machine learning and blockchain technology.
-              </p>
-            </div>
-          </div>
         </div>
 
-      
         <!-- 2026 Events -->
-        <div class="timeline-section">
-                      <!-- Timeline Item 2026 Events -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-section-title">2026 Events</h3>
+        <div class="hover-timeline-group">
+            <h3 class="hover-timeline-group-title">2026 Events</h3>
+            
+            <!-- Timeline Item 8 - Hack Fiesta Miami 2026 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">March 9-15, 2026</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://HackFiestaMiami2026.vercel.app" target="_blank">🎉 Hack Fiesta Miami 2026</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        The evolved version of our flagship event, featuring week-long intensive workshops, industry partnerships, and cutting-edge smart city challenges with real-world implementation opportunities.
+                    </p>
+                </div>
+            </div>
 
+            <!-- Timeline Item 9 - 305 Hack Spring 2026 -->
+            <div class="hover-timeline-item">
+                <div class="hover-timeline-item-content">
+                    <span class="hover-timeline-date">March 20-22, 2026</span>
+                    <h3 class="hover-timeline-event-title">
+                        <a href="https://305hackspring2026.vercel.app" target="_blank">🌴 305 Hack Spring 2026</a>
+                    </h3>
+                    <p class="hover-timeline-description">
+                        Next generation of our 305 Hack series, incorporating lessons learned from previous events and focusing on emerging technologies like quantum computing and advanced AI systems.
+                    </p>
+                </div>
             </div>
-          </div>
-          
-          <!-- Timeline Item 8 - Hack Fiesta Miami 2026 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">March 9-15, 2026</span>
-              <h3 class="timeline-title">
-                <a href="https://HackFiestaMiami2026.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🎉 Hack Fiesta Miami 2026</a>
-              </h3>
-              <p class="timeline-text">
-                The evolved version of our flagship event, featuring week-long intensive workshops, industry partnerships, and cutting-edge smart city challenges with real-world implementation opportunities.
-              </p>
-            </div>
-          </div>
-
-          <!-- Timeline Item 9 - 305 Hack Spring 2026 -->
-          <div class="timeline-item">
-            <div class="timeline-content">
-              <span class="timeline-date">March 20-22, 2026</span>
-              <h3 class="timeline-title">
-                <a href="https://305hackspring2026.vercel.app" target="_blank" style="text-decoration: underline; color: inherit;">🌴 305 Hack Spring 2026</a>
-              </h3>
-              <p class="timeline-text">
-                Next generation of our 305 Hack series, incorporating lessons learned from previous events and focusing on emerging technologies like quantum computing and advanced AI systems.
-              </p>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+</section>
+
+<section>
   
    <!-- Past Gallery Section -->
    <div class="past-gallery mt-5">
@@ -4138,7 +4349,7 @@ body {
                 </div>
                 
                 <div class="text-center mt-5">
-                    <a href="https://forms.gle/9ejeRChF2xuQnWF27" target="_blank" class="btn btn-custom btn-lg">🚀 Register to Start Building 305 Hack Smart Cities Projects</a>
+                    <a href="https://hackuniversity-discord.vercel.app" target="_blank" class="btn btn-custom btn-lg">🚀 Register to Start Building 305 Hack Smart Cities Projects</a>
                 </div>
             </div>
         </div>
