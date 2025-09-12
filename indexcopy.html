@@ -1,379 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Response Viewer</title>
+    <title>Simple Form Checker</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        input { padding: 10px; margin: 10px 0; width: 300px; font-size: 16px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:disabled { opacity: 0.6; }
+        .result { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 5px; }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .data-table th, .data-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .data-table th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
-
-<section class="m-4">  
-    <section class="checklist-section" id="response-viewer" style="margin-top:3rem;">
-    <h2 class="checklist-title glitch" data-text="CHECK YOUR RESPONSES">CHECK YOUR RESPONSES</h2>
-    <p class="checklist-subtitle">[ FORM RESPONSE VIEWER ] — Enter your email to view your submitted form responses</p>
-
-    <style>
-        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-        .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-        .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
-        .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
-        .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
-        .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
-        .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
-        .alert{padding:.75rem;border-radius:4px;border:1px solid}
-        .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
-        .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
-        .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
-
-        .response-cards{
-            margin-top:2rem;
-            display:grid;
-            gap:1.5rem;
-            grid-template-columns:repeat(auto-fit, minmax(400px, 1fr))
-        }
-        .response-card{
-            background:#fff;
-            border-radius:12px;
-            padding:1.5rem;
-            box-shadow:0 4px 15px rgba(0,0,0,0.1);
-            border:2px solid #e0e0e0;
-            transition:all .3s ease
-        }
-        .response-card:hover{
-            transform:translateY(-5px);
-            box-shadow:0 8px 25px rgba(0,0,0,0.15);
-            border-color:#007bff
-        }
-        .card-header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:1rem;
-            padding-bottom:1rem;
-            border-bottom:2px solid #f0f0f0
-        }
-        .card-title{
-            font-size:1.2rem;
-            font-weight:700;
-            color:#333;
-            font-family:"Courier New",monospace
-        }
-        .card-timestamp{
-            font-size:0.9rem;
-            color:#666;
-            background:#f8f9fa;
-            padding:0.3rem 0.8rem;
-            border-radius:6px;
-            font-family:"Courier New",monospace
-        }
-        .data-grid{
-            display:grid;
-            gap:0.8rem;
-            grid-template-columns:1fr
-        }
-        .data-item{
-            display:grid;
-            grid-template-columns:1fr 2fr;
-            gap:0.5rem;
-            padding:0.5rem 0;
-            border-bottom:1px solid #f0f0f0
-        }
-        .data-item:last-child{
-            border-bottom:none
-        }
-        .data-label{
-            font-weight:700;
-            color:#555;
-            font-size:0.9rem;
-            font-family:"Courier New",monospace
-        }
-        .data-value{
-            color:#333;
-            font-size:0.9rem;
-            word-break:break-word;
-            font-family:"Courier New",monospace
-        }
-        .empty-value{
-            color:#999;
-            font-style:italic
-        }
-        
-        @media (max-width:768px){
-            .response-cards{
-                grid-template-columns:1fr
-            }
-            .data-item{
-                grid-template-columns:1fr;
-                gap:0.2rem
-            }
-        }
-    </style>
-
-    <label for="emailInput" class="sr-only">Your email address</label>
-    <div class="cg-row">
-        <input type="email" id="emailInput" class="cg-input" placeholder="Enter your email address" value="codecrunchclub01@gmail.com" />
-        <button id="checkBtn" class="cg-btn" onclick="checkResponses()">🔍 Check Responses</button>
+    <h1>Check Your Form Responses</h1>
+    
+    <div>
+        <input type="email" id="email" placeholder="Enter your email" value="codecrunchclub01@gmail.com">
+        <button onclick="checkEmail()">Check Responses</button>
     </div>
-
-    <div id="result" class="cg-card" aria-live="polite" aria-atomic="true"></div>
-    <div id="responsesSection" style="display:none;"></div>
-    </section>
+    
+    <div id="result"></div>
 
     <script>
-    // Your new deployment URL
-    const API_URL = 'https://script.google.com/macros/s/AKfycbz5ObccmS8ifCws51ruq5rBcPoFURWjn2i-hWDdfmj7jmxlcoyI9YzdzZHEf7C83tuCJA/exec';
-
-    const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
-        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-    );
-
-    function infoBoxHTML() {
-        return `
-        <div class="infobox">
-            <strong style="color:#28a745">📋 Response Viewer:</strong><br>
-            • <strong>Your Data</strong>: View all form responses associated with your email<br>
-            • <strong>Organized Display</strong>: Each response shown in a separate card<br>
-            • <strong>Complete Information</strong>: All submitted data fields displayed<br>
-            • <strong>Timestamps</strong>: See when each form was submitted
-        </div>`;
-    }
-
-    function setStatus(type, html) {
-        const resultDiv = document.getElementById('result');
-        const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
-        resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-    }
-
-    function toggleButton(loading) {
-        const btn = document.getElementById('checkBtn');
-        if (!btn) return;
-        btn.disabled = !!loading;
-        btn.textContent = loading ? '⏳ Loading…' : '🔍 Check Responses';
-    }
-
-    function formatTimestamp(timestamp) {
-        if (!timestamp) return 'N/A';
-        
-        try {
-            const date = new Date(timestamp);
-            if (isNaN(date.getTime())) return timestamp;
+        async function checkEmail() {
+            const email = document.getElementById('email').value.trim();
+            const resultDiv = document.getElementById('result');
+            const button = document.querySelector('button');
             
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        } catch (e) {
-            return timestamp;
-        }
-    }
-
-    function showResponses(data) {
-        const responsesDiv = document.getElementById('responsesSection');
-        
-        console.log('🎨 showResponses called with data:', data);
-        
-        if (!data || !data.labels || !data.rows || !Array.isArray(data.rows)) {
-            console.log('❌ Invalid data structure for showResponses');
-            responsesDiv.style.display = 'none';
-            return;
-        }
-
-        const { labels, rows } = data;
-        const rowCount = rows.length;
-
-        if (rowCount === 0) {
-            setStatus('info', 
-                `<strong>ℹ️ NO RESPONSES FOUND</strong><br>
-                No form responses were found for this email address.<br>
-                Please check the email address or try again later.`
-            );
-            responsesDiv.style.display = 'none';
-            return;
-        }
-
-        setStatus('ok', 
-            `<strong>✅ ${rowCount} RESPONSE${rowCount > 1 ? 'S' : ''} FOUND!</strong><br>
-            Found ${rowCount} form response${rowCount > 1 ? 's' : ''} for your email address.<br>
-            ${rowCount > 1 ? 'Each response is displayed in a separate card below.' : 'Your response is displayed below.'}`
-        );
-
-        let cardsHTML = `
-            <div style="text-align:center;margin-bottom:2rem">
-                <h3 style="color:#333;font-family:'Courier New',monospace;font-size:1.4rem;margin-bottom:0.5rem">
-                    📄 Your Form Response${rowCount > 1 ? 's' : ''}
-                </h3>
-                <p style="color:#666;font-family:'Courier New',monospace;font-size:1rem">
-                    ${rowCount > 1 ? `${rowCount} responses found` : 'Response details'}
-                </p>
-            </div>
-            <div class="response-cards">
-        `;
-
-        rows.forEach((row, index) => {
-            if (!Array.isArray(row) || row.length === 0) return;
-
-            const timestamp = row[1] ? formatTimestamp(row[1]) : 'N/A';
+            if (!email) {
+                resultDiv.innerHTML = '<div class="result error">Please enter an email address</div>';
+                return;
+            }
             
-            cardsHTML += `
-                <div class="response-card">
-                    <div class="card-header">
-                        <div class="card-title">Response #${index + 1}</div>
-                        <div class="card-timestamp">📅 ${timestamp}</div>
-                    </div>
-                    <div class="data-grid">
-            `;
-
-            labels.forEach((label, labelIndex) => {
-                if (labelIndex < row.length) {
-                    const value = row[labelIndex];
-                    const displayValue = value !== null && value !== undefined && value !== '' 
-                        ? esc(String(value)) 
-                        : '<span class="empty-value">Not provided</span>';
+            button.disabled = true;
+            button.textContent = 'Checking...';
+            resultDiv.innerHTML = '<div class="result">Searching...</div>';
+            
+            try {
+                // Using script tag to avoid CORS
+                const script = document.createElement('script');
+                const callback = 'callback' + Date.now();
+                
+                window[callback] = function(data) {
+                    document.head.removeChild(script);
+                    delete window[callback];
+                    button.disabled = false;
+                    button.textContent = 'Check Responses';
                     
-                    cardsHTML += `
-                        <div class="data-item">
-                            <div class="data-label">${esc(label)}:</div>
-                            <div class="data-value">${displayValue}</div>
-                        </div>
-                    `;
-                }
-            });
-
-            cardsHTML += `</div></div>`;
-        });
-
-        cardsHTML += `</div>`;
-        responsesDiv.innerHTML = cardsHTML;
-        responsesDiv.style.display = 'block';
-        
-        setTimeout(() => {
-            responsesDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-    }
-
-    function checkResponses() {
-        const emailInput = document.getElementById('emailInput');
-        const responsesDiv = document.getElementById('responsesSection');
-        const email = (emailInput?.value || '').trim();
-
-        console.log('🔍 Starting response check for:', email);
-
-        if (!email) {
-            setStatus('error', '❌ Please enter your email address.');
-            responsesDiv.style.display = 'none';
-            return;
+                    if (data.error) {
+                        resultDiv.innerHTML = `<div class="result error">Error: ${data.error}</div>`;
+                        return;
+                    }
+                    
+                    if (data.found === 0) {
+                        resultDiv.innerHTML = '<div class="result">No responses found for this email</div>';
+                        return;
+                    }
+                    
+                    let html = `<div class="result success">Found ${data.found} response(s)!</div>`;
+                    
+                    if (data.data.length > 0) {
+                        html += '<table class="data-table"><thead><tr>';
+                        
+                        // Headers
+                        data.headers.forEach(header => {
+                            html += `<th>${header}</th>`;
+                        });
+                        html += '</tr></thead><tbody>';
+                        
+                        // Data rows
+                        data.data.forEach(row => {
+                            html += '<tr>';
+                            row.forEach(cell => {
+                                html += `<td>${cell || 'N/A'}</td>`;
+                            });
+                            html += '</tr>';
+                        });
+                        html += '</tbody></table>';
+                    }
+                    
+                    resultDiv.innerHTML = html;
+                };
+                
+                script.onerror = function() {
+                    document.head.removeChild(script);
+                    delete window[callback];
+                    button.disabled = false;
+                    button.textContent = 'Check Responses';
+                    resultDiv.innerHTML = '<div class="result error">Failed to load data</div>';
+                };
+                
+                script.src = `https://script.google.com/macros/s/AKfycbz5ObccmS8ifCws51ruq5rBcPoFURWjn2i-hWDdfmj7jmxlcoyI9YzdzZHEf7C83tuCJA/exec?email=${encodeURIComponent(email)}&callback=${callback}`;
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                button.disabled = false;
+                button.textContent = 'Check Responses';
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
         }
         
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setStatus('error', '❌ Please enter a valid email address.');
-            responsesDiv.style.display = 'none';
-            return;
-        }
-
-        setStatus('info', '⏳ Searching for your form responses...');
-        responsesDiv.style.display = 'none';
-        toggleButton(true);
-
-        // Use JSONP to bypass CORS issues
-        const script = document.createElement('script');
-        const callbackName = 'jsonpCallback' + Date.now();
-        
-        window[callbackName] = function(data) {
-            console.log('📦 Received JSONP data:', data);
-            
-            // Clean up
-            document.head.removeChild(script);
-            delete window[callbackName];
-            toggleButton(false);
-            
-            if (data.error) {
-                setStatus('error', `❌ ${data.error}`);
-                responsesDiv.style.display = 'none';
-            } else {
-                showResponses(data);
-            }
-        };
-        
-        script.onerror = function() {
-            console.error('❌ Script loading failed');
-            document.head.removeChild(script);
-            delete window[callbackName];
-            toggleButton(false);
-            setStatus('error', '❌ Failed to load data. Please try again.');
-            responsesDiv.style.display = 'none';
-        };
-        
-        const currentUrl = window.location.href;
-        script.src = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}&callback=${callbackName}`;
-        
-        console.log('📡 Making JSONP request:', script.src);
-        document.head.appendChild(script);
-        
-        setTimeout(() => {
-            if (window[callbackName]) {
-                document.head.removeChild(script);
-                delete window[callbackName];
-                toggleButton(false);
-                setStatus('error', '❌ Request timed out. Please try again.');
-                responsesDiv.style.display = 'none';
-            }
-        }, 15000);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('📄 DOM Content Loaded');
-        console.log('🔧 API_URL configured as:', API_URL);
-        
-        const input = document.getElementById('emailInput');
-        
-        input?.addEventListener('keydown', (e) => {
+        // Allow Enter key
+        document.getElementById('email').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                checkResponses();
+                checkEmail();
             }
         });
-        
-        document.getElementById('result').innerHTML = 
-            infoBoxHTML() + 
-            '<div class="alert alert-info">Enter your email above to check your volunteer status and access Form No.7...</div>';
-        
-        console.log('✅ Page initialization complete');
-    });
-
-    // Debug helper
-    window.debugAPI = function(email = 'codecrunchclub01@gmail.com') {
-        console.log('🐛 Testing API directly...');
-        const testUrl = `${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`;
-        console.log('🔗 Test URL:', testUrl);
-        
-        fetch(testUrl)
-            .then(response => response.text())
-            .then(text => {
-                console.log('📤 Direct API response:', text);
-                try {
-                    const json = JSON.parse(text);
-                    console.log('📊 Parsed JSON:', json);
-                } catch (e) {
-                    console.log('❌ Not valid JSON');
-                }
-            })
-            .catch(error => console.error('🐛 Debug error:', error));
-    };
-    
-    console.log('💡 Debug tip: Run "debugAPI()" in console to test the API directly');
     </script>
-</section>
-
 </body>
 </html>
