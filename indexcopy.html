@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Form Checker</title>
+    <title>Form Response Viewer</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
         input { padding: 10px; margin: 10px 0; width: 300px; font-size: 16px; }
@@ -52,7 +52,7 @@
                     button.textContent = 'Check Responses';
                     
                     if (data.error) {
-                        resultDiv.innerHTML = `<div class="result error">Error: ${data.error}</div>`;
+                        resultDiv.innerHTML = `<div class="result error">Error: ${data.error}<br><small>This usually means the spreadsheet is not accessible. Make sure it's shared properly.</small></div>`;
                         return;
                     }
                     
