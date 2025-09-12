@@ -96,7 +96,7 @@
                 
                 script.src = `https://script.google.com/macros/s/AKfycbz5ObccmS8ifCws51ruq5rBcPoFURWjn2i-hWDdfmj7jmxlcoyI9YzdzZHEf7C83tuCJA/exec?email=${encodeURIComponent(email)}&callback=${callback}`;
                 document.head.appendChild(script);
-                
+     
             } catch (error) {
                 button.disabled = false;
                 button.textContent = 'Check Responses';
