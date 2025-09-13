@@ -3031,12 +3031,10 @@ body {
 
 
 /* mlh  .sponsor-support-card Section Styles */
-/*  */
-/*  */
-/*  */
-/*  */
-/* mlh .sponsor-support-card Section Styles */
-/* Floating Top Image */
+/* =======================================
+   mlh .sponsor-support-card Section Styles
+   Floating Top Image
+   ======================================= */
 .floating-top-image {
     position: fixed;
     top: 70px;
@@ -3046,30 +3044,50 @@ body {
     z-index: 9999;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .floating-top-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     opacity: 1;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Tablet screens */
+@media (max-width: 992px) {
     .floating-top-image {
-        width: 80px;
-        top: 70px;
+        width: 70px;
+        top: 60px;
         left: 15px;
     }
 }
 
+/* Mobile screens */
+@media (max-width: 768px) {
+    .floating-top-image {
+        width: 65px;
+        top: 50px;
+        left: 12px;
+    }
+}
+
+/* Small mobile (portrait) */
 @media (max-width: 576px) {
     .floating-top-image {
-        width: 60px;
+        width: 50px;
+        top: 15px;
+        left: 8px;
+    }
+}
+
+/* Extra small devices (very narrow) */
+@media (max-width: 400px) {
+    .floating-top-image {
+        width: 45px;
         top: 10px;
-        left: 10px;
+        left: 5px;
     }
 }
 
