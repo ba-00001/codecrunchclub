@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Crunch - Volunteer Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -378,6 +379,124 @@
             box-shadow: 0 1px 3px rgba(32,33,36,.28);
         }
 
+        /* Footer Styles */
+        .cc-blue {
+            background: #1a73e8;
+        }
+
+        .footer {
+            color: white;
+            padding: 32px 0 48px 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer li {
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer a:hover {
+            opacity: 1;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .social-link:hover {
+            color: #fbbf24;
+        }
+
+        .social-link i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .social-link span {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom .credits {
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        .footer-bottom .credits a {
+            color: #7dd3fc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-bottom .credits a:hover {
+            color: #bae6fd;
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -464,6 +583,15 @@
             .card p {
                 font-size: 13px;
             }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -510,6 +638,8 @@
             <div class="nav-links">
                 <a href="#" class="nav-link">ColorStack at FIU</a>
                 <a href="#" class="nav-link">CAHSI at FIU</a>
+                <a href="#" class="nav-link">Google Developer Group at FIU</a>
+                <a href="#" class="nav-link">Raspberry Pi Code Crunch</a>
                 <a href="#" class="nav-link">Support Us</a>
             </div>
         </div>
@@ -553,80 +683,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="cc-blue footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div>
-                    <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
-                    <p>
-                        A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
-                    </p>
-                    <p>
-                        <a href="http://HackUniversity.vercel.app">HackUniversity.vercel.app</a>
-                    </p>
-                    
-                    <!-- Social Media Links Grid -->
-                    <div>
-                        <h4 style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Connect With Us:</h4>
-                        <div class="social-grid">
-                            <a href="https://hackuniversity-directory.vercel.app/" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="social-link">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="social-link">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="social-link">
-                                <i class="fab fa-youtube"></i>
-                                <span>YouTube</span>
-                            </a>
-                            <a href="https://hackuniversity-discord.vercel.app/" class="social-link">
-                                <i class="fab fa-discord"></i>
-                                <span>Discord</span>
-                            </a>
-                            <a href="https://hackuniversity-calendar.vercel.app/" class="social-link">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>Calendar</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission">Mission</a></li>
-                        <li><a href="https://hackuniversity-calendar.vercel.app/">Events</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/hackathons.html">Hackathons</a></li>
-                        <li><a href="https://hackuniversity-membership.vercel.app/">Membership</a></li>
-                        <li><a href="https://hackuniversity-eboard.vercel.app/">Join E-Board</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#resources">Resources</a></li>
-                        <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Contact</h3>
-                    <div style="font-size: 14px; opacity: 0.8;">
-                        Florida International University<br>
-                        Miami, FL<br>
-                        <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 Hack University. All rights reserved.</p>
-                <div class="credits">
-                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <div class="container">
         <div class="header">
@@ -672,6 +728,80 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="cc-blue footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+                    <p>
+                        A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+                    </p>
+                    <p>
+                        <a href="#">HackUniversity.vercel.app</a>
+                    </p>
+                    
+                    <!-- Social Media Links Grid -->
+                    <div>
+                        <h4 style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Connect With Us:</h4>
+                        <div class="social-grid">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-discord"></i>
+                                <span>Discord</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>Calendar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Mission</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Hackathons</a></li>
+                        <li><a href="#">Membership</a></li>
+                        <li><a href="#">Join E-Board</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Join Discord</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <div style="font-size: 14px; opacity: 0.8;">
+                        Florida International University<br>
+                        Miami, FL<br>
+                        <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Hack University. All rights reserved.</p>
+                <div class="credits">
+                    Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function handleNewVolunteer() {
@@ -885,7 +1015,7 @@
             setInterval(renderHackathons, 3600000);
         });
 
-        // Enhanced button interaction effects with performance optimization
+        // Enhanced button interaction effects
         document.addEventListener('DOMContentLoaded', function() {
             const interactiveElements = document.querySelectorAll('.card-button, .hackathon-link');
             
@@ -910,31 +1040,6 @@
                 });
             });
 
-            // Lazy load images for better performance
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src || img.src;
-                            img.classList.remove('lazy');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => imageObserver.observe(img));
-            }
-
-            // Reduce motion for users who prefer it
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const animations = document.querySelectorAll('.floating, .star');
-                animations.forEach(el => {
-                    el.style.animation = 'none';
-                });
-            }
-
             // Add smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -949,17 +1054,6 @@
                 });
             });
         });
-
-        // Service Worker registration for better performance (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('SW registered: ', registration);
-                }).catch(function(registrationError) {
-                    console.log('SW registration failed: ', registrationError);
-                });
-            });
-        }
     </script>
 </body>
 </html>
