@@ -3814,6 +3814,128 @@ body {
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Track Winners MLH Pins Section -->
+<div style="background: rgba(255, 255, 255, 0.15); border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+    <h4 style="margin: 0 0 10px 0; font-size: 1.2rem; color: #ffd700;">
+        🏆 TRACK WINNERS WILL RECEIVE EXCLUSIVE MLH PINS! 🏆
+    </h4>
+    <div style="margin: 15px 0; position: relative; display: inline-block; overflow: visible;">
+        <img class="mlh-pins-hover" 
+             src="https://github.com/user-attachments/assets/fc08d39f-7308-4174-b6ff-c5e902479dea" 
+             alt="MLH Pins Collection" 
+             style="width: 120px; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;">
+    </div>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">
+        Collect these exclusive MLH pins as a badge of honor! 🎖️<br>
+        <small style="opacity: 0.7;">(Hover over image to enlarge)</small>
+    </p>
+</div>
+
+<style>
+.mlh-pins-hover {
+    transition: all 0.4s ease-in-out !important;
+    z-index: 1 !important;
+    position: relative !important;
+}
+
+.mlh-pins-hover:hover {
+    transform: scale(2.5) !important;
+    z-index: 999 !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
+    border-radius: 12px !important;
+}
+
+/* Mobile support */
+@media (hover: none) and (pointer: coarse) {
+    .mlh-pins-hover:active {
+        transform: scale(2.2) !important;
+        z-index: 999 !important;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
+    }
+}
+
+/* Ensure container doesn't clip enlarged image */
+.mlh-pins-hover:hover,
+.mlh-pins-hover:active {
+    position: relative !important;
+}
+
+@media (max-width: 768px) {
+    .mlh-pins-hover {
+        width: 100px !important;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Track Selection Info -->
         <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 20px; padding: 40px; margin-top: 50px; border: 2px solid rgba(30, 64, 175, 0.2);">
             <h4 style="color: var(--primary); font-size: 1.6rem; margin-bottom: 30px; text-align: center;">🎯 305 Hack Smart City Track Guidelines</h4>
@@ -6039,6 +6161,68 @@ document.addEventListener('DOMContentLoaded', function() {
 //**************
 //**************
 // End Enhanced JavaScript for Volunteers Showcase Section
+
+
+
+// PIN
+//**************
+//**************
+//**************
+//**************
+//**************
+// 
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const pinsImage = document.getElementById('mlh-pins-image');
+//     let isEnlarged = false;
+    
+//     // Handle touch devices
+//     pinsImage.addEventListener('touchstart', function(e) {
+//         e.preventDefault();
+        
+//         if (!isEnlarged) {
+//             this.style.transform = 'scale(2.2)';
+//             this.style.zIndex = '1000';
+//             this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.5)';
+//             isEnlarged = true;
+//         } else {
+//             this.style.transform = 'scale(1)';
+//             this.style.zIndex = '1';
+//             this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+//             isEnlarged = false;
+//         }
+//     });
+    
+//     // Close enlarged image when tapping elsewhere on mobile
+//     document.addEventListener('touchstart', function(e) {
+//         if (!e.target.closest('#mlh-pins-image') && isEnlarged) {
+//             pinsImage.style.transform = 'scale(1)';
+//             pinsImage.style.zIndex = '1';
+//             pinsImage.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+//             isEnlarged = false;
+//         }
+//     });
+// });
+
+
+// END PIN
+//**************
+//**************
+//**************
+//**************
+//**************
+// 
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>
