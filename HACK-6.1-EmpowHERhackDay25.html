@@ -3,40 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmpowHer Hackday - October 18, 2025</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add Tailwind CSS for footer -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <title>EmpowHer HackDay - Empowering Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Add CSS Variables for footer */
-        :root {
-            --cc-blue: #2463EB;
-            --cc-orange: #F59E0B;
-        }
-        
-        .cc-blue { 
-            background-color: var(--cc-blue); 
-        }
-        
-        .cc-orange-text { 
-            color: var(--cc-orange); 
-        }
-        
-        /* Star animation for footer */
-        .star {
-            position: relative;
-            display: inline-block;
-            color: var(--cc-orange);
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            animation: twinkle 1.8s ease-in-out infinite;
-        }
-        
-        @keyframes twinkle { 
-            0%,100%{opacity:1; transform:scale(1)} 
-            50%{opacity:.6; transform:scale(1.1)} 
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -44,7 +13,7 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -58,430 +27,978 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .header-content {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .mlh-badge {
-            background: #ff6b35;
+        .logo::before {
+            content: "⚡";
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
             color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
         }
 
         .hero {
             text-align: center;
-            padding: 80px 0;
+            padding: 4rem 0;
             color: white;
         }
 
         .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        .hero h2 {
-            font-size: 1.8em;
-            margin-bottom: 30px;
-            font-weight: 300;
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
         }
 
         .event-details {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 600px;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .detail-item {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-
-        .detail-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 1.2em;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 30px 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(247, 147, 30, 0.3);
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(247, 147, 30, 0.4);
-        }
-
-        .info-section {
-            background: white;
-            margin: 60px 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-content {
-            padding: 60px;
-        }
-
-        .info-section h3 {
-            font-size: 2.2em;
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-        }
-
-        .info-grid {
+        .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .info-card {
-            text-align: center;
-            padding: 30px;
+        .detail-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
             border-radius: 15px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+            color: white;
             transition: transform 0.3s ease;
         }
 
-        .info-card:hover {
+        .detail-card:hover {
             transform: translateY(-5px);
         }
 
-        .info-card h4 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .features {
+            background: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             color: #333;
         }
 
-        .info-card p {
-            color: #666;
-            font-size: 1.1em;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .footer-content {
+        .feature-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .sponsors {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+
+        .sponsors h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sponsor-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            height: 120px;
+        }
+
+        .sponsor-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .sponsor-logo {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .partner-logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mlh-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mlh-logo {
+            width: 150px;
+            height: 60px;
+            background: #ff6b6b;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .countdown-timer {
             display: flex;
             justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 2rem;
+            margin-top: 1rem;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 2.5rem;
             }
-
-            .hero h2 {
-                font-size: 1.4em;
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .event-details {
-                padding: 30px 20px;
+            
+            .nav-links {
+                display: none;
             }
-
-            .info-content {
-                padding: 40px 20px;
-            }
-
-            .header-content {
-                text-align: center;
-            }
-
-            .logo {
-                margin-bottom: 10px;
+            
+            .countdown-timer {
+                flex-wrap: wrap;
+                gap: 1rem;
             }
         }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+
+
+        /* 
+        
+        Footer Grid Classes
+        
+        
+        */
+
+
+
+        /* Hack University Footer Styles */
+        .hack-university-footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem 0 3rem 0;
+        }
+
+        .hack-university-footer-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hack-university-footer-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hack-university-footer-container {
+                padding: 0 2rem;
+            }
+        }
+
+        .hack-university-footer-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .hack-university-footer-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hack-university-footer-description {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .hack-university-footer-link {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .hack-university-footer-link:hover {
+            opacity: 0.9;
+        }
+
+        .hack-university-social-section {
+            margin-top: 1.5rem;
+        }
+
+        .hack-university-social-title {
+            font-size: 0.875rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .hack-university-social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-social-grid {
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hack-university-social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hack-university-social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .hack-university-social-link:hover {
+            color: #fde047;
+        }
+
+        .hack-university-social-icon {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-social-icon {
+                font-size: 1.25rem;
+            }
+        }
+
+        .hack-university-social-text {
+            font-size: 0.75rem;
+        }
+
+        .hack-university-quick-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hack-university-quick-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-quick-link {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-block;
+        }
+
+        .hack-university-quick-link:hover {
+            opacity: 1;
+        }
+
+        .hack-university-contact-section {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            font-style: normal;
+        }
+
+        .hack-university-contact-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hack-university-contact-link:hover {
+            opacity: 1;
+        }
+
+        .hack-university-footer-bottom {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-footer-bottom {
+                margin-top: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        .hack-university-copyright {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-credits {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .hack-university-credits-link {
+            color: #67e8f9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .hack-university-credits-link:hover {
+            color: #a5f3fc;
+        }
+
+        .hack-university-focus-visible:focus {
+            outline: 2px solid #f59e0b;
+            outline-offset: 2px;
+        }
+
+        /* Animations */
+        @keyframes hack-university-twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hack-university-star {
+            animation: hack-university-twinkle 1.8s ease-in-out infinite;
+        }
+
+        /* Remove text decoration globally for footer */
+        .hack-university-text-decoration-none,
+        .hack-university-text-decoration-none:hover {
+            text-decoration: none !important;
+        }
+
+
+        /* END */
+        
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">EmpowHer</div>
-                <div class="mlh-badge">Powered by MLH</div>
-            </div>
-        </div>
+        <nav class="container">
+            <div class="logo">EmpowHer HackDay</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#prizes">Prizes</a></li>
+                <li><a href="#sponsors">Sponsors</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <section class="hero">
             <div class="container">
-                <h1>EmpowHer Hackday</h1>
-                <h2>Innovate • Collaborate • Inspire</h2>
+                <h1>EmpowHer HackDay</h1>
+                <p>An in-person mini hackathon powered by Major League Hacking (MLH) and amazing MLH partners (like Google). MLH and Google want hackers to leverage the power of large language models to prototype and build awesome hacks faster than ever before!</p>
                 
-                <div class="event-details">
-                    <div class="detail-item">
+                <div class="countdown">
+                    <h3>Event Starts In:</h3>
+                    <div class="countdown-timer">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="days">15</div>
+                            <div>Days</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">06</div>
+                            <div>Hours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">42</div>
+                            <div>Minutes</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">18</div>
+                            <div>Seconds</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="https://events.mlh.io/events/13014-empowher-hackday" target="_blank" class="btn btn-primary pulse">
+                        🚀 Register Now on MLH
+                    </a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+                
+                <div class="calendar-buttons" style="margin-top: 2rem;">
+                    <h3 style="color: white; margin-bottom: 1rem;">📅 Add to Calendar</h3>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&dates=20251018T140000Z%2F20251019T023000Z&details=See+event%3A+https%3A%2F%2Fevents.mlh.io%2Fevents%2F13014-empowher-hackday&text=EmpowHER+HackDay" target="_blank" class="btn" style="background: #4285f4; color: white; font-size: 0.9rem; padding: 10px 20px;">
+                            📱 Google Calendar
+                        </a>
+                        <a href="https://events.mlh.io/events/13014-empowher-hackday.ics" target="_blank" class="btn" style="background: #007aff; color: white; font-size: 0.9rem; padding: 10px 20px;">
+                            🍎 Apple Calendar
+                        </a>
+                        <a href="https://events.mlh.io/events/13014-empowher-hackday.ics" target="_blank" class="btn" style="background: #0078d4; color: white; font-size: 0.9rem; padding: 10px 20px;">
+                            📧 Outlook Calendar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-details" id="about">
+            <div class="container">
+                <h2 style="color: white; text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Event Details</h2>
+                <p style="color: white; text-align: center; font-size: 1.2rem; opacity: 0.9;">Join hundreds of passionate developers, designers, and innovators</p>
+                
+                <div class="details-grid">
+                    <div class="detail-card">
                         <div class="detail-icon">📅</div>
-                        <div>
-                            <strong>October 18, 2025</strong><br>
-                            Saturday, 9:00 AM - 9:00 PM
-                        </div>
+                        <h3>When</h3>
+                        <p>October 18, 2025<br>Saturday, 9:00 AM - 9:00 PM</p>
                     </div>
-                    
-                    <div class="detail-item">
+                    <div class="detail-card">
                         <div class="detail-icon">📍</div>
-                        <div>
-                            <strong>Florida International University</strong><br>
-                            FIU Campus
-                        </div>
+                        <h3>Where</h3>
+                        <p>Florida International University<br>FIU Campus, Miami</p>
                     </div>
-                    
-                    <div class="detail-item">
+                    <div class="detail-card">
                         <div class="detail-icon">⏱️</div>
-                        <div>
-                            <strong>12 Hours</strong><br>
-                            Full Day Hackathon
-                        </div>
+                        <h3>Duration</h3>
+                        <p>12 Hours<br>Full Day Hackathon</p>
                     </div>
-                </div>
-
-                <a href="#register" class="cta-button">Register Now</a>
-                <a href="#details" class="cta-button" style="background: rgba(255, 255, 255, 0.2); box-shadow: none;">Learn More</a>
-            </div>
-        </section>
-
-        <section class="info-section" id="details">
-            <div class="container">
-                <div class="info-content">
-                    <h3>Join the Movement</h3>
-                    <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px; color: #666;">
-                        EmpowHer Hackday is a celebration of women in technology, bringing together passionate innovators 
-                        for 12 hours of coding, creativity, and collaboration.
-                    </p>
-                    
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h4>🚀 Innovation</h4>
-                            <p>Build amazing projects that solve real-world problems and showcase your technical skills.</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h4>🤝 Networking</h4>
-                            <p>Connect with like-minded developers, mentors, and industry professionals.</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h4>🏆 Prizes</h4>
-                            <p>Compete for exciting prizes and recognition for your innovative solutions.</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h4>💡 Learning</h4>
-                            <p>Attend workshops, talks, and mentoring sessions throughout the day.</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h4>🍕 Food & Fun</h4>
-                            <p>Enjoy complimentary meals, snacks, and activities throughout the event.</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h4>🌟 Community</h4>
-                            <p>Be part of an inclusive environment that celebrates diversity in tech.</p>
-                        </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">💰</div>
+                        <h3>Cost</h3>
+                        <p>Completely Free<br>Food & Swag Included</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="hero" id="register" style="padding: 60px 0;">
+        <section class="features">
             <div class="container">
-                <h3 style="font-size: 2.5em; margin-bottom: 30px;">Ready to EmpowHer?</h3>
-                <p style="font-size: 1.3em; margin-bottom: 40px; opacity: 0.9;">
-                    Register now and be part of this inspiring hackathon experience!
+                <h2>Why Join EmpowHer HackDay?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Hacking</h3>
+                        <p>Leverage Google's large language models and AI tools to prototype and build innovative solutions faster than ever.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Rapid Prototyping</h3>
+                        <p>Use cutting-edge AI tools to accelerate your development process and bring ideas to life in record time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌟</div>
+                        <h3>Empowerment Focus</h3>
+                        <p>Dedicated to creating an environment where everyone can thrive and showcase their talents.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Amazing Prizes</h3>
+                        <p>Win exciting prizes!</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎓</div>
+                        <h3>AI Workshops</h3>
+                        <p>Learn hands-on with Google's AI tools, large language models, and cutting-edge machine learning technologies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🍕</div>
+                        <h3>Free Food & Swag</h3>
+                        <p>Enjoy meals, snacks, and exclusive Google & MLH swag throughout the day. Stay energized and motivated!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mlh-section">
+            <div class="container">
+                <div class="mlh-logo">MLH Official</div>
+                <h2>Major League Hacking × Google Event</h2>
+                <p>EmpowHer HackDay is an official Major League Hacking (MLH) mini hackathon powered by Google. Join the largest community of student developers and leverage Google's AI tools to build incredible projects!</p>
+                <div style="margin-top: 2rem;">
+                    <a href="https://events.mlh.io/events/13014-empowher-hackday" target="_blank" class="btn btn-primary">
+                        Register on MLH Platform
+                    </a>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                    By participating, you agree to the <a href="https://github.com/MLH/mlh-policies" style="color: #ffd700;">MLH Code of Conduct</a>
                 </p>
-                <a href="https://events.mlh.io/events/13014-empowher-hackday" class="cta-button" style="font-size: 1.3em; padding: 20px 50px;">
-                    Register
-                </a>
+            </div>
+        </section>
+
+        <section class="sponsors" id="sponsors">
+            <div class="container">
+                <h2>Sponsors & Partners</h2>
+                <p>Supported by amazing organizations who believe in empowering the next generation of innovators</p>
+                <div class="sponsor-grid">
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://miamitechworks.com" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/837c802a-ba10-4d40-9574-9e79f98a5526" alt="Miami Tech Works Logo" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27" alt="Google Developer Group at FIU" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch Global" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack at FIU" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="partner-logo-container">
+                            <a href="https://raspberrypicodeCrunch.vercel.app" target="_blank" rel="noopener noreferrer">
+                                <img src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c" alt="Raspberry Pi Code Crunch" class="sponsor-logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer id="connect" class="cc-blue text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Code Crunch <span class="star">✨</span></h3>
-                    <p class="text-sm opacity-80">
-                        An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
-                    </p>
-                    <p class="text-sm mt-2">
-                        <a href="http://codecrunch.cs.fiu.edu" class="text-white underline hover:opacity-90">codecrunch.cs.fiu.edu</a>
-                    </p>
-                    
-                    <!-- Social Media Links Grid -->
-                    <div class="mt-6">
-                        <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                        <div class="grid grid-cols-3 gap-3">
-                            <a href="https://www.linkedin.com/company/code-crunch-club" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fab fa-linkedin text-xl"></i>
-                                <span class="text-xs mt-1">LinkedIn</span>
-                            </a>
-                            <a href="https://www.instagram.com/codecrunchclub/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fab fa-instagram text-xl"></i>
-                                <span class="text-xs mt-1">Instagram</span>
-                            </a>
-                            <a href="https://github.com/CODE-CRUNCH-CLUB" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fab fa-github text-xl"></i>
-                                <span class="text-xs mt-1">GitHub</span>
-                            </a>
-                            <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fab fa-youtube text-xl"></i>
-                                <span class="text-xs mt-1">YouTube</span>
-                            </a>
-                            <a href="https://fiu.campuslabs.com/engage/organization/codecrunch" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-university text-xl"></i>
-                                <span class="text-xs mt-1 text-center">Panther Connect</span>
-                            </a>
-                            <a href="https://codecrunchglobal.vercel.app/community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fab fa-discord text-xl"></i>
-                                <span class="text-xs mt-1">Discord</span>
-                            </a>
-                            <a href="https://codecrunchglobal.vercel.app/community-access.html" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-users text-xl"></i>
-                                <span class="text-xs mt-1">GroupMe</span>
-                            </a>
-                            <a href="https://hack-university.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-video text-xl"></i>
-                                <span class="text-xs mt-1">Zoom</span>
-                            </a>
-                            <a href="https://lu.ma/CODECRUNCH" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="far fa-calendar-alt text-xl"></i>
-                                <span class="text-xs mt-1 text-center">Event Calendar</span>
-                            </a>
-                            <a href="https://app.epichire.com/clubs/809/invite?code=mXjh9s" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-briefcase text-xl"></i>
-                                <span class="text-xs mt-1">EpicHire</span>
-                            </a>
-                            <a href="https://witty-suede-4a1.notion.site/ebd/1fe7f868cc8c8042b1ebfebc42034954" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-book text-xl"></i>
-                                <span class="text-xs mt-1 text-center">Course Schedule</span>
-                            </a>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScOA6IBnLxnxEnk-BOaXYyPXpJ3dU6Cu4OOrPJ7ErOgKvIdEQ/viewform?usp=dialog" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200">
-                                <i class="fas fa-clipboard-check text-xl"></i>
-                                <span class="text-xs mt-1">Attendance</span>
-                            </a>
-                        </div>
+
+    <footer class="hack-university-footer" role="contentinfo">
+    <div class="hack-university-footer-container">
+        <div class="hack-university-footer-grid">
+            <div>
+                <h3 class="hack-university-footer-title">
+                    Hack University 
+                    <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+                </h3>
+                <p class="hack-university-footer-description">
+                    A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+                </p>
+                <p class="hack-university-footer-description">
+                    <a href="http://HackUniversity.vercel.app" class="hack-university-footer-link hack-university-text-decoration-none hack-university-focus-visible">HackUniversity.vercel.app</a>
+                </p>
+                
+                <div class="hack-university-social-section">
+                    <h4 class="hack-university-social-title">Connect With Us:</h4>
+                    <div class="hack-university-social-grid">
+                        <a href="https://www.linkedin.com/showcase/hack-university-global/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">LinkedIn</span>
+                        </a>
+                        <a href="https://hackuniversity.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Instagram</span>
+                        </a>
+                        <a href="https://hackuniversity.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">GitHub</span>
+                        </a>
+                        <a href="https://hackuniversity.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">YouTube</span>
+                        </a>
+                        <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Discord</span>
+                        </a>
+                        <a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Calendar</span>
+                        </a>
                     </div>
                 </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#mission" class="text-sm opacity-80 hover:opacity-100">Mission</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#events" class="text-sm opacity-80 hover:opacity-100">Events</a></li>
-                        <li><a href="https://ba-00001.github.io/codecrunchclub/hackathons.html" class="text-sm opacity-80 hover:opacity-100">Hackathons</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/community-access.html" class="text-sm opacity-80 hover:opacity-100">Membership</a></li>
-                        <li><a href="#" class="text-sm opacity-80 hover:opacity-100">Join E-Board</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="text-sm opacity-80 hover:opacity-100">Resources</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#connect" class="text-sm opacity-80 hover:opacity-100">Connect</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/community-access.html" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100">Join Discord</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Contact</h3>
-                    <p class="text-sm opacity-80">
-                        Florida International University<br>
-                        Miami, FL<br>
-                        <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100">codecrunchclub@gmail.com</a>
-                    </p>
-                </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-white/20 text-center">
-                <p class="text-sm opacity-80">
-                    © <script>document.write(new Date().getFullYear())</script> Code Crunch. All rights reserved.
-                </p>
-                <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">
-                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" style="color: #4ecdc4; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Brian Bazurto</a> | Powered by innovation and collaboration
-                </p>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Quick Links</h3>
+                <ul class="hack-university-quick-links">
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Mission</a></li>
+                    <li><a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Events</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Hackathons</a></li>
+                    <li><a href="https://hackuniversity-membership.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Membership</a></li>
+                    <li><a href="https://hackuniversity-eboard.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join E-Board</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Resources</a></li>
+                    <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join Discord</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Contact</h3>
+                <address class="hack-university-contact-section">
+                    Florida International University<br>
+                    Miami, FL<br>
+                    <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link hack-university-text-decoration-none hack-university-focus-visible">codecrunchclub@gmail.com</a>
+                </address>
             </div>
         </div>
-    </footer>
+        
+        <div class="hack-university-footer-bottom">
+            <p class="hack-university-copyright">
+                © 2025 Hack University. All rights reserved.
+            </p>
+            <p class="hack-university-credits">
+                Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="hack-university-credits-link hack-university-text-decoration-none hack-university-focus-visible">Brian Bazurto</a> | Powered by innovation and collaboration
+            </p>
+        </div>
+    </div>
+</footer>
+
 
     <script>
-        // Smooth scrolling for anchor links
+        // Countdown Timer
+        function updateCountdown() {
+            // Set the date we're counting down to
+            const eventDate = new Date("2025-10-18T09:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.querySelector('.countdown').innerHTML = '<h3 style="color: #ffd700;">Event is Live! 🎉</h3>';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and detail cards
+        document.querySelectorAll('.feature-card, .detail-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // 
+        
+        //     Hack University Footer JavaScript
+
+
+        //
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced button interaction effects with performance optimization
+            const hackUniversityInteractiveElements = document.querySelectorAll('.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link');
+            
+            hackUniversityInteractiveElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    
+                    // Reset after animation
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+
+                // Improve touch feedback
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.9';
+                });
+
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '';
+                });
+            });
+
+            // Reduce motion for users who prefer it
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const hackUniversityAnimations = document.querySelectorAll('.hack-university-star');
+                hackUniversityAnimations.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+
+            // Add smooth scrolling for anchor links in footer
+            document.querySelectorAll('.hack-university-footer a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
         });
 
-        // Add some interactive hover effects
-        document.querySelectorAll('.info-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+
+        // 
+        
+        //     END
+
+
+        //
+
     </script>
 </body>
 </html>
