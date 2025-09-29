@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Notice - Hack University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #667eea;
+            --secondary-purple: #764ba2;
+            --accent-orange: #ffa726;
+            --accent-red: #ff6b6b;
+            --linkedin-blue: #0077b5;
+            --text-dark: #333;
+            --text-medium: #666;
+            --text-light: #555;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffeaa7;
+            --warning-text: #856404;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-purple) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--text-medium);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .notice {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            color: var(--warning-text);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .links {
+            margin: 30px 0;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-button.secondary {
+            background: linear-gradient(135deg, var(--linkedin-blue), #005885);
+        }
+
+        .about {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .about h3 {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .about p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .organizations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .org-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            color: var(--text-dark);
+            text-align: center;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .link-button {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .organizations {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hack University Footer Styles */
+        .hack-university-footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem 0 3rem 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .hack-university-footer-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hack-university-footer-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hack-university-footer-container {
+                padding: 0 2rem;
+            }
+        }
+
+        .hack-university-footer-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .hack-university-footer-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hack-university-footer-description {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .hack-university-footer-link {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .hack-university-footer-link:hover {
+            opacity: 0.9;
+        }
+
+        .hack-university-social-section {
+            margin-top: 1.5rem;
+        }
+
+        .hack-university-social-title {
+            font-size: 0.875rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .hack-university-social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-social-grid {
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hack-university-social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hack-university-social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .hack-university-social-link:hover {
+            color: #fde047;
+        }
+
+        .hack-university-social-icon {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-social-icon {
+                font-size: 1.25rem;
+            }
+        }
+
+        .hack-university-social-text {
+            font-size: 0.75rem;
+        }
+
+        .hack-university-quick-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hack-university-quick-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-quick-link {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-block;
+        }
+
+        .hack-university-quick-link:hover {
+            opacity: 1;
+        }
+
+        .hack-university-contact-section {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            font-style: normal;
+        }
+
+        .hack-university-contact-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hack-university-contact-link:hover {
+            opacity: 1;
+        }
+
+        .hack-university-footer-bottom {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .hack-university-footer-bottom {
+                margin-top: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        .hack-university-copyright {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-credits {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .hack-university-credits-link {
+            color: #67e8f9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .hack-university-credits-link:hover {
+            color: #a5f3fc;
+        }
+
+        .hack-university-focus-visible:focus {
+            outline: 2px solid #f59e0b;
+            outline-offset: 2px;
+        }
+
+        /* Animations */
+        @keyframes hack-university-twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hack-university-star {
+            animation: hack-university-twinkle 1.8s ease-in-out infinite;
+        }
+
+        /* Remove text decoration globally for footer */
+        .hack-university-text-decoration-none,
+        .hack-university-text-decoration-none:hover {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">⚠️</div>
+        
+        <h1>Service Notice</h1>
+        <p class="subtitle">This page is no longer in service</p>
+        
+        <div class="notice">
+            <strong>This website, form, or link is no longer in service.</strong>
+            <br><br>
+            Please visit our main website or contact us through LinkedIn if you have any questions.
+        </div>
+        
+        <div class="links">
+            <a href="https://hackuniversity.vercel.app" class="link-button" target="_blank">
+                🌐 Visit hackuniversity.vercel.app
+            </a>
+            <a href="https://hackuniversity-linkedin.vercel.app" class="link-button secondary" target="_blank">
+                💼 DM us at hackuniversity-linkedin.vercel.app
+            </a>
+        </div>
+        
+        <div class="about">
+            <h3>About Hack University</h3>
+            <p>
+                Hack University is formed by a collaborative effort uniting multiple student organizations 
+                and global communities with a mission to empower the next generation of innovators, 
+                developers, and leaders through hands-on learning, mentorship, and real-world project experience.
+            </p>
+            
+            <div class="organizations">
+                <div class="org-item">Google Developer Club at FIU</div>
+                <div class="org-item">Code Crunch Global</div>
+                <div class="org-item">ColorStack at FIU</div>
+                <div class="org-item">CAHSI at FIU</div>
+                <div class="org-item">Raspberry Pi Code Crunch</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="hack-university-footer" role="contentinfo">
+        <div class="hack-university-footer-container">
+            <div class="hack-university-footer-grid">
+                <div>
+                    <h3 class="hack-university-footer-title">
+                        Hack University 
+                        <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+                    </h3>
+                    <p class="hack-university-footer-description">
+                        A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+                    </p>
+                    <p class="hack-university-footer-description">
+                        <a href="https://hackuniversity.vercel.app" class="hack-university-footer-link hack-university-text-decoration-none hack-university-focus-visible">hackuniversity.vercel.app</a>
+                    </p>
+                    
+                    <div class="hack-university-social-section">
+                        <h4 class="hack-university-social-title">Connect With Us:</h4>
+                        <div class="hack-university-social-grid">
+                            <a href="https://www.linkedin.com/showcase/hack-university-global/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">LinkedIn</span>
+                            </a>
+                            <a href="https://www.instagram.com/hackuniversity" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">Instagram</span>
+                            </a>
+                            <a href="https://github.com/hackuniversity" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">GitHub</span>
+                            </a>
+                            <a href="https://www.youtube.com/@hackuniversity" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">YouTube</span>
+                            </a>
+                            <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">Discord</span>
+                            </a>
+                            <a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                                <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+                                <span class="hack-university-social-text">Calendar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="hack-university-footer-title">Quick Links</h3>
+                    <ul class="hack-university-quick-links">
+                        <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Mission</a></li>
+                        <li><a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Events</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Hackathons</a></li>
+                        <li><a href="https://hackuniversity-membership.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Membership</a></li>
+                        <li><a href="https://hackuniversity-eboard.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join E-Board</a></li>
+                        <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Resources</a></li>
+                        <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join Discord</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="hack-university-footer-title">Contact</h3>
+                    <address class="hack-university-contact-section">
+                        Florida International University<br>
+                        Miami, FL<br>
+                        <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link hack-university-text-decoration-none hack-university-focus-visible">codecrunchclub@gmail.com</a>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="hack-university-footer-bottom">
+                <p class="hack-university-copyright">
+                    © 2025 Hack University. All rights reserved.
+                </p>
+                <p class="hack-university-credits">
+                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="hack-university-credits-link hack-university-text-decoration-none hack-university-focus-visible">Brian Bazurto</a> | Powered by innovation and collaboration
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced button interaction effects with performance optimization
+            const hackUniversityInteractiveElements = document.querySelectorAll('.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link');
+            
+            hackUniversityInteractiveElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    
+                    // Reset after animation
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+
+                // Improve touch feedback
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.9';
+                });
+
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '';
+                });
+            });
+
+            // Reduce motion for users who prefer it
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const hackUniversityAnimations = document.querySelectorAll('.hack-university-star');
+                hackUniversityAnimations.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+
+            // Add smooth scrolling for anchor links in footer
+            document.querySelectorAll('.hack-university-footer a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
