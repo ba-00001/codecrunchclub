@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Organizations Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .partner-logo {
+            transition: transform 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        .social-grid a:hover {
+            transform: scale(1.1);
+        }
+        
+        .text-decoration-none {
+            text-decoration: none;
+        }
+        
+        .touch-target {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .focus-visible:focus-visible {
+            outline: 2px solid #fbbf24;
+            outline-offset: 2px;
+        }
+        
+        .will-change-transform {
+            will-change: transform;
+        }
+        
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        /* Footer Styles */
+        .hack-university-footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .hack-university-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hack-university-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hack-university-footer-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+
+        .hack-university-star {
+            font-size: 0.875rem;
+            animation: pulse 2s infinite;
+        }
+
+        .hack-university-footer-description {
+            color: #e5e7eb;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .hack-university-footer-link {
+            color: #60a5fa;
+            transition: color 0.3s ease;
+        }
+
+        .hack-university-footer-link:hover {
+            color: #fbbf24;
+        }
+
+        .hack-university-social-section {
+            margin-top: 1.5rem;
+        }
+
+        .hack-university-social-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #f3f4f6;
+        }
+
+        .hack-university-social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .hack-university-social-link {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            color: #d1d5db;
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+        }
+
+        .hack-university-social-link:hover {
+            color: #fbbf24;
+            background-color: rgba(251, 191, 36, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hack-university-social-icon {
+            margin-right: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .hack-university-social-text {
+            font-size: 0.875rem;
+        }
+
+        .hack-university-quick-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hack-university-quick-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-quick-link {
+            color: #d1d5db;
+            transition: all 0.3s ease;
+            padding: 0.25rem 0;
+            display: block;
+        }
+
+        .hack-university-quick-link:hover {
+            color: #fbbf24;
+            padding-left: 0.5rem;
+        }
+
+        .hack-university-contact-section {
+            font-style: normal;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .hack-university-contact-link {
+            color: #60a5fa;
+            transition: color 0.3s ease;
+        }
+
+        .hack-university-contact-link:hover {
+            color: #fbbf24;
+        }
+
+        .hack-university-footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .hack-university-copyright {
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+
+        .hack-university-credits {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .hack-university-credits-link {
+            color: #60a5fa;
+            transition: color 0.3s ease;
+        }
+
+        .hack-university-credits-link:hover {
+            color: #fbbf24;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .hack-university-footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .hack-university-social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <!-- Footer -->
+
+
+    <footer class="hack-university-footer" role="contentinfo">
+    <div class="hack-university-footer-container">
+        <div class="hack-university-footer-grid">
+            <div>
+                <h3 class="hack-university-footer-title">
+                    Hack University 
+                    <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+                </h3>
+                <p class="hack-university-footer-description">
+                    A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+                </p>
+                <p class="hack-university-footer-description">
+                    <a href="http://HackUniversity.vercel.app" class="hack-university-footer-link hack-university-text-decoration-none hack-university-focus-visible">HackUniversity.vercel.app</a>
+                </p>
+                
+                <div class="hack-university-social-section">
+                    <h4 class="hack-university-social-title">Connect With Us:</h4>
+                    <div class="hack-university-social-grid">
+                        <a href="https://www.linkedin.com/showcase/hack-university-global/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">LinkedIn</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Instagram</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">GitHub</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">YouTube</span>
+                        </a>
+                        <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Discord</span>
+                        </a>
+                        <a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Calendar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Quick Links</h3>
+                <ul class="hack-university-quick-links">
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Mission</a></li>
+                    <li><a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Events</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Hackathons</a></li>
+                    <li><a href="https://hackuniversity-membership.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Membership</a></li>
+                    <li><a href="https://hackuniversity-eboard.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join E-Board</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Resources</a></li>
+                    <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join Discord</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Contact</h3>
+                <address class="hack-university-contact-section">
+                    Florida International University<br>
+                    Miami, FL<br>
+                    <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link hack-university-text-decoration-none hack-university-focus-visible">codecrunchclub@gmail.com</a>
+                </address>
+            </div>
+        </div>
+        
+        <div class="hack-university-footer-bottom">
+            <p class="hack-university-copyright">
+                © 2025 Hack University. All rights reserved.
+            </p>
+            <p class="hack-university-credits">
+                Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="hack-university-credits-link hack-university-text-decoration-none hack-university-focus-visible">Brian Bazurto</a> | Powered by innovation and collaboration
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            // Set the date we're counting down to
+            const eventDate = new Date("2025-10-18T09:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.querySelector('.countdown').innerHTML = '<h3 style="color: #ffd700;">Event is Live! 🎉</h3>';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and detail cards
+        document.querySelectorAll('.feature-card, .detail-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // 
+        
+        //     Hack University Footer JavaScript
+
+
+        //
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced button interaction effects with performance optimization
+            const hackUniversityInteractiveElements = document.querySelectorAll('.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link');
+            
+            hackUniversityInteractiveElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    
+                    // Reset after animation
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+
+                // Improve touch feedback
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.9';
+                });
+
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '';
+                });
+            });
+
+            // Reduce motion for users who prefer it
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const hackUniversityAnimations = document.querySelectorAll('.hack-university-star');
+                hackUniversityAnimations.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+
+            // Add smooth scrolling for anchor links in footer
+            document.querySelectorAll('.hack-university-footer a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+
+        // 
+        
+        //     END
+
+
+        //
+
+    </script>
+</body>
+</html>
