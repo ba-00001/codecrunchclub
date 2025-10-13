@@ -7,157 +7,230 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
-        
-        /* Navigation */
-        nav { background: #667eea; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        nav .brand { color: white; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
-        nav .nav-links { display: flex; gap: 2rem; list-style: none; }
-        nav .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
-        nav .nav-links a:hover { opacity: 0.8; }
-        
-        /* Hero Section */
-        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 120px 0 80px; margin-top: 60px; text-align: center; }
-        .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
-        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem; }
-        
-        /* Section */
-        section { padding: 60px 0; }
-        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 3rem; color: #667eea; }
-        
-        /* Cards */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 2rem; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); border-color: #667eea; }
-        .card-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #667eea; }
-        
-        /* Buttons */
-        .btn-primary { background: #667eea; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 600; transition: 0.3s; border: none; }
-        .btn-primary:hover { background: #764ba2; transform: translateY(-2px); }
-        .btn-secondary { background: #32cd32; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 600; transition: 0.3s; }
-        .btn-secondary:hover { background: #28a428; transform: translateY(-2px); }
-        
-        /* Timeline */
-        .timeline { max-width: 800px; margin: 0 auto; }
-        .timeline-item { display: flex; gap: 2rem; margin-bottom: 2rem; }
-        .timeline-dot { width: 20px; height: 20px; background: #667eea; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-        .timeline-content { flex: 1; }
-        .timeline-content h4 { color: #667eea; margin-bottom: 0.5rem; }
-        .timeline-content .date { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        
-        /* Stats */
-        .stats { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin: 3rem 0; }
-        .stat { text-align: center; }
-        .stat-number { font-size: 3rem; font-weight: 700; color: #667eea; }
-        .stat-text { color: #666; }
-        
-        /* Footer */
-        footer { background: #1a1a1a; color: white; text-align: center; padding: 3rem 0; margin-top: 60px; }
-        footer a { color: #667eea; text-decoration: none; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1.1rem; }
-            nav .nav-links { flex-direction: column; gap: 1rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="empowher-styles.css">
 </head>
 <body>
 
 <!-- Navigation -->
-<nav>
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <a href="#" class="brand">EmpowHER 2025</a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#participate">Participate</a></li>
-            <li><a href="#tracks">Tracks</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#faq">FAQ</a></li>
-        </ul>
+        <a class="navbar-brand" href="#">EmpowHER 2025</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#participate">Participate</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracks">Tracks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
 <!-- Hero -->
-<div class="hero">
+<section class="hero">
     <div class="container">
         <h1>💜 EmpowHER Hackathon 2025</h1>
-        <p>Empowering women in technology through innovation, ethical AI, and blockchain solutions. Join us October 13-20, 2025!</p>
-        <div class="stats" style="color: white;">
-            <div class="stat">
-                <div class="stat-number" id="days-count">137</div>
-                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Days Until Start</div>
+        <p class="lead">Empowering women in technology through innovation, ethical AI, and blockchain solutions. Join us for a week of coding, collaboration, and creating positive change!</p>
+        
+        <div class="hero-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="days-countdown">137</div>
+                <div class="stat-label">Days Until Kick-Off</div>
+                <div class="stat-hours" id="hours-countdown">00h</div>
             </div>
-            <div class="stat">
+            <div class="stat-box">
                 <div class="stat-number">7</div>
-                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Days to Innovate</div>
+                <div class="stat-label">Days of Innovation</div>
             </div>
-            <div class="stat">
+            <div class="stat-box">
                 <div class="stat-number">2</div>
-                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Tracks</div>
+                <div class="stat-label">Tracks</div>
             </div>
         </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-secondary" target="_blank">
-            <i class="fas fa-rocket"></i> Register Now
-        </a>
-    </div>
-</div>
 
-<!-- About -->
-<section id="about">
+        <div class="hero-dates">
+            <span><i class="fas fa-calendar"></i> October 13-20, 2025</span>
+            <span><i class="fas fa-rocket"></i> Kick-Off: Oct 13 @ 10PM EST</span>
+            <span><i class="fas fa-trophy"></i> Closing: Oct 20 @ 10PM EST</span>
+            <span><i class="fas fa-laptop"></i> 100% Virtual</span>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-hero btn-primary" target="_blank">
+                <i class="fas fa-user-plus"></i> Register Now
+            </a>
+            <a href="https://codecrunch-zoom.vercel.app" class="btn-hero btn-secondary" target="_blank">
+                <i class="fas fa-video"></i> Join on Zoom
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About Theme -->
+<section id="about" class="section-white">
     <div class="container">
-        <h2 class="section-title">About EmpowHER</h2>
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-icon">👩‍💻</div>
+        <h2 class="section-title">🌟 THEME: Women in Tech, Ethical AI & Blockchain</h2>
+        <p class="text-center lead">Building technology that empowers, includes, and creates positive impact for communities worldwide.</p>
+        <p class="text-center">🌍 Especially welcoming women, non-binary individuals, and allies from ALL backgrounds!</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👩‍💻</div>
                 <h3>Women in Tech Focus</h3>
-                <p>Celebrating and amplifying women's voices in technology</p>
+                <p>Celebrating and amplifying women's voices in technology, creating inclusive solutions</p>
             </div>
-            <div class="card">
-                <div class="card-icon">🤖</div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
                 <h3>Ethical AI</h3>
-                <p>Build AI systems that are fair and beneficial for all</p>
+                <p>Build AI systems that are fair, transparent, and beneficial for all communities</p>
             </div>
-            <div class="card">
-                <div class="card-icon">🏆</div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
                 <h3>Win Recognition</h3>
-                <p>Top projects receive certificates and recognition</p>
+                <p>Track winners receive certificates and recognition for their outstanding projects</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⛓️</div>
+                <h3>Blockchain & More</h3>
+                <p>Optional tracks for emerging tech exploration</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Participate -->
-<section id="participate" style="background: #f8f9fa;">
+<section id="participate" class="section-gray">
     <div class="container">
-        <h2 class="section-title">How to Participate</h2>
+        <h2 class="section-title">Join the Hackathon</h2>
+        
         <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card" style="height: 100%;">
-                    <div class="card-icon">🌐</div>
-                    <h3>For Hackers</h3>
-                    <p><strong>Worldwide | All Universities | All Majors | Age 16+</strong></p>
-                    <p>Build innovative solutions, collaborate with teams, and compete for prizes!</p>
-                    <div style="margin-top: 2rem;">
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-primary" target="_blank">Register</a>
-                        <a href="hacks-toolkit.html" class="btn-primary" target="_blank" style="margin-left: 1rem;">Resources</a>
+            <!-- Hackers Card -->
+            <div class="col-lg-6 mb-4">
+                <div class="participate-card">
+                    <div class="card-header-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>🌐 For Hackers - Students</h3>
+                    <p class="eligibility"><strong>Worldwide | All Universities | All Majors | Age 16+</strong></p>
+                    <p class="note"><strong>Exception:</strong> If you are under 18, you may join but must have parent or guardian permission. They must be around during the event. If the event is in-person or includes an online session, you must have a permission form from your parent or guardian.</p>
+                    
+                    <div class="description-box">
+                        <h4><i class="fas fa-rocket"></i> Hacker - Student</h4>
+                        <p>Join as a participant to build innovative solutions, collaborate with interdisciplinary teams, learn cutting-edge technologies, and compete for prizes. Perfect for students from all majors who want to shape the future through technology!</p>
+                    </div>
+                    
+                    <div class="button-grid">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-action" target="_blank">
+                            <i class="fas fa-user-plus"></i> Register Now
+                        </a>
+                        <a href="agenda.html" class="btn-action" target="_blank">
+                            <i class="fas fa-calendar-alt"></i> Hack Agenda
+                        </a>
+                        <a href="hacks-toolkit.html" class="btn-action" target="_blank">
+                            <i class="fas fa-book"></i> Hacker Guide
+                        </a>
+                        <a href="https://devpost.com/" class="btn-action" target="_blank">
+                            <i class="fas fa-rocket"></i> Devpost Portal
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="card" style="height: 100%;">
-                    <div class="card-icon">🤝</div>
-                    <h3>Get Involved</h3>
-                    <p>Join as a mentor, judge, volunteer, or sponsor to support the next generation of tech leaders</p>
-                    <div style="margin-top: 2rem;">
-                        <a href="https://hackuniversity.vercel.app/" class="btn-secondary" target="_blank">Learn More</a>
+
+            <!-- Get Involved Card -->
+            <div class="col-lg-6 mb-4">
+                <div class="participate-card">
+                    <div class="card-header-icon green">
+                        <i class="fas fa-users"></i>
                     </div>
+                    <h3>🌟 Get Involved</h3>
+                    
+                    <div class="description-box">
+                        <p>Join our hackathon community! Whether you're an industry professional, student volunteer, fundraiser, or sponsor, your support drives innovation and empowers the next generation of tech leaders.</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <a href="https://hackuniversity.vercel.app/" class="btn-action green" target="_blank">
+                            <i class="fas fa-hands-helping"></i> Get Involved - Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section id="timeline" class="section-white">
+    <div class="container">
+        <h2 class="section-title">Hackathon Timeline</h2>
+        <p class="text-center lead">Mark these key dates in your calendar to stay on track throughout the event!</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker active"></div>
+                <div class="timeline-content active">
+                    <h4>Registration Open</h4>
+                    <div class="timeline-date">Since March 2025</div>
+                    <p><i class="fas fa-check-circle"></i> Registration is currently open! Join our inclusive community</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Kick-Off Ceremony</h4>
+                    <div class="timeline-date">October 13, 2025 at 10:00 PM EST</div>
+                    <p>🚀 Official hackathon kick-off! Challenges revealed and hacking begins</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Challenges Unlock</h4>
+                    <div class="timeline-date">October 13, 2025 at 11:00 PM EST</div>
+                    <p>⏰ All track challenges officially unlocked - start building technology for positive change</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Submission Deadline</h4>
+                    <div class="timeline-date">October 20, 2025 at 8:00 PM EST</div>
+                    <p>📦 Final project submissions due on DevPost - get everything in on time!</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Judge Repo Reviews</h4>
+                    <div class="timeline-date">October 20, 2025 from 8:00 PM - 10:00 PM EST</div>
+                    <p>🔍 Judges review project repositories and evaluate submissions</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Live Demos & Presentations</h4>
+                    <div class="timeline-date">October 20, 2025 at 10:00 PM EST</div>
+                    <p>🎤 Teams present their projects live! Showcase your innovation to judges and attendees</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Winners Announced</h4>
+                    <div class="timeline-date">October 20, 2025 around 11:00 PM EST</div>
+                    <p>🏆 Track winners announced during closing ceremony</p>
                 </div>
             </div>
         </div>
@@ -165,78 +238,233 @@
 </section>
 
 <!-- Tracks -->
-<section id="tracks">
+<section id="tracks" class="section-gray">
     <div class="container">
-        <h2 class="section-title">Hackathon Tracks</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>🌟 Track 1: General Track</h3>
-                <p><strong>Top 3 projects win!</strong></p>
-                <p>Women in Tech • Ethical AI • Blockchain • Inclusive Digital Solutions</p>
-            </div>
-            <div class="card">
-                <h3>💼 Track 2: Tech Unicorn</h3>
-                <p><strong>No-code startup pitch competition</strong></p>
-                <p>Pitch your startup idea with a deck, summary, and video presentation</p>
+        <h2 class="section-title">Hackathon Tracks 🧭</h2>
+        <p class="text-center lead">Two exciting tracks - build technology that empowers and includes!</p>
+        
+        <div id="mysteryBanner" class="unlock-banner">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🔓</div>
+            <h4>Challenges Unlock Soon!</h4>
+            <p>Challenge details will be automatically revealed <strong>1 hour after kick-off</strong> on <strong>October 13, 2025 at 11:00 PM EST</strong>.</p>
+            <p style="font-style: italic;">Get ready to build technology that empowers everyone! 💪✨</p>
+        </div>
+        
+        <!-- Track 1 -->
+        <div class="track-main">
+            <h3>🌟 Track 1: EmpowHER General Track</h3>
+            <p class="track-desc">Build innovative solutions in any of the challenge areas below. Top 3 projects win!</p>
+            
+            <div class="winners-box">
+                <h4>🏆 Winners</h4>
+                <p><strong>1st Place • 2nd Place • 3rd Place</strong></p>
+                <p class="note">Winners receive certificates and recognition</p>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Timeline -->
-<section id="timeline" style="background: #f8f9fa;">
-    <div class="container">
-        <h2 class="section-title">Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>Kick-Off Ceremony</h4>
-                    <div class="date">October 13, 2025 @ 10:00 PM EST</div>
-                    <p>Official hackathon kick-off via Zoom</p>
-                </div>
+        
+        <h4 class="text-center" style="margin: 3rem 0 2rem;">Challenge Areas (General Track)</h4>
+        <p class="text-center">Choose one or combine multiple areas for your project</p>
+        
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <h4>👩‍💻 Women in Tech Empowerment</h4>
+                <p>Build solutions that support, mentor, and amplify women's voices in technology.</p>
+                <div class="lock-badge"><i class="fas fa-lock"></i> Details unlock at 11:00 PM EST on Oct 13</div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>Submission Deadline</h4>
-                    <div class="date">October 20, 2025 @ 8:00 PM EST</div>
-                    <p>Final project submissions due on DevPost</p>
-                </div>
+            
+            <div class="challenge-card">
+                <h4>🤖 Ethical AI Solutions</h4>
+                <p>Create AI systems that are fair, transparent, and beneficial for all communities.</p>
+                <div class="lock-badge"><i class="fas fa-lock"></i> Details unlock at 11:00 PM EST on Oct 13</div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h4>Closing Ceremony & Winners</h4>
-                    <div class="date">October 20, 2025 @ 10:00 PM EST</div>
-                    <p>Live demos, presentations, and winner announcements</p>
-                </div>
+            
+            <div class="challenge-card">
+                <h4>⛓️ Blockchain for Social Good</h4>
+                <p>Leverage blockchain technology to create transparency and positive social impact.</p>
+                <div class="lock-badge"><i class="fas fa-lock"></i> Details unlock at 11:00 PM EST on Oct 13</div>
+            </div>
+            
+            <div class="challenge-card">
+                <h4>🌍 Inclusive Digital Solutions</h4>
+                <p>Build accessible and inclusive technology that serves diverse communities.</p>
+                <div class="lock-badge"><i class="fas fa-lock"></i> Details unlock at 11:00 PM EST on Oct 13</div>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="https://codecrunch-zoom.vercel.app" class="btn-primary" target="_blank">
-                <i class="fas fa-video"></i> Join on Zoom
-            </a>
+        
+        <!-- Track 2 -->
+        <div class="track-main unicorn">
+            <h3>💼 Track 2: Tech Unicorn Challenge</h3>
+            <p class="track-desc"><strong>Startup Pitch Competition</strong> – Present your innovative startup idea just like raising seed funding</p>
+            <p style="color: #f093fb; font-style: italic;">🚀 No coding required! Focus on your vision and business strategy</p>
+            
+            <div class="winners-box">
+                <h4>🏆 Winner</h4>
+                <p><strong>Best Pitch</strong></p>
+                <p class="note">Winner receives certificate and recognition</p>
+            </div>
+            
+            <button onclick="toggleUnicornDetails()" class="expand-btn">
+                📋 View Submission Requirements <i id="unicornArrow" class="fas fa-chevron-down"></i>
+            </button>
+            
+            <div id="unicornDetails" class="expandable-content">
+                <h5>📋 What to Submit:</h5>
+                
+                <div class="submission-item">
+                    <strong>1. Pitch Deck or Interactive Prototype</strong>
+                    <ul>
+                        <li>Professional pitch deck (10-15 slides) in PowerPoint, Google Slides, or PDF format</li>
+                        <li>May include: business model canvas, market analysis, financial projections, mockups</li>
+                        <li>Must be uploaded to your GitHub repository with a working preview link</li>
+                    </ul>
+                </div>
+                
+                <div class="submission-item">
+                    <strong>2. Executive Summary</strong>
+                    <ul>
+                        <li>Brief description of your startup vision and value proposition</li>
+                        <li>No more than one page in length (single-spaced, Word/PDF format)</li>
+                        <li>Explain what makes your idea innovative and market-ready</li>
+                        <li>Must be uploaded to GitHub repository</li>
+                    </ul>
+                </div>
+                
+                <div class="submission-item">
+                    <strong>3. Pitch Video Presentation</strong>
+                    <ul>
+                        <li>Present your startup pitch just like you're raising seed funding</li>
+                        <li>Maximum length: 10 minutes or less</li>
+                        <li>Upload video to GitHub repository (or provide YouTube/Loom link in README)</li>
+                        <li>URL must have authorization for judges to view</li>
+                        <li>Teams may decide which member(s) will present in the video</li>
+                    </ul>
+                </div>
+                
+                <div class="important-note">
+                    <strong>⚠️ Important:</strong> All materials (pitch deck, executive summary, video file or link, and any supporting documents) <strong>MUST be uploaded to your GitHub repository</strong>. NO CODE is required or allowed for this challenge.
+                </div>
+                
+                <div class="info-box">
+                    <strong>💡 Recommended Tools:</strong> PowerPoint, Google Slides, Canva, Figma, Pitch.com, Notion, Loom (for video), or any no-code/low-code platform
+                </div>
+                
+                <div class="info-box">
+                    <strong>📁 GitHub Repository Structure Example:</strong><br>
+                    • README.md (project overview & links)<br>
+                    • pitch-deck.pptx or pitch-deck.pdf<br>
+                    • executive-summary.pdf<br>
+                    • pitch-video.mp4 (or link in README)<br>
+                    • /supporting-docs/ (any additional materials)
+                </div>
+            </div>
+            
+            <div class="lock-badge unicorn"><i class="fas fa-lock"></i> Full challenge details unlock at 11:00 PM EST on Oct 13</div>
         </div>
     </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" class="section-white">
     <div class="container">
-        <h2 class="section-title">FAQ</h2>
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div class="card" style="margin-bottom: 1rem;">
-                <h3 style="font-size: 1.2rem;">Is it free?</h3>
-                <p>Yes! 100% free for all participants.</p>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question">What is EmpowHER Hackathon 2025?</button>
+                <div class="faq-answer">
+                    EmpowHER is a week-long virtual hackathon focused on Women in Tech, Ethical AI, and Blockchain for social good. It's designed to create an inclusive space where participants build technology that empowers communities and promotes positive change.
+                </div>
             </div>
-            <div class="card" style="margin-bottom: 1rem;">
-                <h3 style="font-size: 1.2rem;">Who can join?</h3>
-                <p>Everyone! Students from all universities, age 16+, all majors welcome.</p>
+
+            <div class="faq-item">
+                <button class="faq-question">Who can participate in EmpowHER?</button>
+                <div class="faq-answer">
+                    <strong>Everyone is welcome!</strong> While we especially encourage women and non-binary individuals to participate, allies from all backgrounds are invited. Students from all universities, high school students (16+), and participants from all majors are welcome.
+                </div>
             </div>
-            <div class="card">
-                <h3 style="font-size: 1.2rem;">Need experience?</h3>
-                <p>No! We provide resources, tutorials, and mentorship.</p>
+
+            <div class="faq-item">
+                <button class="faq-question">Do I need experience with AI or Blockchain?</button>
+                <div class="faq-answer">
+                    No prior experience required! We'll provide comprehensive resources, tutorials, and mentorship focused on ethical AI and blockchain for social good. Many successful projects come from teams learning these technologies during the hackathon.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Is there a registration fee?</button>
+                <div class="faq-answer">
+                    <strong>No!</strong> EmpowHER Hackathon is completely <strong>free</strong> for all participants. We are committed to making technology accessible and creating an inclusive environment for everyone.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What kind of projects should I build?</button>
+                <div class="faq-answer">
+                    Focus on projects that empower communities, promote inclusion, and create positive social impact. This could include solutions for women in tech mentorship, ethical AI applications, blockchain for transparency, or accessible technology for diverse communities.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How do teams work in EmpowHER?</button>
+                <div class="faq-answer">
+                    You can register solo or with a team of up to 4 members. Solo participants can join our Discord team formation channels to connect with others. We encourage diverse teams and provide mentorship to support collaborative learning.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What resources will be available?</button>
+                <div class="faq-answer">
+                    Participants get access to mentors via Discord, workshops on ethical AI and blockchain, starter templates, API keys, comprehensive documentation, and 24/7 support. We also provide resources specifically focused on women in tech initiatives.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How are projects judged?</button>
+                <div class="faq-answer">
+                    Projects are evaluated on innovation, social impact, technical implementation, inclusivity, and presentation quality. Our diverse panel of judges includes women leaders in tech, AI ethics experts, and blockchain specialists.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Resources -->
+<section id="resources" class="section-gray">
+    <div class="container">
+        <h2 class="section-title">Hackathon Resources</h2>
+        
+        <div class="resource-box">
+            <h3>🧰 Complete Resource Library</h3>
+            <p>For tutorials, starter code, tool recommendations, and more:</p>
+            <a href="hacks-toolkit.html" class="btn-action" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Hackathon Resources
+            </a>
+        </div>
+        
+        <div class="resource-box">
+            <h3>🔗 Stay Connected</h3>
+            <div class="social-links">
+                <a href="https://codecrunch.cs.fiu.edu" target="_blank"><i class="fas fa-globe"></i> Website</a>
+                <a href="https://ba-00001.github.io/codecrunchclub/index.html#connect" target="_blank"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://www.linkedin.com/company/code-crunch-club/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://www.instagram.com/codecrunchclub/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.youtube.com/@CODECRUNCH-CS-FIU-EDU" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="https://ba-00001.github.io/codecrunchclub/community-access.html" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            </div>
+        </div>
+        
+        <div class="sponsor-boxes">
+            <div class="sponsor-box">
+                <p>Interested in being a mentor, judge, workshop host, or organizer?</p>
+                <a href="https://forms.gle/rQ27QDLk6C4EDHon8" class="btn-action" target="_blank">
+                    <i class="fas fa-hands-helping"></i> Volunteer Form
+                </a>
+            </div>
+            <div class="sponsor-box">
+                <p>Want to support this event as a sponsor?</p>
+                <a href="cc-prospectus.html" class="btn-action" target="_blank">
+                    <i class="fas fa-file-download"></i> Download Prospectus
+                </a>
             </div>
         </div>
     </div>
@@ -246,20 +474,18 @@
 <footer>
     <div class="container">
         <p>&copy; 2025 EmpowHER Hackathon | Code Crunch Club</p>
-        <p>Built with ❤️ by <a href="https://www.linkedin.com/in/iba001/" target="_blank">Brian Bazurto</a></p>
+        <p>Empowering women in tech through innovation and inclusion</p>
+        <div class="footer-links">
+            <a href="contact.html">Contact</a>
+            <a href="hack5-code-of-conduct.html">Code of Conduct</a>
+            <a href="hack4-rules.html">Rules</a>
+        </div>
+        <p class="credit">Built with ❤️ by <a href="https://www.linkedin.com/in/iba001/" target="_blank">Brian Bazurto</a></p>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Simple countdown
-    const kickOff = new Date('2025-10-13T22:00:00-04:00');
-    setInterval(() => {
-        const now = new Date();
-        const days = Math.floor((kickOff - now) / (1000 * 60 * 60 * 24));
-        document.getElementById('days-count').textContent = days > 0 ? days : 'LIVE';
-    }, 60000);
-</script>
+<script src="empowher-scripts.js"></script>
 
 </body>
 </html>
