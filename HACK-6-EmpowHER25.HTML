@@ -433,39 +433,74 @@
 
 
 
-    <!-- Stats Section -->
-    <div class="stats-container">
-        <div class="stat-item">
-            <div class="stat-number">137</div>
-            <div class="stat-text">Days Until Start</div>
+<!-- Stats Section -->
+<div class="stats-container">
+    <div class="stat-item" id="kickoff-countdown-stat">
+        <div class="stat-number" id="kickoff-days">137</div>
+        <div class="stat-text" id="kickoff-text">Days Until Kick-Off</div>
+        <div style="font-size: 1.5rem; color: #764ba2; margin-top: 10px; font-weight: bold;" id="kickoff-hours">00h</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">7</div>
+        <div class="stat-text">Days of Innovation</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-text">Empowering Tracks</div>
+    </div>
+</div>
+
+<script>
+    // Separate Countdown for Kick-Off: October 13, 2025 @ 10:00 PM EST
+    function updateKickOffCountdown() {
+        const kickOffDate = new Date('2025-10-13T22:00:00-04:00'); // 10 PM EST
+        const now = new Date();
+        const timeLeft = kickOffDate - now;
+        
+        if (timeLeft <= 0) {
+            document.getElementById('kickoff-days').textContent = 'LIVE';
+            document.getElementById('kickoff-days').style.color = '#32cd32';
+            document.getElementById('kickoff-hours').textContent = 'NOW!';
+            document.getElementById('kickoff-hours').style.color = '#32cd32';
+            document.getElementById('kickoff-text').textContent = 'Kick-Off Active!';
+            return;
+        }
+        
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        
+        document.getElementById('kickoff-days').textContent = days;
+        document.getElementById('kickoff-hours').textContent = hours + 'h';
+    }
+    
+    updateKickOffCountdown();
+    setInterval(updateKickOffCountdown, 60000);
+</script>
+    
+<div style="margin: 3rem 0;">
+    <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+            <span style="font-size: 1.2rem;">📅</span> <strong>October 13-20, 2025</strong>
         </div>
-        <div class="stat-item">
-            <div class="stat-number">7</div>
-            <div class="stat-text">Days of Innovation</div>
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+            <span style="font-size: 1.2rem;">🚀</span> <strong>Kick-Off:</strong> Oct 13 @ 10:00 PM EST
         </div>
-        <div class="stat-item">
-            <div class="stat-number">5</div>
-            <div class="stat-text">Empowering Tracks</div>
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+            <span style="font-size: 1.2rem;">🎉</span> <strong>Closing:</strong> Oct 20 @ 10:00 PM EST
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
+            <span style="font-size: 1.2rem;">💻</span> <strong>100% Virtual</strong>
         </div>
     </div>
     
-    <div style="margin: 3rem 0;">
-        <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🗓️ Mark Your Calendar</h3>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0;">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
-                <span style="font-size: 1.2rem;">📅</span> <strong>October 13-20, 2025</strong>
-            </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
-                <span style="font-size: 1.2rem;">🚦</span> <strong>Start:</strong> Monday at 12:00 AM
-            </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
-                <span style="font-size: 1.2rem;">🏁</span> <strong>End:</strong> Monday at 11:59 PM
-            </div>
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 0.75rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.2);">
-                <span style="font-size: 1.2rem;">💻</span> <strong>100% Virtual</strong>
-            </div>
-        </div>
+    <!-- Agenda Button -->
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="agenda.html" target="_blank" class="apply-button" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 1.2rem; padding: 12px 30px;">
+            <i class="fas fa-calendar-alt me-2"></i> View Full Agenda
+        </a>
     </div>
+</div>
             
     <div style="margin: 3rem 0;">
         <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">💫 Why EmpowHER Is Your Opportunity</h3>
@@ -620,7 +655,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const releaseDate = new Date('2025-10-13T23:00:00');
+            const releaseDate = new Date('2025-10-13T23:00:00-04:00'); // 11 PM EST
+
             
             function updateCountdown() {
                 const currentDate = new Date();
@@ -636,13 +672,13 @@
                     }
                     
                     // Update stats to show "LIVE NOW"
-                    const daysCountdown = document.querySelector('.stat-item .stat-number');
-                    const daysText = document.querySelector('.stat-item .stat-text');
-                    if (daysCountdown && daysText) {
-                        daysCountdown.textContent = "LIVE";
-                        daysCountdown.style.color = "#32cd32";
-                        daysText.textContent = "NOW ACTIVE!";
-                    }
+                        const daysCountdown = document.querySelector('.stat-item .stat-number');
+                        const daysText = document.querySelector('.stat-item .stat-text');
+                        if (daysCountdown && daysText) {
+                            daysCountdown.textContent = "LIVE";
+                            daysCountdown.style.color = "#32cd32";
+                            daysText.textContent = "NOW ACTIVE!";
+                        }
                     
                     // Update all challenge locks
                     const lockedChallenges = document.querySelectorAll('.challenge-lock');
@@ -680,7 +716,7 @@
                         countdownEl.className = 'live-countdown';
                         countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; border: 1px solid rgba(102, 126, 234, 0.3);";
                         countdownEl.innerHTML = `
-                            <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #667eea;">Challenges unlock in:</p>
+                            <p style="font-size: 1.1rem; margin-bottom: 20px;">Each track will feature unique challenges automatically revealed <strong>1 hour after kick-off</strong> on <strong>October 13, 2025 at 11:00 PM EST</strong>.</p>
                             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
                                 <div style="text-align: center;">
                                     <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">${days}</div>
