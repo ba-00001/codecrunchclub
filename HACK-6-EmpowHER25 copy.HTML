@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowHER Hackathon 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        
+        /* Navigation */
+        nav { background: #667eea; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        nav .brand { color: white; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
+        nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+        nav .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav .nav-links a:hover { opacity: 0.8; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 120px 0 80px; margin-top: 60px; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem; }
+        
+        /* Section */
+        section { padding: 60px 0; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 3rem; color: #667eea; }
+        
+        /* Cards */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 2rem; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); border-color: #667eea; }
+        .card-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #667eea; }
+        
+        /* Buttons */
+        .btn-primary { background: #667eea; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 600; transition: 0.3s; border: none; }
+        .btn-primary:hover { background: #764ba2; transform: translateY(-2px); }
+        .btn-secondary { background: #32cd32; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 600; transition: 0.3s; }
+        .btn-secondary:hover { background: #28a428; transform: translateY(-2px); }
+        
+        /* Timeline */
+        .timeline { max-width: 800px; margin: 0 auto; }
+        .timeline-item { display: flex; gap: 2rem; margin-bottom: 2rem; }
+        .timeline-dot { width: 20px; height: 20px; background: #667eea; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+        .timeline-content { flex: 1; }
+        .timeline-content h4 { color: #667eea; margin-bottom: 0.5rem; }
+        .timeline-content .date { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        
+        /* Stats */
+        .stats { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin: 3rem 0; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 3rem; font-weight: 700; color: #667eea; }
+        .stat-text { color: #666; }
+        
+        /* Footer */
+        footer { background: #1a1a1a; color: white; text-align: center; padding: 3rem 0; margin-top: 60px; }
+        footer a { color: #667eea; text-decoration: none; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            nav .nav-links { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container">
+        <a href="#" class="brand">EmpowHER 2025</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#participate">Participate</a></li>
+            <li><a href="#tracks">Tracks</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="container">
+        <h1>💜 EmpowHER Hackathon 2025</h1>
+        <p>Empowering women in technology through innovation, ethical AI, and blockchain solutions. Join us October 13-20, 2025!</p>
+        <div class="stats" style="color: white;">
+            <div class="stat">
+                <div class="stat-number" id="days-count">137</div>
+                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Days Until Start</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">7</div>
+                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Days to Innovate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2</div>
+                <div class="stat-text" style="color: rgba(255,255,255,0.9);">Tracks</div>
+            </div>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-secondary" target="_blank">
+            <i class="fas fa-rocket"></i> Register Now
+        </a>
+    </div>
+</div>
+
+<!-- About -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title">About EmpowHER</h2>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">👩‍💻</div>
+                <h3>Women in Tech Focus</h3>
+                <p>Celebrating and amplifying women's voices in technology</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>Ethical AI</h3>
+                <p>Build AI systems that are fair and beneficial for all</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <h3>Win Recognition</h3>
+                <p>Top projects receive certificates and recognition</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Participate -->
+<section id="participate" style="background: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">How to Participate</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card" style="height: 100%;">
+                    <div class="card-icon">🌐</div>
+                    <h3>For Hackers</h3>
+                    <p><strong>Worldwide | All Universities | All Majors | Age 16+</strong></p>
+                    <p>Build innovative solutions, collaborate with teams, and compete for prizes!</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSer5wd8Mv7A60cApYnoH3Y_nJadg1f6NKGEr5DmtRI4HXoG4w/viewform" class="btn-primary" target="_blank">Register</a>
+                        <a href="hacks-toolkit.html" class="btn-primary" target="_blank" style="margin-left: 1rem;">Resources</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card" style="height: 100%;">
+                    <div class="card-icon">🤝</div>
+                    <h3>Get Involved</h3>
+                    <p>Join as a mentor, judge, volunteer, or sponsor to support the next generation of tech leaders</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="https://hackuniversity.vercel.app/" class="btn-secondary" target="_blank">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tracks -->
+<section id="tracks">
+    <div class="container">
+        <h2 class="section-title">Hackathon Tracks</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>🌟 Track 1: General Track</h3>
+                <p><strong>Top 3 projects win!</strong></p>
+                <p>Women in Tech • Ethical AI • Blockchain • Inclusive Digital Solutions</p>
+            </div>
+            <div class="card">
+                <h3>💼 Track 2: Tech Unicorn</h3>
+                <p><strong>No-code startup pitch competition</strong></p>
+                <p>Pitch your startup idea with a deck, summary, and video presentation</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section id="timeline" style="background: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Kick-Off Ceremony</h4>
+                    <div class="date">October 13, 2025 @ 10:00 PM EST</div>
+                    <p>Official hackathon kick-off via Zoom</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Submission Deadline</h4>
+                    <div class="date">October 20, 2025 @ 8:00 PM EST</div>
+                    <p>Final project submissions due on DevPost</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Closing Ceremony & Winners</h4>
+                    <div class="date">October 20, 2025 @ 10:00 PM EST</div>
+                    <p>Live demos, presentations, and winner announcements</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://codecrunch-zoom.vercel.app" class="btn-primary" target="_blank">
+                <i class="fas fa-video"></i> Join on Zoom
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="card" style="margin-bottom: 1rem;">
+                <h3 style="font-size: 1.2rem;">Is it free?</h3>
+                <p>Yes! 100% free for all participants.</p>
+            </div>
+            <div class="card" style="margin-bottom: 1rem;">
+                <h3 style="font-size: 1.2rem;">Who can join?</h3>
+                <p>Everyone! Students from all universities, age 16+, all majors welcome.</p>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 1.2rem;">Need experience?</h3>
+                <p>No! We provide resources, tutorials, and mentorship.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>&copy; 2025 EmpowHER Hackathon | Code Crunch Club</p>
+        <p>Built with ❤️ by <a href="https://www.linkedin.com/in/iba001/" target="_blank">Brian Bazurto</a></p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Simple countdown
+    const kickOff = new Date('2025-10-13T22:00:00-04:00');
+    setInterval(() => {
+        const now = new Date();
+        const days = Math.floor((kickOff - now) / (1000 * 60 * 60 * 24));
+        document.getElementById('days-count').textContent = days > 0 ? days : 'LIVE';
+    }, 60000);
+</script>
+
+</body>
+</html>
