@@ -807,92 +807,134 @@
     </div>
     
     <!-- Special Track with Expandable Content -->
-    <div style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(102, 126, 234, 0.2) 100%); border-radius: 16px; padding: 40px; margin: 40px 0; border: 2px solid rgba(240, 147, 251, 0.4);">
-        <h3 style="color: #f093fb; font-size: 2rem; margin-bottom: 1rem; text-align: center;">💼 Track 2: Tech Unicorn Challenge</h3>
-        <p style="color: #e0e0ff; text-align: center; font-size: 1.2rem; margin-bottom: 1rem;"><strong>Startup Pitch Competition</strong> – Present your innovative startup idea just like raising seed funding</p>
-        <p style="color: #f093fb; font-style: italic; text-align: center; margin-bottom: 2rem;">🚀 No coding required! Focus on your vision and business strategy</p>
-        
-        <div style="background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(50, 205, 50, 0.3); text-align: center;">
-            <h4 style="color: #32cd32; font-size: 1.3rem; margin-bottom: 10px;">🏆 Winner</h4>
-            <p style="font-size: 1.1rem; color: #e0e0ff; margin: 0;">
-                <strong>Best Pitch</strong>
-            </p>
-            <p style="font-size: 0.95rem; color: #e0e0ff; margin-top: 10px; font-style: italic;">
-                Winner receives certificate and recognition
-            </p>
-        </div>
-        
-        <!-- Expandable Requirements Section -->
-        <button onclick="toggleUnicornDetails()" style="width: 100%; background: linear-gradient(135deg, #f093fb, #667eea); color: white; border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; margin-bottom: 15px;">
-            <span>📋 View Submission Requirements</span>
-            <i id="unicornArrow" class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
-        </button>
-        
-        <div id="unicornDetails" style="display: none; overflow: hidden; transition: max-height 0.3s ease;">
-            <div style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 20px; margin: 0; border: 1px solid rgba(240, 147, 251, 0.2);">
-                <h5 style="color: #f093fb; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px;">📋 What to Submit:</h5>
-                
-                <div style="margin-left: 15px;">
-                    <p style="color: #e0e0ff; margin-bottom: 12px;">
-                        <strong>1. Pitch Deck or Interactive Prototype</strong><br>
-                        <span style="font-size: 0.95rem;">
-                            • Professional pitch deck (10-15 slides) in PowerPoint, Google Slides, or PDF format<br>
-                            • May include: business model canvas, market analysis, financial projections, mockups<br>
-                            • Must be uploaded to your GitHub repository with a working preview link
-                        </span>
-                    </p>
+<!-- Special Track with Expandable Content -->
+<!-- Special Track with Expandable Content -->
+        <div style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(102, 126, 234, 0.2) 100%); border-radius: 16px; padding: 40px; margin: 40px 0; border: 2px solid rgba(240, 147, 251, 0.4);">
+            <h3 style="color: #f093fb; font-size: 2rem; margin-bottom: 1rem; text-align: center;">💼 Track 2: Tech Unicorn Challenge</h3>
+            <p style="color: #e0e0ff; text-align: center; font-size: 1.2rem; margin-bottom: 1rem;"><strong>Startup Pitch Competition</strong> – Present your innovative startup idea just like raising seed funding</p>
+            <p style="color: #f093fb; font-style: italic; text-align: center; margin-bottom: 2rem;">🚀 No coding required! Focus on your vision and business strategy</p>
+            
+            <div style="background: rgba(50, 205, 50, 0.15); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(50, 205, 50, 0.3); text-align: center;">
+                <h4 style="color: #32cd32; font-size: 1.3rem; margin-bottom: 10px;">🏆 Winner</h4>
+                <p style="font-size: 1.1rem; color: #e0e0ff; margin: 0;">
+                    <strong>Best Pitch</strong>
+                </p>
+                <p style="font-size: 0.95rem; color: #e0e0ff; margin-top: 10px; font-style: italic;">
+                    Winner receives certificate and recognition
+                </p>
+            </div>
+            
+            <!-- Expandable Requirements Section -->
+            <button onclick="toggleUnicornDetails()" style="width: 100%; background: linear-gradient(135deg, #f093fb, #667eea); color: white; border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; margin-bottom: 15px;">
+                <span>📋 View Submission Requirements</span>
+                <i id="unicornArrow" class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
+            </button>
+            
+            <div id="unicornDetails" style="display: none; overflow: hidden; transition: max-height 0.3s ease;">
+                <div style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 20px; margin: 0; border: 1px solid rgba(240, 147, 251, 0.2);">
+                    <h5 style="color: #f093fb; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px;">📋 What to Submit:</h5>
                     
-                    <p style="color: #e0e0ff; margin-bottom: 12px;">
-                        <strong>2. Executive Summary</strong><br>
-                        <span style="font-size: 0.95rem;">
-                            • Brief description of your startup vision and value proposition<br>
-                            • No more than one page in length (single-spaced, Word/PDF format)<br>
-                            • Explain what makes your idea innovative and market-ready<br>
-                            • Must be uploaded to GitHub repository
-                        </span>
-                    </p>
+                    <div style="margin-left: 15px;">
+                        <p style="color: #e0e0ff; margin-bottom: 12px;">
+                            <strong>1. Pitch Deck or Interactive Prototype</strong><br>
+                            <span style="font-size: 0.95rem;">
+                                • Professional pitch deck (10-15 slides) in PowerPoint, Google Slides, or PDF format<br>
+                                • May include: business model canvas, market analysis, financial projections, mockups<br>
+                                • Must be uploaded to your GitHub repository with a working preview link
+                            </span>
+                        </p>
+                        
+                        <p style="color: #e0e0ff; margin-bottom: 12px;">
+                            <strong>2. Executive Summary</strong><br>
+                            <span style="font-size: 0.95rem;">
+                                • Brief description of your startup vision and value proposition<br>
+                                • No more than one page in length (single-spaced, Word/PDF format)<br>
+                                • Explain what makes your idea innovative and market-ready<br>
+                                • Must be uploaded to GitHub repository
+                            </span>
+                        </p>
+                        
+                        <p style="color: #e0e0ff; margin-bottom: 12px;">
+                            <strong>3. Pitch Video Presentation</strong><br>
+                            <span style="font-size: 0.95rem;">
+                                • Present your startup pitch just like you're raising seed funding<br>
+                                • Maximum length: 10 minutes or less<br>
+                                • Upload video to GitHub repository (or provide YouTube/Loom link in README)<br>
+                                • URL must have authorization for judges to view<br>
+                                • Teams may decide which member(s) will present in the video
+                            </span>
+                        </p>
+                    </div>
                     
-                    <p style="color: #e0e0ff; margin-bottom: 12px;">
-                        <strong>3. Pitch Video Presentation</strong><br>
-                        <span style="font-size: 0.95rem;">
-                            • Present your startup pitch just like you're raising seed funding<br>
-                            • Maximum length: 10 minutes or less<br>
-                            • Upload video to GitHub repository (or provide YouTube/Loom link in README)<br>
-                            • URL must have authorization for judges to view<br>
-                            • Teams may decide which member(s) will present in the video
-                        </span>
-                    </p>
+                    <div style="background: rgba(255, 99, 71, 0.15); border-radius: 8px; padding: 15px; margin-top: 20px; border: 1px solid rgba(255, 99, 71, 0.3);">
+                        <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
+                            <strong>⚠️ Important:</strong> All materials (pitch deck, executive summary, video file or link, and any supporting documents) <strong>MUST be uploaded to your GitHub repository</strong>. NO CODE is required or allowed for this challenge.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(102, 126, 234, 0.15); border-radius: 8px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.3);">
+                        <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
+                            <strong>💡 Recommended Tools:</strong> PowerPoint, Google Slides, Canva, Figma, Pitch.com, Notion, Loom (for video), or any no-code/low-code platform
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(102, 126, 234, 0.15); border-radius: 8px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.3);">
+                        <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
+                            <strong>📁 GitHub Repository Structure Example:</strong><br>
+                            • README.md (project overview & links)<br>
+                            • pitch-deck.pptx or pitch-deck.pdf<br>
+                            • executive-summary.pdf<br>
+                            • pitch-video.mp4 (or link in README)<br>
+                            • /supporting-docs/ (any additional materials)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LOCKED MESSAGE (visible before 11 PM) -->
+            <div class="challenge-lock" style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(240, 147, 251, 0.3);">
+                <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #f093fb;"></i> <span style="color: #f093fb;">Full challenge details unlock at 11:00 PM EST on Oct 13</span></p>
+            </div>
+            
+            <!-- UNLOCKED CONTENT (hidden until countdown triggers) -->
+            <div class="challenge-unlocked" style="display: none; background: rgba(50, 205, 50, 0.1); border-radius: 10px; padding: 20px; margin-top: 15px; border: 1px solid rgba(50, 205, 50, 0.3);">
+                <p style="margin: 0; margin-bottom: 15px;"><i class="fas fa-unlock me-2" style="color: #32cd32;"></i> <span style="color: #e0e0ff; font-weight: bold; font-size: 1.1rem;">🎉 Challenge Now Active!</span></p>
+                
+                <div style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid rgba(240, 147, 251, 0.2);">
+                    <h5 style="color: #f093fb; font-size: 1.05rem; margin-top: 0; margin-bottom: 10px;">🎯 Challenge Focus Areas:</h5>
+                    <ul style="text-align: left; color: #e0e0ff; font-size: 0.95rem; margin: 0; padding-left: 20px;">
+                        <li><strong>Women in Tech:</strong> Solutions that empower women entrepreneurs and close gender gaps in startup funding</li>
+                        <li><strong>Ethical AI:</strong> AI-powered startups focused on fairness, transparency, and social good</li>
+                        <li><strong>Social Impact:</strong> Technologies addressing community needs and creating positive change</li>
+                        <li><strong>Inclusive Innovation:</strong> Accessible products/services for diverse and underserved markets</li>
+                    </ul>
                 </div>
                 
-                <div style="background: rgba(255, 99, 71, 0.15); border-radius: 8px; padding: 15px; margin-top: 20px; border: 1px solid rgba(255, 99, 71, 0.3);">
-                    <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
-                        <strong>⚠️ Important:</strong> All materials (pitch deck, executive summary, video file or link, and any supporting documents) <strong>MUST be uploaded to your GitHub repository</strong>. NO CODE is required or allowed for this challenge.
-                    </p>
+                <div style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <h5 style="color: #667eea; font-size: 1.05rem; margin-top: 0; margin-bottom: 10px;">⚖️ Judging Criteria:</h5>
+                    <ul style="text-align: left; color: #e0e0ff; font-size: 0.95rem; margin: 0; padding-left: 20px;">
+                        <li><strong>Technical Difficulty:</strong> Complexity and technical sophistication of the proposed solution</li>
+                        <li><strong>Functionality:</strong> How well the startup concept solves the identified problem</li>
+                        <li><strong>Innovation & Creativity:</strong> Originality and uniqueness of the business idea</li>
+                        <li><strong>Design & User Experience:</strong> Quality of pitch deck design and presentation clarity</li>
+                        <li><strong>Impact & Usefulness:</strong> Potential positive impact on target market and society</li>
+                        <li><strong>Presentation & Demo:</strong> Quality and persuasiveness of video pitch delivery</li>
+                    </ul>
                 </div>
                 
-                <div style="background: rgba(102, 126, 234, 0.15); border-radius: 8px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.3);">
-                    <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
-                        <strong>💡 Recommended Tools:</strong> PowerPoint, Google Slides, Canva, Figma, Pitch.com, Notion, Loom (for video), or any no-code/low-code platform
-                    </p>
-                </div>
-                
-                <div style="background: rgba(102, 126, 234, 0.15); border-radius: 8px; padding: 15px; margin-top: 15px; border: 1px solid rgba(102, 126, 234, 0.3);">
-                    <p style="color: #e0e0ff; margin: 0; font-size: 0.95rem;">
-                        <strong>📁 GitHub Repository Structure Example:</strong><br>
-                        • README.md (project overview & links)<br>
-                        • pitch-deck.pptx or pitch-deck.pdf<br>
-                        • executive-summary.pdf<br>
-                        • pitch-video.mp4 (or link in README)<br>
-                        • /supporting-docs/ (any additional materials)
-                    </p>
+                <div style="background: rgba(50, 205, 50, 0.1); border-radius: 10px; padding: 15px; border: 1px solid rgba(50, 205, 50, 0.2);">
+                    <h5 style="color: #32cd32; font-size: 1.05rem; margin-top: 0; margin-bottom: 10px;">💡 Pitch Tips:</h5>
+                    <ul style="text-align: left; color: #e0e0ff; font-size: 0.95rem; margin: 0; padding-left: 20px;">
+                        <li>Start with a compelling problem statement that resonates with judges</li>
+                        <li>Clearly articulate your unique value proposition and competitive advantage</li>
+                        <li>Include realistic financial projections and funding requirements</li>
+                        <li>Demonstrate deep understanding of your target market and customers</li>
+                        <li>Show passion, confidence, and preparedness in your video presentation</li>
+                        <li>Address potential risks and your mitigation strategies</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
-        <div class="challenge-lock" style="background: rgba(240, 147, 251, 0.1); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px solid rgba(240, 147, 251, 0.3);">
-            <p style="margin: 0;"><i class="fas fa-lock me-2" style="color: #f093fb;"></i> <span style="color: #f093fb;">Full challenge details unlock at 11:00 PM EST on Oct 13</span></p>
-        </div>
-    </div>
 
     <script>
         // Toggle function for Tech Unicorn details
