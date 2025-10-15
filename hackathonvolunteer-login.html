@@ -60,7 +60,6 @@
             let email = inputField.value.trim();
             const resultDiv = document.getElementById("result");
             
-            // Info box that stays at the top
             const infoBox = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
             <strong style="color: #ffa500;">📋 Email Verification:</strong><br>
             • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, or any email used as Google account<br>
@@ -74,7 +73,6 @@
                 return;
             }
 
-            // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 resultDiv.innerHTML = infoBox + '❌ Please enter a valid email address.';
@@ -83,7 +81,6 @@
 
             resultDiv.innerHTML = infoBox + '⏳ Checking email address in official volunteer database...';
 
-            // ✅ YOUR CORRECT API URL
             const apiUrl = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
             
             try {
@@ -101,17 +98,15 @@
                     
                     if (data.length > 0 && data[0].status !== "No entry") {
                         data.forEach((entry) => {
-                            // ========================================
                             // WELCOME SECTION WITH DYNAMIC BUTTONS
-                            // ========================================
                             html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
                             html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
                             
-                            // Render dynamic buttons from API
+                            // Render dynamic buttons
                             if (entry.buttons && Array.isArray(entry.buttons)) {
                                 entry.buttons.forEach(button => {
                                     const bgColor = BUTTON_COLORS[button.color] || BUTTON_COLORS.blue;
-                                    html += `<div style="background: ${bgColor}; padding: 12px 15px; border-radius: 8px; margin: 10px 0; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">`;
+                                    html += `<div style="background: ${bgColor}; padding: 12px 15px; border-radius: 8px; margin: 10px 0; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">`;
                                     html += `<a href="${button.url}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05em; display: block;">${button.name}</a>`;
                                     if (button.description) {
                                         html += `<p style="margin: 5px 0 0; font-size: 0.85em; color: rgba(255,255,255,0.9);">${button.description}</p>`;
@@ -131,16 +126,13 @@
                             }
                             html += `</div>`;
                             
-                            // ========================================
                             // BASIC VOLUNTEER INFO
-                            // ========================================
                             html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
                             html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
                             html += `• Role/Status: ${entry.status}<br>`;
                             html += `• Form 2 Submitted: ${entry.timestamp || 'N/A'}<br>`;
                             html += `• Verified Email: ${entry.email}<br>`;
                             
-                            // Show additional info if available
                             if (entry.position && entry.position !== "Not available") {
                                 html += `• Position: ${entry.position}<br>`;
                             }
@@ -155,45 +147,10 @@
                             }
                             html += `</div>`;
                             
-                            // ========================================
-                            // VOLUNTEER COMMITMENTS/PREFERENCES
-                            // ========================================
-                            if (entry.volunteerPreferences && Object.keys(entry.volunteerPreferences).length > 0) {
-                                html += `<div style="background-color: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
-                                html += `<strong style="color: #00ff99;">✅ YOUR VOLUNTEER COMMITMENTS:</strong><br><br>`;
-                                
-                                Object.entries(entry.volunteerPreferences).forEach(([key, value]) => {
-                                    // Clean up the field name for better display
-                                    let cleanName = key
-                                        .replace(/([A-Z])/g, ' $1') // Add space before capital letters
-                                        .replace(/^./, str => str.toUpperCase()) // Capitalize first letter
-                                        .replace(/hack/i, 'Hack') // Capitalize "Hack"
-                                        .replace(/\d+/, match => '#' + match) // Add # before numbers
-                                        .trim();
-                                    
-                                    // Color code based on response
-                                    let valueColor = '#00ff99'; // Default green for commitments
-                                    if (value.toLowerCase().includes('judge')) {
-                                        valueColor = '#ffaa00'; // Orange for judges
-                                    } else if (value.toLowerCase().includes('mentor')) {
-                                        valueColor = '#00bfff'; // Blue for mentors
-                                    } else if (value.toLowerCase().includes('speaker')) {
-                                        valueColor = '#ff6b6b'; // Red for speakers
-                                    }
-                                    
-                                    html += `<div style="margin-bottom: 0.5rem;">`;
-                                    html += `• <strong style="color: #fff;">${cleanName}:</strong> `;
-                                    html += `<span style="color: ${valueColor}; font-weight: bold;">${value}</span>`;
-                                    html += `</div>`;
-                                });
-                                
-                                html += `</div>`;
-                            }
+                            // ❌ REMOVED: VOLUNTEER COMMITMENTS SECTION
                         });
                     } else {
-                        // ========================================
-                        // NOT FOUND / NOT A VOLUNTEER
-                        // ========================================
+                        // NOT FOUND
                         html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
                         html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
                         html += `• Status: No entry found in Form 2 database<br>`;
@@ -212,7 +169,6 @@
             }
         }
 
-        // Allow Enter key to trigger search
         document.getElementById('emailInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkOfficialVolunteerStatus();
