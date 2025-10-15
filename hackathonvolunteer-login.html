@@ -29,139 +29,167 @@
         Results will appear here...
     </div>
 
-    <script>
-        function checkDomain() {
-            const allowedDomain = 'codecrunchglobal.vercel.app';
-            const currentDomain = window.location.hostname;
+<script>
+    function checkDomain() {
+        const allowedDomain = 'codecrunchglobal.vercel.app';
+        const currentDomain = window.location.hostname;
+        
+        if (currentDomain !== allowedDomain) {
+            document.getElementById('result').innerHTML = 
+                `❌ This tool only works on pages from ${allowedDomain}`;
+            return false;
+        }
+        return true;
+    }
+
+    // JSONP function to bypass CORS
+    function jsonpRequest(url, callbackName) {
+        return new Promise((resolve, reject) => {
+            // Create unique callback name
+            const uniqueCallback = callbackName + '_' + Date.now();
             
-            if (currentDomain !== allowedDomain) {
-                document.getElementById('result').innerHTML = 
-                    `❌ This tool only works on pages from ${allowedDomain}`;
-                return false;
-            }
-            return true;
+            // Define callback function
+            window[uniqueCallback] = function(data) {
+                // Clean up
+                delete window[uniqueCallback];
+                document.body.removeChild(script);
+                resolve(data);
+            };
+
+            // Create script tag
+            const script = document.createElement('script');
+            script.src = url + '&callback=' + uniqueCallback;
+            script.onerror = function() {
+                delete window[uniqueCallback];
+                document.body.removeChild(script);
+                reject(new Error('JSONP request failed'));
+            };
+            
+            // Add to page
+            document.body.appendChild(script);
+        });
+    }
+
+    async function checkOfficialVolunteerStatus() {
+        if (!checkDomain()) {
+            return;
         }
 
-        async function checkOfficialVolunteerStatus() {
-            if (!checkDomain()) {
+        const inputField = document.getElementById("emailInput");
+        let email = inputField.value.trim();
+        const resultDiv = document.getElementById("result");
+        
+        const infoBox = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
+        <strong style="color: #ffa500;">📋 Email Verification:</strong><br>
+        • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, or any email used as Google account<br>
+        • <strong>Official Volunteers</strong>: Judges, Speakers, Mentors, Organizers<br>
+        • <strong>Form 2 participants</strong>: Those who filled out the volunteer confirmation form<br>
+        • <strong>Special roles</strong>: People with elevated permissions and responsibilities
+        </div>`;
+        
+        if (!email) {
+            resultDiv.innerHTML = infoBox + '❌ Please enter your email address from Form 2.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            resultDiv.innerHTML = infoBox + '❌ Please enter a valid email address.';
+            return;
+        }
+
+        resultDiv.innerHTML = infoBox + '⏳ Checking email address in official volunteer database...';
+
+        const apiUrl = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
+        
+        try {
+            const currentUrl = window.location.href;
+            const requestUrl = `${apiUrl}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`;
+            
+            // Use JSONP instead of fetch
+            const data = await jsonpRequest(requestUrl, 'volunteerCallback');
+            
+            if (data.error) {
+                resultDiv.innerHTML = infoBox + `❌ Error: ${data.error}`;
                 return;
             }
 
-            const inputField = document.getElementById("emailInput");
-            let email = inputField.value.trim();
-            const resultDiv = document.getElementById("result");
-            
-            const infoBox = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
-            <strong style="color: #ffa500;">📋 Email Verification:</strong><br>
-            • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, or any email used as Google account<br>
-            • <strong>Official Volunteers</strong>: Judges, Speakers, Mentors, Organizers<br>
-            • <strong>Form 2 participants</strong>: Those who filled out the volunteer confirmation form<br>
-            • <strong>Special roles</strong>: People with elevated permissions and responsibilities
-            </div>`;
-            
-            if (!email) {
-                resultDiv.innerHTML = infoBox + '❌ Please enter your email address from Form 2.';
-                return;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                resultDiv.innerHTML = infoBox + '❌ Please enter a valid email address.';
-                return;
-            }
-
-            resultDiv.innerHTML = infoBox + '⏳ Checking email address in official volunteer database...';
-
-            const apiUrl = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
-            
-            try {
-                const currentUrl = window.location.href;
-                const response = await fetch(`${apiUrl}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`);
-                const data = await response.json();
+            if (Array.isArray(data)) {
+                let html = infoBox + `<strong>Official Volunteer Status for "📧 <span style="color:white">${email}</span>":</strong><br>`;
                 
-                if (data.error) {
-                    resultDiv.innerHTML = infoBox + `❌ Error: ${data.error}`;
-                    return;
-                }
-
-                if (Array.isArray(data)) {
-                    let html = infoBox + `<strong>Official Volunteer Status for "📧 <span style="color:white">${email}</span>":</strong><br>`;
-                    
-                    if (data.length > 0 && data[0].status !== "No entry") {
-                        data.forEach((entry) => {
-                            // Discord section
-                            if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
-                                html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
-                                html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
-                                
-                                // Discord join link
-                                html += `<div style="background: linear-gradient(45deg, #7289da, #5865f2); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);">`;
-                                html += `<a href="${entry.discordJoinLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🚀 JOIN DISCORD SERVER 🚀</a>`;
-                                html += `</div>`;
-                                
-                                // Private channel link
-                                html += `<div style="background: linear-gradient(45deg, #43b581, #4caf50); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);">`;
-                                html += `<a href="${entry.privateChannelLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🔒 CHECK PRIVATE CHANNEL ACCESS 🔒</a>`;
-                                html += `</div>`;
-                                
-                                // Discord instructions
-                                let formattedInstructions = entry.discordInstructions
-                                    .replace(/\n/g, '<br>')
-                                    .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fff;">$1</strong>')
-                                    .replace(/`(.*?)`/g, '<code style="background: #333; padding: 2px 6px; border-radius: 3px; color: #ffaa00;">$1</code>');
-                                
-                                html += `<br>${formattedInstructions}`;
-                                html += `</div>`;
-                            }
+                if (data.length > 0 && data[0].status !== "No entry") {
+                    data.forEach((entry) => {
+                        // Discord section
+                        if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
+                            html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
+                            html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
                             
-                            // Basic info
-                            html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
-                            html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
-                            html += `• Role/Status: ${entry.status}<br>`;
-                            html += `• Form 2 Submitted: ${entry.timestamp}<br>`;
-                            html += `• Verified Email: ${entry.email}<br>`;
-                            
-                            if (entry.basicInfo) {
-                                if (entry.basicInfo.position && entry.basicInfo.position !== "Not available") {
-                                    html += `• Position: ${entry.basicInfo.position}<br>`;
-                                }
-                                if (entry.basicInfo.company && entry.basicInfo.company !== "Not available") {
-                                    html += `• Company: ${entry.basicInfo.company}<br>`;
-                                }
-                                if (entry.basicInfo.discordUsername && entry.basicInfo.discordUsername !== "Not available") {
-                                    html += `• Discord: ${entry.basicInfo.discordUsername}<br>`;
-                                }
-                                if (entry.basicInfo.githubProfile && entry.basicInfo.githubProfile !== "Not available") {
-                                    html += `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color: #00ff99;">${entry.basicInfo.githubProfile}</a><br>`;
-                                }
-                            }
+                            // Discord join link
+                            html += `<div style="background: linear-gradient(45deg, #7289da, #5865f2); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);">`;
+                            html += `<a href="${entry.discordJoinLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🚀 JOIN DISCORD SERVER 🚀</a>`;
                             html += `</div>`;
                             
-                            // ❌ REMOVED: ALL volunteer preferences sections
-                        });
-                    } else {
-                        html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
-                        html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
-                        html += `• Status: No entry found in Form 2 database<br>`;
-                        html += `• Email: ${email}<br>`;
-                        html += `• This means you are not registered as a Judge, Speaker, Mentor, or Organizer<br>`;
-                        html += `• Make sure you're using the same email address from Form 2<br>`;
+                            // Private channel link
+                            html += `<div style="background: linear-gradient(45deg, #43b581, #4caf50); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);">`;
+                            html += `<a href="${entry.privateChannelLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🔒 CHECK PRIVATE CHANNEL ACCESS 🔒</a>`;
+                            html += `</div>`;
+                            
+                            // Discord instructions
+                            let formattedInstructions = entry.discordInstructions
+                                .replace(/\n/g, '<br>')
+                                .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fff;">$1</strong>')
+                                .replace(/`(.*?)`/g, '<code style="background: #333; padding: 2px 6px; border-radius: 3px; color: #ffaa00;">$1</code>');
+                            
+                            html += `<br>${formattedInstructions}`;
+                            html += `</div>`;
+                        }
+                        
+                        // Basic info
+                        html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
+                        html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
+                        html += `• Role/Status: ${entry.status}<br>`;
+                        html += `• Form 2 Submitted: ${entry.timestamp}<br>`;
+                        html += `• Verified Email: ${entry.email}<br>`;
+                        
+                        if (entry.basicInfo) {
+                            if (entry.basicInfo.position && entry.basicInfo.position !== "Not available") {
+                                html += `• Position: ${entry.basicInfo.position}<br>`;
+                            }
+                            if (entry.basicInfo.company && entry.basicInfo.company !== "Not available") {
+                                html += `• Company: ${entry.basicInfo.company}<br>`;
+                            }
+                            if (entry.basicInfo.discordUsername && entry.basicInfo.discordUsername !== "Not available") {
+                                html += `• Discord: ${entry.basicInfo.discordUsername}<br>`;
+                            }
+                            if (entry.basicInfo.githubProfile && entry.basicInfo.githubProfile !== "Not available") {
+                                html += `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color: #00ff99;">${entry.basicInfo.githubProfile}</a><br>`;
+                            }
+                        }
                         html += `</div>`;
-                    }
-                    
-                    resultDiv.innerHTML = html;
+                    });
+                } else {
+                    html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
+                    html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
+                    html += `• Status: No entry found in Form 2 database<br>`;
+                    html += `• Email: ${email}<br>`;
+                    html += `• This means you are not registered as a Judge, Speaker, Mentor, or Organizer<br>`;
+                    html += `• Make sure you're using the same email address from Form 2<br>`;
+                    html += `</div>`;
                 }
-
-            } catch (error) {
-                console.error('Error checking status:', error);
-                resultDiv.innerHTML = infoBox + '❌ Failed to check official volunteer status. Please try again later.';
+                
+                resultDiv.innerHTML = html;
             }
+
+        } catch (error) {
+            console.error('Error checking status:', error);
+            resultDiv.innerHTML = infoBox + '❌ Failed to check official volunteer status. Please try again later.';
         }
+    }
 
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkOfficialVolunteerStatus();
-            }
-        });
-    </script>
+    document.getElementById('emailInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkOfficialVolunteerStatus();
+        }
+    });
+</script>
 </section>
