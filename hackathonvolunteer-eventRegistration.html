@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Professional Volunteer — Event Registration • Code Crunch</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --matrix-green:#00e676;
+      --cyber-blue:#00b0ff;
+      --neon-pink:#ff3d8d;
+      --hacker-purple:#8a2be2;
+      --warning:#ffc107;
+      --text-secondary:#4b5563;
+      --text-light:#6b7280;
+      --bg-color:#0d1117;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+
+    /* NAV */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
+
+    /* Timezone band */
+    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
+    .timezone-header{text-align:center;margin-bottom:18px}
+    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
+    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
+    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
+    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
+    .timezone-flag{font-size:18px;margin-bottom:6px}
+    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
+    .timezone-location{color:#5f6368;font-size:12px}
+
+    /* Main */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+
+    /* Portal buttons */
+    .portal-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
+      margin-top:14px
+    }
+    .portal-btn{
+      display:flex;flex-direction:column;gap:6px;
+      background:#fff;color:#111827;text-decoration:none;
+      padding:16px 18px;border-radius:12px;border:1px solid #e5e7eb;
+      font-family:"Courier New",monospace;font-weight:700;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      position:relative;
+    }
+    .portal-btn small{font-weight:500;color:#6b7280}
+    .portal-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(17,24,39,.08);border-color:#2563eb}
+    .portal-btn[aria-disabled="true"]{
+      pointer-events:none;
+      opacity:.7;
+      filter:grayscale(.25);
+    }
+    .portal-btn[aria-disabled="true"]:focus{outline:none}
+    .portal-note{margin-top:10px;color:#4b5563;font-size:.95rem;text-align:center}
+
+    /* Status badges */
+    .status-badge{position:absolute;top:10px;right:10px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
+    .status-open{background:#16a34a}     /* green */
+    .status-upcoming{background:#2563eb} /* blue */
+    .status-closed{background:#6b7280}   /* gray */
+
+    /* Legend chips */
+    .legend{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:14px}
+    .legend .chip{display:inline-block;border-radius:999px;color:#fff;padding:2px 10px;font:600 12px/1 system-ui}
+
+    /* Footer */
+    .cc-blue{background:#1a73e8}
+    .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
+    .footer h3{font-size:18px;font-weight:500;margin-bottom:16px;color:#fff}
+    .footer p{font-size:14px;opacity:.9;margin-bottom:16px;line-height:1.5}
+    .footer ul{list-style:none;padding:0;margin:0}
+    .footer li{margin-bottom:8px}
+    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.9;transition:opacity .2s ease}
+    .footer a:hover{opacity:1}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:8px;transition:color .2s ease}
+    .social-link:hover{color:#fbbf24}
+    .social-link i{font-size:18px;margin-bottom:4px}
+    .social-link span{font-size:11px;text-align:center}
+    .footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);text-align:center}
+    .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
+    .footer-bottom .credits{font-size:12px;opacity:.85}
+
+    @media (max-width:520px){.container{padding:16px}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TIMEZONE BAND -->
+  <div class="timezone-section">
+    <div class="timezone-header">
+      <h2>🏆 Hackathon HQ</h2>
+    </div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location">Miami, FL (ET)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- =========================
+         INDUSTRY PROFESSIONAL VOLUNTEER — EVENT REGISTRATION
+         (Judging & Expo Forms • Volunteers Only)
+         ========================= -->
+    <section class="surface" id="judging-expo-portals">
+      <h2 class="card-title" style="text-align:center">Industry Professional Volunteer — Event Registration</h2>
+      <p class="card-description" style="text-align:center;max-width:860px;margin:0 auto;">
+        These Judging & Expo Google Forms are <strong>restricted to approved volunteers for each hackathon</strong>.
+        You must be signed in with the <strong>same email</strong> used on your volunteer registration.
+      </p>
+
+      <!-- Legend -->
+      <div class="legend" aria-hidden="true">
+        <span class="chip" style="background:#16a34a">OPEN</span>
+        <span class="chip" style="background:#2563eb">OPENS SOON</span>
+        <span class="chip" style="background:#6b7280">CLOSED</span>
+      </div>
+
+      <div class="portal-grid" style="margin-top:16px">
+        <!-- SummerCodeX — CLOSED -->
+        <a class="portal-btn"
+           href="#REPLACE_WITH_GFORM_URL_SummerCodeX_2025"
+           aria-disabled="true" tabindex="-1"
+           title="Registration closed">
+          <span>🔒 SummerCodeX — Summer 2025</span>
+          <small>
+            <strong>Status:</strong> CLOSED ·
+            <strong>Opened:</strong> Jun 21, 2025 ·
+            <strong>Closed:</strong> Jul 21, 2025
+          </small>
+          <span class="status-badge status-closed">CLOSED</span>
+        </a>
+
+        <!-- 305 Hackathon Edition — OPENS SOON -->
+        <a class="portal-btn"
+           href="#REPLACE_WITH_GFORM_URL_305_Fall_2025"
+           aria-disabled="true" tabindex="-1"
+           title="Registration not open yet">
+          <span>🔒 305 Hackathon Edition — Fall 2025</span>
+          <small>
+            <strong>Status:</strong> OPENS SOON ·
+            <strong>Opens:</strong> Oct 20, 2025 ·
+            <strong>Closes:</strong> Nov 16, 2025
+          </small>
+          <span class="status-badge status-upcoming">OPENS SOON</span>
+        </a>
+
+        <!-- EmpowHer Hack — OPEN (live now) -->
+        <a class="portal-btn"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSeXMq0v0GD4cTIRRW4uEsTrShjr_wiOF0eCUIeCpCzk3w97mA/viewform?usp=dialog"
+           title="Open the EmpowHer Hackathon Online — Fall 2025 Judging & Expo Google Form">
+          <span>🔒 EmpowHer Hackathon Online — Fall 2025</span>
+          <small>
+            <strong>Status:</strong> OPEN ·
+            <strong>Opens:</strong> Oct 13, 2025 ·
+            <strong>Closes:</strong> Oct 15, 2025
+          </small>
+          <span class="status-badge status-open">OPEN</span>
+        </a>
+
+        <!-- EmpowHer Mini HackDay — OPEN (live now) -->
+        <a class="portal-btn"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSe_vntEUMjl2zMUqoEGcriNnlYoMS6IctCJ-yai1Otl4Lr2lw/viewform?usp=dialog"
+           title="Open the EmpowHer Mini HackDay (In-Person) — Fall 2025 Judging & Expo Google Form">
+          <span>🔒 EmpowHer Mini HackDay (In-Person) — Fall 2025</span>
+          <small>
+            <strong>Status:</strong> OPEN ·
+            <strong>Opens:</strong> Oct 13, 2025 ·
+            <strong>Closes:</strong> Oct 17, 2025
+          </small>
+          <span class="status-badge status-open">OPEN</span>
+        </a>
+
+        <!-- CodeFest — OPENS SOON -->
+        <a class="portal-btn"
+           href="#"
+           aria-disabled="true" tabindex="-1"
+           title="Registration not open yet">
+          <span>🔒 CodeFest — December 2025</span>
+          <small>
+            <strong>Status:</strong> OPENS SOON ·
+            <strong>Opens:</strong> Dec 08, 2025 ·
+            <strong>Closes:</strong> Dec 15, 2025
+          </small>
+          <span class="status-badge status-upcoming">OPENS SOON</span>
+        </a>
+      </div>
+
+      <div class="portal-note" style="max-width:900px;margin:12px auto 0;">
+        ✅ If your volunteer <em>Event Registration Response</em> already appears on the Google Sheet but you still can’t access a form,
+        please message us on LinkedIn with the <strong>last 5 characters of your Ticket ID (including the “#”)</strong>
+        — for example: <code>#A1B2C</code>.
+        &nbsp;<a href="https://codecrunchglobal-linkedin.vercel.app/" target="_blank" rel="noopener">Contact us on LinkedIn</a>.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (Hack University) -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👩🏽‍💻 🧑🏿‍💻</span></h3>
+          <p>
+            A collaborative effort uniting student organizations and global communities to empower the next generation of innovators.
+          </p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
+
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.9;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Minimal JS -->
+  <script>
+    // Timezone clocks
+    function updateTimes() {
+      const now = new Date();
+      const set = (id, tz) => {
+        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh = String(t.getHours()).padStart(2,'0');
+        const mm = String(t.getMinutes()).padStart(2,'0');
+        const ss = String(t.getSeconds()).padStart(2,'0');
+        const el = document.getElementById(id);
+        if (el) el.textContent = `${hh}:${mm}:${ss}`;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      updateTimes();
+      setInterval(updateTimes, 1000);
+    });
+  </script>
+</body>
+</html>
