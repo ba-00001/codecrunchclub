@@ -141,55 +141,60 @@
                             }
                             html += `</div>`;
                             
-                            // Show ALL volunteer preferences (complete responses from column C onwards)
-                            if (entry.volunteerPreferences && Object.keys(entry.volunteerPreferences).length > 0) {
-                                html += `<div style="background-color: #2a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffaa00; margin-top: 1rem;">`;
-                                html += `<strong style="color: #ffaa00;">🎯 ALL YOUR VOLUNTEER Form no2 RESPONSES :</strong><br><br>`;
+                            // // Show ALL volunteer preferences (complete responses from column C onwards)
+                            // if (entry.volunteerPreferences && Object.keys(entry.volunteerPreferences).length > 0) {
+                            //     html += `<div style="background-color: #2a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffaa00; margin-top: 1rem;">`;
+                            //     html += `<strong style="color: #ffaa00;">🎯 ALL YOUR VOLUNTEER Form no2 RESPONSES :</strong><br><br>`;
                                 
-                                Object.entries(entry.volunteerPreferences).forEach(([question, answer]) => {
-                                    // Clean up the question for better display
-                                    let cleanQuestion = question
-                                        .replace(/^\d+\.\s*/, '') // Remove leading numbers
-                                        .replace(/Would you be interested to volunteer for\s*/i, '') // Remove repetitive text
-                                        .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '') // Clean up HACK numbering
-                                        .replace(/\s*\[\s*/, ' [') // Clean spacing around brackets
-                                        .trim();
+                            //     Object.entries(entry.volunteerPreferences).forEach(([question, answer]) => {
+                            //         // Clean up the question for better display
+                            //         let cleanQuestion = question
+                            //             .replace(/^\d+\.\s*/, '') // Remove leading numbers
+                            //             .replace(/Would you be interested to volunteer for\s*/i, '') // Remove repetitive text
+                            //             .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '') // Clean up HACK numbering
+                            //             .replace(/\s*\[\s*/, ' [') // Clean spacing around brackets
+                            //             .trim();
                                     
-                                    // Color code the responses
-                                    let responseColor = '#ccc'; // Default gray
-                                    if (answer && answer !== 'Not available' && answer !== 'No' && answer.toLowerCase().includes('yes')) {
-                                        responseColor = '#00ff99'; // Green for positive responses
-                                    } else if (answer === 'No' || answer === 'Not available') {
-                                        responseColor = '#ff6b6b'; // Red for no/not available
-                                    }
+                            //         // Color code the responses
+                            //         let responseColor = '#ccc'; // Default gray
+                            //         if (answer && answer !== 'Not available' && answer !== 'No' && answer.toLowerCase().includes('yes')) {
+                            //             responseColor = '#00ff99'; // Green for positive responses
+                            //         } else if (answer === 'No' || answer === 'Not available') {
+                            //             responseColor = '#ff6b6b'; // Red for no/not available
+                            //         }
                                     
-                                    html += `<div style="margin-bottom: 0.8rem; padding: 0.5rem; background-color: #1a1a1a; border-radius: 4px;">`;
-                                    html += `<strong style="color: #fff; font-size: 0.9em;">${cleanQuestion}</strong><br>`;
-                                    html += `<span style="color: ${responseColor}; font-weight: bold;">→ ${answer || 'Not available'}</span>`;
-                                    html += `</div>`;
-                                });
+                            //         html += `<div style="margin-bottom: 0.8rem; padding: 0.5rem; background-color: #1a1a1a; border-radius: 4px;">`;
+                            //         html += `<strong style="color: #fff; font-size: 0.9em;">${cleanQuestion}</strong><br>`;
+                            //         html += `<span style="color: ${responseColor}; font-weight: bold;">→ ${answer || 'Not available'}</span>`;
+                            //         html += `</div>`;
+                            //     });
                                 
-                                html += `</div>`;
+                            //     html += `</div>`;
                                 
-                                // Also show a summary of positive responses
-                                if (entry.volunteerSummary && entry.volunteerSummary.length > 0) {
-                                    html += `<div style="background-color: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
-                                    html += `<strong style="color: #00ff99;">✅ SUMMARY - Events You're Volunteering For:</strong><br>`;
+                            //     // Also show a summary of positive responses
+                            //     if (entry.volunteerSummary && entry.volunteerSummary.length > 0) {
+                            //         html += `<div style="background-color: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
+                            //         html += `<strong style="color: #00ff99;">✅ SUMMARY - Events You're Volunteering For:</strong><br>`;
                                     
-                                    entry.volunteerSummary.forEach((pref) => {
-                                        let cleanEventName = pref.event
-                                            .replace(/^\d+\.\s*/, '')
-                                            .replace(/Would you be interested to volunteer for\s*/i, '')
-                                            .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '')
-                                            .replace(/\s*\[\s*/, ' [')
-                                            .trim();
+                            //         entry.volunteerSummary.forEach((pref) => {
+                            //             let cleanEventName = pref.event
+                            //                 .replace(/^\d+\.\s*/, '')
+                            //                 .replace(/Would you be interested to volunteer for\s*/i, '')
+                            //                 .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '')
+                            //                 .replace(/\s*\[\s*/, ' [')
+                            //                 .trim();
                                         
-                                        html += `• <strong>${cleanEventName}</strong>: <span style="color: #00ff99;">${pref.response}</span><br>`;
-                                    });
+                            //             html += `• <strong>${cleanEventName}</strong>: <span style="color: #00ff99;">${pref.response}</span><br>`;
+                            //         });
                                     
-                                    html += `</div>`;
-                                }
-                            }
+                            //         html += `</div>`;
+                            //     }
+
+
+                            // }
+
+
+
                         });
                     } else {
                         html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
