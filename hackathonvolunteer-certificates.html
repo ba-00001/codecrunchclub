@@ -1,2753 +1,893 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer Guide HACK UNIVERSITY Matrix</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    
-    <style>
-        :root {
-    --primary: #00ff41;
-    --primary-dark: #00cc33;
-    --primary-light: #33ff66;
-    --secondary: #ff0080;
-    --accent: #00d4ff;
-    --warning: #ffff00;
-    --danger: #ff3333;
-    
-    /* Hacker theme colors inspired by gaming/anime */
-    --matrix-green: #00ff41;
-    --cyber-blue: #00d4ff;
-    --neon-pink: #ff0080;
-    --electric-yellow: #ffff00;
-    --hacker-purple: #8a2be2;
-    --terminal-green: #39ff14;
-    
-    --bg-color: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-card: #111111;
-    --bg-card-light: #1a1a1a;
-    --text-primary: #00ff41;
-    --text-secondary: #33ff66;
-    --text-light: #66ff99;
-    --border-color: #00ff41;
-    
-    --shadow-sm: 0 0 10px rgba(0, 255, 65, 0.3);
-    --shadow: 0 0 20px rgba(0, 255, 65, 0.4);
-    --shadow-md: 0 0 30px rgba(0, 255, 65, 0.5);
-    --shadow-lg: 0 0 40px rgba(0, 255, 65, 0.6);
-    --radius: 0.75rem;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Courier New', monospace;
-    background: var(--bg-color);
-    color: var(--text-primary);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding-top: 80px;
-    position: relative;
-    overflow-x: hidden;
-}
-
-/* Matrix-style animated background */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(90deg, transparent 79px, rgba(0, 255, 65, 0.03) 81px, rgba(0, 255, 65, 0.03) 82px, transparent 84px),
-        linear-gradient(rgba(0, 255, 65, 0.03) 50%, transparent 50%);
-    background-size: 85px 85px;
-    z-index: -2;
-    animation: matrix-bg 20s linear infinite;
-}
-
-@keyframes matrix-bg {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(85px); }
-}
-
-/* Glitch effect */
-.glitch {
-    position: relative;
-    color: var(--matrix-green);
-    animation: glitch-skew 2s infinite linear alternate-reverse;
-}
-
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch::before {
-    animation: glitch-anim 0.5s infinite linear alternate-reverse;
-    color: var(--cyber-blue);
-    z-index: -1;
-}
-
-.glitch::after {
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-    color: var(--neon-pink);
-    z-index: -2;
-}
-
-@keyframes glitch-anim {
-    0% { clip: rect(42px, 9999px, 44px, 0); }
-    5% { clip: rect(12px, 9999px, 59px, 0); }
-    10% { clip: rect(48px, 9999px, 29px, 0); }
-    15% { clip: rect(42px, 9999px, 73px, 0); }
-    20% { clip: rect(63px, 9999px, 27px, 0); }
-    25% { clip: rect(34px, 9999px, 55px, 0); }
-    30% { clip: rect(86px, 9999px, 73px, 0); }
-    35% { clip: rect(20px, 9999px, 20px, 0); }
-    40% { clip: rect(26px, 9999px, 60px, 0); }
-    45% { clip: rect(25px, 9999px, 66px, 0); }
-    50% { clip: rect(57px, 9999px, 98px, 0); }
-    55% { clip: rect(5px, 9999px, 46px, 0); }
-    60% { clip: rect(82px, 9999px, 31px, 0); }
-    65% { clip: rect(54px, 9999px, 27px, 0); }
-    70% { clip: rect(28px, 9999px, 99px, 0); }
-    75% { clip: rect(45px, 9999px, 69px, 0); }
-    80% { clip: rect(23px, 9999px, 85px, 0); }
-    85% { clip: rect(54px, 9999px, 84px, 0); }
-    90% { clip: rect(45px, 9999px, 47px, 0); }
-    95% { clip: rect(37px, 9999px, 20px, 0); }
-    100% { clip: rect(4px, 9999px, 91px, 0); }
-}
-
-@keyframes glitch-anim2 {
-    0% { clip: rect(65px, 9999px, 100px, 0); }
-    5% { clip: rect(52px, 9999px, 74px, 0); }
-    10% { clip: rect(79px, 9999px, 85px, 0); }
-    15% { clip: rect(75px, 9999px, 5px, 0); }
-    20% { clip: rect(67px, 9999px, 61px, 0); }
-    25% { clip: rect(14px, 9999px, 79px, 0); }
-    30% { clip: rect(1px, 9999px, 66px, 0); }
-    35% { clip: rect(86px, 9999px, 30px, 0); }
-    40% { clip: rect(23px, 9999px, 98px, 0); }
-    45% { clip: rect(85px, 9999px, 72px, 0); }
-    50% { clip: rect(71px, 9999px, 75px, 0); }
-    55% { clip: rect(2px, 9999px, 48px, 0); }
-    60% { clip: rect(30px, 9999px, 16px, 0); }
-    65% { clip: rect(59px, 9999px, 50px, 0); }
-    70% { clip: rect(41px, 9999px, 62px, 0); }
-    75% { clip: rect(2px, 9999px, 82px, 0); }
-    80% { clip: rect(47px, 9999px, 73px, 0); }
-    85% { clip: rect(3px, 9999px, 27px, 0); }
-    90% { clip: rect(26px, 9999px, 55px, 0); }
-    95% { clip: rect(42px, 9999px, 97px, 0); }
-    100% { clip: rect(38px, 9999px, 49px, 0); }
-}
-
-@keyframes glitch-skew {
-    2%, 64% { transform: skew(0deg); }
-    4%, 60% { transform: skew(2deg); }
-    62% { transform: skew(0deg) skew(5deg); }
-}
-
-.container {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* Navigation Styles */
-.navbar {
-    background: rgba(0, 0, 0, 0.95) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-    border-bottom: 2px solid var(--matrix-green);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 0.75rem 0;
-}
-
-.navbar-custom {
-    background: rgba(0, 0, 0, 0.95) !important;
-    backdrop-filter: blur(10px);
-}
-
-.navbar-brand {
-    color: var(--text-secondary) !important;
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-brand:hover {
-    color: var(--matrix-green) !important;
-    text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
-}
-
-/* Support Us Button */
-.support-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(45deg, var(--neon-pink), var(--hacker-purple));
-    color: white;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 0.875rem;
-    font-family: 'Courier New', monospace;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid var(--neon-pink);
-    box-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
-}
-
-.support-btn:hover {
-    background: linear-gradient(45deg, var(--hacker-purple), var(--neon-pink));
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255, 0, 128, 0.6);
-}
-
-/* Hamburger Menu */
-.hamburger-menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 4px;
-    z-index: 1060 !important;
-    position: relative !important;
-}
-
-.hamburger-menu:focus {
-    box-shadow: 0 0 0 2px var(--matrix-green);
-    outline: none;
-}
-
-.hamburger-line {
-    width: 100%;
-    height: 3px;
-    background: var(--matrix-green);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 5px var(--matrix-green);
-}
-
-.hamburger-menu:hover .hamburger-line {
-    background: var(--cyber-blue);
-    box-shadow: 0 0 10px var(--cyber-blue);
-}
-
-/* Fix for disappearing navigation menu */
-.offcanvas.show {
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.offcanvas {
-    background: rgba(0, 0, 0, 0.98) !important;
-    backdrop-filter: blur(15px) !important;
-    border-left: 2px solid var(--matrix-green) !important;
-    box-shadow: -10px 0 30px rgba(0, 255, 65, 0.3) !important;
-    width: 350px !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    z-index: 1055 !important;
-    transform: translateX(100%) !important;
-    transition: transform 0.3s ease-in-out !important;
-}
-
-.offcanvas-body {
-    padding: 1rem 1.5rem 2rem !important;
-    overflow-y: auto !important;
-    max-height: calc(100vh - 120px) !important;
-    flex-grow: 1 !important;
-    display: block !important;
-}
-
-.offcanvas-header {
-    border-bottom: 2px solid var(--matrix-green) !important;
-    padding: 1.5rem !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-}
-
-.offcanvas-title {
-    color: var(--matrix-green);
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--matrix-green);
-    margin: 0;
-}
-
-/* Ensure the backdrop doesn't interfere */
-.offcanvas-backdrop {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    z-index: 1050 !important;
-}
-
-/* Close Button Fix */
-.custom-close {
-    background: transparent !important;
-    border: 2px solid var(--matrix-green) !important;
-    border-radius: 50% !important;
-    width: 2rem !important;
-    height: 2rem !important;
-    opacity: 1 !important;
-    filter: none !important;
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.custom-close span {
-    color: var(--matrix-green) !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-}
-
-.custom-close:hover,
-.custom-close:focus {
-    background: var(--matrix-green) !important;
-    transform: scale(1.1) !important;
-    opacity: 1 !important;
-}
-
-.custom-close:hover span,
-.custom-close:focus span {
-    color: var(--bg-color) !important;
-}
-
-/* Navigation Menu Items - Prevent disappearing */
-.nav-menu {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: block !important;
-    width: 100% !important;
-}
-
-.nav-section-title {
-    color: var(--cyber-blue);
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 1.5rem 0 0.75rem 0;
-    padding: 0.5rem;
-    border-left: 4px solid var(--cyber-blue);
-    background: rgba(0, 212, 255, 0.1);
-    text-shadow: 0 0 5px var(--cyber-blue);
-}
-
-.nav-section-title:first-child {
-    margin-top: 0;
-}
-
-.nav-item {
-    margin-bottom: 0.5rem !important;
-    display: block !important;
-}
-
-.nav-link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    color: var(--text-secondary) !important;
-    text-decoration: none !important;
-    padding: 0.75rem !important;
-    border-radius: var(--radius) !important;
-    transition: all 0.3s ease !important;
-    font-family: 'Courier New', monospace !important;
-    font-weight: 500 !important;
-    position: relative !important;
-    overflow: hidden !important;
-    width: 100% !important;
-}
-
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.nav-link:hover::before {
-    left: 100%;
-}
-
-.nav-link:hover {
-    color: var(--matrix-green) !important;
-    background: rgba(0, 255, 65, 0.1) !important;
-    transform: translateX(5px) !important;
-    text-shadow: 0 0 10px var(--matrix-green) !important;
-    text-decoration: none !important;
-}
-
-.nav-link i {
-    font-size: 1.1rem;
-    width: 1.5rem;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-/* Hackathon Link Improvements */
-.hackathon-main {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.hackathon-link {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.25rem !important;
-}
-
-.nav-date {
-    font-size: 0.75rem !important;
-    color: var(--text-light) !important;
-    margin-left: 2.25rem !important;
-    font-style: italic !important;
-}
-
-.archived {
-    opacity: 0.7;
-}
-
-.archived:hover {
-    color: var(--text-light) !important;
-    background: rgba(102, 102, 102, 0.1) !important;
-}
-
-/* Partner Logos in Menu */
-.menu-partners {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--matrix-green);
-    flex-shrink: 0;
-}
-
-.partner-logos {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    align-items: center;
-}
-
-.partner-logos a {
-    transition: all 0.3s ease;
-    border-radius: 50%;
-    padding: 0.5rem;
-    background: rgba(0, 255, 65, 0.1);
-    border: 1px solid var(--matrix-green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.partner-logos a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px var(--matrix-green);
-}
-
-/* Header Styles */
-.header {
-    padding: 3.5rem 0 2rem;
-    position: relative;
-}
-
-.header-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-}
-
-.header-title {
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--matrix-green);
-    margin-bottom: 0.5rem;
-    font-family: 'Courier New', monospace;
-    text-shadow: 
-        0 0 10px var(--matrix-green),
-        0 0 20px var(--matrix-green),
-        0 0 30px var(--matrix-green);
-    animation: pulse-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-glow {
-    from {
-        text-shadow: 
-            0 0 10px var(--matrix-green),
-            0 0 20px var(--matrix-green),
-            0 0 30px var(--matrix-green);
-    }
-    to {
-        text-shadow: 
-            0 0 5px var(--matrix-green),
-            0 0 10px var(--matrix-green),
-            0 0 15px var(--matrix-green),
-            0 0 20px var(--matrix-green);
-    }
-}
-
-.header-subtitle {
-    font-size: 1.125rem;
-    color: var(--text-secondary);
-    max-width: 640px;
-    font-family: 'Courier New', monospace;
-    margin: 0 auto;
-}
-
-/* Main Content */
-.content {
-    padding: 2rem 0 4rem;
-}
-
-.card {
-    background: rgba(17, 17, 17, 0.9);
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--matrix-green);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    padding: 2rem;
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--matrix-green), var(--cyber-blue), var(--neon-pink), var(--electric-yellow));
-    border-radius: var(--radius) var(--radius) 0 0;
-}
-
-.card-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-    position: relative;
-    display: inline-block;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px var(--matrix-green);
-}
-
-.card-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -0.5rem;
-    width: 60%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--matrix-green), var(--cyber-blue));
-    border-radius: 2px;
-    box-shadow: 0 0 10px var(--matrix-green);
-}
-
-.card-description {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    font-family: 'Courier New', monospace;
-}
-
-/* Discord Join Button */
-.discord-section {
-    text-align: center;
-    padding: 3rem 0;
-}
-
-.discord-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(45deg, #5865F2, #7289da);
-    color: white;
-    font-weight: 700;
-    padding: 1.5rem 3rem;
-    border-radius: var(--radius);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    gap: 1rem;
-    font-size: 1.25rem;
-    font-family: 'Courier New', monospace;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 3px solid #5865F2;
-    box-shadow: 0 0 25px rgba(88, 101, 242, 0.6);
-    position: relative;
-    overflow: hidden;
-}
-
-.discord-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.discord-button:hover::before {
-    left: 100%;
-}
-
-.discord-button:hover {
-    background: linear-gradient(45deg, #4752C4, #5865F2);
-    color: white;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 40px rgba(88, 101, 242, 0.8);
-}
-
-.discord-icon {
-    font-size: 2rem;
-}
-
-.register-note {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: rgba(255, 193, 7, 0.1);
-    border: 2px solid var(--warning);
-    border-radius: var(--radius);
-    color: var(--warning);
-    font-family: 'Courier New', monospace;
-    text-align: center;
-}
-
-/* Checklist Section */
-.checklist-section {
-    background: rgba(17, 17, 17, 0.95);
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--cyber-blue);
-    border-radius: var(--radius);
-    padding: 2rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
-    position: relative;
-}
-
-.checklist-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--cyber-blue), var(--matrix-green), var(--neon-pink));
-    border-radius: var(--radius) var(--radius) 0 0;
-}
-
-.checklist-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--cyber-blue);
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px var(--cyber-blue);
-    text-align: center;
-}
-
-.checklist-subtitle {
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    font-family: 'Courier New', monospace;
-    text-align: center;
-    font-style: italic;
-}
-
-.checklist {
-    list-style: none;
-    padding: 0;
-}
-
-.checklist-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: rgba(0, 212, 255, 0.1);
-    border-left: 4px solid var(--cyber-blue);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    transition: all 0.3s ease;
-}
-
-.checklist-item:hover {
-    background: rgba(0, 212, 255, 0.2);
-    transform: translateX(5px);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-}
-
-.checklist-number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    background: var(--cyber-blue);
-    color: var(--bg-color);
-    border-radius: 50%;
-    font-weight: 700;
-    font-family: 'Courier New', monospace;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px var(--cyber-blue);
-}
-
-.checklist-text {
-    color: var(--text-secondary);
-    font-family: 'Courier New', monospace;
-    line-height: 1.5;
-}
-
-.checklist-link {
-    color: var(--cyber-blue);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.checklist-link:hover {
-    color: var(--matrix-green);
-    text-shadow: 0 0 10px var(--matrix-green);
-}
-
-/* Footer Styles */
-.footer {
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 2rem 0;
-    border-top: 2px solid var(--matrix-green);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-}
-
-.footer-container {
-    text-align: center;
-}
-
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.footer-description {
-    color: var(--text-light);
-    font-size: 0.875rem;
-    font-family: 'Courier New', monospace;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.footer-website {
-    margin-bottom: 1rem;
-}
-
-.footer-website-link {
-    color: var(--matrix-green);
-    text-decoration: none;
-    font-size: 1rem;
-    font-family: 'Courier New', monospace;
-    transition: all 0.3s ease;
-}
-
-.footer-website-link:hover {
-    color: var(--cyber-blue);
-    text-shadow: 0 0 10px var(--cyber-blue);
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1rem;
-}
-
-.footer-link {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-family: 'Courier New', monospace;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.footer-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background: var(--matrix-green);
-    transition: width 0.3s ease;
-}
-
-.footer-link:hover::after {
-    width: 100%;
-}
-
-.footer-link:hover {
-    color: var(--matrix-green);
-    text-shadow: 0 0 10px var(--matrix-green);
-}
-
-.footer-copyright {
-    color: var(--text-light);
-    font-size: 0.75rem;
-    font-family: 'Courier New', monospace;
-    margin-bottom: 0.5rem;
-}
-
-.footer-credits {
-    color: var(--text-light);
-    font-size: 0.75rem;
-    font-family: 'Courier New', monospace;
-}
-
-.footer-credits-link {
-    color: var(--cyber-blue);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.footer-credits-link:hover {
-    color: var(--matrix-green);
-    text-shadow: 0 0 10px var(--matrix-green);
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .header-title {
-        font-size: 2.5rem;
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Certificates • Code Crunch</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --matrix-green:#00e676;
+      --cyber-blue:#00b0ff;
+      --neon-pink:#ff3d8d;
+      --hacker-purple:#8a2be2;
+      --warning:#ffc107;
+      --text-secondary:#4b5563;
+      --text-light:#6b7280;
+      --bg-color:#0d1117;
     }
 
-    .discord-button {
-        padding: 1.25rem 2rem;
-        font-size: 1rem;
+    /* simple cards & checklist/fAQ scaffolding */
+    .card{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
+    .card-title{font-size:20px;font-weight:600;margin-bottom:8px}
+    .card-description{color:#5f6368}
+
+    .checklist{list-style:none;padding:0;margin:12px 0}
+    .checklist-item{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+    .checklist-number{
+      width:28px;height:28px;border-radius:50%;
+      background:#1a73e8;color:#fff;display:flex;align-items:center;justify-content:center;
+      font-weight:700;flex:0 0 28px
     }
+    .checklist-text{color:#374151;line-height:1.6}
 
-    .footer-links {
-        flex-direction: column;
-        gap: 1rem;
+    .faq-section{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
+    .faq-title{font-size:20px;font-weight:600}
+    .faq-subtitle{color:#5f6368;margin-bottom:12px}
+    .faq-container{margin-top:8px}
+    .faq-item{border-top:1px solid #eee}
+    .faq-item:first-child{border-top:0}
+    .faq-question{
+      width:100%;text-align:left;background:#f8fafc;border:0;padding:12px;border-radius:8px;
+      display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:600
     }
-}
+    .faq-icon{margin-right:8px}
+    .faq-answer{display:none;padding:12px 4px;color:#374151}
+    .faq-item.open .faq-answer{display:block}
+    .faq-item.open .faq-arrow{transform:rotate(180deg)}
 
-@media (max-width: 576px) {
-    .header-title {
-        font-size: 2rem;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+
+    /* NAV */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
+
+    /* Timezone band */
+    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
+    .timezone-header{text-align:center;margin-bottom:18px}
+    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
+    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
+    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
+    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
+    .timezone-flag{font-size:18px;margin-bottom:6px}
+    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
+    .timezone-location{color:#5f6368;font-size:12px}
+
+    /* Main */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+    #result{margin-top:16px;background:#111827;color:#d1fae5;border-radius:12px;padding:16px;font-family:monospace}
+
+    .info-box{background:#1a1a2e;border-left:4px solid #ffa500;border-radius:8px;padding:12px;margin-bottom:12px;color:#fff}
+
+    /* Certificate Generator small utilities */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
+    .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
+    .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
+    .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
+    .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
+    .alert{padding:.75rem;border-radius:4px;border:1px solid}
+    .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
+    .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
+    .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
+
+    /* Certificate preview canvas (A4-ish landscape) */
+    .certificate-container{
+      width:1123px;height:794px;background:#fff;border:8px solid #B8860B;border-radius:10px;padding:40px;color:#333;
+      font-family:"Times New Roman",serif;position:relative;margin:0 auto 20px;box-sizing:border-box
     }
+    .certificate-container h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
+    .certificate-container .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
+    .certificate-container .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center}
+    .certificate-container .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center}
+    .certificate-container .body{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
+    .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
 
-    .discord-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.875rem;
-    }
+    .certificates-grid{display:grid;gap:3rem;margin-top:2rem}
+    .btn-green{padding:12px 24px;background:#28a745;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
+    .btn-green:hover{background:#218838;transform:translateY(-2px)}
+    .btn-blue{padding:15px 30px;background:#2196f3;color:#fff;border:none;border-radius:8px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
+    .btn-blue:hover{background:#1976d2;transform:translateY(-2px)}
+    .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
 
-    .checklist-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-    }
+    @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
+    @media (max-width:900px){.certificate-container{transform:scale(.65)}}
+    @media (max-width:700px){.certificate-container{transform:scale(.55)}}
 
-    .offcanvas {
-        width: 300px !important;
-    }
-    
-    .support-btn span {
-        display: none !important;
-    }
-    
-    .navbar-brand span {
-        display: none !important;
-    }
-}
+    /* Footer (Hack University) */
+    .cc-blue{background:#1a73e8}
+    .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
+    .footer h3{font-size:18px;font-weight:500;margin-bottom:16px;color:#fff}
+    .footer p{font-size:14px;opacity:.9;margin-bottom:16px;line-height:1.5}
+    .footer ul{list-style:none;padding:0;margin:0}
+    .footer li{margin-bottom:8px}
+    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.9;transition:opacity .2s ease}
+    .footer a:hover{opacity:1}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:8px;transition:color .2s ease}
+    .social-link:hover{color:#fbbf24}
+    .social-link i{font-size:18px;margin-bottom:4px}
+    .social-link span{font-size:11px;text-align:center}
+    .footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);text-align:center}
+    .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
+    .footer-bottom .credits{font-size:12px;opacity:.85}
 
-/* Embed NOTION 
-
-*
-*
-*
-**
-*
-*
-*
-*/
-       /* Embed container styles */
-.embed-container {
-    min-height: calc(100vh - 80px);
-    background: #ffffff;
-    width: 90%;
-    margin: 0 auto;
-    max-width: none;
-}
-
-.notion-iframe {
-    width: 100%;
-    height: calc(100vh - 80px);
-    border: none;
-    background: #ffffff;
-}
-
-.loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #787774;
-    font-size: 14px;
-    z-index: 5;
-}
-
-.loading::after {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-left: 8px;
-    border: 2px solid #e1e5e9;
-    border-top: 2px solid #37352f;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}      
-
-
-/* END Embed NOTION 
-
-*
-*
-*
-**
-*
-*
-*
-*/
-
-
-/* faq Styles */
-/*  */
-/*  */
-/*  */
-/*  */
-/* faq Styles */
-
-/* FAQ Section Styles */
-.faq-section {
-    background: rgba(17, 17, 17, 0.95);
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--hacker-purple);
-    border-radius: var(--radius);
-    padding: 2rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 0 40px rgba(138, 43, 226, 0.6);
-    position: relative;
-}
-
-.faq-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--hacker-purple), var(--neon-pink), var(--cyber-blue));
-    border-radius: var(--radius) var(--radius) 0 0;
-}
-
-.faq-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--hacker-purple);
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px var(--hacker-purple);
-    text-align: center;
-}
-
-.faq-subtitle {
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    font-family: 'Courier New', monospace;
-    text-align: center;
-    font-style: italic;
-}
-
-.faq-container {
-    max-width: 100%;
-}
-
-.faq-item {
-    margin-bottom: 1rem;
-    border: 1px solid rgba(138, 43, 226, 0.3);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-}
-
-.faq-item:hover {
-    border-color: var(--hacker-purple);
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
-}
-
-.faq-question {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.faq-question:hover {
-    color: var(--hacker-purple);
-    background: rgba(138, 43, 226, 0.05);
-}
-
-.faq-question::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.faq-question:hover::before {
-    left: 100%;
-}
-
-.faq-icon {
-    color: var(--neon-pink);
-    font-weight: 700;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-.faq-arrow {
-    margin-left: auto;
-    transition: transform 0.3s ease;
-    color: var(--hacker-purple);
-}
-
-.faq-item.active .faq-arrow {
-    transform: rotate(180deg);
-}
-
-.faq-item.active .faq-icon {
-    color: var(--hacker-purple);
-    transform: rotate(90deg);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    background: rgba(138, 43, 226, 0.02);
-}
-
-.faq-item.active .faq-answer {
-    max-height: 500px;
-    padding: 1.25rem;
-}
-
-.faq-answer p {
-    color: var(--text-light);
-    font-family: 'Courier New', monospace;
-    line-height: 1.6;
-    margin: 0;
-}
-
-.faq-answer strong {
-    color: var(--neon-pink);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .faq-question {
-        padding: 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 1rem;
-    }
-    
-    .faq-title {
-        font-size: 1.5rem;
-    }
-}
-
-/* faq Styles */
-/*  */
-/*  */
-/*  */
-/*  */
-/* end faq Styles */
-
-
-    </style>
+    @media (max-width:520px){.container{padding:16px}}
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-custom">
-        <div class="container-fluid px-3">
-            <div class="d-flex align-items-center w-100">
-                <!-- Logo -->
-                <a class="navbar-brand me-3" href="index.html">
-                    <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch Club Logo" height="50" class="me-1" />
-                    <span class="d-none d-sm-inline">Code Crunch</span>
-                </a>
-                              <a class="navbar-brand me-3" href="https://colorstackatfiu.vercel.app">
-                    <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="Color Stack at FIU Logo" height="50" class="me-1" />
-                    <span class="d-none d-sm-inline">ColorStack at FIU</span>
-                </a>
-                              <a class="navbar-brand me-3" href="https://cahsiatfiu.vercel.app/">
-                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" height="50" class="me-1" />
-                    <span class="d-none d-sm-inline">CAHSI at FIU</span>
-                </a>
-
-                
-                <!-- Support Us Button -->
-                <a href="https://hack-university-fundraiser.vercel.app/" class="support-btn me-auto" target="_blank">
-                    <i class="bi bi-heart-fill"></i>
-                    <span class="d-none d-sm-inline">Support Us</span>
-                </a>
-                
-                <!-- Hamburger Menu Button -->
-                <button class="navbar-toggler hamburger-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" 
-                        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Off-canvas Mobile Menu -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title glitch" id="mobileMenuLabel" data-text="HACKER MENU">HACKER MENU</h5>
-                <button type="button" class="btn-close btn-close-white custom-close" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="nav-menu">
-                    <!-- Main Navigation -->
-                    <li class="nav-section-title">MAIN NAVIGATION</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://Hacks-at-fiu.vercel.app" target="_blank">
-                            <i class="bi bi-shield-check"></i>
-                            <span>Hacker Guide</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://Hacksatfiu-toolkit.vercel.app">
-                            <i class="bi bi-tools"></i>
-                            <span>Hack Toolkit</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://ba-00001.github.io/codecrunchclub/hackathons.html">
-                            <i class="bi bi-calendar-event"></i>
-                            <span>All Hackathons</span>
-                        </a>
-                    </li>
-                    
-                    <!-- Active Missions -->
-                    <li class="nav-section-title">🚀 ACTIVE MISSIONS</li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-4-SummerCodeX25.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-box"></i>
-                                <span>SummerCodeX 2025</span>
-                            </div>
-                            <span class="nav-date">Jul 21-28, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-5-305-HACK-FALL2025.html">
-                            <div class="hackathon-main">
-                                <i class="bi bi-buildings"></i>
-                                <span>305 Hackathon: Fall 2025 Siege</span>
-                            </div>
-                            <span class="nav-date">Sep 20-22, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-6-EmpowHER25.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-person-hearts"></i>
-                                <span>EmpowHER Hackathon 2025</span>
-                            </div>
-                            <span class="nav-date">Oct 13-20, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-7-CodeFest25.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-stars"></i>
-                                <span>CodeFest 2025</span>
-                            </div>
-                            <span class="nav-date">Dec 8-15, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-8-HackFiestaMiami26.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-globe"></i>
-                                <span>HackFiesta Miami 2026</span>
-                            </div>
-                            <span class="nav-date">Mar 9-15, 2026</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link" href="https://ba-00001.github.io/codecrunchclub/HACK-9-305HackathonSpring26.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-shield-shaded"></i>
-                                <span>305 Hackathon: Spring 2026</span>
-                            </div>
-                            <span class="nav-date">Mar 28-30, 2026</span>
-                        </a>
-                    </li>
-                    
-                    <!-- Archived Operations -->
-                    <li class="nav-section-title">📁 ARCHIVED OPERATIONS</li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACK-3-CODESTORM25.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-cloud-lightning"></i>
-                                <span>CodeStorm 2025</span>
-                            </div>
-                            <span class="nav-date">May 19-26, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/305HACK-SPRING25.html">
-                            <div class="hackathon-main">
-                                <i class="bi bi-shield-shaded"></i>
-                                <span>305 Hack: Spring 2025</span>
-                            </div>
-                            <span class="nav-date">Mar 29-31, 2025</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hackathon-link archived" href="https://ba-00001.github.io/codecrunchclub/HACKFIESTA-SPRING25.HTML">
-                            <div class="hackathon-main">
-                                <i class="bi bi-cpu"></i>
-                                <span>HackFiesta Miami 2025</span>
-                            </div>
-                            <span class="nav-date">Mar 21-23, 2025</span>
-                        </a>
-                    </li>
-                </ul>
-                
-                <!-- Partner Logos in Menu -->
-                <div class="menu-partners">
-                    <div class="partner-logos">
-                        <a href="https://codecrunchglobal.vercel.app/" target="_blank">
-                            <img src="https://github.com/user-attachments/assets/c359ccd5-2470-4ba5-a8fe-a32ee12a4e0a" alt="Code Crunch" height="30">
-                        </a>
-                        <a href="https://colorstackatfiu.vercel.app" target="_blank">
-                            <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack" height="30">
-                        </a>
-                        <a href="https://cahsiatfiu.vercel.app/" target="_blank">
-                            <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI" height="30">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-        <!-- clock Section -->
-        <!-- ***************** -->
-        <!-- ***************** -->
-        <!-- ***************** -->
-        <!--  Section -->
-        <!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
-        <!-- International Time Clock Bar - Add this right after the closing </nav> tag -->
-        <div id="time-bar" class="time-bar">
-            <div class="container-fluid">
-                <div class="time-zones">
-                    <div class="time-zone">
-                        <div class="timezone-label">🏆 Hackathon HQ</div>
-                        <div class="timezone-time" id="hackathon-time"></div>
-                        <div class="timezone-location">Miami, FL (EST)</div>
-                    </div>
-                    <div class="time-zone">
-                        <div class="timezone-label">🇪🇺 Europe</div>
-                        <div class="timezone-time" id="europe-time"></div>
-                        <div class="timezone-location">London (GMT)</div>
-                    </div>
-                    <div class="time-zone">
-                        <div class="timezone-label">🌍 Africa</div>
-                        <div class="timezone-time" id="africa-time"></div>
-                        <div class="timezone-location">Lagos (WAT)</div>
-                    </div>
-                    <div class="time-zone">
-                        <div class="timezone-label">🌏 Asia</div>
-                        <div class="timezone-time" id="asia-time"></div>
-                        <div class="timezone-location">Tokyo (JST)</div>
-                    </div>
-                    <div class="time-zone">
-                        <div class="timezone-label">🇦🇺 Australia</div>
-                        <div class="timezone-time" id="australia-time"></div>
-                        <div class="timezone-location">Sydney (AEDT)</div>
-                    </div>
-                    <div class="time-zone">
-                        <div class="timezone-label">🇮🇳 India</div>
-                        <div class="timezone-time" id="india-time"></div>
-                        <div class="timezone-location">Mumbai (IST)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-        /* International Time Clock Bar Styles */
-        .time-bar {
-            position: fixed;
-            top: 82px; /* Adjust based on your navbar height */
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
-            backdrop-filter: blur(15px);
-            border-bottom: 2px solid var(--matrix-green, #00ff41);
-            z-index: 999;
-            padding: 8px 0;
-            box-shadow: 0 2px 20px rgba(0, 255, 65, 0.3);
-        }
-
-        .time-zones {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 0 15px;
-        }
-
-        .time-zone {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 120px;
-            text-align: center;
-            transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 8px;
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-        }
-
-        .time-zone:hover {
-            background: rgba(0, 255, 65, 0.1);
-            border-color: rgba(0, 255, 65, 0.4);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .timezone-label {
-            font-size: 0.75rem;
-            color: var(--cyber-blue, #00d4ff);
-            font-family: 'Courier New', monospace;
-            font-weight: 600;
-            margin-bottom: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .timezone-time {
-            font-size: 1rem;
-            color: var(--matrix-green, #00ff41);
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-            margin-bottom: 2px;
-            line-height: 1.2;
-        }
-
-        .timezone-location {
-            font-size: 0.65rem;
-            color: #e0e0ff;
-            font-family: 'Courier New', monospace;
-            opacity: 0.8;
-            line-height: 1;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .time-bar {
-                top: 70px; /* Adjust for mobile navbar height */
-                padding: 6px 0;
-            }
-            
-            .time-zones {
-                gap: 8px;
-                padding: 0 10px;
-            }
-            
-            .time-zone {
-                min-width: 90px;
-                padding: 4px 6px;
-            }
-            
-            .timezone-label {
-                font-size: 0.65rem;
-            }
-            
-            .timezone-time {
-                font-size: 0.85rem;
-            }
-            
-            .timezone-location {
-                font-size: 0.6rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .time-zones {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-            
-            .time-zone {
-                min-width: 80px;
-                padding: 3px 5px;
-            }
-            
-            .timezone-label {
-                font-size: 0.6rem;
-            }
-            
-            .timezone-time {
-                font-size: 0.8rem;
-            }
-            
-            .timezone-location {
-                font-size: 0.55rem;
-            }
-        }
-
-        /* Animation for time updates */
-        .timezone-time {
-            transition: all 0.3s ease;
-        }
-
-        .timezone-time.updating {
-            color: var(--cyber-blue, #00d4ff);
-            transform: scale(1.05);
-        }
-
-        /* Body padding adjustment to prevent content overlap */
-        body {
-            padding-top: 130px !important; /* Adjust based on navbar + time bar height */
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-top: 115px !important;
-            }
-        }
-
-        /* Glitch effect for hackathon time */
-        .time-zone:first-child .timezone-time {
-            animation: time-glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes time-glow {
-            from {
-                text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-            }
-            to {
-                text-shadow: 
-                    0 0 10px rgba(0, 255, 65, 0.8),
-                    0 0 20px rgba(0, 255, 65, 0.6),
-                    0 0 30px rgba(0, 255, 65, 0.4);
-            }
-        }
-        </style>
-
-        <script>
-        // International Time Clock Functionality
-        function updateInternationalTimes() {
-            const now = new Date();
-            
-            // Time zones configuration
-            const timeZones = {
-                'hackathon-time': {
-                    timezone: 'America/New_York', // Miami/EST
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                },
-                'europe-time': {
-                    timezone: 'Europe/London', // GMT/BST
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                },
-                'africa-time': {
-                    timezone: 'Africa/Lagos', // WAT (West Africa Time)
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                },
-                'asia-time': {
-                    timezone: 'Asia/Tokyo', // JST
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                },
-                'australia-time': {
-                    timezone: 'Australia/Sydney', // AEDT/AEST
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                },
-                'india-time': {
-                    timezone: 'Asia/Kolkata', // IST
-                    format: { 
-                        hour: '2-digit', 
-                        minute: '2-digit', 
-                        second: '2-digit',
-                        hour12: true
-                    }
-                }
-            };
-            
-            // Update each time zone
-            Object.keys(timeZones).forEach(elementId => {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    const config = timeZones[elementId];
-                    
-                    try {
-                        const timeString = now.toLocaleTimeString('en-US', {
-                            timeZone: config.timezone,
-                            ...config.format
-                        });
-                        
-                        // Add updating animation
-                        element.classList.add('updating');
-                        element.textContent = timeString;
-                        
-                        // Remove animation after update
-                        setTimeout(() => {
-                            element.classList.remove('updating');
-                        }, 300);
-                        
-                    } catch (error) {
-                        console.error(`Error updating time for ${elementId}:`, error);
-                        element.textContent = '--:--:--';
-                    }
-                }
-            });
-        }
-
-        // Initialize time updates when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update times immediately
-            updateInternationalTimes();
-            
-            // Update every second
-            setInterval(updateInternationalTimes, 1000);
-            
-            console.log('🌍 International Time Clock initialized successfully!');
-        });
-
-        // Handle visibility change to pause/resume updates when tab is not visible
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                // Resume updates when tab becomes visible
-                updateInternationalTimes();
-            }
-        });
-        </script>
-        <!-- clock Section -->
-        <!-- ***************** -->
-        <!-- ***************** -->
-        <!-- ***************** -->
-        <!--  end Section -->
-
-
-
-
-
-
-
-
-
-
-        <header class="header">
-    <div class="container header-container">
-        <h1 class="header-title glitch" data-text="PARTICIPANT CERTIFICATE PORTAL">Participant Certificate Portal</h1>
-        <p class="header-subtitle">Official certificates for hackathon volunteers, industry professionals, judges, mentors, and contributors.</p>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
     </div>
-    </header>
-
-    <main class="content">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <section class="m-4">  
-                <!-- =========================
-                CERTIFICATE GENERATOR (Drop-in)
-                Robust, accessible, XSS-safe, multi-certificate support
-                ========================= -->
-                <section class="checklist-section" id="certificate-generator" style="margin-top:3rem;">
-                <h2 class="checklist-title glitch" data-text="GENERATE YOUR CERTIFICATE">GENERATE YOUR CERTIFICATE for SummerCodex 2025</h2>
-                <p class="checklist-subtitle">[ OFFICIAL PARTICIPATION CERTIFICATE ] — Download your volunteer certificate using your email address</p>
-
-                <style>
-                    /* ---- Small utility styles (kept inline to be drop-in) ---- */
-                    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-                    .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-                    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
-                    .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
-                    .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
-                    .cg-card{margin-top:1.5rem;background:#fff;padding:1rem;border-radius:8px;color:#333;font-family:"Courier New",monospace;border:2px solid #ddd}
-                    .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
-                    .alert{padding:.75rem;border-radius:4px;border:1px solid}
-                    .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
-                    .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
-                    .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
-
-                    /* Certificate preview canvas (A4 landscape at ~96dpi) */
-                    .certificate-container{
-                    width:1123px;height:794px;background:#fff;border:8px solid #B8860B;border-radius:10px;padding:40px;color:#333;
-                    font-family:"Times New Roman",serif;position:relative;margin:0 auto 20px;box-sizing:border-box
-                    }
-                    .certificate-container h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
-                    .certificate-container .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
-                    .certificate-container .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center}
-                    .certificate-container .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center}
-                    .certificate-container .body{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
-                    .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
-                    
-                    .certificates-grid{display:grid;gap:3rem;margin-top:2rem}
-                    .btn-green{padding:12px 24px;background:#28a745;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
-                    .btn-green:hover{background:#218838;transform:translateY(-2px)}
-                    .btn-blue{padding:15px 30px;background:#2196f3;color:#fff;border:none;border-radius:8px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s ease;font-family:"Courier New",monospace}
-                    .btn-blue:hover{background:#1976d2;transform:translateY(-2px)}
-                    .certificate-title{text-align:center;margin-bottom:1rem;color:#333;font-family:"Courier New",monospace}
-                    
-                    @media (max-width:1200px){.certificate-container{transform:scale(.8);transform-origin:top center}}
-                    @media (max-width:900px){.certificate-container{transform:scale(.65)}}
-                    @media (max-width:700px){.certificate-container{transform:scale(.55)}}
-                </style>
-
-                <label for="certificateEmailInput" class="sr-only">Registered email address</label>
-                <div class="cg-row">
-                    <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" />
-                    <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
-                </div>
-
-                <div id="certificateResult" class="cg-card" aria-live="polite" aria-atomic="true"></div>
-
-                <!-- Certificates Display Area -->
-                <div id="certificatesDisplay" style="display:none;margin-top:2rem;"></div>
-                </section>
-
-                <script>
-                /* ======================
-                Helpers (sanitization, UI)
-                ====================== */
-                const API_URL = 'https://script.google.com/macros/s/AKfycbwp3xDZno3iMGp_T_A_QmRHapDTJipoe2FMh28UzVD1lDuOHF0kjldQlSREQW74iMWMGw/exec';
-                let allCertificatesData = [];
-
-                const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
-                ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-                );
-
-                function rolesToText(roles, rolesText) {
-                if (rolesText) return String(rolesText);
-                if (Array.isArray(roles)) return roles.join(', ');
-                return roles || 'Contributor';
-                }
-
-                function normalizeCert(cert) {
-                return {
-                    participantName: esc(cert?.participantName || 'Participant'),
-                    hackathonName: esc(cert?.hackathonName || 'Hackathon'),
-                    date: esc(cert?.date || 'Date'),
-                    location: esc(cert?.location || 'Location'),
-                    rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
-                    hackLogoUrl: cert?.hackLogoUrl || ''
-                };
-                }
-
-                function infoBoxHTML() {
-                return `
-                <div class="infobox">
-                    <strong style="color:#28a745">🏆 Certificate Generator:</strong><br>
-                    • <strong>Official Certificates</strong>: Available for confirmed participants<br>
-                    • <strong>Any Valid Email</strong>: Use the email from your participation records<br>
-                    • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
-                    • <strong>Verification</strong>: Certificates include official verification details<br>
-                    • <strong>Recognition</strong>: Professional certificate for your portfolio
-                </div>`;
-                }
-
-                function setStatus(type, html) {
-                const resultDiv = document.getElementById('certificateResult');
-                const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
-                resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-                }
-
-                function toggleButton(loading) {
-                const btn = document.getElementById('generateBtn');
-                if (!btn) return;
-                btn.disabled = !!loading;
-                btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
-                }
-
-                /* ======================
-                Main flow
-                ====================== */
-                async function generateCertificate() {
-                const emailInput = document.getElementById('certificateEmailInput');
-                const displayDiv = document.getElementById('certificatesDisplay');
-                const email = (emailInput?.value || '').trim();
-
-                // Validate email
-                if (!email) {
-                    setStatus('error', '❌ Please enter your email address.');
-                    displayDiv.style.display = 'none';
-                    return;
-                }
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    setStatus('error', '❌ Please enter a valid email address.');
-                    displayDiv.style.display = 'none';
-                    return;
-                }
-
-                setStatus('info', '⏳ Checking for available certificates...');
-                displayDiv.style.display = 'none';
-                toggleButton(true);
-
-                // fetch with timeout/abort
-                const ac = new AbortController();
-                const to = setTimeout(() => ac.abort(), 10000);
-
-                try {
-                    const currentUrl = window.location.href;
-                    const res = await fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`, { signal: ac.signal });
-                    const payload = await res.json().catch(() => ({}));
-                    if (!res.ok) throw new Error(payload?.error || res.statusText);
-
-                    // Accept multiple shapes: array, {certificates:[...]}, single object
-                    let certificatesArr = [];
-                    if (Array.isArray(payload)) {
-                    certificatesArr = payload;
-                    } else if (Array.isArray(payload?.certificates)) {
-                    certificatesArr = payload.certificates;
-                    } else if (payload?.certificateData) {
-                    certificatesArr = [payload];
-                    } else if (payload?.length) {
-                    certificatesArr = payload;
-                    } else if (payload?.[0]) {
-                    certificatesArr = [payload[0]];
-                    }
-
-                    // Base validity (status/data)
-                    const baseValid = certificatesArr.filter(cert =>
-                    cert?.status === "Certificate Available" &&
-                    (cert?.certificateData || cert?.participantName)
-                    );
-
-                    // 🚫 Disqualify by role text
-                    const validCerts = baseValid.filter(cert => {
-                    const role = String(cert?.rolesText || '').toLowerCase().trim();
-                    if (role === 'signed up as a judge but did not participate') return false;
-                    if (role.includes('not participate')) return false;
-                    return true;
-                    });
-
-                    if (!validCerts.length) {
-                    showCertificateError('You signed as volunteer for this hack but unfortunately you did not participate, so we cannot give you a certificate.');
-                    return;
-                    }
-
-                    showCertificatesFound(validCerts);
-                } catch (err) {
-                    console.error(err);
-                    setStatus('error', '❌ Failed to check records. Please try again later.');
-                } finally {
-                    clearTimeout(to);
-                    toggleButton(false);
-                }
-                }
-
-                function showCertificatesFound(certificatesArr) {
-                const displayDiv = document.getElementById('certificatesDisplay');
-                
-                // Store all certificates
-                allCertificatesData = certificatesArr.map(c => c.certificateData || c);
-                
-                const count = certificatesArr.length;
-                const plural = count > 1 ? 's' : '';
-                
-                setStatus('ok',
-                    `<strong>✅ ${count} CERTIFICATE${plural.toUpperCase()} FOUND!</strong><br>
-                    ${count === 1 ? 'Your certificate is ready for download.' : `Great news! You have participated in ${count} events. Each certificate is displayed below.`}<br><br>
-                    <strong>Found ${count} certificate${plural} for your email address.</strong>`
-                );
-
-                // Generate individual certificate previews
-                let html = `
-                    <div style="text-align:center;margin-bottom:2rem">
-                    <h3 class="certificate-title">📜 Your Certificate${plural}</h3>
-                    ${count > 1 ? '<p style="color:#666;font-family:\'Courier New\',monospace">Each certificate is displayed individually with its own download button</p>' : ''}
-                    </div>
-                    <div class="certificates-grid">`;
-
-                allCertificatesData.forEach((rawCert, index) => {
-                    const cert = normalizeCert(rawCert);
-                    
-                    html += `
-                    <div style="text-align:center">
-                        <h4 class="certificate-title">🏆 Certificate ${index + 1}${count > 1 ? ` - ${cert.hackathonName}` : ''}</h4>
-                        
-                        <!-- Individual Certificate Preview -->
-                        <div class="certificate-container">
-                        ${cert.hackLogoUrl ? `<img src="${cert.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
-                        
-                        <div style="text-align:center;margin-bottom:40px">
-                            <h1>CERTIFICATE</h1>
-                            <p class="sub">OF ACHIEVEMENT</p>
-                        </div>
-                        
-                        <p class="presented">This certificate is presented to</p>
-                        <h2 class="participant-name">${cert.participantName}</h2>
-                        
-                        <div class="body">
-                            <p>In recognition of your outstanding contributions as a <strong>${cert.rolesText}</strong> at the
-                            <strong>${cert.hackathonName}</strong>.
-                            </p><br>
-                            <p><strong>${cert.date}</strong> — <span>${cert.location}</span></p><br>
-                            <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
-                        </div>
-
-                        <!-- Bottom logos and signature -->
-                        <div style="position:absolute;bottom:30px;left:40px;right:40px;">
-                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-                            <div style="display:flex;gap:20px;align-items:center">
-                                <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width:50px;height:50px;object-fit:contain">
-                                <img src="https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34" alt="FIU Pino Global" style="width:50px;height:50px;object-fit:contain">
-                                <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width:50px;height:50px;object-fit:contain">
-                            </div>
-                            <div style="text-align:center">
-                                <div style="border-top:2px solid #333;width:250px;margin:0 auto 15px"></div>
-                                <p style="font-size:1rem;font-weight:700;margin-bottom:5px">BRIAN BAZURTO</p>
-                                <p style="font-size:.9rem;font-style:italic;margin:0">Code Crunch President</p>
-                                <p style="font-size:.9rem;font-style:italic;margin:0">Hack University Initiative</p>
-                            </div>
-                            <div style="display:flex;gap:15px;align-items:center">
-                                <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
-                                <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
-                                <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        
-                        <!-- Download button for this specific certificate -->
-                        <div style="margin-top:10px">
-                        <button class="btn-green" onclick="downloadSpecificCertificate(${index})">
-                            📄 Download This Certificate
-                        </button>
-                        </div>
-                        
-                        <!-- Certificate details -->
-                        <div style="margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;text-align:left;font-family:'Courier New',monospace;font-size:.9rem">
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-                            <div><strong>Participant:</strong> ${cert.participantName}</div>
-                            <div><strong>Role:</strong> ${cert.rolesText}</div>
-                            <div><strong>Event:</strong> ${cert.hackathonName}</div>
-                            <div><strong>Date:</strong> ${cert.date}</div>
-                            <div><strong>Location:</strong> ${cert.location}</div>
-                            <div><strong>Certificate #:</strong> ${index + 1}</div>
-                        </div>
-                        </div>
-                    </div>`;
-                });
-
-                html += `</div>`;
-
-                // Add download all option if multiple certificates
-                if (count > 1) {
-                    html += `
-                    <div style="text-align:center;margin-top:3rem;padding:2rem;background:#e3f2fd;border-radius:8px;border:2px solid #2196f3">
-                        <h4 style="color:#1976d2;margin-bottom:1rem;font-family:'Courier New',monospace">📚 Download All Certificates</h4>
-                        <button class="btn-blue" onclick="downloadAllCertificates()">📦 Download All ${count} Certificates</button>
-                        <p style="color:#555;font-size:.9rem;margin-top:.5rem;font-family:'Courier New',monospace">This will open each certificate in a separate tab</p>
-                    </div>`;
-                }
-
-                displayDiv.innerHTML = html;
-                displayDiv.style.display = 'block';
-                
-                setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-                }
-
-                function downloadSpecificCertificate(index) {
-                const cert = allCertificatesData?.[index];
-                if (!cert) return alert('Certificate data not available');
-                generateCertificateWindow(cert);
-                }
-
-                function downloadAllCertificates() {
-                if (!allCertificatesData?.length) return alert('Certificate data not available');
-                allCertificatesData.forEach((cert, i) => setTimeout(() => generateCertificateWindow(cert), i * 500));
-                }
-
-                function showCertificateError(message) {
-                document.getElementById('certificatesDisplay').style.display = 'none';
-                setStatus('error', `${esc(message)}<br><br><strong>If you believe this is an error, please contact the organizers with your email address.</strong>`);
-                }
-
-                /* ======================
-                Print/Download windows
-                ====================== */
-                function generateCertificateWindow(certRaw) {
-                const c = normalizeCert(certRaw);
-
-                const html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                <meta charset="utf-8">
-                <title>Certificate - ${c.participantName}</title>
-                <style>
-                    @page { size:A4 landscape; margin:10mm }
-                    *{box-sizing:border-box}
-                    body{font-family:"Times New Roman",serif;background:#f5f5f5;padding:20px;margin:0}
-                    .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
-                    .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
-                    .hack-logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
-                    .hdr{text-align:center;margin-bottom:40px}
-                    .ttl{font-size:4rem;font-weight:700;letter-spacing:4px;color:#333;margin-bottom:10px;line-height:1}
-                    .sub{font-size:1.2rem;letter-spacing:4px;color:#666;text-transform:uppercase}
-                    .presented{font-size:1.1rem;font-style:italic;margin:50px 0 0;text-align:center;color:#555}
-                    .name{font-size:3rem;font-weight:700;font-style:italic;color:#333;margin:30px 0;text-align:center}
-                    .rec{font-size:1.1rem;line-height:1.6;color:#555;margin:30px auto;max-width:80%;text-align:center}
-                    .info{font-size:1.1rem;font-weight:700;color:#333;margin:30px 0;text-align:center}
-                    .impact{font-size:1rem;font-style:italic;color:#666;margin-top:20px;text-align:center}
-                    .footer{margin-top:60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
-                    .left img{width:40px;height:40px;object-fit:contain;margin-right:15px}
-                    .sig{text-align:center;flex:1}
-                    .sig-line{border-top:2px solid #333;width:200px;margin:0 auto 10px}
-                    .sig-name{font-size:1rem;font-weight:700;color:#333;margin-bottom:3px}
-                    .sig-title{font-size:.9rem;font-style:italic;color:#666;line-height:1.3}
-                    .right img{width:35px;height:35px;object-fit:contain;border-radius:3px;margin-left:12px}
-                    .controls{text-align:center;margin:20px 0;padding:15px;background:#f8f9fa;border-radius:8px}
-                    .btn{padding:12px 24px;font-size:1rem;cursor:pointer;border:0;border-radius:6px;margin:0 10px;font-weight:700;transition:all .3s ease}
-                    .btn-primary{background:#007bff;color:#fff}.btn-secondary{background:#6c757d;color:#fff}.btn:hover{transform:translateY(-2px)}
-                    @media print{
-                    body{background:#fff!important;padding:0!important;margin:0!important}
-                    .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
-                    .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
-                    .controls{display:none!important}
-                    .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
-                    .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
-                    .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
-                    }
-                </style>
-                </head>
-                <body>
-                <div class="controls">
-                    <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
-                    <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
-                </div>
-                <div class="wrap">
-                    <div class="sheet">
-                    ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
-                    <div class="hdr"><div class="ttl">CERTIFICATE</div><div class="sub">OF ACHIEVEMENT</div></div>
-                    <div class="presented">This certificate is presented to</div>
-                    <div class="name">${c.participantName}</div>
-                    <div class="rec">In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-                        <strong>${c.hackathonName}</strong>.
-                    </div>
-                    <div class="info">${c.date} — ${c.location}</div>
-                    <div class="impact">Your insights helped shape a fair and impactful competition experience for all participants.</div>
-                    <div class="footer">
-                        <div class="left" style="flex:1;display:flex;align-items:center">
-                        <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors">
-                        <img src="https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34" alt="FIU Pino Global">
-                        <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business">
-                        </div>
-                        <div class="sig">
-                        <div class="sig-line"></div>
-                        <div class="sig-name">BRIAN BAZURTO</div>
-                        <div class="sig-title">Code Crunch President<br>Hack University Initiative</div>
-                        </div>
-                        <div class="right" style="flex:1;display:flex;justify-content:flex-end;align-items:center">
-                        <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
-                        <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU">
-                        <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU">
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </body>
-                </html>`;
-
-                const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
-                if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
-                w.opener = null; // security
-                w.document.write(html);
-                w.document.close();
-                }
-
-                /* Enter key triggers generation */
-                document.addEventListener('DOMContentLoaded', () => {
-                const input = document.getElementById('certificateEmailInput');
-                input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
-                // initial info box
-                document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
-                });
-                </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Eligibility Information Section -->
-            <section class="card" style="margin-bottom: 2rem;">
-              <h2 class="card-title">🏆 Who Can Request Certificates?</h2>
-                <div class="card-description">
-                    <p>Certificates are available for verified participants who contributed to our hackathon events in official capacities:</p>
-                </div>
-    
-                
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                    <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--matrix-green);">
-                        <h3 style="color: var(--matrix-green); margin-bottom: 1rem; font-size: 1.2rem;">👨‍⚖️ Judges & Evaluators</h3>
-                        <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-                            <li>Technical project evaluators</li>
-                            <li>Industry expert judges</li>
-                            <li>Academic review panel members</li>
-                            <li>Presentation assessment judges</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(0, 212, 255, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--cyber-blue);">
-                        <h3 style="color: var(--cyber-blue); margin-bottom: 1rem; font-size: 1.2rem;">👨‍🏫 Mentors & Advisors</h3>
-                        <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-                            <li>Technical mentors</li>
-                            <li>Business development advisors</li>
-                            <li>Subject matter experts</li>
-                            <li>Workshop facilitators</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(255, 0, 128, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--neon-pink);">
-                        <h3 style="color: var(--neon-pink); margin-bottom: 1rem; font-size: 1.2rem;">🏢 Industry Partners</h3>
-                        <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-                            <li>Sponsor representatives</li>
-                            <li>Corporate volunteers</li>
-                            <li>Industry speakers</li>
-                            <li>Partnership coordinators</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(138, 43, 226, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--hacker-purple);">
-                        <h3 style="color: var(--hacker-purple); margin-bottom: 1rem; font-size: 1.2rem;">📋 Event Team</h3>
-                        <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-                            <li>Event organizers</li>
-                            <li>Logistics coordinators</li>
-                            <li>Technical support volunteers</li>
-                            <li>Academic partners</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Certificate Value Section -->
-            <section class="card" style="margin-bottom: 2rem;">
-                <h2 class="card-title">✨ Professional Recognition</h2>
-                <div class="card-description">
-                    <p>Our official certificates provide valuable professional documentation and recognition for your contributions to technology education and innovation.</p>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
-                    <div style="background: rgba(0, 255, 65, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
-                        <h4 style="color: var(--matrix-green); margin-bottom: 0.5rem;">Official Documentation</h4>
-                        <p style="color: var(--text-light); font-size: 0.9rem;">Verified proof of professional service and community contribution</p>
-                    </div>
-                    
-                    <div style="background: rgba(0, 212, 255, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
-                        <h4 style="color: var(--cyber-blue); margin-bottom: 0.5rem;">Portfolio Enhancement</h4>
-                        <p style="color: var(--text-light); font-size: 0.9rem;">Professional credential for academic and career portfolios</p>
-                    </div>
-                    
-                    <div style="background: rgba(255, 0, 128, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
-                        <h4 style="color: var(--neon-pink); margin-bottom: 0.5rem;">Community Impact</h4>
-                        <p style="color: var(--text-light); font-size: 0.9rem;">Recognition of dedication to technology education</p>
-                    </div>
-                    
-                    <div style="background: rgba(138, 43, 226, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">✅</div>
-                        <h4 style="color: var(--hacker-purple); margin-bottom: 0.5rem;">Industry Engagement</h4>
-                        <p style="color: var(--text-light); font-size: 0.9rem;">Demonstrates active participation in tech innovation</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- How It Works Section -->
-            <section class="checklist-section" style="margin-bottom: 2rem;">
-                <h2 class="checklist-title">🔧 How to Get Your Certificate</h2>
-                <p class="checklist-subtitle">Simple 3-step process to download your official participation certificate</p>
-                
-                <ul class="checklist">
-                    <li class="checklist-item">
-                        <div class="checklist-number">1</div>
-                        <div class="checklist-text">
-                            <strong>Enter Your Email</strong><br>
-                            Use the same email address you provided during event registration or volunteer sign-up.
-                        </div>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checklist-number">2</div>
-                        <div class="checklist-text">
-                            <strong>Verify Your Participation</strong><br>
-                            Our system will check your participation records across all hackathon events.
-                        </div>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checklist-number">3</div>
-                        <div class="checklist-text">
-                            <strong>Download & Print</strong><br>
-                            Generate high-quality PDF certificates ready for printing or digital use.
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Enhanced FAQ Section -->
-            <section class="faq-section">
-                <h2 class="faq-title">❓ Frequently Asked Questions</h2>
-                <p class="faq-subtitle">Everything you need to know about our certificate system</p>
-                
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>How long after an event are certificates available?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Certificates are typically available <strong>15-20 business days</strong> after the event concludes. We need time to verify all participants and process the official records.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>What if my email address has changed since the event?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Try using your <strong>original email address</strong> first. If that doesn't work, contact us <a href="https://codecrunchglobal-linkedin.vercel.app/">here codecrunchglobal-linkedin.vercel.app</a> with both your old and new email addresses, and we'll update your records. </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>Are these certificates officially recognized?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p><strong>Yes!</strong> These certificates are issued by Code Crunch a student organization supported by FIU Honors College, FIU Business, and Pino Global. They're suitable for professional volunteering documentation.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>Can I update my name on the certificate?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Name corrections can be made for <strong>spelling errors or preferred names</strong>. Contact our support team <a href="https://codecrunchglobal-linkedin.vercel.app/">here codecrunchglobal-linkedin.vercel.app</a> with your request and we'll update your records within 15-20 business days.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>What format are the certificates in?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Certificates are generated as <strong>high-quality PDF files</strong> optimized for both digital use and professional printing on standard A4 paper in landscape orientation.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span class="faq-icon">?</span>
-                            <span>I don't see my participation record. What should I do?</span>
-                            <span class="faq-arrow">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>First, try using any <strong>alternative email addresses</strong> you might have used. If still not found, contact us with your full name, event name, and role - we'll manually verify your participation.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact Support Section -->
-            <section class="card" style="margin-bottom: 2rem; text-align: center;">
-                <h2 class="card-title">📞 Need Help?</h2>
-                <div class="card-description">
-                    <p>Having trouble with your certificate? Our support team is here to help!</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                        <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px;">
-                            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">🔗 LinkedIn Support</h4>
-                            <p style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
-                                Contact <strong>Code Crunch Global</strong> on LinkedIn<br>
-                                <small>Connect with Code Crunch directly</small>
-                            </p>
-                            <a href="https://codecrunchglobal-linkedin.vercel.app/" target="_blank" 
-                               style="display: inline-block; margin-top: 0.75rem; padding: 0.5rem 1rem; 
-                                      background: var(--matrix-green); color: var(--bg-color); 
-                                      text-decoration: none; border-radius: 6px; font-weight: 600;
-                                      transition: all 0.3s ease; font-family: 'Courier New', monospace;">
-                                Connect on LinkedIn
-                            </a>
-                        </div>
-                        
-
-                    </div>
-                    
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 193, 7, 0.1); border-radius: 8px; border-left: 4px solid var(--warning);">
-                        <p style="color: var(--warning); font-family: 'Courier New', monospace; margin: 0;">
-                            <strong>⚡ Quick Tip:</strong> Include your full name, event name, and role when contacting support for faster assistance.
-                        </p>
-                    </div>
-                    
-                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(138, 43, 226, 0.1); border-radius: 8px; border-left: 4px solid var(--hacker-purple);">
-                        <p style="color: var(--hacker-purple); font-family: 'Courier New', monospace; margin: 0;">
-                            <strong>🚀 Pro Tip:</strong> For fastest response, reach out via LinkedIn first, then follow up in Discord Private channel if needed.
-                        </p>
-                    </div>
-                </div>
-            </section>
+  </nav>
+
+  <!-- TIMEZONE BAND -->
+  <div class="timezone-section">
+    <div class="timezone-header">
+      <h2>🏆 Hackathon HQ</h2>
+    </div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location">Miami, FL (ET)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- =========================
+         CERTIFICATE GENERATOR
+         ========================= -->
+    <section class="surface" id="certificate-generator">
+      <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE for SummerCodex 2025</h2>
+      <p class="card-description" style="text-align:center">[ OFFICIAL PARTICIPATION CERTIFICATE ] — Download your volunteer certificate using your email address</p>
+
+      <label for="certificateEmailInput" class="sr-only">Registered email address</label>
+      <div class="cg-row">
+        <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" autocomplete="email" />
+        <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
+      </div>
+
+      <div id="certificateResult" class="cg-card" aria-live="polite" aria-atomic="true"></div>
+
+      <!-- Certificates Display Area -->
+      <div id="certificatesDisplay" style="display:none;margin-top:2rem;"></div>
+    </section>
+
+    <!-- Eligibility Information Section -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">🏆 Who Can Request Certificates?</h2>
+      <div class="card-description">
+        <p>Certificates are available for verified participants who contributed to our hackathon events in official capacities:</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem;">
+        <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--matrix-green);">
+          <h3 style="color: var(--matrix-green); margin-bottom: 1rem; font-size: 1.2rem;">👨‍⚖️ Judges & Evaluators</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>Technical project evaluators</li>
+            <li>Industry expert judges</li>
+            <li>Academic review panel members</li>
+            <li>Presentation assessment judges</li>
+          </ul>
         </div>
-    </main>
- 
 
+        <div style="background: rgba(0, 212, 255, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--cyber-blue);">
+          <h3 style="color: var(--cyber-blue); margin-bottom: 1rem; font-size: 1.2rem;">👨‍🏫 Mentors & Advisors</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>Technical mentors</li>
+            <li>Business development advisors</li>
+            <li>Subject matter experts</li>
+            <li>Workshop facilitators</li>
+          </ul>
+        </div>
 
+        <div style="background: rgba(255, 0, 128, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--neon-pink);">
+          <h3 style="color: var(--neon-pink); margin-bottom: 1rem; font-size: 1.2rem;">🏢 Industry Partners</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>Sponsor representatives</li>
+            <li>Corporate volunteers</li>
+            <li>Industry speakers</li>
+            <li>Partnership coordinators</li>
+          </ul>
+        </div>
 
+        <div style="background: rgba(138, 43, 226, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--hacker-purple);">
+          <h3 style="color: var(--hacker-purple); margin-bottom: 1rem; font-size: 1.2rem;">📋 Event Team</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>Event organizers</li>
+            <li>Logistics coordinators</li>
+            <li>Technical support volunteers</li>
+            <li>Academic partners</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <!-- Certificate Value Section -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">✨ Professional Recognition</h2>
+      <div class="card-description">
+        <p>Our official certificates provide valuable professional documentation and recognition for your contributions to technology education and innovation.</p>
+      </div>
 
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
+        <div style="background:rgba(0,255,65,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">📋</div>
+          <h4 style="color:var(--matrix-green);margin-bottom:.5rem;">Official Documentation</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Verified proof of professional service and community contribution</p>
+        </div>
 
+        <div style="background:rgba(0,212,255,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">🎓</div>
+          <h4 style="color:var(--cyber-blue);margin-bottom:.5rem;">Portfolio Enhancement</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Professional credential for academic and career portfolios</p>
+        </div>
 
+        <div style="background:rgba(255,0,128,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">🤝</div>
+          <h4 style="color:var(--neon-pink);margin-bottom:.5rem;">Community Impact</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Recognition of dedication to technology education</p>
+        </div>
 
+        <div style="background:rgba(138,43,226,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">✅</div>
+          <h4 style="color:var(--hacker-purple);margin-bottom:.5rem;">Industry Engagement</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Demonstrates active participation in tech innovation</p>
+        </div>
+      </div>
+    </section>
 
+    <!-- How It Works Section -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">🔧 How to Get Your Certificate</h2>
+      <p class="card-description">Simple 3-step process to download your official participation certificate</p>
 
+      <ul class="checklist">
+        <li class="checklist-item">
+          <div class="checklist-number">1</div>
+          <div class="checklist-text">
+            <strong>Enter Your Email</strong><br>
+            Use the same email address you provided during event registration or volunteer sign-up.
+          </div>
+        </li>
+        <li class="checklist-item">
+          <div class="checklist-number">2</div>
+          <div class="checklist-text">
+            <strong>Verify Your Participation</strong><br>
+            Our system will check your participation records across all hackathon events.
+          </div>
+        </li>
+        <li class="checklist-item">
+          <div class="checklist-number">3</div>
+          <div class="checklist-text">
+            <strong>Download & Print</strong><br>
+            Generate high-quality PDF certificates ready for printing or digital use.
+          </div>
+        </li>
+      </ul>
+    </section>
 
+    <!-- Enhanced FAQ Section -->
+    <section class="faq-section" style="margin-top: 2rem;">
+      <h2 class="faq-title">❓ Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Everything you need to know about our certificate system</p>
 
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>How long after an event are certificates available?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Certificates are typically available <strong>15-20 business days</strong> after the event concludes. We need time to verify all participants and process the official records.</p>
+          </div>
+        </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>What if my email address has changed since the event?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Try using your <strong>original email address</strong> first. If that doesn't work, contact us <a href="https://codecrunchglobal-linkedin.vercel.app/">here codecrunchglobal-linkedin.vercel.app</a> with both your old and new email addresses, and we'll update your records. </p>
+          </div>
+        </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>Are these certificates officially recognized?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Yes!</strong> These certificates are issued by Code Crunch, a student organization supported by FIU Honors College, FIU Business, and Pino Global. They're suitable for professional volunteering documentation.</p>
+          </div>
+        </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>Can I update my name on the certificate?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Name corrections can be made for <strong>spelling errors or preferred names</strong>. Contact our support team <a href="https://codecrunchglobal-linkedin.vercel.app/">here codecrunchglobal-linkedin.vercel.app</a> with your request and we'll update your records within 15-20 business days.</p>
+          </div>
+        </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>What format are the certificates in?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Certificates are generated as <strong>high-quality PDF files</strong> optimized for both digital use and professional printing on standard A4 paper in landscape orientation.</p>
+          </div>
+        </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span class="faq-arrow">▼</span>
+            <span>I don't see my participation record. What should I do?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>First, try using any <strong>alternative email addresses</strong> you might have used. If still not found, contact us with your full name, event name, and role — we'll manually verify your participation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Contact Support Section -->
+    <section class="card" style="margin-top: 2rem; text-align: center;">
+      <h2 class="card-title">📞 Need Help?</h2>
+      <div class="card-description">
+        <p>Having trouble with your certificate? Our support team is here to help!</p>
 
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;">
+          <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px;">
+            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">🔗 LinkedIn Support</h4>
+            <p style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
+              Contact <strong>Code Crunch Global</strong> on LinkedIn<br>
+              <small>Connect with Code Crunch directly</small>
+            </p>
+            <a href="https://codecrunchglobal-linkedin.vercel.app/" target="_blank" rel="noopener"
+               style="display:inline-block;margin-top:.75rem;padding:.5rem 1rem;background:var(--matrix-green);color:var(--bg-color);
+                      text-decoration:none;border-radius:6px;font-weight:600;transition:all .3s ease;font-family:'Courier New', monospace;">
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
 
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(255,193,7,0.1);border-radius:8px;border-left:4px solid var(--warning);">
+          <p style="color:var(--warning);font-family:'Courier New', monospace;margin:0;">
+            <strong>⚡ Quick Tip:</strong> Include your full name, event name, and role when contacting support for faster assistance.
+          </p>
+        </div>
 
+        <div style="margin-top:1rem;padding:1rem;background:rgba(138,43,226,0.1);border-radius:8px;border-left:4px solid var(--hacker-purple);">
+          <p style="color:var(--hacker-purple);font-family:'Courier New', monospace;margin:0;">
+            <strong>🚀 Pro Tip:</strong> For fastest response, reach out via LinkedIn first, then follow up in Discord Private channel if needed.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <!-- FOOTER (Hack University) -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p>
+            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+          </p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
 
-
-
-    
-
-
-
-
-
-
-    
-
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-content">
-                <p class="footer-description">
-                    An interdisciplinary tech and innovation club empowering students through coding workshops, technical interview prep, and project-based learning. Open to high school students (16+), all majors, and any university worldwide.
-                </p>
-                <p class="footer-website">
-                    <a href="http://codecrunch.cs.fiu.edu" class="footer-website-link">codecrunch.cs.fiu.edu</a>
-                </p>
-                <div class="footer-links">
-                    <a href="index.html" class="footer-link">Become a Code Crunch Member</a>
-                    <a href="contact.html" class="footer-link">Contact</a>
-                </div>
-                <p class="footer-copyright">
-                    © <span id="current-year"></span> Code Crunch. All rights reserved.
-                </p>
-                <p class="footer-credits">
-                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="footer-credits-link">Brian Bazurto</a> | Powered by innovation and collaboration
-                </p>
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
             </div>
+          </div>
         </div>
-    </footer>
 
-    <!-- Bootstrap JS Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Matrix Effects Script -->
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Fix for disappearing menu - Manual toggle control
-    const hamburgerBtn = document.querySelector('.hamburger-menu');
-    const offcanvasMenu = document.querySelector('#mobileMenu');
-    const closeBtn = document.querySelector('.custom-close');
-    
-    if (hamburgerBtn && offcanvasMenu) {
-        // Hamburger button click handler
-        hamburgerBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Toggle the menu manually
-            if (offcanvasMenu.classList.contains('show')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-        
-        // Close button click handler
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                closeMenu();
-            });
-        }
-        
-        // Function to open menu
-        function openMenu() {
-            offcanvasMenu.classList.add('show');
-            document.body.classList.add('modal-open');
-            document.body.style.overflow = 'hidden';
-            
-            // Add backdrop
-            let backdrop = document.querySelector('.offcanvas-backdrop');
-            if (!backdrop) {
-                backdrop = document.createElement('div');
-                backdrop.className = 'offcanvas-backdrop fade show';
-                backdrop.addEventListener('click', closeMenu);
-                document.body.appendChild(backdrop);
-            }
-        }
-        
-        // Function to close menu
-        function closeMenu() {
-            offcanvasMenu.classList.remove('show');
-            document.body.classList.remove('modal-open');
-            document.body.style.overflow = '';
-            
-            // Remove backdrop
-            const backdrop = document.querySelector('.offcanvas-backdrop');
-            if (backdrop) {
-                backdrop.remove();
-            }
-        }
-        
-        // Prevent menu from closing when clicking inside
-        offcanvasMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-        
-        // Close menu when clicking on navigation links
-        const navLinks = offcanvasMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                // Small delay to allow navigation
-                setTimeout(closeMenu, 100);
-            });
-        });
-        
-        // Handle escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && offcanvasMenu.classList.contains('show')) {
-                closeMenu();
-            }
-        });
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.9;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Single, unified script (no conflicting globals) -->
+  <script>
+    // ===== Certificate API (unique, non-conflicting) =====
+    const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbwp3xDZno3iMGp_T_A_QmRHapDTJipoe2FMh28UzVD1lDuOHF0kjldQlSREQW74iMWMGw/exec';
+    let allCertificatesData = [];
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
+    );
+
+    function rolesToText(roles, rolesText) {
+      if (rolesText) return String(rolesText);
+      if (Array.isArray(roles)) return roles.join(', ');
+      return roles || 'Contributor';
     }
 
-    // Matrix rain effect
-    function createMatrixRain() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.style.position = 'fixed';
-        canvas.style.top = '0';
-        canvas.style.left = '0';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        canvas.style.pointerEvents = 'none';
-        canvas.style.zIndex = '-1';
-        canvas.style.opacity = '0.1';
-        
-        document.body.appendChild(canvas);
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-        const matrixArray = matrix.split("");
-        
-        const fontSize = 10;
-        const columns = canvas.width / fontSize;
-        
-        const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-        
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px Courier New';
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        
-        setInterval(draw, 35);
-    }
-    
-    // Initialize matrix rain effect
-    setTimeout(createMatrixRain, 1000);
-
-    // Glitch effect for elements
-    const glitchElements = document.querySelectorAll('.glitch');
-    glitchElements.forEach(element => {
-        const text = element.textContent;
-        element.setAttribute('data-text', text);
-        
-        setInterval(() => {
-            if (Math.random() > 0.98) {
-                element.style.animation = 'none';
-                setTimeout(() => {
-                    element.style.animation = 'glitch-skew 2s infinite linear alternate-reverse';
-                }, 100);
-            }
-        }, 3000);
-    });
-
-    // Discord button animation
-    const discordButton = document.querySelector('.discord-button');
-    if (discordButton) {
-        discordButton.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) scale(1.05)';
-        });
-        
-        discordButton.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
+    function normalizeCert(cert) {
+      return {
+        participantName: esc(cert?.participantName || 'Participant'),
+        hackathonName: esc(cert?.hackathonName || 'Hackathon'),
+        date: esc(cert?.date || 'Date'),
+        location: esc(cert?.location || 'Location'),
+        rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
+        hackLogoUrl: cert?.hackLogoUrl || ''
+      };
     }
 
-    // Checklist item animations
-    const checklistItems = document.querySelectorAll('.checklist-item');
-    checklistItems.forEach((item, index) => {
+    function infoBoxHTML() {
+      return `
+        <div class="infobox">
+          <strong style="color:#28a745">🏆 Certificate Generator:</strong><br>
+          • <strong>Official Certificates</strong>: Available for confirmed participants<br>
+          • <strong>Any Valid Email</strong>: Use the email from your participation records<br>
+          • <strong>Download Ready</strong>: High-quality PDF certificate for printing<br>
+          • <strong>Verification</strong>: Certificates include official verification details<br>
+          • <strong>Recognition</strong>: Professional certificate for your portfolio
+        </div>`;
+    }
+
+    function setStatus(type, html) {
+      const resultDiv = document.getElementById('certificateResult');
+      const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
+      resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
+    }
+
+    function toggleButton(loading) {
+      const btn = document.getElementById('generateBtn');
+      if (!btn) return;
+      btn.disabled = !!loading;
+      btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+    }
+
+    async function generateCertificate() {
+      const emailInput = document.getElementById('certificateEmailInput');
+      const displayDiv = document.getElementById('certificatesDisplay');
+      const email = (emailInput?.value || '').trim();
+
+      if (!email) {
+        setStatus('error', '❌ Please enter your email address.');
+        displayDiv.style.display = 'none';
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setStatus('error', '❌ Please enter a valid email address.');
+        displayDiv.style.display = 'none';
+        return;
+      }
+
+      setStatus('info', '⏳ Checking for available certificates...');
+      displayDiv.style.display = 'none';
+      toggleButton(true);
+
+      // fetch with timeout/abort
+      const ac = new AbortController();
+      const to = setTimeout(() => ac.abort(), 10000);
+
+      try {
+        const currentUrl = window.location.href;
+        const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`, { signal: ac.signal });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(payload?.error || res.statusText);
+
+        // Accept multiple shapes: array, {certificates:[...]}, single object
+        let certificatesArr = [];
+        if (Array.isArray(payload)) {
+          certificatesArr = payload;
+        } else if (Array.isArray(payload?.certificates)) {
+          certificatesArr = payload.certificates;
+        } else if (payload?.certificateData) {
+          certificatesArr = [payload];
+        } else if (payload?.length) {
+          certificatesArr = payload;
+        } else if (payload?.[0]) {
+          certificatesArr = [payload[0]];
+        }
+
+        // Base validity (status/data)
+        const baseValid = certificatesArr.filter(cert =>
+          cert?.status === "Certificate Available" &&
+          (cert?.certificateData || cert?.participantName)
+        );
+
+        // Disqualify by role text
+        const validCerts = baseValid.filter(cert => {
+          const role = String(cert?.rolesText || '').toLowerCase().trim();
+          if (role === 'signed up as a judge but did not participate') return false;
+          if (role.includes('not participate')) return false;
+          return true;
+        });
+
+        if (!validCerts.length) {
+          showCertificateError('You signed as volunteer for this hack but unfortunately you did not participate, so we cannot give you a certificate.');
+          return;
+        }
+
+        showCertificatesFound(validCerts);
+      } catch (err) {
+        console.error(err);
+        setStatus('error', '❌ Failed to check records. Please try again later.');
+      } finally {
+        clearTimeout(to);
+        toggleButton(false);
+      }
+    }
+
+    function showCertificatesFound(certificatesArr) {
+      const displayDiv = document.getElementById('certificatesDisplay');
+
+      // Store all certificates
+      allCertificatesData = certificatesArr.map(c => c.certificateData || c);
+
+      const count = certificatesArr.length;
+      const plural = count > 1 ? 's' : '';
+
+      setStatus('ok',
+        `<strong>✅ ${count} CERTIFICATE${plural.toUpperCase()} FOUND!</strong><br>
+        ${count === 1 ? 'Your certificate is ready for download.' : `Great news! You have participated in ${count} events. Each certificate is displayed below.`}<br><br>
+        <strong>Found ${count} certificate${plural} for your email address.</strong>`
+      );
+
+      // Generate individual certificate previews
+      let html = `
+        <div style="text-align:center;margin-bottom:2rem">
+          <h3 class="certificate-title">📜 Your Certificate${plural}</h3>
+          ${count > 1 ? '<p style="color:#666;font-family:\'Courier New\',monospace">Each certificate is displayed individually with its own download button</p>' : ''}
+        </div>
+        <div class="certificates-grid">`;
+
+      allCertificatesData.forEach((rawCert, index) => {
+        const cert = normalizeCert(rawCert);
+        html += `
+          <div style="text-align:center">
+            <h4 class="certificate-title">🏆 Certificate ${index + 1}${count > 1 ? ` - ${cert.hackathonName}` : ''}</h4>
+
+            <!-- Individual Certificate Preview -->
+            <div class="certificate-container">
+              ${cert.hackLogoUrl ? `<img src="${cert.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
+
+              <div style="text-align:center;margin-bottom:40px">
+                <h1>CERTIFICATE</h1>
+                <p class="sub">OF ACHIEVEMENT</p>
+              </div>
+
+              <p class="presented">This certificate is presented to</p>
+              <h2 class="participant-name">${cert.participantName}</h2>
+
+              <div class="body">
+                <p>In recognition of your outstanding contributions as a <strong>${cert.rolesText}</strong> at the
+                <strong>${cert.hackathonName}</strong>.
+                </p><br>
+                <p><strong>${cert.date}</strong> — <span>${cert.location}</span></p><br>
+                <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+              </div>
+
+              <!-- Bottom logos and signature -->
+              <div style="position:absolute;bottom:30px;left:40px;right:40px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+                  <div style="display:flex;gap:20px;align-items:center">
+                    <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors" style="width:50px;height:50px;object-fit:contain">
+                    <img src="https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34" alt="FIU Pino Global" style="width:50px;height:50px;object-fit:contain">
+                    <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business" style="width:50px;height:50px;object-fit:contain">
+                  </div>
+                  <div style="text-align:center">
+                    <div style="border-top:2px solid #333;width:250px;margin:0 auto 15px"></div>
+                    <p style="font-size:1rem;font-weight:700;margin-bottom:5px">BRIAN BAZURTO</p>
+                    <p style="font-size:.9rem;font-style:italic;margin:0">Code Crunch President</p>
+                    <p style="font-size:.9rem;font-style:italic;margin:0">Hack University Initiative</p>
+                  </div>
+                  <div style="display:flex;gap:15px;align-items:center">
+                    <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+                    <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+                    <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU" style="width:45px;height:45px;object-fit:contain;border-radius:4px">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Download button for this specific certificate -->
+            <div style="margin-top:10px">
+              <button class="btn-green" onclick="downloadSpecificCertificate(${index})">
+                📄 Download This Certificate
+              </button>
+            </div>
+
+            <!-- Certificate details -->
+            <div style="margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;text-align:left;font-family:'Courier New',monospace;font-size:.9rem">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div><strong>Participant:</strong> ${cert.participantName}</div>
+                <div><strong>Role:</strong> ${cert.rolesText}</div>
+                <div><strong>Event:</strong> ${cert.hackathonName}</div>
+                <div><strong>Date:</strong> ${cert.date}</div>
+                <div><strong>Location:</strong> ${cert.location}</div>
+                <div><strong>Certificate #:</strong> ${index + 1}</div>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      html += `</div>`;
+
+      // Add download all option if multiple certificates
+      if (count > 1) {
+        html += `
+          <div style="text-align:center;margin-top:3rem;padding:2rem;background:#e3f2fd;border-radius:8px;border:2px solid #2196f3">
+            <h4 style="color:#1976d2;margin-bottom:1rem;font-family:'Courier New',monospace">📚 Download All Certificates</h4>
+            <button class="btn-blue" onclick="downloadAllCertificates()">📦 Download All ${count} Certificates</button>
+            <p style="color:#555;font-size:.9rem;margin-top:.5rem;font-family:'Courier New',monospace">This will open each certificate in a separate tab</p>
+          </div>`;
+      }
+
+      displayDiv.innerHTML = html;
+      displayDiv.style.display = 'block';
+      setTimeout(() => displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+    }
+
+    function downloadSpecificCertificate(index) {
+      const cert = allCertificatesData?.[index];
+      if (!cert) return alert('Certificate data not available');
+      generateCertificateWindow(cert);
+    }
+
+    function downloadAllCertificates() {
+      if (!allCertificatesData?.length) return alert('Certificate data not available');
+      allCertificatesData.forEach((cert, i) => setTimeout(() => generateCertificateWindow(cert), i * 500));
+    }
+
+    function showCertificateError(message) {
+      document.getElementById('certificatesDisplay').style.display = 'none';
+      setStatus('error', `${esc(message)}<br><br><strong>If you believe this is an error, please contact the organizers with your email address.</strong>`);
+    }
+
+    function generateCertificateWindow(certRaw) {
+      const c = normalizeCert(certRaw);
+
+      const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta charset="utf-8">
+      <title>Certificate - ${c.participantName}</title>
+      <style>
+        @page { size:A4 landscape; margin:10mm }
+        *{box-sizing:border-box}
+        body{font-family:"Times New Roman",serif;background:#f5f5f5;padding:20px;margin:0}
+        .wrap{max-width:1200px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+        .sheet{width:100%;max-width:1000px;min-height:700px;margin:0 auto;border:15px solid #B8860B;padding:40px;background:#fff;position:relative}
+        .hack-logo{position:absolute;top:20px;right:20px;max-width:120px;max-height:70px;object-fit:contain}
+        .hdr{text-align:center;margin-bottom:40px}
+        .ttl{font-size:4rem;font-weight:700;letter-spacing:4px;color:#333;margin-bottom:10px;line-height:1}
+        .sub{font-size:1.2rem;letter-spacing:4px;color:#666;text-transform:uppercase}
+        .presented{font-size:1.1rem;font-style:italic;margin:50px 0 0;text-align:center;color:#555}
+        .name{font-size:3rem;font-weight:700;font-style:italic;color:#333;margin:30px 0;text-align:center}
+        .rec{font-size:1.1rem;line-height:1.6;color:#555;margin:30px auto;max-width:80%;text-align:center}
+        .info{font-size:1.1rem;font-weight:700;color:#333;margin:30px 0;text-align:center}
+        .impact{font-size:1rem;font-style:italic;color:#666;margin-top:20px;text-align:center}
+        .footer{margin-top:60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+        .left img{width:40px;height:40px;object-fit:contain;margin-right:15px}
+        .sig{text-align:center;flex:1}
+        .sig-line{border-top:2px solid #333;width:200px;margin:0 auto 10px}
+        .sig-name{font-size:1rem;font-weight:700;color:#333;margin-bottom:3px}
+        .sig-title{font-size:.9rem;font-style:italic;color:#666;line-height:1.3}
+        .right img{width:35px;height:35px;object-fit:contain;border-radius:3px;margin-left:12px}
+        .controls{text-align:center;margin:20px 0;padding:15px;background:#f8f9fa;border-radius:8px}
+        .btn{padding:12px 24px;font-size:1rem;cursor:pointer;border:0;border-radius:6px;margin:0 10px;font-weight:700;transition:all .3s ease}
+        .btn-primary{background:#007bff;color:#fff}.btn-secondary{background:#6c757d;color:#fff}.btn:hover{transform:translateY(-2px)}
+        @media print{
+          body{background:#fff!important;padding:0!important;margin:0!important}
+          .wrap{max-width:none!important;padding:0!important;box-shadow:none!important;background:#fff!important}
+          .sheet{max-width:none!important;width:277mm!important;height:190mm!important;border:8mm solid #B8860B!important;padding:15mm!important;margin:0!important;page-break-inside:avoid!important}
+          .controls{display:none!important}
+          .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
+          .ttl{font-size:16mm!important}.sub{font-size:4mm!important}.name{font-size:12mm!important}
+          .presented,.rec,.info{font-size:3.5mm!important}.impact{font-size:3mm!important}
+        }
+      </style>
+      </head>
+      <body>
+      <div class="controls">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+        <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+      </div>
+      <div class="wrap">
+        <div class="sheet">
+          ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
+          <div class="hdr"><div class="ttl">CERTIFICATE</div><div class="sub">OF ACHIEVEMENT</div></div>
+          <div class="presented">This certificate is presented to</div>
+          <div class="name">${c.participantName}</div>
+          <div class="rec">In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
+            <strong>${c.hackathonName}</strong>.
+          </div>
+          <div class="info">${c.date} — ${c.location}</div>
+          <div class="impact">Your insights helped shape a fair and impactful competition experience for all participants.</div>
+          <div class="footer">
+            <div class="left" style="flex:1;display:flex;align-items:center">
+              <img src="https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3" alt="FIU Honors">
+              <img src="https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34" alt="FIU Pino Global">
+              <img src="https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c" alt="FIU Business">
+            </div>
+            <div class="sig">
+              <div class="sig-line"></div>
+              <div class="sig-name">BRIAN BAZURTO</div>
+              <div class="sig-title">Code Crunch President<br>Hack University Initiative</div>
+            </div>
+            <div class="right" style="flex:1;display:flex;justify-content:flex-end;align-items:center">
+              <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch">
+              <img src="https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846" alt="ColorStack at FIU">
+              <img src="https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85" alt="CAHSI at FIU">
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>
+      </html>`;
+
+      const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
+      if (!w) { alert('Please allow pop-ups to view/print your certificate.'); return; }
+      w.opener = null; // security
+      w.document.write(html);
+      w.document.close();
+    }
+
+    // ===== FAQ toggler =====
+    function toggleFAQ(btn){
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      item.classList.toggle('open');
+    }
+
+    // ===== Timezone clock =====
+    function updateTimes() {
+      const now = new Date();
+      const set = (id, tz) => {
+        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh = String(t.getHours()).padStart(2,'0');
+        const mm = String(t.getMinutes()).padStart(2,'0');
+        const ss = String(t.getSeconds()).padStart(2,'0');
+        const out = `${hh}:${mm}:${ss}`;
+        const el = document.getElementById(id);
+        if (el) el.textContent = out;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
+
+    // ===== Init =====
+    document.addEventListener('DOMContentLoaded', () => {
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Initial certificate helper text
+      document.getElementById('certificateResult').innerHTML =
+        infoBoxHTML() + 'Enter your email above to check for available certificates...';
+
+      // Enter key triggers certificate generation
+      const input = document.getElementById('certificateEmailInput');
+      input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
+
+      // FAQ fade-in animation
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach((item, index) => {
         item.style.opacity = '0';
-        item.style.transform = 'translateX(-50px)';
-        
+        item.style.transform = 'translateY(20px)';
         setTimeout(() => {
-            item.style.transition = 'all 0.6s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateX(0)';
-        }, 200 * (index + 1));
+          item.style.transition = 'all 0.6s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, 100 * (index + 1));
+      });
+
+      // Live clocks
+      updateTimes();
+      setInterval(updateTimes, 1000);
     });
-
-    // Window resize handler for canvas
-    window.addEventListener('resize', function() {
-        const canvas = document.querySelector('canvas');
-        if (canvas) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-    });
-
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Additional smooth scroll behavior for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Prevent body scroll when menu is open
-    function toggleBodyScroll(disable) {
-        if (disable) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = '15px'; // Prevent layout shift
-        } else {
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-        }
-    }
-
-    // Enhanced menu visibility tracking
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const menu = mutation.target;
-                if (menu.classList.contains('show')) {
-                    console.log('Menu opened successfully');
-                    toggleBodyScroll(true);
-                } else {
-                    console.log('Menu closed');
-                    toggleBodyScroll(false);
-                }
-            }
-        });
-    });
-
-    if (offcanvasMenu) {
-        observer.observe(offcanvasMenu, { attributes: true });
-    }
-});
-
-
-
-        // JavaScript functions for the Notion embed
-        //
-        //
-        //
-        //
-
-function hideLoading() {
-    const loading = document.getElementById('loading');
-    if (loading) {
-        loading.style.display = 'none';
-    }
-}
-
-function showError() {
-    const loading = document.getElementById('loading');
-    if (loading) {
-        loading.innerHTML = 'Failed to load Code Crunch Global Wiki. Please check the URL or try refreshing.';
-        loading.style.color = '#e74c3c';
-    }
-}
-        // END JavaScript functions for the Notion embed
-        //
-        //
-        //
-        //
-
-
-
-
-    // faq JavaScript
-    //**************
-    //**************
-    //**************
-    //**************
-    //**************
-    //**************
-            function toggleFAQ(button) {
-            const faqItem = button.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            
-            // Close all other FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Toggle current item
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
-            
-            // Add glitch effect occasionally
-            if (Math.random() > 0.7) {
-                button.style.animation = 'glitch-skew 0.5s';
-                setTimeout(() => {
-                    button.style.animation = '';
-                }, 500);
-            }
-        }
-
-        // Initialize FAQ animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    item.style.transition = 'all 0.6s ease';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 100 * (index + 1));
-            });
-        });
-
-    // END faq- navigation JavaScript
-    //**************
-    //**************
-    //**************
-    //**************
-    //**************
-    //**************
-
-
-
-
-
-
-
-
-
-    </script>
-
+  </script>
 </body>
 </html>
