@@ -179,6 +179,7 @@
 
       <div class="portal-grid" style="margin-top:16px">
         <!-- SummerCodeX — CLOSED -->
+         <!-- this disable aria-disabled="true" tabindex="-1"  -->
         <a class="portal-btn"
            href="#REPLACE_WITH_GFORM_URL_SummerCodeX_2025"
            aria-disabled="true" tabindex="-1"
@@ -189,7 +190,7 @@
             <strong>Opened:</strong> Jun 21, 2025 ·
             <strong>Closed:</strong> Jul 21, 2025
           </small>
-          <span class="status-badge status-closed">CLOSED</span>
+          
         </a>
 
         <!-- 305 Hackathon Edition — OPENS SOON -->
@@ -203,7 +204,7 @@
             <strong>Opens:</strong> Oct 20, 2025 ·
             <strong>Closes:</strong> Nov 16, 2025
           </small>
-          <span class="status-badge status-upcoming">OPENS SOON</span>
+         
         </a>
 
         <!-- EmpowHer Hack — OPEN (live now) -->
@@ -216,7 +217,7 @@
             <strong>Opens:</strong> Oct 13, 2025 ·
             <strong>Closes:</strong> Oct 15, 2025
           </small>
-          <span class="status-badge status-open">OPEN</span>
+          
         </a>
 
         <!-- EmpowHer Mini HackDay — OPEN (live now) -->
@@ -229,23 +230,57 @@
             <strong>Opens:</strong> Oct 13, 2025 ·
             <strong>Closes:</strong> Oct 17, 2025
           </small>
-          <span class="status-badge status-open">OPEN</span>
+         
         </a>
 
         <!-- CodeFest — OPENS SOON -->
         <a class="portal-btn"
            href="#"
-           aria-disabled="true" tabindex="-1"
+     
            title="Registration not open yet">
           <span>🔒 CodeFest — December 2025</span>
           <small>
             <strong>Status:</strong> OPENS SOON ·
-            <strong>Opens:</strong> Dec 08, 2025 ·
+            <strong>Opens:</strong> Oct 26, 2025 ·
             <strong>Closes:</strong> Dec 15, 2025
           </small>
-          <span class="status-badge status-upcoming">OPENS SOON</span>
+          
+          
         </a>
       </div>
+
+
+<!-- 1) Manual (hard-coded)
+
+You flip the state by editing each card’s HTML:
+
+OPEN
+
+Use the real Google Form URL in href.
+
+Do not include aria-disabled="true".
+
+Badge class: status-badge status-open and text OPEN.
+
+OPENS SOON
+
+Keep a placeholder href="#".
+
+Add aria-disabled="true".
+
+Badge class: status-badge status-upcoming with text OPENS SOON.
+
+CLOSED
+
+Keep a placeholder href="#".
+
+Add aria-disabled="true".
+
+Badge class: status-badge status-closed with text CLOSED.
+
+That’s it. This is what I did for each card in your last page. -->
+
+
 
       <div class="portal-note" style="max-width:900px;margin:12px auto 0;">
         ✅ If your volunteer <em>Event Registration Response</em> already appears on the Google Sheet but you still can’t access a form,
