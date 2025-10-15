@@ -38,12 +38,15 @@
   </div>
 
   <script>
-    // === SET THIS ===
+    // === CONFIG ===
+    // Your Apps Script /exec URL:
     const API_URL = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
-    // If your Apps Script requires a shared key (server-to-server), this simple HTML cannot safely include it.
-    // Either remove the key requirement in Apps Script or proxy via your own server.
-    // const SHARED_KEY = "UNSAFE_TO_PUT_HERE"; // ⚠️ Don't expose secrets in client code.
 
+    // If your Apps Script enforces a shared key (?key=...), put it here.
+    // If you disabled the key on the server, leave this as an empty string.
+    const KEY = ""; // e.g., "SET_A_LONG_RANDOM_SECRET"
+
+    // === UTIL ===
     const $ = (id) => document.getElementById(id);
 
     $("btn").addEventListener("click", async () => {
@@ -65,26 +68,40 @@
       }
 
       try {
-        const url = `${API_URL}?email=${encodeURIComponent(email)}`; // + `&key=${encodeURIComponent(SHARED_KEY)}` if you *temporarily* allow it
-        const res = await fetch(url, { cache: "no-store" });
+        // Always send the origin so the Apps Script can validate/log it server-side
+        const origin = window.location.origin;
+
+        // Build query params
+        const params = new URLSearchParams({
+          email,
+          origin
+        });
+        if (KEY) params.set("key", KEY);
+
+        const res = await fetch(`${API_URL}?${params.toString()}`, { cache: "no-store" });
         if (!res.ok) {
           msg.textContent = "Access denied or server error.";
           msg.className = "msg err";
           return;
         }
+
         const data = await res.json();
-        if (!data || !data.allowed) {
-          msg.textContent = "This email is not on the volunteer list.";
+
+        if (!data || data.allowed !== true) {
+          msg.textContent = data?.error
+            ? `Denied: ${data.error}`
+            : "This email is not on the volunteer list.";
           msg.className = "msg err";
           return;
         }
 
-        // Success — show greeting
+        // Success — show greeting and details
         const discord = (data.discord || "").trim();
         greet.textContent = `Welcome ${data.email || email}${discord ? ` (${discord})` : ""}!`;
+
         const parts = [];
         if (data.position) parts.push(data.position);
-        if (data.company) parts.push(data.company);
+        if (data.company)  parts.push(data.company);
         if (data.timestamp) parts.push(`Added: ${data.timestamp}`);
         details.textContent = parts.join(" • ");
 
