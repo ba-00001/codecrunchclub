@@ -3,386 +3,678 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Volunteer Login</title>
+  <title>Volunteer Portal - Code Crunch Global</title>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body { 
-      font-family: system-ui, -apple-system, Arial, sans-serif; 
-      max-width: 520px; 
-      margin: 8vh auto; 
-      padding: 0 16px;
-      background: #f9fafb;
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a1a2e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
     }
-    .card { 
-      background: white;
-      border: 1px solid #e5e7eb; 
-      padding: 32px; 
-      border-radius: 16px; 
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
     }
-    h1 { 
-      margin: 0 0 8px; 
-      font-size: 1.875rem;
-      color: #111827;
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(0, 255, 153, 0.05);
+      border: 2px solid #00ff99;
+      border-radius: 12px;
     }
-    p { 
-      margin: 8px 0 24px; 
-      color: #6b7280; 
-      line-height: 1.5;
+    .header h1 {
+      font-size: 2.5rem;
+      color: #00ff99;
+      text-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+      margin-bottom: 10px;
     }
-    label { 
-      display: block; 
-      margin: 0 0 8px; 
-      font-weight: 600;
-      color: #374151;
-      font-size: 0.875rem;
+    .login-card {
+      background: rgba(26, 26, 46, 0.9);
+      border: 1px solid #00ff99;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 255, 153, 0.1);
     }
-    input[type=email] { 
-      width: 100%; 
-      padding: 12px 16px; 
-      border: 2px solid #d1d5db; 
-      border-radius: 10px;
+    .login-card h2 {
+      color: #00ff99;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      color: #00ff99;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type=email] {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #00ff99;
+      border-radius: 8px;
+      color: #fff;
       font-size: 1rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: 'Courier New', monospace;
     }
     input[type=email]:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      border-color: #00ffff;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
     }
-    button { 
+    .btn {
       width: 100%;
-      margin-top: 16px; 
-      padding: 12px 16px; 
-      border: 0; 
-      border-radius: 10px; 
-      background: #111827; 
-      color: #fff; 
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background-color 0.2s;
-    }
-    button:hover { 
-      background: #1f2937; 
-    }
-    button:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-    }
-    .msg { 
-      margin-top: 16px; 
-      padding: 12px 16px;
+      padding: 14px;
+      background: linear-gradient(45deg, #00ff99, #00ffff);
+      color: #000;
+      border: none;
       border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    .ok { 
-      background: #d1fae5;
-      color: #065f46; 
-      border: 1px solid #a7f3d0;
-    }
-    .err { 
-      background: #fee2e2;
-      color: #991b1b; 
-      border: 1px solid #fecaca;
-    }
-    .hidden { display: none; }
-    .profile { 
-      margin-top: 24px; 
-      padding: 20px; 
-      background: #f9fafb; 
-      border: 1px solid #e5e7eb; 
-      border-radius: 12px;
-    }
-    .greeting {
-      font-weight: 600;
-      font-size: 1.125rem;
-      color: #111827;
-      margin-bottom: 8px;
-    }
-    .details { 
-      color: #6b7280; 
-      font-size: 0.875rem;
-      line-height: 1.6;
-    }
-    .detail-row {
-      margin: 4px 0;
-    }
-    .detail-label {
-      font-weight: 600;
-      color: #374151;
-    }
-    details {
-      margin-top: 16px;
-    }
-    summary {
+      font-size: 1.1rem;
+      font-weight: bold;
       cursor: pointer;
-      color: #6b7280;
-      font-size: 0.875rem;
-      padding: 8px 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Courier New', monospace;
     }
-    summary:hover {
-      color: #111827;
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 255, 153, 0.4);
     }
-    pre { 
-      background: #0f172a; 
-      color: #e2e8f0; 
-      padding: 16px; 
-      border-radius: 8px; 
-      overflow: auto;
-      font-size: 0.8125rem;
-      line-height: 1.5;
-      margin: 8px 0 0;
+    .btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
     }
     .spinner {
       display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid #ffffff;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #000;
       border-top: 2px solid transparent;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin-left: 8px;
-      vertical-align: middle;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .debug-info {
-      margin-top: 16px;
-      padding: 12px;
-      background: #fef3c7;
-      border: 1px solid #fbbf24;
+    .message {
+      margin-top: 20px;
+      padding: 12px 16px;
       border-radius: 8px;
-      font-size: 0.875rem;
-      color: #92400e;
+      font-weight: bold;
+    }
+    .message.error {
+      background: rgba(255, 107, 107, 0.2);
+      border: 1px solid #ff6b6b;
+      color: #ff6b6b;
+    }
+    .message.success {
+      background: rgba(0, 255, 153, 0.2);
+      border: 1px solid #00ff99;
+      color: #00ff99;
+    }
+    .hidden {
+      display: none;
+    }
+    
+    /* Dashboard Styles */
+    .dashboard {
+      display: none;
+    }
+    .dashboard.active {
+      display: block;
+    }
+    .welcome-banner {
+      background: linear-gradient(45deg, rgba(0, 255, 153, 0.2), rgba(0, 255, 255, 0.2));
+      border: 2px solid #00ff99;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .welcome-banner h2 {
+      font-size: 2rem;
+      color: #00ff99;
+      margin-bottom: 10px;
+    }
+    .volunteer-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .info-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 15px;
+      border-radius: 8px;
+      border-left: 3px solid #00ff99;
+    }
+    .info-label {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    .info-value {
+      color: #fff;
+      font-weight: bold;
+    }
+    .section {
+      background: rgba(26, 26, 46, 0.9);
+      border: 1px solid #00ff99;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .section h3 {
+      color: #00ff99;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .discord-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .discord-btn {
+      padding: 20px;
+      background: linear-gradient(45deg, #7289da, #5865f2);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+      box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);
+    }
+    .discord-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(114, 137, 218, 0.5);
+    }
+    .discord-btn.private {
+      background: linear-gradient(45deg, #43b581, #4caf50);
+      box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);
+    }
+    .discord-btn.private:hover {
+      box-shadow: 0 6px 25px rgba(67, 181, 129, 0.5);
+    }
+    .event-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      transition: transform 0.2s;
+    }
+    .event-card:hover {
+      transform: translateX(5px);
+    }
+    .event-card.disabled {
+      border-color: #666;
+      opacity: 0.6;
+    }
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+    .event-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00ff99;
+    }
+    .event-status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .event-status.open {
+      background: rgba(0, 255, 153, 0.2);
+      color: #00ff99;
+    }
+    .event-status.coming-soon {
+      background: rgba(255, 170, 0, 0.2);
+      color: #ffaa00;
+    }
+    .event-status.ended {
+      background: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+    }
+    .event-description {
+      color: #ccc;
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+    .event-dates {
+      color: #888;
+      font-size: 0.9rem;
+      margin: 10px 0;
+    }
+    .event-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #00ff99, #00ffff);
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+    .event-btn:hover {
+      transform: scale(1.05);
+    }
+    .event-btn.disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .cert-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #ffaa00;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+    .cert-card.disabled {
+      border-color: #666;
+      opacity: 0.6;
+    }
+    .cert-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffaa00;
+      margin-bottom: 10px;
+    }
+    .logout-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background: rgba(255, 107, 107, 0.2);
+      border: 1px solid #ff6b6b;
+      color: #ff6b6b;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+    .logout-btn:hover {
+      background: rgba(255, 107, 107, 0.3);
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>🎯 Volunteer Login</h1>
-    <p>Enter the email you used to register as a volunteer. We'll verify your access.</p>
+  <div class="container">
+    <!-- Login Section -->
+    <div id="loginSection">
+      <div class="header">
+        <h1>🎯 VOLUNTEER PORTAL</h1>
+        <p style="color: #00ff99;">Official Volunteers - Code Crunch Global & Hack University</p>
+      </div>
+      
+      <div class="login-card">
+        <h2>🔐 Volunteer Login</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Enter your registered email address to access your volunteer dashboard</p>
+        
+        <div class="form-group">
+          <label for="email">📧 Email Address</label>
+          <input type="email" id="email" placeholder="your@email.com" required />
+        </div>
+        
+        <button class="btn" id="loginBtn" onclick="handleLogin()">
+          <span id="loginText">Access Dashboard</span>
+        </button>
+        
+        <div id="loginMessage" class="message hidden"></div>
+      </div>
+    </div>
 
-    <label for="email">Email Address</label>
-    <input id="email" type="email" placeholder="you@example.com" required />
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="dashboard">
+      <button class="logout-btn" onclick="handleLogout()">🚪 Logout</button>
+      
+      <div class="welcome-banner">
+        <h2>🎉 Welcome, <span id="volunteerName">Volunteer</span>!</h2>
+        <p style="color: #ccc;">Official Volunteer Dashboard</p>
+        
+        <div class="volunteer-info" id="volunteerInfo"></div>
+      </div>
 
-    <button id="btn">
-      <span id="btnText">Verify Access</span>
-    </button>
-    <div id="msg" class="msg hidden"></div>
+      <!-- Discord Section -->
+      <div class="section">
+        <h3>💬 Discord Access</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Join our Discord server to collaborate with other volunteers and access exclusive channels</p>
+        
+        <div class="discord-buttons">
+          <a href="#" id="discordJoinLink" class="discord-btn" target="_blank">
+            🚀 JOIN DISCORD SERVER
+          </a>
+          <a href="#" id="discordPrivateLink" class="discord-btn private" target="_blank">
+            🔒 PRIVATE VOLUNTEER CHANNEL
+          </a>
+        </div>
+        
+        <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; border-left: 3px solid #00ff99;">
+          <p style="color: #00ff99; font-weight: bold; margin-bottom: 10px;">📋 Setup Instructions:</p>
+          <ol style="color: #ccc; line-height: 1.8; padding-left: 20px;">
+            <li>Join the Discord server using the button above</li>
+            <li>Post an introduction in the <code>#introductions</code> channel</li>
+            <li>Tag these roles: <code>@new-hackathon-volunteer</code> <code>@club-team</code> <code>@hack-organizers</code></li>
+            <li>Access the private volunteer channel once approved</li>
+          </ol>
+        </div>
+      </div>
 
-    <div id="profile" class="profile hidden">
-      <div id="greeting" class="greeting"></div>
-      <div id="details" class="details"></div>
-      <details>
-        <summary>View Response Data</summary>
-        <pre id="dbg"></pre>
-      </details>
+      <!-- Hackathon Events Section -->
+      <div class="section">
+        <h3>🏆 Hackathon Events</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Register for upcoming hackathon events. New events will appear here automatically.</p>
+        
+        <div id="eventsList"></div>
+      </div>
+
+      <!-- Certificates Section -->
+      <div class="section">
+        <h3>🎓 Volunteer Certificates</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Download your volunteer certificates once they become available</p>
+        
+        <div id="certificatesList"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    // === CONFIG ===
     const API_URL = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
+    let currentVolunteerData = null;
 
-    // === UTIL ===
-    const $ = (id) => document.getElementById(id);
-
-    function safeOriginParam() {
-      const o = (window.location && window.location.origin) || "";
-      if (!o) return "";
-      const low = o.toLowerCase();
-      if (low === "null" || low.startsWith("file:")) return "";
-      return o;
-    }
-
-    function setLoading(isLoading) {
-      const btn = $("btn");
-      const btnText = $("btnText");
-      btn.disabled = isLoading;
-      if (isLoading) {
-        btnText.innerHTML = 'Verifying<span class="spinner"></span>';
-      } else {
-        btnText.textContent = "Verify Access";
-      }
-    }
-
-    function showMessage(text, type) {
-      const msg = $("msg");
-      msg.textContent = text;
-      msg.className = `msg ${type}`;
-      msg.classList.remove("hidden");
-    }
-
-    function hideMessage() {
-      $("msg").classList.add("hidden");
-    }
-
-    // JSONP request function with timeout
+    // JSONP request function
     function jsonpRequest(url, timeoutMs = 15000) {
       return new Promise((resolve, reject) => {
         const callbackName = 'jsonpCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
         let timeoutId;
         let script;
         
-        // Cleanup function
         const cleanup = () => {
           if (timeoutId) clearTimeout(timeoutId);
           if (window[callbackName]) delete window[callbackName];
-          if (script && script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
+          if (script && script.parentNode) script.parentNode.removeChild(script);
         };
         
-        // Success callback
         window[callbackName] = function(data) {
           cleanup();
           resolve(data);
         };
 
-        // Create and append script
         script = document.createElement('script');
         script.src = url + '&callback=' + callbackName;
-        
-        script.onerror = function(e) {
+        script.onerror = () => {
           cleanup();
-          console.error("Script loading error:", e);
-          reject(new Error('Failed to load script. Check if the Apps Script URL is correct and the deployment is active.'));
+          reject(new Error('Failed to load script'));
         };
 
-        // Timeout
         timeoutId = setTimeout(() => {
           cleanup();
-          reject(new Error('Request timeout. The server took too long to respond.'));
+          reject(new Error('Request timeout'));
         }, timeoutMs);
         
         document.body.appendChild(script);
       });
     }
 
-    // Handle Enter key in email input
-    $("email").addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        $("btn").click();
-      }
-    });
+    // Handle login
+    async function handleLogin() {
+      const email = document.getElementById('email').value.trim();
+      const loginBtn = document.getElementById('loginBtn');
+      const loginText = document.getElementById('loginText');
+      const messageDiv = document.getElementById('loginMessage');
 
-    $("btn").addEventListener("click", async () => {
-      const email = $("email").value.trim();
-      const profile = $("profile");
-      const greet = $("greeting");
-      const details = $("details");
-      const dbg = $("dbg");
-
-      hideMessage();
-      profile.classList.add("hidden");
-      greet.textContent = "";
-      details.innerHTML = "";
-      dbg.textContent = "";
+      messageDiv.classList.add('hidden');
 
       if (!email) {
-        showMessage("Please enter your email address.", "err");
+        showMessage('Please enter your email address', 'error');
         return;
       }
 
-      // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        showMessage("Please enter a valid email address.", "err");
+        showMessage('Please enter a valid email address', 'error');
         return;
       }
 
-      setLoading(true);
+      loginBtn.disabled = true;
+      loginText.innerHTML = 'Verifying<span class="spinner"></span>';
 
       try {
         const params = new URLSearchParams({ email });
-        const origin = safeOriginParam();
-        if (origin) params.set("origin", origin);
+        const origin = window.location.origin;
+        if (origin) params.set('origin', origin);
 
         const url = `${API_URL}?${params.toString()}`;
-        
-        console.log("Making request to:", url);
-        
-        // Use JSONP to bypass CORS
         const data = await jsonpRequest(url);
 
-        console.log("Received data:", data);
-
-        if (!data || data.allowed !== true) {
-          const errorMsg = data?.error
-            ? `Access denied: ${data.error}`
-            : "This email is not registered in our volunteer database.";
-          showMessage(errorMsg, "err");
-          if (data) {
-            dbg.textContent = JSON.stringify(data, null, 2);
-          }
+        if (!data.ok || !data.allowed) {
+          showMessage(data.error || 'Email not found in volunteer database', 'error');
+          loginBtn.disabled = false;
+          loginText.textContent = 'Access Dashboard';
           return;
         }
 
-        // Success — show greeting and details
-        const discord = (data.discord || "").trim();
-        greet.textContent = `Welcome, ${data.email || email}!`;
-        if (discord) {
-          greet.textContent += ` 💬`;
-        }
+        // Success - show dashboard
+        currentVolunteerData = data;
+        showDashboard(data);
 
-        const detailsHTML = [];
-        if (data.position) {
-          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Position:</span> ${data.position}</div>`);
-        }
-        if (data.company) {
-          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Organization:</span> ${data.company}</div>`);
-        }
-        if (discord) {
-          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Discord:</span> ${discord}</div>`);
-        }
-        if (data.timestamp) {
-          const date = new Date(data.timestamp);
-          const formatted = date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          });
-          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Registered:</span> ${formatted}</div>`);
-        }
-        
-        details.innerHTML = detailsHTML.join('');
+      } catch (error) {
+        console.error('Login error:', error);
+        showMessage('Connection error. Please try again.', 'error');
+        loginBtn.disabled = false;
+        loginText.textContent = 'Access Dashboard';
+      }
+    }
 
-        showMessage("✓ Access granted. Welcome to the volunteer portal!", "ok");
-        profile.classList.remove("hidden");
-        dbg.textContent = JSON.stringify(data, null, 2);
+    // Show message
+    function showMessage(text, type) {
+      const messageDiv = document.getElementById('loginMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+      messageDiv.classList.remove('hidden');
+    }
 
-      } catch (e) {
-        console.error("Login error:", e);
-        showMessage(e.message || "Network error. Please check your connection and try again.", "err");
-        
-        // Show helpful debug info
-        const debugDiv = document.createElement('div');
-        debugDiv.className = 'debug-info';
-        debugDiv.innerHTML = `
-          <strong>Troubleshooting:</strong><br>
-          1. Check if the Apps Script is deployed as "Anyone" can access<br>
-          2. Make sure the deployment URL is correct<br>
-          3. Try opening this URL directly: <a href="${API_URL}?email=test@test.com&callback=test" target="_blank">Test API</a><br>
-          4. Error: ${e.message}
+    // Show dashboard
+    function showDashboard(data) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('dashboardSection').classList.add('active');
+
+      // Update volunteer info
+      document.getElementById('volunteerName').textContent = data.volunteer.email.split('@')[0];
+      
+      const infoHTML = `
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">${data.volunteer.email}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Position</div>
+          <div class="info-value">${data.volunteer.position || 'N/A'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Company</div>
+          <div class="info-value">${data.volunteer.company || 'N/A'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Status</div>
+          <div class="info-value">${data.volunteer.status}</div>
+        </div>
+      `;
+      document.getElementById('volunteerInfo').innerHTML = infoHTML;
+
+      // Update Discord links
+      document.getElementById('discordJoinLink').href = data.discord.joinLink;
+      document.getElementById('discordPrivateLink').href = data.discord.privateChannelLink;
+
+      // Render events
+      renderEvents(data.events || []);
+
+      // Render certificates
+      renderCertificates(data.certificates || []);
+    }
+
+    // Render events
+    function renderEvents(events) {
+      const eventsContainer = document.getElementById('eventsList');
+      
+      if (events.length === 0) {
+        eventsContainer.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #888;">
+            <p>📭 No hackathon events available at the moment</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Check back later for new events!</p>
+          </div>
         `;
-        const msg = $("msg");
-        if (msg.nextSibling) {
-          msg.parentNode.insertBefore(debugDiv, msg.nextSibling);
-        } else {
-          msg.parentNode.appendChild(debugDiv);
-        }
-      } finally {
-        setLoading(false);
+        return;
+      }
+
+      let html = '';
+      events.forEach(event => {
+        const isDisabled = !event.isAvailable;
+        const statusClass = event.status === 'Open Now' ? 'open' : 
+                           event.status === 'Coming Soon' ? 'coming-soon' : 'ended';
+        
+        html += `
+          <div class="event-card ${isDisabled ? 'disabled' : ''}">
+            <div class="event-header">
+              <div class="event-name">${event.name}</div>
+              <span class="event-status ${statusClass}">${event.status}</span>
+            </div>
+            
+            <div class="event-description">${event.description || 'Join this exciting hackathon event!'}</div>
+            
+            ${event.startDate ? `
+              <div class="event-dates">
+                📅 ${formatEventDates(event.startDate, event.endDate)}
+              </div>
+            ` : ''}
+            
+            ${event.isAvailable && event.url ? `
+              <a href="${event.url}" target="_blank" class="event-btn">
+                🚀 Register Now
+              </a>
+            ` : `
+              <button class="event-btn disabled">
+                ${event.status === 'Coming Soon' ? '🔒 Opens Soon' : '⏱️ Registration Closed'}
+              </button>
+            `}
+          </div>
+        `;
+      });
+      
+      eventsContainer.innerHTML = html;
+    }
+
+    // Render certificates
+    function renderCertificates(certificates) {
+      const certsContainer = document.getElementById('certificatesList');
+      
+      if (certificates.length === 0) {
+        certsContainer.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #888;">
+            <p>📭 No certificates available yet</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Certificates will appear here after you complete volunteer tasks</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      certificates.forEach(cert => {
+        const isDisabled = !cert.isAvailable;
+        const statusClass = cert.status === 'Available' ? 'open' : 'coming-soon';
+        
+        html += `
+          <div class="cert-card ${isDisabled ? 'disabled' : ''}">
+            <div class="event-header">
+              <div class="cert-name">🎓 ${cert.event}</div>
+              <span class="event-status ${statusClass}">${cert.status}</span>
+            </div>
+            
+            ${cert.availableDate ? `
+              <div class="event-dates">
+                📅 Available from: ${formatDate(cert.availableDate)}
+              </div>
+            ` : ''}
+            
+            ${cert.isAvailable && cert.url ? `
+              <a href="${cert.url}" target="_blank" class="event-btn">
+                📥 Download Certificate
+              </a>
+            ` : `
+              <button class="event-btn disabled">
+                🔒 Not Available Yet
+              </button>
+            `}
+          </div>
+        `;
+      });
+      
+      certsContainer.innerHTML = html;
+    }
+
+    // Format event dates
+    function formatEventDates(startDate, endDate) {
+      const start = new Date(startDate);
+      const end = endDate ? new Date(endDate) : null;
+      
+      const options = { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+      
+      if (end) {
+        return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
+      }
+      
+      return start.toLocaleDateString('en-US', options);
+    }
+
+    // Format single date
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const options = { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    // Handle logout
+    function handleLogout() {
+      if (confirm('Are you sure you want to logout?')) {
+        currentVolunteerData = null;
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('dashboardSection').classList.remove('active');
+        document.getElementById('email').value = '';
+        document.getElementById('loginMessage').classList.add('hidden');
+        document.getElementById('loginBtn').disabled = false;
+        document.getElementById('loginText').textContent = 'Access Dashboard';
+      }
+    }
+
+    // Handle Enter key
+    document.getElementById('email').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        handleLogin();
       }
     });
 
-    // Focus email input on load
-    window.addEventListener("load", () => {
-      $("email").focus();
+    // Auto-focus email input
+    window.addEventListener('load', () => {
+      document.getElementById('email').focus();
     });
   </script>
 </body>
