@@ -5,8 +5,8 @@
     
     <div style="background: rgba(0, 255, 153, 0.1); border: 1px solid #00ff99; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
         <p style="margin: 0; color: #00ff99; font-weight: bold;">📋 What happens next:</p>
-        <p style="margin: 0.5rem 0; color: #fff;">✅ If you're confirmed as volunteer [form no1 & form no2 completed], you'll see the Discord and access links.</p>
-        <p style="margin: 0.5rem 0; color: #fff;">❌ If not, you'll be prompted to go to <strong>Step 2</strong> to register and wait for acceptance</p>
+        <p style="margin: 0.5rem 0; color: #fff;">✅ If you're confirmed as volunteer [form no1 & form no2 completed], you'll see the Discord and GroupMe join links.</p>
+        <p style="margin: 0.5rem 0; color: #fff;">❌ If not, you'll be prompted to go to <strong>Step 2</strong> to register and wait if you get accepted as volunteer or not</p>
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
@@ -41,15 +41,6 @@
             }
             return true;
         }
-
-        // Button color styles mapping
-        const BUTTON_COLORS = {
-            discord: 'linear-gradient(45deg, #7289da, #5865f2)',
-            green: 'linear-gradient(45deg, #43b581, #4caf50)',
-            blue: 'linear-gradient(45deg, #00bfff, #0099ff)',
-            orange: 'linear-gradient(45deg, #ff9800, #ff6b00)',
-            red: 'linear-gradient(45deg, #ff6b6b, #ff4444)'
-        };
 
         async function checkOfficialVolunteerStatus() {
             if (!checkDomain()) {
@@ -98,59 +89,57 @@
                     
                     if (data.length > 0 && data[0].status !== "No entry") {
                         data.forEach((entry) => {
-                            // WELCOME SECTION WITH DYNAMIC BUTTONS
-                            html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
-                            html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
-                            
-                            // Render dynamic buttons
-                            if (entry.buttons && Array.isArray(entry.buttons)) {
-                                entry.buttons.forEach(button => {
-                                    const bgColor = BUTTON_COLORS[button.color] || BUTTON_COLORS.blue;
-                                    html += `<div style="background: ${bgColor}; padding: 12px 15px; border-radius: 8px; margin: 10px 0; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">`;
-                                    html += `<a href="${button.url}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05em; display: block;">${button.name}</a>`;
-                                    if (button.description) {
-                                        html += `<p style="margin: 5px 0 0; font-size: 0.85em; color: rgba(255,255,255,0.9);">${button.description}</p>`;
-                                    }
-                                    html += `</div>`;
-                                });
-                            }
-                            
-                            // Discord instructions
-                            if (entry.discordInstructions) {
+                            // Discord section
+                            if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
+                                html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
+                                html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
+                                
+                                // Discord join link
+                                html += `<div style="background: linear-gradient(45deg, #7289da, #5865f2); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);">`;
+                                html += `<a href="${entry.discordJoinLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🚀 JOIN DISCORD SERVER 🚀</a>`;
+                                html += `</div>`;
+                                
+                                // Private channel link
+                                html += `<div style="background: linear-gradient(45deg, #43b581, #4caf50); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);">`;
+                                html += `<a href="${entry.privateChannelLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🔒 CHECK PRIVATE CHANNEL ACCESS 🔒</a>`;
+                                html += `</div>`;
+                                
+                                // Discord instructions
                                 let formattedInstructions = entry.discordInstructions
                                     .replace(/\n/g, '<br>')
                                     .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fff;">$1</strong>')
                                     .replace(/`(.*?)`/g, '<code style="background: #333; padding: 2px 6px; border-radius: 3px; color: #ffaa00;">$1</code>');
                                 
-                                html += `<br><div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 6px; line-height: 1.6;">${formattedInstructions}</div>`;
+                                html += `<br>${formattedInstructions}`;
+                                html += `</div>`;
                             }
-                            html += `</div>`;
                             
-                            // BASIC VOLUNTEER INFO
+                            // Basic info
                             html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
                             html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
                             html += `• Role/Status: ${entry.status}<br>`;
-                            html += `• Form 2 Submitted: ${entry.timestamp || 'N/A'}<br>`;
+                            html += `• Form 2 Submitted: ${entry.timestamp}<br>`;
                             html += `• Verified Email: ${entry.email}<br>`;
                             
-                            if (entry.position && entry.position !== "Not available") {
-                                html += `• Position: ${entry.position}<br>`;
-                            }
-                            if (entry.company && entry.company !== "Not available") {
-                                html += `• Company: ${entry.company}<br>`;
-                            }
-                            if (entry.discordUsername && entry.discordUsername !== "Not available") {
-                                html += `• Discord: ${entry.discordUsername}<br>`;
-                            }
-                            if (entry.githubProfile && entry.githubProfile !== "Not available") {
-                                html += `• GitHub: <a href="${entry.githubProfile}" target="_blank" style="color: #00ff99;">${entry.githubProfile}</a><br>`;
+                            if (entry.basicInfo) {
+                                if (entry.basicInfo.position && entry.basicInfo.position !== "Not available") {
+                                    html += `• Position: ${entry.basicInfo.position}<br>`;
+                                }
+                                if (entry.basicInfo.company && entry.basicInfo.company !== "Not available") {
+                                    html += `• Company: ${entry.basicInfo.company}<br>`;
+                                }
+                                if (entry.basicInfo.discordUsername && entry.basicInfo.discordUsername !== "Not available") {
+                                    html += `• Discord: ${entry.basicInfo.discordUsername}<br>`;
+                                }
+                                if (entry.basicInfo.githubProfile && entry.basicInfo.githubProfile !== "Not available") {
+                                    html += `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color: #00ff99;">${entry.basicInfo.githubProfile}</a><br>`;
+                                }
                             }
                             html += `</div>`;
                             
-                            // ❌ REMOVED: VOLUNTEER COMMITMENTS SECTION
+                            // ❌ REMOVED: ALL volunteer preferences sections
                         });
                     } else {
-                        // NOT FOUND
                         html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
                         html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
                         html += `• Status: No entry found in Form 2 database<br>`;
