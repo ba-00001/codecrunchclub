@@ -1,188 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Crunch – Accepted Volunteer Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:#f8f9fa; color:#202124; min-height:100vh;
+    }
+    /* NAV */
+    .navbar { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; }
+    .nav-brand { font-size:22px; font-weight:600; color:#1a73e8; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:24px; }
+    .nav-link { color:#5f6368; text-decoration:none; font-size:14px; padding:8px 12px; border-radius:6px; }
+    .nav-link:hover { background:#f1f3f4; color:#1a73e8; }
 
+    /* HEADER */
+    .container { max-width:960px; margin:0 auto; padding:24px; }
+    .header { text-align:center; margin:28px 0 10px; }
+    .header h1 { font-weight:600; font-size:28px; }
+    .header p { color:#5f6368; margin-top:6px; }
 
+    /* CARD */
+    .surface { background:#fff; border:1px solid #dadce0; border-radius:12px; padding:24px; }
+    .tag { display:inline-block; background:#e8f0fe; color:#1a73e8; border:1px solid #d2e3fc; font-size:12px; padding:4px 8px; border-radius:999px; margin:6px 0 12px; }
 
-<section class="checklist-section" id="volunteer-status-checker" style="margin-top: 3rem;">
+    .title { font-size:22px; font-weight:600; text-align:center; margin-bottom:10px; }
+    .subtitle { text-align:center; color:#5f6368; }
 
-    <h2 class="checklist-title glitch" data-text="CHECK OFFICIAL VOLUNTEER STATUS">CHECK OFFICIAL VOLUNTEER STATUS</h2>
-    <p style="color: limegreen; font-family: monospace;">Check if you are an <strong>Official Volunteer</strong> (Judge, Speaker, Mentor, etc.) using your <strong>email address</strong> from Form 2:</p>
-    
-    <div style="background: rgba(0, 255, 153, 0.1); border: 1px solid #00ff99; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-        <p style="margin: 0; color: #00ff99; font-weight: bold;">📋 What happens next:</p>
-        <p style="margin: 0.5rem 0; color: #fff;">✅ If you're confirmed as volunteer [form no1 & form no2 completed], you'll see the Discord and GroupMe join links.</p>
-        <p style="margin: 0.5rem 0; color: #fff;">❌ If not, you'll be prompted to go to <strong>Step 2</strong> to register and wait if you get accepted as volunteer or not</p>
+    .helper { background:#fff7ed; border:1px solid #ffedd5; color:#7c2d12; border-radius:8px; padding:12px; margin:16px 0; }
+    .ok { background:rgba(0,255,153,.1); border:1px solid #00ff99; color:#064e3b; border-radius:8px; padding:12px; margin:16px 0; }
+
+    .row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .email-input { flex:1 1 320px; padding:12px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; }
+    .email-input:focus { outline:none; border-color:#1a73e8; box-shadow:0 0 0 3px rgba(26,115,232,.15); }
+    .btn { padding:12px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
+    .btn-primary { background:#1a73e8; color:#fff; }
+    .btn-primary:hover { background:#1557b0; }
+    .btn-cta { display:inline-block; padding:10px 14px; background:#00ff99; color:#000; border-radius:8px; font-weight:700; text-decoration:none; }
+
+    #result { margin-top:16px; background:#111827; color:#d1fae5; border-radius:12px; padding:16px; font-family:monospace; }
+    .info { background:#1a1a2e; border-left:4px solid #ffa500; border-radius:8px; padding:12px; margin-bottom:12px; color:#fff; }
+    .card-welcome { background:#0f172a; border-left:4px solid #00ff99; border-radius:8px; padding:16px; margin:12px 0; }
+    .cta { display:grid; gap:8px; margin:10px 0; }
+    .cta a { display:block; text-align:center; color:#fff; text-decoration:none; font-weight:700; padding:10px 14px; border-radius:8px; }
+    .cta-discord { background:linear-gradient(45deg,#7289da,#5865f2); }
+    .cta-private { background:linear-gradient(45deg,#43b581,#4caf50); }
+
+    .card-yes { background:#052e16; border-left:4px solid #00ff99; border-radius:8px; padding:12px; margin-top:8px; }
+    .card-no { background:#3f1d1d; border-left:4px solid #ff6b6b; border-radius:8px; padding:12px; margin-top:8px; }
+
+    .footer { margin-top:40px; background:#1a73e8; color:#fff; }
+    .footer-inner { max-width:960px; margin:0 auto; padding:24px; text-align:center; }
+    .muted a { color:#fff; opacity:.85; text-decoration:none; }
+    .muted a:hover { opacity:1; }
+
+    @media (max-width:520px){
+      .container{ padding:16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand"><i class="fa-solid fa-shield-halved"></i> Code Crunch Portal</div>
+      <div class="nav-links">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">Volunteer Wiki</a>
+        <a class="nav-link" href="#">Contact</a>
+      </div>
     </div>
+  </nav>
 
+  <!-- HEADER -->
+  <header class="container header">
+    <div class="tag"><i class="fa-solid fa-lock"></i> Accepted Volunteers Only</div>
+    <h1>Hack & Club Volunteer Login</h1>
+    <p>Access for **confirmed** volunteers (Form No. 2) to join Discord and the private volunteer channels.</p>
+  </header>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-        <input type="email" id="emailInput" placeholder="Enter your email address (any Google account email)" 
-            style="flex: 1 1 300px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;" />
-        <button onclick="checkOfficialVolunteerStatus()" 
-                style="padding: 0.5rem 1rem; font-size: 1rem; background: #00ff99; color: #000; border: none; border-radius: 5px; cursor: pointer;">
-        📧 Check Email Status
-        </button>
-    </div>
-    
-    <div id="result" style="margin-top: 1.5rem; background-color: #222; padding: 1rem; border-radius: 8px; color: limegreen; font-family: monospace;">
-        <div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
-        <strong style="color: #ffa500;">📋 Email Verification:</strong><br>
-        • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, or any email used as Google account<br>
-        • <strong>Official Volunteers</strong>: Judges, Speakers, Mentors, Organizers<br>
-        • <strong>Form 2 participants</strong>: Those who filled out the volunteer confirmation form<br>
-        • <strong>Special roles</strong>: People with elevated permissions and responsibilities
+  <!-- LOGIN CARD -->
+  <main class="container">
+    <section class="surface">
+      <h2 class="title">Check Your Status</h2>
+      <p class="subtitle">Enter the <strong>same email</strong> you used on <strong>Form No. 2 (Volunteer Confirmation)</strong>.</p>
+
+      <div class="helper">
+        <strong>Heads-up:</strong> This portal is restricted to confirmed volunteers (Judges, Mentors, Speakers, Organizers). If you haven’t been accepted yet, you won’t be able to sign in here.
+      </div>
+
+      <div class="row">
+        <input id="emailInput" class="email-input" type="email" placeholder="your@email.com"/>
+        <button class="btn btn-primary" onclick="checkOfficialVolunteerStatus()">Sign In</button>
+      </div>
+
+      <div id="result">
+        <div class="info">
+          <strong>📋 What you'll see if confirmed:</strong><br/>
+          • Direct links to join Discord and verify private-channel access<br/>
+          • Your confirmed role status & Form-2 timestamp
         </div>
-        Results will appear here...
+        Awaiting email…
+      </div>
+
+      <div id="applyNotice" style="display:none; margin-top:12px; color:#5f6368; font-size:14px;">
+        Not accepted yet? You can apply here: <a href="#" id="form1Link">Volunteer Application (Form No. 1)</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="muted">© <span id="year"></span> Code Crunch • <a href="#">Privacy</a> • <a href="#">Terms</a></div>
     </div>
+  </footer>
 
-<script>
-  function checkDomain() {
-    const allowedDomain = 'codecrunchglobal.vercel.app';
-    const currentDomain = window.location.hostname;
-    if (currentDomain !== allowedDomain) {
-      document.getElementById('result').innerHTML = 
-        `❌ This tool only works on pages from ${allowedDomain}`;
-      return false;
-    }
-    return true;
-  }
+  <script>
+    // ====== CONFIG ======
+    const USE_API_KEY = true; // set to false if you don't implement key check server-side
+    const API_KEY = "REPLACE_WITH_SECURE_KEY"; // TODO(you): put a secret, and validate it in Apps Script
+    const API_URL = "https://script.google.com/macros/s/AKfycbw8KAqiULOrPefzNs1XRo-PdeJNfDaTYBiVL5jEoL435PeStgoxKmk6_auoH7jnx2Aw5w/exec"; // your new script
+    const ALLOWED_HOST = "codecrunchglobal.vercel.app";
+    const FORM1_URL = "https://codecrunchvolunteerform-no1.vercel.app"; // TODO(you): update/remove if you want zero leakage
 
-  async function checkOfficialVolunteerStatus() {
-    if (!checkDomain()) return;
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('form1Link').setAttribute('href', FORM1_URL);
 
-    const inputField = document.getElementById("emailInput");
-    let email = inputField.value.trim();
-    const resultDiv = document.getElementById("result");
-
-    // 🔗 Easy-to-edit links
-
-    const apiUrl = "https://script.google.com/macros/s/AKfycbw8KAqiULOrPefzNs1XRo-PdeJNfDaTYBiVL5jEoL435PeStgoxKmk6_auoH7jnx2Aw5w/exec";
-    //old one          https://script.google.com/macros/s/AKfycbzLDAEJpj7_JV_bat7PaMhdLtX_YgE2KjhVQY1WCYWQBBiIbQAKpLty0hdAOnX4hcA/exec
-    // const apiUrl = "https://script.google.com/macros/s/AKfycbzLDAEJpj7_JV_bat7PaMhdLtX_YgE2KjhVQY1WCYWQBBiIbQAKpLty0hdAOnX4hcA/exec";
-   
-    const hack1RegistrationLink = "https://codecrunchglobal.vercel.app/hack1-register"; // <-- replace with your real link
-
-    // Info box (kept)
-    const infoBox = `<div style="background-color: #1a1a2e; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem;">
-      <strong style="color: #ffa500;">📋 Email Verification:</strong><br>
-      • <strong>Any Valid Email</strong>: Gmail, Outlook, Yahoo, or any email used as Google account<br>
-      • <strong>Official Volunteers</strong>: Judges, Speakers, Mentors, Organizers<br>
-      • <strong>Form 2 participants</strong>: Those who filled out the volunteer confirmation form<br>
-      • <strong>Special roles</strong>: People with elevated permissions and responsibilities
-    </div>`;
-
-    // Basic validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      resultDiv.innerHTML = infoBox + '❌ Please enter your email address from Form 2.';
-      return;
-    }
-    if (!emailRegex.test(email)) {
-      resultDiv.innerHTML = infoBox + '❌ Please enter a valid email address.';
-      return;
-    }
-
-    resultDiv.innerHTML = infoBox + '⏳ Checking email address in official volunteer database...';
-
-    try {
-      const currentUrl = window.location.href;
-      const response = await fetch(`${apiUrl}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`);
-      const data = await response.json();
-
-      if (data.error) {
-        resultDiv.innerHTML = infoBox + `❌ Error: ${data.error}`;
-        return;
+    function domainOK() {
+      const ok = window.location.hostname === ALLOWED_HOST;
+      if (!ok) {
+        const result = document.getElementById('result');
+        result.innerHTML = `<div class="info">❌ This portal only works on <strong>${ALLOWED_HOST}</strong>.</div>`;
       }
+      return ok;
+    }
 
-      if (Array.isArray(data)) {
-        let html = infoBox + `<strong>Official Volunteer Status for "📧 <span style="color:white">${email}</span>":</strong><br>`;
+    function infoBoxHTML(){
+      return `<div class="info">
+        <strong>📋 Email Verification:</strong><br>
+        • Use the email on <strong>Form No. 2</strong><br>
+        • Accepted volunteers only (Judges, Mentors, Speakers, Organizers)
+      </div>`;
+    }
 
-        if (data.length > 0 && data[0].status !== "No entry") {
-          data.forEach((entry) => {
-            // 🎉 Top welcome + Discord section (unchanged)
+    async function checkOfficialVolunteerStatus(){
+      if (!domainOK()) return;
+
+      const email = (document.getElementById('emailInput').value || "").trim();
+      const resultDiv = document.getElementById('result');
+      const applyNotice = document.getElementById('applyNotice');
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.'; return; }
+      if (!emailRegex.test(email)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.'; return; }
+
+      resultDiv.innerHTML = infoBoxHTML() + '⏳ Verifying your volunteer status…';
+      applyNotice.style.display = 'none';
+
+      try {
+        const currentUrl = window.location.href;
+        const url = new URL(API_URL);
+        url.searchParams.set('email', email);
+        url.searchParams.set('referer', currentUrl);
+        // Optional privacy/perf: don’t ship big fields unless explicitly requested
+        url.searchParams.set('details', '0');
+        if (USE_API_KEY) url.searchParams.set('key', API_KEY);
+
+        const resp = await fetch(url.toString());
+        const data = await resp.json();
+
+        if (data.error) {
+          resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`;
+          return;
+        }
+        if (!Array.isArray(data)) {
+          resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.';
+          return;
+        }
+
+        let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${email}</span>:</strong><br/>`;
+
+        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
+          // CONFIRMED VOLUNTEER
+          data.forEach(entry => {
             if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
-              html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
-              html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
-
-              html += `<div style="background: linear-gradient(45deg, #7289da, #5865f2); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);">
-                        <a href="${entry.discordJoinLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🚀 JOIN DISCORD SERVER 🚀</a>
-                      </div>`;
-
-              html += `<div style="background: linear-gradient(45deg, #43b581, #4caf50); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);">
-                        <a href="${entry.privateChannelLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🔒 CHECK PRIVATE CHANNEL ACCESS 🔒</a>
-                      </div>`;
-
-              let formattedInstructions = entry.discordInstructions
-                .replace(/\n/g, '<br>')
-                .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fff;">$1</strong>')
-                .replace(/`(.*?)`/g, '<code style="background: #333; padding: 2px 6px; border-radius: 3px; color: #ffaa00;">$1</code>');
-
-              html += `<br>${formattedInstructions}`;
-              html += `</div>`;
+              html += `<div class="card-welcome">
+                        <strong style="color:#00ff99; font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
+                        <div class="cta">
+                          <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank">🚀 JOIN DISCORD SERVER</a>
+                          <a class="cta-private" href="${entry.privateChannelLink}" target="_blank">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
+                        </div>` +
+                        entry.discordInstructions
+                          .replace(/\n/g,'<br/>')
+                          .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
+                          .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
+                      `</div>`;
             }
 
-            // ✅ Basic confirmation card (kept)
-            html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
-            html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
-            html += `• Role/Status: ${entry.status}<br>`;
-            html += `• Form 2 Submitted: ${entry.timestamp}<br>`;
-            html += `• Verified Email: ${entry.email}<br>`;
-            if (entry.basicInfo) {
-              if (entry.basicInfo.position && entry.basicInfo.position !== "Not available") {
-                html += `• Position: ${entry.basicInfo.position}<br>`;
-              }
-              if (entry.basicInfo.company && entry.basicInfo.company !== "Not available") {
-                html += `• Company: ${entry.basicInfo.company}<br>`;
-              }
-              if (entry.basicInfo.discordUsername && entry.basicInfo.discordUsername !== "Not available") {
-                html += `• Discord: ${entry.basicInfo.discordUsername}<br>`;
-              }
-              if (entry.basicInfo.githubProfile && entry.basicInfo.githubProfile !== "Not available") {
-                html += `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color: #00ff99;">${entry.basicInfo.githubProfile}</a><br>`;
-              }
-            }
-            html += `</div>`;
-
-            // 🆕 Register for HACK #1 button (added)
-            html += `<div style="margin-top: 12px;">
-                      <a href="${hack1RegistrationLink}" target="_blank"
-                         style="display:inline-block; padding: 10px 14px; background:#00ff99; color:#000; border-radius:8px; font-weight:700; text-decoration:none;">
-                        📝 Register for HACK #1
-                      </a>
-                    </div>`;
+            html += `<div class="card-yes">
+                      <strong>✅ Confirmed Volunteer</strong><br/>
+                      • Status: ${entry.status}<br/>
+                      • Form-2 Timestamp: ${entry.timestamp}<br/>
+                      • Email: ${entry.email}<br/>` +
+                      (entry?.basicInfo?.position && entry.basicInfo.position!=="Not available" ? `• Position: ${entry.basicInfo.position}<br/>` : '') +
+                      (entry?.basicInfo?.company && entry.basicInfo.company!=="Not available" ? `• Company: ${entry.basicInfo.company}<br/>` : '') +
+                      (entry?.basicInfo?.discordUsername && entry.basicInfo.discordUsername!=="Not available" ? `• Discord: ${entry.basicInfo.discordUsername}<br/>` : '') +
+                      (entry?.basicInfo?.githubProfile && entry.basicInfo.githubProfile!=="Not available" ? `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color:#00ff99;">${entry.basicInfo.githubProfile}</a><br/>` : '') +
+                    `</div>`;
           });
 
         } else {
-          // Not official: keep simple notice
-          html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
-          html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
-          html += `• Status: No entry found in Form 2 database<br>`;
-          html += `• Email: ${email}<br>`;
-          html += `• Make sure you're using the same email address from Form 2<br>`;
-          html += `</div>`;
-
-          // (Optional) You can still show a registration CTA here if you want:
-          html += `<div style="margin-top: 12px;">
-                    <a href="${hack1RegistrationLink}" target="_blank"
-                       style="display:inline-block; padding: 10px 14px; background:#00ff99; color:#000; border-radius:8px; font-weight:700; text-decoration:none;">
-                      📝 Register for HACK #1
-                    </a>
+          // NOT CONFIRMED — deny access, no registration CTA
+          html += `<div class="card-no">
+                    <strong>❌ Access Denied</strong><br/>
+                    • We could not find a confirmed Form-2 entry for this email.<br/>
+                    • This portal is restricted to current, accepted volunteers only.
                   </div>`;
+          // Optional: show where to apply (remove this block if you want zero leakage)
+          document.getElementById('applyNotice').style.display = 'block';
         }
 
         resultDiv.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = infoBoxHTML() + '❌ Network error. Please try again later.';
       }
-    } catch (error) {
-      console.error('Error checking status:', error);
-      resultDiv.innerHTML = infoBox + '❌ Failed to check official volunteer status. Please try again later.';
     }
-  }
 
-  // Allow Enter key to trigger search
-  document.getElementById('emailInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      checkOfficialVolunteerStatus();
-    }
-  });
-</script>
-
-</section>
+    // Press Enter to submit
+    document.getElementById('emailInput').addEventListener('keypress', (e)=>{
+      if (e.key === 'Enter') checkOfficialVolunteerStatus();
+    });
+  </script>
+</body>
+</html>
