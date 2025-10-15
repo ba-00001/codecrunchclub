@@ -9,7 +9,6 @@
         <p style="margin: 0.5rem 0; color: #fff;">❌ If not, you'll be prompted to go to <strong>Step 2</strong> to register and wait if you get accepted as volunteer or not</p>
     </div>
 
-
     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
         <input type="email" id="emailInput" placeholder="Enter your email address (any Google account email)" 
             style="flex: 1 1 300px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;" />
@@ -75,6 +74,9 @@
 
             resultDiv.innerHTML = infoBox + '⏳ Checking email address in official volunteer database...';
 
+            // ========================================
+            // 🔄 UPDATED API URL - USE YOUR NEW DEPLOYMENT URL
+            // ========================================
             const apiUrl = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
             
             try {
@@ -87,27 +89,30 @@
                     return;
                 }
 
+                // ========================================
+                // 🔄 UPDATED: Handle new response format
+                // ========================================
                 if (Array.isArray(data)) {
                     let html = infoBox + `<strong>Official Volunteer Status for "📧 <span style="color:white">${email}</span>":</strong><br>`;
                     
                     if (data.length > 0 && data[0].status !== "No entry") {
                         data.forEach((entry) => {
-                            // Discord Server and Channel Checker Section (at the top)
+                            // Discord Server and Channel Section
                             if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
                                 html += `<div style="background-color: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #00ff99; box-shadow: 0 2px 10px rgba(0,255,153,0.1);">`;
                                 html += `<strong style="color: #00ff99; font-size: 1.1em;">🎉 Welcome to the Official Volunteer Team!</strong><br><br>`;
                                 
-                                // Discord join link (from API response)
+                                // Discord join link
                                 html += `<div style="background: linear-gradient(45deg, #7289da, #5865f2); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);">`;
                                 html += `<a href="${entry.discordJoinLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🚀 JOIN DISCORD SERVER 🚀</a>`;
                                 html += `</div>`;
                                 
-                                // Private channel link (from API response)
+                                // Private channel link
                                 html += `<div style="background: linear-gradient(45deg, #43b581, #4caf50); padding: 10px 15px; border-radius: 8px; margin: 8px 0; text-align: center; box-shadow: 0 4px 15px rgba(67, 181, 129, 0.3);">`;
                                 html += `<a href="${entry.privateChannelLink}" target="_blank" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1em;">🔒 CHECK PRIVATE CHANNEL ACCESS 🔒</a>`;
                                 html += `</div>`;
                                 
-                                // Process the Discord instructions
+                                // Discord instructions
                                 let formattedInstructions = entry.discordInstructions
                                     .replace(/\n/g, '<br>')
                                     .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fff;">$1</strong>')
@@ -121,82 +126,100 @@
                             html += `<div style="background-color: #1a4a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
                             html += `<strong style="color: #00ff99;">✅ CONFIRMED OFFICIAL VOLUNTEER</strong><br>`;
                             html += `• Role/Status: ${entry.status}<br>`;
-                            html += `• Form 2 Submitted: ${entry.timestamp}<br>`;
+                            html += `• Form 2 Submitted: ${entry.timestamp || 'N/A'}<br>`;
                             html += `• Verified Email: ${entry.email}<br>`;
                             
-                            // Add basic info if available
-                            if (entry.basicInfo) {
-                                if (entry.basicInfo.position && entry.basicInfo.position !== "Not available") {
-                                    html += `• Position: ${entry.basicInfo.position}<br>`;
-                                }
-                                if (entry.basicInfo.company && entry.basicInfo.company !== "Not available") {
-                                    html += `• Company: ${entry.basicInfo.company}<br>`;
-                                }
-                                if (entry.basicInfo.discordUsername && entry.basicInfo.discordUsername !== "Not available") {
-                                    html += `• Discord: ${entry.basicInfo.discordUsername}<br>`;
-                                }
-                                if (entry.basicInfo.githubProfile && entry.basicInfo.githubProfile !== "Not available") {
-                                    html += `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color: #00ff99;">${entry.basicInfo.githubProfile}</a><br>`;
-                                }
+                            // ========================================
+                            // 🔄 UPDATED: Display dynamic columns
+                            // ========================================
+                            // Show position if available
+                            if (entry.position && entry.position !== "Not available") {
+                                html += `• Position: ${entry.position}<br>`;
                             }
+                            
+                            // Show company if available
+                            if (entry.company && entry.company !== "Not available") {
+                                html += `• Company: ${entry.company}<br>`;
+                            }
+                            
+                            // Show Discord username if available
+                            if (entry.discordUsername && entry.discordUsername !== "Not available") {
+                                html += `• Discord: ${entry.discordUsername}<br>`;
+                            }
+                            
+                            // Show GitHub profile if available
+                            if (entry.githubProfile && entry.githubProfile !== "Not available") {
+                                html += `• GitHub: <a href="${entry.githubProfile}" target="_blank" style="color: #00ff99;">${entry.githubProfile}</a><br>`;
+                            }
+                            
                             html += `</div>`;
                             
-                            // Show ALL volunteer preferences (complete responses from column C onwards)
-                            if (entry.volunteerPreferences && Object.keys(entry.volunteerPreferences).length > 0) {
+                            // ========================================
+                            // 🔄 UPDATED: Show ALL additional columns you added
+                            // ========================================
+                            // Collect all extra fields (excluding the standard ones)
+                            const standardFields = ['timestamp', 'email', 'position', 'company', 'discordUsername', 'githubProfile', 'status', 'discordJoinLink', 'privateChannelLink', 'discordInstructions'];
+                            const extraFields = Object.keys(entry).filter(key => !standardFields.includes(key));
+                            
+                            if (extraFields.length > 0) {
                                 html += `<div style="background-color: #2a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffaa00; margin-top: 1rem;">`;
-                                html += `<strong style="color: #ffaa00;">🎯 ALL YOUR VOLUNTEER Form no2 RESPONSES :</strong><br><br>`;
+                                html += `<strong style="color: #ffaa00;">🎯 VOLUNTEER PREFERENCES & ADDITIONAL INFO:</strong><br><br>`;
                                 
-                                Object.entries(entry.volunteerPreferences).forEach(([question, answer]) => {
-                                    // Clean up the question for better display
-                                    let cleanQuestion = question
-                                        .replace(/^\d+\.\s*/, '') // Remove leading numbers
-                                        .replace(/Would you be interested to volunteer for\s*/i, '') // Remove repetitive text
-                                        .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '') // Clean up HACK numbering
-                                        .replace(/\s*\[\s*/, ' [') // Clean spacing around brackets
+                                extraFields.forEach((fieldName) => {
+                                    const value = entry[fieldName];
+                                    
+                                    // Skip if not available
+                                    if (!value || value === "Not available") return;
+                                    
+                                    // Clean up field name for display
+                                    let cleanFieldName = fieldName
+                                        .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+                                        .replace(/^./, str => str.toUpperCase()) // Capitalize first letter
                                         .trim();
                                     
                                     // Color code the responses
                                     let responseColor = '#ccc'; // Default gray
-                                    if (answer && answer !== 'Not available' && answer !== 'No' && answer.toLowerCase().includes('yes')) {
+                                    const lowerValue = value.toString().toLowerCase();
+                                    
+                                    if (lowerValue.includes('yes')) {
                                         responseColor = '#00ff99'; // Green for positive responses
-                                    } else if (answer === 'No' || answer === 'Not available') {
-                                        responseColor = '#ff6b6b'; // Red for no/not available
+                                    } else if (lowerValue === 'no') {
+                                        responseColor = '#ff6b6b'; // Red for no
                                     }
                                     
                                     html += `<div style="margin-bottom: 0.8rem; padding: 0.5rem; background-color: #1a1a1a; border-radius: 4px;">`;
-                                    html += `<strong style="color: #fff; font-size: 0.9em;">${cleanQuestion}</strong><br>`;
-                                    html += `<span style="color: ${responseColor}; font-weight: bold;">→ ${answer || 'Not available'}</span>`;
+                                    html += `<strong style="color: #fff; font-size: 0.9em;">${cleanFieldName}</strong><br>`;
+                                    html += `<span style="color: ${responseColor}; font-weight: bold;">→ ${value}</span>`;
                                     html += `</div>`;
                                 });
                                 
                                 html += `</div>`;
                                 
-                                // Also show a summary of positive responses
-                                if (entry.volunteerSummary && entry.volunteerSummary.length > 0) {
+                                // Show summary of "Yes" responses
+                                const yesResponses = extraFields.filter(key => {
+                                    const val = entry[key];
+                                    return val && val.toString().toLowerCase().includes('yes');
+                                });
+                                
+                                if (yesResponses.length > 0) {
                                     html += `<div style="background-color: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #00ff99; margin-top: 1rem;">`;
-                                    html += `<strong style="color: #00ff99;">✅ SUMMARY - Events You're Volunteering For:</strong><br>`;
+                                    html += `<strong style="color: #00ff99;">✅ SUMMARY - Your Active Volunteer Commitments:</strong><br>`;
                                     
-                                    entry.volunteerSummary.forEach((pref) => {
-                                        let cleanEventName = pref.event
-                                            .replace(/^\d+\.\s*/, '')
-                                            .replace(/Would you be interested to volunteer for\s*/i, '')
-                                            .replace(/HACK\s*#?\s*\d+\s*:?\s*/i, '')
-                                            .replace(/\s*\[\s*/, ' [')
+                                    yesResponses.forEach((fieldName) => {
+                                        let cleanName = fieldName
+                                            .replace(/([A-Z])/g, ' $1')
+                                            .replace(/^./, str => str.toUpperCase())
                                             .trim();
                                         
-                                        html += `• <strong>${cleanEventName}</strong>: <span style="color: #00ff99;">${pref.response}</span><br>`;
+                                        html += `• <strong>${cleanName}</strong>: <span style="color: #00ff99;">${entry[fieldName]}</span><br>`;
                                     });
                                     
                                     html += `</div>`;
                                 }
-
-
                             }
-
-
-                            
                         });
                     } else {
+                        // Not found
                         html += `<div style="background-color: #4a1a1a; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-top: 1rem;">`;
                         html += `<strong style="color: #ff6b6b;">❌ NOT AN OFFICIAL VOLUNTEER</strong><br>`;
                         html += `• Status: No entry found in Form 2 database<br>`;
