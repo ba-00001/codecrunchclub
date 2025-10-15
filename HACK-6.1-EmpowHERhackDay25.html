@@ -101,12 +101,23 @@
             opacity: 0.9;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+       <style>
+  /* make the hero buttons stack vertically everywhere */
+  .hero-buttons{
+    display:flex;
+    flex-direction: column;      /* <— stack */
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* optional: make each button the same width and centered */
+  .hero-buttons .btn{
+    width: 100%;
+    max-width: 420px;            /* tweak width as you like */
+    text-align: center;
+  }
+
+
 
         .btn {
             padding: 15px 30px;
