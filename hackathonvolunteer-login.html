@@ -5,113 +5,325 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Volunteer Login</title>
   <style>
-    body { font-family: system-ui, Arial, sans-serif; max-width: 520px; margin: 8vh auto; padding: 0 16px; }
-    .card { border: 1px solid #e5e7eb; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    h1 { margin: 0 0 8px; }
-    p  { margin: 8px 0; color: #4b5563; }
-    label { display:block; margin: 12px 0 6px; font-weight: 600; }
-    input[type=email] { width:100%; padding: 12px; border:1px solid #d1d5db; border-radius:10px; }
-    button { margin-top:12px; padding: 10px 14px; border: 0; border-radius: 10px; background:#111827; color:#fff; cursor:pointer; }
-    .msg { margin-top: 12px; }
-    .ok  { color: #065f46; }
-    .err { color: #991b1b; }
-    .hidden { display:none; }
-    .profile { margin-top: 14px; padding: 12px; background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; }
-    .muted { color:#6b7280; font-size: 0.925rem; }
+    * { box-sizing: border-box; }
+    body { 
+      font-family: system-ui, -apple-system, Arial, sans-serif; 
+      max-width: 520px; 
+      margin: 8vh auto; 
+      padding: 0 16px;
+      background: #f9fafb;
+    }
+    .card { 
+      background: white;
+      border: 1px solid #e5e7eb; 
+      padding: 32px; 
+      border-radius: 16px; 
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+    h1 { 
+      margin: 0 0 8px; 
+      font-size: 1.875rem;
+      color: #111827;
+    }
+    p { 
+      margin: 8px 0 24px; 
+      color: #6b7280; 
+      line-height: 1.5;
+    }
+    label { 
+      display: block; 
+      margin: 0 0 8px; 
+      font-weight: 600;
+      color: #374151;
+      font-size: 0.875rem;
+    }
+    input[type=email] { 
+      width: 100%; 
+      padding: 12px 16px; 
+      border: 2px solid #d1d5db; 
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type=email]:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    button { 
+      width: 100%;
+      margin-top: 16px; 
+      padding: 12px 16px; 
+      border: 0; 
+      border-radius: 10px; 
+      background: #111827; 
+      color: #fff; 
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+    button:hover { 
+      background: #1f2937; 
+    }
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    .msg { 
+      margin-top: 16px; 
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .ok { 
+      background: #d1fae5;
+      color: #065f46; 
+      border: 1px solid #a7f3d0;
+    }
+    .err { 
+      background: #fee2e2;
+      color: #991b1b; 
+      border: 1px solid #fecaca;
+    }
+    .hidden { display: none; }
+    .profile { 
+      margin-top: 24px; 
+      padding: 20px; 
+      background: #f9fafb; 
+      border: 1px solid #e5e7eb; 
+      border-radius: 12px;
+    }
+    .greeting {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+    .details { 
+      color: #6b7280; 
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+    .detail-row {
+      margin: 4px 0;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: #374151;
+    }
+    details {
+      margin-top: 16px;
+    }
+    summary {
+      cursor: pointer;
+      color: #6b7280;
+      font-size: 0.875rem;
+      padding: 8px 0;
+    }
+    summary:hover {
+      color: #111827;
+    }
+    pre { 
+      background: #0f172a; 
+      color: #e2e8f0; 
+      padding: 16px; 
+      border-radius: 8px; 
+      overflow: auto;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      margin: 8px 0 0;
+    }
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #ffffff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Volunteer Login</h1>
-    <p>Enter the email you used to register. We’ll check it against the volunteer list.</p>
+    <h1>🎯 Volunteer Login</h1>
+    <p>Enter the email you used to register as a volunteer. We'll verify your access.</p>
 
-    <label for="email">Email</label>
+    <label for="email">Email Address</label>
     <input id="email" type="email" placeholder="you@example.com" required />
 
-    <button id="btn">Continue</button>
-    <div id="msg" class="msg"></div>
+    <button id="btn">
+      <span id="btnText">Verify Access</span>
+    </button>
+    <div id="msg" class="msg hidden"></div>
 
     <div id="profile" class="profile hidden">
-      <div id="greeting" style="font-weight:600;"></div>
-      <div id="details" class="muted"></div>
+      <div id="greeting" class="greeting"></div>
+      <div id="details" class="details"></div>
+      <details>
+        <summary>View Response Data</summary>
+        <pre id="dbg"></pre>
+      </details>
     </div>
   </div>
 
   <script>
     // === CONFIG ===
-    // Your Apps Script /exec URL:
+    // Replace with your actual Apps Script deployment URL
     const API_URL = "https://script.google.com/macros/s/AKfycbz0FkcYV_Wkt5Iv1BKzJw6KXIoqXgfyBPDfAVRlLjsJbZ1Iq9eqX-hT5EEkTJGxNgfs5w/exec";
-
-    // If your Apps Script enforces a shared key (?key=...), put it here.
-    // If you disabled the key on the server, leave this as an empty string.
-    const KEY = ""; // e.g., "SET_A_LONG_RANDOM_SECRET"
+    
+    // Replace with your shared secret key (must match the one in Apps Script)
+    const KEY = "CHANGE_ME_SUPER_LONG_RANDOM_SECRET";
 
     // === UTIL ===
     const $ = (id) => document.getElementById(id);
 
+    function safeOriginParam() {
+      const o = (window.location && window.location.origin) || "";
+      if (!o) return "";
+      const low = o.toLowerCase();
+      if (low === "null" || low.startsWith("file:")) return "";
+      return o;
+    }
+
+    function setLoading(isLoading) {
+      const btn = $("btn");
+      const btnText = $("btnText");
+      btn.disabled = isLoading;
+      if (isLoading) {
+        btnText.innerHTML = 'Verifying<span class="spinner"></span>';
+      } else {
+        btnText.textContent = "Verify Access";
+      }
+    }
+
+    function showMessage(text, type) {
+      const msg = $("msg");
+      msg.textContent = text;
+      msg.className = `msg ${type}`;
+      msg.classList.remove("hidden");
+    }
+
+    function hideMessage() {
+      $("msg").classList.add("hidden");
+    }
+
+    // Handle Enter key in email input
+    $("email").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        $("btn").click();
+      }
+    });
+
     $("btn").addEventListener("click", async () => {
       const email = $("email").value.trim();
-      const msg = $("msg");
       const profile = $("profile");
       const greet = $("greeting");
       const details = $("details");
+      const dbg = $("dbg");
 
-      msg.textContent = "";
+      hideMessage();
       profile.classList.add("hidden");
       greet.textContent = "";
-      details.textContent = "";
+      details.innerHTML = "";
+      dbg.textContent = "";
 
       if (!email) {
-        msg.textContent = "Please enter your email.";
-        msg.className = "msg err";
+        showMessage("Please enter your email address.", "err");
         return;
       }
 
-      try {
-        // Always send the origin so the Apps Script can validate/log it server-side
-        const origin = window.location.origin;
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showMessage("Please enter a valid email address.", "err");
+        return;
+      }
 
-        // Build query params
-        const params = new URLSearchParams({
-          email,
-          origin
-        });
+      setLoading(true);
+
+      try {
+        const params = new URLSearchParams({ email });
+        const origin = safeOriginParam();
+        if (origin) params.set("origin", origin);
         if (KEY) params.set("key", KEY);
 
-        const res = await fetch(`${API_URL}?${params.toString()}`, { cache: "no-store" });
+        const url = `${API_URL}?${params.toString()}`;
+        const res = await fetch(url, { 
+          cache: "no-store",
+          method: "GET"
+        });
+
         if (!res.ok) {
-          msg.textContent = "Access denied or server error.";
-          msg.className = "msg err";
+          showMessage(`Access denied or server error (HTTP ${res.status}).`, "err");
           return;
         }
 
         const data = await res.json();
 
         if (!data || data.allowed !== true) {
-          msg.textContent = data?.error
-            ? `Denied: ${data.error}`
-            : "This email is not on the volunteer list.";
-          msg.className = "msg err";
+          const errorMsg = data?.error
+            ? `Access denied: ${data.error}`
+            : "This email is not registered in our volunteer database.";
+          showMessage(errorMsg, "err");
+          if (data) {
+            dbg.textContent = JSON.stringify(data, null, 2);
+          }
           return;
         }
 
         // Success — show greeting and details
         const discord = (data.discord || "").trim();
-        greet.textContent = `Welcome ${data.email || email}${discord ? ` (${discord})` : ""}!`;
+        greet.textContent = `Welcome, ${data.email || email}!`;
+        if (discord) {
+          greet.textContent += ` 💬`;
+        }
 
-        const parts = [];
-        if (data.position) parts.push(data.position);
-        if (data.company)  parts.push(data.company);
-        if (data.timestamp) parts.push(`Added: ${data.timestamp}`);
-        details.textContent = parts.join(" • ");
+        const detailsHTML = [];
+        if (data.position) {
+          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Position:</span> ${data.position}</div>`);
+        }
+        if (data.company) {
+          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Organization:</span> ${data.company}</div>`);
+        }
+        if (discord) {
+          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Discord:</span> ${discord}</div>`);
+        }
+        if (data.timestamp) {
+          const date = new Date(data.timestamp);
+          const formatted = date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+          detailsHTML.push(`<div class="detail-row"><span class="detail-label">Registered:</span> ${formatted}</div>`);
+        }
+        
+        details.innerHTML = detailsHTML.join('');
 
-        msg.textContent = "Access granted.";
-        msg.className = "msg ok";
+        showMessage("✓ Access granted. Welcome to the volunteer portal!", "ok");
         profile.classList.remove("hidden");
+        dbg.textContent = JSON.stringify(data, null, 2);
+
       } catch (e) {
-        msg.textContent = "Network error. Please try again.";
-        msg.className = "msg err";
+        showMessage("Network error. Please check your connection and try again.", "err");
+        console.error("Login error:", e);
+      } finally {
+        setLoading(false);
       }
+    });
+
+    // Focus email input on load
+    window.addEventListener("load", () => {
+      $("email").focus();
     });
   </script>
 </body>
