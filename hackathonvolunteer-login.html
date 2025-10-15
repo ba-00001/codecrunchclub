@@ -305,7 +305,8 @@
       const cert = entry.certificatesLink || RESOURCE_LINKS_FALLBACK.certificates;
       const resp = entry.eventRegistrationResponseSheetLink || RESOURCE_LINKS_FALLBACK.responses;
       const evalL = entry.hackathonEvaluationFormsLink || RESOURCE_LINKS_FALLBACK.evaluation;
-      const expo = entry.expoFormsLink || RESOURCE_LINKS_FALLBACK.expo;
+      // ✅ fix: use eventRegistrationLink (optionally fall back to expoFormsLink if you had an older version)
+      const reg   = entry.eventRegistrationLink || entry.expoFormsLink || RESOURCE_LINKS_FALLBACK.expo;
 
       document.getElementById('resources').style.display = 'block';
 
@@ -313,7 +314,7 @@
         { card: 'card-cert', link: 'link-cert', href: cert },
         { card: 'card-resp', link: 'link-resp', href: resp },
         { card: 'card-eval', link: 'link-eval', href: evalL },
-        { card: 'card-expo', link: 'link-expo', href: expo }
+        { card: 'card-expo', link: 'link-expo', href: expo } // ← this is the “Event Registration Forms → Open” button
       ];
 
       map.forEach(({card, link, href}) => {
