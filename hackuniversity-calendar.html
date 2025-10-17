@@ -99,17 +99,17 @@
         <div class="mb-16 text-center">
             <h2 class="text-2xl font-bold text-gray-800 mb-8">Hack University Main Calendar</h2>
             <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <a href="https://hackuniversity-calendar.vercel.app/" 
+                <a href="https://lu.ma/hackuniversity" 
                    target="_blank" 
                    class="btn-hover bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2">
                     <i class="far fa-calendar-alt"></i>
-                    View Hack University Calendar
+                    View Hack University Calendar [Luma Calendar]
                 </a>
-                <a href="https://lu.ma/hackuniversity" 
+                <a href="https://calendar.google.com/calendar/embed?src=84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12%40group.calendar.google.com&ctz=America%2FNew_York" 
                    target="_blank" 
                    class="btn-hover bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2">
                     <i class="fas fa-external-link-alt"></i>
-                    Luma Calendar
+                    View Hack University [ Google Calendar ]
                 </a>
                 <a href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" 
                    target="_blank" 
@@ -119,7 +119,25 @@
                 </a>
             </div>
         </div>
-        
+                    
+            <!-- Embedded Google Calendar -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-16">  <!-- <- added mb-16 -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Live Calendar View</h2>
+            <div class="flex justify-center">
+                <iframe
+                src="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+                class="calendar-iframe"
+                frameborder="0"
+                scrolling="no">
+                </iframe>
+            </div>
+            </div>
+
+
+
+
+
+
         <!-- Organization Specific Calendars -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             
@@ -204,18 +222,7 @@
             </div>
         </div>
         
-        <!-- Embedded Google Calendar -->
-        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Live Calendar View</h2>
-            <div class="flex justify-center">
-                <iframe 
-                    src="https://calendar.google.com/calendar/embed?src=84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12%40group.calendar.google.com&ctz=America%2FNew_York" 
-                    class="calendar-iframe"
-                    frameborder="0" 
-                    scrolling="no">
-                </iframe>
-            </div>
-        </div>
+
     </div>
 </section>
 
