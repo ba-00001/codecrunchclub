@@ -122,6 +122,29 @@
       .hackathon-item{ padding:12px; gap:8px;}
       .container{ padding:16px;}
     }
+
+
+    .policy-note {
+  background: #fff7ed;            /* soft orange */
+  border: 1px solid #fde68a;
+  color: #8a4b00;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 20px 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 14px;
+}
+.policy-note .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.policy-note strong {
+  font-weight: 600;
+}
+
   </style>
 </head>
 <body>
@@ -201,6 +224,15 @@
 
     <div class="hackathons-section">
       <h2>🚀 HACK OPERATIONS</h2>
+
+        <div class="policy-note" role="note" aria-label="Volunteer policy">
+        <div class="icon">📝</div>
+        <div>
+            <strong>Remote volunteers</strong> are eligible to support <strong>in-person events</strong>.<br>
+            <strong>Preference will be given to in-person volunteers</strong> if the volunteer pool for an event reaches capacity.
+        </div>
+        </div>
+
 
       <div class="section-header">
         <h3>🚀 ACTIVE MISSIONS</h3>
@@ -308,7 +340,7 @@
 
     /* ---------- Hackathon data ---------- */
     const hackathons = [
-      { name:'🏙️ 305 Hackathon Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
+      { name:'🏙️ 305 Hackathon: Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
       { name:'👑 EmpowHER Hackathon 2025',        startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
       { name:'👑 EmpowHER HackDAY 2025',          startDate:'2025-10-18', endDate:'2025-10-18', modality:'in-person', url:'https://empowherhackdayfall25.vercel.app/' },
       { name:'🎆 CodeFest 2025',                   startDate:'2025-12-08', endDate:'2025-12-15', modality:'virtual',   url:'https://codefesthack2025.vercel.app/' },
@@ -316,7 +348,7 @@
       { name:'⚡ 305 Hackathon: Spring edition 2026', startDate:'2026-03-20', endDate:'2026-03-22', modality:'tbd',    url:'https://305hackspring2026.vercel.app/' },
       { name:'🌟 SummerCodeX 2025',               startDate:'2025-07-21', endDate:'2025-07-28', modality:'virtual',   url:'#' },
       { name:'⛈️ CodeStorm 2025',                 startDate:'2025-05-19', endDate:'2025-05-26', modality:'virtual',   url:'#' },
-      { name:'⚡ 305 Hackathon: Spring Infiltration', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid', url:'#' },
+      { name:'⚡ 305 Hackathon: Spring 2025 edition', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid', url:'#' },
       { name:'🔥 HackFiesta Miami 2025',           startDate:'2025-03-21', endDate:'2025-03-23', modality:'virtual',   url:'#' }
     ];
 
