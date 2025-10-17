@@ -334,17 +334,114 @@
                 font-size: 2.5rem;
             }
         }
+
+        
+
+        /* --- EmpowHER: Subcards under About --- */
+            .subcards-wrap {
+            margin: 2rem 0 0;
+            }
+            .subcard-emp {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(102, 126, 234, 0.35);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+            height: 100%;
+            transition: transform .2s ease, box-shadow .2s ease;
+            }
+            .subcard-emp:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+            }
+            .subcard-emp h3 {
+            color: #667eea;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            }
+            .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+            text-align: left;
+            }
+            .step-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            align-items: start;
+            }
+            .step-badge {
+            background: #e8f0fe;
+            color: #1a73e8;
+            border: 1px solid #d2e3fc;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            line-height: 1;
+            min-width: 58px;
+            text-align: center;
+            }
+            .step-text {
+            color: #e0e0ff;
+            font-size: .98rem;
+            line-height: 1.55;
+            }
+            .link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff !important;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 600;
+            border: 1px solid rgba(118, 75, 162, .6);
+            box-shadow: 0 4px 14px rgba(102, 126, 234, .25);
+            }
+            .link-pill:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+            }
+            .resource-list {
+            display: grid;
+            gap: 10px;
+            text-align: left;
+            }
+            .resource-item strong {
+            color: #e0e0ff;
+            }
+            .resource-item a {
+            color: #f093fb;
+            text-decoration: none;
+            font-weight: 600;
+            }
+            .resource-item a:hover { text-decoration: underline; }
+
+        
+
     </style>
 </head>
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">EmpowHER 2025</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="hackathons.html">Hackathons</a></li>
@@ -369,71 +466,141 @@
     <div style="margin: 3rem 0; background: rgba(102, 126, 234, 0.15); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(4px); border: 1px solid rgba(102, 126, 234, 0.3);">
         <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🌟 THEME: Women in Tech, Ethical AI & Blockchain</h3>
         <p style="text-align: center; margin-bottom: 1rem;">Building technology that empowers, includes, and creates positive impact for communities worldwide.</p>
-        <p style="text-align: center; font-weight: bold; color: #e0e0ff;">🌍 Especially welcoming women, non-binary individuals, and allies from ALL backgrounds!</p>
-    </div>
-
-<div class="row" style="margin: 3rem 0;">
-    <!-- Participants Card (Hackers) -->
-    <div class="col-lg-6 mb-4">
-        <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(50, 205, 50, 0.15) 100%); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(4px); border: 2px solid rgba(102, 126, 234, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); height: 100%;">
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
-                    <i class="fas fa-code" style="font-size: 2rem; color: white;"></i>
-                </div>
-                <h3 style="color: #667eea; margin-bottom: 0.5rem; font-size: 1.6rem; font-weight: bold;">🌐 Worldwide | All Universities | All Majors | Age 16+</h3>
-                <p style="color: #e0e0ff; font-size: 0.9rem; margin-top: 0.5rem; line-height: 1.5;">
-                    <strong>Exception:</strong> If you are under 18, you may join but must have <strong>parent or guardian permission</strong>. They must be around during the event. If the event is in-person or includes an online session, you must have a permission form from your parent or guardian.
-                </p>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(102, 126, 234, 0.2);">
-                <h4 style="color: #667eea; font-size: 1.4rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <i class="fas fa-rocket" style="color: #32cd32;"></i> Hacker - Student
-                </h4>
-                <p style="color: #e0e0ff; font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; text-align: center;">
+        
+            <p style="color: #e0e0ff; font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; text-align: center;">
                     Join as a participant to build innovative solutions, collaborate with interdisciplinary teams, learn cutting-edge technologies, and compete for prizes. Perfect for students from all majors who want to shape the future through technology!
                 </p>
-                
-                <!-- Organized Button Grid -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-                    <a href="https://hackuniversity.vercel.app/" 
-                       target="_blank" 
-                       class="hacker-button"
-                       style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Register Now</span>
-                    </a>
-                    
-                    <a href="https://EmpowHERHack2025-agenda.vercel.app﻿" 
-                       target="_blank" 
-                       class="hacker-button"
-                       style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Hack Agenda</span>
-                    </a>
-                    
-                    <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" 
-                       target="_blank" 
-                       class="hacker-button"
-                       style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
-                        <i class="fas fa-book"></i>
-                        <span>Hacker Guide</span>
-                    </a>
-                    
-                    <a href="https://empowherhack2025-devpost.vercel.app/" 
-                       target="_blank" 
-                       class="hacker-button"
-                       style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
-                        <i class="fas fa-rocket"></i>
-                        <span>Devpost Portal</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+
+    
+    
+    
+    
+    
     </div>
 
+
+
+<div class="row" style="margin: 3rem 0;">
+  <!-- Participants Card (Hackers) -->
+  <div class="col-lg-6 mb-4">
+    <div style="background: linear-gradient(135deg, rgba(102,126,234,0.15) 0%, rgba(50,205,50,0.15) 100%);
+                border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(4px);
+                border: 2px solid rgba(102,126,234,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.1); height: 100%;">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2);
+                    border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center;
+                    justify-content: center; box-shadow: 0 4px 15px rgba(102,126,234,0.4);">
+          <i class="fa-solid fa-code" style="font-size: 2rem; color: white;"></i>
+        </div>
+
+        <h3 style="color: #667eea; margin-bottom: 0.5rem; font-size: 1.6rem; font-weight: bold;">
+          <i class="fa-solid fa-rocket" style="color: #32cd32;"></i> Hacker - Student
+        </h3>
+
+        <p style="color: #e0e0ff; font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; text-align: center;">
+          🌐 Open Worldwide — All Universities | All Majors | All High School (16+)  
+          Especially welcoming women, non-binary individuals, and allies from all backgrounds!
+        </p>
+
+        <p style="color: #e0e0ff; font-size: 0.9rem; margin-top: 0.5rem; line-height: 1.5;">
+          <strong>Exception:</strong> If you’re under 18, you must have parent/guardian permission. For in-person activities, a parent/guardian must be present. For online sessions, a signed permission form is required.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === REGISTRATION + HACK RESOURCES SUBCARDS === -->
+<div class="row subcards-wrap g-3" aria-label="Hack Operations quick actions">
+  <!-- Registration subcard -->
+  <div class="col-md-6">
+    <div class="subcard-emp">
+      <h3>📝 Registration</h3>
+      <ol class="step-list">
+        <li class="step-item">
+          <span class="step-badge">Step 1</span>
+          <div class="step-text">
+            Register with <strong>OneStopForm</strong> → go to <strong>Hack University</strong> → 
+            <em>Hackathons</em> and complete the One Stop Form.
+            <br>
+            <a class="pill" href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-external-link-alt"></i> Open Hack University
+            </a>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <span class="step-badge">Step 2</span>
+          <div class="step-text">
+            Get your ticket on the <strong>Bevy calendar</strong>.
+            <br>
+            <a class="pill" href="https://empowherhack2025-bevy.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-ticket-alt"></i> Open Bevy Calendar
+            </a>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <span class="step-badge">Step 3</span>
+          <div class="step-text">
+            <strong>Check in with Staff</strong> 
+            <span style="opacity:.85;">[only for In-person events]</span>.
+            <br>
+            <a class="pill" href="#" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-id-badge"></i> Check-in Info
+            </a>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <span class="step-badge">Step 4</span>
+          <div class="step-text">
+            Register on <strong>Devpost</strong> 
+            <span style="opacity:.85;">(Project Submission Portal)</span>.
+            <br>
+            <a class="pill" href="https://empowherhack2025-devpost.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-rocket"></i> Open Devpost Portal
+            </a>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Hack Resources subcard -->
+  <div class="col-md-6">
+    <div class="subcard-emp">
+      <h3>📚 Hack Resources</h3>
+      <div class="resource-list">
+        <div class="resource-item">
+          <strong>Hack Agenda:</strong>
+          <a href="https://EmpowHERHack2025-agenda.vercel.app" target="_blank" rel="noopener noreferrer">
+            EmpowHER 2025 Agenda
+          </a>
+        </div>
+        <div class="resource-item">
+          <strong>Hack Guide:</strong>
+          <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank" rel="noopener noreferrer">
+            Hacker Guide &amp; Toolkit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- === /END SUBCARDS === -->
+
+
+
+
+
+
+
+
     <!-- Non-Participants Card (Get Involved) -->
-    <div class="col-lg-6 mb-4">
+    <div class="row" style="margin: 3rem 0;">
+  <div class="col-lg-6 mb-4">
         <div style="background: linear-gradient(135deg, rgba(50, 205, 50, 0.15) 0%, rgba(0, 198, 255, 0.15) 100%); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(4px); border: 2px solid rgba(50, 205, 50, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); height: 100%;">
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #32cd32, #00c6ff); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(50, 205, 50, 0.4);">
@@ -462,32 +629,13 @@
     </div>
 </div>
 
-<style>
-/* Hover effects for hacker buttons */
-.hacker-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
-}
 
-/* Hover effect for Get Involved button */
-.involve-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(50, 205, 50, 0.6) !important;
-}
-</style>
 
 <style>
-/* Hover effects for hacker buttons */
-.hacker-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
-}
-
+    /* Hover effects for hacker buttons */
+.hacker-button:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(102,126,234,.5)!important}
 /* Hover effect for Get Involved button */
-.involve-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(50, 205, 50, 0.6) !important;
-}
+.involve-button:hover{transform:translateY(-5px) scale(1.05);box-shadow:0 10px 30px rgba(50,205,50,.6)!important}
 </style>
 
 
@@ -498,7 +646,7 @@
 <!-- Stats Section -->
 <div class="stats-container">
     <div class="stat-item" id="kickoff-countdown-stat">
-        <div class="stat-number" id="kickoff-days">137</div>
+        <div class="stat-number" id="kickoff-days" aria-live="polite">--</div>
         <div class="stat-text" id="kickoff-text">Days Until Kick-Off</div>
         <div style="font-size: 1.5rem; color: #764ba2; margin-top: 10px; font-weight: bold;" id="kickoff-hours">00h</div>
     </div>
@@ -936,105 +1084,63 @@
             </div>
         </div>
 
-    <script>
-        // Toggle function for Tech Unicorn details
-        function toggleUnicornDetails() {
-            const details = document.getElementById('unicornDetails');
-            const arrow = document.getElementById('unicornArrow');
-            
-            if (details.style.display === 'none' || details.style.display === '') {
-                details.style.display = 'block';
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                details.style.display = 'none';
-                arrow.style.transform = 'rotate(0deg)';
-            }
-        }
-        
-        // Countdown script - UPDATED VERSION
-        document.addEventListener("DOMContentLoaded", function() {
-            const releaseDate = new Date('2025-10-13T23:00:00-04:00'); // 11 PM EST
-            
-            function updateCountdown() {
-                const currentDate = new Date();
-                const timeLeft = releaseDate - currentDate;
-                
-                if (timeLeft <= 0) {
-                    // Hackathon has started - reveal challenges NOW
-                    console.log("🎉 Challenges are now available!");
-                    
-                    // Hide mystery banner
-                    const mysteryBanner = document.getElementById('mysteryBanner');
-                    if (mysteryBanner) {
-                        mysteryBanner.style.display = 'none';
-                    }
-                    
-                    // Hide all lock divs and show unlocked content
-                    const lockedChallenges = document.querySelectorAll('.challenge-lock');
-                    lockedChallenges.forEach((element) => {
-                        element.style.display = 'none';
-                    });
-                    
-                    // Show all unlocked challenge details
-                    const unlockedChallenges = document.querySelectorAll('.challenge-unlocked');
-                    unlockedChallenges.forEach((element) => {
-                        element.style.display = 'block';
-                    });
-                    
-                    // Stop the interval
-                    clearInterval(window.challengeCountdownInterval);
-                    return;
-                } else {
-                    // Calculate remaining time
-                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    
-                    // Update mystery banner with countdown
-                    const mysteryBanner = document.getElementById('mysteryBanner');
-                    if (mysteryBanner) {
-                        const existingCountdown = mysteryBanner.querySelector('.live-countdown');
-                        if (existingCountdown) {
-                            existingCountdown.remove();
-                        }
-                        
-                        const countdownEl = document.createElement('div');
-                        countdownEl.className = 'live-countdown';
-                        countdownEl.style = "margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; border: 1px solid rgba(102, 126, 234, 0.3);";
-                        countdownEl.innerHTML = `
-                            <p style="font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; color: #667eea;">Challenges unlock in:</p>
-                            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">${days}</div>
-                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Days</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #764ba2;">${hours}</div>
-                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Hours</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #f093fb;">${minutes}</div>
-                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Minutes</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: bold; color: #11998e;">${seconds}</div>
-                                    <div style="font-size: 0.9rem; color: #e0e0ff;">Seconds</div>
-                                </div>
-                            </div>
-                        `;
-                        mysteryBanner.appendChild(countdownEl);
-                    }
-                }
-            }
-            
-            // Run immediately
-            updateCountdown();
-            
-            // Update every second
-            window.challengeCountdownInterval = setInterval(updateCountdown, 1000);
-        });
-    </script>
+    
+<script>
+function toggleUnicornDetails(){
+  const d=document.getElementById('unicornDetails');
+  const a=document.getElementById('unicornArrow');
+  const open=d.style.display==='block';
+  d.style.display=open?'none':'block';
+  a.style.transform=open?'rotate(0deg)':'rotate(180deg)';
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Kickoff (Oct 13, 2025 10:00 PM ET)
+  const kickoff=new Date('2025-10-13T22:00:00-04:00');
+  const dDays=document.getElementById('kickoff-days');
+  const dHours=document.getElementById('kickoff-hours');
+  const dText=document.getElementById('kickoff-text');
+  function updateKickoff(){
+    const t=kickoff-new Date();
+    if(t<=0){dDays.textContent='LIVE';dDays.style.color='#32cd32';dHours.textContent='NOW!';dHours.style.color='#32cd32';dText.textContent='Kick-Off Active!';return;}
+    const days=Math.floor(t/86400000);
+    const hours=Math.floor((t%86400000)/3600000);
+    dDays.textContent=days; dHours.textContent=hours+'h';
+  }
+  updateKickoff(); setInterval(updateKickoff,60000);
+
+  // Challenges unlock (Oct 13, 2025 11:00 PM ET)
+  const release=new Date('2025-10-13T23:00:00-04:00');
+  function updateUnlock(){
+    const t=release-new Date();
+    const banner=document.getElementById('mysteryBanner');
+    if(t<=0){
+      if(banner) banner.style.display='none';
+      document.querySelectorAll('.challenge-lock').forEach(el=>el.style.display='none');
+      document.querySelectorAll('.challenge-unlocked').forEach(el=>el.style.display='block');
+      return;
+    }
+    if(banner){
+      const ex=banner.querySelector('.live-countdown'); if(ex) ex.remove();
+      const d=Math.floor(t/86400000), h=Math.floor((t%86400000)/3600000),
+            m=Math.floor((t%3600000)/60000), s=Math.floor((t%60000)/1000);
+      const cd=document.createElement('div');
+      cd.className='live-countdown';
+      cd.style.cssText='margin-top:20px;padding:15px;background:rgba(102,126,234,.1);border-radius:10px;border:1px solid rgba(102,126,234,.3)';
+      cd.innerHTML=`
+        <p style="font-size:1.1rem;margin-bottom:10px;font-weight:bold;color:#667eea;">Challenges unlock in:</p>
+        <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:#667eea;">${d}</div><div style="font-size:.9rem;color:#e0e0ff;">Days</div></div>
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:#764ba2;">${h}</div><div style="font-size:.9rem;color:#e0e0ff;">Hours</div></div>
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:#f093fb;">${m}</div><div style="font-size:.9rem;color:#e0e0ff;">Minutes</div></div>
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:bold;color:#11998e;">${s}</div><div style="font-size:.9rem;color:#e0e0ff;">Seconds</div></div>
+        </div>`;
+      banner.appendChild(cd);
+    }
+  }
+  updateUnlock(); setInterval(updateUnlock,1000);
+});
+</script>
+
 </section>
 
     <script>
