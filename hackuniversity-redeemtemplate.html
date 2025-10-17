@@ -1,0 +1,761 @@
+<!-- 
+      This hack’s benefits have ended. Redeem are no longer available.
+      This hack’s benefits have not started. Please wait for Organizer instructions to Redeem.
+      This hack’s benefits is live. Please enter your email to Redeem. -->
+
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Hack Participant Redeem — Subscriptions / APIs</title>
+
+<!-- Font Awesome (icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<!-- Basic, permissive CSP (tweak for your domains as needed) -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' https:; img-src 'self' https: data:;
+               style-src 'self' https: 'unsafe-inline';
+               script-src 'self' https:;
+               connect-src 'self' https:;
+               font-src 'self' https: data:;">
+
+<noscript><div style="background:#300;color:#fff;padding:.75rem;text-align:center">
+  This portal requires JavaScript to function.
+</div></noscript>
+
+<style>
+  :root{
+    /* page vars */
+    --bg: #0f172a;           /* slate-900 */
+    --panel: #111827cc;      /* semi glass */
+    --brand1: #667eea;       /* indigo */
+    --brand2: #764ba2;       /* purple */
+    --text: #f8fafc;
+    --muted:#cbd5e1;
+    --card:#0b1224;
+    --border:#23304d;
+
+    /* footer fallback (remove if defined globally) */
+    --primary-blue: #0f3460;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Ubuntu,'Apple Color Emoji','Segoe UI Emoji';
+    color:var(--text);
+    background: radial-gradient(1200px 800px at 10% -10%, rgba(102,126,234,.2), transparent),
+                radial-gradient(1000px 700px at 110% 10%, rgba(118,75,162,.2), transparent),
+                linear-gradient(135deg, #0b1022 0%, #131a33 100%);
+  }
+  .wrap{ max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding: 18px 0;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;
+    letter-spacing:.2px;
+  }
+  .brand-badge{
+    width:36px;height:36px;border-radius:10px;
+    background: linear-gradient(135deg, var(--brand1), var(--brand2));
+    display:grid;place-items:center;
+    box-shadow:0 6px 24px rgba(102,126,234,.45);
+  }
+  .btn{
+    --bg:#1b2b57; --bd:#2a3b6a; --hover:#223770;
+    appearance:none; border:none; cursor:pointer;
+    background: var(--bg);
+    color:#fff; font-weight:700; letter-spacing:.25px;
+    padding:12px 16px; border-radius:12px; border:1px solid var(--bd);
+    transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover{ transform: translateY(-1px); background:var(--hover); box-shadow:0 10px 30px rgba(35,56,120,.35); }
+  .btn-ghost{ background: transparent; border:1px solid var(--border); }
+  .btn-primary{ --bg: linear-gradient(135deg, var(--brand1), var(--brand2)); --bd:transparent; --hover: linear-gradient(135deg,#556fe9,#6a44a3); }
+  .btn-claim{ --bg:#1a4030; --bd:#2a5f48; --hover:#21533f; }
+  .btn[disabled], .is-disabled{ opacity:.55; cursor:not-allowed; pointer-events:none; }
+
+  .panel{
+    background: var(--panel);
+    border: 1px solid rgba(102,126,234,.25);
+    box-shadow: 0 10px 40px rgba(0,0,0,.3);
+    backdrop-filter: blur(6px);
+    border-radius:16px;
+    padding: 20px;
+  }
+  .divider{ height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin:16px 0; }
+  .helper{
+    background: rgba(255,255,255,.06);
+    border: 1px dashed rgba(255,255,255,.15);
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--muted);
+    font-size:.95rem;
+  }
+  .row{ display:flex; gap:10px; align-items:center; margin-top:14px; flex-wrap:wrap; }
+  .email{
+    flex:1 1 260px;
+    padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+    background: #0d162f; color:var(--text); outline:none;
+  }
+  .info{ font-size:.95rem; color:var(--muted); }
+
+  /* Status chip */
+  .status{
+    display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
+    border-radius:999px; font-size:.85rem; border:1px solid var(--border); color:#e5e7eb;
+    background:#0d152b;
+  }
+  .status.ok{ border-color: rgba(34,197,94,.35); background:#0f2a1e; color:#bbf7d0; }
+  .status.no{ border-color: rgba(239,68,68,.35); background:#2a1010; color:#fecaca; }
+  .status.is-pending-reveal{ border-color:rgba(245,158,11,.4); background:#2a1f0f; color:#fde68a; }
+  .status.is-closed{ border-color:rgba(239,68,68,.4); background:#2a1010; color:#fecaca; }
+  .status.is-working{ border-color:rgba(147,197,253,.4); background:#0e213d; color:#bfdbfe; }
+
+  /* Hack header */
+  .hack-head{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    margin-bottom:14px;
+  }
+  .hack-head-left{ display:flex; flex-direction:column; gap:6px; }
+  .hack-head-title{ font-size:1.2rem; font-weight:800; letter-spacing:.2px; }
+  .hack-head-link{
+    color:#93c5fd; text-decoration:none; font-size:.92rem;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .hack-head-link:hover{ text-decoration:underline; }
+
+  .hack-closed{
+    background: linear-gradient(90deg, rgba(239,68,68,.18), rgba(239,68,68,.08));
+    border:1px solid rgba(239,68,68,.35);
+    color:#fecaca;
+    padding:10px 12px;
+    border-radius:12px;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+
+  /* Grid */
+  .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+  .col-4{ grid-column: span 4; min-width:260px; }
+  .col-8{ grid-column: span 8; min-width:260px; }
+
+  /* Products list */
+  .list{ display:grid; gap:14px; }
+  .prod{
+    background: var(--card); border:1px solid var(--border);
+    border-radius:14px; padding:14px;
+    display:grid; grid-template-columns: 1fr auto; align-items:center; gap:12px;
+  }
+  .prod h4{ margin:0 0 6px; font-size:1.05rem; }
+  .prod p{ margin:0; font-size:.95rem; color:var(--muted); }
+  .prod .right{ display:flex; gap:8px; align-items:center; }
+  .prod .sponsor{ color:#93c5fd; text-decoration:none; font-size:.92rem; }
+  .mute{ color:var(--muted); }
+
+  footer{ margin:36px 0 0; }
+
+  /* ==== Benefits section (hard-coded) ==== */
+  .benefits{
+    display:grid; gap:12px;
+  }
+  .benefit-card{
+    background: var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+  }
+  .benefit-card h4{
+    margin:0 0 4px; font-size:1.05rem;
+  }
+  .benefit-card .company{
+    color:#93c5fd; font-weight:700;
+  }
+  .benefit-card .benefit{
+    color:var(--muted);
+  }
+
+  /* ==== HACK UNIVERSITY FOOTER ==== */
+  .hack-university-footer { background: var(--primary-blue); color: white; padding: 2rem 0 3rem 0; }
+  .hack-university-footer-container { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
+  @media (min-width: 640px) { .hack-university-footer-container { padding: 0 1.5rem; } }
+  @media (min-width: 1024px) { .hack-university-footer-container { padding: 0 2rem; } }
+  .hack-university-footer-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 768px) { .hack-university-footer-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  .hack-university-footer-title { font-size: 1.125rem; font-weight: bold; margin-bottom: 1rem; }
+  .hack-university-footer-description { font-size: 0.875rem; opacity: 0.8; margin-bottom: 1rem; }
+  .hack-university-footer-link { color: white; text-decoration: underline; transition: opacity 0.3s ease; }
+  .hack-university-footer-link:hover { opacity: 0.9; }
+  .hack-university-social-section { margin-top: 1.5rem; }
+  .hack-university-social-title { font-size: 0.875rem; font-weight: bold; margin-bottom: 0.75rem; }
+  .hack-university-social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  @media (min-width: 768px) { .hack-university-social-grid { gap: 0.75rem; } }
+  @media (max-width: 768px) { .hack-university-social-grid { grid-template-columns: repeat(2, 1fr); } }
+  .hack-university-social-link {
+    display: flex; flex-direction: column; align-items: center; color: white; text-decoration: none;
+    padding: 0.5rem; transition: color 0.2s ease; min-height: 44px; min-width: 44px;
+  }
+  .hack-university-social-link:hover { color: #fde047; }
+  .hack-university-social-icon { font-size: 1.125rem; margin-bottom: 0.25rem; }
+  @media (min-width: 768px) { .hack-university-social-icon { font-size: 1.25rem; } }
+  .hack-university-social-text { font-size: 0.75rem; }
+  .hack-university-quick-links { margin: 0; padding: 0; list-style: none; }
+  .hack-university-quick-links li { margin-bottom: 0.5rem; }
+  .hack-university-quick-link {
+    font-size: 0.875rem; opacity: 0.8; color: white; text-decoration: none; transition: opacity 0.3s ease;
+    min-height: 44px; min-width: 44px; display: inline-block;
+  }
+  .hack-university-quick-link:hover { opacity: 1; }
+  .hack-university-contact-section { font-size: 0.875rem; opacity: 0.8; font-style: normal; }
+  .hack-university-contact-link { color: white; text-decoration: none; transition: opacity 0.3s ease; }
+  .hack-university-contact-link:hover { opacity: 1; }
+  .hack-university-footer-bottom { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2); text-align: center; }
+  @media (min-width: 768px) { .hack-university-footer-bottom { margin-top: 2rem; padding-top: 2rem; } }
+  .hack-university-copyright { font-size: 0.875rem; opacity: 0.8; margin-bottom: 0.5rem; }
+  .hack-university-credits { font-size: 0.75rem; opacity: 0.6; }
+  .hack-university-credits-link { color: #67e8f9; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+  .hack-university-credits-link:hover { color: #a5f3fc; }
+  .hack-university-focus-visible:focus { outline: 2px solid #f59e0b; outline-offset: 2px; }
+  @keyframes hack-university-twinkle { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.1)} }
+  .hack-university-star { animation: hack-university-twinkle 1.8s ease-in-out infinite; }
+  .hack-university-text-decoration-none,
+  .hack-university-text-decoration-none:hover { text-decoration: none !important; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Top bar -->
+    <header>
+      <div class="brand">
+        <div class="brand-badge"><i class="fa-solid fa-bolt"></i></div>
+        <div>Hack Participant Subscriptions / APIs Redeem</div>
+      </div>
+      <a class="btn btn-ghost" href="#" id="hackHome">Hack Home</a>
+    </header>
+
+    <!-- HACK HEADER SUMMARY -->
+    <section class="hack-head panel" id="hackHead">
+      <div class="hack-head-left">
+        <div class="hack-head-title" id="hackTitle">Hackathon</div>
+        <a id="hackSite" href="#" target="_blank" rel="noopener" class="hack-head-link" style="display:none">
+          Visit website <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="hack-head-right">
+        <span id="hackStatus" class="status">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Checking…
+        </span>
+      </div>
+    </section>
+    <div id="hackClosedNotice" class="hack-closed" hidden>
+      <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+      
+      <!-- This hack’s benefits have ended. Redeem are no longer available. -->
+      This hack’s benefits have not started. Please wait for Organizer instructions to Redeem.
+      <!-- This hack’s benefits is live. Please enter your email to Redeem. -->
+    </div>
+
+    <!-- Sign-in -->
+    <section class="panel" id="login">
+      <div class="helper">
+        <strong>Participants only:</strong> sign in with the email you used to register for the hack.
+        After verification, you’ll see your available subscriptions/APIs and claim buttons.
+      </div>
+
+      <div class="row">
+        <input id="email" class="email" type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" />
+        <button id="signin" type="button" class="btn btn-primary">
+          <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In
+        </button>
+      </div>
+
+      <div id="loginMsg" class="info" style="margin-top:10px;" aria-live="polite" role="status">Awaiting email…</div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== CURRENT BENEFITS (HARD-CODED) ===== -->
+    <section class="panel" id="currentBenefits" aria-labelledby="currentBenefitsTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;">
+        <h3 id="currentBenefitsTitle" style="margin:0;font-size:1.15rem;">
+          Current Benefits
+        </h3>
+
+      </div>
+
+      <div class="benefits">
+        <!-- EDIT ME: duplicate .benefit-card blocks to add more static benefits -->
+        <!-- <article class="benefit-card">
+          <h4 class="company">Company Name: <span>Acme Cloud</span></h4>
+          <p class="benefit">Benefit: <span>12-month Pro API credits (up to $200) + premium SDK access</span></p>
+        </article>
+
+        <article class="benefit-card">
+          <h4 class="company">Company Name: <span>DevTools Co.</span></h4>
+          <p class="benefit">Benefit: <span>Free Team plan for 6 months for all hack participants</span></p>
+        </article>
+
+        <article class="benefit-card">
+          <h4 class="company">Company Name: <span>AI Widgets Inc.</span></h4>
+          <p class="benefit">Benefit: <span>5M tokens/month for 3 months on the Student tier</span></p>
+        </article> -->
+
+        
+        <!-- /EDIT ME -->
+      </div>
+
+      <p class="info" style="margin-top:10px">
+        Note: These are public benefit previews. Your personalized redemption items will appear below after sign-in.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Dashboard -->
+    <section class="grid" id="dash" hidden aria-busy="false">
+      <!-- Left: participant card -->
+      <div class="col-4">
+        <div class="panel">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="brand-badge" style="width:40px;height:40px;"><i class="fa-solid fa-user"></i></div>
+            <div>
+              <div style="font-weight:800;">Participant</div>
+              <div id="pStatus" class="status"><i class="fa-solid fa-circle-notch fa-spin"></i> Checking…</div>
+            </div>
+          </div>
+          <div class="info">
+            <div><span class="mute">Name:</span> <span id="pName">—</span></div>
+            <div><span class="mute">Email:</span> <span id="pEmail">—</span></div>
+            <div><span class="mute">Hack:</span> <span id="pHack">—</span></div>
+            <div><span class="mute">Team:</span> <span id="pTeam">—</span></div>
+            <div><span class="mute">Status:</span> <span id="pRole">—</span></div>
+          </div>
+          <div class="divider"></div>
+          <div class="info">
+            <span class="mute">Tip:</span> Code Redeem are per-email. Use the same email you used on Hack University registration OneStopForm.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: products -->
+      <div class="col-8">
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;">
+            <h3 style="margin:0;font-size:1.15rem;">Available Subscriptions / APIs</h3>
+            <button id="refresh" type="button" class="btn btn-ghost"><i class="fa-solid fa-rotate"></i> Refresh</button>
+          </div>
+          <div id="prodList" class="list" tabindex="-1">
+            <div class="info">No data yet. Sign in above to view your benefits.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== HACK UNIVERSITY FOOTER ===== -->
+  <footer class="hack-university-footer" role="contentinfo">
+    <div class="hack-university-footer-container">
+        <div class="hack-university-footer-grid">
+            <div>
+                <h3 class="hack-university-footer-title">
+                    Hack University 
+                    <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+                </h3>
+                <p class="hack-university-footer-description">
+                    A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+                </p>
+                <p class="hack-university-footer-description">
+                    <a href="http://HackUniversity.vercel.app" class="hack-university-footer-link hack-university-text-decoration-none hack-university-focus-visible">HackUniversity.vercel.app</a>
+                </p>
+                
+                <div class="hack-university-social-section">
+                    <h4 class="hack-university-social-title">Connect With Us:</h4>
+                    <div class="hack-university-social-grid">
+                        <a href="https://www.linkedin.com/showcase/hack-university-global/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">LinkedIn</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Instagram</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">GitHub</span>
+                        </a>
+                        <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">YouTube</span>
+                        </a>
+                        <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Discord</span>
+                        </a>
+                        <a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-social-link hack-university-text-decoration-none hack-university-focus-visible">
+                            <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+                            <span class="hack-university-social-text">Calendar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Quick Links</h3>
+                <ul class="hack-university-quick-links">
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Mission</a></li>
+                    <li><a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Events</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Hackathons</a></li>
+                    <li><a href="https://hackuniversity-membership.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Membership</a></li>
+                    <li><a href="https://hackuniversity-eboard.vercel.app/" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join E-Board</a></li>
+                    <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Resources</a></li>
+                    <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer" class="hack-university-quick-link hack-university-text-decoration-none hack-university-focus-visible">Join Discord</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="hack-university-footer-title">Contact</h3>
+                <address class="hack-university-contact-section">
+                    Florida International University<br>
+                    Miami, FL<br>
+                    <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link hack-university-text-decoration-none hack-university-focus-visible">codecrunchclub@gmail.com</a>
+                </address>
+            </div>
+        </div>
+        
+        <div class="hack-university-footer-bottom">
+            <p class="hack-university-copyright">
+                © <span id="year"></span> Hack University. All rights reserved.
+            </p>
+            <p class="hack-university-credits">
+                Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="hack-university-credits-link hack-university-text-decoration-none hack-university-focus-visible">Brian Bazurto</a> | Powered by innovation and collaboration
+            </p>
+        </div>
+    </div>
+  </footer>
+  <!-- ===== END FOOTER ===== -->
+
+<script>
+  // ====== CONFIG (edit these) ======
+  const ALLOWED_HOST = ""; // e.g. "codecrunchglobal.vercel.app" (leave "" to allow all domains)
+  const API_BASE     = "https://api.example.com"; // your backend base URL
+  const USE_API_KEY  = false;
+  const API_KEY      = "REPLACE_ME";
+
+  // Optional home link
+  document.getElementById('hackHome').href = "#";
+
+  // footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ====== UTIL ======
+  const byId = (id)=>document.getElementById(id);
+  const setText = (id, v)=>{ const el=byId(id); if(el) el.textContent = (v ?? '—'); };
+  function emailValid(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e||""); }
+
+  function msg(text){ 
+    const el = byId('loginMsg'); 
+    el.textContent = text; 
+  }
+  function msgHTML(html){
+    const el = byId('loginMsg');
+    el.innerHTML = html;
+  }
+
+  function escapeHTML(s){ return (s??"").toString()
+      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+      .replaceAll('"','&quot;').replaceAll("'","&#039;'); }
+
+  function isSafeHttpUrl(url) {
+    try {
+      const u = new URL(url, location.origin);
+      return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch { return false; }
+  }
+
+  async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 15000 } = options; // 15s
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+      const resp = await fetch(resource, { ...options, signal: controller.signal });
+      return resp;
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
+  function domainOK(){
+    if(!ALLOWED_HOST) return true;
+    const ok = location.hostname === ALLOWED_HOST;
+    if(!ok){
+      msg(`❌ This portal only works on ${ALLOWED_HOST}.`);
+    }
+    return ok;
+  }
+
+  // ====== HACK HEADER ======
+  let HACK_STATUS = 'pending_work'; // global gate
+
+  /**
+   * Sets the top header values and status.
+   * @param {Object} cfg
+   * @param {string} cfg.name       - Hack name text
+   * @param {string} cfg.site       - Full URL to the hack website
+   * @param {'pending_reveal'|'closed'|'pending_work'} cfg.status
+   */
+  function setHackHeader(cfg){
+    const titleEl  = byId('hackTitle');
+    const siteEl   = byId('hackSite');
+    const statusEl = byId('hackStatus');
+    const closedEl = byId('hackClosedNotice');
+
+    if (cfg?.name) titleEl.textContent = cfg.name;
+    if (cfg?.site && isSafeHttpUrl(cfg.site)) {
+      siteEl.href = cfg.site; siteEl.style.display = 'inline-flex';
+    } else { siteEl.style.display = 'none'; }
+
+    statusEl.classList.remove('ok','no','is-pending-reveal','is-closed','is-working');
+
+    switch(cfg?.status){
+      case 'pending_reveal':
+        HACK_STATUS = 'pending_reveal';
+        statusEl.classList.add('is-pending-reveal');
+        statusEl.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> Pending reveal at ceremony';
+        closedEl.hidden = true;
+        break;
+      case 'closed':
+        HACK_STATUS = 'closed';
+        statusEl.classList.add('is-closed');
+        statusEl.innerHTML = '<i class="fa-solid fa-lock"></i> Benefit has ended';
+        closedEl.hidden = false;
+        break;
+      case 'pending_work':
+      default:
+        HACK_STATUS = 'pending_work';
+        statusEl.classList.add('is-working');
+        statusEl.innerHTML = '<i class="fa-solid fa-wrench"></i> Pending — we\u2019re working on it';
+        closedEl.hidden = true;
+        break;
+    }
+  }
+
+  // ====== RENDERERS ======
+  function renderParticipant(p){
+    setText('pName', p?.name || 'Not available');
+    setText('pEmail', p?.email || 'Not available');
+    setText('pHack', p?.hackName || 'Generic Hackathon');
+    setText('pTeam', p?.teamName || '—');
+    setText('pRole', p?.status || 'Participant');
+
+    const st = byId('pStatus');
+    st.classList.remove('ok','no');
+    if(p?.verified){
+      st.classList.add('ok');
+      st.innerHTML = `<i class="fa-solid fa-circle-check"></i> Verified`;
+    }else{
+      st.classList.add('no');
+      st.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Not Verified`;
+    }
+
+    // Optional: also reflect hack status from API if provided
+    if(p?.hackMeta){
+      setHackHeader({
+        name: p.hackMeta.name || p.hackName || 'Generic Hackathon',
+        site: p.hackMeta.site || '#',
+        status: p.hackMeta.status || 'pending_work'
+      });
+    }
+  }
+
+  function renderProducts(products, email){
+    const list = byId('prodList');
+    list.innerHTML = "";
+    if(!products || !products.length){
+      list.innerHTML = `<div class="info">No sponsor products are currently available for this account.</div>`;
+      return;
+    }
+
+    products.forEach(prod=>{
+      const claimed = !!prod.claimed;
+      const sponsorHref = (prod.sponsorUrl && isSafeHttpUrl(prod.sponsorUrl)) ? prod.sponsorUrl : "#";
+      const productEl = document.createElement('div');
+      productEl.className = 'prod';
+      const claimDisabled = claimed || HACK_STATUS === 'closed';
+
+      productEl.innerHTML = `
+        <div>
+          <h4>${escapeHTML(prod.name || 'Unnamed Product')}</h4>
+          <p>${escapeHTML(prod.description || 'Sponsor-provided benefit / API access')}</p>
+          <p class="mute">Sponsor: ${
+            sponsorHref === '#'
+              ? `<span class="sponsor" aria-disabled="true">Unavailable</span>`
+              : `<a class="sponsor" href="${sponsorHref}" target="_blank" rel="noopener noreferrer">${escapeHTML(prod.sponsorName || 'Visit sponsor')}</a>`
+          }</p>
+        </div>
+        <div class="right">
+          <a class="btn btn-ghost" href="${sponsorHref}" target="_blank" rel="noopener noreferrer"
+             ${sponsorHref==="#"?'aria-disabled="true" tabindex="-1"':''} title="Open sponsor page">
+            <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <button class="btn btn-claim" ${claimDisabled?'disabled':''} data-id="${escapeHTML(String(prod.id||''))}">
+            ${claimed
+              ? '<i class="fa-solid fa-check"></i> Claimed'
+              : (HACK_STATUS === 'closed'
+                    ? '<i class="fa-solid fa-lock"></i> Closed'
+                    : '<i class="fa-solid fa-gift"></i> Claim')}
+          </button>
+        </div>
+      `;
+
+      const claimBtn = productEl.querySelector('button.btn-claim');
+      if (claimBtn && !claimDisabled) {
+        claimBtn.addEventListener('click', async (e)=>{
+          const btn = e.currentTarget;
+          btn.disabled = true;
+          byId('dash').setAttribute('aria-busy', 'true');
+          btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Claiming…`;
+          try{
+            const ok = await claimProduct(email, prod.id);
+            if(ok){
+              btn.classList.add('is-disabled');
+              btn.innerHTML = `<i class="fa-solid fa-check"></i> Claimed`;
+            }else{
+              throw new Error('Claim failed');
+            }
+          }catch(err){
+            console.error(err);
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-gift"></i> Try Again`;
+            alert('Could not complete claim. Please try again or contact support.');
+          } finally {
+            byId('dash').setAttribute('aria-busy', 'false');
+          }
+        });
+      }
+      list.appendChild(productEl);
+    });
+  }
+
+  // ====== API CALLS (adjust endpoints) ======
+  async function fetchParticipant(email){
+    const url = new URL(API_BASE + '/participant');
+    url.searchParams.set('email', email);
+    if(USE_API_KEY) url.searchParams.set('key', API_KEY);
+
+    const resp = await fetchWithTimeout(url.toString(), { headers: { 'Accept':'application/json' }, timeout: 15000 });
+    if(!resp.ok) throw new Error('Network error ' + resp.status);
+
+    let data;
+    try { data = await resp.json(); }
+    catch { throw new Error('Invalid JSON'); }
+
+    return data; // { participant: {...}, products: [...] }
+  }
+
+  async function claimProduct(email, productId){
+    const url = API_BASE + '/claim';
+    const payload = { email, productId };
+    const headers = { 'Content-Type':'application/json', 'Accept':'application/json' };
+    if(USE_API_KEY) headers['x-api-key'] = API_KEY;
+
+    const resp = await fetchWithTimeout(url, { method:'POST', headers, body: JSON.stringify(payload), timeout: 15000 });
+    if(!resp.ok) return false;
+    try {
+      const data = await resp.json();
+      return !!data.ok;
+    } catch { return false; }
+  }
+
+  // ====== EVENTS ======
+  async function onSignin(){
+    if(!domainOK()) return;
+    const email = (byId('email').value||'').trim().toLowerCase();
+    if(!email){ msg('❌ Please enter your email.'); return; }
+    if(!emailValid(email)){ msg('❌ Please enter a valid email address.'); return; }
+
+    msg('⏳ Verifying participant…');
+    byId('signin').disabled = true;
+    byId('dash').setAttribute('aria-busy', 'true');
+
+    try{
+      const result = await fetchParticipant(email);
+      const p = result?.participant;
+      const products = result?.products || [];
+
+      if(!p || p.status === 'No entry'){
+        msg('❌ We could not verify this email as a registered participant.');
+        byId('dash').hidden = true;
+        return;
+      }
+
+      renderParticipant(p);
+      renderProducts(products, email);
+      byId('dash').hidden = false;
+      msgHTML(`<span class="status ok"><i class="fa-solid fa-circle-check"></i> Signed in</span>`);
+
+      // Persist email locally
+      try { localStorage.setItem('hack_claims_email', email); } catch {}
+
+      // Update URL (?email=)
+      const qs = new URLSearchParams(location.search);
+      qs.set('email', email);
+      history.replaceState(null,'', location.pathname + '?' + qs.toString());
+
+      // Focus products for screen readers
+      const prodList = byId('prodList');
+      prodList.setAttribute('tabindex','-1');
+      prodList.focus({ preventScroll:false });
+
+      // If your API doesn't provide hackMeta, set a default
+      if(!p?.hackMeta){
+        setHackHeader({
+          name: 'Generic Hackathon 2025',
+          site: 'https://hack.example.com',
+          status: 'pending_reveal' // 'pending_reveal' | 'closed' | 'pending_work'
+        });
+      }
+    }catch(err){
+      console.error(err);
+      msg('❌ Network or server error. Please try again later.');
+      byId('dash').hidden = true;
+    }finally{
+      byId('signin').disabled = false;
+      byId('dash').setAttribute('aria-busy', 'false');
+    }
+  }
+
+  byId('signin').addEventListener('click', onSignin);
+  byId('email').addEventListener('keypress', (e)=>{ if(e.key==='Enter') onSignin(); });
+  byId('refresh').addEventListener('click', (e)=>{
+    const email = (byId('email').value||'').trim();
+    if(!emailValid(email)){ msg('Enter a valid email first.'); return; }
+    onSignin();
+  });
+
+  // Prefill from ?email=, localStorage, and optional header params
+  (function initFromQuery(){
+    const qs = new URLSearchParams(location.search);
+    const em = qs.get('email') || (()=>{ try { return localStorage.getItem('hack_claims_email') || ''; } catch { return ''; } })();
+    if(em){ byId('email').value = em; }
+
+    const name = qs.get('name');
+    const site = qs.get('site');
+    const status = qs.get('status'); // pending_reveal | closed | pending_work
+    setHackHeader({
+      name: name || 'Generic Hackathon 2025',
+      site: (site && isSafeHttpUrl(site)) ? site : '#',
+      status: (status==='pending_reveal' || status==='closed' || status==='pending_work') ? status : 'pending_work'
+    });
+  })();
+</script>
+</body>
+</html>

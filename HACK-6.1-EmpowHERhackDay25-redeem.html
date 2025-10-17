@@ -1,10 +1,31 @@
-<!DOCTYPE html>
+<!-- 
+      This hack’s benefits have ended. Redeem are no longer available.
+      This hack’s benefits have not started. Please wait for Organizer instructions to Redeem.
+      This hack’s benefits is live. Please enter your email to Redeem. -->
+
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hack Participant Claims — Subscriptions / APIs</title>
+
+<title>EmpowHer MiniHackDAY Fall 2025 - Hack Participant Redeem — Subscriptions / APIs</title>
+
+<!-- Font Awesome (icons) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<!-- Basic, permissive CSP (tweak for your domains as needed) -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' https:; img-src 'self' https: data:;
+               style-src 'self' https: 'unsafe-inline';
+               script-src 'self' https:;
+               connect-src 'self' https:;
+               font-src 'self' https: data:;">
+
+<noscript><div style="background:#300;color:#fff;padding:.75rem;text-align:center">
+  This portal requires JavaScript to function.
+</div></noscript>
 
 <style>
   :root{
@@ -143,12 +164,28 @@
 
   footer{ margin:36px 0 0; }
 
-  /* ==== HACK UNIVERSITY FOOTER (your footer) ==== */
-  .hack-university-footer {
-    background: var(--primary-blue);
-    color: white;
-    padding: 2rem 0 3rem 0;
+  /* ==== Benefits section (hard-coded) ==== */
+  .benefits{
+    display:grid; gap:12px;
   }
+  .benefit-card{
+    background: var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+  }
+  .benefit-card h4{
+    margin:0 0 4px; font-size:1.05rem;
+  }
+  .benefit-card .company{
+    color:#93c5fd; font-weight:700;
+  }
+  .benefit-card .benefit{
+    color:var(--muted);
+  }
+
+  /* ==== HACK UNIVERSITY FOOTER ==== */
+  .hack-university-footer { background: var(--primary-blue); color: white; padding: 2rem 0 3rem 0; }
   .hack-university-footer-container { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
   @media (min-width: 640px) { .hack-university-footer-container { padding: 0 1.5rem; } }
   @media (min-width: 1024px) { .hack-university-footer-container { padding: 0 2rem; } }
@@ -192,7 +229,6 @@
   .hack-university-star { animation: hack-university-twinkle 1.8s ease-in-out infinite; }
   .hack-university-text-decoration-none,
   .hack-university-text-decoration-none:hover { text-decoration: none !important; }
-  /* ==== END FOOTER CSS ==== */
 </style>
 </head>
 <body>
@@ -201,7 +237,7 @@
     <header>
       <div class="brand">
         <div class="brand-badge"><i class="fa-solid fa-bolt"></i></div>
-        <div>Hack Participant Claims</div>
+        <div>Hack Participant Subscriptions / APIs Redeem</div>
       </div>
       <a class="btn btn-ghost" href="#" id="hackHome">Hack Home</a>
     </header>
@@ -209,8 +245,8 @@
     <!-- HACK HEADER SUMMARY -->
     <section class="hack-head panel" id="hackHead">
       <div class="hack-head-left">
-        <div class="hack-head-title" id="hackTitle">Generic Hackathon</div>
-        <a id="hackSite" href="#" target="_blank" rel="noopener" class="hack-head-link">
+        <div class="hack-head-title" id="hackTitle">Hackathon</div>
+        <a id="hackSite" href="#" target="_blank" rel="noopener" class="hack-head-link" style="display:none">
           Visit website <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
       </div>
@@ -222,7 +258,10 @@
     </section>
     <div id="hackClosedNotice" class="hack-closed" hidden>
       <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-      This hack’s benefits have ended. Claims are no longer available.
+      
+      <!-- This hack’s benefits have ended. Redeem are no longer available. -->
+      This hack’s benefits have not started. Please wait for Organizer instructions to Redeem.
+      <!-- This hack’s benefits is live. Please enter your email to Redeem. -->
     </div>
 
     <!-- Sign-in -->
@@ -234,18 +273,55 @@
 
       <div class="row">
         <input id="email" class="email" type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" />
-        <button id="signin" class="btn btn-primary">
+        <button id="signin" type="button" class="btn btn-primary">
           <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In
         </button>
       </div>
 
-      <div id="loginMsg" class="info" style="margin-top:10px;">Awaiting email…</div>
+      <div id="loginMsg" class="info" style="margin-top:10px;" aria-live="polite" role="status">Awaiting email…</div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== CURRENT BENEFITS (HARD-CODED) ===== -->
+    <section class="panel" id="currentBenefits" aria-labelledby="currentBenefitsTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;">
+        <h3 id="currentBenefitsTitle" style="margin:0;font-size:1.15rem;">
+          Current Benefits
+        </h3>
+
+      </div>
+
+      <div class="benefits">
+        <!-- EDIT ME: duplicate .benefit-card blocks to add more static benefits -->
+        <!-- <article class="benefit-card">
+          <h4 class="company">Company Name: <span>Acme Cloud</span></h4>
+          <p class="benefit">Benefit: <span>12-month Pro API credits (up to $200) + premium SDK access</span></p>
+        </article>
+
+        <article class="benefit-card">
+          <h4 class="company">Company Name: <span>DevTools Co.</span></h4>
+          <p class="benefit">Benefit: <span>Free Team plan for 6 months for all hack participants</span></p>
+        </article>
+
+        <article class="benefit-card">
+          <h4 class="company">Company Name: <span>AI Widgets Inc.</span></h4>
+          <p class="benefit">Benefit: <span>5M tokens/month for 3 months on the Student tier</span></p>
+        </article> -->
+
+        
+        <!-- /EDIT ME -->
+      </div>
+
+      <p class="info" style="margin-top:10px">
+        Note: These are public benefit previews. Your personalized redemption items will appear below after sign-in.
+      </p>
     </section>
 
     <div class="divider"></div>
 
     <!-- Dashboard -->
-    <section class="grid" id="dash" hidden>
+    <section class="grid" id="dash" hidden aria-busy="false">
       <!-- Left: participant card -->
       <div class="col-4">
         <div class="panel">
@@ -265,7 +341,7 @@
           </div>
           <div class="divider"></div>
           <div class="info">
-            <span class="mute">Tip:</span> claims are per-email. Use the same email you used on registration/Devpost.
+            <span class="mute">Tip:</span> Code Redeem are per-email. Use the same email you used on Hack University registration OneStopForm.
           </div>
         </div>
       </div>
@@ -275,9 +351,9 @@
         <div class="panel">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;">
             <h3 style="margin:0;font-size:1.15rem;">Available Subscriptions / APIs</h3>
-            <button id="refresh" class="btn btn-ghost"><i class="fa-solid fa-rotate"></i> Refresh</button>
+            <button id="refresh" type="button" class="btn btn-ghost"><i class="fa-solid fa-rotate"></i> Refresh</button>
           </div>
-          <div id="prodList" class="list">
+          <div id="prodList" class="list" tabindex="-1">
             <div class="info">No data yet. Sign in above to view your benefits.</div>
           </div>
         </div>
@@ -384,21 +460,51 @@
   const byId = (id)=>document.getElementById(id);
   const setText = (id, v)=>{ const el=byId(id); if(el) el.textContent = (v ?? '—'); };
   function emailValid(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e||""); }
-  function msg(s){ byId('loginMsg').innerHTML = s; }
+
+  function msg(text){ 
+    const el = byId('loginMsg'); 
+    el.textContent = text; 
+  }
+  function msgHTML(html){
+    const el = byId('loginMsg');
+    el.innerHTML = html;
+  }
+
   function escapeHTML(s){ return (s??"").toString()
       .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
       .replaceAll('"','&quot;').replaceAll("'","&#039;'); }
+
+  function isSafeHttpUrl(url) {
+    try {
+      const u = new URL(url, location.origin);
+      return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch { return false; }
+  }
+
+  async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 15000 } = options; // 15s
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+      const resp = await fetch(resource, { ...options, signal: controller.signal });
+      return resp;
+    } finally {
+      clearTimeout(id);
+    }
+  }
 
   function domainOK(){
     if(!ALLOWED_HOST) return true;
     const ok = location.hostname === ALLOWED_HOST;
     if(!ok){
-      msg(`❌ This portal only works on <code style="background:#0e1730;border:1px solid #23304d;padding:2px 6px;border-radius:6px;">${ALLOWED_HOST}</code>.`);
+      msg(`❌ This portal only works on ${ALLOWED_HOST}.`);
     }
     return ok;
   }
 
   // ====== HACK HEADER ======
+  let HACK_STATUS = 'pending_work'; // global gate
+
   /**
    * Sets the top header values and status.
    * @param {Object} cfg
@@ -413,24 +519,28 @@
     const closedEl = byId('hackClosedNotice');
 
     if (cfg?.name) titleEl.textContent = cfg.name;
-    if (cfg?.site) { siteEl.href = cfg.site; siteEl.style.display = 'inline-flex'; }
-    else { siteEl.style.display = 'none'; }
+    if (cfg?.site && isSafeHttpUrl(cfg.site)) {
+      siteEl.href = cfg.site; siteEl.style.display = 'inline-flex';
+    } else { siteEl.style.display = 'none'; }
 
     statusEl.classList.remove('ok','no','is-pending-reveal','is-closed','is-working');
 
     switch(cfg?.status){
       case 'pending_reveal':
+        HACK_STATUS = 'pending_reveal';
         statusEl.classList.add('is-pending-reveal');
         statusEl.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> Pending reveal at ceremony';
         closedEl.hidden = true;
         break;
       case 'closed':
+        HACK_STATUS = 'closed';
         statusEl.classList.add('is-closed');
         statusEl.innerHTML = '<i class="fa-solid fa-lock"></i> Benefit has ended';
         closedEl.hidden = false;
         break;
       case 'pending_work':
       default:
+        HACK_STATUS = 'pending_work';
         statusEl.classList.add('is-working');
         statusEl.innerHTML = '<i class="fa-solid fa-wrench"></i> Pending — we\u2019re working on it';
         closedEl.hidden = true;
@@ -473,45 +583,64 @@
       list.innerHTML = `<div class="info">No sponsor products are currently available for this account.</div>`;
       return;
     }
+
     products.forEach(prod=>{
       const claimed = !!prod.claimed;
-      const sponsorHref = prod.sponsorUrl || "#";
+      const sponsorHref = (prod.sponsorUrl && isSafeHttpUrl(prod.sponsorUrl)) ? prod.sponsorUrl : "#";
       const productEl = document.createElement('div');
       productEl.className = 'prod';
+      const claimDisabled = claimed || HACK_STATUS === 'closed';
+
       productEl.innerHTML = `
         <div>
           <h4>${escapeHTML(prod.name || 'Unnamed Product')}</h4>
           <p>${escapeHTML(prod.description || 'Sponsor-provided benefit / API access')}</p>
-          <p class="mute">Sponsor: <a class="sponsor" href="${sponsorHref}" target="_blank" rel="noopener noreferrer">${escapeHTML(prod.sponsorName || 'Visit sponsor')}</a></p>
+          <p class="mute">Sponsor: ${
+            sponsorHref === '#'
+              ? `<span class="sponsor" aria-disabled="true">Unavailable</span>`
+              : `<a class="sponsor" href="${sponsorHref}" target="_blank" rel="noopener noreferrer">${escapeHTML(prod.sponsorName || 'Visit sponsor')}</a>`
+          }</p>
         </div>
         <div class="right">
-          <a class="btn btn-ghost" href="${sponsorHref}" target="_blank" rel="noopener noreferrer" ${sponsorHref==="#"?'aria-disabled="true" tabindex="-1"':''} title="Open sponsor page">
+          <a class="btn btn-ghost" href="${sponsorHref}" target="_blank" rel="noopener noreferrer"
+             ${sponsorHref==="#"?'aria-disabled="true" tabindex="-1"':''} title="Open sponsor page">
             <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i>
           </a>
-          <button class="btn btn-claim" ${claimed?'disabled':''} data-id="${escapeHTML(String(prod.id||''))}">
-            ${claimed ? '<i class="fa-solid fa-check"></i> Claimed' : '<i class="fa-solid fa-gift"></i> Claim'}
+          <button class="btn btn-claim" ${claimDisabled?'disabled':''} data-id="${escapeHTML(String(prod.id||''))}">
+            ${claimed
+              ? '<i class="fa-solid fa-check"></i> Claimed'
+              : (HACK_STATUS === 'closed'
+                    ? '<i class="fa-solid fa-lock"></i> Closed'
+                    : '<i class="fa-solid fa-gift"></i> Claim')}
           </button>
         </div>
       `;
-      productEl.querySelector('button.btn-claim')?.addEventListener('click', async (e)=>{
-        const btn = e.currentTarget;
-        btn.disabled = true;
-        btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Claiming…`;
-        try{
-          const ok = await claimProduct(email, prod.id);
-          if(ok){
-            btn.classList.add('is-disabled');
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> Claimed`;
-          }else{
-            throw new Error('Claim failed');
+
+      const claimBtn = productEl.querySelector('button.btn-claim');
+      if (claimBtn && !claimDisabled) {
+        claimBtn.addEventListener('click', async (e)=>{
+          const btn = e.currentTarget;
+          btn.disabled = true;
+          byId('dash').setAttribute('aria-busy', 'true');
+          btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Claiming…`;
+          try{
+            const ok = await claimProduct(email, prod.id);
+            if(ok){
+              btn.classList.add('is-disabled');
+              btn.innerHTML = `<i class="fa-solid fa-check"></i> Claimed`;
+            }else{
+              throw new Error('Claim failed');
+            }
+          }catch(err){
+            console.error(err);
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-gift"></i> Try Again`;
+            alert('Could not complete claim. Please try again or contact support.');
+          } finally {
+            byId('dash').setAttribute('aria-busy', 'false');
           }
-        }catch(err){
-          console.error(err);
-          btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-gift"></i> Try Again`;
-          alert('Could not complete claim. Please try again or contact support.');
-        }
-      });
+        });
+      }
       list.appendChild(productEl);
     });
   }
@@ -522,9 +651,14 @@
     url.searchParams.set('email', email);
     if(USE_API_KEY) url.searchParams.set('key', API_KEY);
 
-    const resp = await fetch(url.toString(), { headers: { 'Accept':'application/json' } });
+    const resp = await fetchWithTimeout(url.toString(), { headers: { 'Accept':'application/json' }, timeout: 15000 });
     if(!resp.ok) throw new Error('Network error ' + resp.status);
-    return await resp.json(); // { participant: {...}, products: [...] }
+
+    let data;
+    try { data = await resp.json(); }
+    catch { throw new Error('Invalid JSON'); }
+
+    return data; // { participant: {...}, products: [...] }
   }
 
   async function claimProduct(email, productId){
@@ -533,10 +667,12 @@
     const headers = { 'Content-Type':'application/json', 'Accept':'application/json' };
     if(USE_API_KEY) headers['x-api-key'] = API_KEY;
 
-    const resp = await fetch(url, { method:'POST', headers, body: JSON.stringify(payload) });
+    const resp = await fetchWithTimeout(url, { method:'POST', headers, body: JSON.stringify(payload), timeout: 15000 });
     if(!resp.ok) return false;
-    const data = await resp.json();
-    return !!data.ok;
+    try {
+      const data = await resp.json();
+      return !!data.ok;
+    } catch { return false; }
   }
 
   // ====== EVENTS ======
@@ -548,6 +684,7 @@
 
     msg('⏳ Verifying participant…');
     byId('signin').disabled = true;
+    byId('dash').setAttribute('aria-busy', 'true');
 
     try{
       const result = await fetchParticipant(email);
@@ -560,18 +697,25 @@
         return;
       }
 
-      // Show dash + data
       renderParticipant(p);
       renderProducts(products, email);
       byId('dash').hidden = false;
-      msg(`<span class="status ok"><i class="fa-solid fa-circle-check"></i> Signed in</span>`);
+      msgHTML(`<span class="status ok"><i class="fa-solid fa-circle-check"></i> Signed in</span>`);
+
+      // Persist email locally
+      try { localStorage.setItem('hack_claims_email', email); } catch {}
 
       // Update URL (?email=)
       const qs = new URLSearchParams(location.search);
       qs.set('email', email);
       history.replaceState(null,'', location.pathname + '?' + qs.toString());
 
-      // If your API doesn't provide hackMeta, you can set it here manually:
+      // Focus products for screen readers
+      const prodList = byId('prodList');
+      prodList.setAttribute('tabindex','-1');
+      prodList.focus({ preventScroll:false });
+
+      // If your API doesn't provide hackMeta, set a default
       if(!p?.hackMeta){
         setHackHeader({
           name: 'Generic Hackathon 2025',
@@ -585,17 +729,22 @@
       byId('dash').hidden = true;
     }finally{
       byId('signin').disabled = false;
+      byId('dash').setAttribute('aria-busy', 'false');
     }
   }
 
   byId('signin').addEventListener('click', onSignin);
   byId('email').addEventListener('keypress', (e)=>{ if(e.key==='Enter') onSignin(); });
-  byId('refresh').addEventListener('click', onSignin);
+  byId('refresh').addEventListener('click', (e)=>{
+    const email = (byId('email').value||'').trim();
+    if(!emailValid(email)){ msg('Enter a valid email first.'); return; }
+    onSignin();
+  });
 
-  // Prefill from ?email= and optional hack header from ?name, ?site, ?status
+  // Prefill from ?email=, localStorage, and optional header params
   (function initFromQuery(){
     const qs = new URLSearchParams(location.search);
-    const em = qs.get('email');
+    const em = qs.get('email') || (()=>{ try { return localStorage.getItem('hack_claims_email') || ''; } catch { return ''; } })();
     if(em){ byId('email').value = em; }
 
     const name = qs.get('name');
@@ -603,7 +752,7 @@
     const status = qs.get('status'); // pending_reveal | closed | pending_work
     setHackHeader({
       name: name || 'Generic Hackathon 2025',
-      site: site || '#',
+      site: (site && isSafeHttpUrl(site)) ? site : '#',
       status: (status==='pending_reveal' || status==='closed' || status==='pending_work') ? status : 'pending_work'
     });
   })();
