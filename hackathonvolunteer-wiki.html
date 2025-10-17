@@ -269,7 +269,7 @@
     function handleNewVolunteer(){ alert('Redirecting to volunteer registration form...'); }
     function handleCurrentVolunteer(){ alert('Redirecting to volunteer dashboard...'); }
 
-    // --- Miami / Local-date helpers ---
+    /* ---------- Miami / Local-date helpers ---------- */
     function asLocalDate(ymd){
       const [y,m,d] = ymd.split('-').map(Number);
       return new Date(y, m-1, d);
@@ -287,16 +287,26 @@
       const miami = new Date(date.toLocaleString('en-US',{ timeZone:'America/New_York'}));
       return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST'; // 240=EDT, 300=EST
     }
-    function calculateCountdown(startDateStr){
-      const startMiami = asLocalDate(startDateStr); startMiami.setHours(0,0,0,0);
-      const todayMiami = nowInMiami();              todayMiami.setHours(0,0,0,0);
-      const diffDays = Math.ceil((startMiami - todayMiami) / (1000*60*60*24));
-      if(diffDays > 0) return { text:`${diffDays} days`, isPast:false };
-      if(diffDays === 0) return { text:'Today!', isPast:false };
-      return { text:'Completed', isPast:true };
+
+    // NEW: status helper (X days -> Live -> Completed), inclusive of end date
+    function getEventStatus(startDateStr, endDateStr) {
+      const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
+      const end   = asLocalDate(endDateStr);   end.setHours(23,59,59,999);
+
+      const now = nowInMiami();
+      const today = new Date(now); today.setHours(0,0,0,0);
+
+      if (today < start) {
+        const diffDays = Math.ceil((start - today) / (1000*60*60*24));
+        return { text: `${diffDays} days`, isPast: false, isLive: false };
+      }
+      if (now <= end) {
+        return { text: 'Live', isPast: false, isLive: true };
+      }
+      return { text: 'Completed', isPast: true, isLive: false };
     }
 
-    // Hackathon data
+    /* ---------- Hackathon data ---------- */
     const hackathons = [
       { name:'🏙️ 305 Hackathon Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
       { name:'👑 EmpowHER Hackathon 2025',        startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
@@ -341,7 +351,7 @@
       sorted.forEach(h => {
         const startDate = asLocalDate(h.startDate);
         const endDate   = asLocalDate(h.endDate);
-        const countdown = calculateCountdown(h.startDate);
+        const status    = getEventStatus(h.startDate, h.endDate);
 
         const range = (h.startDate === h.endDate)
           ? `${formatDateMiami(h.startDate)}`
@@ -357,7 +367,7 @@
               <div class="hackathon-date">${dateLine}</div>
             </div>
             <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
-            <div class="hackathon-countdown ${countdown.isPast ? 'countdown-past' : 'countdown-upcoming'}">${countdown.text}</div>
+            <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
             <a href="${h.url}" class="hackathon-link">Website</a>
           </div>
         `;
@@ -398,11 +408,11 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderHackathons();
       updateTimes();
-      setInterval(updateTimes, 1000);       // live clocks
-      setInterval(renderHackathons, 3600000); // refresh countdown hourly
+      setInterval(updateTimes, 1000);         // live clocks
+      setInterval(renderHackathons, 3600000); // refresh status hourly
     });
 
-    // Click/touch effects
+    // Click/touch effects + smooth scroll
     document.addEventListener('DOMContentLoaded', function () {
       const interactive = document.querySelectorAll('.card-button, .hackathon-link');
       interactive.forEach(el => {
