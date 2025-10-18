@@ -492,6 +492,238 @@
       </div>
     </section>
 
+
+
+
+
+
+
+
+<!-- ===================== TRACKS (DROP-IN) ===================== -->
+<section class="event-details" id="tracks" aria-labelledby="tracks-title">
+  <style>
+    /* Scoped to #tracks to avoid collisions */
+    #tracks .tracks-title { color:#fff; text-align:center; font-size:2.25rem; margin-bottom:.5rem; }
+    #tracks .tracks-sub { color:#fff; text-align:center; opacity:.9; margin-bottom:1.5rem; }
+    #tracks .tracks-grid { display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    #tracks .track-card {
+      background: rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.20);
+      border-radius:16px; padding:1.25rem; color:#fff; box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      transition: transform .25s ease;
+    }
+    #tracks .track-card:hover { transform: translateY(-4px); }
+    #tracks .track-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.75rem; }
+    #tracks .track-name { font-size:1.35rem; font-weight:800; letter-spacing:.2px; }
+    #tracks .badge {
+      display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .6rem; border-radius:999px; font-size:.8rem; font-weight:700;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color:#fff; box-shadow: 0 6px 16px rgba(0,0,0,.12); white-space:nowrap;
+    }
+    #tracks .pill {
+      display:inline-flex; align-items:center; gap:.35rem; background: rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.25); padding:.35rem .6rem; border-radius:999px; font-size:.78rem;
+      margin-right:.35rem; margin-bottom:.35rem;
+    }
+    #tracks .hr { height:1px; background: rgba(255,255,255,.2); margin:1rem 0; }
+    #tracks .list { margin:.25rem 0 .75rem 0; padding-left:1.1rem; }
+    #tracks .list li { margin:.35rem 0; }
+    #tracks .muted { opacity:.9; }
+    #tracks .stack { display:flex; flex-wrap:wrap; gap:.35rem; margin:.75rem 0 .25rem 0; }
+    #tracks .mini-grid { display:grid; gap:.5rem; grid-template-columns: 1fr 1fr; }
+    #tracks .mini-item {
+      background: rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
+      border-radius:10px; padding:.6rem .7rem; font-size:.9rem;
+    }
+    #tracks .mini-item strong { color:#ffd700; display:block; font-size:.95rem; }
+    #tracks .btn-row { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+
+    /* Challenge prompt box */
+    #tracks .prompt-card {
+      background: rgba(255,255,255,.10); border:1px dashed rgba(255,255,255,.35);
+      border-radius:16px; padding:1rem; color:#fff; margin-bottom:1.25rem;
+    }
+    #tracks .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+    #tracks .prompt-title { font-weight:800; font-size:1.1rem; }
+    #tracks .prompt-status { font-size:.85rem; opacity:.9; }
+    #tracks .prompt-locked { color:#ffd700; }
+    #tracks .prompt-body {
+      background:#0f1531; color:#e8e9ff; border:1px solid rgba(255,255,255,.2);
+      border-radius:12px; padding:.75rem .9rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size:.9rem; min-height:72px; margin-top:.6rem; white-space:pre-wrap; word-break:break-word;
+    }
+    #tracks .tiny { font-size:.78rem; opacity:.85; }
+    @media (max-width: 640px){ #tracks .mini-grid { grid-template-columns: 1fr; } }
+  </style>
+
+  <div class="container">
+    <h2 id="tracks-title" class="tracks-title">Hackathon Tracks 🧭</h2>
+    <p class="tracks-sub">Build from <strong>10:00 AM</strong> to <strong>8:00 PM</strong> (10 hours). Submit before closing demos.</p>
+
+    <!-- ======= Challenge Prompt (Unlocks at 10:00 AM ET on 10/18/2025) ======= -->
+    <article id="challenge" class="prompt-card" aria-labelledby="prompt-title" aria-live="polite">
+      <div class="prompt-head">
+        <span id="prompt-title" class="prompt-title">🔒 Challenge Prompt — unlocks at kickoff (10:00 AM ET)</span>
+        <span id="prompt-status" class="prompt-status prompt-locked">Locked until 10:00 AM ET · Sat, Oct 18, 2025</span>
+      </div>
+      <div id="prompt-body" class="prompt-body">organizer will provde challege pront at kick off event</div>
+      <p class="tiny" style="margin-top:.5rem;">Note: This prompt is injected at the exact kickoff time (respecting viewer timezone via UTC).</p>
+    </article>
+
+    <div class="tracks-grid">
+      <!-- ============== TRACK 1: GENERAL ============== -->
+      <article class="track-card" aria-labelledby="t1-title">
+        <div class="track-head">
+          <h3 id="t1-title" class="track-name">🌟 Track 1 — EmpowHER General</h3>
+          <span class="badge" aria-label="Top 3 projects win">Top 3 Win</span>
+        </div>
+        <p class="muted">Build an innovative solution in any of these focus areas. Code or vibe coding welcome! Cite sources when using Gen AI.</p>
+
+        <div class="stack" aria-label="Suggested focus areas">
+          <span class="pill">Women in Tech Empowerment</span>
+          <span class="pill">Ethical AI</span>
+          <span class="pill">Blockchain for Social Good</span>
+          <span class="pill">Inclusive Digital Solutions</span>
+          <span class="pill">Accessibility (WCAG)</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <h4 style="margin-bottom:.35rem;">🧾 What to Submit</h4>
+        <ul class="list">
+          <li><strong>GitHub Repo</strong> with your code or prototype files and a clear <code>README.md</code>.</li>
+          <li><strong>Demo Video</strong> up to <strong>2 minutes</strong> (YouTube/Loom link in README).</li>
+          <li><strong>Live Link</strong> (if applicable) or screenshots/GIFs in the README.</li>
+          <li><strong>Live Demo </strong> up to <strong>2 minutes </strong>+ 1 min Q&A </li>
+        </ul>
+
+        <div class="mini-grid" role="list" aria-label="Judging criteria">
+          <div class="mini-item" role="listitem"><strong>Innovation</strong> Originality and creativity of the solution.</div>
+          <div class="mini-item" role="listitem"><strong>Impact</strong> Usefulness and potential for positive change.</div>
+          <div class="mini-item" role="listitem"><strong>Functionality</strong> How well it works (or how convincingly it is prototyped).</div>
+          <div class="mini-item" role="listitem"><strong>UX & Clarity</strong> Design quality and clarity of the README/demo.</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <h4 style="margin-bottom:.35rem;">⏱️ Mini Day Timeline</h4>
+        <div class="mini-grid" aria-label="Timeline">
+          <div class="mini-item"><strong>10:00 AM</strong> Kickoff, team forming</div>
+          <div class="mini-item"><strong>1:00 PM</strong> Checkpoint & mentor round</div>
+          <div class="mini-item"><strong>6:30 PM</strong> Submissions open / final checks</div>
+          <div class="mini-item"><strong>8:00 PM</strong> Submissions due / Demos</div>
+        </div>
+
+        <div class="btn-row" aria-label="Submission actions">
+          <a class="btn btn-primary" href="https://empowherhackdayfall2025-devpost.vercel.app/" target="_blank" rel="noopener">Submit on Devpost</a>
+          <a class="btn btn-secondary" href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener">Hacker Guide</a>
+        </div>
+      </article>
+
+      <!-- ============== TRACK 2: TECH UNICORN (PITCH) ============== -->
+      <article class="track-card" aria-labelledby="t2-title">
+        <div class="track-head">
+          <h3 id="t2-title" class="track-name">🦄 Track 2 — Tech Unicorn (Pitch)</h3>
+          <span class="badge" aria-label="Best pitch wins">Best Pitch</span>
+        </div>
+        <p class="muted">Startup pitch challenge — <strong>No code Track.</strong> Focus on vision, problem, market, and go-to-market.</p>
+
+        <h4 style="margin-bottom:.35rem;">🧾 What to Submit (GitHub Repo)</h4>
+        <ul class="list">
+          <li><strong>Pitch Deck</strong> (10–12 slides) PDF/PPT/Slides link.</li>
+          <li><strong>Executive Summary</strong> (≤1 page) — value prop & market.</li>
+          <li><strong>Pitch Video</strong> (≤2 minutes) — unlisted link acceptable.</li>
+          <li><strong>Live Demo </strong> up to <strong>2 minutes </strong>+ 1 min Q&A </li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <h4 style="margin-bottom:.35rem;">⚖️ Judging Criteria</h4>
+        <div class="mini-grid" role="list" aria-label="Judging criteria">
+          <div class="mini-item" role="listitem"><strong>Problem & Insight</strong> Clarity and depth of understanding.</div>
+          <div class="mini-item" role="listitem"><strong>Solution & Moat</strong> Differentiation and feasibility.</div>
+          <div class="mini-item" role="listitem"><strong>Market</strong> Size, users, and adoption path.</div>
+          <div class="mini-item" role="listitem"><strong>Story & Delivery</strong> Deck quality and pitch presence.</div>
+          
+        </div>
+
+        <div class="hr"></div>
+
+        <h4 style="margin-bottom:.35rem;">⏱️ Mini Day Timeline</h4>
+        <div class="mini-grid" aria-label="Timeline">
+          <div class="mini-item"><strong>10:00 AM</strong> Ideation & validation</div>
+          <div class="mini-item"><strong>2:00 PM</strong> Draft deck review (mentors)</div>
+          <div class="mini-item"><strong>6:30 PM</strong> Finalize deck & video link</div>
+          <div class="mini-item"><strong>8:00 PM</strong> Submit & pitch</div>
+        </div>
+
+        <div class="btn-row" aria-label="Submission actions">
+          <a class="btn btn-primary" href="https://empowherhackdayfall2025-devpost.vercel.app/" target="_blank" rel="noopener">Submit on Devpost</a>
+          <a class="btn btn-secondary" href="https://codecrunchglobal.vercel.app/HACK-6.1-EmpowHERhackDay25-redeem.html" target="_blank" rel="noopener">Perks & Tools</a>
+        </div>
+
+        <p class="tiny" style="margin-top:.6rem;">
+          Tip: Include mockups (Figma/Canva), market sizing, a simple GTM plan, and risks + mitigations.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <!-- Unlock script: 10:00 AM ET on 2025-10-18 = 2025-10-18T14:00:00Z -->
+  <script>
+    (function(){
+      const UNLOCK_UTC = Date.parse('2025-10-18T14:00:00Z'); // 10:00 AM ET
+      const bodyEl = document.getElementById('prompt-body');
+      const statusEl = document.getElementById('prompt-status');
+
+      function unlockIfTime() {
+        if (!bodyEl || !statusEl) return;
+        const now = Date.now();
+        if (now >= UNLOCK_UTC) {
+          // Inject the real prompt text here later:
+
+
+
+
+          // bodyEl.textContent = "YOUR REAL PROMPT GOES HERE";
+
+
+
+
+
+
+
+          bodyEl.textContent = bodyEl.textContent.trim() === "" 
+            ? "" 
+            : bodyEl.textContent; // keep empty if organizer later sets textContent
+          statusEl.textContent = "✅ Prompt unlocked";
+          statusEl.classList.remove('prompt-locked');
+        }
+      }
+      unlockIfTime();
+      // Check every 5s to catch tab users who open early
+      const t = setInterval(function(){
+        if (Date.now() >= UNLOCK_UTC) {
+          unlockIfTime();
+          clearInterval(t);
+        }
+      }, 5000);
+    })();
+  </script>
+</section>
+<!-- =================== END TRACKS (DROP-IN) =================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     <section class="mlh-section">
       <div class="container">
         <div class="mlh-logo">MLH Official</div>
