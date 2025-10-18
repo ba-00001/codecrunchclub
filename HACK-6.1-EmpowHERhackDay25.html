@@ -203,22 +203,118 @@
     .hack-university-text-decoration-none,
     .hack-university-text-decoration-none:hover { text-decoration: none !important; }
     /* ---------- End Footer ---------- */
+  
+  
+  
+  
+  /* ---------- Mobile Nav ---------- */
+.site-nav { position: relative; }
+.nav-toggle {
+  display: none; /* shown on mobile in media query */
+  background: transparent; border: 0; cursor: pointer;
+  min-width:44px; min-height:44px; padding:.25rem; border-radius:.5rem;
+}
+.nav-toggle:focus-visible { outline:2px solid #ffd700; outline-offset:2px; }
+.nav-toggle-bar {
+  display:block; width:26px; height:3px; background:#fff; margin:5px 0; border-radius:2px;
+  transition: transform .25s ease, opacity .25s ease, background .25s ease;
+}
+
+/* Animate to X when open */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Desktop-only list keeps your current layout */
+.desktop-only { display: flex; gap: 2rem; list-style: none; }
+
+/* Mobile panel */
+.mobile-menu {
+  position: fixed; top: var(--header-h); left: 0; right: 0;
+  background: rgba(20,22,40,.98);
+  border-bottom: 1px solid rgba(255,255,255,.15);
+  transform: translateY(-8px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+  z-index: 1001;
+}
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+.mobile-menu-list { list-style: none; margin: 0; padding: .5rem 1rem 1rem 1rem; }
+.mobile-link {
+  display:block; color:#fff; text-decoration:none; font-weight:600;
+  padding: .9rem .75rem; border-radius:.6rem;
+  min-height:44px;
+}
+.mobile-link:focus-visible, .mobile-link:hover { background: rgba(255,255,255,.12); color:#ffd700; }
+
+/* Backdrop */
+.nav-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  opacity: 0; pointer-events: none; transition: opacity .22s ease;
+}
+.nav-backdrop.open { opacity: 1; pointer-events: auto; }
+
+/* Responsive rules */
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .nav-toggle { display: inline-flex; }
+  header { --header-h: 70px; }
+  body.menu-open { overflow: hidden; } /* prevent page scroll when menu open */
+}
+
+  
+  
+  
+  
+  
   </style>
 </head>
 <body>
-  <header>
-    <nav class="container" aria-label="Primary">
-      <div class="logo">EmpowHer HackDay</div>
+<header>
+  <nav class="container site-nav" aria-label="Primary">
+    <a href="#" class="logo">EmpowHer HackDay</a>
 
-      
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="http://empowherhackdayfall2025-agenda.vercel.app/" rel="noopener noreferrer">Schedule</a></li>
-        <li><a href="#prizes">Prizes</a></li>
-        <li><a href="#sponsors">Sponsors</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Mobile toggle button -->
+    <button
+      class="nav-toggle"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <!-- Desktop links -->
+    <ul class="nav-links desktop-only">
+      <li><a href="#about">About</a></li>
+      <li><a href="http://empowherhackdayfall2025-agenda.vercel.app/" rel="noopener noreferrer">Schedule</a></li>
+      <li><a href="#prizes">Prizes</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile menu (hidden by default) -->
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <ul class="mobile-menu-list">
+      <li><a class="mobile-link" href="#about">About</a></li>
+      <li><a class="mobile-link" href="http://empowherhackdayfall2025-agenda.vercel.app/" rel="noopener noreferrer">Schedule</a></li>
+      <li><a class="mobile-link" href="#prizes">Prizes</a></li>
+      <li><a class="mobile-link" href="#sponsors">Sponsors</a></li>
+    </ul>
+  </div>
+
+  <!-- Backdrop for mobile menu -->
+  <div class="nav-backdrop" hidden></div>
+</header>
+
 
   <main>
     <section class="hero">
@@ -972,6 +1068,69 @@
         });
       });
     });
+
+
+
+  (function () {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const backdrop = document.querySelector('.nav-backdrop');
+    const focusable = () => menu.querySelectorAll('a, button');
+    let lastFocus = null;
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.hidden = false; backdrop.hidden = false;
+      // trigger CSS transitions
+      requestAnimationFrame(() => {
+        menu.classList.add('open');
+        backdrop.classList.add('open');
+        const first = focusable()[0]; if (first) first.focus();
+      });
+    }
+
+    function closeMenu() {
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open'); backdrop.classList.remove('open');
+      // wait for transition then hide
+      setTimeout(() => { menu.hidden = true; backdrop.hidden = true; }, 200);
+      if (lastFocus) lastFocus.focus();
+    }
+
+    function isOpen() { return toggle.getAttribute('aria-expanded') === 'true'; }
+
+    if (toggle && menu && backdrop) {
+      toggle.addEventListener('click', () => isOpen() ? closeMenu() : openMenu());
+      backdrop.addEventListener('click', closeMenu);
+
+      // Close on ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) { closeMenu(); }
+        // Basic focus trap when open
+        if (e.key === 'Tab' && isOpen()) {
+          const items = Array.from(focusable());
+          if (items.length === 0) return;
+          const first = items[0], last = items[items.length - 1];
+          if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+          else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+        }
+      });
+
+      // Close menu when a link is clicked (and smooth scroll as you already do)
+      menu.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href]');
+        if (a) closeMenu();
+      });
+    }
+  })();
+
+
+
+
+
   </script>
 </body>
 </html>
