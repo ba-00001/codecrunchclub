@@ -9,6 +9,7 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+
     /* NAV */
     .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
     .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
@@ -52,18 +53,6 @@
     .cta-private{background:linear-gradient(45deg,#43b581,#4caf50)}
     .card-yes{background:#052e16;border-left:4px solid #00ff99;border-radius:8px;padding:12px;margin-top:8px}
     .card-no{background:#3f1d1d;border-left:4px solid #ff6b6b;border-radius:8px;padding:12px;margin-top:8px}
-
-    /* Resources */
-    .resources{margin-top:28px;display:none}
-    .resources h2{font-size:20px;margin-bottom:12px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-    .res-card{background:#fff;border:1px solid #dadce0;border-radius:10px;padding:16px}
-    .res-card h3{font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-    .res-card p{color:#5f6368;font-size:14px;line-height:1.5;margin-bottom:10px}
-    .res-card a{display:inline-block;background:#1a73e8;color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
-    .res-card a:hover{background:#1557b0}
-    .res-locked{opacity:.6;filter:grayscale(1)}
-    .res-locked .lock{color:#d33b01}
 
     /* Footer (Hack University) */
     .cc-blue{background:#1a73e8}
@@ -178,33 +167,6 @@
         Awaiting email…
       </div>
     </section>
-
-    <!-- Resources (locked until verified) -->
-    <section class="resources" id="resources">
-      <h2>Volunteer Resources</h2>
-      <div class="grid">
-        <div class="res-card res-locked" id="card-cert">
-          <h3><i class="fa-solid fa-certificate"></i> Certificates <span class="lock">🔒</span></h3>
-          <p>Access or verify volunteer participation certificates.</p>
-          <a href="#" id="link-cert" target="_blank" rel="noopener" aria-disabled="true">Open</a>
-        </div>
-        <div class="res-card res-locked" id="card-expo">
-          <h3><i class="fa-solid fa-file-lines"></i> Event Registration Forms <span class="lock">🔒</span></h3>
-          <p>Hack and event registration forms.</p>
-          <a href="#" id="link-expo" target="_blank" rel="noopener" aria-disabled="true">Open</a>
-        </div>
-        <div class="res-card res-locked" id="card-resp">
-          <h3><i class="fa-solid fa-table-list"></i> Event Registration Response Sheet <span class="lock">🔒</span></h3>
-          <p>Review registration responses compiled from the event form.</p>
-          <a href="#" id="link-resp" target="_blank" rel="noopener" aria-disabled="true">Open</a>
-        </div>
-        <div class="res-card res-locked" id="card-eval">
-          <h3><i class="fa-solid fa-clipboard-check"></i> Hackathon Evaluation <span class="lock">🔒</span></h3>
-          <p>Judging evaluation forms (access granted only to volunteers registered by each event).</p>
-          <a href="#" id="link-eval" target="_blank" rel="noopener" aria-disabled="true">Open</a>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- FOOTER (Hack University) -->
@@ -267,8 +229,8 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ====== CONFIG ======
-    const ALLOWED_HOST = "codecrunchglobal.vercel.app"; // <- set to your live domain
-      const API_URL = "https://script.google.com/macros/s/AKfycbz77WvTTO2CDPpP-ELSVnLHE2czI7PjGXmBWQY3aR696g6D0McYslVeJAlb9cjzBKFWQA/exec";
+    const ALLOWED_HOST = "codecrunchglobal.vercel.app";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzMz7yJrBVBYKVPTZCHP408ffEG3rhxj_0bVj4ldX72r1QAKjujd6ue61alOVuEO16XqA/exec";
     const USE_API_KEY = false;
     const API_KEY     = "REPLACE_WITH_SECURE";
 
@@ -291,37 +253,6 @@
         • Use the email you used to register and confirm on <strong>Form No. 2</strong><br>
         • Accepted volunteers only (Judges, Mentors, Speakers, Organizers)
       </div>`; }
-
-    // Apply resource links from API only (no fallbacks). If a link is missing, keep that card locked.
-    function applyResourceLinksFromAPI(entry) {
-      const map = [
-        { card: 'card-cert', link: 'link-cert', key: 'certificatesLink' },
-        { card: 'card-resp', link: 'link-resp', key: 'eventRegistrationResponseSheetLink' },
-        { card: 'card-eval', link: 'link-eval', key: 'hackathonEvaluationFormsLink' },
-        // uses eventRegistrationLink (from your Apps Script)
-        { card: 'card-expo', link: 'link-expo', key: 'eventRegistrationLink' }
-      ];
-
-      let anyUnlocked = false;
-
-      map.forEach(({card, link, key}) => {
-        const url = entry?.[key];
-        if (url && typeof url === 'string' && url.startsWith('http')) {
-          const cardEl = document.getElementById(card);
-          const aEl = document.getElementById(link);
-          aEl.href = url;
-          aEl.removeAttribute('aria-disabled');
-          cardEl.classList.remove('res-locked');
-          const lock = cardEl.querySelector('.lock');
-          if (lock) lock.remove();
-          anyUnlocked = true;
-        }
-      });
-
-      if (anyUnlocked) {
-        document.getElementById('resources').style.display = 'block';
-      }
-    }
 
     async function checkOfficialVolunteerStatus() {
       if (!domainOK()) return;
@@ -376,9 +307,6 @@
                       (entry?.basicInfo?.discordUsername && entry.basicInfo.discordUsername!=="Not available" ? `• Discord: ${entry.basicInfo.discordUsername}<br/>` : '') +
                       (entry?.basicInfo?.githubProfile && entry.basicInfo.githubProfile!=="Not available" ? `• GitHub: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color:#00ff99;">${entry.basicInfo.githubProfile}</a><br/>` : '') +
                     `</div>`;
-
-            // unlock only links that exist in API
-            applyResourceLinksFromAPI(entry);
           });
 
           resultDiv.innerHTML = html;
