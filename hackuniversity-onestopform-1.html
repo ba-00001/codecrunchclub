@@ -37,6 +37,23 @@
 <body class="bg-white text-gray-900">
 
 
+    <!-- Page Title / Hero -->
+  <header class="w-full bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p class="text-xs sm:text-sm text-gray-500 mb-2">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        Membership
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+        Membership & Certificates
+      </h1>
+      <p class="mt-2 text-gray-600 max-w-2xl">
+        Verify your OneStopForm email to unlock certificate download and community access (Discord & GroupMe).
+      </p>
+    </div>
+  </header>
+
   
 
 <section id="membership-certificate" class="py-16 bg-white">
@@ -51,13 +68,13 @@
             <i class="fas fa-certificate text-2xl text-white" aria-hidden="true"></i>
           </div>
           <h3 class="text-2xl font-bold cc-blue-text mb-3">Existing Organization Members & Hackathon Participants</h3>
-        <p class="text-blue-700 mb-4">Get your Membership certificates and community platforms instantly</p>
+        
         </div>
 
 
 
       <!-- Benefits List -->
-          <div class="mb-6 space-y-2"></div>
+          <!-- <div class="mb-6 space-y-2"></div>
           <div class="flex items-center space-x-2">
             <span class="text-green-500 text-lg">👥</span>
             <span class="text-sm text-gray-700">Discord, GroupMe & IG community access</span>
@@ -67,10 +84,50 @@
             <span class="text-green-500 text-lg">📜</span>
             <span class="text-sm text-gray-700">Official membership certificates</span>
           </div>
-        
+         -->
 
 
 
+
+
+          <!-- What You'll Unlock (Locked Preview) -->
+<div aria-hidden="true" class="mb-6">
+  <h4 class="text-base font-semibold text-gray-800 mb-3">🔒 What you’ll unlock after verification</h4>
+  <div class="grid md:grid-cols-3 gap-4">
+    <button
+      type="button"
+      disabled
+      class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3 cursor-not-allowed"
+    >
+      <i class="fas fa-download text-xl" aria-hidden="true"></i>
+      Download Membership Certificate
+      <i class="fa-solid fa-lock ml-1" aria-hidden="true"></i>
+    </button>
+
+    <a
+      role="button"
+      aria-disabled="true"
+      tabindex="-1"
+      class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3 cursor-not-allowed pointer-events-none text-decoration-none"
+    >
+      <i class="fab fa-discord text-xl" aria-hidden="true"></i>
+      Join Discord servers
+      <i class="fa-solid fa-lock ml-1" aria-hidden="true"></i>
+    </a>
+
+    <a
+      role="button"
+      aria-disabled="true"
+      tabindex="-1"
+      class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3 cursor-not-allowed pointer-events-none text-decoration-none"
+    >
+      <i class="fas fa-users text-xl" aria-hidden="true"></i>
+      Join GroupMe
+      <i class="fa-solid fa-lock ml-1" aria-hidden="true"></i>
+    </a>
+  </div>
+  <p class="text-xs text-gray-500 mt-2">Verify with the same Gmail/Google account you used on the OneStopForm to unlock these.</p>
+</div>
 
 
 

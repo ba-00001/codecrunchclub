@@ -77,6 +77,22 @@
     .ql-luma i { color:#7c3aed; } /* Luma / calendar icon color */
     .ql-googlecal i { color:#1a73e8; }
 
+        /* Instagram quick-link style */
+/* Instagram: same look as default buttons */
+.ql-instagram {
+  background: #f8f9fa;          /* same as .ql-btn */
+  color: #1f2a36 !important;     /* same label color */
+  border-color: #eef1f4;         /* same border */
+  box-shadow: none;              /* no extra shadow */
+}
+/* Brand-colored icon only */
+.ql-instagram i {
+  color: #E1306C !important;     /* Instagram brand pink */
+}
+
+
+
+
     /* Org links (horizontal) */
     .orgs-row-wrap {
       background:#f8f9fa;
@@ -186,9 +202,18 @@
     <!-- Quick links: Discord / GroupMe / Luma / Google Calendar -->
     <nav class="quick-links" aria-label="Quick links">
       <!-- TODO: Replace # with your real Discord invite -->
-      <a class="ql-btn ql-discord" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1" target="_blank" rel="noopener">
+      <a class="ql-btn ql-discord" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" target="_blank" rel="noopener">
         <i class="fa-brands fa-discord"></i><span>Discord</span>
       </a>
+
+      <!-- Instagram -->
+      <a class="ql-btn ql-instagram"
+        href="https://instagram.com/hackuniversity"  
+        target="_blank" rel="noopener"
+        aria-label="Join our Instagram">
+        <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+      </a>
+
 
       <!-- TODO: Replace # with your real GroupMe link -->
       <a class="ql-btn ql-groupme" href="#" target="_blank" rel="noopener">
