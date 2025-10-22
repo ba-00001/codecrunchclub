@@ -34,7 +34,6 @@
 
 
 
-
 <body class="bg-white text-gray-900">
 
 
@@ -44,34 +43,6 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- All your content including the grid goes here -->
    
-<!-- Access Notice (Top Banner) -->
-<section id="access-notice" class="w-full bg-yellow-50 border-b border-yellow-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="flex items-start gap-3">
-      <div class="flex-shrink-0 mt-0.5">
-        <i class="fa-solid fa-circle-info text-yellow-600"></i>
-      </div>
-      <div>
-        <h2 class="text-sm sm:text-base font-semibold text-yellow-800">
-          Access for Registered Members or Hackathon Participants (OneStopForm)
-        </h2>
-        <ul class="mt-1 text-sm text-yellow-900 space-y-1 list-disc pl-5">
-          <li>
-            Access is only available to users who successfully completed the
-            <strong>OneStopForm</strong> (member or hackathon participant).
-          </li>
-          <li>
-            You must sign in with the <strong>same Gmail / Google account</strong> used on your OneStopForm submission.
-          </li>
-          <li>
-            If your email is not found, please return to registration and use a <strong>Gmail account</strong>.
-            (Using an <em>.edu</em> email can lose Google access after graduation.)
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
 
       <!-- Certificate Generation for Existing Members -->
       <div class="bg-gray-50 rounded-lg p-8 shadow-md">
@@ -467,14 +438,13 @@ async function generateCertificate(evt) {
     if (data && data.error) throw new Error(data.error);
 
     const certificates = Array.isArray(data?.certificates) ? data.certificates : [];
-      if (certificates.length === 0) {
-        showStatus(
-          "error",
-          "❌ No record found for this email. Access is limited to members/hackathon participants who completed the OneStopForm. Please use the SAME Gmail/Google account you registered with. If you registered with a non-Gmail (e.g., .edu) and don’t have access, we recommend to re-register using a Gmail account."
-        );
-        return;
-      }
-
+    if (certificates.length === 0) {
+      showStatus(
+        "error",
+        "❌ No membership found for this email address. Please register as a new member using the form on the left, or contact us if you believe this is an error."
+      );
+      return;
+    }
 
     // Use first certificate; if multiple exist, prefer the most recent if provided
     const chosen =
