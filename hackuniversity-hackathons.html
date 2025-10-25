@@ -3,143 +3,988 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hack University — Hackathon Events</title>
+  <title>Code Crunch - Volunteer Guide</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Tailwind for the header -->
+  <!-- Tailwind for the header you provided -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html:focus-within { scroll-behavior: smooth; }
-    body{
-      font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      background:#f8f9fa; min-height:100vh; color:#202124;
+    /* ========== CSS CUSTOM PROPERTIES ========== */
+    :root {
+      --color-primary: #1a73e8;
+      --color-primary-hover: #1557b0;
+      --color-text: #202124;
+      --color-text-muted: #5f6368;
+      --color-border: #dadce0;
+      --color-bg: #f8f9fa;
+      --color-bg-white: #fff;
+      --color-success: #137333;
+      --color-success-bg: #e6f4ea;
+      --color-warning: #b45309;
+      --color-warning-bg: #fff4e5;
+      --color-danger: #d33b01;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 10px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 1px 6px rgba(32,33,36,.28);
+      --shadow-lg: 0 2px 10px rgba(32,33,36,.28);
+      --transition-fast: .15s ease;
+      --transition-base: .2s ease;
     }
 
-    /* Skip link */
-    .skip-link {
-      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    /* ========== BASE STYLES ========== */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
     }
-    .skip-link:focus {
-      position:fixed; left:1rem; top:1rem; width:auto; height:auto;
-      background:#111827; color:#fff; padding:.5rem .75rem; border-radius:.5rem; z-index:1500;
-      outline:2px solid #fbbf24; outline-offset:2px;
+    
+    body {
+      font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--color-bg);
+      min-height: 100vh;
+      color: var(--color-text);
+      line-height: 1.5;
     }
 
-    .navbar{ background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000;}
-    .nav-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px;}
-    .nav-brand{ font-size:22px; font-weight:600; color:#1a73e8;}
-    .nav-brand a{ color:inherit; text-decoration:none; }
-    .nav-links{ display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end; }
-    .nav-link{ color:#5f6368; text-decoration:none; font-weight:500; font-size:13.5px; padding:8px 12px; border-radius:6px; transition:.2s;}
-    .nav-link:hover,.nav-link:focus-visible{ color:#1a73e8; background:#eef3ff; outline:none; }
-
-    .timezone-section{ background:#fff; border-bottom:1px solid #e8eaed; padding:24px 20px; margin-bottom:32px;}
-    .timezone-header{ text-align:center; margin-bottom:16px;}
-    .timezone-header h2{ color:#202124; font-size:28px; font-weight:600; margin:0 0 6px;}
-    .timezone-header p{ color:#5f6368; font-size:14px; }
-    .timezone-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:16px; max-width:1200px; margin:16px auto 0;}
-    .timezone-item{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:16px; text-align:center; transition:.2s;}
-    .timezone-item:hover{ box-shadow:0 1px 6px rgba(32,33,36,.28); border-color:#dadce0;}
-    .timezone-flag{ font-size:18px; margin-bottom:6px;}
-    .timezone-time{ font-size:16px; font-weight:600; color:#1a73e8; margin-bottom:2px; font-family:'Roboto Mono',monospace;}
-    .timezone-location{ color:#5f6368; font-size:12px;}
-
-    .container{ max-width:1200px; margin:0 auto; padding:20px; }
-
-    .hackathons-section{ background:#fff; border:1px solid #dadce0; border-radius:10px; padding:28px; }
-    .hackathons-section h2{ color:#202124; font-size:26px; font-weight:700; margin-bottom:24px; text-align:center; }
-    .section-header{ margin-bottom:18px;}
-    .section-header h3{ color:#202124; font-size:18px; font-weight:700; margin-bottom:4px;}
-    .section-header p{ color:#5f6368; font-size:14px; margin:0;}
-
-    .hackathons-list{ display:grid; gap:14px;}
-    .hackathon-item{
-      background:#fff; border:1px solid #dadce0; border-radius:10px; padding:18px;
-      display:grid; grid-template-columns:1fr auto auto auto; gap:12px; align-items:center; transition:.2s;
+    /* ========== NAVIGATION ========== */
+    .navbar { 
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
     }
-    .hackathon-item:hover{ box-shadow:0 1px 6px rgba(32,33,36,.20); border-color:#4285f4;}
-    .hackathon-info{ display:flex; flex-direction:column; gap:4px; min-width:0;}
-    .hackathon-name{ font-weight:700; color:#202124; font-size:16px; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-    .hackathon-date{ color:#5f6368; font-size:13px; }
-    .hackathon-mode{ padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.3px; white-space:nowrap;}
-    .mode-virtual{ background:#e8f0fe; color:#1a73e8; border:1px solid #d2e3fc;}
-    .mode-person{ background:#e6f4ea; color:#137333; border:1px solid #ceead6;}
-    .mode-hybrid{ background:#fff4e5; color:#b45309; border:1px solid #fde68a;}
-    .mode-tbd{ background:#f3f4f6; color:#374151; border:1px solid #d1d5db;}
-
-    .hackathon-countdown{ background:#f8f9fa; color:#202124; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; text-align:center; min-width:84px;}
-    .countdown-upcoming{ background:#e8f0fe; color:#1a73e8; border:1px solid #d2e3fc;}
-    .countdown-past{ background:#fce8e6; color:#b91c1c; border:1px solid #f9dedc;}
-
-    .hackathon-link{ background:#1a73e8; color:#fff; padding:9px 14px; border-radius:8px; text-decoration:none; font-weight:700; font-size:13px; transition:.2s; text-align:center;}
-    .hackathon-link:hover,.hackathon-link:focus-visible{ background:#1557b0; box-shadow:0 1px 3px rgba(32,33,36,.28); outline:none; }
-
-    .cc-blue{ background:#1a73e8;}
-    .footer{ color:#fff; padding:32px 0 48px; margin-top:32px;}
-    .footer-container{ max-width:1200px; margin:0 auto; padding:0 20px;}
-    .footer-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin-bottom:32px;}
-    .footer h3{ font-size:18px; font-weight:700; margin-bottom:16px; color:#fff;}
-    .footer p{ font-size:14px; opacity:.85; margin-bottom:16px; line-height:1.55;}
-    .footer ul{ list-style:none; padding:0; margin:0;}
-    .footer li{ margin-bottom:8px;}
-    .footer a{ color:#fff; text-decoration:none; font-size:14px; opacity:.9; transition:opacity .2s;}
-    .footer a:hover,.footer a:focus-visible{ opacity:1; outline:none; }
-    .social-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:16px;}
-    .social-link{ display:flex; flex-direction:column; align-items:center; color:#fff; text-decoration:none; padding:8px; transition:transform .15s, color .2s;}
-    .social-link:hover{ color:#fbbf24; transform:translateY(-1px); }
-    .social-link i{ font-size:18px; margin-bottom:4px;}
-    .social-link span{ font-size:11px; text-align:center;}
-    .footer-bottom{ margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.2); text-align:center;}
-    .footer-bottom p{ font-size:14px; opacity:.9; margin-bottom:8px;}
-    .footer-bottom .credits{ font-size:12px; opacity:.8;}
-    .footer-bottom .credits a{ color:#7dd3fc; text-decoration:none; font-weight:700;}
-    .footer-bottom .credits a:hover{ color:#bae6fd;}
-
-    .badge{ display:inline-block; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; }
-    .badge-live{ background:#e6f4ea; color:#137333; border:1px solid #ceead6; }
-    .badge-warn{ background:#fff4e5; color:#b45309; border:1px solid #fde68a; }
-    .badge-lock{ background:#f3f4f6; color:#374151; border:1px solid #d1d5db; }
-
-    @media (max-width:900px){
-      .hackathon-item{ grid-template-columns:1fr auto; grid-auto-rows:auto; }
-      .hackathon-mode{ order:2; }
-      .hackathon-countdown{ order:3; }
-      .hackathon-link{ order:4; }
+    
+    .nav-container { 
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
     }
-    @media (max-width:768px){
-      .nav-container{ flex-direction:column; gap:10px;}
-      .nav-links{ justify-content:center; }
-      .nav-link{ font-size:12px; padding:6px 10px; }
-      .timezone-grid{ grid-template-columns:repeat(2,1fr); gap:12px;}
-      .timezone-item{ padding:12px;}
-      .timezone-location{ font-size:11px;}
-      .footer-grid{ grid-template-columns:1fr; gap:20px;}
-      .social-grid{ grid-template-columns:repeat(2,1fr); }
+    
+    .nav-brand { 
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--color-primary);
     }
-    @media (max-width:480px){
-      .timezone-grid{ grid-template-columns:1fr; gap:10px;}
-      .hackathons-section{ padding:20px 16px;}
-      .hackathon-item{ padding:14px; gap:10px;}
-      .container{ padding:16px; }
+    
+    .nav-brand a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity var(--transition-base);
     }
+    
+    .nav-brand a:hover {
+      opacity: 0.8;
+    }
+    
+    .nav-links { 
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link { 
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 14px;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+    }
+    
+    .nav-link:hover { 
+      color: var(--color-primary);
+      background: #f1f3f4;
+    }
+    
+    .nav-link:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ========== TIMEZONE SECTION ========== */
+    .timezone-section { 
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-lg) 20px;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .timezone-header { 
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .timezone-header h2 { 
+      color: var(--color-text);
+      font-size: 28px;
+      font-weight: 400;
+      margin: 0 0 20px;
+    }
+    
+    .timezone-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .timezone-item { 
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    
+    .timezone-item:hover { 
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+    
+    .timezone-flag { 
+      font-size: 20px;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .timezone-time { 
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-xs);
+      font-family: 'Roboto Mono', monospace;
+    }
+    
+    .timezone-location { 
+      color: var(--color-text-muted);
+      font-size: 12px;
+    }
+
+    /* ========== CONTAINER & HEADER ========== */
+    .container { 
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header { 
+      text-align: center;
+      color: var(--color-text);
+      margin-bottom: 48px;
+    }
+    
+    .header h1 { 
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text);
+    }
+    
+    .header p { 
+      font-size: 16px;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========== FORM STYLES ========== */
+    .form-wrap { 
+      max-width: 900px;
+      margin: 0 auto 32px;
+    }
+    
+    .form-card {
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .form-card h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+    
+    .form-muted { 
+      color: var(--color-text-muted);
+      font-size: 14px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+    
+    .form-grid .full { 
+      grid-column: 1 / -1;
+    }
+    
+    .field { 
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .label { 
+      font-size: 13px;
+      color: #374151;
+      font-weight: 600;
+    }
+    
+    .input, .select, .textarea {
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--color-text);
+      background: var(--color-bg-white);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    
+    .input:focus, .select:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, .15);
+    }
+    
+    .textarea { 
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .help { 
+      font-size: 12px;
+      color: #6b7280;
+    }
+    
+    .check-row { 
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .actions { 
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      padding: 12px var(--spacing-md);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      background: var(--color-primary);
+      color: var(--color-bg-white);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      min-height: 44px; /* Better touch target */
+    }
+    
+    .btn:hover { 
+      background: var(--color-primary-hover);
+      box-shadow: 0 2px 8px rgba(26, 115, 232, .25);
+      transform: translateY(-1px);
+    }
+    
+    .btn:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .btn.secondary { 
+      background: var(--color-bg-white);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    
+    .btn.secondary:hover { 
+      background: #ebf3ff;
+    }
+    
+    .inline-note { 
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: var(--spacing-xs);
+    }
+
+    /* ========== VOLUNTEER CARDS ========== */
+    .volunteer-cards { 
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .volunteer-cards .card {
+      flex: 0 1 300px;
+      max-width: 350px;
+    }
+    
+    .card { 
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover { 
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+    
+    .card-icon { 
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin: 0 auto var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--color-bg-white);
+      background: var(--color-primary);
+    }
+    
+    .card h3 { 
+      font-size: 20px;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-sm);
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .card p { 
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: var(--spacing-md);
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .card-button { 
+      display: block;
+      width: 100%;
+      padding: 12px var(--spacing-lg);
+      background: var(--color-primary);
+      color: var(--color-bg-white);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all var(--transition-base);
+      border: none;
+      cursor: pointer;
+      min-height: 44px; /* Better touch target */
+    }
+    
+    .card-button:hover { 
+      background: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    
+    .card-button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ========== HACKATHONS SECTION ========== */
+    .hackathons-section { 
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+      max-width: 1200px;
+      margin: 0 auto var(--spacing-xl);
+    }
+    
+    .hackathons-section h2 { 
+      color: var(--color-text);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-header { 
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .section-header h3 { 
+      color: var(--color-text);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .section-header p { 
+      color: var(--color-text-muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .hackathons-list { 
+      display: grid;
+      gap: 15px;
+    }
+    
+    .hackathon-item { 
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: var(--spacing-md);
+      align-items: center;
+      transition: all var(--transition-base);
+    }
+    
+    .hackathon-item:hover { 
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+      transform: translateX(4px);
+    }
+    
+    .hackathon-info { 
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+    
+    .hackathon-name { 
+      font-weight: 500;
+      color: var(--color-text);
+      font-size: 16px;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .hackathon-date { 
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+    
+    .hackathon-mode { 
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    
+    .mode-virtual { 
+      background: #e8f0fe;
+      color: var(--color-primary);
+      border: 1px solid #d2e3fc;
+    }
+    
+    .mode-person { 
+      background: var(--color-success-bg);
+      color: var(--color-success);
+      border: 1px solid #ceead6;
+    }
+    
+    .mode-hybrid { 
+      background: var(--color-warning-bg);
+      color: #ea8600;
+      border: 1px solid #fde68a;
+    }
+    
+    .mode-tbd { 
+      background: #f3f4f6;
+      color: #6b7280;
+      border: 1px solid #d1d5db;
+    }
+
+    .hackathon-countdown { 
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      min-width: 80px;
+      white-space: nowrap;
+    }
+    
+    .countdown-upcoming { 
+      background: #e8f0fe;
+      color: var(--color-primary);
+      border: 1px solid #d2e3fc;
+    }
+    
+    .countdown-past { 
+      background: #fce8e6;
+      color: var(--color-danger);
+      border: 1px solid #f9dedc;
+    }
+
+    .hackathon-link { 
+      background: var(--color-primary);
+      color: var(--color-bg-white);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all var(--transition-base);
+      min-height: 44px; /* Better touch target */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+    
+    .hackathon-link:hover { 
+      background: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+      transform: scale(1.05);
+    }
+    
+    .hackathon-link:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ========== FOOTER ========== */
+    .cc-blue { 
+      background: var(--color-primary);
+    }
+    
+    .footer { 
+      color: var(--color-bg-white);
+      padding: var(--spacing-xl) 0 48px;
+    }
+    
+    .footer-container { 
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .footer-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .footer h3 { 
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-bg-white);
+    }
+    
+    .footer p { 
+      font-size: 14px;
+      opacity: .8;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.5;
+    }
+    
+    .footer ul { 
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer li { 
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .footer a { 
+      color: var(--color-bg-white);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .8;
+      transition: opacity var(--transition-base);
+    }
+    
+    .footer a:hover { 
+      opacity: 1;
+      text-decoration: underline;
+    }
+    
+    .social-grid { 
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+    
+    .social-link { 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--color-bg-white);
+      text-decoration: none;
+      padding: var(--spacing-sm);
+      transition: all var(--transition-base);
+      border-radius: var(--radius-sm);
+    }
+    
+    .social-link:hover { 
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .social-link i { 
+      font-size: 18px;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .social-link span { 
+      font-size: 11px;
+      text-align: center;
+    }
+    
+    .footer-bottom { 
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid rgba(255, 255, 255, .2);
+      text-align: center;
+    }
+    
+    .footer-bottom p { 
+      font-size: 14px;
+      opacity: .8;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .footer-bottom .credits { 
+      font-size: 12px;
+      opacity: .6;
+    }
+    
+    .footer-bottom .credits a { 
+      color: #7dd3fc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .footer-bottom .credits a:hover { 
+      color: #bae6fd;
+    }
+
+    /* ========== POLICY NOTE ========== */
+    .policy-note {
+      background: var(--color-warning-bg);
+      border: 1px solid #fde68a;
+      color: #8a4b00;
+      border-radius: var(--radius-md);
+      padding: 14px var(--spacing-md);
+      margin: 0 0 20px 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      font-size: 14px;
+    }
+    
+    .policy-note .icon { 
+      font-size: 18px;
+      line-height: 1;
+    }
+    
+    .policy-note strong { 
+      font-weight: 600;
+    }
+
+    /* ========== BADGES ========== */
+    .card .subtext { 
+      color: #6b7280;
+      font-size: 12px;
+      margin-top: var(--spacing-sm);
+      text-align: center;
+    }
+    
+    .badge { 
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    .badge-live { 
+      background: var(--color-success-bg);
+      color: var(--color-success);
+      border: 1px solid #ceead6;
+    }
+    
+    .badge-warn { 
+      background: var(--color-warning-bg);
+      color: var(--color-warning);
+      border: 1px solid #fde68a;
+    }
+    
+    .badge-lock { 
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    
+    /* Tablet: 600-768px */
+    @media (max-width: 768px) and (min-width: 601px) {
+      .nav-links { 
+        gap: 20px;
+      }
+      
+      .nav-link { 
+        font-size: 13px;
+        padding: 6px 12px;
+      }
+      
+      .hackathon-item { 
+        grid-template-columns: 1fr auto auto;
+        gap: 12px;
+      }
+      
+      .hackathon-mode { 
+        grid-row: 2;
+        grid-column: 1;
+      }
+      
+      .volunteer-cards { 
+        justify-content: center;
+      }
+      
+      .volunteer-cards .card {
+        flex: 0 1 calc(50% - 10px);
+      }
+    }
+
+    /* Mobile: Max 768px */
+    @media (max-width: 768px) {
+      .nav-container { 
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .nav-links { 
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-sm);
+      }
+      
+      .nav-link { 
+        font-size: 11px;
+        padding: 6px 10px;
+        white-space: nowrap;
+      }
+      
+      .timezone-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .timezone-item { 
+        padding: 12px;
+      }
+      
+      .timezone-location { 
+        font-size: 10px;
+      }
+      
+      .header h1 { 
+        font-size: 24px;
+      }
+      
+      .header p { 
+        font-size: 14px;
+        padding: 0 10px;
+      }
+      
+      .volunteer-cards { 
+        gap: 20px;
+        justify-content: center;
+      }
+      
+      .volunteer-cards .card {
+        flex: 0 1 calc(50% - 10px);
+        max-width: 100%;
+      }
+      
+      .hackathon-item { 
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 10px;
+        padding: var(--spacing-md);
+      }
+      
+      .hackathon-info { 
+        text-align: center;
+        margin-bottom: var(--spacing-sm);
+      }
+      
+      .hackathon-name { 
+        font-size: 14px;
+        line-height: 1.3;
+      }
+      
+      .hackathon-date { 
+        font-size: 12px;
+      }
+      
+      .hackathon-mode, .hackathon-countdown { 
+        font-size: 11px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+      }
+      
+      .hackathon-link { 
+        font-size: 12px;
+        padding: var(--spacing-sm) 12px;
+        width: 100%;
+      }
+      
+      .card { 
+        padding: 18px;
+      }
+      
+      .card h3 { 
+        font-size: 18px;
+      }
+      
+      .card p { 
+        font-size: 13px;
+      }
+      
+      .footer-grid { 
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .social-grid { 
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .form-grid { 
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Small Mobile: Max 480px */
+    @media (max-width: 480px) {
+      .nav-link { 
+        font-size: 10px;
+        padding: 5px var(--spacing-sm);
+      }
+      
+      .timezone-grid { 
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .timezone-item { 
+        padding: 10px;
+      }
+      
+      .header h1 { 
+        font-size: 20px;
+      }
+      
+      .hackathons-section { 
+        padding: 20px var(--spacing-md);
+      }
+      
+      .hackathon-item { 
+        padding: 12px;
+        gap: var(--spacing-sm);
+      }
+      
+      .container { 
+        padding: var(--spacing-md);
+      }
+    }
+
+    /* ========== ACCESSIBILITY ========== */
+    
+    /* Focus visible for keyboard navigation */
+    *:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .card, .hackathon-item, .timezone-item {
+        border-width: 2px;
+      }
+      
+      .btn, .card-button, .hackathon-link {
+        border: 2px solid currentColor;
+      }
+    }
+
+    /* Dark mode disabled - keeping white background always */
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- Navigation -->
-  <nav class="navbar" aria-label="Primary">
+  <!-- Navigation Header -->
+  <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener noreferrer"><strong>Hack University</strong></a>
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
       </div>
-      <div class="nav-links" role="navigation" aria-label="Partner links">
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener noreferrer">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener noreferrer">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener noreferrer">GDG at FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link" target="_blank" rel="noopener noreferrer">Raspberry Pi Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link" target="_blank" rel="noopener noreferrer">Support Us</a>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
       </div>
     </div>
   </nav>
@@ -148,119 +993,167 @@
   <header class="w-full bg-gray-50 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
-        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener noreferrer">Hack University</a>
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
         <span aria-hidden="true"> / </span>
-        Hackathon Events
+        Hackathons Events
       </p>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Hackathon Events
+        Hackathons Events
       </h1>
       <p class="mt-2 text-gray-600 max-w-2xl">
-        Explore our upcoming and past hackathons. Open worldwide to all majors, ages 16+.
-        <span class="block mt-1 text-gray-500 text-sm">
-          Under 18 requires a signed parent/guardian consent form. Outside the USA, follow local age requirements.
-        </span>
+        Check our upcoming and past hackathons. Open to everyone worldwide, all majors. Ages 16+ accepted (under 18 requires parental/guardian consent form signed).
       </p>
     </div>
   </header>
 
-  <main id="main">
-    <!-- Time Zone Section -->
-    <section class="timezone-section" aria-labelledby="tz-title">
-      <div class="timezone-header">
-        <h2 id="tz-title">🏆 Hackathon HQ</h2>
-        <p>Live clocks in common participant regions</p>
+  <!-- Time Zone Section -->
+  <div class="timezone-section">
+    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location" id="miami-label">Miami, FL (ET)</div>
       </div>
-      <div class="timezone-grid" role="list">
-        <div class="timezone-item" role="listitem" aria-label="Miami Eastern Time">
-          <div class="timezone-flag" aria-hidden="true">🇺🇸</div>
-          <div class="timezone-time" id="miami-time">--:--:--</div>
-          <div class="timezone-location" id="miami-label">Miami, FL (ET)</div>
-        </div>
-        <div class="timezone-item" role="listitem" aria-label="London UK">
-          <div class="timezone-flag" aria-hidden="true">🇬🇧</div>
-          <div class="timezone-time" id="london-time">--:--:--</div>
-          <div class="timezone-location">London (UK)</div>
-        </div>
-        <div class="timezone-item" role="listitem" aria-label="Lagos West Africa Time">
-          <div class="timezone-flag" aria-hidden="true">🌍</div>
-          <div class="timezone-time" id="lagos-time">--:--:--</div>
-          <div class="timezone-location">Lagos (WAT)</div>
-        </div>
-        <div class="timezone-item" role="listitem" aria-label="Tokyo Japan Standard Time">
-          <div class="timezone-flag" aria-hidden="true">🇯🇵</div>
-          <div class="timezone-time" id="tokyo-time">--:--:--</div>
-          <div class="timezone-location">Tokyo (JST)</div>
-        </div>
-        <div class="timezone-item" role="listitem" aria-label="Sydney AEDT">
-          <div class="timezone-flag" aria-hidden="true">🇦🇺</div>
-          <div class="timezone-time" id="sydney-time">--:--:--</div>
-          <div class="timezone-location">Sydney (AEDT)</div>
-        </div>
-        <div class="timezone-item" role="listitem" aria-label="Mumbai India Standard Time">
-          <div class="timezone-flag" aria-hidden="true">🇮🇳</div>
-          <div class="timezone-time" id="mumbai-time">--:--:--</div>
-          <div class="timezone-location">Mumbai (IST)</div>
-        </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
       </div>
-    </section>
-
-    <!-- Content container -->
-    <div class="container">
-      <!-- HACK OPERATIONS / EVENTS -->
-      <section class="hackathons-section" aria-labelledby="ops-title">
-        <h2 id="ops-title">🚀 Hack Operations</h2>
-
-        <div class="section-header">
-          <h3>🚀 Active Missions</h3>
-          <p>Upcoming events sorted by date</p>
-        </div>
-        <div class="hackathons-list" id="upcoming-events" aria-live="polite"></div>
-
-        <div class="section-header" style="margin-top:28px;">
-          <h3>📚 Past Events</h3>
-          <p>Completed hackathons and events</p>
-        </div>
-        <div class="hackathons-list" id="past-events"></div>
-      </section>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
     </div>
-  </main>
+  </div>
+
+  <div class="container">
+    <!-- Volunteer/Info Cards Section -->
+    <div class="volunteer-cards">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3>Hacker Guide</h3>
+        <p>Everything you need to know to participate in our hackathons. Get started with tips, rules, and resources.</p>
+        <a href="#" class="card-button">View Guide</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <h3>Hackathon Registration</h3>
+        <p>Register for upcoming hackathons and secure your spot. Join us in building amazing projects!</p>
+        <a href="#" class="card-button">Register Now</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fab fa-discord"></i>
+        </div>
+        <h3>Discord Community</h3>
+        <p>Join our Discord server to connect with fellow hackers, get support, and stay updated on events.</p>
+        <a href="#" class="card-button" target="_blank" rel="noopener">Join Discord</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Hack University GroupMe</h3>
+        <p>Stay connected with the Hack University community through our GroupMe for quick updates and discussions.</p>
+        <a href="#" class="card-button" target="_blank" rel="noopener">Join GroupMe</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <h3>Hack University IG</h3>
+        <p>Follow us on Instagram for event highlights, behind-the-scenes content, and community updates.</p>
+        <a href="#" class="card-button" target="_blank" rel="noopener">Follow on IG</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <h3>Google Calendar</h3>
+        <p>Add our events to your Google Calendar and never miss a hackathon, workshop, or meeting.</p>
+        <a href="#" class="card-button" target="_blank" rel="noopener">View Calendar</a>
+      </div>
+    </div>
+
+    <!-- HACK OPERATIONS / EVENTS -->
+    <div class="hackathons-section">
+      <h2>🚀 HACK OPERATIONS</h2>
+
+      <div class="section-header">
+        <h3>🚀 ACTIVE MISSIONS</h3>
+        <p>Upcoming events sorted by date</p>
+      </div>
+      <div class="hackathons-list" id="upcoming-events"></div>
+
+      <div class="section-header" style="margin-top: 48px;">
+        <h3>📚 PAST EVENTS</h3>
+        <p>Completed hackathons and events</p>
+      </div>
+      <div class="hackathons-list" id="past-events"></div>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer class="cc-blue footer" role="contentinfo">
+  <footer class="cc-blue footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div>
-          <h3>Hack University <span aria-hidden="true">👨🏻‍💻 👩🏽‍💻 🧑🏿‍💻</span></h3>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
           <p>A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.</p>
-          <p><a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener noreferrer">HackUniversity.vercel.app</a></p>
+          <p><a href="https://hackuniversity.vercel.app">HackUniversity.vercel.app</a></p>
           <div>
-            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;">Connect With Us</h4>
+            <h4 style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Connect With Us:</h4>
             <div class="social-grid">
-              <a href="https://www.linkedin.com/showcase/hack-university-global/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-              <a href="https://hackuniversity-directory.vercel.app/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-              <a href="https://hackuniversity-directory.vercel.app/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span>GitHub</span></a>
-              <a href="https://hackuniversity-directory.vercel.app/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-              <a href="https://hackuniversity-discord.vercel.app/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i><span>Discord</span></a>
-              <a href="https://hackuniversity-calendar.vercel.app/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
             </div>
           </div>
         </div>
         <div>
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" target="_blank" rel="noopener noreferrer">Mission</a></li>
-            <li><a href="https://hackuniversity-calendar.vercel.app/" target="_blank" rel="noopener noreferrer">Events</a></li>
-            <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a></li>
-            <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank" rel="noopener noreferrer">Membership</a></li>
-            <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank" rel="noopener noreferrer">Join E-Board</a></li>
-            <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" target="_blank" rel="noopener noreferrer">Resources</a></li>
-            <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
           </ul>
         </div>
         <div>
           <h3>Contact</h3>
-          <div style="font-size:14px;opacity:.9;">
+          <div style="font-size: 14px; opacity: .8;">
             Miami, FL<br/>
             <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
           </div>
@@ -269,8 +1162,7 @@
       <div class="footer-bottom">
         <p>© 2025 Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ for the tech community by
-          <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener noreferrer">Brian Bazurto</a> · Powered by innovation and collaboration
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
         </div>
       </div>
     </div>
@@ -278,36 +1170,44 @@
 
   <script>
     /* ---------- Time helpers ---------- */
-    function asLocalDate(ymd){
-      const [y,m,d] = ymd.split('-').map(Number);
-      return new Date(y, m-1, d);
+    function asLocalDate(ymd) {
+      const [y, m, d] = ymd.split('-').map(Number);
+      return new Date(y, m - 1, d);
     }
-    function nowInMiami(){
-      return new Date(new Date().toLocaleString('en-US',{ timeZone:'America/New_York'}));
+    
+    function nowInMiami() {
+      return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     }
-    function formatDateMiami(dateStr){
+    
+    function formatDateMiami(dateStr) {
       const d = asLocalDate(dateStr);
-      return d.toLocaleDateString('en-US',{
-        year:'numeric', month:'long', day:'numeric', timeZone:'America/New_York'
+      return d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'America/New_York'
       });
     }
-    function getETAbbrev(date = nowInMiami()){
-      // 240 = EDT (UTC-4), 300 = EST (UTC-5)
-      const miami = new Date(date.toLocaleString('en-US',{ timeZone:'America/New_York'}));
-      return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST';
+    
+    function getETAbbrev(date = nowInMiami()) {
+      const miami = new Date(date.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST'; // 240=EDT, 300=EST
     }
 
     // Status helper (X days -> Live -> Completed), inclusive of end date
     function getEventStatus(startDateStr, endDateStr) {
-      const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
-      const end   = asLocalDate(endDateStr);   end.setHours(23,59,59,999);
+      const start = asLocalDate(startDateStr);
+      start.setHours(0, 0, 0, 0);
+      const end = asLocalDate(endDateStr);
+      end.setHours(23, 59, 59, 999);
 
       const now = nowInMiami();
-      const today = new Date(now); today.setHours(0,0,0,0);
+      const today = new Date(now);
+      today.setHours(0, 0, 0, 0);
 
       if (today < start) {
-        const diffDays = Math.ceil((start - today) / (1000*60*60*24));
-        return { text: `${diffDays} day${diffDays===1?'':'s'}`, isPast: false, isLive: false };
+        const diffDays = Math.ceil((start - today) / (1000 * 60 * 60 * 24));
+        return { text: `${diffDays} days`, isPast: false, isLive: false };
       }
       if (now <= end) {
         return { text: 'Live', isPast: false, isLive: true };
@@ -317,20 +1217,20 @@
 
     /* ---------- Hackathon data ---------- */
     const hackathons = [
-      { name:'🏙️ 305 Hackathon: Fall 2025 Edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
-      { name:'👑 EmpowHER Hackathon 2025',          startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
-      { name:'👑 EmpowHER HackDay 2025',            startDate:'2025-10-18', endDate:'2025-10-18', modality:'in-person', url:'https://empowherhackdayfall25.vercel.app/' },
-      { name:'🎆 CodeFest 2025',                    startDate:'2025-12-08', endDate:'2025-12-15', modality:'virtual',   url:'https://codefesthack2025.vercel.app/' },
-      { name:'🔥 HackFiesta Miami 2026',            startDate:'2026-03-09', endDate:'2026-03-15', modality:'virtual',   url:'https://hackfiestamiami2026.vercel.app/' },
-      { name:'⚡ 305 Hackathon: Spring 2026 Edition', startDate:'2026-03-20', endDate:'2026-03-22', modality:'tbd',    url:'https://305hackspring2026.vercel.app/' },
-      { name:'🌟 SummerCodeX 2025',                 startDate:'2025-07-21', endDate:'2025-07-28', modality:'virtual',   url:'#' },
-      { name:'⛈️ CodeStorm 2025',                   startDate:'2025-05-19', endDate:'2025-05-26', modality:'virtual',   url:'#' },
-      { name:'⚡ 305 Hackathon: Spring 2025 Edition', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid',  url:'#' },
-      { name:'🔥 HackFiesta Miami 2025',            startDate:'2025-03-21', endDate:'2025-03-23', modality:'virtual',   url:'#' }
+      { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', url: 'https://305hackfall2025.vercel.app' },
+      { name: '👑 EmpowHER Hackathon 2025', startDate: '2025-10-13', endDate: '2025-10-20', modality: 'virtual', url: 'https://empowherhack2025.vercel.app/' },
+      { name: '👑 EmpowHER HackDAY 2025', startDate: '2025-10-18', endDate: '2025-10-18', modality: 'in-person', url: 'https://empowherhackdayfall25.vercel.app/' },
+      { name: '🎆 CodeFest 2025', startDate: '2025-12-08', endDate: '2025-12-15', modality: 'virtual', url: 'https://codefesthack2025.vercel.app/' },
+      { name: '🔥 HackFiesta Miami 2026', startDate: '2026-03-09', endDate: '2026-03-15', modality: 'virtual', url: 'https://hackfiestamiami2026.vercel.app/' },
+      { name: '⚡ 305 Hackathon: Spring edition 2026', startDate: '2026-03-20', endDate: '2026-03-22', modality: 'tbd', url: 'https://305hackspring2026.vercel.app/' },
+      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', url: '#' },
+      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', url: '#' },
+      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', url: '#' },
+      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', url: '#' }
     ];
 
-    function getModalityClass(modality){
-      switch(modality.toLowerCase()){
+    function getModalityClass(modality) {
+      switch (modality.toLowerCase()) {
         case 'virtual': return 'mode-virtual';
         case 'in-person': return 'mode-person';
         case 'hybrid': return 'mode-hybrid';
@@ -338,8 +1238,9 @@
         default: return 'mode-tbd';
       }
     }
-    function getModalityText(modality){
-      switch(modality.toLowerCase()){
+    
+    function getModalityText(modality) {
+      switch (modality.toLowerCase()) {
         case 'in-person': return 'In Person';
         case 'virtual': return 'Virtual';
         case 'hybrid': return 'Hybrid';
@@ -348,23 +1249,23 @@
       }
     }
 
-    function renderHackathons(){
+    function renderHackathons() {
       const now = nowInMiami();
       const upcoming = [];
       const past = [];
 
       const sorted = [...hackathons].sort(
-        (a,b) => asLocalDate(a.startDate) - asLocalDate(b.startDate)
+        (a, b) => asLocalDate(a.startDate) - asLocalDate(b.startDate)
       );
 
       sorted.forEach(h => {
         const startDate = asLocalDate(h.startDate);
-        const endDate   = asLocalDate(h.endDate);
-        const status    = getEventStatus(h.startDate, h.endDate);
+        const endDate = asLocalDate(h.endDate);
+        const status = getEventStatus(h.startDate, h.endDate);
 
         const range = (h.startDate === h.endDate)
           ? `${formatDateMiami(h.startDate)}`
-          : `${formatDateMiami(h.startDate)} – ${formatDateMiami(h.endDate)}`;
+          : `${formatDateMiami(h.startDate)} - ${formatDateMiami(h.endDate)}`;
 
         const tz = getETAbbrev();
         const dateLine = `${range} (${tz})`;
@@ -372,44 +1273,53 @@
         const html = `
           <div class="hackathon-item">
             <div class="hackathon-info">
-              <div class="hackathon-name" title="${h.name}">${h.name}</div>
+              <div class="hackathon-name">${h.name}</div>
               <div class="hackathon-date">${dateLine}</div>
             </div>
             <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
             <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
-            <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener noreferrer" aria-label="Open website for ${h.name}">Website</a>
+            <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
           </div>
         `;
 
-        if (endDate < now) { past.push(html); } else { upcoming.push(html); }
+        if (endDate < now) {
+          past.push(html);
+        } else {
+          upcoming.push(html);
+        }
       });
 
-      document.getElementById('upcoming-events').innerHTML = upcoming.join('') || '<p class="text-gray-500">No upcoming events yet. Check back soon!</p>';
-      document.getElementById('past-events').innerHTML = past.join('') || '<p class="text-gray-500">No past events listed.</p>';
+      document.getElementById('upcoming-events').innerHTML = upcoming.length > 0 
+        ? upcoming.join('') 
+        : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No upcoming events at this time.</p>';
+      
+      document.getElementById('past-events').innerHTML = past.length > 0 
+        ? past.join('') 
+        : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No past events to display.</p>';
     }
 
     // Live clocks
-    function updateTimes(){
+    function updateTimes() {
       const now = new Date();
 
-      const miami = new Date(now.toLocaleString('en-US',{ timeZone:'America/New_York'}));
+      const miami = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
       document.getElementById('miami-time').textContent = miami.toTimeString().split(' ')[0];
       const label = document.getElementById('miami-label');
       if (label) label.textContent = `Miami, FL (${getETAbbrev()})`;
 
-      const london = new Date(now.toLocaleString('en-US',{ timeZone:'Europe/London'}));
+      const london = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
       document.getElementById('london-time').textContent = london.toTimeString().split(' ')[0];
 
-      const lagos = new Date(now.toLocaleString('en-US',{ timeZone:'Africa/Lagos'}));
+      const lagos = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Lagos' }));
       document.getElementById('lagos-time').textContent = lagos.toTimeString().split(' ')[0];
 
-      const tokyo = new Date(now.toLocaleString('en-US',{ timeZone:'Asia/Tokyo'}));
+      const tokyo = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
       document.getElementById('tokyo-time').textContent = tokyo.toTimeString().split(' ')[0];
 
-      const sydney = new Date(now.toLocaleString('en-US',{ time Zone:'Australia/Sydney'}));
+      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
       document.getElementById('sydney-time').textContent = sydney.toTimeString().split(' ')[0];
 
-      const mumbai = new Date(now.toLocaleString('en-US',{ timeZone:'Asia/Kolkata'}));
+      const mumbai = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
       document.getElementById('mumbai-time').textContent = mumbai.toTimeString().split(' ')[0];
     }
 
@@ -420,12 +1330,28 @@
       setInterval(updateTimes, 1000);         // live clocks
       setInterval(renderHackathons, 3600000); // refresh status hourly
 
-      // Click/touch effects for buttons/links
-      const interactive = document.querySelectorAll('.hackathon-link, .social-link, .nav-link');
+      // Click/touch effects + smooth scroll
+      const interactive = document.querySelectorAll('.card-button, .hackathon-link, .btn');
       interactive.forEach(el => {
-        el.addEventListener('click', function(){ this.style.transform='scale(0.98)'; setTimeout(()=>{ this.style.transform=''; },120); });
-        el.addEventListener('touchstart', function(){ this.style.opacity='0.9'; }, {passive:true});
-        el.addEventListener('touchend', function(){ this.style.opacity=''; });
+        el.addEventListener('click', function () {
+          this.style.transform = 'scale(0.97)';
+          setTimeout(() => { this.style.transform = ''; }, 120);
+        });
+        el.addEventListener('touchstart', function () { this.style.opacity = '0.9'; });
+        el.addEventListener('touchend', function () { this.style.opacity = ''; });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetSel = this.getAttribute('href');
+          if (targetSel && targetSel !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(targetSel);
+            if (target) { 
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+            }
+          }
+        });
       });
     });
   </script>
