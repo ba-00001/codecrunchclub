@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Code Crunch - Volunteer Guide</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Tailwind for the header you provided -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -33,6 +35,44 @@
     .header{ text-align:center; color:#202124; margin-bottom:48px;}
     .header h1{ font-size:32px; font-weight:400; margin-bottom:8px; color:#202124;}
     .header p{ font-size:16px; color:#5f6368; line-height:1.5;}
+
+    /* Registration form card */
+    .form-wrap { max-width:900px; margin:0 auto 32px; }
+    .form-card {
+      background:#fff; border:1px solid #dadce0; border-radius:10px; padding:20px;
+      box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    .form-card h2 {
+      font-size:22px; font-weight:600; color:#202124; margin-bottom:6px;
+    }
+    .form-muted { color:#5f6368; font-size:14px; margin-bottom:16px; }
+    .form-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    .form-grid .full { grid-column:1 / -1; }
+    .field { display:flex; flex-direction:column; gap:6px; }
+    .label { font-size:13px; color:#374151; font-weight:600; }
+    .input, .select, .textarea {
+      border:1px solid #dadce0; border-radius:6px; padding:10px 12px;
+      font-size:14px; color:#202124; background:#fff; transition:border-color .15s ease, box-shadow .15s ease;
+    }
+    .input:focus, .select:focus, .textarea:focus {
+      outline:none; border-color:#1a73e8; box-shadow:0 0 0 3px rgba(26,115,232,.15);
+    }
+    .textarea { min-height:100px; resize:vertical; }
+    .help { font-size:12px; color:#6b7280; }
+    .check-row { display:flex; align-items:center; gap:10px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px; padding:12px 16px; border-radius:8px; border:none; cursor:pointer;
+      font-weight:600; font-size:14px; text-decoration:none;
+      background:#1a73e8; color:#fff; transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover { background:#1557b0; box-shadow:0 2px 8px rgba(26,115,232,.25); transform:translateY(-1px); }
+    .btn.secondary { background:#fff; color:#1a73e8; border:2px solid #1a73e8; }
+    .btn.secondary:hover { background:#ebf3ff; }
+    .inline-note { font-size:12px; color:#6b7280; margin-top:4px; }
 
     .volunteer-cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; margin-bottom:50px;}
     .card{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:24px; transition:.2s; position:relative; overflow:hidden;}
@@ -98,13 +138,11 @@
     .policy-note .icon { font-size:18px; line-height:1; }
     .policy-note strong { font-weight:600; }
 
-    /* --- tiny helpers for the new cards --- */
     .card .subtext{ color:#6b7280; font-size:12px; margin-top:8px; text-align:center;}
     .badge{ display:inline-block; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:600; }
     .badge-live{ background:#e6f4ea; color:#137333; border:1px solid #ceead6; }
     .badge-warn{ background:#fff4e5; color:#b45309; border:1px solid #fde68a; }
     .badge-lock{ background:#f3f4f6; color:#374151; border:1px solid #d1d5db; }
-    .card .small-note{ font-size:12px; color:#5f6368; margin-top:10px; line-height:1.45; text-align:left; }
 
     @media (max-width:768px){
       .nav-container{ flex-direction:column; gap:12px;}
@@ -127,6 +165,7 @@
       .card p{ font-size:13px;}
       .footer-grid{ grid-template-columns:1fr; gap:20px;}
       .social-grid{ grid-template-columns:repeat(2,1fr);}
+      .form-grid { grid-template-columns:1fr; }
     }
     @media (max-width:480px){
       .nav-link{ font-size:10px; padding:5px 8px;}
@@ -155,6 +194,23 @@
       </div>
     </div>
   </nav>
+
+  <!-- Page Title / Hero (Tailwind-based) -->
+  <header class="w-full bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p class="text-xs sm:text-sm text-gray-500 mb-2">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        305 Hackathon Edition — November 2025
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+        Membership &amp; Registration — 305 Hackathon (Nov 2025)
+      </h1>
+      <p class="mt-2 text-gray-600 max-w-2xl">
+        Verify your organization email and register below. After submitting, you'll be redirected to the 305 Hackathon November 2025 site with your details for perks, updates, and check-in.
+      </p>
+    </div>
+  </header>
 
   <!-- Time Zone Section -->
   <div class="timezone-section">
@@ -193,25 +249,96 @@
     </div>
   </div>
 
+  <!-- Registration Form that routes to 305 Hackathon Edition — Nov 2025 -->
   <div class="container">
+    <section class="form-wrap" id="register">
+      <div class="form-card" aria-labelledby="reg-title">
+        <h2 id="reg-title"><i class="fa-solid fa-id-card-clip"></i> Register for 305 Hackathon — November 2025</h2>
+        <p class="form-muted">
+          Use your <strong>organization email</strong>. After submitting, you’ll be redirected to the 305 Hackathon site with your info attached.
+        </p>
+
+        <!-- GET so querystring is visible to the destination if JS is disabled -->
+        <form id="reg-form" method="GET" action="https://305hackfall2025.vercel.app">
+          <div class="form-grid">
+            <div class="field">
+              <label class="label" for="fullName">Full Name</label>
+              <input class="input" id="fullName" name="name" type="text" placeholder="Jane Doe" required/>
+            </div>
+
+            <div class="field">
+              <label class="label" for="email">Organization Email</label>
+              <input class="input" id="email" name="email" type="email" placeholder="jane.doe@university.edu" required/>
+              <div class="help">Must match your university/organization domain for perks.</div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="role">Role</label>
+              <select class="select" id="role" name="role" required>
+                <option value="">Select role…</option>
+                <option>Hacker</option>
+                <option>Volunteer</option>
+                <option>Mentor</option>
+                <option>Sponsor</option>
+                <option>Staff</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label" for="track">Participation</label>
+              <select class="select" id="track" name="track" required>
+                <option value="">Choose one…</option>
+                <option>Online (Nov 7–15)</option>
+                <option>In-Person (Nov 15)</option>
+                <option>Both</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label class="label" for="notes">Notes (optional)</label>
+              <textarea class="textarea" id="notes" name="notes" placeholder="Dietary needs, accessibility, or team info…"></textarea>
+            </div>
+
+            <div class="field full">
+              <label class="check-row">
+                <input type="checkbox" id="agree" required/>
+                <span>I agree to event policies and the MLH Code of Conduct.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Hidden metadata for destination -->
+          <input type="hidden" name="event" value="305 Hackathon Edition — November 2025"/>
+          <input type="hidden" name="source" value="volunteer-guide"/>
+
+          <div class="actions">
+            <button class="btn" type="submit">
+              <i class="fa-solid fa-paper-plane"></i> Register &amp; Continue
+            </button>
+            <a class="btn secondary" href="https://305hackfall2025.vercel.app" target="_blank" rel="noopener">
+              <i class="fa-solid fa-up-right-from-square"></i> View Event Site
+            </a>
+            <div class="inline-note">You’ll receive confirmation and updates via email.</div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Existing content -->
     <div class="header">
       <h1>VOLUNTEER GUIDE</h1>
       <p>Join the Code Crunch volunteer collective and help shape the future of CS students during the school year and hackathons. Complete the volunteer steps to get confirmed and start your mission.</p>
     </div>
 
- 
 
+
+
+
+
+    
     <!-- HACK OPERATIONS / EVENTS -->
     <div class="hackathons-section">
       <h2>🚀 HACK OPERATIONS</h2>
-
-      <!-- <div class="policy-note" role="note" aria-label="Volunteer policy">
-        <div class="icon">📝</div>
-        <div>
-          <strong>Remote volunteers</strong> are eligible to support <strong>in-person events</strong>.<br>
-          <strong>Preference will be given to in-person volunteers</strong> if the volunteer pool for an event reaches capacity.
-        </div>
-      </div> -->
 
       <div class="section-header">
         <h3>🚀 ACTIVE MISSIONS</h3>
@@ -412,13 +539,12 @@
       document.getElementById('mumbai-time').textContent = mumbai.toTimeString().split(' ')[0];
     }
 
-    // ---------- OPTIONAL: Form No. 2 availability (opens 2 days after event end) ----------
-    // Update these per-month:
+    // Optional "Form 2" availability (kept as-is)
     const currentEventConfig = {
       name: '305 Hack Edition — Nov 2025',
-      endDate: '2025-11-16',            // event end date
-      registrationClose: '2025-12-01',  // donations/registration close date
-      form2Url: 'https://your-form2-nov2025.example' // TODO: replace with live Form No. 2 URL
+      endDate: '2025-11-16',
+      registrationClose: '2025-12-01',
+      form2Url: 'https://your-form2-nov2025.example'
     };
 
     const d = s => { const [y,m,day]=s.split('-').map(Number); return new Date(y,m-1,day); };
@@ -431,7 +557,6 @@
 
       const link = document.getElementById('form2-link');
       const status = document.getElementById('form2-status');
-
       if (!link || !status) return;
 
       link.href = currentEventConfig.form2Url;
@@ -455,6 +580,26 @@
       }
     })();
 
+    // Hook up form to redirect (keeps GET fallback if JS disabled)
+    (function attachFormRedirect(){
+      const DEST_URL = 'https://305hackfall2025.vercel.app'; // change if you use a different final URL
+      const form = document.getElementById('reg-form');
+      if (!form) return;
+      form.addEventListener('submit', function(e){
+        try {
+          e.preventDefault();
+          const data = new FormData(form);
+          const params = new URLSearchParams(data);
+          params.set('ts', Date.now().toString());
+          params.set('src', 'membership-form');
+          const target = `${DEST_URL}?${params.toString()}`;
+          window.location.assign(target);
+        } catch (err) {
+          form.submit();
+        }
+      });
+    })();
+
     // Initialize page
     document.addEventListener('DOMContentLoaded', function () {
       renderHackathons();
@@ -463,9 +608,9 @@
       setInterval(renderHackathons, 3600000); // refresh status hourly
 
       // Click/touch effects + smooth scroll
-      const interactive = document.querySelectorAll('.card-button, .hackathon-link');
+      const interactive = document.querySelectorAll('.card-button, .hackathon-link, .btn');
       interactive.forEach(el => {
-        el.addEventListener('click', function(){ this.style.transform='scale(0.95)'; setTimeout(()=>{ this.style.transform=''; },150); });
+        el.addEventListener('click', function(){ this.style.transform='scale(0.97)'; setTimeout(()=>{ this.style.transform=''; },120); });
         el.addEventListener('touchstart', function(){ this.style.opacity='0.9'; });
         el.addEventListener('touchend', function(){ this.style.opacity=''; });
       });

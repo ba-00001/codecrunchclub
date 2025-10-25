@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Session A — Hybrid + Remote · 305 Veterans & DefenseTech Hack</title>
-  <meta name="description" content="Hybrid session with full remote participation for the 305 Veterans & DefenseTech Hack. Kickoff Friday, build through Saturday with mentors, checkpoints, and workshops."/>
+  <title>Session A — Online Hybrid/Remote · 305 Veterans & DefenseTech Hack</title>
+  <meta name="description" content="Online Hybrid/Remote session for the 305 Veterans & DefenseTech Hack. Runs Nov 7–15 with mentors, checkpoints, and workshops."/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{ --blue:#0b2a6f; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --bg:#ffffff; --soft:#f6f8ff; --r:14px; }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
     a{text-decoration:none}
-    header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10}
+    header.site-nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10}
     .wrap{max-width:1100px;margin:0 auto;padding:16px}
     .brand{display:flex;gap:10px;align-items:center;font-weight:900;color:var(--blue)}
     .hero{background:var(--soft);padding:28px 16px}
@@ -30,35 +30,85 @@
     .btn.alt{background:#fff;color:var(--blue);border:2px solid var(--blue)}
     .meta{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.95rem;margin-top:4px}
     .row{display:flex;gap:10px;flex-wrap:wrap}
-    footer{border-top:1px solid var(--line);margin-top:28px}
-    .foot{padding:18px 16px;color:var(--muted);font-size:.95rem}
+
+    /* --- Footer styles (match palette) --- */
+    .hack-university-footer {
+      background: linear-gradient(135deg, #0b2a6f 0%, #0a2563 60%, #071c4a 100%);
+      color: #fff; padding: 3rem 0 1.25rem; margin-top: 3rem;
+    }
+    .hack-university-footer-container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+    .hack-university-footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+    .hack-university-footer-title { font-size: 1.1rem; font-weight: 800; margin-bottom: .75rem; color: #fbbf24; }
+    .hack-university-star { font-size: .85rem; animation: hu-pulse 2s infinite; }
+    .hack-university-footer-description { color: #e5e7eb; margin-bottom: .6rem; line-height: 1.6; }
+    .hack-university-footer-link { color: #93c5fd; text-decoration: none; }
+    .hack-university-footer-link:hover { color: #fbbf24; }
+    .hack-university-social-section { margin-top: 1rem; }
+    .hack-university-social-title { font-size: .95rem; font-weight: 700; color: #f3f4f6; margin-bottom: .5rem; }
+    .hack-university-social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: .5rem; }
+    .hack-university-social-link { display: flex; align-items: center; gap: .5rem; color: #e5e7eb; padding: .45rem .5rem; border-radius: .5rem; transition: transform .2s ease, background .2s ease, color .2s ease; }
+    .hack-university-social-link:hover { color: #fbbf24; background: rgba(251,191,36,.08); transform: translateY(-2px); }
+    .hack-university-social-icon { font-size: 1.05rem; }
+    .hack-university-social-text { font-size: .9rem; }
+    .hack-university-quick-links { list-style: none; padding: 0; margin: 0; }
+    .hack-university-quick-links li { margin-bottom: .45rem; }
+    .hack-university-quick-link { color: #e5e7eb; text-decoration: none; display: inline-block; padding: .2rem 0; transition: color .2s ease, transform .2s ease, padding .2s ease; }
+    .hack-university-quick-link:hover { color: #fbbf24; padding-left: .35rem; }
+    .hack-university-contact-section { color: #e5e7eb; line-height: 1.6; font-style: normal; }
+    .hack-university-contact-link { color: #93c5fd; text-decoration: none; }
+    .hack-university-contact-link:hover { color: #fbbf24; }
+    .hack-university-footer-bottom { border-top: 1px solid rgba(255,255,255,.15); padding-top: 1.25rem; text-align: center; }
+    .hack-university-copyright { color: #cbd5e1; margin-bottom: .4rem; font-size: .95rem; }
+    .hack-university-credits { color: #9ca3af; font-size: .875rem; }
+    .hack-university-credits-link { color: #93c5fd; text-decoration: none; }
+    .hack-university-credits-link:hover { color: #fbbf24; }
+    @keyframes hu-pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+    @media (max-width: 768px) {
+      .hack-university-footer-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .hack-university-social-grid { grid-template-columns: repeat(2,1fr); }
+    }
   </style>
 </head>
 <body>
-<header>
+<!-- small sticky nav -->
+<header class="site-nav">
   <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
-    <div class="brand"><i class="fa-solid fa-wifi"></i> Session A — Hybrid + Remote</div>
+    <div class="brand"><i class="fa-solid fa-wifi"></i> Session A — Online Hybrid/Remote</div>
     <nav><a class="btn alt" href="index.html">← All Sessions</a></nav>
+  </div>
+</header>
+
+<!-- Page Title / Hero -->
+<header class="w-full bg-gray-50 border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-xs sm:text-sm text-gray-500 mb-2">
+      <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+      <span aria-hidden="true"> / </span>
+      305 Veterans &amp; DefenseTech Hack
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+      Session A — Online Hybrid/Remote
+    </h1>
+    <p class="mt-2 text-gray-600 max-w-2xl">
+      Dates: <strong>Fri, Nov 7 → Sat, Nov 15, 2025</strong> (ET). Challenge prompt drops at the closing ceremony. Live demos are required (0 points without).
+    </p>
   </div>
 </header>
 
 <main>
   <section class="hero">
     <div class="wrap">
-      <h1>Hybrid + Remote (Fri → Sat)</h1>
-      <p>
-        Kickoff Friday, keep building through Saturday with mentor office hours, checkpoints, and async support.
-      </p>
-      <p class="meta" style="margin-top:6px;"><strong>Date:</strong> Fri, <strong>Nov 21, 2025</strong> → Sat, <strong>Nov 22, 2025</strong> (Eastern Time)</p>
+      <h1>Online Build Sprint (Nov 7–15)</h1>
+      <p>Kickoff Nov 7 and keep building through Nov 15 with mentor hours, checkpoints, and async support.</p>
+      <p class="meta" style="margin-top:6px;"><strong>Timeline:</strong> Continuous build window across Nov 7–15 (ET)</p>
       <div class="notice">
-        <strong>Heads up:</strong> The <em>Build</em> challenge prompt is revealed at the <strong>closing ceremony (Eastern Time)</strong>. 
-        <strong>Live demos are required</strong>; no live demo = <strong>0 points</strong>.  
-        RSVP on <strong>Bevy</strong> to receive automatic hack updates via email.
+        <strong>Heads up:</strong> The <em>Build</em> challenge prompt is revealed at the <strong>closing ceremony (ET)</strong>. 
+        <strong>Live demos are required</strong>; no live demo = <strong>0 points</strong>. RSVP on <strong>Bevy</strong> for automatic email updates.
       </div>
       <div class="row" style="margin-top:12px;">
-        <!-- Replace href with your meeting/stream links -->
         <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-door-open"></i> Join Opening Ceremony</a>
         <a class="btn alt" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-flag-checkered"></i> Join Closing Ceremony</a>
+        <a class="btn alt" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i> Join Online Session</a>
       </div>
     </div>
   </section>
@@ -68,34 +118,32 @@
       <div class="card">
         <h2>Event Details</h2>
         <div class="meta" style="margin:6px 0 8px">
-          <span><i class="fa-regular fa-calendar"></i> Fri → Sat (Nov 21–22)</span>
+          <span><i class="fa-regular fa-calendar"></i> Nov 7–15 (ET)</span>
           <span><i class="fa-regular fa-clock"></i> Continuous build</span>
           <span><i class="fa-solid fa-globe"></i> Remote / Hybrid</span>
         </div>
         <ul class="list">
-          <li>Kickoff stream + team formation</li>
-          <li>Mentor hours and mid-sprint checkpoint</li>
-          <li>Submission window and live demos</li>
+          <li>Kickoff stream + team formation (Nov 7)</li>
+          <li>Mentor hours and mid-sprint checkpoints</li>
+          <li>Submission window and live demos (Nov 15)</li>
         </ul>
         <div class="row" style="margin-top:10px">
           <a class="btn" href="#" target="_blank" rel="noopener">Register</a>
           <a class="btn alt" href="#" target="_blank" rel="noopener">RSVP on Bevy</a>
-          <a class="btn alt" href="#" target="_blank" rel="noopener">Participant Perks (APIs & Subs)</a>
+          <a class="btn alt" href="#" target="_blank" rel="noopener">Participant Perks (APIs &amp; Subs)</a>
         </div>
-        <p style="font-size:.9rem;color:var(--muted);margin-top:6px;">
-          Participant Perks require Hack University registration using your registered organization email.
-        </p>
+        <p style="font-size:.9rem;color:var(--muted);margin-top:6px;">Perks require Hack University registration (use your org email).</p>
       </div>
 
       <div class="card">
         <h2>Themes</h2>
         <p class="meta">Build for impact in defense, veteran services, resilience, and safety.</p>
         <div style="margin-top:6px">
-          <span class="pill">Veteran Health & Services</span>
-          <span class="pill">DefenseTech & Dual-Use</span>
+          <span class="pill">Veteran Health &amp; Services</span>
+          <span class="pill">DefenseTech &amp; Dual-Use</span>
           <span class="pill">Cybersecurity</span>
           <span class="pill">Emergency Response</span>
-          <span class="pill">Logistics & Mobility</span>
+          <span class="pill">Logistics &amp; Mobility</span>
         </div>
       </div>
     </div>
@@ -106,20 +154,20 @@
       <div class="card">
         <h2>Registration Steps</h2>
         <ol class="list">
-          <li>RSVP and Register for Session A (Hybrid/Remote).</li>
+          <li>RSVP and Register for the Online session.</li>
           <li>Complete One-Stop Form for tools/perks access.</li>
           <li>Join Discord and project board.</li>
           <li>Create your repo and make your first commit.</li>
-          <li>Submit final links before deadline.</li>
+          <li>Submit final links before Nov 15 deadline.</li>
         </ol>
       </div>
 
       <div class="card">
         <h2>Resources</h2>
         <ul class="list">
-          <li>Hacker Guide & Toolkit</li>
-          <li>Agenda (Kickoff, checkpoints, demos)</li>
-          <li>Mentor Directory & Office Hours</li>
+          <li>Hacker Guide &amp; Toolkit</li>
+          <li>Agenda &amp; checkpoints</li>
+          <li>Mentor Directory &amp; Office Hours</li>
           <li>Devpost (submissions)</li>
         </ul>
         <div class="row" style="margin-top:10px">
@@ -132,12 +180,12 @@
 
   <section class="section wrap">
     <div class="card">
-      <h2>Tracks & Judging</h2>
-      <p class="meta">Top projects by Innovation, Impact, Functionality, and Clarity.</p>
+      <h2>Tracks &amp; Judging</h2>
+      <p class="meta">Criteria: Innovation · Impact · Functionality · Clarity</p>
       <div style="margin-top:6px;display:grid;gap:10px">
         <div class="card" style="border-style:dashed">
           <strong>General Build</strong>
-          <p>Prototype or convincing simulation. Include README, short video, and live link or screenshots.</p>
+          <p>Prototype/simulation with README, short video, and a live link or screenshots.</p>
         </div>
         <div class="card" style="border-style:dashed">
           <strong>Tech Unicorn (Pitch)</strong>
@@ -148,8 +196,102 @@
   </section>
 </main>
 
-<footer>
-  <div class="wrap foot">© 2025 Hack University · Code Crunch · GDG @ FIU</div>
+<!-- Footer -->
+<footer class="hack-university-footer" role="contentinfo">
+  <div class="hack-university-footer-container">
+    <div class="hack-university-footer-grid">
+      <div>
+        <h3 class="hack-university-footer-title">
+          Hack University
+          <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻 👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻 🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+        </h3>
+        <p class="hack-university-footer-description">
+          A collaborative effort uniting multiple student organizations and global communities to empower the next generation of innovators, developers, and leaders.
+        </p>
+        <p class="hack-university-footer-description">
+          <a href="https://HackUniversity.vercel.app" class="hack-university-footer-link">HackUniversity.vercel.app</a>
+        </p>
+
+        <div class="hack-university-social-section">
+          <h4 class="hack-university-social-title">Connect With Us</h4>
+          <div class="hack-university-social-grid">
+            <a href="https://www.linkedin.com/showcase/hack-university-global/" class="hack-university-social-link">
+              <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">LinkedIn</span>
+            </a>
+            <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link">
+              <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">Instagram</span>
+            </a>
+            <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link">
+              <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">GitHub</span>
+            </a>
+            <a href="https://hackuniversity-directory.vercel.app/" class="hack-university-social-link">
+              <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">YouTube</span>
+            </a>
+            <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link">
+              <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">Discord</span>
+            </a>
+            <a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-social-link">
+              <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+              <span class="hack-university-social-text">Calendar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="hack-university-footer-title">Quick Links</h3>
+        <ul class="hack-university-quick-links">
+          <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="hack-university-quick-link">Mission</a></li>
+          <li><a href="https://hackuniversity-calendar.vercel.app/" class="hack-university-quick-link">Events</a></li>
+          <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="hack-university-quick-link">Hackathons</a></li>
+          <li><a href="https://hackuniversity-membership.vercel.app/" class="hack-university-quick-link">Membership</a></li>
+          <li><a href="https://hackuniversity-eboard.vercel.app/" class="hack-university-quick-link">Join E-Board</a></li>
+          <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="hack-university-quick-link">Resources</a></li>
+          <li><a href="https://hackuniversity-discord.vercel.app/" class="hack-university-quick-link" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="hack-university-footer-title">Contact</h3>
+        <address class="hack-university-contact-section">
+          Florida International University<br/>
+          Miami, FL<br/>
+          <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link">codecrunchclub@gmail.com</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="hack-university-footer-bottom">
+      <p class="hack-university-copyright">© 2025 Hack University. All rights reserved.</p>
+      <p class="hack-university-credits">
+        Built with ❤️ for the tech community by
+        <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="hack-university-credits-link">Brian Bazurto</a>
+        · Powered by innovation and collaboration
+      </p>
+    </div>
+  </div>
 </footer>
+
+<script>
+  (function () {
+    const els = document.querySelectorAll('.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link');
+    els.forEach(el => {
+      el.addEventListener('click', function () {
+        this.style.transform = 'scale(0.97)';
+        setTimeout(() => { this.style.transform=''; }, 120);
+      });
+      el.addEventListener('touchstart', function () { this.style.opacity='0.9'; });
+      el.addEventListener('touchend', function () { this.style.opacity=''; });
+    });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.hack-university-star').forEach(el => { el.style.animation = 'none'; });
+    }
+  })();
+</script>
 </body>
 </html>
