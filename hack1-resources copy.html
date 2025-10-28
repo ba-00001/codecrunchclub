@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Code Crunch - Volunteer Guide</title>
+  <title>Code Crunch - Hackathons & Resources</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- Tailwind for the header you provided -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -970,6 +970,274 @@
     }
 
     /* Dark mode disabled - keeping white background always */
+
+    /* ========== INFO NOTE STYLES ========== */
+    .info-note {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.05), rgba(26, 115, 232, 0.1));
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+    }
+
+    .info-note-icon {
+      color: var(--color-primary);
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .info-note-content {
+      flex: 1;
+    }
+
+    .info-note-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .info-note-text {
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .info-link {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+    }
+
+    .info-link:hover {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .info-note {
+        flex-direction: column;
+      }
+
+      .info-note-text {
+        font-size: 14px;
+      }
+    }
+
+    /* ========== RESOURCES SECTION STYLES ========== */
+    .content {
+      padding-bottom: var(--spacing-xl);
+    }
+
+    .resource-section {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .resource-section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-icon {
+      background-color: rgba(26, 115, 232, 0.1);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .resource-item {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--color-border);
+      line-height: 1.6;
+    }
+
+    .resource-item:last-child {
+      border-bottom: none;
+    }
+
+    .link-btn {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all var(--transition-base);
+    }
+
+    .link-btn:hover {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+
+    .link-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .tool-category {
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+    }
+
+    .tool-category-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    .tool-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tool-item {
+      padding: var(--spacing-sm) 0;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .tool-item:before {
+      content: '→';
+      color: var(--color-primary);
+      font-weight: bold;
+    }
+
+    .why-join {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.05), rgba(26, 115, 232, 0.1));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+      margin: var(--spacing-xl) 0;
+    }
+
+    .why-join-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-lg);
+      text-align: center;
+    }
+
+    .why-join-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .why-join-item {
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+      background: var(--color-bg-white);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-muted);
+    }
+
+    .team-signature {
+      text-align: right;
+      font-style: italic;
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-lg);
+      font-weight: 500;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .contact-card {
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+    }
+
+    .contact-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) 0;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .contact-link:hover {
+      color: var(--color-primary);
+      padding-left: var(--spacing-sm);
+    }
+
+    .contact-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Responsive adjustments for resources section */
+    @media (max-width: 768px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-join {
+        padding: var(--spacing-lg);
+      }
+
+      .why-join-title {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -995,129 +1263,218 @@
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
         <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
         <span aria-hidden="true"> / </span>
-        Hackathons Events
+        <a href="#" class="underline hover:no-underline">Hacker Guide</a>
+        <span aria-hidden="true"> / </span>
+        Hack Resources
       </p>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Hackathons Events
+        Hack Resources
       </h1>
       <p class="mt-2 text-gray-600 max-w-2xl">
-        Check our upcoming and past hackathons. Open to everyone worldwide, all majors. Ages 16+ accepted (under 18 requires parental/guardian consent form signed).
+        Everything you need to succeed in our hackathons - tools, technologies, APIs, and project inspiration.
       </p>
     </div>
   </header>
 
-  <!-- Time Zone Section -->
-  <div class="timezone-section">
-    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
-    <div class="timezone-grid">
-      <div class="timezone-item">
-        <div class="timezone-flag">🇺🇸 - HQ</div>
-        <div class="timezone-time" id="miami-time">--:--:--</div>
-        <div class="timezone-location" id="miami-label">Miami, FL (ET)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇪🇺</div>
-        <div class="timezone-time" id="london-time">--:--:--</div>
-        <div class="timezone-location">London (GMT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌍</div>
-        <div class="timezone-time" id="lagos-time">--:--:--</div>
-        <div class="timezone-location">Lagos (WAT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌏</div>
-        <div class="timezone-time" id="tokyo-time">--:--:--</div>
-        <div class="timezone-location">Tokyo (JST)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇦🇺</div>
-        <div class="timezone-time" id="sydney-time">--:--:--</div>
-        <div class="timezone-location">Sydney (AEDT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇮🇳</div>
-        <div class="timezone-time" id="mumbai-time">--:--:--</div>
-        <div class="timezone-location">Mumbai (IST)</div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <!-- Volunteer/Info Cards Section -->
-    <div class="volunteer-cards">
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-book"></i>
-        </div>
-        <h3>Hacker Guide</h3>
-        <p>Everything you need to know to participate in our hackathons. Get started with tips, rules, and resources.</p>
-        <a href="#" class="card-button">View Guide</a>
+    <!-- Quick Info Note -->
+    <div class="info-note">
+      <div class="info-note-icon">
+        <i class="fas fa-info-circle"></i>
       </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <h3>Hackathon Registration</h3>
-        <p>Register for upcoming hackathons and secure your spot. Join us in building amazing projects!</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" class="card-button">Register Now</a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="fab fa-discord"></i>
-        </div>
-        <h3>Discord Community</h3>
-        <p>Join our Discord server to connect with fellow hackers, get support, and stay updated on events.</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" class="card-button" target="_blank" rel="noopener">Join Discord</a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <h3>Hack University GroupMe</h3>
-        <p>Stay connected with the Hack University community through our GroupMe for quick updates and discussions.</p>
-        <a href="https://hackuniversityplatforms.vercel.app/" class="card-button" target="_blank" rel="noopener">Join GroupMe</a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="fab fa-instagram"></i>
-        </div>
-        <h3>Hack University IG</h3>
-        <p>Follow us on Instagram for event highlights, behind-the-scenes content, and community updates.</p>
-        <a href="https://hackuniversityplatforms.vercel.app/" class="card-button" target="_blank" rel="noopener">Follow on IG</a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="far fa-calendar-alt"></i>
-        </div>
-        <h3>Google Calendar</h3>
-        <p>Add our events to your Google Calendar and never miss a hackathon, workshop, or meeting.</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" class="card-button" target="_blank" rel="noopener">View Calendar</a>
+      <div class="info-note-content">
+        <h3 class="info-note-title">Quick Links</h3>
+        <p class="info-note-text">
+          <a href="https://hackuniversity-hackerguide.vercel.app/" class="info-link">Hacker Guide</a> • 
+          <a href="#" class="info-link">Registration</a> • 
+          <a href="#" class="info-link">Discord</a> • 
+          <a href="#" class="info-link">GroupMe</a> • 
+          <a href="#" class="info-link">Instagram</a> • 
+          <a href="#" class="info-link">Calendar</a>
+        </p>
       </div>
     </div>
 
-    <!-- HACK OPERATIONS / EVENTS -->
-    <div class="hackathons-section">
-      <h2>🚀 HACK OPERATIONS</h2>
 
-      <div class="section-header">
-        <h3>🚀 ACTIVE MISSIONS</h3>
-        <p>Upcoming events sorted by date</p>
-      </div>
-      <div class="hackathons-list" id="upcoming-events"></div>
 
-      <div class="section-header" style="margin-top: 48px;">
-        <h3>📚 PAST EVENTS</h3>
-        <p>Completed hackathons and events</p>
-      </div>
-      <div class="hackathons-list" id="past-events"></div>
-    </div>
-  </div>
+        <div class="container">
+
+            
+            <section class="card">
+                <h2 class="card-title">Tools and Technologies</h2>
+                <p class="card-description">Participants can use any tools or frameworks they prefer, but here are some recommended technologies for your project.</p>
+                
+                <div class="tool-grid">
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">Frontend</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">React</li>
+                            <li class="tool-item">Next.js</li>
+                            <li class="tool-item">HTML</li>
+                            <li class="tool-item">CSS</li>
+                            <li class="tool-item">JavaScript</li>
+                            <li class="tool-item">TypeScript</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">Backend</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">Node.js</li>
+                            <li class="tool-item">Flask</li>
+                            <li class="tool-item">Django</li>
+                            <li class="tool-item">FastAPI</li>
+                            <li class="tool-item">Spring Boot</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">Database</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">PostgreSQL</li>
+                            <li class="tool-item">MySQL</li>
+                            <li class="tool-item">Firebase</li>
+                            <li class="tool-item">MongoDB</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">AI & Machine Learning</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">TensorFlow</li>
+                            <li class="tool-item">PyTorch</li>
+                            <li class="tool-item">OpenAI API</li>
+                            <li class="tool-item">Hugging Face</li>
+                            <li class="tool-item">LangChain</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">Blockchain</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">Ethereum</li>
+                            <li class="tool-item">Solidity</li>
+                            <li class="tool-item">Polygon</li>
+                            <li class="tool-item">IPFS</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="tool-category-title">DevOps & Cloud</h3>
+                        <ul class="tool-list">
+                            <li class="tool-item">Docker</li>
+                            <li class="tool-item">Kubernetes</li>
+                            <li class="tool-item">AWS</li>
+                            <li class="tool-item">GCP</li>
+                            <li class="tool-item">Azure</li>
+                            <li class="tool-item">Terraform</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card">
+                <h2 class="card-title">APIs & Development Resources</h2>
+                
+                <div class="resource-section">
+                    <h3 class="resource-section-title">
+                        <div class="section-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </div>
+                        APIs & AI Tools
+                    </h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <strong>Google Gemini API</strong> – 
+                            <a href="https://ai.google.dev/" class="link-btn" target="_blank">
+                                ai.google.dev
+                                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="resource-section">
+                    <h3 class="resource-section-title">
+                        <div class="section-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                        </div>
+                        Blockchain & Testnets
+                    </h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <strong>Midnight Testnet Faucet</strong> – 
+                            <a href="https://faucet.testnet.midnight.network/" class="link-btn" target="_blank">
+                                faucet.testnet.midnight.network
+                                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="resource-item">
+                            <strong>Midnight Developer Documentation</strong> – 
+                            <a href="https://docs.midnight.network/" class="link-btn" target="_blank">
+                                docs.midnight.network
+                                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="card">
+                <h2 class="card-title">Project Inspiration</h2>
+                <p class="card-description">If you're looking for ideas, here are a few problem statements to consider for your hackathon project:</p>
+                
+                <div class="resource-section">
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <strong>AI for Accessibility:</strong> Develop an AI-powered assistant for visually impaired users.
+                        </li>
+                        <li class="resource-item">
+                            <strong>Blockchain for Transparency:</strong> Build a secure blockchain-based voting system.
+                        </li>
+                        <li class="resource-item">
+                            <strong>AI-Powered Debugging:</strong> Create a tool that analyzes and fixes errors in code automatically.
+                        </li>
+                        <li class="resource-item">
+                            <strong>Sustainable Tech:</strong> Use AI to reduce energy consumption in smart homes.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="why-join">
+                <h2 class="why-join-title">Why Join Code Crunch Hackathons?</h2>
+                <ul class="why-join-list">
+                    <li class="why-join-item">Open to students of all backgrounds and skill levels.</li>
+                    <li class="why-join-item">Hands-on experience with cutting-edge technologies.</li>
+                    <li class="why-join-item">Network with tech enthusiasts, mentors, and recruiters.</li>
+                    <li class="why-join-item">Win prizes and gain industry recognition.</li>
+                    <li class="why-join-item">Showcase your skills in AI, Blockchain, and Web Development.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">We look forward to seeing the innovative projects you will create. Let's build the future together at Code Crunch Hackathons!</p>
+                <p class="team-signature">— The Code Crunch Team</p>
+            </section>
+            
+
+    
+
+
+    </section>
+
+
+
+</main>
 
   <!-- Footer -->
   <footer class="cc-blue footer">
