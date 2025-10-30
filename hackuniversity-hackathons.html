@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Code Crunch - Volunteer Guide</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Tailwind for the header you provided -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* ========== CSS CUSTOM PROPERTIES ========== */
     :root {
       --color-primary: #1a73e8;
       --color-primary-hover: #1557b0;
@@ -38,13 +36,7 @@
       --transition-base: .2s ease;
     }
 
-    /* ========== BASE STYLES ========== */
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--color-bg);
@@ -53,7 +45,7 @@
       line-height: 1.5;
     }
 
-    /* ========== NAVIGATION ========== */
+    /* NAV */
     .navbar { 
       background: var(--color-bg-white);
       border-bottom: 1px solid var(--color-border);
@@ -63,913 +55,178 @@
       z-index: 1000;
       box-shadow: var(--shadow-sm);
     }
-    
     .nav-container { 
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
+      max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
     }
-    
-    .nav-brand { 
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--color-primary);
+    .nav-brand { font-size: 22px; font-weight: 500; color: var(--color-primary); }
+    .nav-brand a { color: inherit; text-decoration: none; transition: opacity var(--transition-base); }
+    .nav-brand a:hover { opacity: 0.8; }
+    .nav-links { display: flex; gap: 30px; }
+    .nav-link { color: var(--color-text-muted); text-decoration: none; font-weight: 400; font-size: 14px; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); transition: all var(--transition-base); }
+    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+    .nav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+    /* TIMEZONE */
+    .timezone-section { background: var(--color-bg-white); border-bottom: 1px solid var(--color-border); padding: var(--spacing-lg) 20px; margin-bottom: var(--spacing-xl); }
+    .timezone-header { text-align: center; margin-bottom: 25px; }
+    .timezone-header h2 { color: var(--color-text); font-size: 28px; font-weight: 400; margin: 0 0 20px; }
+    .timezone-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+    .timezone-item { background: var(--color-bg-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-align: center; transition: all var(--transition-base); }
+    .timezone-item:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); transform: translateY(-2px); }
+    .timezone-flag { font-size: 20px; margin-bottom: var(--spacing-sm); }
+    .timezone-time { font-size: 16px; font-weight: 500; color: var(--color-primary); margin-bottom: var(--spacing-xs); font-family: 'Roboto Mono', monospace; }
+    .timezone-location { color: var(--color-text-muted); font-size: 12px; }
+
+    /* LAYOUT BASICS */
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .header { text-align: center; color: var(--color-text); margin-bottom: 48px; }
+    .header h1 { font-size: 32px; font-weight: 400; margin-bottom: var(--spacing-sm); color: var(--color-text); }
+    .header p { font-size: 16px; color: var(--color-text-muted); line-height: 1.5; }
+
+    /* ---------- COMPACT QUICK LINKS (replaces old cards) ---------- */
+    .quick-wrap { max-width: 1200px; margin: 0 auto var(--spacing-xl); }
+    .quick-title { font-weight: 600; font-size: 18px; margin: 6px 0 12px; color: var(--color-text); }
+
+    .link-line{
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+      gap:8px; line-height:1.3;
     }
-    
-    .nav-brand a {
-      color: inherit;
-      text-decoration: none;
-      transition: opacity var(--transition-base);
-    }
-    
-    .nav-brand a:hover {
-      opacity: 0.8;
-    }
-    
-    .nav-links { 
-      display: flex;
-      gap: 30px;
-    }
-    
-    .nav-link { 
-      color: var(--color-text-muted);
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 14px;
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: var(--radius-sm);
-      transition: all var(--transition-base);
-    }
-    
-    .nav-link:hover { 
-      color: var(--color-primary);
-      background: #f1f3f4;
-    }
-    
-    .nav-link:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
+    .link-line li{ list-style:none; position:relative; display:flex; align-items:center; }
+    .link-line li:not(:last-child)::after{
+      content:"•"; color:var(--color-text-muted); margin:0 6px; pointer-events:none; user-select:none;
     }
 
-    /* ========== TIMEZONE SECTION ========== */
-    .timezone-section { 
-      background: var(--color-bg-white);
-      border-bottom: 1px solid var(--color-border);
-      padding: var(--spacing-lg) 20px;
-      margin-bottom: var(--spacing-xl);
+    /* rectangular title buttons */
+    .chip{
+      appearance:none; border:1px solid var(--color-border); background:var(--color-bg-white); color:var(--color-text);
+      padding:10px 12px; border-radius: var(--radius-md); font-weight:700; text-decoration:none;
+      display:inline-flex; align-items:center; gap:.5ch;
+      transition:box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+      white-space:nowrap;
     }
-    
-    .timezone-header { 
-      text-align: center;
-      margin-bottom: 25px;
+    .chip:hover, .chip:focus-visible{
+      border-color:var(--color-primary);
+      box-shadow:0 0 0 3px rgba(26,115,232,.15);
+      outline:0; transform:translateY(-1px)
     }
-    
-    .timezone-header h2 { 
-      color: var(--color-text);
-      font-size: 28px;
-      font-weight: 400;
-      margin: 0 0 20px;
-    }
-    
-    .timezone-grid { 
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .timezone-item { 
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-md);
-      text-align: center;
-      transition: all var(--transition-base);
-    }
-    
-    .timezone-item:hover { 
-      box-shadow: var(--shadow-md);
-      border-color: var(--color-primary);
-      transform: translateY(-2px);
-    }
-    
-    .timezone-flag { 
-      font-size: 20px;
-      margin-bottom: var(--spacing-sm);
-    }
-    
-    .timezone-time { 
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-xs);
-      font-family: 'Roboto Mono', monospace;
-    }
-    
-    .timezone-location { 
-      color: var(--color-text-muted);
-      font-size: 12px;
-    }
+    .chip .ico{ color:var(--color-primary) }
 
-    /* ========== CONTAINER & HEADER ========== */
-    .container { 
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+    /* tooltip bubble (offset 15px from button) */
+    .tip{
+      position:absolute; z-index:20; inset:auto auto calc(100% + 15px) 50%;
+      transform:translateX(-50%) scale(.98); transform-origin:bottom center;
+      background:var(--color-bg-white); color:var(--color-text); border:1px solid var(--color-border);
+      border-radius:var(--radius-lg); padding:12px 14px; min-width:260px; max-width:300px;
+      box-shadow:var(--shadow-lg); display:none;
     }
-    
-    .header { 
-      text-align: center;
-      color: var(--color-text);
-      margin-bottom: 48px;
+    .tip::after{
+      content:""; position:absolute; left:50%; bottom:-8px; transform:translateX(-50%);
+      border:8px solid transparent; border-top-color:var(--color-bg-white);
+      filter:drop-shadow(0 2px 2px rgba(0,0,0,.06));
     }
-    
-    .header h1 { 
-      font-size: 32px;
-      font-weight: 400;
-      margin-bottom: var(--spacing-sm);
-      color: var(--color-text);
+    .tip p{ margin:0 0 10px 0; color:var(--color-text-muted); font-size:14px; line-height:1.35 }
+    .tip a.btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.5ch;
+      padding:10px 12px; border-radius: var(--radius-md); background:var(--color-primary); color:#fff; text-decoration:none; font-weight:700;
     }
-    
-    .header p { 
-      font-size: 16px;
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
+    .tip a.btn:hover{ background:var(--color-primary-hover); }
 
-    /* ========== FORM STYLES ========== */
-    .form-wrap { 
-      max-width: 900px;
-      margin: 0 auto 32px;
+    /* show tooltip on hover/focus (desktop pointers) */
+    @media (hover:hover) and (pointer:fine){
+      .link-line li:has(.chip:hover) .tip,
+      .link-line li:has(.chip:focus-visible) .tip { display:block; animation:pop .14s ease-out both }
     }
-    
-    .form-card {
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .form-card h2 {
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 6px;
-    }
-    
-    .form-muted { 
-      color: var(--color-text-muted);
-      font-size: 14px;
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-md);
-    }
-    
-    .form-grid .full { 
-      grid-column: 1 / -1;
-    }
-    
-    .field { 
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    
-    .label { 
-      font-size: 13px;
-      color: #374151;
-      font-weight: 600;
-    }
-    
-    .input, .select, .textarea {
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 14px;
-      color: var(--color-text);
-      background: var(--color-bg-white);
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    }
-    
-    .input:focus, .select:focus, .textarea:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, .15);
-    }
-    
-    .textarea { 
-      min-height: 100px;
-      resize: vertical;
-    }
-    
-    .help { 
-      font-size: 12px;
-      color: #6b7280;
-    }
-    
-    .check-row { 
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .actions { 
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--spacing-sm);
-      padding: 12px var(--spacing-md);
-      border-radius: var(--radius-md);
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      background: var(--color-primary);
-      color: var(--color-bg-white);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-      min-height: 44px; /* Better touch target */
-    }
-    
-    .btn:hover { 
-      background: var(--color-primary-hover);
-      box-shadow: 0 2px 8px rgba(26, 115, 232, .25);
-      transform: translateY(-1px);
-    }
-    
-    .btn:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-    
-    .btn:active {
-      transform: translateY(0);
-    }
-    
-    .btn.secondary { 
-      background: var(--color-bg-white);
-      color: var(--color-primary);
-      border: 2px solid var(--color-primary);
-    }
-    
-    .btn.secondary:hover { 
-      background: #ebf3ff;
-    }
-    
-    .inline-note { 
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: var(--spacing-xs);
-    }
+    @keyframes pop{ from{opacity:0; transform:translateX(-50%) translateY(4px) scale(.98)} to{opacity:1; transform:translateX(-50%) translateY(0) scale(1)} }
 
-    /* ========== VOLUNTEER CARDS ========== */
-    .volunteer-cards { 
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-    
-    .volunteer-cards .card {
-      flex: 0 1 300px;
-      max-width: 350px;
-    }
-    
-    .card { 
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-      transition: all var(--transition-base);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card:hover { 
-      box-shadow: var(--shadow-lg);
-      border-color: var(--color-primary);
-      transform: translateY(-4px);
-    }
-    
-    .card-icon { 
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      margin: 0 auto var(--spacing-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: var(--color-bg-white);
-      background: var(--color-primary);
-    }
-    
-    .card h3 { 
-      font-size: 20px;
-      color: var(--color-text);
-      margin-bottom: var(--spacing-sm);
-      text-align: center;
-      font-weight: 500;
-    }
-    
-    .card p { 
-      color: var(--color-text-muted);
-      line-height: 1.5;
-      margin-bottom: var(--spacing-md);
-      text-align: center;
-      font-size: 14px;
-    }
-    
-    .card-button { 
-      display: block;
-      width: 100%;
-      padding: 12px var(--spacing-lg);
-      background: var(--color-primary);
-      color: var(--color-bg-white);
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      text-align: center;
-      font-weight: 500;
-      font-size: 14px;
-      transition: all var(--transition-base);
-      border: none;
-      cursor: pointer;
-      min-height: 44px; /* Better touch target */
-    }
-    
-    .card-button:hover { 
-      background: var(--color-primary-hover);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-    
-    .card-button:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
+    /* HACKATHONS LIST */
+    .hackathons-section { background: var(--color-bg-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-xl); max-width: 1200px; margin: 0 auto var(--spacing-xl); }
+    .hackathons-section h2 { color: var(--color-text); font-size: 28px; font-weight: 500; margin-bottom: var(--spacing-xl); text-align: center; position: relative; }
+    .section-header { margin-bottom: var(--spacing-lg); }
+    .section-header h3 { color: var(--color-text); font-size: 20px; font-weight: 500; margin-bottom: var(--spacing-xs); }
+    .section-header p { color: var(--color-text-muted); font-size: 14px; margin: 0; }
 
-    /* ========== HACKATHONS SECTION ========== */
-    .hackathons-section { 
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-xl);
-      max-width: 1200px;
-      margin: 0 auto var(--spacing-xl);
-    }
-    
-    .hackathons-section h2 { 
-      color: var(--color-text);
-      font-size: 28px;
-      font-weight: 500;
-      margin-bottom: var(--spacing-xl);
-      text-align: center;
-      position: relative;
-    }
-    
-    .section-header { 
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .section-header h3 { 
-      color: var(--color-text);
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: var(--spacing-xs);
-    }
-    
-    .section-header p { 
-      color: var(--color-text-muted);
-      font-size: 14px;
-      margin: 0;
-    }
+    .hackathons-list { display: grid; gap: 15px; }
+    .hackathon-item { background: var(--color-bg-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; display: grid; grid-template-columns: 1fr auto auto auto; gap: var(--spacing-md); align-items: center; transition: all var(--transition-base); }
+    .hackathon-item:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); transform: translateX(4px); }
+    .hackathon-info { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+    .hackathon-name { font-weight: 500; color: var(--color-text); font-size: 16px; margin-bottom: var(--spacing-xs); }
+    .hackathon-date { color: var(--color-text-muted); font-size: 13px; }
+    .hackathon-mode { padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
+    .mode-virtual { background: #e8f0fe; color: var(--color-primary); border: 1px solid #d2e3fc; }
+    .mode-person { background: var(--color-success-bg); color: var(--color-success); border: 1px solid #ceead6; }
+    .mode-hybrid { background: var(--color-warning-bg); color: #ea8600; border: 1px solid #fde68a; }
+    .mode-tbd { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
 
-    .hackathons-list { 
-      display: grid;
-      gap: 15px;
-    }
-    
-    .hackathon-item { 
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 1fr auto auto auto;
-      gap: var(--spacing-md);
-      align-items: center;
-      transition: all var(--transition-base);
-    }
-    
-    .hackathon-item:hover { 
-      box-shadow: var(--shadow-md);
-      border-color: var(--color-primary);
-      transform: translateX(4px);
-    }
-    
-    .hackathon-info { 
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-xs);
-    }
-    
-    .hackathon-name { 
-      font-weight: 500;
-      color: var(--color-text);
-      font-size: 16px;
-      margin-bottom: var(--spacing-xs);
-    }
-    
-    .hackathon-date { 
-      color: var(--color-text-muted);
-      font-size: 13px;
-    }
-    
-    .hackathon-mode { 
-      padding: var(--spacing-xs) var(--spacing-sm);
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .3px;
-      white-space: nowrap;
-    }
-    
-    .mode-virtual { 
-      background: #e8f0fe;
-      color: var(--color-primary);
-      border: 1px solid #d2e3fc;
-    }
-    
-    .mode-person { 
-      background: var(--color-success-bg);
-      color: var(--color-success);
-      border: 1px solid #ceead6;
-    }
-    
-    .mode-hybrid { 
-      background: var(--color-warning-bg);
-      color: #ea8600;
-      border: 1px solid #fde68a;
-    }
-    
-    .mode-tbd { 
-      background: #f3f4f6;
-      color: #6b7280;
-      border: 1px solid #d1d5db;
-    }
+    .hackathon-countdown { background: var(--color-bg); color: var(--color-text); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; text-align: center; min-width: 80px; white-space: nowrap; }
+    .countdown-upcoming { background: #e8f0fe; color: var(--color-primary); border: 1px solid #d2e3fc; }
+    .countdown-past { background: #fce8e6; color: var(--color-danger); border: 1px solid #f9dedc; }
 
-    .hackathon-countdown { 
-      background: var(--color-bg);
-      color: var(--color-text);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      font-weight: 500;
-      text-align: center;
-      min-width: 80px;
-      white-space: nowrap;
-    }
-    
-    .countdown-upcoming { 
-      background: #e8f0fe;
-      color: var(--color-primary);
-      border: 1px solid #d2e3fc;
-    }
-    
-    .countdown-past { 
-      background: #fce8e6;
-      color: var(--color-danger);
-      border: 1px solid #f9dedc;
-    }
+    .hackathon-link { background: var(--color-primary); color: var(--color-bg-white); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); text-decoration: none; font-weight: 500; font-size: 14px; transition: all var(--transition-base); min-height: 44px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+    .hackathon-link:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); transform: scale(1.05); }
+    .hackathon-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 
-    .hackathon-link { 
-      background: var(--color-primary);
-      color: var(--color-bg-white);
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
-      transition: all var(--transition-base);
-      min-height: 44px; /* Better touch target */
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-    }
-    
-    .hackathon-link:hover { 
-      background: var(--color-primary-hover);
-      box-shadow: var(--shadow-md);
-      transform: scale(1.05);
-    }
-    
-    .hackathon-link:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
+    /* FOOTER */
+    .cc-blue { background: var(--color-primary); }
+    .footer { color: var(--color-bg-white); padding: var(--spacing-xl) 0 48px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+    .footer h3 { font-size: 18px; font-weight: 500; margin-bottom: var(--spacing-md); color: var(--color-bg-white); }
+    .footer p { font-size: 14px; opacity: .8; margin-bottom: var(--spacing-md); line-height: 1.5; }
+    .footer ul { list-style: none; padding: 0; margin: 0; }
+    .footer li { margin-bottom: var(--spacing-sm); }
+    .footer a { color: var(--color-bg-white); text-decoration: none; font-size: 14px; opacity: .8; transition: opacity var(--transition-base); }
+    .footer a:hover { opacity: 1; text-decoration: underline; }
+    .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+    .social-link { display: flex; flex-direction: column; align-items: center; color: var(--color-bg-white); text-decoration: none; padding: var(--spacing-sm); transition: all var(--transition-base); border-radius: var(--radius-sm); }
+    .social-link:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+    .social-link i { font-size: 18px; margin-bottom: var(--spacing-xs); }
+    .social-link span { font-size: 11px; text-align: center; }
+    .footer-bottom { margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid rgba(255, 255, 255, .2); text-align: center; }
+    .footer-bottom p { font-size: 14px; opacity: .8; margin-bottom: var(--spacing-sm); }
+    .footer-bottom .credits { font-size: 12px; opacity: .6; }
+    .footer-bottom .credits a { color: #7dd3fc; text-decoration: none; font-weight: 500; }
+    .footer-bottom .credits a:hover { color: #bae6fd; }
 
-    /* ========== FOOTER ========== */
-    .cc-blue { 
-      background: var(--color-primary);
-    }
-    
-    .footer { 
-      color: var(--color-bg-white);
-      padding: var(--spacing-xl) 0 48px;
-    }
-    
-    .footer-container { 
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    .footer-grid { 
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .footer h3 { 
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: var(--spacing-md);
-      color: var(--color-bg-white);
-    }
-    
-    .footer p { 
-      font-size: 14px;
-      opacity: .8;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.5;
-    }
-    
-    .footer ul { 
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .footer li { 
-      margin-bottom: var(--spacing-sm);
-    }
-    
-    .footer a { 
-      color: var(--color-bg-white);
-      text-decoration: none;
-      font-size: 14px;
-      opacity: .8;
-      transition: opacity var(--transition-base);
-    }
-    
-    .footer a:hover { 
-      opacity: 1;
-      text-decoration: underline;
-    }
-    
-    .social-grid { 
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-sm);
-      margin-top: var(--spacing-md);
-    }
-    
-    .social-link { 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: var(--color-bg-white);
-      text-decoration: none;
-      padding: var(--spacing-sm);
-      transition: all var(--transition-base);
-      border-radius: var(--radius-sm);
-    }
-    
-    .social-link:hover { 
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-    
-    .social-link i { 
-      font-size: 18px;
-      margin-bottom: var(--spacing-xs);
-    }
-    
-    .social-link span { 
-      font-size: 11px;
-      text-align: center;
-    }
-    
-    .footer-bottom { 
-      margin-top: var(--spacing-xl);
-      padding-top: var(--spacing-lg);
-      border-top: 1px solid rgba(255, 255, 255, .2);
-      text-align: center;
-    }
-    
-    .footer-bottom p { 
-      font-size: 14px;
-      opacity: .8;
-      margin-bottom: var(--spacing-sm);
-    }
-    
-    .footer-bottom .credits { 
-      font-size: 12px;
-      opacity: .6;
-    }
-    
-    .footer-bottom .credits a { 
-      color: #7dd3fc;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    
-    .footer-bottom .credits a:hover { 
-      color: #bae6fd;
-    }
-
-    /* ========== POLICY NOTE ========== */
-    .policy-note {
-      background: var(--color-warning-bg);
-      border: 1px solid #fde68a;
-      color: #8a4b00;
-      border-radius: var(--radius-md);
-      padding: 14px var(--spacing-md);
-      margin: 0 0 20px 0;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      align-items: start;
-      font-size: 14px;
-    }
-    
-    .policy-note .icon { 
-      font-size: 18px;
-      line-height: 1;
-    }
-    
-    .policy-note strong { 
-      font-weight: 600;
-    }
-
-    /* ========== BADGES ========== */
-    .card .subtext { 
-      color: #6b7280;
-      font-size: 12px;
-      margin-top: var(--spacing-sm);
-      text-align: center;
-    }
-    
-    .badge { 
-      display: inline-block;
-      padding: var(--spacing-xs) var(--spacing-sm);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    
-    .badge-live { 
-      background: var(--color-success-bg);
-      color: var(--color-success);
-      border: 1px solid #ceead6;
-    }
-    
-    .badge-warn { 
-      background: var(--color-warning-bg);
-      color: var(--color-warning);
-      border: 1px solid #fde68a;
-    }
-    
-    .badge-lock { 
-      background: #f3f4f6;
-      color: #374151;
-      border: 1px solid #d1d5db;
-    }
-
-    /* ========== RESPONSIVE DESIGN ========== */
-    
-    /* Tablet: 600-768px */
+    /* RESPONSIVE */
     @media (max-width: 768px) and (min-width: 601px) {
-      .nav-links { 
-        gap: 20px;
-      }
-      
-      .nav-link { 
-        font-size: 13px;
-        padding: 6px 12px;
-      }
-      
-      .hackathon-item { 
-        grid-template-columns: 1fr auto auto;
-        gap: 12px;
-      }
-      
-      .hackathon-mode { 
-        grid-row: 2;
-        grid-column: 1;
-      }
-      
-      .volunteer-cards { 
-        justify-content: center;
-      }
-      
-      .volunteer-cards .card {
-        flex: 0 1 calc(50% - 10px);
-      }
+      .nav-links { gap: 20px; }
+      .nav-link { font-size: 13px; padding: 6px 12px; }
+      .hackathon-item { grid-template-columns: 1fr auto auto; gap: 12px; }
+      .hackathon-mode { grid-row: 2; grid-column: 1; }
     }
-
-    /* Mobile: Max 768px */
     @media (max-width: 768px) {
-      .nav-container { 
-        flex-direction: column;
-        gap: 12px;
-      }
-      
-      .nav-links { 
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--spacing-sm);
-      }
-      
-      .nav-link { 
-        font-size: 11px;
-        padding: 6px 10px;
-        white-space: nowrap;
-      }
-      
-      .timezone-grid { 
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-      
-      .timezone-item { 
-        padding: 12px;
-      }
-      
-      .timezone-location { 
-        font-size: 10px;
-      }
-      
-      .header h1 { 
-        font-size: 24px;
-      }
-      
-      .header p { 
-        font-size: 14px;
-        padding: 0 10px;
-      }
-      
-      .volunteer-cards { 
-        gap: 20px;
-        justify-content: center;
-      }
-      
-      .volunteer-cards .card {
-        flex: 0 1 calc(50% - 10px);
-        max-width: 100%;
-      }
-      
-      .hackathon-item { 
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 10px;
-        padding: var(--spacing-md);
-      }
-      
-      .hackathon-info { 
-        text-align: center;
-        margin-bottom: var(--spacing-sm);
-      }
-      
-      .hackathon-name { 
-        font-size: 14px;
-        line-height: 1.3;
-      }
-      
-      .hackathon-date { 
-        font-size: 12px;
-      }
-      
-      .hackathon-mode, .hackathon-countdown { 
-        font-size: 11px;
-        padding: var(--spacing-xs) var(--spacing-sm);
-      }
-      
-      .hackathon-link { 
-        font-size: 12px;
-        padding: var(--spacing-sm) 12px;
-        width: 100%;
-      }
-      
-      .card { 
-        padding: 18px;
-      }
-      
-      .card h3 { 
-        font-size: 18px;
-      }
-      
-      .card p { 
-        font-size: 13px;
-      }
-      
-      .footer-grid { 
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .social-grid { 
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .form-grid { 
-        grid-template-columns: 1fr;
-      }
-    }
+      .nav-container { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: var(--spacing-sm); }
+      .nav-link { font-size: 11px; padding: 6px 10px; white-space: nowrap; }
+      .timezone-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .timezone-item { padding: 12px; }
+      .timezone-location { font-size: 10px; }
+      .header h1 { font-size: 24px; }
+      .header p { font-size: 14px; padding: 0 10px; }
 
-    /* Small Mobile: Max 480px */
+      /* Mobile tooltips: expand inline */
+      .tip{ position:static; transform:none; inset:auto; max-width:unset; min-width:unset; width:100%; margin-top:8px; display:none; }
+      .tip::after{ display:none }
+      .link-line li.open .tip{ display:block }
+    }
     @media (max-width: 480px) {
-      .nav-link { 
-        font-size: 10px;
-        padding: 5px var(--spacing-sm);
-      }
-      
-      .timezone-grid { 
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-      
-      .timezone-item { 
-        padding: 10px;
-      }
-      
-      .header h1 { 
-        font-size: 20px;
-      }
-      
-      .hackathons-section { 
-        padding: 20px var(--spacing-md);
-      }
-      
-      .hackathon-item { 
-        padding: 12px;
-        gap: var(--spacing-sm);
-      }
-      
-      .container { 
-        padding: var(--spacing-md);
-      }
+      .nav-link { font-size: 10px; padding: 5px var(--spacing-sm); }
+      .timezone-grid { grid-template-columns: 1fr; gap: 10px; }
+      .timezone-item { padding: 10px; }
+      .header h1 { font-size: 20px; }
+      .hackathons-section { padding: 20px var(--spacing-md); }
+      .hackathon-item { padding: 12px; gap: var(--spacing-sm); }
+      .container { padding: var(--spacing-md); }
     }
 
-    /* ========== ACCESSIBILITY ========== */
-    
-    /* Focus visible for keyboard navigation */
-    *:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    /* Reduced motion support */
+    *:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
-
-    /* High contrast mode support */
     @media (prefers-contrast: high) {
-      .card, .hackathon-item, .timezone-item {
-        border-width: 2px;
-      }
-      
-      .btn, .card-button, .hackathon-link {
-        border: 2px solid currentColor;
-      }
+      .hackathon-item, .timezone-item { border-width: 2px; }
+      .chip, .btn, .hackathon-link { border: 2px solid currentColor; }
     }
-
-    /* Dark mode disabled - keeping white background always */
   </style>
 </head>
 <body>
@@ -989,7 +246,7 @@
     </div>
   </nav>
 
-  <!-- Page Title / Hero (Tailwind-based) -->
+  <!-- Page Title / Hero -->
   <header class="w-full bg-gray-50 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
@@ -1044,62 +301,71 @@
   </div>
 
   <div class="container">
-    <!-- Volunteer/Info Cards Section -->
-    <div class="volunteer-cards">
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-book"></i>
-        </div>
-        <h3>Hacker Guide</h3>
-        <p>Everything you need to know to participate in our hackathons. Get started with tips, rules, and resources.</p>
-        <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" class="card-button">View Guide</a>
-      </div>
+    <!-- NEW: Quick Links (replaces old cards) -->
+    <section class="quick-wrap">
+      <div class="quick-title">Quick Links</div>
+      <ul class="link-line" id="quick-links" aria-label="Hack University quick links">
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" aria-describedby="tip-guide">
+            <i class="ico fas fa-book"></i> Hacker Guide
+          </a>
+          <div class="tip" id="tip-guide" role="tooltip">
+            <p>Everything you need to participate: tips, rules, and starter resources.</p>
+            <a class="btn" href="https://codecrunchglobal.vercel.app/hacks-toolkit.html">View Guide</a>
+          </div>
+        </li>
 
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <h3>Hackathon Registration</h3>
-        <p>Register for upcoming hackathons and secure your spot. Join us in building amazing projects!</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" class="card-button">Register Now</a>
-      </div>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" aria-describedby="tip-reg">
+            <i class="ico fas fa-user-plus"></i> Hackathon Registration
+          </a>
+          <div class="tip" id="tip-reg" role="tooltip">
+            <p>Register for upcoming hackathons and secure your spot.</p>
+            <a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html">Register Now</a>
+          </div>
+        </li>
 
-      <div class="card">
-        <div class="card-icon">
-          <i class="fab fa-discord"></i>
-        </div>
-        <h3>Discord Community</h3>
-        <p>Join our Discord server to connect with fellow hackers, get support, and stay updated on events.</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" class="card-button" target="_blank" rel="noopener">Join Discord</a>
-      </div>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" aria-describedby="tip-discord" target="_blank" rel="noopener">
+            <i class="ico fab fa-discord"></i> Discord Community
+          </a>
+          <div class="tip" id="tip-discord" role="tooltip">
+            <p>Connect with fellow hackers, get support, and stay updated.</p>
+            <a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" target="_blank" rel="noopener">Join Discord</a>
+          </div>
+        </li>
 
-      <div class="card">
-        <div class="card-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <h3>Hack University GroupMe</h3>
-        <p>Stay connected with the Hack University community through our GroupMe for quick updates and discussions.</p>
-        <a href="https://hackuniversityplatforms.vercel.app/" class="card-button" target="_blank" rel="noopener">Join GroupMe</a>
-      </div>
+        <li>
+          <a class="chip" href="https://hackuniversityplatforms.vercel.app/" aria-describedby="tip-gm" target="_blank" rel="noopener">
+            <i class="ico fas fa-users"></i> Hack University GroupMe
+          </a>
+          <div class="tip" id="tip-gm" role="tooltip">
+            <p>Quick updates and discussions with the HU community.</p>
+            <a class="btn" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">Join GroupMe</a>
+          </div>
+        </li>
 
-      <div class="card">
-        <div class="card-icon">
-          <i class="fab fa-instagram"></i>
-        </div>
-        <h3>Hack University IG</h3>
-        <p>Follow us on Instagram for event highlights, behind-the-scenes content, and community updates.</p>
-        <a href="https://hackuniversityplatforms.vercel.app/" class="card-button" target="_blank" rel="noopener">Follow on IG</a>
-      </div>
+        <li>
+          <a class="chip" href="https://hackuniversityplatforms.vercel.app/" aria-describedby="tip-ig" target="_blank" rel="noopener">
+            <i class="ico fab fa-instagram"></i> Instagram Group
+          </a>
+          <div class="tip" id="tip-ig" role="tooltip">
+            <p>Event highlights, behind-the-scenes, and community updates.</p>
+            <a class="btn" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">Open Instagram</a>
+          </div>
+        </li>
 
-      <div class="card">
-        <div class="card-icon">
-          <i class="far fa-calendar-alt"></i>
-        </div>
-        <h3>Google Calendar</h3>
-        <p>Add our events to your Google Calendar and never miss a hackathon, workshop, or meeting.</p>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" class="card-button" target="_blank" rel="noopener">View Calendar</a>
-      </div>
-    </div>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" aria-describedby="tip-cal" target="_blank" rel="noopener">
+            <i class="ico far fa-calendar-alt"></i> Google Calendar
+          </a>
+          <div class="tip" id="tip-cal" role="tooltip">
+            <p>Add events to your calendar and never miss a workshop or hack.</p>
+            <a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener">View Calendar</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
     <!-- HACK OPERATIONS / EVENTS -->
     <div class="hackathons-section">
@@ -1174,60 +440,51 @@
       const [y, m, d] = ymd.split('-').map(Number);
       return new Date(y, m - 1, d);
     }
-    
     function nowInMiami() {
       return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     }
-    
     function formatDateMiami(dateStr) {
       const d = asLocalDate(dateStr);
-      return d.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        timeZone: 'America/New_York'
-      });
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/New_York' });
     }
-    
     function getETAbbrev(date = nowInMiami()) {
       const miami = new Date(date.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-      return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST'; // 240=EDT, 300=EST
+      return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST';
     }
-
-    // Status helper (X days -> Live -> Completed), inclusive of end date
     function getEventStatus(startDateStr, endDateStr) {
-      const start = asLocalDate(startDateStr);
-      start.setHours(0, 0, 0, 0);
-      const end = asLocalDate(endDateStr);
-      end.setHours(23, 59, 59, 999);
-
+      const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
+      const end = asLocalDate(endDateStr);     end.setHours(23,59,59,999);
       const now = nowInMiami();
-      const today = new Date(now);
-      today.setHours(0, 0, 0, 0);
-
+      const today = new Date(now); today.setHours(0,0,0,0);
       if (today < start) {
         const diffDays = Math.ceil((start - today) / (1000 * 60 * 60 * 24));
         return { text: `${diffDays} days`, isPast: false, isLive: false };
       }
-      if (now <= end) {
-        return { text: 'Live', isPast: false, isLive: true };
-      }
+      if (now <= end) return { text: 'Live', isPast: false, isLive: true };
       return { text: 'Completed', isPast: true, isLive: false };
     }
 
     /* ---------- Hackathon data ---------- */
     const hackathons = [
+      { name: '🪖 305 Hackathon | Edition November 2025 — Veterans &amp; DefenseTech Hack', startDate: '2025-11-07', endDate: '2025-11-15', modality: 'Two Sessions Online: Session A (Synchronous) Session B — In-Person', url: 'https://305hacknov2025.vercel.app/' },
       { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', url: 'https://305hackfall2025.vercel.app' },
       { name: '👑 EmpowHER Hackathon 2025', startDate: '2025-10-13', endDate: '2025-10-20', modality: 'virtual', url: 'https://empowherhack2025.vercel.app/' },
       { name: '👑 EmpowHER HackDAY 2025', startDate: '2025-10-18', endDate: '2025-10-18', modality: 'in-person', url: 'https://empowherhackdayfall25.vercel.app/' },
       { name: '🎆 CodeFest 2025', startDate: '2025-12-08', endDate: '2025-12-15', modality: 'virtual', url: 'https://codefesthack2025.vercel.app/' },
       { name: '🔥 HackFiesta Miami 2026', startDate: '2026-03-09', endDate: '2026-03-15', modality: 'virtual', url: 'https://hackfiestamiami2026.vercel.app/' },
       { name: '⚡ 305 Hackathon: Spring edition 2026', startDate: '2026-03-20', endDate: '2026-03-22', modality: 'tbd', url: 'https://305hackspring2026.vercel.app/' },
-      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', url: '#' },
-      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', url: '#' },
-      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', url: '#' },
-      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', url: '#' }
+      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', url: 'https://summercodexhack2025.vercel.app/' },
+      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', url: 'https://codestormhack2025.vercel.app/' },
+      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', url: 'https://305hackspring2025.vercel.app/' },
+      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', url: 'https://hackfiestamiami2025.vercel.app/' }
     ];
+
+
+
+
+
+
+
 
     function getModalityClass(modality) {
       switch (modality.toLowerCase()) {
@@ -1238,7 +495,6 @@
         default: return 'mode-tbd';
       }
     }
-    
     function getModalityText(modality) {
       switch (modality.toLowerCase()) {
         case 'in-person': return 'In Person';
@@ -1254,9 +510,7 @@
       const upcoming = [];
       const past = [];
 
-      const sorted = [...hackathons].sort(
-        (a, b) => asLocalDate(a.startDate) - asLocalDate(b.startDate)
-      );
+      const sorted = [...hackathons].sort((a, b) => asLocalDate(a.startDate) - asLocalDate(b.startDate));
 
       sorted.forEach(h => {
         const startDate = asLocalDate(h.startDate);
@@ -1282,11 +536,7 @@
           </div>
         `;
 
-        if (endDate < now) {
-          past.push(html);
-        } else {
-          upcoming.push(html);
-        }
+        if (endDate < now) { past.push(html); } else { upcoming.push(html); }
       });
 
       document.getElementById('upcoming-events').innerHTML = upcoming.length > 0 
@@ -1323,36 +573,32 @@
       document.getElementById('mumbai-time').textContent = mumbai.toTimeString().split(' ')[0];
     }
 
-    // Initialize page
+    // Init
     document.addEventListener('DOMContentLoaded', function () {
       renderHackathons();
       updateTimes();
-      setInterval(updateTimes, 1000);         // live clocks
-      setInterval(renderHackathons, 3600000); // refresh status hourly
+      setInterval(updateTimes, 1000);
+      setInterval(renderHackathons, 3600000);
 
-      // Click/touch effects + smooth scroll
-      const interactive = document.querySelectorAll('.card-button, .hackathon-link, .btn');
-      interactive.forEach(el => {
-        el.addEventListener('click', function () {
-          this.style.transform = 'scale(0.97)';
-          setTimeout(() => { this.style.transform = ''; }, 120);
-        });
-        el.addEventListener('touchstart', function () { this.style.opacity = '0.9'; });
-        el.addEventListener('touchend', function () { this.style.opacity = ''; });
+      // Mobile: toggle quick-link tooltips inline
+      const list = document.getElementById('quick-links');
+      function closeAll(){ list.querySelectorAll('li.open').forEach(li => li.classList.remove('open')); }
+      list.addEventListener('click', (e) => {
+        const chip = e.target.closest('.chip');
+        if (!chip) return;
+        if (window.matchMedia('(max-width:768px)').matches) {
+          e.preventDefault();
+          const li = chip.closest('li');
+          const wasOpen = li.classList.contains('open');
+          closeAll();
+          if (!wasOpen) li.classList.add('open');
+        }
       });
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const targetSel = this.getAttribute('href');
-          if (targetSel && targetSel !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(targetSel);
-            if (target) { 
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-            }
-          }
-        });
+      document.addEventListener('click', (e) => {
+        if (!window.matchMedia('(max-width:768px)').matches) return;
+        if (!e.target.closest('#quick-links')) closeAll();
       });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
     });
   </script>
 </body>

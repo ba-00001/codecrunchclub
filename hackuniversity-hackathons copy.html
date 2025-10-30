@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Crunch - Volunteer Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      --color-primary:#1a73e8; --color-primary-hover:#1557b0; --color-text:#202124; --color-text-muted:#5f6368;
+      --color-border:#dadce0; --color-bg:#f8f9fa; --color-bg-white:#fff; --color-success:#137333; --color-success-bg:#e6f4ea;
+      --color-warning:#b45309; --color-warning-bg:#fff4e5; --color-danger:#d33b01;
+      --spacing-xs:4px; --spacing-sm:8px; --spacing-md:16px; --spacing-lg:24px; --spacing-xl:32px;
+      --radius-sm:4px; --radius-md:8px; --radius-lg:10px;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.04); --shadow-md:0 1px 6px rgba(32,33,36,.28); --shadow-lg:0 2px 10px rgba(32,33,36,.28);
+      --transition-fast:.15s ease; --transition-base:.2s ease;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--color-bg);min-height:100vh;color:var(--color-text);line-height:1.5}
+
+    /* NAV */
+    .navbar{background:var(--color-bg-white);border-bottom:1px solid var(--color-border);padding:12px 0;position:sticky;top:0;z-index:1000;box-shadow:var(--shadow-sm)}
+    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+    .nav-brand{font-size:22px;font-weight:500;color:var(--color-primary)}
+    .nav-brand a{color:inherit;text-decoration:none;transition:opacity var(--transition-base)}
+    .nav-brand a:hover{opacity:.8}
+    .nav-links{display:flex;gap:30px}
+    .nav-link{color:var(--color-text-muted);text-decoration:none;font-weight:400;font-size:14px;padding:var(--spacing-sm) var(--spacing-md);border-radius:var(--radius-sm);transition:all var(--transition-base)}
+    .nav-link:hover{color:var(--color-primary);background:#f1f3f4}
+    .nav-link:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+
+    /* TIMEZONE */
+    .timezone-section{background:var(--color-bg-white);border-bottom:1px solid var(--color-border);padding:var(--spacing-lg) 20px;margin-bottom:var(--spacing-xl)}
+    .timezone-header{text-align:center;margin-bottom:25px}
+    .timezone-header h2{color:var(--color-text);font-size:28px;font-weight:400;margin:0 0 20px}
+    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+    .timezone-item{background:var(--color-bg-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-align:center;transition:all var(--transition-base)}
+    .timezone-item:hover{box-shadow:var(--shadow-md);border-color:var(--color-primary);transform:translateY(-2px)}
+    .timezone-flag{font-size:20px;margin-bottom:var(--spacing-sm)}
+    .timezone-time{font-size:16px;font-weight:500;color:var(--color-primary);margin-bottom:var(--spacing-xs);font-family:'Roboto Mono',monospace}
+    .timezone-location{color:var(--color-text-muted);font-size:12px}
+
+    /* LAYOUT */
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{text-align:center;color:var(--color-text);margin-bottom:24px}
+    .header h1{font-size:32px;font-weight:400;margin-bottom:var(--spacing-sm);color:var(--color-text)}
+    .header p{font-size:16px;color:var(--color-text-muted);line-height:1.5}
+
+    /* QUICK LINKS (rectangular title chips + tooltips) */
+    .quick-wrap{max-width:1200px;margin:0 auto var(--spacing-xl)}
+    .quick-title{font-weight:600;font-size:18px;margin:6px 0 12px;color:var(--color-text)}
+    .link-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;line-height:1.3}
+    .link-line li{list-style:none;position:relative;display:flex;align-items:center}
+    .link-line li:not(:last-child)::after{content:"•";color:var(--color-text-muted);margin:0 6px;pointer-events:none;user-select:none}
+    .chip{appearance:none;border:1px solid var(--color-border);background:var(--color-bg-white);color:var(--color-text);padding:10px 12px;border-radius:var(--radius-md);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.5ch;transition:box-shadow .15s ease,transform .15s ease,border-color .15s ease;white-space:nowrap}
+    .chip:hover,.chip:focus-visible{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(26,115,232,.15);outline:0;transform:translateY(-1px)}
+    .chip .ico{color:var(--color-primary)}
+    .tip{position:absolute;z-index:20;inset:auto auto calc(100% + 15px) 50%;transform:translateX(-50%) scale(.98);transform-origin:bottom center;background:var(--color-bg-white);color:var(--color-text);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:12px 14px;min-width:260px;max-width:300px;box-shadow:var(--shadow-lg);display:none}
+    .tip::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--color-bg-white);filter:drop-shadow(0 2px 2px rgba(0,0,0,.06))}
+    .tip p{margin:0 0 10px 0;color:var(--color-text-muted);font-size:14px;line-height:1.35}
+    .tip a.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5ch;padding:10px 12px;border-radius:var(--radius-md);background:var(--color-primary);color:#fff;text-decoration:none;font-weight:700}
+    .tip a.btn:hover{background:var(--color-primary-hover)}
+    @media(hover:hover) and (pointer:fine){
+      .link-line li:has(.chip:hover) .tip,
+      .link-line li:has(.chip:focus-visible) .tip{display:block;animation:pop .14s ease-out both}
+    }
+    @keyframes pop{from{opacity:0;transform:translateX(-50%) translateY(4px) scale(.98)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+
+    /* EVENT SPOTLIGHT */
+    .spotlight{max-width:1200px;margin:16px auto 32px;background:#eef3ff;border:1px solid #d6e2ff;border-radius:12px;padding:18px 20px}
+    .spotlight h2{font-size:22px;margin-bottom:8px}
+    .spotlight .meta{color:#334155;font-size:14px;margin-bottom:10px}
+    .pill{display:inline-block;background:#e8f0fe;color:#1557b0;border:1px solid #d2e3fc;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700;margin-right:8px}
+    .bullet{margin-left:18px}
+
+    /* HACKATHON LIST */
+    .hackathons-section{background:var(--color-bg-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-xl);max-width:1200px;margin:0 auto var(--spacing-xl)}
+    .hackathons-section h2{color:var(--color-text);font-size:28px;font-weight:500;margin-bottom:var(--spacing-xl);text-align:center}
+    .section-header{margin-bottom:var(--spacing-lg)}
+    .section-header h3{color:var(--color-text);font-size:20px;font-weight:500;margin-bottom:var(--spacing-xs)}
+    .section-header p{color:var(--color-text-muted);font-size:14px;margin:0}
+    .hackathons-list{display:grid;gap:15px}
+    .hackathon-item{background:var(--color-bg-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:20px;display:grid;grid-template-columns:1fr auto auto auto;gap:var(--spacing-md);align-items:center;transition:all var(--transition-base)}
+    .hackathon-item:hover{box-shadow:var(--shadow-md);border-color:var(--color-primary);transform:translateX(4px)}
+    .hackathon-info{display:flex;flex-direction:column;gap:var(--spacing-xs)}
+    .hackathon-name{font-weight:500;color:var(--color-text);font-size:16px;margin-bottom:var(--spacing-xs)}
+    .hackathon-date{color:var(--color-text-muted);font-size:13px}
+    .hackathon-mode{padding:var(--spacing-xs) var(--spacing-sm);border-radius:var(--radius-sm);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+    .mode-virtual{background:#e8f0fe;color:var(--color-primary);border:1px solid #d2e3fc}
+    .mode-person{background:var(--color-success-bg);color:var(--color-success);border:1px solid #ceead6}
+    .mode-hybrid{background:var(--color-warning-bg);color:#ea8600;border:1px solid #fde68a}
+    .mode-tbd{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
+    .hackathon-countdown{background:var(--color-bg);color:var(--color-text);padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:500;text-align:center;min-width:80px;white-space:nowrap}
+    .countdown-upcoming{background:#e8f0fe;color:var(--color-primary);border:1px solid #d2e3fc}
+    .countdown-past{background:#fce8e6;color:var(--color-danger);border:1px solid #f9dedc}
+    .hackathon-link{background:var(--color-primary);color:#fff;padding:var(--spacing-sm) var(--spacing-md);border-radius:var(--radius-sm);text-decoration:none;font-weight:500;font-size:14px;transition:all var(--transition-base);min-height:44px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+    .hackathon-link:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md);transform:scale(1.05)}
+    .hackathon-link:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+
+    /* FOOTER */
+    .cc-blue{background:var(--color-primary)}
+    .footer{color:#fff;padding:var(--spacing-xl) 0 48px}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--spacing-lg);margin-bottom:var(--spacing-xl)}
+    .footer h3{font-size:18px;font-weight:500;margin-bottom:var(--spacing-md);color:#fff}
+    .footer p{font-size:14px;opacity:.8;margin-bottom:var(--spacing-md);line-height:1.5}
+    .footer ul{list-style:none;padding:0;margin:0}
+    .footer li{margin-bottom:var(--spacing-sm)}
+    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.8;transition:opacity var(--transition-base)}
+    .footer a:hover{opacity:1;text-decoration:underline}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-sm);margin-top:var(--spacing-md)}
+    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:var(--spacing-sm);transition:all var(--transition-base);border-radius:var(--radius-sm)}
+    .social-link:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+    .social-link i{font-size:18px;margin-bottom:var(--spacing-xs)}
+    .social-link span{font-size:11px;text-align:center}
+    .footer-bottom{margin-top:var(--spacing-xl);padding-top:var(--spacing-lg);border-top:1px solid rgba(255,255,255,.2);text-align:center}
+    .footer-bottom p{font-size:14px;opacity:.8;margin-bottom:var(--spacing-sm)}
+    .footer-bottom .credits{font-size:12px;opacity:.6}
+    .footer-bottom .credits a{color:#7dd3fc;text-decoration:none;font-weight:500}
+    .footer-bottom .credits a:hover{color:#bae6fd}
+
+    /* RESPONSIVE */
+    @media (max-width:768px) and (min-width:601px){
+      .nav-links{gap:20px}
+      .nav-link{font-size:13px;padding:6px 12px}
+      .hackathon-item{grid-template-columns:1fr auto auto;gap:12px}
+      .hackathon-mode{grid-row:2;grid-column:1}
+    }
+    @media (max-width:768px){
+      .nav-container{flex-direction:column;gap:12px}
+      .nav-links{flex-wrap:wrap;justify-content:center;gap:var(--spacing-sm)}
+      .nav-link{font-size:11px;padding:6px 10px;white-space:nowrap}
+      .timezone-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+      .timezone-item{padding:12px}
+      .timezone-location{font-size:10px}
+      .header h1{font-size:24px}
+      .header p{font-size:14px;padding:0 10px}
+      /* mobile tooltip becomes inline */
+      .tip{position:static;transform:none;inset:auto;max-width:unset;min-width:unset;width:100%;margin-top:8px;display:none}
+      .tip::after{display:none}
+      .link-line li.open .tip{display:block}
+    }
+    @media (max-width:480px){
+      .nav-link{font-size:10px;padding:5px var(--spacing-sm)}
+      .timezone-grid{grid-template-columns:1fr;gap:10px}
+      .timezone-item{padding:10px}
+      .header h1{font-size:20px}
+      .hackathons-section{padding:20px var(--spacing-md)}
+      .hackathon-item{padding:12px;gap:var(--spacing-sm)}
+      .container{padding:var(--spacing-md)}
+    }
+    *:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
+    @media (prefers-contrast:high){.hackathon-item,.timezone-item{border-width:2px}.chip,.btn,.hackathon-link{border:2px solid currentColor}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="w-full bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p class="text-xs sm:text-sm text-gray-500 mb-2">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        Hackathons Events
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+        Hackathons Events
+      </h1>
+
+      <!-- NEW: What is a hackathon blurb -->
+      <div class="mt-3 text-gray-700">
+        <p class="mb-2"><strong>What’s a hackathon?</strong> A hackathon is a fast-paced <em>problem-solving competition</em> where teams build and demo solutions to real challenges.</p>
+        <p class="text-gray-600">Hack University hackathons include <strong>coding</strong> and <strong>business problem-solving</strong> tracks for <strong>all majors</strong>, open to students <strong>16+</strong> from any university. We also run <strong>no-code challenges</strong> so everyone can participate.</p>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- TIMEZONES -->
+  <div class="timezone-section">
+    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
+    <div class="timezone-grid">
+      <div class="timezone-item"><div class="timezone-flag">🇺🇸 - HQ</div><div class="timezone-time" id="miami-time">--:--:--</div><div class="timezone-location" id="miami-label">Miami, FL (ET)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇪🇺</div><div class="timezone-time" id="london-time">--:--:--</div><div class="timezone-location">London (GMT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🌍</div><div class="timezone-time" id="lagos-time">--:--:--</div><div class="timezone-location">Lagos (WAT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🌏</div><div class="timezone-time" id="tokyo-time">--:--:--</div><div class="timezone-location">Tokyo (JST)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇦🇺</div><div class="timezone-time" id="sydney-time">--:--:--</div><div class="timezone-location">Sydney (AEDT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇮🇳</div><div class="timezone-time" id="mumbai-time">--:--:--</div><div class="timezone-location">Mumbai (IST)</div></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- QUICK LINKS -->
+    <section class="quick-wrap">
+      <div class="quick-title">Quick Links</div>
+      <ul class="link-line" id="quick-links" aria-label="Hack University quick links">
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" aria-describedby="tip-guide"><i class="ico fas fa-book"></i> Hacker Guide</a>
+          <div class="tip" id="tip-guide" role="tooltip"><p>Everything you need to participate: tips, rules, and starter resources.</p><a class="btn" href="https://codecrunchglobal.vercel.app/hacks-toolkit.html">View Guide</a></div>
+        </li>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" aria-describedby="tip-reg"><i class="ico fas fa-user-plus"></i> Hackathon Registration</a>
+          <div class="tip" id="tip-reg" role="tooltip"><p>Register for upcoming hackathons and secure your spot.</p><a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html">Register Now</a></div>
+        </li>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" aria-describedby="tip-discord" target="_blank" rel="noopener"><i class="ico fab fa-discord"></i> Discord Community</a>
+          <div class="tip" id="tip-discord" role="tooltip"><p>Connect with fellow hackers, get support, and stay updated.</p><a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" target="_blank" rel="noopener">Join Discord</a></div>
+        </li>
+        <li>
+          <a class="chip" href="https://hackuniversityplatforms.vercel.app/" aria-describedby="tip-gm" target="_blank" rel="noopener"><i class="ico fas fa-users"></i> Hack University GroupMe</a>
+          <div class="tip" id="tip-gm" role="tooltip"><p>Quick updates and discussions with the HU community.</p><a class="btn" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">Join GroupMe</a></div>
+        </li>
+        <li>
+          <a class="chip" href="https://hackuniversityplatforms.vercel.app/" aria-describedby="tip-ig" target="_blank" rel="noopener"><i class="ico fab fa-instagram"></i> Instagram Group</a>
+          <div class="tip" id="tip-ig" role="tooltip"><p>Event highlights, behind-the-scenes, and community updates.</p><a class="btn" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">Open Instagram</a></div>
+        </li>
+        <li>
+          <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" aria-describedby="tip-cal" target="_blank" rel="noopener"><i class="ico far fa-calendar-alt"></i> Google Calendar</a>
+          <div class="tip" id="tip-cal" role="tooltip"><p>Add events to your calendar and never miss a workshop or hack.</p><a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener">View Calendar</a></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- HACK OPERATIONS / EVENTS -->
+    <div class="hackathons-section">
+      <h2>🚀 HACK OPERATIONS</h2>
+
+      <div class="section-header">
+        <h3>🚀 ACTIVE MISSIONS</h3>
+        <p>Upcoming events sorted by date</p>
+      </div>
+      <div class="hackathons-list" id="upcoming-events"></div>
+
+      <div class="section-header" style="margin-top: 48px;">
+        <h3>📚 PAST EVENTS</h3>
+        <p>Completed hackathons and events</p>
+      </div>
+      <div class="hackathons-list" id="past-events"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p>A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.</p>
+          <p><a href="https://hackuniversity.vercel.app">HackUniversity.vercel.app</a></p>
+          <div>
+            <h4 style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size: 14px; opacity: .8;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Time helpers ---------- */
+    function asLocalDate(ymd){const [y,m,d]=ymd.split('-').map(Number);return new Date(y,m-1,d)}
+    function nowInMiami(){return new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}))}
+    function format
