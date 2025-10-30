@@ -159,6 +159,11 @@
         margin-top: -2px;
       }
 
+
+      .hackathon-mode-wrap{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+}
+
     .hours-badge{
       padding: 6px 10px;
       border-radius: var(--radius-sm);
@@ -572,12 +577,23 @@
               <div class="hackathon-name">${h.name}</div>
               ${h.theme ? `<div class="hackathon-theme">${h.theme}</div>` : ''}
               <div class="hackathon-date">${dateLine}</div>
-            </div>
-            <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
-             ${h.hoursLabel ? `<div class="hours-badge" title="Estimated hacking time">${h.hoursLabel}</div>` : ''}
-            <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
-            <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
-          </div>
+          //   </div>
+          //   <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
+          //   <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
+          //   <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
+          // </div>
+
+              <div class="hackathon-mode-wrap">
+      <div class="hackathon-mode ${getModalityClass(h.modality)}">
+        ${getModalityText(h.modality)}
+      </div>
+      ${h.hoursLabel ? `<div class="hours-badge" title="Estimated hacking time">${h.hoursLabel}</div>` : ''}
+    </div>
+
+    <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
+    <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
+  </div>
+  
         `;
 
         if (endDate < now) { past.push(html); } else { upcoming.push(html); }
