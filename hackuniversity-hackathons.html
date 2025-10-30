@@ -152,6 +152,26 @@
     .hackathon-name { font-weight: 500; color: var(--color-text); font-size: 16px; margin-bottom: var(--spacing-xs); }
     .hackathon-date { color: var(--color-text-muted); font-size: 13px; }
     .hackathon-mode { padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
+    
+    .hackathon-theme{
+        color: var(--color-text-muted);
+        font-size: 12.5px;
+        margin-top: -2px;
+      }
+
+    .hours-badge{
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background:#eef2ff;
+      border:1px solid #dbeafe;
+      color:#1e40af;
+      font-size:12px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+
+    
+    
     .mode-virtual { background: #e8f0fe; color: var(--color-primary); border: 1px solid #d2e3fc; }
     .mode-person { background: var(--color-success-bg); color: var(--color-success); border: 1px solid #ceead6; }
     .mode-hybrid { background: var(--color-warning-bg); color: #ea8600; border: 1px solid #fde68a; }
@@ -466,17 +486,25 @@
 
     /* ---------- Hackathon data ---------- */
     const hackathons = [
-      { 
-        name: '🪖 305 Hackathon | Edition November 2025', 
-        theme: 'Veterans & DefenseTech Hack',
-        startDate: '2025-11-07', 
-        endDate: '2025-11-15', 
-        // Modality updated to reflect new structure
-        modality: 'hybrid', 
-        modalityDescription: 'Two Sessions: Online (Synchronous) & In-Person', // New field for detailed text
-        url: 'https://305hacknov2025.vercel.app/' 
-      },
-    
+
+  {
+    name: '🪖 305 Hackathon: Edition Nov 2025 (Online)',
+    theme: 'Theme: Veterans & DefenseTech',
+    startDate: '2025-11-07',
+    endDate:   '2025-11-15',
+    modality:  'virtual',
+    hoursLabel: '1068 hrs',   // 👈 shown as-is
+    url: 'https://305hacknov2025.vercel.app/'
+  },
+  {
+    name: '🪖 305 Hackathon: Edition Nov 2025 (In-Person)',
+    theme: 'Theme: Veterans & DefenseTech',
+    startDate: '2025-11-15',
+    endDate:   '2025-11-15',
+    modality:  'in-person',
+    hoursLabel: '12 hrs',     // 👈 shown as-is
+    url: 'https://305hacknov2025.vercel.app/'
+  },
     
     { name: '🪖 305 Hackathon | Edition November 2025 — Theme: Veterans &amp; DefenseTech Hack', startDate: '2025-11-07', endDate: '2025-11-15', modality: 'two sessions', url: 'https://305hacknov2025.vercel.app/' },
       { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', url: 'https://305hackfall2025.vercel.app' },
@@ -542,9 +570,11 @@
           <div class="hackathon-item">
             <div class="hackathon-info">
               <div class="hackathon-name">${h.name}</div>
+              ${h.theme ? `<div class="hackathon-theme">${h.theme}</div>` : ''}
               <div class="hackathon-date">${dateLine}</div>
             </div>
             <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
+             ${h.hoursLabel ? `<div class="hours-badge" title="Estimated hacking time">${h.hoursLabel}</div>` : ''}
             <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
             <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
           </div>
