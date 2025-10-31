@@ -43,8 +43,18 @@
     .card-button{ display:block; width:100%; padding:12px 24px; background:#1a73e8; color:#fff; text-decoration:none; border-radius:4px; text-align:center; font-weight:500; font-size:14px; transition:.2s; border:none; cursor:pointer;}
     .card-button:hover{ background:#1557b0; box-shadow:0 1px 3px rgba(32,33,36,.28);}
 
-    .hackathons-section{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:32px;}
-    .hackathons-section h2{ color:#202124; font-size:28px; font-weight:500; margin-bottom:32px; text-align:center; position:relative;}
+
+     /* HACK OPERATIONS container (re-used) */
+    .hackathons-section{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:32px; }
+    .hackathons-section h2{ color:#202124; font-size:28px; font-weight:500; margin-bottom:16px; text-align:center; }
+    
+    .ops-desc{ max-width:820px; margin:0 auto; text-align:center; color:#5f6368; font-size:15px; line-height:1.6; }
+    .ops-cta{ margin-top:22px; display:flex; justify-content:center; }
+    .ops-cta a{ display:inline-flex; align-items:center; gap:.6rem; background:#1a73e8; color:#fff; text-decoration:none; font-weight:600; padding:12px 18px; border-radius:8px; transition:.2s; }
+    .ops-cta a:hover{ background:#1557b0; box-shadow:0 6px 16px rgba(26,115,232,.25); }
+
+
+
     .section-header{ margin-bottom:24px;}
     .section-header h3{ color:#202124; font-size:20px; font-weight:500; margin-bottom:4px;}
     .section-header p{ color:#5f6368; font-size:14px; margin:0;}
@@ -310,29 +320,19 @@
 
     </div>
 
-    <!-- HACK OPERATIONS / EVENTS -->
-    <div class="hackathons-section">
+       <!-- 🚀 HACK OPERATIONS (REPLACED) -->
+    <div class="hackathons-section" id="hack-ops">
       <h2>🚀 HACK OPERATIONS</h2>
-
-      <div class="policy-note" role="note" aria-label="Volunteer policy">
-        <div class="icon">📝</div>
-        <div>
-          <strong>Remote volunteers</strong> are eligible to support <strong>in-person events</strong>.<br>
-          <strong>Preference will be given to in-person volunteers</strong> if the volunteer pool for an event reaches capacity.
-        </div>
+      <p class="ops-desc">
+        Find upcoming hackathons and explore past hackathons on our Hack University
+        <strong>Participate</strong> page.
+      </p>
+      <div class="ops-cta">
+        <a href="https://hackuniversity-hackathons.vercel.app/" target="_blank" rel="noopener" aria-label="Open Hack University Participate page">
+          <i class="fa-solid fa-rocket"></i>
+          Open Participate Page
+        </a>
       </div>
-
-      <div class="section-header">
-        <h3>🚀 ACTIVE MISSIONS</h3>
-        <p>Upcoming events sorted by date</p>
-      </div>
-      <div class="hackathons-list" id="upcoming-events"></div>
-
-      <div class="section-header" style="margin-top:48px;">
-        <h3>📚 PAST EVENTS</h3>
-        <p>Completed hackathons and events</p>
-      </div>
-      <div class="hackathons-list" id="past-events"></div>
     </div>
   </div>
 
