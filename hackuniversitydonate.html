@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
   <title>Donate & Sponsor — Code Crunch Hackathons 2025–2026</title>
   <style>
     :root{
@@ -62,9 +64,9 @@
     .btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
     .btn-outline{background:transparent;color:var(--primary);border-color:var(--primary)}
     .note{background:rgba(245,158,11,.08);border-left:4px solid var(--accent);padding:12px;border-radius:8px;margin-top:10px;color:#6b4a0b}
-    footer{text-align:center;padding:46px 0;color:var(--text-light)}
+    /* footer{text-align:center;padding:46px 0;color:var(--text-light)}
     footer a{color:var(--primary);font-weight:700;text-decoration:none}
-    footer a:hover{text-decoration:underline}
+    footer a:hover{text-decoration:underline} */
 
     /* Tier picker (added) */
     .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
@@ -97,13 +99,224 @@
       .nav-link1{ font-size:10px; padding:5px 8px; }
     }
 
+        /* 
+        
+        Universal Footer
+        
+        
+      */
+    /* ---- Footer Universal – minimal tokens (safe if your page lacks global vars) ---- */
+    :root {
+      --fu-primary: #1a73e8;
+      --fu-primary-ink: #e3f2ff;
+      --fu-bg: var(--fu-primary);
+      --fu-text: #ffffff;
+      --fu-text-dim: rgba(255,255,255,.95);
+      --fu-divider: rgba(255,255,255,.25);
+
+      --fu-radius-sm: 8px;
+      --fu-shadow-lg: 0 6px 20px rgba(0,0,0,.25);
+    }
+
+    /* Container & base */
+    .footer-universal {
+      background: var(--fu-bg);
+      color: var(--fu-text);
+      padding: 32px 0 48px;
+    }
+    .footer-universal__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Links */
+    .footer-universal a {
+      color: var(--fu-primary-ink);
+      text-decoration: none;
+      transition: opacity .2s ease, text-decoration-color .2s ease;
+    }
+    .footer-universal a:hover {
+      opacity: .95;
+      text-decoration: underline;
+    }
+
+    /* Grid */
+    .footer-universal__grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr; /* About | Quick | Contact */
+      gap: clamp(20px, 3vw, 48px);
+      align-items: start;
+      margin-bottom: 32px;
+    }
+    .footer-universal__heading {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .footer-universal__p {
+      font-size: 15px;
+      opacity: .9;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    /* Lists */
+    .footer-universal__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-universal__li {
+      margin: 8px 0;
+    }
+
+    /* “Connect with us” */
+    .footer-universal__connect-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 18px 0 10px;
+      opacity: .95;
+    }
+
+    /* Social grid */
+    .footer-universal__social {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(80px, 1fr));
+      gap: 14px 18px;
+      margin-top: 10px;
+    }
+    .footer-universal__social-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 8px;
+      border-radius: 10px;
+      text-align: center;
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .footer-universal__social-item:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.12);
+    }
+    .footer-universal__social-item i {
+      font-size: 22px; /* uses Font Awesome in your page */
+    }
+    .footer-universal__social-item span {
+      font-size: 12px;
+      opacity: .95;
+    }
+
+    /* Bottom line */
+    .footer-universal__bottom {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--fu-divider);
+      text-align: center;
+    }
+    .footer-universal__bottom p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      opacity: .95;
+    }
+    .footer-universal__credits {
+      font-size: 13px;
+      opacity: .9;
+    }
+    .footer-universal__credits a {
+      color: #bfe6ff;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .footer-universal__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .footer-universal__grid { grid-template-columns: 1fr; }
+      .footer-universal__social { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
+      .footer-universal { padding-bottom: 32px; }
+    }
+    
+    /* keeps the blue light color of footer*/
+    @media (prefers-color-scheme: dark) {
+      .footer-universal { --fu-bg:#1a73e8; }
+    }
+
+    /* A11y nicety */
+    .footer-universal *:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+
+
+
+
+    /* 
+
+    universal footer end 
+
+    */
+  .site-note { text-align:center; padding:46px 0; color:var(--text-light); }
+  .site-note a { color:var(--primary); font-weight:700; text-decoration:none; }
+  .site-note a:hover { text-decoration:underline; }
+
+
+      /* ---------- Page Hero / Breadcrumb ---------- */
+      .page-hero{
+        width:100%;
+        background:#f9fafb; /* matches bg-gray-50 vibe */
+        border-bottom:1px solid #e5e7eb; /* gray-200 */
+      }
+      .page-hero__inner{
+        max-width:1200px;
+        margin:0 auto;
+        padding:18px 20px 24px; /* compact top, comfy bottom */
+      }
+      .page-hero__crumbs{
+        font-size:12px;
+        color:#6b7280; /* text-light */
+        margin:0 0 8px;
+      }
+      .page-hero__link{
+        color:#6b7280;
+        text-decoration:underline;
+        text-underline-offset:2px;
+      }
+      .page-hero__link:hover{ text-decoration:none; color:var(--primary); }
+      .page-hero__sep{ margin:0 6px; color:#9ca3af; }
+      .page-hero__current{ color:#374151; font-weight:600; }
+
+      .page-hero__title{
+        font-size:clamp(1.75rem, 3.4vw, 2.25rem);
+        line-height:1.15;
+        font-weight:800;
+        color:#111827; /* near-black */
+        margin:2px 0 6px;
+      }
+      .page-hero__subtitle{
+        max-width:820px;
+        font-size:0.98rem;
+        color:#4b5563; /* gray-600 */
+        margin:0;
+      }
+      @media (max-width:640px){
+        .page-hero__inner{ padding:16px 16px 20px; }
+        .page-hero__crumbs{ font-size:11px; }
+        .page-hero__title{ font-size:1.65rem; }
+      }
+
+  /* ---------- end Page Hero / Breadcrumb ---------- */
 
   </style>
 </head>
 <body>
 
   <!-- NAV OUTSIDE -->
-  <nav class="navba1">
+  <nav class="navbar1">
     <div class="nav-container1">
       <!-- <div class="nav-brand1">
         <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
@@ -117,8 +330,7 @@
         <!-- <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link1">Support Us</a> -->
       </div>
     </div>
-
-
+</nav>
 
   <div class="bg-pattern"></div>
 
@@ -146,10 +358,31 @@
       </ul>
       <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
+
+
+
+
+    
   </nav>
 
   <div class="container">
     <header>
+      
+
+<!-- Page Title / Hero (Breadcrumb + Title) — no <header> tag -->
+
+    <p class="page-hero__crumbs">
+      <a href="https://hackuniversity.vercel.app" class="page-hero__link">Hack University</a>
+      <span class="page-hero__sep" aria-hidden="true"> /</span>
+      <span class="page-hero__current" aria-current="page">Donate &amp; Sponsor</span>
+    </p>
+
+
+
+
+
+
+
       
       <h1>Donate & Sponsor</h1>
       <p class="subtitle">Fuel monthly student hackathons open to all majors — where creators, coders, designers, and innovators build real-world tech, mentorship, and career opportunities across AI, Cloud, Cybersecurity, DevOps, Blockchain, XR, and Web3. Students from every background — business, design, engineering, health, and the arts — collaborate to turn ideas into impact through hands-on learning and industry mentorship.</p>
@@ -162,6 +395,20 @@
     </header>
 
     <main class="main">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- 01 About -->
       <section id="about" class="card">
         <h2>01 — About Code Crunch Hackathons</h2>
@@ -398,15 +645,117 @@
         
         </div> -->
       </section>
-    </main>
 
-    <footer>
+
+ <footer class="site-note">
       <h3>Building Tomorrow’s Tech Leaders Today</h3>
       <p>Questions? <a href="https://www.linkedin.com/company/code-crunch-club" target="_blank" rel="noopener">Message us on LinkedIn</a>.</p>
+
     </footer>
+
+
+
+
+
+    <!-- Requires Font Awesome on the page for icons -->
+<footer class="footer-universal" role="contentinfo">
+  <div class="footer-universal__container">
+    <div class="footer-universal__grid">
+      <!-- About -->
+      <section aria-labelledby="footer-universal-about">
+        <h3 id="footer-universal-about" class="footer-universal__heading">
+          Hack University <span aria-hidden="true">🧑🏻‍💻🧑🏼‍💻🧑🏽‍💻🧑🏾‍💻🧑🏿‍💻</span>
+        </h3>
+        <p class="footer-universal__p">
+          A collaborative effort uniting multiple student organizations and global communities with a mission
+          to empower the next generation of innovators, developers, and leaders.
+        </p>
+        <p class="footer-universal__p">
+          <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">HackUniversity.vercel.app</a>
+        </p>
+
+        <div class="footer-universal__connect-title">Connect With Us</div>
+        <div class="footer-universal__social">
+          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on LinkedIn" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span>
+          </a>
+          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on Instagram" target="_blank" rel="noopener">
+            <i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span>
+          </a>
+          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on GitHub" target="_blank" rel="noopener">
+            <i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+          </a>
+          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on YouTube" target="_blank" rel="noopener">
+            <i class="fab fa-youtube" aria-hidden="true"></i><span>YouTube</span>
+          </a>
+          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Join our Discord" target="_blank" rel="noopener">
+            <i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+          </a>
+          <a class="footer-universal__social-item" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" aria-label="Events Calendar" target="_blank" rel="noopener">
+            <i class="far fa-calendar-alt" aria-hidden="true"></i><span>Calendar</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Quick Links -->
+      <nav aria-labelledby="footer-universal-links">
+        <h3 id="footer-universal-links" class="footer-universal__heading">Quick Links</h3>
+        <ul class="footer-universal__list">
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Mission</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Events</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Hackathons</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Membership</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Join E-Board</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Resources</a></li>
+          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Join Discord</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact -->
+      <section aria-labelledby="footer-universal-contact">
+        <h3 id="footer-universal-contact" class="footer-universal__heading">Contact</h3>
+        <p class="footer-universal__p" style="margin:0 0 8px">Miami, FL</p>
+        <p class="footer-universal__p" style="margin:0">
+          <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+        </p>
+      </section>
+    </div>
+
+    <div class="footer-universal__bottom">
+      <p>© <span id="footer-universal-year"></span> Hack University. All rights reserved.</p>
+      <div class="footer-universal__credits">
+        Built with ❤️ for the tech community by
+        <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a> · Powered by innovation and collaboration
+      </div>
+    </div>
   </div>
+</footer>
+
+
+
+    </main>
+
+   
+
+
+
+
+
+</div>
 
   <script>
+
+
+  // javascript  footer
+  (function () {
+    var el = document.getElementById('footer-universal-year');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+  // End javascript for footer
+
+
+
+
     // Mobile menu
     const hamburger=document.querySelector('.hamburger');
     const mobileMenu=document.querySelector('.nav-menu.mobile');

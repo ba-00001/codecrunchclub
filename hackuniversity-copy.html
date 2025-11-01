@@ -1,1177 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hack University - Empowering Tomorrow's Innovators</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
-    
-    <style>
-        :root {
-            --primary-blue: #2563eb;
-            --secondary-blue: #1e40af;
-            --tertiary-blue: #1d4ed8;
-            --primary-orange: #f59e0b;
-            --secondary-orange: #d97706;
-            --tertiary-orange: #b45309;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hack University - Empowering Tomorrow's Innovators</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
 
-        /* Base utilities */
-        .cc-blue { background: var(--primary-blue); }
-        .cc-blue-text { color: var(--secondary-blue); }
-        .cc-orange { background: var(--primary-orange); }
-        
-        /* Remove text decoration globally */
-        .text-decoration-none, .text-decoration-none:hover { 
-            text-decoration: none !important; 
-        }
+  <!-- Hack University Theme + Adapter -->
+  <style>
+    /* =========================
+       Hack University — Theme
+       ========================= */
+    :root{
+      --color-primary:#1a73e8;
+      --color-primary-hover:#1557b0;
+      --color-text:#202124;
+      --color-text-muted:#5f6368;
+      --color-border:#dadce0;
+      --color-bg:#f8f9fa;
+      --color-bg-white:#fff;
+      --color-success:#137333;
+      --color-success-bg:#e6f4ea;
+      --color-warning:#ea8600;
+      --color-warning-bg:#fff4e5;
+      --color-danger:#d33b01;
+      --spacing-xs:4px; --spacing-sm:8px; --spacing-md:16px; --spacing-lg:24px; --spacing-xl:32px;
+      --radius-sm:6px; --radius-md:10px; --radius-lg:12px;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:0 3px 10px rgba(32,33,36,.18);
+      --shadow-lg:0 6px 20px rgba(32,33,36,.25);
+      --transition-base:.2s ease;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:var(--color-bg);
+      color:var(--color-text);
+      line-height:1.55;
+    }
+    a{text-decoration:none}
 
-        /* Animations */
-        @keyframes twinkle { 
-            0%, 100% { opacity: 1; transform: scale(1); } 
-            50% { opacity: 0.6; transform: scale(1.1); } 
-        }
-        .star { animation: twinkle 1.8s ease-in-out infinite; }
+    /* Cards / Hover */
+    .card-hover{
+      background:rgba(255,255,255,.1);
+      backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:12px;
+      box-shadow:var(--shadow-sm);
+      transition:box-shadow var(--transition-base),transform var(--transition-base),border-color var(--transition-base);
+    }
+    .card-hover:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--color-primary) }
 
-        @keyframes float { 
-            0%, 100% { transform: translateY(0px); } 
-            50% { transform: translateY(-10px); } 
-        }
-        .floating { animation: float 3s ease-in-out infinite; }
+    /* Buttons use shared palette */
+    .btn-primary{
+      background:var(--color-primary);
+      color:#fff;
+      border:1px solid var(--color-primary);
+      border-radius:9999px;
+      transition:box-shadow var(--transition-base),transform var(--transition-base),background var(--transition-base),opacity var(--transition-base);
+      display:inline-block;
+    }
+    .btn-primary:hover{ background:var(--color-primary-hover); box-shadow:var(--shadow-md); transform:translateY(-2px) }
+    .btn-secondary{
+      border:2px solid #fff; color:#fff; background:transparent; border-radius:9999px;
+      transition:background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+    }
+    .btn-secondary:hover{ background:#fff; color:var(--color-primary); transform:translateY(-2px) }
+    .btn-mobile{ min-height:44px }
 
-        /* Hero gradient */
-        .gradient-hero { 
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--tertiary-blue) 100%); 
-        }
+    /* Footer look & feel */
+    .footer{ color:#fff; padding: var(--spacing-xl) 0 48px; }
+    .footer a{ color:#e3f2ff; text-decoration:none; transition:opacity .2s ease }
+    .footer a:hover{ opacity:.95; text-decoration:underline }
+    .footer .social-grid a{ transition:transform .15s ease, background .15s ease; border-radius:10px }
+    .footer .social-grid a:hover{ transform: translateY(-2px); background: rgba(255,255,255,.12) }
 
-        /* Interactive elements */
-        .card-hover { 
-            transition: all 0.3s ease; 
-        }
-        .card-hover:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-        }
+    /* Brand utility mapping */
+    .cc-blue{ background:var(--color-primary)!important }
+    .cc-blue-text{ color:var(--color-primary-hover)!important }
+    .cc-orange{ background:var(--color-warning-bg)!important; color:var(--color-warning)!important }
 
-        .btn-primary { 
-            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover { 
-            background: linear-gradient(135deg, var(--secondary-orange) 0%, var(--tertiary-orange) 100%); 
-            transform: translateY(-2px); 
-        }
+    /* Hero with HU gradient */
+    .gradient-hero{
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 55%, #0b4aa6 100%);
+    }
 
-        .btn-secondary { 
-            border: 2px solid white; 
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover { 
-            background: white; 
-            color: var(--primary-blue); 
-            transform: translateY(-2px); 
-        }
+    /* Motion + focus */
+    *:focus-visible{ outline:2px solid var(--color-primary); outline-offset:2px }
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{ animation-duration:0.01ms!important; animation-iteration-count:1!important; transition-duration:0.01ms!important }
+    }
 
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem !important;
-                line-height: 1.1;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.125rem !important;
-                line-height: 1.4;
-            }
-            
-            .floating-bg {
-                display: none; /* Hide floating elements on mobile for performance */
-            }
-            
-            .partner-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .cta-section {
-                gap: 2rem;
-            }
-            
-            .social-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-            
-            .btn-mobile {
-                font-size: 0.875rem;
-                padding: 0.75rem 1.5rem;
-            }
-        }
+    /* Your original animations/utilities kept */
+    @keyframes twinkle { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.1)} }
+    .star{ animation: twinkle 1.8s ease-in-out infinite }
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-10px) } }
+    .floating{ animation: float 3s ease-in-out infinite }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2rem !important;
-            }
-            
-            .hero-subtitle {
-                font-size: 1rem !important;
-            }
-            
-            .stats-number {
-                font-size: 2.5rem !important;
-            }
-        }
+    /* Mobile optimizations (kept) */
+    @media (max-width:768px){
+      .hero-title{ font-size:2.5rem!important; line-height:1.1 }
+      .hero-subtitle{ font-size:1.125rem!important; line-height:1.4 }
+      .floating-bg{ display:none }
+      .partner-grid{ grid-template-columns:1fr; gap:1rem }
+      .cta-section{ gap:2rem }
+      .social-grid{ grid-template-columns:repeat(2,1fr); gap:.75rem }
+      .btn-mobile{ font-size:.875rem; padding:.75rem 1.5rem }
+    }
+    @media (max-width:480px){
+      .hero-title{ font-size:2rem!important }
+      .hero-subtitle{ font-size:1rem!important }
+      .stats-number{ font-size:2.5rem!important }
+    }
+    .focus-visible:focus{ outline:2px solid #f59e0b; outline-offset:2px } /* kept from your page */
 
-        /* Touch targets for mobile */
-        .touch-target {
-            min-height: 44px;
-            min-width: 44px;
-        }
-
-        /* Improved focus states */
-        .focus-visible:focus {
-            outline: 2px solid var(--primary-orange);
-            outline-offset: 2px;
-        }
-
-        /* Performance optimizations */
-        .will-change-transform {
-            will-change: transform;
-        }
-
-        .backface-hidden {
-            backface-visibility: hidden;
-        }
-    </style>
+    /* CTA shimmer button from your page */
+    .btn-hover-effect{ transition: all .3s ease; position:relative; overflow:hidden }
+    .btn-hover-effect:hover{ transform: translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,.2) }
+    .btn-hover-effect::before{
+      content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+      transition:left .5s;
+    }
+    .btn-hover-effect:hover::before{ left:100% }
+  </style>
 </head>
 <body class="bg-gray-50">
-    
-    <!-- Hero Section -->
-    <section class="gradient-hero min-h-screen flex items-center justify-center relative overflow-hidden" role="banner">
-        <!-- Background decorative elements -->
-        <div class="absolute inset-0 floating-bg">
-            <div class="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-white/10 rounded-full blur-xl floating"></div>
-            <div class="absolute bottom-1/3 right-1/4 w-24 h-24 md:w-48 md:h-48 bg-white/10 rounded-full blur-xl floating" style="animation-delay: -1s;"></div>
-        </div>
-        
-        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
-            <!-- Main Title -->
-            <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 md:mb-6">
-                Hack University 
-            </h1>
-            <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 md:mb-6">
-                 <span class="star" aria-hidden="true">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 </span>
-            </h1>
-            <p class="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed">
-                Empowering the next generation of innovators, developers, and leaders through collaborative learning and cutting-edge technology
-            </p>
 
-   <!-- CTA Buttons -->
-<div class="cta-section flex flex-col lg:flex-row gap-6 lg:gap-8 justify-center items-stretch lg:items-start mb-12 md:mb-16">
-   <!-- For Students Section -->
-<div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
-  <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Students</h3>
-
-  <p class="text-white/90 text-sm md:text-base mb-4 leading-relaxed">
-    Use the OneStop form to join, register for hackathons, volunteer, or apply for E-Board—everything in one place.
-  </p>
-
-  <div class="flex flex-col gap-3 space-y-2">
-        <!-- Internship Program -->
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-internship.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Join membership for GDG at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch. Ages 13 and up.">
-      Internship Program
-      <span class="block text-xs opacity-90 mt-1">
-        Ages 18+
-      </span>
-    </a>
-    
-    <!-- Membership -->
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Join membership for GDG at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch. Ages 13 and up.">
-      Join Membership
-      <span class="block text-xs opacity-90 mt-1">
-        GDG @ FIU · Code Crunch · ColorStack · CAHSI · Raspberry Pi Code Crunch• Ages 13+
-      </span>
-    </a>
-
-    <!-- Discord -->
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Get Discord access for GDG at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch. Ages 13 and up.">
-      Join Discord
-      <span class="block text-xs opacity-90 mt-1">
-        All org servers • Ages 13+
-      </span>
-    </a>
-
-        <!-- GroupMe Group Chat-->
-    <a href="https://hackuniversityplatforms.vercel.app/" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Get Discord access for GDG at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch. Ages 13 and up.">
-      Join GroupMe Group Chat
-      <span class="block text-xs opacity-90 mt-1">
-        <!-- All org servers • Ages 13+ -->
-      </span>
-    </a>
-
-    <!-- IG Group Chat-->
-    <a href="https://hackuniversityplatforms.vercel.app/" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Get Discord access for GDG at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch. Ages 13 and up.">
-      Join IG Group Chat
-      <span class="block text-xs opacity-90 mt-1">
-        <!-- All org servers • Ages 13+ -->
-      </span>
-    </a>
-
-    <!-- Calendar -->
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="View the Hack University calendar for all upcoming events. For students 13 and up.">
-      View Calendar
-      <span class="block text-xs opacity-90 mt-1">
-        All upcoming dates • Ages 13+
-      </span>
-    </a>
-
-
-    <!-- Certificates -->
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Request official membership certificates as PDF for LinkedIn and resumes.">
-      Get Membership Certificates
-      <span class="block text-xs opacity-90 mt-1">
-        Official PDF for LinkedIn & resumes
-      </span>
-    </a>
-
-    <!-- Hackathons -->
-    <a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Register for upcoming hackathons. Ages 16 and up.">
-      Hackathons
-      <span class="block text-xs opacity-90 mt-1">
-        Events • Worlwide • Ages 16+
-      </span>
-    </a>
-
-    <!-- Hacker Guide -->
-    <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Open the Hacker Guide with rules, submission requirements, and resources.">
-      Open Hacker Guide
-      <span class="block text-xs opacity-90 mt-1">
-        Rules • Submissions • Resources
-      </span>
-    </a>
-
-    <!-- Wiki -->
-    <a href="https://infoflyers.vercel.app" target="_blank"
-       class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
-       aria-label="Browse the Hack University Wiki with event links and resources. For students 13 and up.">
-      Browse Wiki
-      <span class="block text-xs opacity-90 mt-1">
-        Events & Resources • Ages 13+
-      </span>
-    </a>
-
-
-  </div>
-</div>
-
-                
-
-
-                <!-- For Companies -->
-                <div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Companies</h3>
-                    <div class="flex flex-col gap-3 space-y-2">
-                        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank" 
-                           class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden">
-                            Sponsor Us
-                        </a>
-                        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank" 
-                           class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden">
-                            Host an Event
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- For Industry Professionals -->
-                <div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Industry Professionals</h3>
-                    <div class="flex flex-col gap-3 space-y-2">
-                        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank" 
-                           class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden">
-                            Donate
-                        </a>
-
-                        <a href="https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html" target="_blank" 
-                           class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden">
-                            Volunteer
-                        </a>
-                        <a href="https://codecrunchvolunteerform-no6.vercel.app/" target="_blank" 
-                           class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold transition-all duration-300 text-decoration-none hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden">
-                            Fundraising Advisory Board
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Partner Organizations -->
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8">Connect with Our Partner Organizations</h2>
-                <div class="partner-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Google Developer Club at FIU -->
-                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover will-change-transform backface-hidden">
-                    <a href="https://gdgatfiu.vercel.app" target="_blank" class="block text-decoration-none text-white hover:text-white">
-                        <div class="mb-3 md:mb-4 flex justify-center">
-                            <img src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27" 
-                                alt="Google Developer Club Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Google Developer Club</h3>
-                        <p class="text-white/80 text-sm">at Florida International University</p>
-                    </a>
-
-                    <!-- Social Media Links Grid -->
-                    <div class="mt-6">
-                        <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                        <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                            <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">LinkedIn</span>
-                            </a>
-                            <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Instagram</span>
-                            </a>
-                            <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">GitHub</span>
-                            </a>
-                            <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">YouTube</span>
-                            </a>
-                            <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Discord</span>
-                            </a>
-                            <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1 text-center">Calendar</span>
-                            </a>
-                        </div>
-                    </div>
-
-                        <!-- Attendance Form -->
-                    <div class="mt-4 text-center">
-                        <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                            <i class="fas fa-clipboard-check text-lg md:text-xl" aria-hidden="true"></i>
-                            <span class="text-xs mt-1">Attendance</span>
-                        </a>
-                    </div>
-                    
-                </div>
-
-                <!-- Code Crunch Global -->
-                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white hover:bg-white/20 card-hover will-change-transform backface-hidden">
-                    <a href="https://codecrunchglobal.vercel.app" target="_blank" class="block text-decoration-none text-white hover:text-white">
-                        <div class="mb-3 md:mb-4 flex justify-center">
-                            <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" 
-                                alt="Code Crunch Global Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Code Crunch Worldwide</h3>
-                        <p class="text-white/80 text-sm">Global coding community</p>
-                    </a>
-
-                    <!-- Social Media Links Grid -->
-                    <div class="mt-6">
-                        <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                        <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                            <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">LinkedIn</span>
-                            </a>
-                            <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Instagram</span>
-                            </a>
-                            <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">GitHub</span>
-                            </a>
-                            <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">YouTube</span>
-                            </a>
-                            <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Discord</span>
-                            </a>
-                            <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1 text-center">Calendar</span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Attendance Form -->
-                    <div class="mt-4 text-center">
-                        <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                            <i class="fas fa-clipboard-check text-lg md:text-xl" aria-hidden="true"></i>
-                            <span class="text-xs mt-1">Attendance</span>
-                        </a>
-                    </div>
-                </div>
-
-                    <!-- ColorStack at FIU -->
-                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white hover:bg-white/20 card-hover will-change-transform backface-hidden">
-                      <a href="https://colorstackatfiu.vercel.app" target="_blank" class="block text-decoration-none text-white hover:text-white">
-                          <div class="mb-3 md:mb-4 flex justify-center">
-                              <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" 
-                                  alt="ColorStack Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
-                          </div>
-                          <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">ColorStack</h3>
-                          <p class="text-white/80 text-sm">at Florida International University</p>
-                      </a>
-
-                      <!-- Social Media Links Grid -->
-                      <div class="mt-6">
-                          <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                          <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                              <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">LinkedIn</span>
-                              </a>
-                              <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Instagram</span>
-                              </a>
-                              <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">GitHub</span>
-                              </a>
-                              <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">YouTube</span>
-                              </a>
-                              <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Discord</span>
-                              </a>
-                              <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1 text-center">Calendar</span>
-                              </a>
-                          </div>
-                      </div>
-                      
-                      <!-- Attendance Form -->
-                      <div class="mt-4 text-center">
-                          <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                              <i class="fas fa-clipboard-check text-lg md:text-xl" aria-hidden="true"></i>
-                              <span class="text-xs mt-1">Attendance</span>
-                          </a>
-                      </div>
-                  </div>
-                
-                
-                  <!-- CAHSI at FIU -->
-                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white hover:bg-white/20 card-hover will-change-transform backface-hidden">
-                      <a href="https://cahsiatfiu.vercel.app" target="_blank" class="block text-decoration-none text-white hover:text-white">
-                          <div class="mb-3 md:mb-4 flex justify-center">
-                              <img src="https://github.com/user-attachments/assets/0c9b5533-3b83-4f27-99ef-67185a345355" 
-                                  alt="CAHSI Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
-                          </div>
-                          <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">CAHSI</h3>
-                          <p class="text-white/80 text-sm">at Florida International University</p>
-                      </a>
-
-                      <!-- Social Media Links Grid -->
-                      <div class="mt-6">
-                          <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                          <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                              <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">LinkedIn</span>
-                              </a>
-                              <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Instagram</span>
-                              </a>
-                              <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">GitHub</span>
-                              </a>
-                              <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">YouTube</span>
-                              </a>
-                              <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Discord</span>
-                              </a>
-                              <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1 text-center">Calendar</span>
-                              </a>
-                          </div>
-                      </div>
-                      
-                      <!-- Attendance Form -->
-                      <div class="mt-4 text-center">
-                          <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                              <i class="fas fa-clipboard-check text-lg md:text-xl" aria-hidden="true"></i>
-                              <span class="text-xs mt-1">Attendance</span>
-                          </a>
-                      </div>
-                  </div>
-
-                  <!-- Raspberry Pi Code Crunch -->
-                     <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white hover:bg-white/20 card-hover will-change-transform backface-hidden">
-                      <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" class="block text-decoration-none text-white hover:text-white">
-                          <div class="mb-3 md:mb-4 flex justify-center">
-                              <img src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c" 
-                                  alt="Raspberry Pi Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
-                          </div>
-                          <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Raspberry Pi</h3>
-                          <p class="text-white/80 text-sm">Code Crunch Community</p>
-                      </a>
-
-                      <!-- Social Media Links Grid -->
-                      <div class="mt-6">
-                          <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                          <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                              <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">LinkedIn</span>
-                              </a>
-                              <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Instagram</span>
-                              </a>
-                              <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">GitHub</span>
-                              </a>
-                              <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">YouTube</span>
-                              </a>
-                              <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1">Discord</span>
-                              </a>
-                              <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                  <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                  <span class="text-xs mt-1 text-center">Calendar</span>
-                              </a>
-                          </div>
-                      </div>
-                      
-                      <!-- Attendance Form -->
-                      <div class="mt-4 text-center">
-                          <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                              <i class="fas fa-clipboard-check text-lg md:text-xl" aria-hidden="true"></i>
-                              <span class="text-xs mt-1">Attendance</span>
-                          </a>
-                      </div>
-                  </div>
-
-
-                </div>
-            </div>
-        </div>
-     
-    </section>
-
-
-
-
-
-    <!-- Stats Section -->
-<section class="py-12 md:py-20 bg-white" aria-label="Statistics">
-    <div class="max-w-6xl mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-center">
-            <div class="p-6 md:p-8 card-hover">
-                <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">1000+</div>
-                <div class="text-gray-600 text-base md:text-lg">Active Members</div>
-            </div>
-            <div class="p-6 md:p-8 card-hover">
-                <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">17+</div>
-                <div class="text-gray-600 text-base md:text-lg">Countries Represented</div>
-            </div>
-            <div class="p-6 md:p-8 card-hover">
-                <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">112+</div>
-                <div class="text-gray-600 text-base md:text-lg">Universities and educational institutions Worldwide</div>
-            </div>
-            <div class="p-6 md:p-8 card-hover">
-                <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">170+</div>
-                <div class="text-gray-600 text-base md:text-lg">Events Hosted</div>
-            </div>
-        </div>
+  <!-- Hero Section -->
+  <section class="gradient-hero min-h-screen flex items-center justify-center relative overflow-hidden" role="banner">
+    <!-- Background decorative elements -->
+    <div class="absolute inset-0 floating-bg">
+      <div class="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-white/10 rounded-full blur-xl floating"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-24 h-24 md:w-48 md:h-48 bg-white/10 rounded-full blur-xl floating" style="animation-delay:-1s"></div>
     </div>
-</section>
 
-    <!-- Mission Section -->
-    <section class="py-12 md:py-20 bg-gray-100" aria-label="Mission">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Our Mission</h2>
-            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
-                A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders through hands-on learning, mentorship, and real-world project experience.
-            </p>
-        </div>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- About Hack University Initiative Section -->
-<section class="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" id="mission">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900">
-        Hack University Initiative
-        <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
+    <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
+      <!-- Main Title -->
+      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 md:mb-6">Hack University</h1>
+      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 md:mb-6">
+        <span class="star" aria-hidden="true">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 </span>
       </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Empowering the next generation of innovators, developers, and leaders through collaboration across disciplines and borders
+      <p class="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed">
+        Empowering the next generation of innovators, developers, and leaders through collaborative learning and cutting-edge technology
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="cta-section flex flex-col lg:flex-row gap-6 lg:gap-8 justify-center items-stretch lg:items-start mb-12 md:mb-16">
+        <!-- For Students Section -->
+        <div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Students</h3>
+          <p class="text-white/90 text-sm md:text-base mb-4 leading-relaxed">
+            Use the OneStop form to join, register for hackathons, volunteer, or apply for E-Board—everything in one place.
+          </p>
+
+          <div class="flex flex-col gap-3 space-y-2">
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-internship.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Internship Program">
+              Internship Program
+              <span class="block text-xs opacity-90 mt-1">Ages 18+</span>
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Join membership for all partner orgs">
+              Join Membership
+              <span class="block text-xs opacity-90 mt-1">
+                GDG @ FIU · Code Crunch · ColorStack · CAHSI · Raspberry Pi Code Crunch • Ages 13+
+              </span>
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Discord access">
+              Join Discord
+              <span class="block text-xs opacity-90 mt-1">All org servers • Ages 13+</span>
+            </a>
+
+            <a href="https://hackuniversityplatforms.vercel.app/" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="GroupMe">
+              Join GroupMe Group Chat
+            </a>
+
+            <a href="https://hackuniversityplatforms.vercel.app/" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Instagram Group Chat">
+              Join IG Group Chat
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Calendar">
+              View Calendar
+              <span class="block text-xs opacity-90 mt-1">All upcoming dates • Ages 13+</span>
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Membership certificates">
+              Get Membership Certificates
+              <span class="block text-xs opacity-90 mt-1">Official PDF for LinkedIn & resumes</span>
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Hackathons">
+              Hackathons
+              <span class="block text-xs opacity-90 mt-1">Events • Worldwide • Ages 16+</span>
+            </a>
+
+            <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Hacker Guide">
+              Open Hacker Guide
+              <span class="block text-xs opacity-90 mt-1">Rules • Submissions • Resources</span>
+            </a>
+
+            <a href="https://infoflyers.vercel.app" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target focus-visible will-change-transform backface-hidden"
+               aria-label="Wiki">
+              Browse Wiki
+              <span class="block text-xs opacity-90 mt-1">Events & Resources • Ages 13+</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- For Companies -->
+        <div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Companies</h3>
+          <div class="flex flex-col gap-3 space-y-2">
+            <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target">
+              Sponsor Us
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target">
+              Host an Event
+            </a>
+          </div>
+        </div>
+
+        <!-- For Industry Professionals -->
+        <div class="text-center flex-1 max-w-xs mx-auto lg:max-w-none">
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">For Industry Professionals</h3>
+          <div class="flex flex-col gap-3 space-y-2">
+            <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target">
+              Donate
+            </a>
+            <a href="https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target">
+              Volunteer
+            </a>
+            <a href="https://codecrunchvolunteerform-no6.vercel.app/" target="_blank"
+               class="btn-primary btn-mobile text-white px-4 py-3 md:px-6 rounded-full font-bold hover:opacity-90 inline-block touch-target">
+              Fundraising Advisory Board
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partner Organizations -->
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8">Connect with Our Partner Organizations</h2>
+
+        <div class="partner-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <!-- Google Developer Club -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover">
+            <a href="https://gdgatfiu.vercel.app" target="_blank" class="block text-white">
+              <div class="mb-3 md:mb-4 flex justify-center">
+                <img src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27" alt="Google Developer Club Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
+              </div>
+              <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Google Developer Club</h3>
+              <p class="text-white/80 text-sm">at Florida International University</p>
+            </a>
+
+            <div class="mt-6">
+              <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+              <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+                <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+                <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+                <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+                <a href="https://gdgatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+                <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+                <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white p-2">
+                <i class="fas fa-clipboard-check text-lg md:text-xl"></i>
+                <span class="text-xs mt-1">Attendance</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Code Crunch Global -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover">
+            <a href="https://codecrunchglobal.vercel.app" target="_blank" class="block text-white">
+              <div class="mb-3 md:mb-4 flex justify-center">
+                <img src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e" alt="Code Crunch Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
+              </div>
+              <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Code Crunch Worldwide</h3>
+              <p class="text-white/80 text-sm">Global coding community</p>
+            </a>
+
+            <div class="mt-6">
+              <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+              <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+                <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+                <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+                <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+                <a href="https://codecrunchglobal.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+                <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+                <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white p-2">
+                <i class="fas fa-clipboard-check text-lg md:text-xl"></i>
+                <span class="text-xs mt-1">Attendance</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ColorStack -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover">
+            <a href="https://colorstackatfiu.vercel.app" target="_blank" class="block text-white">
+              <div class="mb-3 md:mb-4 flex justify-center">
+                <img src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036" alt="ColorStack Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
+              </div>
+              <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">ColorStack</h3>
+              <p class="text-white/80 text-sm">at Florida International University</p>
+            </a>
+
+            <div class="mt-6">
+              <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+              <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+                <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+                <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+                <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+                <a href="https://colorstackatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+                <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+                <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white p-2">
+                <i class="fas fa-clipboard-check text-lg md:text-xl"></i>
+                <span class="text-xs mt-1">Attendance</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- CAHSI -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover">
+            <a href="https://cahsiatfiu.vercel.app" target="_blank" class="block text-white">
+              <div class="mb-3 md:mb-4 flex justify-center">
+                <img src="https://github.com/user-attachments/assets/0c9b5533-3b83-4f27-99ef-67185a345355" alt="CAHSI Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
+              </div>
+              <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">CAHSI</h3>
+              <p class="text-white/80 text-sm">at Florida International University</p>
+            </a>
+
+            <div class="mt-6">
+              <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+              <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+                <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+                <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+                <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+                <a href="https://cahsiatfiu.vercel.app" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+                <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+                <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white p-2">
+                <i class="fas fa-clipboard-check text-lg md:text-xl"></i>
+                <span class="text-xs mt-1">Attendance</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Raspberry Pi Code Crunch -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 text-white card-hover">
+            <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" class="block text-white">
+              <div class="mb-3 md:mb-4 flex justify-center">
+                <img src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c" alt="Raspberry Pi Logo" class="partner-logo h-12 md:h-16 w-auto object-contain" loading="lazy">
+              </div>
+              <h3 class="text-lg md:text-xl font-bold mb-1 md:mb-2">Raspberry Pi</h3>
+              <p class="text-white/80 text-sm">Code Crunch Community</p>
+            </a>
+
+            <div class="mt-6">
+              <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+              <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+                <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+                <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+                <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+                <a href="https://raspberrypicodecrunch.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+                <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+                <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="https://hackuniversity-attendance.vercel.app/" class="flex flex-col items-center text-white p-2">
+                <i class="fas fa-clipboard-check text-lg md:text-xl"></i>
+                <span class="text-xs mt-1">Attendance</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-12 md:py-20 bg-white" aria-label="Statistics">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-center">
+        <div class="p-6 md:p-8 card-hover">
+          <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">1000+</div>
+          <div class="text-gray-600 text-base md:text-lg">Active Members</div>
+        </div>
+        <div class="p-6 md:p-8 card-hover">
+          <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">17+</div>
+          <div class="text-gray-600 text-base md:text-lg">Countries Represented</div>
+        </div>
+        <div class="p-6 md:p-8 card-hover">
+          <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">112+</div>
+          <div class="text-gray-600 text-base md:text-lg">Universities and educational institutions Worldwide</div>
+        </div>
+        <div class="p-6 md:p-8 card-hover">
+          <div class="stats-number text-3xl md:text-4xl font-bold cc-blue-text mb-2">170+</div>
+          <div class="text-gray-600 text-base md:text-lg">Events Hosted</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-12 md:py-20 bg-gray-100" aria-label="Mission">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Our Mission</h2>
+      <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+        A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders through hands-on learning, mentorship, and real-world project experience.
       </p>
     </div>
+  </section>
 
-    <!-- About Description -->
-    <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">About the Initiative</h2>
-        <p class="text-lg leading-relaxed text-gray-700 mb-6">
-          Founded in <strong>August 2024</strong>, the <strong>Hack University Initiative</strong> is a collaborative effort uniting multiple student organizations and global communities with a mission to <strong>empower the next generation of innovators, developers, and leaders</strong>. Through workshops, hackathons, and mentorship, Hack University drives <strong>innovation and collaboration</strong> across disciplines and borders.
+  <!-- About Hack University Initiative -->
+  <section class="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" id="mission">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-gray-900">
+          Hack University Initiative <span class="star inline-block align-[-0.2em]" aria-hidden="true">✨</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Empowering the next generation of innovators, developers, and leaders through collaboration across disciplines and borders
         </p>
+      </div>
 
-        <!-- Partner Organizations -->
-        <div class="bg-gray-50 rounded-xl p-6 mb-8">
-          <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Partner Organizations</h3>
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0"></div>
-              <div>
-                <strong>Google Developer Club at FIU (GDG FIU)</strong> – A Google Developer Group focused on building community and sharing knowledge around Google technologies and software development. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-orange-500 rounded-full mt-3 flex-shrink-0"></div>
-              <div>
-                <strong>Code Crunch Global</strong> – An interdisciplinary tech club dedicated to coding, technical interview prep, and hackathons. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0"></div>
-              <div>
-                <strong>ColorStack at FIU</strong> – Part of a national network of 120+ chapters, focused on mentorship, community, and career pathways for underrepresented students in tech. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0"></div>
-              <div>
-                <strong>Raspberry Pi Code Crunch</strong> – A hands-on, project-based club and learning platform featuring structured learning paths, video tutorials, certificates, and resources in coding, AI, and electronics. <em>Open Worldwide | All Universities | All Majors | High School Students (13+)</em>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-teal-500 rounded-full mt-3 flex-shrink-0"></div>
-              <div>
-                <strong>CAHSI at FIU</strong> – Part of the Computing Alliance of Hispanic-Serving Institutions (CAHSI) network across 60+ universities, expanding access to computing research and tech careers. <em>Open Worldwide | All Universities | All Majors | High School Students (16+)</em>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">About the Initiative</h2>
+          <p class="text-lg leading-relaxed text-gray-700 mb-6">
+            Founded in <strong>August 2024</strong>, the <strong>Hack University Initiative</strong> is a collaborative effort uniting multiple student organizations and global communities with a mission to <strong>empower the next generation of innovators, developers, and leaders</strong>. Through workshops, hackathons, and mentorship, Hack University drives <strong>innovation and collaboration</strong> across disciplines and borders.
+          </p>
 
-        <!-- Membership Benefits -->
-        <div class="grid md:grid-cols-2 gap-8 mb-8">
-          <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-blue-900 mb-4">Membership Benefits ✨</h3>
-            <ul class="space-y-2">
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Access to 7 annual interdisciplinary hackathons</span>
-              </li>
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Technical interview preparation and resume reviews</span>
-              </li>
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Startup pitch development and entrepreneurship mentoring</span>
-              </li>
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Executive Board application opportunities</span>
-              </li>
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Networking with students from diverse academic disciplines</span>
-              </li>
-              <li class="flex items-center space-x-2">
-                <span class="text-green-500">✓</span>
-                <span class="text-gray-700">Connections to industry partners and job opportunities</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-purple-900 mb-4">Community Access ✨</h3>
+          <!-- Partner Orgs list -->
+          <div class="bg-gray-50 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Partner Organizations</h3>
             <div class="space-y-4">
-              <div>
-                <h4 class="font-semibold text-gray-800 mb-1">Discord</h4>
-                <p class="text-sm text-gray-600">Get access to coding help, project teams, and mentorship opportunities. Secure access after form completion to avoid bots and scammers.</p>
+              <div class="flex items-start space-x-3">
+                <div class="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0"></div>
+                <div><strong>Google Developer Club at FIU (GDG FIU)</strong> – Google technologies & software dev. <em>Open Worldwide | All Majors | 16+</em></div>
               </div>
-              <div>
-                <h4 class="font-semibold text-gray-800 mb-1">GroupMe</h4>
-                <p class="text-sm text-gray-600">Connect with peers and stay updated on announcements. Protected community access after registration.</p>
+              <div class="flex items-start space-x-3">
+                <div class="w-2 h-2 bg-orange-500 rounded-full mt-3 flex-shrink-0"></div>
+                <div><strong>Code Crunch Global</strong> – Coding, interview prep, hackathons. <em>Open Worldwide | All Majors | 16+</em></div>
               </div>
-              <div>
-                <h4 class="font-semibold text-gray-800 mb-1">IG Group</h4>
-                <p class="text-sm text-gray-600">Follow updates, success stories, and networking opportunities. Verified member access only.</p>
+              <div class="flex items-start space-x-3">
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0"></div>
+                <div><strong>ColorStack at FIU</strong> – Community & career pathways. <em>Open Worldwide | All Majors | 16+</em></div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0"></div>
+                <div><strong>Raspberry Pi Code Crunch</strong> – Coding/AI/electronics learning paths. <em>Open Worldwide | All Majors | 13+</em></div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="w-2 h-2 bg-teal-500 rounded-full mt-3 flex-shrink-0"></div>
+                <div><strong>CAHSI at FIU</strong> – Research & tech career access. <em>Open Worldwide | All Majors | 16+</em></div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Who Can Join -->
-        <div class="bg-gradient-to-r from-green-50 to-emerald-100 rounded-xl p-6">
-          <h3 class="text-xl font-bold text-green-900 mb-4 text-center">Who Can Join? ✨</h3>
-          <p class="text-center text-gray-700 mb-4">
-            <strong>All academic backgrounds welcome! No coding experience required - we welcome beginners and experts alike!</strong>
-          </p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-center">
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">💻</div>
-              <div class="text-sm font-medium">Computer Science</div>
+          <!-- Benefits & Community access -->
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+              <h3 class="text-xl font-bold text-blue-900 mb-4">Membership Benefits ✨</h3>
+              <ul class="space-y-2">
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Access to 7 annual interdisciplinary hackathons</span></li>
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Technical interview prep & resume reviews</span></li>
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Startup pitch coaching & entrepreneurship mentoring</span></li>
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Executive Board application opportunities</span></li>
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Cross-discipline networking</span></li>
+                <li class="flex items-center space-x-2"><span class="text-green-500">✓</span><span class="text-gray-700">Industry partner connections & jobs</span></li>
+              </ul>
             </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">⚙️</div>
-              <div class="text-sm font-medium">Engineering</div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
+              <h3 class="text-xl font-bold text-purple-900 mb-4">Community Access ✨</h3>
+              <div class="space-y-4">
+                <div><h4 class="font-semibold text-gray-800 mb-1">Discord</h4><p class="text-sm text-gray-600">Coding help, team formation, mentorship. Secured after form completion.</p></div>
+                <div><h4 class="font-semibold text-gray-800 mb-1">GroupMe</h4><p class="text-sm text-gray-600">Announcements & quick coordination. Protected access.</p></div>
+                <div><h4 class="font-semibold text-gray-800 mb-1">IG Group</h4><p class="text-sm text-gray-600">Highlights & networking. Verified members only.</p></div>
+              </div>
             </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">💼</div>
-              <div class="text-sm font-medium">Business</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🏥</div>
-              <div class="text-sm font-medium">Health Sciences</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">⚖️</div>
-              <div class="text-sm font-medium">Law</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🎨</div>
-              <div class="text-sm font-medium">Design</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">📚</div>
-              <div class="text-sm font-medium">Education</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🧬</div>
-              <div class="text-sm font-medium">Biology</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🧮</div>
-              <div class="text-sm font-medium">Mathematics</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🔬</div>
-              <div class="text-sm font-medium">Chemistry</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🌍</div>
-              <div class="text-sm font-medium">Environmental Science</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">💰</div>
-              <div class="text-sm font-medium">Finance</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">📈</div>
-              <div class="text-sm font-medium">Marketing</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🎭</div>
-              <div class="text-sm font-medium">Arts</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🎵</div>
-              <div class="text-sm font-medium">Music</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🧠</div>
-              <div class="text-sm font-medium">Psychology</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🌐</div>
-              <div class="text-sm font-medium">Communications</div>
-            </div>
-            <div class="bg-white rounded-lg p-3 shadow-sm">
-              <div class="text-2xl mb-1">🌟</div>
-              <div class="text-sm font-medium">Any Major!</div>
+          </div>
+
+          <!-- Who can join -->
+          <div class="bg-gradient-to-r from-green-50 to-emerald-100 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-green-900 mb-4 text-center">Who Can Join? ✨</h3>
+            <p class="text-center text-gray-700 mb-4"><strong>All academic backgrounds welcome! No coding experience required.</strong></p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-center">
+              <!-- icons grid (kept) -->
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">💻</div><div class="text-sm font-medium">Computer Science</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">⚙️</div><div class="text-sm font-medium">Engineering</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">💼</div><div class="text-sm font-medium">Business</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🏥</div><div class="text-sm font-medium">Health Sciences</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">⚖️</div><div class="text-sm font-medium">Law</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🎨</div><div class="text-sm font-medium">Design</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">📚</div><div class="text-sm font-medium">Education</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🧬</div><div class="text-sm font-medium">Biology</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🧮</div><div class="text-sm font-medium">Mathematics</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🔬</div><div class="text-sm font-medium">Chemistry</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🌍</div><div class="text-sm font-medium">Environmental Science</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">💰</div><div class="text-sm font-medium">Finance</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">📈</div><div class="text-sm font-medium">Marketing</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🎭</div><div class="text-sm font-medium">Arts</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🎵</div><div class="text-sm font-medium">Music</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🧠</div><div class="text-sm font-medium">Psychology</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🌐</div><div class="text-sm font-medium">Communications</div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="text-2xl mb-1">🌟</div><div class="text-sm font-medium">Any Major!</div></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Call to Action Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl shadow-lg p-8 text-white mb-8">
+        <div class="text-center max-w-4xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4">Ready to Transform Your Future?</h3>
+          <p class="text-lg leading-relaxed mb-6">
+            Join our global community of innovators from all disciplines and get access to exclusive opportunities, mentorship, and cutting-edge resources. Whether you're interested in hackathons, technical growth, or leadership opportunities, we have a place for you.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6 text-left mb-8">
+            <div>
+              <h4 class="font-bold mb-2">🚀 New Members</h4>
+              <p class="text-blue-100">Register to become a member of all 5
+                <span class="relative inline-block">
+                  <span class="text-white font-semibold cursor-help border-b border-dotted border-white">Hack University organizations</span>
+                </span>, register and gain access to 7 annual hackathons, and apply for Executive Board positions.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-bold mb-2">🏆 Existing Members</h4>
+              <p class="text-blue-100">Get your official membership certificates for your resume and instant access to all community platforms [Discord and GroupMe].</p>
+            </div>
+          </div>
 
-
-    
-
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Call to Action Section -->
-<section class="py-12 bg-gray-50">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Majors Grid -->
-    <!-- <div class="text-center mb-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-        <div class="text-center">
-          <div class="text-2xl mb-2">📈</div>
-          <div class="font-semibold text-gray-800">Marketing</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl mb-2">🎭</div>
-          <div class="font-semibold text-gray-800">Arts</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl mb-2">🎵</div>
-          <div class="font-semibold text-gray-800">Music</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl mb-2">🧠</div>
-          <div class="font-semibold text-gray-800">Psychology</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl mb-2">🌐</div>
-          <div class="font-semibold text-gray-800">Communications</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl mb-2">🌟</div>
-          <div class="font-semibold text-blue-600">Any Major!</div>
+          <div class="text-center">
+            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html"
+               onclick="redirectToTargetPage()"
+               class="btn-hover-effect inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-xl shadow-lg hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-300">
+              <span class="mr-2">🚀</span>
+              Join Hack University Now
+              <span class="ml-2">→</span>
+            </a>
+            <p class="mt-4 text-blue-100 text-sm">
+              100% Free • Open to All Majors • Global Community • Instant Access
+            </p>
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
+  </section>
 
-    <!-- Enhanced Information Section -->
-    <div class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl shadow-lg p-8 text-white mb-8">
-      <div class="text-center max-w-4xl mx-auto">
-        <h3 class="text-2xl font-bold mb-4">Ready to Transform Your Future?</h3>
-        <p class="text-lg leading-relaxed mb-6">
-          Join our global community of innovators from all disciplines and get access to exclusive opportunities, mentorship, and cutting-edge resources. Whether you're interested in hackathons, technical growth, or leadership opportunities, we have a place for you.
+  <!-- Footer -->
+  <footer class="cc-blue footer text-white" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div>
+          <h3 class="text-lg font-bold mb-4">Hack University <span class="star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p class="text-sm opacity-80 mb-4">A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.</p>
+          <p class="text-sm mb-4"><a href="http://HackUniversity.vercel.app" class="text-white underline hover:opacity-90">HackUniversity.vercel.app</a></p>
+          <div class="mt-6">
+            <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
+            <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
+              <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white p-2"><i class="fab fa-linkedin text-lg md:text-xl"></i><span class="text-xs mt-1">LinkedIn</span></a>
+              <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-instagram text-lg md:text-xl"></i><span class="text-xs mt-1">Instagram</span></a>
+              <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-github text-lg md:text-xl"></i><span class="text-xs mt-1">GitHub</span></a>
+              <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-youtube text-lg md:text-xl"></i><span class="text-xs mt-1">YouTube</span></a>
+              <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="fab fa-discord text-lg md:text-xl"></i><span class="text-xs mt-1">Discord</span></a>
+              <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white p-2"><i class="far fa-calendar-alt text-lg md:text-xl"></i><span class="text-xs mt-1">Calendar</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="text-sm opacity-80 hover:opacity-100">Mission</a></li>
+            <li><a href="https://hackuniversity-calendar.vercel.app/" class="text-sm opacity-80 hover:opacity-100">Events</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="text-sm opacity-80 hover:opacity-100">Hackathons</a></li>
+            <li><a href="https://hackuniversity-membership.vercel.app/" class="text-sm opacity-80 hover:opacity-100">Membership</a></li>
+            <li><a href="https://hackuniversity-eboard.vercel.app/" class="text-sm opacity-80 hover:opacity-100">Join E-Board</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="text-sm opacity-80 hover:opacity-100">Resources</a></li>
+            <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" class="text-sm opacity-80 hover:opacity-100">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-4">Contact</h3>
+          <address class="text-sm opacity-80 not-italic">
+            Florida International University<br>Miami, FL<br>
+            <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100">codecrunchclub@gmail.com</a>
+          </address>
+        </div>
+      </div>
+
+      <div class="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-white/20 text-center">
+        <p class="text-sm opacity-80 mb-2">© 2025 Hack University. All rights reserved.</p>
+        <p class="text-xs opacity-60">
+          Built with ❤️ for the tech community by
+          <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="text-cyan-300 hover:text-cyan-200 font-semibold">Brian Bazurto</a> |
+          Powered by innovation and collaboration
         </p>
-        <div class="grid md:grid-cols-2 gap-6 text-left mb-8">
-          <div>
-            <h4 class="font-bold mb-2">🚀 New Members</h4>
-            <p class="text-blue-100">Register to become a member of all 5 
-              <span class="relative inline-block" 
-                    onmouseenter="this.querySelector('.tooltip-content').style.opacity='1'; this.querySelector('.tooltip-content').style.visibility='visible';" 
-                    onmouseleave="this.querySelector('.tooltip-content').style.opacity='0'; this.querySelector('.tooltip-content').style.visibility='hidden';">
-                <span class="text-white font-semibold cursor-help border-b border-dotted border-white">
-                  Hack University organizations
-                </span>
-                <span class="tooltip-content absolute top-full left-1/2 z-10" 
-                      style="transform: translateX(-50%); margin-top: 8px; padding: 8px 12px; background-color: #1f2937; color: white; font-size: 0.875rem; border-radius: 6px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); opacity: 0; visibility: hidden; transition: all 0.2s; width: 400px; white-space: nowrap; text-align: left; line-height: 1.6;">
-                  • Google Developer Club at FIU<br>
-                  • Code Crunch Global<br>
-                  • ColorStack at FIU<br>
-                  • CAHSI at FIU<br>
-                  • Raspberry Pi Code Crunch
-                  <span style="content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: #1f2937;"></span>
-                </span>
-              </span>, register and gain access to 7 annual hackathons, and apply for Executive Board positions.</p>
-          </div>
-          <div>
-            <h4 class="font-bold mb-2">🏆 Existing Members</h4>
-            <p class="text-blue-100">Get your official membership certificates for your resume and instant access to all community platforms [Discord and GroupMe].</p>
-          </div>
-        </div>
-        
-        <!-- Call to Action Button -->
-        <div class="text-center">
-          <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" 
-             onclick="redirectToTargetPage()" 
-             class="btn-hover-effect inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-xl shadow-lg hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-300">
-            <span class="mr-2">🚀</span>
-            Join Hack University Now
-            <span class="ml-2">→</span>
-          </a>
-          <p class="mt-4 text-blue-100 text-sm">
-            100% Free • Open to All Majors • Global Community • Instant Access
-          </p>
-        </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<style>
-.btn-hover-effect {
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+  <!-- Scripts -->
+  <script>
+    // Enhanced button interactions
+    document.addEventListener('DOMContentLoaded', function(){
+      const interactive = document.querySelectorAll('.btn-primary, .btn-secondary, .cc-orange');
+      interactive.forEach(el=>{
+        el.addEventListener('click', function(){ this.style.transform='scale(0.95)'; setTimeout(()=>this.style.transform='',150); });
+        el.addEventListener('touchstart', function(){ this.style.opacity='0.9' });
+        el.addEventListener('touchend', function(){ this.style.opacity='' });
+      });
 
-.btn-hover-effect:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.btn-hover-effect::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.btn-hover-effect:hover::before {
-    left: 100%;
-}
-</style>
-
-<script>
-function redirectToTargetPage() {
-    // Replace this URL with your target page
-    window.location.href = 'https://your-target-page.com';
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    <!-- Footer -->
-    <footer class="cc-blue text-white py-8 md:py-12" role="contentinfo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Hack University <span class="star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
-                    <p class="text-sm opacity-80 mb-4">
-                        A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders. 
-                    </p>
-                    <p class="text-sm mb-4">
-                        <a href="http://HackUniversity.vercel.app" class="text-white underline hover:opacity-90 text-decoration-none focus-visible">HackUniversity.vercel.app</a>
-                    </p>
-                    
-                    <!-- Social Media Links Grid -->
-                    <div class="mt-6">
-                        <h4 class="text-sm font-bold mb-3">Connect With Us:</h4>
-                        <div class="social-grid grid grid-cols-3 gap-2 md:gap-3">
-                            <a href="https://www.linkedin.com/showcase/hack-university-global/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-linkedin text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">LinkedIn</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-instagram text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Instagram</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-github text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">GitHub</span>
-                            </a>
-                            <a href="https://hackuniversity-directory.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-youtube text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">YouTube</span>
-                            </a>
-                            <a href="https://hackuniversity-discord.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="fab fa-discord text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1">Discord</span>
-                            </a>
-                            <a href="https://hackuniversity-calendar.vercel.app/" class="flex flex-col items-center text-white hover:text-yellow-300 transition duration-200 text-decoration-none touch-target focus-visible p-2">
-                                <i class="far fa-calendar-alt text-lg md:text-xl" aria-hidden="true"></i>
-                                <span class="text-xs mt-1 text-center">Calendar</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Mission</a></li>
-                        <li><a href="https://hackuniversity-calendar.vercel.app/" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Events</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Hackathons</a></li>
-                        <li><a href="https://hackuniversity-membership.vercel.app/" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Membership</a></li>
-                        <li><a href="https://hackuniversity-eboard.vercel.app/" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Join E-Board</a></li>
-                        <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Resources</a></li>
-                        <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-sm opacity-80 hover:opacity-100 text-decoration-none touch-target focus-visible">Join Discord</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Contact</h3>
-                    <address class="text-sm opacity-80 not-italic">
-                        Florida International University<br>
-                        Miami, FL<br>
-                        <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100 text-decoration-none focus-visible">codecrunchclub@gmail.com</a>
-                    </address>
-                </div>
-            </div>
-            <div class="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-white/20 text-center">
-                <p class="text-sm opacity-80 mb-2">
-                    © 2025 Hack University. All rights reserved.
-                </p>
-                <p class="text-xs opacity-60">
-                    Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="text-cyan-300 hover:text-cyan-200 text-decoration-none font-semibold transition-colors focus-visible">Brian Bazurto</a> | Powered by innovation and collaboration
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Enhanced button interaction effects with performance optimization
-        document.addEventListener('DOMContentLoaded', function() {
-            const interactiveElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cc-orange');
-            
-            interactiveElements.forEach(element => {
-                element.addEventListener('click', function(e) {
-                    // Add click animation
-                    this.style.transform = 'scale(0.95)';
-                    
-                    // Reset after animation
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                });
-
-                // Improve touch feedback
-                element.addEventListener('touchstart', function() {
-                    this.style.opacity = '0.9';
-                });
-
-                element.addEventListener('touchend', function() {
-                    this.style.opacity = '';
-                });
-            });
-
-            // Lazy load images for better performance
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src || img.src;
-                            img.classList.remove('lazy');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => imageObserver.observe(img));
+      // Lazy load images
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      if('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries, obs)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting){
+              const img = entry.target;
+              img.src = img.dataset?.src || img.src;
+              img.classList.remove('lazy');
+              obs.unobserve(img);
             }
-
-            // Reduce motion for users who prefer it
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const animations = document.querySelectorAll('.floating, .star');
-                animations.forEach(el => {
-                    el.style.animation = 'none';
-                });
-            }
-
-            // Add smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
+          });
         });
+        images.forEach(img=>io.observe(img));
+      }
 
-        // Service Worker registration for better performance (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('SW registered: ', registration);
-                }).catch(function(registrationError) {
-                    console.log('SW registration failed: ', registrationError);
-                });
-            });
-        }
-    </script>
+      // Reduce motion support
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        document.querySelectorAll('.floating, .star').forEach(el=>{ el.style.animation='none' });
+      }
+
+      // Smooth scroll for internal anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const target = document.querySelector(this.getAttribute('href'));
+          if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}) }
+        });
+      });
+    });
+
+    // Optional SW
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('/sw.js').catch(()=>{});
+      });
+    }
+
+    // Button redirect (update if you want custom)
+    function redirectToTargetPage(){
+      // Replace with your preferred destination if needed
+      // window.location.href = 'https://your-target-page.com';
+    }
+  </script>
 </body>
 </html>
