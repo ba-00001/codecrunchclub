@@ -45,7 +45,7 @@
     }
 
     /* NAV */
-    .navbar { 
+    /* .navbar { 
       background: var(--color-bg-white);
       border-bottom: 1px solid var(--color-border);
       padding: 12px 0;
@@ -54,13 +54,23 @@
     }
     .nav-container { 
       max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
+    } */
+
+
+
+
+
+    @media (max-width:768px){
+      .nav-container{ flex-direction:column; gap:12px; }
+      .nav-links{ flex-wrap:wrap; justify-content:center; gap:8px; }
+      .nav-link{ font-size:11px; padding:6px 10px; white-space:nowrap; }
     }
-    .nav-brand { font-size: 22px; font-weight: 600; color: var(--color-primary); letter-spacing:.2px; }
-    .nav-brand a { color: inherit; text-decoration: none; transition: opacity var(--transition-base); }
-    .nav-brand a:hover { opacity: 0.85; }
-    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
-    .nav-link { color: var(--color-text-muted); text-decoration: none; font-weight: 500; font-size: 14px; padding: 8px 12px; border-radius: var(--radius-sm); transition: all var(--transition-base); }
-    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+    @media (max-width:480px){
+      .nav-link{ font-size:10px; padding:5px 8px; }
+    }
+
+
+
 
     /* TIMEZONE */
     .timezone-section { background: var(--color-bg-white); border-bottom: 1px solid var(--color-border); padding: var(--spacing-lg) 20px; margin-bottom: var(--spacing-xl); }
@@ -221,34 +231,72 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
+
+
+
+
+    /* Header above the card */
+    .site-header {
+      width:100%;
+      /* background:#f8fafc;
+      border-bottom:1px solid #e5e7eb; */
+    }
+    .site-header-inner {
+      max-width:1200px;
+      margin:0 auto;
+      padding: 14px 20px;
+    }
+
+
+    .crumbs {
+      font-size: 12px;
+      color:#6b7280;
+    }
+
+
+         /* NAVBAR (same as your previous, now naturally full-width) */
+    .navbar { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+    .nav-brand { font-size:22px; font-weight:500; color:#4285f4; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
+    .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
   </style>
 </head>
 <body>
-  <!-- Navigation Header -->
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <!-- NAV OUTSIDE -->
+  <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
+        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
       </div>
       <div class="nav-links">
-        <a href="https://codecrunchglobal.vercel.app" class="nav-link" target="_blank" rel="noopener">Code Crunch Worldwide</a>
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link" target="_blank" rel="noopener">Google Developer Group at FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link" target="_blank" rel="noopener">Raspberry Pi Code Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link" target="_blank" rel="noopener">Support Us</a>
+                <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
       </div>
     </div>
+      <!-- HEADER OUTSIDE -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <p class="crumbs">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        Hackathon Events
+      </p>
+    </div>
+  </header>
   </nav>
+
 
   <!-- Page Title / Hero -->
   <header class="w-full bg-gray-50 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
-        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
-        <span aria-hidden="true"> / </span>
-        Hackathon Events
-      </p>
+
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
         Hackathon Events
       </h1>

@@ -6,6 +6,7 @@
     <title>Organization Calendars - Hack University</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
     <style>
         /* Global Utilities */
         .text-decoration-none { 
@@ -74,9 +75,76 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #64748b;
         }
+
+
+    /* Header above the card */
+    .site-header {
+      width:100%;
+      /* background:#f8fafc;
+      border-bottom:1px solid #e5e7eb; */
+    }
+    .site-header-inner {
+      max-width:1200px;
+      margin:0 auto;
+      padding: 14px 20px;
+    }
+
+
+    .crumbs {
+      font-size: 12px;
+      color:#6b7280;
+    }
+
+
+
+
+         /* NAVBAR (same as your previous, now naturally full-width) */
+    .navbar { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+    .nav-brand { font-size:22px; font-weight:500; color:#4285f4; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
+    .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
+    @media (max-width:768px){
+      .nav-container{ flex-direction:column; gap:12px; }
+      .nav-links{ flex-wrap:wrap; justify-content:center; gap:8px; }
+      .nav-link{ font-size:11px; padding:6px 10px; white-space:nowrap; }
+    }
+    @media (max-width:480px){
+      .nav-link{ font-size:10px; padding:5px 8px; }
+    }
     </style>
 </head>
 <body class="bg-gray-50">
+<body>
+    <!-- NAV OUTSIDE -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
+      </div>
+      <div class="nav-links">
+                <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+      <!-- HEADER OUTSIDE -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <p class="crumbs">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        Partner Calendars
+      </p>
+    </div>
+  </header>
+  </nav>
+
+
 
 <!-- Header Section -->
 <section class="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 relative overflow-hidden">
@@ -86,8 +154,8 @@
     </div>
     
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Organization Calendars</h1>
-        <p class="text-lg text-white/80 max-w-3xl mx-auto">Stay up to date with events from all our partner organizations</p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Partners Calendars</h1>
+        <p class="text-lg text-white/80 max-w-3xl mx-auto">Stay up to date with events from all our Partners organizations</p>
     </div>
 </section>
 
