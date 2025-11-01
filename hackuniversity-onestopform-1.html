@@ -25,7 +25,73 @@
     #cert-status.error   { background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%); color:#991b1b; border-color:#fca5a5; }
   
   
+ /* 
+ navbar styles
+ 
+ 
+ */
 
+
+   /* Base navbar styles */
+.navbar {
+  background:#fff;
+  border-bottom:1px solid #e8eaed;
+  padding:12px 0;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container {
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+}
+
+.nav-brand {
+  font-size:22px;
+  font-weight:500;
+  color:#4285f4;
+}
+
+.nav-links {
+  display:flex;
+  gap:30px;
+}
+
+.nav-link {
+  color:#5f6368;
+  text-decoration:none;
+  font-weight:400;
+  font-size:14px;
+  padding:8px 16px;
+  border-radius:4px;
+  transition:.2s;
+}
+
+.nav-link:hover {
+  color:#1a73e8;
+  background:#f1f3f4;
+}
+
+/* Responsive tweaks used in your page */
+@media (max-width:768px){
+  .nav-container{ flex-direction:column; gap:12px; }
+  .nav-links{ flex-wrap:wrap; justify-content:center; gap:8px; }
+  .nav-link{ font-size:11px; padding:6px 10px; white-space:nowrap; }
+}
+@media (max-width:480px){
+  .nav-link{ font-size:10px; padding:5px 8px; }
+}
+
+ /* 
+ navbar styles end
+ 
+ 
+ */
 
   </style>
 </head>
@@ -35,20 +101,50 @@
 
 
 <body class="bg-white text-gray-900">
+  <!-- Navigation Header -->
+   <!-- 
+  works with 
+        /*  
+        
+        navbar styles 
+
+         */ 
+
+         no JavaScript needed
+         -->
+  <!-- NAV OUTSIDE -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
+      </div>
+      <div class="nav-links">
+                <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+<!-- Navigation Header ends -->
 
 
     <!-- Page Title / Hero -->
   <header class="w-full bg-gray-50 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
+        <!-- 1st page -->
         <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+         <!-- next page -->       
         <span aria-hidden="true"> / </span>
-        Membership
-      </p>
-    <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" class="underline hover:no-underline">Hack University</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" class="underline hover:no-underline">OneStop Form Registration</a>
+        
+         <!-- current page -->
         <span aria-hidden="true"> / </span>
-        OneStop Form Registration
-      </p>
+        Current Members or Registered Hackathon Participants 
+
+      <!-- page title -->
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
         Current Members or Registered Hackathon Participants 
       </h1>
