@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Notice — Hack University</title>
+
+  <!-- Tailwind + Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    /* ===== Design tokens (same system as the other page) ===== */
+    :root{
+      --hu-primary:#2563eb;        /* blue-600 */
+      --hu-primary-700:#1d4ed8;    /* hover */
+      --hu-bg:#f8f9fa;             /* page bg */
+      --hu-text:#202124;           /* body text */
+      --hu-muted:#5f6368;          /* muted */
+      --hu-border:#e5e7eb;         /* borders */
+      --hu-white:#ffffff;
+      --hu-warn-bg:#fff8e1;        /* notice bg */
+      --hu-warn-border:#fde68a;    /* notice border */
+      --hu-warn-text:#7a5b00;      /* notice text */
+    }
+
+    html,body{height:100%}
+    body{
+      background:var(--hu-bg);
+      color:var(--hu-text);
+      font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    /* ===== Card + badges ===== */
+    .hu-card{ background:var(--hu-white); border:1px solid var(--hu-border); border-radius:16px; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+    .hu-badge{ display:inline-flex; align-items:center; gap:.5rem; padding:.375rem .75rem; border-radius:999px; font-weight:700; font-size:.8125rem; letter-spacing:.2px; white-space:nowrap; }
+    .hu-badge-red{ background:#fee2e2; color:#991b1b; }
+    .hu-badge-gray{ background:#f3f4f6; color:#374151; }
+
+    /* ===== Footer (shared look) ===== */
+    .site-footer{ background:var(--hu-primary); color:#fff; }
+    .site-footer a{ color:#eaf2ff; }
+    .site-footer a:hover{ color:#fff; text-decoration:underline; }
+    .footer-link{ display:block; padding:.25rem 0; }
+    .footer-link:hover{ transform:translateX(2px); }
+
+/* 
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+
+*/
+
+/* Navigation Header CSS -  */
+/* Navigation Styles */
+.navbar { 
+  background: #fff; 
+  border-bottom: 1px solid #e8eaed; 
+  padding: 12px 0; 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000;
+}
+
+.nav-container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0 20px;
+}
+
+.nav-brand { 
+  font-size: 22px; 
+  font-weight: 500; 
+  color: #4285f4;
+}
+
+.nav-brand a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 30px;
+}
+
+.nav-link { 
+  color: #5f6368; 
+  text-decoration: none; 
+  font-weight: 400; 
+  font-size: 14px; 
+  padding: 8px 16px; 
+  border-radius: 4px; 
+  transition: .2s;
+}
+
+.nav-link:hover { 
+  color: #1a73e8; 
+  background: #f1f3f4;
+}
+
+/* Hero Section (using Tailwind classes) */
+.hero-section {
+  width: 100%;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hero-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.breadcrumb {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb a {
+  text-decoration: underline;
+}
+
+.breadcrumb a:hover {
+  text-decoration: none;
+}
+
+.hero-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.hero-description {
+  margin-top: 0.5rem;
+  color: #4b5563;
+  max-width: 42rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .nav-container { 
+    flex-direction: column; 
+    gap: 12px;
+  }
+  
+  .nav-links { 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 8px;
+  }
+  
+  .nav-link { 
+    font-size: 11px; 
+    padding: 6px 10px; 
+    white-space: nowrap;
+  }
+
+  .hero-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.875rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link { 
+    font-size: 10px; 
+    padding: 5px 8px;
+  }
+}
+/* 
+End of navigation CSS */
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Nav + Hero (namespaced; no body classes required) -->
+<!-- Navigation Header -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
+        <strong>Hack University Initiative</strong>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+      <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
+      <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+      <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+      <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+      <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero/Title Section (Optional - customize title and description) -->
+<header class="w-full bg-gray-50 border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-xs sm:text-sm text-gray-500 mb-2">
+      <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+      <span aria-hidden="true"> / </span>
+      404 Error
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+      <!-- CUSTOMIZE THIS TITLE -->
+      404 Error - Page is no longer in service
+    </h1>
+    <p class="mt-2 text-gray-600 max-w-2xl">
+      <!-- CUSTOMIZE THIS DESCRIPTION -->
+            The website, form, or link you tried to access has been retired. Please use the official links below to reach the current Hack University resources.
+  </div>
+</header>
+
+
+  <!-- ===== MAIN ===== -->
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section class="hu-card p-8 sm:p-10">
+      <!-- Header row -->
+      <div class="flex items-start justify-between gap-4">
+        <div class="space-y-2">
+          <div class="inline-flex gap-2">
+            <span class="hu-badge hu-badge-red"><i class="fa-solid fa-triangle-exclamation"></i> Service Notice</span>
+            <span class="hu-badge hu-badge-gray"><i class="fa-regular fa-clock"></i> Updated</span>
+          </div>
+          <!-- <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">This page is no longer in service</h1>
+          <p class="text-gray-600 max-w-prose">
+            The website, form, or link you tried to access has been retired. Please use the official links below to reach the current Hack University resources.
+          </p> -->
+        </div>
+        <div class="hidden sm:block text-red-600">
+          <i class="fa-solid fa-circle-exclamation text-4xl"></i>
+        </div>
+      </div>
+
+      <!-- Warning box -->
+      <div class="mt-6 rounded-xl border px-5 py-4"
+           style="background:var(--hu-warn-bg); border-color:var(--hu-warn-border); color:var(--hu-warn-text);">
+        <p class="font-medium">Action needed:</p>
+        <p class="mt-1">
+          Navigate using the buttons below. If you believe you reached this notice in error, contact us via LinkedIn or email.
+        </p>
+      </div>
+
+      <!-- Primary links -->
+      <div class="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-3">
+        <a href="https://hackuniversity.vercel.app" target="_blank"
+           class="inline-flex items-center justify-center rounded-md px-5 py-3 text-white bg-[var(--hu-primary)] hover:bg-[var(--hu-primary-700)] transition">
+          <i class="fa-solid fa-globe me-2"></i> Visit hackuniversity.vercel.app
+        </a>
+
+        <a href="https://hackuniversity-linkedin.vercel.app" target="_blank"
+           class="inline-flex items-center justify-center rounded-md px-5 py-3 border border-gray-300 text-gray-800 hover:bg-gray-50 transition">
+          <i class="fa-brands fa-linkedin me-2"></i> DM us on LinkedIn
+        </a>
+
+        <!-- <a href="mailto:codecrunchclub@gmail.com"
+           class="inline-flex items-center justify-center rounded-md px-5 py-3 border border-gray-300 text-gray-800 hover:bg-gray-50 transition">
+          <i class="fa-regular fa-envelope me-2"></i> Email Support
+        </a> -->
+      </div>
+
+      <!-- About + orgs -->
+      <div class="mt-10 pt-8 border-t border-[var(--hu-border)]">
+        <h2 class="text-xl font-semibold">About Hack University</h2>
+        <p class="mt-2 text-gray-600">
+          Hack University unites student organizations and global communities to empower the next generation of innovators,
+          developers, and leaders through hands-on learning, mentorship, and real-world projects.
+        </p>
+
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-lg border border-[var(--hu-border)] bg-white p-3 ps-4 flex items-center">
+            <span class="me-3 text-[var(--hu-primary)]"><i class="fa-solid fa-circle-dot"></i></span>
+            Google Developer Group at FIU
+          </div>
+          <div class="rounded-lg border border-[var(--hu-border)] bg-white p-3 ps-4 flex items-center">
+            <span class="me-3 text-[var(--hu-primary)]"><i class="fa-solid fa-circle-dot"></i></span>
+            Code Crunch Worldwide
+          </div>
+          <div class="rounded-lg border border-[var(--hu-border)] bg-white p-3 ps-4 flex items-center">
+            <span class="me-3 text-[var(--hu-primary)]"><i class="fa-solid fa-circle-dot"></i></span>
+            ColorStack at FIU
+          </div>
+          <div class="rounded-lg border border-[var(--hu-border)] bg-white p-3 ps-4 flex items-center">
+            <span class="me-3 text-[var(--hu-primary)]"><i class="fa-solid fa-circle-dot"></i></span>
+            CAHSI at FIU
+          </div>
+          <div class="rounded-lg border border-[var(--hu-border)] bg-white p-3 ps-4 flex items-center sm:col-span-2">
+            <span class="me-3 text-[var(--hu-primary)]"><i class="fa-solid fa-circle-dot"></i></span>
+            Raspberry Pi Code Crunch
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER (shared across pages) ===== -->
+  <footer class="site-footer mt-16" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid gap-10 md:grid-cols-3">
+        <div>
+          <h3 class="text-white/90 font-bold text-lg">Hack University <span class="opacity-90">👩🏻‍💻👨🏾‍💻🧑🏼‍💻</span></h3>
+          <p class="mt-3 text-white/80 leading-relaxed">
+            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+          </p>
+          <p class="mt-2">
+            <a href="https://hackuniversity.vercel.app" class="underline underline-offset-2">hackuniversity.vercel.app</a>
+          </p>
+          <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <a href="https://hackuniversity-linkedin.vercel.app/" class="footer-link"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
+            <a href="https://codecrunchglobal.vercel.app/" class="footer-link"><i class="fab fa-instagram mr-2"></i>Instagram</a>
+            <a href="https://github.com/hackuniversity" class="footer-link"><i class="fab fa-github mr-2"></i>GitHub</a>
+            <a href="https://hackuniversity.vercel.app" class="footer-link"><i class="fab fa-youtube mr-2"></i>YouTube</a>
+            <a href="https://hackuniversity.vercel.app" class="footer-link"><i class="fab fa-discord mr-2"></i>Discord</a>
+            <a href="https://hackuniversity-calendar.vercel.app/" class="footer-link"><i class="far fa-calendar-alt mr-2"></i>Calendar</a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-white/90 font-bold text-lg">Quick Links</h3>
+          <div class="mt-3 space-y-1">
+            <a class="footer-link" href="https://codecrunchglobal.vercel.app/hackathons-discord.html#mission">Mission</a>
+            <a class="footer-link" href="https://hackuniversity-calendar.vercel.app/">Events</a>
+            <a class="footer-link" href="https://codecrunchglobal.vercel.app/hackathons.html">Hackathons</a>
+            <a class="footer-link" href="https://hackuniversity-membership.vercel.app/">Membership</a>
+            <a class="footer-link" href="https://hackuniversity-eboard.vercel.app/">Join E-Board</a>
+            <a class="footer-link" href="https://codecrunchglobal.vercel.app/index.html#resources">Resources</a>
+            <a class="footer-link" href="https://hackuniversity-discord.vercel.app/" target="_blank" rel="noopener">Join Discord</a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-white/90 font-bold text-lg">Contact</h3>
+          <address class="not-italic mt-3 text-white/80 leading-relaxed">
+            Florida International University<br/>
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com" class="underline underline-offset-2">codecrunchclub@gmail.com</a>
+          </address>
+        </div>
+      </div>
+
+      <div class="mt-10 border-t border-white/20 pt-6 text-center text-white/80">
+        <p>© 2025 Hack University. All rights reserved.</p>
+        <p class="text-white/70 text-sm mt-1">
+          Built with ❤️ by <a class="underline underline-offset-2" href="https://www.linkedin.com/in/iba001/" target="_blank">Brian Bazurto</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+   
+// Navigation JavaScript Enhancements
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Smooth scrolling for anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }
+    });
+  });
+
+  // Add active state to navigation links based on current page
+  function setActiveNavLink() {
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(function(link) {
+      const linkUrl = link.getAttribute('href');
+      
+      // Remove any existing active class
+      link.classList.remove('nav-link-active');
+      
+      // Check if current page matches this link
+      if (currentUrl.includes(linkUrl.replace('https://', '').replace('http://', ''))) {
+        link.classList.add('nav-link-active');
+        link.style.color = '#1a73e8';
+        link.style.backgroundColor = '#e8f0fe';
+        link.style.fontWeight = '500';
+      }
+    });
+  }
+
+  // Call on page load
+  setActiveNavLink();
+
+  // Add mobile menu functionality (if you want to convert to hamburger menu)
+  function addMobileMenu() {
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Create hamburger button
+    const hamburger = document.createElement('button');
+    hamburger.innerHTML = '☰';
+    hamburger.className = 'mobile-menu-toggle';
+    hamburger.style.cssText = `
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #4285f4;
+      cursor: pointer;
+      padding: 8px;
+    `;
+
+    // Add hamburger after brand
+    navContainer.insertBefore(hamburger, navLinks);
+
+    // Toggle menu on mobile
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('mobile-menu-open');
+    });
+
+    // Add mobile styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (max-width: 768px) {
+        .mobile-menu-toggle { display: block !important; }
+        .nav-links { 
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid #e8eaed;
+          flex-direction: column;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav-links.mobile-menu-open { display: flex !important; }
+        .nav-container { position: relative; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Uncomment the line below if you want mobile hamburger menu
+  // addMobileMenu();
+
+  // Add hover effects and click feedback
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(function(link) {
+    // Add ripple effect on click
+    link.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(26, 115, 232, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.3s ease-out;
+        pointer-events: none;
+      `;
+      
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 300);
+    });
+  });
+
+  // Add ripple animation CSS
+  const rippleStyle = document.createElement('style');
+  rippleStyle.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(rippleStyle);
+
+});
+
+// Optional: Add scroll-based navbar background change
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 10) {
+    navbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+    navbar.style.backdropFilter = 'blur(10px)';
+  } else {
+    navbar.style.boxShadow = 'none';
+    navbar.style.backgroundColor = '#fff';
+    navbar.style.backdropFilter = 'none';
+  }
+});
+// end Navigation JavaScript Enhancements
+
+
+    </script>
+
+
+
+</body>
+</html>
