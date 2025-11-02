@@ -264,47 +264,49 @@
   </style>
 </head>
 <body>
-    <!-- NAV OUTSIDE -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
-      </div>
-      <div class="nav-links">
-                <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
-      </div>
+  <!-- Nav + Hero (namespaced; no body classes required) -->
+<!-- Navigation Header -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
+        <strong>Hack University Initiative</strong>
+      </a>
     </div>
-      <!-- HEADER OUTSIDE -->
-  <header class="site-header">
-    <div class="site-header-inner">
-      <p class="crumbs">
-        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
-        <span aria-hidden="true"> / </span>
-        Hackathon Events
-      </p>
+    <div class="nav-links">
+      <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+      <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
+      <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+      <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+      <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+      <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
     </div>
-  </header>
-  </nav>
+  </div>
+</nav>
+
+<!-- Hero/Title Section (Optional - customize title and description) -->
+<header class="w-full bg-gray-50 border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-xs sm:text-sm text-gray-500 mb-2">
+      <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+      <span aria-hidden="true"> / </span>
+      Hackathon Events
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+      <!-- CUSTOMIZE THIS TITLE -->
+      Hackathon Events
+    </h1>
+<p class="mt-2 text-gray-600 max-w-2xl">
+  A hackathon is a problem-solving competition. Hack University hackathons tackle challenges from interdisciplinary areas and feature two main tracks:<br>
+  • <strong>Tech challenge</strong> (coding/development) - <em>Example: Build an AI-powered study group app</em><br>
+  • <strong>Technopreneurship challenge</strong> (<strong>no code</strong> - business pitch only) - <em>Example: Pitch a sustainable campus delivery service</em><br><br>
+  Check our upcoming and past hackathons below. Open to everyone worldwide, all majors welcome. Ages 16+ accepted (under 18 requires parental/guardian consent).
+</p>
+</div>
+</header>
 
 
-  <!-- Page Title / Hero -->
-  <header class="w-full bg-gray-50 border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <p class="text-xs sm:text-sm text-gray-500 mb-2">
 
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Hackathon Events
-      </h1>
-      <p class="mt-2 text-gray-600 max-w-2xl">
-        Check our upcoming and past hackathons. Open to everyone worldwide, all majors. Ages 16+ accepted (under 18 requires parental/guardian consent).
-      </p>
-    </div>
-  </header>
 
   <!-- Time Zone Section -->
   <div class="timezone-section" aria-labelledby="hq-title">
@@ -754,6 +756,170 @@
       });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
     });
+
+
+    // Navigation JavaScript Enhancements
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Smooth scrolling for anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }
+    });
+  });
+
+  // Add active state to navigation links based on current page
+  function setActiveNavLink() {
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(function(link) {
+      const linkUrl = link.getAttribute('href');
+      
+      // Remove any existing active class
+      link.classList.remove('nav-link-active');
+      
+      // Check if current page matches this link
+      if (currentUrl.includes(linkUrl.replace('https://', '').replace('http://', ''))) {
+        link.classList.add('nav-link-active');
+        link.style.color = '#1a73e8';
+        link.style.backgroundColor = '#e8f0fe';
+        link.style.fontWeight = '500';
+      }
+    });
+  }
+
+  // Call on page load
+  setActiveNavLink();
+
+  // Add mobile menu functionality (if you want to convert to hamburger menu)
+  function addMobileMenu() {
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Create hamburger button
+    const hamburger = document.createElement('button');
+    hamburger.innerHTML = '☰';
+    hamburger.className = 'mobile-menu-toggle';
+    hamburger.style.cssText = `
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #4285f4;
+      cursor: pointer;
+      padding: 8px;
+    `;
+
+    // Add hamburger after brand
+    navContainer.insertBefore(hamburger, navLinks);
+
+    // Toggle menu on mobile
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('mobile-menu-open');
+    });
+
+    // Add mobile styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (max-width: 768px) {
+        .mobile-menu-toggle { display: block !important; }
+        .nav-links { 
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid #e8eaed;
+          flex-direction: column;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav-links.mobile-menu-open { display: flex !important; }
+        .nav-container { position: relative; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Uncomment the line below if you want mobile hamburger menu
+  // addMobileMenu();
+
+  // Add hover effects and click feedback
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(function(link) {
+    // Add ripple effect on click
+    link.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(26, 115, 232, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.3s ease-out;
+        pointer-events: none;
+      `;
+      
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 300);
+    });
+  });
+
+  // Add ripple animation CSS
+  const rippleStyle = document.createElement('style');
+  rippleStyle.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(rippleStyle);
+
+});
+
+// Optional: Add scroll-based navbar background change
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 10) {
+    navbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+    navbar.style.backdropFilter = 'blur(10px)';
+  } else {
+    navbar.style.boxShadow = 'none';
+    navbar.style.backgroundColor = '#fff';
+    navbar.style.backdropFilter = 'none';
+  }
+});
+// end Navigation JavaScript Enhancements
+
+
+
   </script>
 </body>
 </html>
