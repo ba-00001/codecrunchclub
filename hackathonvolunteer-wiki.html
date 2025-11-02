@@ -328,9 +328,9 @@
         <strong>Participate</strong> page.
       </p>
       <div class="ops-cta">
-        <a href="https://hackuniversity-hackathons.vercel.app/" target="_blank" rel="noopener" aria-label="Open Hack University Participate page">
+        <a href="https://hackuniversity-hackathons.vercel.app/" target="_blank" rel="noopener" aria-label="Open Hack University Hackathons Events Page">
           <i class="fa-solid fa-rocket"></i>
-          Open Participate Page
+          Open Hackathons Events Page
         </a>
       </div>
     </div>
@@ -347,12 +347,12 @@
           <div>
             <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
             <div class="social-grid">
-              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
-              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
-              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+              <a href="https://www.linkedin.com/company/hackuniversity" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
             </div>
           </div>
         </div>
@@ -385,211 +385,209 @@
     </div>
   </footer>
 
-  <script>
-    /* ---------- Time helpers ---------- */
-    function asLocalDate(ymd){
-      const [y,m,d] = ymd.split('-').map(Number);
-      return new Date(y, m-1, d);
-    }
-    function nowInMiami(){
-      return new Date(new Date().toLocaleString('en-US',{ timeZone:'America/New_York'}));
-    }
-    function formatDateMiami(dateStr){
-      const d = asLocalDate(dateStr);
-      return d.toLocaleDateString('en-US',{
-        year:'numeric', month:'long', day:'numeric', timeZone:'America/New_York'
-      });
-    }
-    function getETAbbrev(date = nowInMiami()){
-      const miami = new Date(date.toLocaleString('en-US',{ timeZone:'America/New_York'}));
-      return miami.getTimezoneOffset() === 240 ? 'EDT' : 'EST'; // 240=EDT, 300=EST
-    }
+<script>
+/* ============================
+   🕒 DST-safe clocks (Intl)
+   ============================ */
+function fmtTime(tz) {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz,
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false
+  }).format(new Date());
+}
+function tzAbbrev(tz) {
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz, timeZoneName: 'short'
+    }).formatToParts(new Date());
+    return parts.find(p => p.type === 'timeZoneName')?.value || '';
+  } catch { return ''; }
+}
+function updateTimes(){
+  // Miami (label shows EDT/EST automatically)
+  const miamiTZ = 'America/New_York';
+  const miamiTime = document.getElementById('miami-time');
+  const miamiLabel = document.getElementById('miami-label');
+  if (miamiTime)  miamiTime.textContent  = fmtTime(miamiTZ);
+  if (miamiLabel) miamiLabel.textContent = `Miami, FL (${tzAbbrev(miamiTZ)})`;
 
-    // Status helper (X days -> Live -> Completed), inclusive of end date
-    function getEventStatus(startDateStr, endDateStr) {
-      const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
-      const end   = asLocalDate(endDateStr);   end.setHours(23,59,59,999);
+  // Others: update times only
+  const map = [
+    ['london-time','Europe/London'],
+    ['lagos-time','Africa/Lagos'],
+    ['tokyo-time','Asia/Tokyo'],
+    ['sydney-time','Australia/Sydney'],
+    ['mumbai-time','Asia/Kolkata'],
+  ];
+  for (const [id, tz] of map) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = fmtTime(tz);
+  }
+}
 
-      const now = nowInMiami();
-      const today = new Date(now); today.setHours(0,0,0,0);
+/* ============================
+   📅 Hackathon helpers
+   ============================ */
+function asLocalDate(ymd){
+  const [y,m,d] = ymd.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+function nowInMiami(){
+  return new Date(new Date().toLocaleString('en-US',{ timeZone:'America/New_York'}));
+}
+function formatDateMiami(dateStr){
+  const d = asLocalDate(dateStr);
+  return d.toLocaleDateString('en-US',{
+    year:'numeric', month:'long', day:'numeric', timeZone:'America/New_York'
+  });
+}
+function getEventStatus(startDateStr, endDateStr) {
+  const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
+  const end   = asLocalDate(endDateStr);   end.setHours(23,59,59,999);
+  const now   = nowInMiami();
+  const today = new Date(now); today.setHours(0,0,0,0);
 
-      if (today < start) {
-        const diffDays = Math.ceil((start - today) / (1000*60*60*24));
-        return { text: `${diffDays} days`, isPast: false, isLive: false };
+  if (today < start) {
+    const diffDays = Math.ceil((start - today) / (1000*60*60*24));
+    return { text: `${diffDays} days`, isPast:false, isLive:false };
+  }
+  if (now <= end) return { text:'Live', isPast:false, isLive:true };
+  return { text:'Completed', isPast:true, isLive:false };
+}
+
+/* ============================
+   🧠 Hackathon data
+   ============================ */
+const hackathons = [
+  { name:'🏙️ 305 Hackathon: Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
+  { name:'👑 EmpowHER Hackathon 2025',        startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
+  { name:'👑 EmpowHER HackDAY 2025',          startDate:'2025-10-18', endDate:'2025-10-18', modality:'in-person', url:'https://empowherhackdayfall25.vercel.app/' },
+  { name:'🎆 CodeFest 2025',                   startDate:'2025-12-08', endDate:'2025-12-15', modality:'virtual',   url:'https://codefesthack2025.vercel.app/' },
+  { name:'🔥 HackFiesta Miami 2026',           startDate:'2026-03-09', endDate:'2026-03-15', modality:'virtual',   url:'https://hackfiestamiami2026.vercel.app/' },
+  { name:'⚡ 305 Hackathon: Spring edition 2026', startDate:'2026-03-20', endDate:'2026-03-22', modality:'tbd',    url:'https://305hackspring2026.vercel.app/' },
+  { name:'🌟 SummerCodeX 2025',               startDate:'2025-07-21', endDate:'2025-07-28', modality:'virtual',   url:'#' },
+  { name:'⛈️ CodeStorm 2025',                 startDate:'2025-05-19', endDate:'2025-05-26', modality:'virtual',   url:'#' },
+  { name:'⚡ 305 Hackathon: Spring 2025 edition', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid', url:'#' },
+  { name:'🔥 HackFiesta Miami 2025',           startDate:'2025-03-21', endDate:'2025-03-23', modality:'virtual',   url:'#' }
+];
+function getModalityClass(m){
+  switch((m||'').toLowerCase()){
+    case 'virtual': return 'mode-virtual';
+    case 'in-person': return 'mode-person';
+    case 'hybrid': return 'mode-hybrid';
+    case 'tbd': default: return 'mode-tbd';
+  }
+}
+function getModalityText(m){
+  switch((m||'').toLowerCase()){
+    case 'in-person': return 'In Person';
+    case 'virtual': return 'Virtual';
+    case 'hybrid': return 'Hybrid';
+    case 'tbd': default: return 'TBD';
+  }
+}
+
+/* ============================
+   🧩 Render hackathons
+   ============================ */
+function renderHackathons(){
+  const now = nowInMiami();
+  const upcoming = [];
+  const past = [];
+
+  const sorted = [...hackathons].sort((a,b)=>asLocalDate(a.startDate)-asLocalDate(b.startDate));
+  sorted.forEach(h=>{
+    const endDate = asLocalDate(h.endDate);
+    const status  = getEventStatus(h.startDate, h.endDate);
+    const range = (h.startDate===h.endDate)
+      ? `${formatDateMiami(h.startDate)}`
+      : `${formatDateMiami(h.startDate)} - ${formatDateMiami(h.endDate)}`;
+    const dateLine = `${range} (${tzAbbrev('America/New_York')})`;
+
+    const item = `
+      <div class="hackathon-item">
+        <div class="hackathon-info">
+          <div class="hackathon-name">${h.name}</div>
+          <div class="hackathon-date">${dateLine}</div>
+        </div>
+        <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
+        <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
+        <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
+      </div>`;
+    if (endDate < now) past.push(item); else upcoming.push(item);
+  });
+
+  const up = document.getElementById('upcoming-events');
+  const pa = document.getElementById('past-events');
+  if (up) up.innerHTML = upcoming.join('');
+  if (pa) pa.innerHTML = past.join('');
+}
+
+/* ==========================================
+   🔒 Optional: Form No. 2 availability
+   ========================================== */
+const currentEventConfig = {
+  name: '305 Hack Edition — Nov 2025',
+  endDate: '2025-11-16',
+  registrationClose: '2025-12-01',
+  form2Url: 'https://your-form2-nov2025.example'
+};
+const d = s => { const [y,m,day]=s.split('-').map(Number); return new Date(y,m-1,day); };
+function daysUntil(date){
+  const t=new Date(); t.setHours(0,0,0,0);
+  const d0=d(date); d0.setHours(0,0,0,0);
+  return Math.ceil((d0 - t)/(1000*60*60*24));
+}
+(function updateForm2Card(){
+  const opensOn = new Date(d(currentEventConfig.endDate).getTime() + 2*24*60*60*1000);
+  const closesOn = d(currentEventConfig.registrationClose);
+  const now = new Date(); now.setHours(0,0,0,0);
+  const link = document.getElementById('form2-link');
+  const status = document.getElementById('form2-status');
+  if (!link || !status) return;
+
+  link.href = currentEventConfig.form2Url;
+  if (now < opensOn){
+    const days = daysUntil(opensOn.toISOString().slice(0,10));
+    status.innerHTML = `<span class="badge badge-lock">Locked</span> Opens in <strong>${days} day${days===1?'':'s'}</strong> — ${opensOn.toLocaleDateString()}.`;
+    link.style.pointerEvents='none'; link.style.opacity='.7';
+  } else if (now > closesOn){
+    status.innerHTML = `<span class="badge badge-warn">Closed</span> Donations & registration closed on <strong>${closesOn.toLocaleDateString()}</strong>.`;
+    link.style.pointerEvents='none'; link.style.opacity='.7';
+  } else {
+    status.innerHTML = `<span class="badge badge-live">Live</span> Accepting donations & registrations until <strong>${closesOn.toLocaleDateString()}</strong>.`;
+  }
+})();
+
+/* ============================
+   🚀 Init
+   ============================ */
+document.addEventListener('DOMContentLoaded', () => {
+  renderHackathons();
+  updateTimes();
+  setInterval(updateTimes, 1000);         // live clocks
+  setInterval(renderHackathons, 3600000); // refresh status hourly
+
+  const interactive = document.querySelectorAll('.card-button, .hackathon-link');
+  interactive.forEach(el=>{
+    el.addEventListener('click', ()=>{ el.style.transform='scale(0.95)'; setTimeout(()=>{ el.style.transform=''; },150); });
+    el.addEventListener('touchstart', ()=>{ el.style.opacity='0.9'; });
+    el.addEventListener('touchend', ()=>{ el.style.opacity=''; });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const targetSel = this.getAttribute('href');
+      if (targetSel && targetSel !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(targetSel);
+        if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
       }
-      if (now <= end) {
-        return { text: 'Live', isPast: false, isLive: true };
-      }
-      return { text: 'Completed', isPast: true, isLive: false };
-    }
-
-    /* ---------- Hackathon data ---------- */
-    const hackathons = [
-      { name:'🏙️ 305 Hackathon: Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
-      { name:'👑 EmpowHER Hackathon 2025',        startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
-      { name:'👑 EmpowHER HackDAY 2025',          startDate:'2025-10-18', endDate:'2025-10-18', modality:'in-person', url:'https://empowherhackdayfall25.vercel.app/' },
-      { name:'🎆 CodeFest 2025',                   startDate:'2025-12-08', endDate:'2025-12-15', modality:'virtual',   url:'https://codefesthack2025.vercel.app/' },
-      { name:'🔥 HackFiesta Miami 2026',           startDate:'2026-03-09', endDate:'2026-03-15', modality:'virtual',   url:'https://hackfiestamiami2026.vercel.app/' },
-      { name:'⚡ 305 Hackathon: Spring edition 2026', startDate:'2026-03-20', endDate:'2026-03-22', modality:'tbd',    url:'https://305hackspring2026.vercel.app/' },
-      { name:'🌟 SummerCodeX 2025',               startDate:'2025-07-21', endDate:'2025-07-28', modality:'virtual',   url:'#' },
-      { name:'⛈️ CodeStorm 2025',                 startDate:'2025-05-19', endDate:'2025-05-26', modality:'virtual',   url:'#' },
-      { name:'⚡ 305 Hackathon: Spring 2025 edition', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid', url:'#' },
-      { name:'🔥 HackFiesta Miami 2025',           startDate:'2025-03-21', endDate:'2025-03-23', modality:'virtual',   url:'#' }
-    ];
-
-    function getModalityClass(modality){
-      switch(modality.toLowerCase()){
-        case 'virtual': return 'mode-virtual';
-        case 'in-person': return 'mode-person';
-        case 'hybrid': return 'mode-hybrid';
-        case 'tbd': return 'mode-tbd';
-        default: return 'mode-tbd';
-      }
-    }
-    function getModalityText(modality){
-      switch(modality.toLowerCase()){
-        case 'in-person': return 'In Person';
-        case 'virtual': return 'Virtual';
-        case 'hybrid': return 'Hybrid';
-        case 'tbd': return 'TBD';
-        default: return 'TBD';
-      }
-    }
-
-    function renderHackathons(){
-      const now = nowInMiami();
-      const upcoming = [];
-      const past = [];
-
-      const sorted = [...hackathons].sort(
-        (a,b) => asLocalDate(a.startDate) - asLocalDate(b.startDate)
-      );
-
-      sorted.forEach(h => {
-        const startDate = asLocalDate(h.startDate);
-        const endDate   = asLocalDate(h.endDate);
-        const status    = getEventStatus(h.startDate, h.endDate);
-
-        const range = (h.startDate === h.endDate)
-          ? `${formatDateMiami(h.startDate)}`
-          : `${formatDateMiami(h.startDate)} - ${formatDateMiami(h.endDate)}`;
-
-        const tz = getETAbbrev();
-        const dateLine = `${range} (${tz})`;
-
-        const html = `
-          <div class="hackathon-item">
-            <div class="hackathon-info">
-              <div class="hackathon-name">${h.name}</div>
-              <div class="hackathon-date">${dateLine}</div>
-            </div>
-            <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
-            <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
-            <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
-          </div>
-        `;
-
-        if (endDate < now) { past.push(html); } else { upcoming.push(html); }
-      });
-
-      document.getElementById('upcoming-events').innerHTML = upcoming.join('');
-      document.getElementById('past-events').innerHTML = past.join('');
-    }
-
-    // Live clocks
-    function updateTimes(){
-      const now = new Date();
-
-      const miami = new Date(now.toLocaleString('en-US',{ timeZone:'America/New_York'}));
-      document.getElementById('miami-time').textContent = miami.toTimeString().split(' ')[0];
-      const label = document.getElementById('miami-label');
-      if (label) label.textContent = `Miami, FL (${getETAbbrev()})`;
-
-      const london = new Date(now.toLocaleString('en-US',{ timeZone:'Europe/London'}));
-      document.getElementById('london-time').textContent = london.toTimeString().split(' ')[0];
-
-      const lagos = new Date(now.toLocaleString('en-US',{ timeZone:'Africa/Lagos'}));
-      document.getElementById('lagos-time').textContent = lagos.toTimeString().split(' ')[0];
-
-      const tokyo = new Date(now.toLocaleString('en-US',{ timeZone:'Asia/Tokyo'}));
-      document.getElementById('tokyo-time').textContent = tokyo.toTimeString().split(' ')[0];
-
-      const sydney = new Date(now.toLocaleString('en-US',{ timeZone:'Australia/Sydney'}));
-      document.getElementById('sydney-time').textContent = sydney.toTimeString().split(' ')[0];
-
-      const mumbai = new Date(now.toLocaleString('en-US',{ timeZone:'Asia/Kolkata'}));
-      document.getElementById('mumbai-time').textContent = mumbai.toTimeString().split(' ')[0];
-    }
-
-    // ---------- OPTIONAL: Form No. 2 availability (opens 2 days after event end) ----------
-    // Update these per-month:
-    const currentEventConfig = {
-      name: '305 Hack Edition — Nov 2025',
-      endDate: '2025-11-16',            // event end date
-      registrationClose: '2025-12-01',  // donations/registration close date
-      form2Url: 'https://your-form2-nov2025.example' // TODO: replace with live Form No. 2 URL
-    };
-
-    const d = s => { const [y,m,day]=s.split('-').map(Number); return new Date(y,m-1,day); };
-    function daysUntil(date){ const t=new Date(); t.setHours(0,0,0,0); const d0=d(date); d0.setHours(0,0,0,0); return Math.ceil((d0 - t)/(1000*60*60*24)); }
-
-    (function updateForm2Card(){
-      const opensOn = new Date(d(currentEventConfig.endDate).getTime() + 2*24*60*60*1000);
-      const closesOn = d(currentEventConfig.registrationClose);
-      const now = new Date(); now.setHours(0,0,0,0);
-
-      const link = document.getElementById('form2-link');
-      const status = document.getElementById('form2-status');
-
-      if (!link || !status) return;
-
-      link.href = currentEventConfig.form2Url;
-
-      if (now < opensOn){
-        const days = daysUntil(opensOn.toISOString().slice(0,10));
-        status.innerHTML =
-          `<span class="badge badge-lock">Locked</span> Opens in <strong>${days} day${days===1?'':'s'}</strong> — ${opensOn.toLocaleDateString()}.`;
-        link.setAttribute('aria-disabled','true');
-        link.style.pointerEvents = 'none';
-        link.style.opacity = '.7';
-      } else if (now > closesOn){
-        status.innerHTML =
-          `<span class="badge badge-warn">Closed</span> Donations & registration closed on <strong>${closesOn.toLocaleDateString()}</strong>.`;
-        link.setAttribute('aria-disabled','true');
-        link.style.pointerEvents = 'none';
-        link.style.opacity = '.7';
-      } else {
-        status.innerHTML =
-          `<span class="badge badge-live">Live</span> Accepting donations & registrations until <strong>${closesOn.toLocaleDateString()}</strong>.`;
-      }
-    })();
-
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', function () {
-      renderHackathons();
-      updateTimes();
-      setInterval(updateTimes, 1000);         // live clocks
-      setInterval(renderHackathons, 3600000); // refresh status hourly
-
-      // Click/touch effects + smooth scroll
-      const interactive = document.querySelectorAll('.card-button, .hackathon-link');
-      interactive.forEach(el => {
-        el.addEventListener('click', function(){ this.style.transform='scale(0.95)'; setTimeout(()=>{ this.style.transform=''; },150); });
-        el.addEventListener('touchstart', function(){ this.style.opacity='0.9'; });
-        el.addEventListener('touchend', function(){ this.style.opacity=''; });
-      });
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e){
-          const targetSel = this.getAttribute('href');
-          if (targetSel && targetSel !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(targetSel);
-            if(target){ target.scrollIntoView({ behavior:'smooth', block:'start' }); }
-          }
-        });
-      });
     });
-  </script>
+  });
+});
+</script>
+
 </body>
 </html>
