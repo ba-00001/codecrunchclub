@@ -15,7 +15,12 @@
       --text-light:#6b7280;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+    body{
+      font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:#f8f9fa;color:#202124;min-height:100vh;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    img{ -webkit-print-color-adjust: exact; print-color-adjust: exact; image-rendering:-webkit-optimize-contrast; }
 
     /* NAV */
     .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
@@ -53,11 +58,12 @@
     .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
 
     /* CERTIFICATE PAGE */
+    .print-page{break-inside:avoid; page-break-inside:avoid;}
     .certificate-page{
       background:#fff;border:8px solid #B8860B;border-radius:10px;color:#333;
       font-family:"Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
       width:1123px;height:794px;padding:40px;
-      display:flex;flex-direction:column;page-break-inside:avoid;
+      display:flex;flex-direction:column;page-break-inside:avoid; position:relative;
     }
     .certificate-page h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
     .certificate-page .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
@@ -77,9 +83,12 @@
 
     .logo-grid{
       display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
-      gap:12px;align-items:center;margin-top:10px;margin-bottom:0
+      gap:12px;align-items:center;margin-top:10px;margin-bottom:0;
+      contain:layout paint; /* helps prevent overlap */
     }
-    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
+    .logo-grid img{
+      width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid;
+    }
 
     /* PRINT */
     @page { size: A4 landscape; margin: 10mm; }
@@ -90,8 +99,10 @@
       .certificate-page{
         width:277mm!important;height:190mm!important;
         border:8mm solid #B8860B!important;border-radius:0!important;padding:15mm!important;margin:0!important;
-        display:flex;flex-direction:column;
+        display:flex;flex-direction:column; break-inside:avoid; page-break-inside:avoid;
       }
+      .print-page{page-break-after:always;}
+      .print-page:last-child{page-break-after:auto;}
       .content-wrap{flex:1 1 auto;min-height:0}
       .cert-bottom{margin-top:auto}
       .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm;margin-top:6mm}
@@ -246,10 +257,23 @@
       for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0; }
       return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
     }
-    function logosHTML(logoUrls){ const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS; return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join(''); }
-    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
-    function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
-    function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
+    function logosHTML(logoUrls){
+      const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
+      return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
+    }
+    function infoBoxHTML(){
+      return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
+    }
+    function setStatus(type, html){
+      const el = document.getElementById('certificateResult');
+      const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info';
+      el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
+    }
+    function toggleButton(loading){
+      const btn = document.getElementById('generateBtn');
+      if(!btn) return;
+      btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+    }
 
     // Certificate page HTML (LOGOS BELOW CERT ID)
     function certPageHTML(c){
@@ -271,11 +295,9 @@
 
             <div class="body-text">
               <p>In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-              <strong>${c.hackathonName}</strong>.</p><p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+              <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.</p>
               <br>
-              <p><strong>${c.date}</strong> — <span>${c.location}</span></p>
-              <br>
-              
+              <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
             </div>
           </div>
 
@@ -306,7 +328,14 @@
       `;
       const pages = certs.map(certPageHTML).join('');
       const html = `<!DOCTYPE html><html><head>${head}</head><body><div id="root">${pages}</div>
-        <script>(function(){function w(){const i=[...document.images].filter(x=>!x.complete||x.naturalWidth===0);if(!i.length)return Promise.resolve();return Promise.all(i.map(im=>new Promise(r=>{im.onload=im.onerror=()=>r();})));}w().then(function(){${autoPrint?'window.print();':''}});})();<\/script>
+        <script>(function(){
+          function waitImgs(){
+            const imgs=[...document.images].filter(x=>!x.complete||x.naturalWidth===0);
+            if(!imgs.length) return Promise.resolve();
+            return Promise.all(imgs.map(im=>new Promise(r=>{im.onload=im.onerror=()=>r();})));
+          }
+          waitImgs().then(function(){ ${autoPrint?'window.print();':''} });
+        })();<\/script>
       </body></html>`;
 
       const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
@@ -343,7 +372,10 @@
           return true;
         });
 
-        if(!valid.length){ setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.'); return; }
+        if(!valid.length){
+          setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.');
+          return;
+        }
 
         const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
         setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…`);
@@ -357,7 +389,23 @@
     }
 
     // Clocks + init
-    function updateTimes(){const now=new Date();const set=(id,tz)=>{const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));const hh=String(t.getHours()).padStart(2,'0');const mm=String(t.getMinutes()).padStart(2,'0');const ss=String(t.getSeconds()).padStart(2,'0');const el=document.getElementById(id);if(el) el.textContent=`${hh}:${mm}:${ss}`};set('miami-time',"America/New_York");set('london-time',"Europe/London");set('lagos-time',"Africa/Lagos");set('tokyo-time',"Asia/Tokyo");set('sydney-time',"Australia/Sydney");set('mumbai-time',"Asia/Kolkata");}
+    function updateTimes(){
+      const now=new Date();
+      const set=(id,tz)=>{
+        const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh=String(t.getHours()).padStart(2,'0');
+        const mm=String(t.getMinutes()).padStart(2,'0');
+        const ss=String(t.getSeconds()).padStart(2,'0');
+        const el=document.getElementById(id);
+        if(el) el.textContent=`${hh}:${mm}:${ss}`;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
     document.addEventListener('DOMContentLoaded', ()=>{
       document.getElementById('year').textContent = new Date().getFullYear();
       document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
