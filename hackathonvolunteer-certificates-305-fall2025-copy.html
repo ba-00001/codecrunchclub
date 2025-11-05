@@ -6,7 +6,6 @@
   <title>Volunteer Certificates • Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --matrix-green:#00e676;
@@ -15,7 +14,6 @@
       --text-secondary:#4b5563;
       --text-light:#6b7280;
     }
-
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
 
@@ -47,7 +45,7 @@
     .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
     .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
 
-    /* Certificate generator UI */
+    /* Generator UI */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
     .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
@@ -71,17 +69,17 @@
     .content-wrap{flex:1 1 auto;min-height:0}
     .cert-bottom{margin-top:auto}
 
-    /* Logo grid shrinks gracefully */
-    .logo-grid{
-      display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
-      gap:12px;align-items:center;margin-bottom:12px
-    }
-    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
-
-    .sig-block{text-align:center;max-width:340px;margin:0 auto}
+    /* Signature + ID + Logos */
+    .sig-block{text-align:center;max-width:360px;margin:0 auto}
     .signature-script{font-family:'Great Vibes', cursive;font-size:2.1rem;line-height:1;transform:rotate(-2deg);color:#222;letter-spacing:.5px;margin-bottom:10px}
     .sig-line{border-top:2px solid #333;width:260px;margin:0 auto 8px}
-    .cert-id{font-family:"Courier New", monospace;font-size:.85rem;color:#555;margin-top:6px}
+    .cert-id{font-family:"Courier New", monospace;font-size:.9rem;color:#555;margin-top:6px}
+
+    .logo-grid{
+      display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
+      gap:12px;align-items:center;margin-top:10px;margin-bottom:0
+    }
+    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
 
     /* PRINT */
     @page { size: A4 landscape; margin: 10mm; }
@@ -96,7 +94,7 @@
       }
       .content-wrap{flex:1 1 auto;min-height:0}
       .cert-bottom{margin-top:auto}
-      .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm}
+      .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm;margin-top:6mm}
       .logo-grid img{max-height:10mm!important}
       .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
       .certificate-page h1{font-size:16mm!important}
@@ -227,7 +225,6 @@
       "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
       "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
     ];
-    let allCertificatesData = [];
 
     // Helpers
     const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -254,7 +251,7 @@
     function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
     function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
 
-    // Certificate page HTML
+    // Certificate page HTML (LOGOS BELOW CERT ID)
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -283,7 +280,6 @@
           </div>
 
           <div class="cert-bottom">
-            <div class="logo-grid">${logosHTML(c.logos)}</div>
             <div class="sig-block">
               <div class="signature-script">Brian Bazurto</div>
               <div class="sig-line"></div>
@@ -292,6 +288,8 @@
               <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
               <div class="cert-id">Cert ID: ${idText}</div>
             </div>
+            <!-- Logos appear BELOW the Cert ID -->
+            <div class="logo-grid">${logosHTML(c.logos)}</div>
           </div>
         </div>
       </section>`;
