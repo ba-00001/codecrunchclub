@@ -255,8 +255,10 @@
       "https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34",
       "https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c",
       "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-      "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
-      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
+      "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+      "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
+      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+            "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
     ];
     // Signature image
     const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
@@ -282,7 +284,7 @@
       return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
     }
     function logosHTML(logoUrls){ const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS; return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join(''); }
-    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
+    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates of Completion Awarded to Volunteers Who Have Successfully Fulfilled All Volunteer Hours and Requirements<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
     function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
     function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
 
