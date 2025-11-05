@@ -5,51 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Volunteer Certificates • Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  <!-- Signature font -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --matrix-green:#00e676;
       --cyber-blue:#00b0ff;
-      --neon-pink:#ff3d8d;
-      --hacker-purple:#8a2be2;
       --warning:#ffc107;
       --text-secondary:#4b5563;
       --text-light:#6b7280;
-      --bg-color:#0d1117;
     }
-
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
-
-    /* Simple cards & checklist/fAQ scaffolding */
-    .card{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
-    .card-title{font-size:20px;font-weight:600;margin-bottom:8px}
-    .card-description{color:#5f6368}
-    .checklist{list-style:none;padding:0;margin:12px 0}
-    .checklist-item{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
-    .checklist-number{
-      width:28px;height:28px;border-radius:50%;
-      background:#1a73e8;color:#fff;display:flex;align-items:center;justify-content:center;
-      font-weight:700;flex:0 0 28px
-    }
-    .checklist-text{color:#374151;line-height:1.6}
-
-    .faq-section{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
-    .faq-title{font-size:20px;font-weight:600}
-    .faq-subtitle{color:#5f6368;margin-bottom:12px}
-    .faq-container{margin-top:8px}
-    .faq-item{border-top:1px solid #eee}
-    .faq-item:first-child{border-top:0}
-    .faq-question{
-      width:100%;text-align:left;background:#f8fafc;border:0;padding:12px;border-radius:8px;
-      display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:600
-    }
-    .faq-icon{margin-right:8px}
-    .faq-answer{display:none;padding:12px 4px;color:#374151}
-    .faq-item.open .faq-answer{display:block}
-    .faq-item.open .faq-arrow{transform:rotate(180deg)}
 
     /* NAV */
     .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
@@ -73,27 +39,26 @@
     /* Main */
     .container{max-width:1100px;margin:0 auto;padding:24px}
     .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
-    #result{margin-top:16px;background:#111827;color:#d1fae5;border-radius:12px;padding:16px;font-family:monospace}
-
     .infobox{background:#f8f9fa;padding:1rem;border-radius:8px;border-left:4px solid #28a745;margin-bottom:1rem}
     .alert{padding:.75rem;border-radius:4px;border:1px solid}
     .alert-info{color:#0066cc;background:#e3f2fd;border-color:#bbdefb}
     .alert-error{color:#721c24;background:#f8d7da;border-color:#f5c6cb}
     .alert-ok{color:#155724;background:#d4edda;border-color:#c3e6cb}
 
-    /* Certificate generator utilities */
+    /* Generator UI */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .cg-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
     .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;background:#fff;color:#333;font-size:1rem;font-family:"Courier New",monospace}
     .cg-btn{padding:.75rem 1.5rem;font-size:1rem;background:#007bff;color:#fff;border:0;border-radius:8px;cursor:pointer;font-family:"Courier New",monospace;font-weight:bold;transition:all .3s ease}
     .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
 
-    /* CERTIFICATE PAGE (screen preview size + print size) */
+    /* CERTIFICATE PAGE */
     .certificate-page{
       background:#fff;border:8px solid #B8860B;border-radius:10px;color:#333;
-      font-family:"Times New Roman",serif;position:relative;margin:0 auto 24px;box-sizing:border-box;
+      font-family:"Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
       width:1123px;height:794px;padding:40px;
-      page-break-inside:avoid;
+      display:flex;flex-direction:column;page-break-inside:avoid;
+      position:relative;
     }
     .certificate-page h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
     .certificate-page .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
@@ -102,48 +67,53 @@
     .body-text{font-size:1.1rem;line-height:1.8;margin:30px 0;color:#555;text-align:center}
     .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px;object-fit:contain}
 
-    /* Bottom area with logo grid + signature + hash */
-    .cert-bottom{position:absolute;bottom:30px;left:40px;right:40px}
-    .logo-grid{
-      display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
-      gap:12px;align-items:center;margin-bottom:12px
-    }
-    .logo-grid img{width:100%;max-height:52px;object-fit:contain;filter:saturate(.95) contrast(1.05)}
-    .sig-block{text-align:center;max-width:340px;margin:0 auto}
+    .content-wrap{flex:1 1 auto;min-height:0}
+    .cert-bottom{margin-top:auto}
+
+    /* Signature + ID + Logos */
+    .sig-block{text-align:center;max-width:360px;margin:0 auto}
+    .sig-img{max-height:75px;object-fit:contain;margin:0 auto 6px;display:block}
     .signature-script{font-family:'Great Vibes', cursive;font-size:2.1rem;line-height:1;transform:rotate(-2deg);color:#222;letter-spacing:.5px;margin-bottom:10px}
     .sig-line{border-top:2px solid #333;width:260px;margin:0 auto 8px}
-    .cert-id{font-family:"Courier New", monospace;font-size:.85rem;color:#555;margin-top:6px}
+    .cert-id{font-family:"Courier New", monospace;font-size:.9rem;color:#555;margin-top:6px}
 
-    /* Print: true A4 landscape full page for each certificate */
+    .logo-grid{
+      display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
+      gap:12px;align-items:center;margin-top:10px;margin-bottom:0
+    }
+    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
+
+    /* EXTRA SPACE before signature */
+    .sig-gap{height:24px;}
+
+    /* PRINT */
     @page { size: A4 landscape; margin: 10mm; }
     @media print{
       body{background:#fff!important}
-      .navbar,.timezone-section,.container > .card, .footer, .controls{display:none!important}
+      .navbar,.timezone-section,.footer,.surface > *:not(#certificate-generator){display:none!important}
       .container{max-width:none;padding:0}
       .certificate-page{
         width:277mm!important;height:190mm!important;
         border:8mm solid #B8860B!important;border-radius:0!important;padding:15mm!important;margin:0!important;
-        page-break-inside:avoid;break-inside:avoid;
+        display:flex;flex-direction:column;
       }
-      .print-page{page-break-after:always;break-after:page}
-      .print-page:last-child{page-break-after:auto;break-after:auto}
+      .content-wrap{flex:1 1 auto;min-height:0}
+      .cert-bottom{margin-top:auto}
+      .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm;margin-top:6mm}
+      .logo-grid img{max-height:10mm!important}
       .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
       .certificate-page h1{font-size:16mm!important}
       .certificate-page .sub{font-size:4mm!important}
       .participant-name{font-size:12mm!important}
       .presented,.body-text{font-size:3.5mm!important}
-      .cert-id{font-size:3.2mm!important}
-      .logo-grid img{max-height:14mm!important}
       .signature-script{font-size:8mm!important}
       .sig-line{width:70mm!important}
+      .cert-id{font-size:3.2mm!important}
+      .sig-gap{height:10mm!important;}
+      .sig-img{max-height:14mm!important;}
     }
 
-    @media (max-width:1200px){.certificate-page{transform:scale(.85);transform-origin:top center}}
-    @media (max-width:1000px){.certificate-page{transform:scale(.7)}}
-    @media (max-width:800px){.certificate-page{transform:scale(.58)}}
-    @media (max-width:520px){.container{padding:16px}}
-    
-    /* Footer (Hack University) */
+    /* Footer */
     .cc-blue{background:#1a73e8}
     .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
     .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
@@ -169,12 +139,13 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+        <a href="https://HackUniversity.vercel.app" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
       </div>
       <div class="nav-links">
+        <a href="https://codecrunchglobal.vercel.app" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
         <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
         <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
         <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
         <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
       </div>
@@ -183,212 +154,60 @@
 
   <!-- TIMEZONE BAND -->
   <div class="timezone-section">
-    <div class="timezone-header">
-      <h2>🏆 Hackathon HQ</h2>
-    </div>
+    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
     <div class="timezone-grid">
-      <div class="timezone-item">
-        <div class="timezone-flag">🇺🇸 - HQ</div>
-        <div class="timezone-time" id="miami-time">--:--:--</div>
-        <div class="timezone-location">Miami, FL (ET)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇪🇺</div>
-        <div class="timezone-time" id="london-time">--:--:--</div>
-        <div class="timezone-location">London (GMT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌍</div>
-        <div class="timezone-time" id="lagos-time">--:--:--</div>
-        <div class="timezone-location">Lagos (WAT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌏</div>
-        <div class="timezone-time" id="tokyo-time">--:--:--</div>
-        <div class="timezone-location">Tokyo (JST)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇦🇺</div>
-        <div class="timezone-time" id="sydney-time">--:--:--</div>
-        <div class="timezone-location">Sydney (AEDT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇮🇳</div>
-        <div class="timezone-time" id="mumbai-time">--:--:--</div>
-        <div class="timezone-location">Mumbai (IST)</div>
-      </div>
+      <div class="timezone-item"><div class="timezone-flag">🇺🇸 - HQ</div><div class="timezone-time" id="miami-time">--:--:--</div><div class="timezone-location">Miami, FL (ET)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇪🇺</div><div class="timezone-time" id="london-time">--:--:--</div><div class="timezone-location">London (GMT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🌍</div><div class="timezone-time" id="lagos-time">--:--:--</div><div class="timezone-location">Lagos (WAT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🌏</div><div class="timezone-time" id="tokyo-time">--:--:--</div><div class="timezone-location">Tokyo (JST)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇦🇺</div><div class="timezone-time" id="sydney-time">--:--:--</div><div class="timezone-location">Sydney (AEDT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">🇮🇳</div><div class="timezone-time" id="mumbai-time">--:--:--</div><div class="timezone-location">Mumbai (IST)</div></div>
     </div>
   </div>
 
   <main class="container">
-    <!-- =========================
-         CERTIFICATE GENERATOR
-         ========================= -->
+    <!-- CERTIFICATE GENERATOR -->
     <section class="surface" id="certificate-generator">
       <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE • 305 Hackathon Edition (Fall 2025)</h2>
-      <p class="card-description" style="text-align:center">[ OFFICIAL PARTICIPATION CERTIFICATE ] — Download your volunteer certificate using your email address</p>
+      <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] — Download your volunteer certificate using your registered email address</p>
 
       <label for="certificateEmailInput" class="sr-only">Registered email address</label>
       <div class="cg-row">
-        <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" autocomplete="email" />
+        <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" autocomplete="email"/>
         <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
       </div>
 
-      <div id="certificateResult" class="card" aria-live="polite" aria-atomic="true" style="margin-top:1rem"></div>
-    </section>
-
-    Eligibility Information Section
-    <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">🏆 Who Can Request Certificates?</h2>
-      <div class="card-description">
-        <p>Certificates are available for verified participants who contributed to our hackathon events in official capacities:</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem;">
-        <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--matrix-green);">
-          <h3 style="color: var(--matrix-green); margin-bottom: 1rem; font-size: 1.2rem;">👨‍⚖️ Judges & Evaluators</h3>
-          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-            <li>Technical project evaluators</li>
-            <li>Industry expert judges</li>
-            <li>Academic review panel members</li>
-            <li>Presentation assessment judges</li>
-          </ul>
-        </div>
-
-        <div style="background: rgba(0, 212, 255, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--cyber-blue);">
-          <h3 style="color: var(--cyber-blue); margin-bottom: 1rem; font-size: 1.2rem;">👨‍🏫 Mentors & Advisors</h3>
-          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-            <li>Technical mentors</li>
-            <li>Business development advisors</li>
-            <li>Subject matter experts</li>
-            <li>Workshop facilitators</li>
-          </ul>
-        </div>
-
-        <div style="background: rgba(255, 0, 128, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--neon-pink);">
-          <h3 style="color: var(--neon-pink); margin-bottom: 1rem; font-size: 1.2rem;">🏢 Industry Partners</h3>
-          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-            <li>Sponsor representatives</li>
-            <li>Corporate volunteers</li>
-            <li>Industry speakers</li>
-            <li>Partnership coordinators</li>
-          </ul>
-        </div>
-
-        <div style="background: rgba(138, 43, 226, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--hacker-purple);">
-          <h3 style="color: var(--hacker-purple); margin-bottom: 1rem; font-size: 1.2rem;">📋 Event Team</h3>
-          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
-            <li>Event organizers</li>
-            <li>Logistics coordinators</li>
-            <li>Technical support volunteers</li>
-            <li>Academic partners</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Certificate Value Section -->
-    <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">✨ Professional Recognition</h2>
-      <div class="card-description">
-        <p>Our official certificates provide valuable professional documentation and recognition for your contributions to technology education and innovation.</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
-        <div style="background:rgba(0,255,65,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">📋</div>
-          <h4 style="color:var(--matrix-green);margin-bottom:.5rem;">Official Documentation</h4>
-          <p style="color:var(--text-light);font-size:.9rem;">Verified proof of professional service and community contribution</p>
-        </div>
-
-        <div style="background:rgba(0,212,255,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">🎓</div>
-          <h4 style="color:var(--cyber-blue);margin-bottom:.5rem;">Portfolio Enhancement</h4>
-          <p style="color:var(--text-light);font-size:.9rem;">Professional credential for academic and career portfolios</p>
-        </div>
-
-        <div style="background:rgba(255,0,128,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">🤝</div>
-          <h4 style="color:var(--neon-pink);margin-bottom:.5rem;">Community Impact</h4>
-          <p style="color:var(--text-light);font-size:.9rem;">Recognition of dedication to technology education</p>
-        </div>
-
-        <div style="background:rgba(138,43,226,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">✅</div>
-          <h4 style="color:var(--hacker-purple);margin-bottom:.5rem;">Industry Engagement</h4>
-          <p style="color:var(--text-light);font-size:.9rem;">Demonstrates active participation in tech innovation</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">🔧 How to Get Your Certificate</h2>
-      <p class="card-description">Simple 3-step process to download your official participation certificate</p>
-
-      <ul class="checklist">
-        <li class="checklist-item">
-          <div class="checklist-number">1</div>
-          <div class="checklist-text">
-            <strong>Enter Your Email</strong><br>
-            Use the same email address you provided during event registration or volunteer sign-up.
-          </div>
-        </li>
-        <li class="checklist-item">
-          <div class="checklist-number">2</div>
-          <div class="checklist-text">
-            <strong>Verify Your Participation</strong><br>
-            Our system will check your participation records across all hackathon events.
-          </div>
-        </li>
-        <li class="checklist-item">
-          <div class="checklist-number">3</div>
-          <div class="checklist-text">
-            <strong>Print / Save to PDF</strong><br>
-            Your certificate opens in a clean tab, ready to print or save.
-          </div>
-        </li>
-      </ul>
+      <div id="certificateResult" class="surface" aria-live="polite" aria-atomic="true" style="margin-top:1rem"></div>
     </section>
   </main>
 
-  <!-- FOOTER (Hack University) -->
+  <!-- FOOTER -->
   <footer class="cc-blue footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div>
-          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
-          <p>
-            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
-          </p>
-          <p><a href="#">HackUniversity.vercel.app</a></p>
-
+          <h3>Hack University</h3>
+          <p>A collaborative effort uniting student organizations and global communities to empower innovators, developers, and leaders.</p>
+          <p><a href="https://hackuniversity.vercel.app">HackUniversity.vercel.app</a></p>
           <div>
             <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
             <div class="social-grid">
-              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
-              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
-              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+              <a href="https://hackuniversity-linkedin.vercel.app" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="https://www.instagram.com/codecrunchclub/" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="https://github.com/CODE-CRUNCH-CLUB" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="https://www.youtube.com/@CODECRUNCH-WORLDWIDE" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="https://hackuniversity-registration.vercel.app" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="https://hackuniversity-calendar.vercel.app" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
             </div>
           </div>
         </div>
-
         <div>
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#">Mission</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Hackathons</a></li>
-            <li><a href="#">Membership</a></li>
-            <li><a href="#">Join E-Board</a></li>
-            <li><a href="#">Resources</a></li>
-            <li><a href="#">Join Discord</a></li>
+            <li><a href="#">Mission</a></li><li><a href="#">Events</a></li><li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li><li><a href="#">Join E-Board</a></li><li><a href="#">Resources</a></li><li><a href="#">Join Discord</a></li>
           </ul>
         </div>
-
         <div>
           <h3>Contact</h3>
           <div style="font-size:14px;opacity:.9;">
@@ -397,42 +216,30 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>© <span id="year"></span> Hack University. All rights reserved.</p>
-        <div class="credits">
-          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
-        </div>
+        <div class="credits">Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a></div>
       </div>
     </div>
   </footer>
 
-  <!-- Unified script -->
   <script>
-    // ===== Constants =====
+    /* ===== Settings ===== */
     const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbzzc8k3xWTxdyc7jfVpLISnSpY1qwaNB_QMmYC0ORkM9UVUbKk4De5cb5upCztCepN9/exec';
     const DEFAULT_LOGOS = [
-      "https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3", // FIU Honors
-      "https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34", // Pino Global
-      "https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c", // FIU Business
-      "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e", // Code Crunch
-      "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846", // ColorStack
-      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"  // CAHSI
+      "https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3",
+      "https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34",
+      "https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c",
+      "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+      "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
+      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
     ];
-    let allCertificatesData = [];
+    const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
 
-    // ===== Helpers =====
-    const esc = s => String(s ?? '').replace(/[&<>"']/g, m =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-    );
-
-    function rolesToText(roles, rolesText) {
-      if (rolesText) return String(rolesText);
-      if (Array.isArray(roles)) return roles.join(', ');
-      return roles || 'Contributor';
-    }
-
-    function normalizeCert(cert) {
+    /* ===== Helpers ===== */
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    function rolesToText(roles, rolesText){ if(rolesText) return String(rolesText); if(Array.isArray(roles)) return roles.join(', '); return roles || 'Contributor'; }
+    function normalizeCert(cert){
       return {
         participantName: esc(cert?.participantName || 'Participant'),
         hackathonName: esc(cert?.hackathonName || 'Hackathon'),
@@ -440,52 +247,21 @@
         location: esc(cert?.location || 'Location'),
         rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
         hackLogoUrl: cert?.hackLogoUrl || '',
-        logos: Array.isArray(cert?.logos) ? cert.logos : null
+        logos: Array.isArray(cert?.logos) ? cert.logos : null,
+        signatureUrl: cert?.signatureUrl || SIGNATURE_URL
       };
     }
-
-    // Deterministic 8-hex hash (FNV-1a variant)
     function certHash(name, eventName, dateStr){
-      const s = `${name}|${eventName}|${dateStr}`;
-      let h = 0x811c9dc5;
-      for (let i=0;i<s.length;i++){
-        h ^= s.charCodeAt(i);
-        h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0;
-      }
+      const s = `${name}|${eventName}|${dateStr}`; let h = 0x811c9dc5;
+      for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0; }
       return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
     }
+    function logosHTML(logoUrls){ const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS; return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join(''); }
+    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
+    function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
+    function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
 
-    function logosHTML(logoUrls){
-      const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
-      return arr.map(u => `<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
-    }
-
-    function infoBoxHTML() {
-      return `
-        <div class="infobox">
-          <strong style="color:#28a745">🏆 Certificate Generator:</strong><br>
-          • <strong>Official Certificates</strong>: Available for confirmed participants<br>
-          • <strong>Any Valid Email</strong>: Use the email from your participation records<br>
-          • <strong>Print Ready</strong>: Opens in a clean tab for printing or Save as PDF<br>
-          • <strong>Verification</strong>: Certificates include verification details<br>
-          • <strong>Recognition</strong>: Professional certificate for your portfolio
-        </div>`;
-    }
-
-    function setStatus(type, html) {
-      const resultDiv = document.getElementById('certificateResult');
-      const cls = type === 'ok' ? 'alert-ok' : type === 'error' ? 'alert-error' : 'alert-info';
-      resultDiv.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-    }
-
-    function toggleButton(loading) {
-      const btn = document.getElementById('generateBtn');
-      if (!btn) return;
-      btn.disabled = !!loading;
-      btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
-    }
-
-    // Build one full certificate page (HTML chunk)
+    /* ===== Certificate page ===== */
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -493,203 +269,144 @@
       <section class="print-page">
         <div class="certificate-page">
           ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ''}
-          <div style="text-align:center;margin-bottom:40px">
-            <h1>CERTIFICATE</h1>
-            <p class="sub">OF ACHIEVEMENT</p>
-          </div>
 
-          <p class="presented">This certificate is presented to</p>
-          <h2 class="participant-name">${c.participantName}</h2>
+          <div class="content-wrap">
+            <div style="text-align:center;margin-bottom:40px">
+              <h1>CERTIFICATE</h1>
+              <p class="sub">OF ACHIEVEMENT</p>
+            </div>
 
-          <div class="body-text">
-            <p>In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-            <strong>${c.hackathonName}</strong>.</p>
-            <br>
-            <p><strong>${c.date}</strong> — <span>${c.location}</span></p>
-            <br>
-            <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+            <p class="presented">This certificate is presented to</p>
+            <h2 class="participant-name">${c.participantName}</h2>
+
+            <div class="body-text">
+              <p>In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
+              <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.</p>
+              <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+              <br>
+            </div>
           </div>
 
           <div class="cert-bottom">
-            <div class="logo-grid">
-              ${logosHTML(c.logos)}
-            </div>
+            <div class="sig-gap"></div>
+
             <div class="sig-block">
-              <div class="signature-script">Brian Bazurto</div>
+              ${
+                c.signatureUrl
+                  ? `<img class="sig-img" src="${c.signatureUrl}" alt="Signature" onerror="this.style.display='none'">`
+                  : `<div class="signature-script">Brian Bazurto</div>`
+              }
               <div class="sig-line"></div>
-              <div style="font-size:.95rem;font-weight:700">BRIAN BAZURTO</div>
+              <div style="font-size:.95rem;font-weight:700;margin-top:6px;">BRIAN BAZURTO</div>
               <div style="font-size:.9rem;font-style:italic">Code Crunch President</div>
               <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
               <div class="cert-id">Cert ID: ${idText}</div>
             </div>
+
+            <!-- Logos BELOW the Cert ID -->
+            <div class="logo-grid">${logosHTML(c.logos)}</div>
           </div>
         </div>
       </section>`;
     }
 
-    // Open all certificates in a new, print-ready tab and auto-print
+    /* ===== Print tab ===== */
     function openCertificatesInNewTab(certs, autoPrint=true){
       const css = document.querySelector('style')?.innerHTML || '';
       const head = `
         <meta charset="utf-8">
         <title>Certificates</title>
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-        <style>${css}</style>
-      `;
+        <style>${css}</style>`;
       const pages = certs.map(certPageHTML).join('');
-      const html = `
-        <!DOCTYPE html><html><head>${head}</head>
-        <body>
-          <div id="root">${pages}</div>
-          <script>
-            (function(){
-              function waitImgs(){
-                const imgs=[...document.images].filter(i=>!i.complete||i.naturalWidth===0);
-                if(!imgs.length) return Promise.resolve();
-                return Promise.all(imgs.map(img=>new Promise(r=>{img.onload=img.onerror=()=>r();})));
-              }
-              waitImgs().then(function(){ ${autoPrint ? 'window.print();' : ''} });
-            })();
-          <\/script>
-        </body></html>
-      `;
+      const html = `<!DOCTYPE html><html><head>${head}</head><body><div id="root">${pages}</div>
+        <script>(function(){
+          function waitImgs(){
+            const imgs=[...document.images].filter(x=>!x.complete||x.naturalWidth===0);
+            if(!imgs.length) return Promise.resolve();
+            return Promise.all(imgs.map(im=>new Promise(r=>{im.onload=im.onerror=()=>r();})));
+          }
+          waitImgs().then(function(){ ${autoPrint ? 'window.print();' : ''} });
+        })();<\/script>
+      </body></html>`;
 
       const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
       if(!w){ alert('Please allow pop-ups to view/print your certificate.'); return; }
-      w.opener = null;
-      w.document.open();
-      w.document.write(html);
-      w.document.close();
+      w.opener = null; w.document.open(); w.document.write(html); w.document.close();
     }
 
-    // ===== Core actions =====
-    async function generateCertificate() {
-      const emailInput = document.getElementById('certificateEmailInput');
-      const email = (emailInput?.value || '').trim();
+    /* ===== Generate flow ===== */
+    async function generateCertificate(){
+      const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
+      if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('error','❌ Please enter a valid email address.'); return; }
 
-      if (!email) {
-        setStatus('error', '❌ Please enter your email address.');
-        return;
-      }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        setStatus('error', '❌ Please enter a valid email address.');
-        return;
-      }
+      setStatus('info','⏳ Checking for available certificates...'); toggleButton(true);
+      const ac = new AbortController(); const to = setTimeout(()=>ac.abort(),12000);
 
-      setStatus('info', '⏳ Checking for available certificates...');
-      toggleButton(true);
+      try{
+        const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`, {signal:ac.signal});
+        const payload = await res.json().catch(()=>({}));
+        if(!res.ok) throw new Error(payload?.error || res.statusText);
 
-      const ac = new AbortController();
-      const to = setTimeout(() => ac.abort(), 12000);
+        let certs = [];
+        if(Array.isArray(payload)) certs = payload;
+        else if(Array.isArray(payload?.certificates)) certs = payload.certificates;
+        else if(payload?.certificateData) certs = [payload];
+        else if(payload?.length) certs = payload;
+        else if(payload?.[0]) certs = [payload[0]];
 
-      try {
-        const currentUrl = window.location.href;
-        const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(currentUrl)}`, { signal: ac.signal });
-        const payload = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(payload?.error || res.statusText);
-
-        let certificatesArr = [];
-        if (Array.isArray(payload)) {
-          certificatesArr = payload;
-        } else if (Array.isArray(payload?.certificates)) {
-          certificatesArr = payload.certificates;
-        } else if (payload?.certificateData) {
-          certificatesArr = [payload];
-        } else if (payload?.length) {
-          certificatesArr = payload;
-        } else if (payload?.[0]) {
-          certificatesArr = [payload[0]];
-        }
-
-        const baseValid = certificatesArr.filter(cert =>
-          cert?.status === "Certificate Available" &&
-          (cert?.certificateData || cert?.participantName)
-        );
-
-        const validCerts = baseValid.filter(cert => {
-          const role = String(cert?.rolesText || '').toLowerCase().trim();
-          if (role === 'signed up as a judge but did not participate') return false;
-          if (role.includes('not participate')) return false;
+        const base = certs.filter(c => c?.status === 'Certificate Available' && (c?.certificateData || c?.participantName));
+        const valid = base.filter(c => {
+          const role = String(c?.rolesText || '').toLowerCase().trim();
+          if(role === 'signed up as a judge but did not participate') return false;
+          if(role.includes('not participate')) return false;
           return true;
         });
 
-        if (!validCerts.length) {
-          setStatus('error', 'No eligible certificate found for this email. If you believe this is an error, contact the organizers with your email and event role.');
-          return;
-        }
+        if(!valid.length){ setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.'); return; }
 
-        showCertificatesFound(validCerts);
-      } catch (err) {
-        console.error(err);
-        setStatus('error', '❌ Failed to check records. Please try again later.');
-      } finally {
-        clearTimeout(to);
-        toggleButton(false);
+        const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
+        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
+        openCertificatesInNewTab(normalized, true);
+      }catch(e){
+        console.error(e);
+        setStatus('error','❌ Failed to check records. Please try again later.');
+      }finally{
+        clearTimeout(to); toggleButton(false);
       }
     }
 
-    // After verification: open ONLY a clean print tab (no inline preview)
-    function showCertificatesFound(certificatesArr){
-      allCertificatesData = certificatesArr.map(c => c.certificateData || c).map(normalizeCert);
-
-      const count = allCertificatesData.length;
-      setStatus('ok', `<strong>✅ Found ${count} certificate${count>1?'s':''}.</strong> Opening in a new tab…`);
-
-      // Open clean, print-ready tab with only the certificate pages
-      openCertificatesInNewTab(allCertificatesData, /*autoPrint*/ true);
+    /* ===== Clocks + init (fault-tolerant) ===== */
+    function safeTimeString(now, tz) {
+      try {
+        return new Date(now.toLocaleString("en-US",{ timeZone: tz }))
+          .toTimeString().slice(0,8);
+      } catch(e) {
+        const d = new Date();
+        const hh = String(d.getHours()).padStart(2,'0');
+        const mm = String(d.getMinutes()).padStart(2,'0');
+        const ss = String(d.getSeconds()).padStart(2,'0');
+        return `${hh}:${mm}:${ss}`;
+      }
     }
-
-    // ===== FAQ toggler =====
-    function toggleFAQ(btn){
-      const item = btn.closest('.faq-item');
-      if (!item) return;
-      item.classList.toggle('open');
-    }
-
-    // ===== Timezone clock =====
-    function updateTimes() {
+    function setTile(id, text){ const el=document.getElementById(id); if(el) el.textContent=text; }
+    function updateTimes(){
       const now = new Date();
-      const set = (id, tz) => {
-        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh = String(t.getHours()).padStart(2,'0');
-        const mm = String(t.getMinutes()).padStart(2,'0');
-        const ss = String(t.getSeconds()).padStart(2,'0');
-        const out = `${hh}:${mm}:${ss}`;
-        const el = document.getElementById(id);
-        if (el) el.textContent = out;
-      };
-      set('miami-time',"America/New_York");
-      set('london-time',"Europe/London");
-      set('lagos-time',"Africa/Lagos");
-      set('tokyo-time',"Asia/Tokyo");
-      set('sydney-time',"Australia/Sydney");
-      set('mumbai-time',"Asia/Kolkata");
+      setTile('miami-time',  safeTimeString(now,'America/New_York'));
+      setTile('london-time', safeTimeString(now,'Europe/London'));
+      setTile('lagos-time',  safeTimeString(now,'Africa/Lagos'));
+      setTile('tokyo-time',  safeTimeString(now,'Asia/Tokyo'));
+      setTile('sydney-time', safeTimeString(now,'Australia/Sydney'));
+      setTile('mumbai-time',  safeTimeString(now,'Asia/Kolkata'));
     }
 
-    // ===== Init =====
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', ()=>{
       document.getElementById('year').textContent = new Date().getFullYear();
       document.getElementById('certificateResult').innerHTML =
         infoBoxHTML() + 'Enter your email above to check for available certificates...';
-
-      const input = document.getElementById('certificateEmailInput');
-      input?.addEventListener('keydown', e => { if (e.key === 'Enter') generateCertificate(); });
-
-      // FAQ fade-in animation
-      const faqItems = document.querySelectorAll('.faq-item');
-      faqItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-          item.style.transition = 'all 0.6s ease';
-          item.style.opacity = '1';
-          item.style.transform = 'translateY(0)';
-        }, 100 * (index + 1));
-      });
-
-      updateTimes();
-      setInterval(updateTimes, 1000);
+      document.getElementById('certificateEmailInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') generateCertificate(); });
+      updateTimes(); setInterval(updateTimes, 1000);
     });
   </script>
 </body>
