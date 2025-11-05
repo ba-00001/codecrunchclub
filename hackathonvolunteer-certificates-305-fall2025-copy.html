@@ -83,6 +83,9 @@
     }
     .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
 
+    /* EXTRA SPACE before signature */
+    .sig-gap{height:24px;}
+
     /* PRINT */
     @page { size: A4 landscape; margin: 10mm; }
     @media print{
@@ -106,6 +109,8 @@
       .signature-script{font-size:8mm!important}
       .sig-line{width:70mm!important}
       .cert-id{font-size:3.2mm!important}
+      .sig-gap{height:10mm!important;}
+      .sig-img{max-height:14mm!important;} /* keep signature from touching the text */
     }
 
     /* Footer */
@@ -228,7 +233,7 @@
       "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
       "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
     ];
-    // Your signature image (Variant #3)
+    // Signature image
     const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
 
     // ===== Helpers =====
@@ -283,6 +288,8 @@
           </div>
 
           <div class="cert-bottom">
+            <div class="sig-gap"></div>
+
             <div class="sig-block">
               ${
                 c.signatureUrl
@@ -371,7 +378,23 @@
     }
 
     // ===== Clocks + init =====
-    function updateTimes(){const now=new Date();const set=(id,tz)=>{const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));const hh=String(t.getHours()).padStart(2,'0');const mm=String(t.getMinutes()).padStart(2,'0');const ss=String(t.getSeconds()).padStart(2,'0');const el=document.getElementById(id);if(el) el.textContent=`${hh}:${mm}:${ss}`};set('miami-time',"America/New_York");set('london-time',"Europe/London");set('lagos-time',"Africa/Lagos");set('tokyo-time',"Asia/Tokyo");set('sydney-time',"Australia/Sydney");set('mumbai-time',"Asia/Kolkata");}
+    function updateTimes(){
+      const now=new Date();
+      const set=(id,tz)=>{
+        const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh=String(t.getHours()).padStart(2,'0');
+        const mm=String(t.getMinutes()).padStart(2,'0');
+        const ss=String(t.getSeconds()).padStart(2,'0');
+        const el=document.getElementById(id);
+        if(el) el.textContent=`${hh}:${mm}:${ss}`;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
     document.addEventListener('DOMContentLoaded', ()=>{
       document.getElementById('year').textContent = new Date().getFullYear();
       document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
