@@ -15,12 +15,7 @@
       --text-light:#6b7280;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      background:#f8f9fa;color:#202124;min-height:100vh;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    }
-    img{ -webkit-print-color-adjust: exact; print-color-adjust: exact; image-rendering:-webkit-optimize-contrast; }
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
 
     /* NAV */
     .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
@@ -58,12 +53,12 @@
     .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
 
     /* CERTIFICATE PAGE */
-    .print-page{break-inside:avoid; page-break-inside:avoid;}
     .certificate-page{
       background:#fff;border:8px solid #B8860B;border-radius:10px;color:#333;
       font-family:"Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
       width:1123px;height:794px;padding:40px;
-      display:flex;flex-direction:column;page-break-inside:avoid; position:relative;
+      display:flex;flex-direction:column;page-break-inside:avoid;
+      position:relative;
     }
     .certificate-page h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:#333}
     .certificate-page .sub{font-size:1.2rem;color:#666;letter-spacing:4px}
@@ -77,32 +72,28 @@
 
     /* Signature + ID + Logos */
     .sig-block{text-align:center;max-width:360px;margin:0 auto}
+    .sig-img{max-height:75px;object-fit:contain;margin:0 auto 6px;display:block}
     .signature-script{font-family:'Great Vibes', cursive;font-size:2.1rem;line-height:1;transform:rotate(-2deg);color:#222;letter-spacing:.5px;margin-bottom:10px}
     .sig-line{border-top:2px solid #333;width:260px;margin:0 auto 8px}
     .cert-id{font-family:"Courier New", monospace;font-size:.9rem;color:#555;margin-top:6px}
 
     .logo-grid{
       display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
-      gap:12px;align-items:center;margin-top:10px;margin-bottom:0;
-      contain:layout paint; /* helps prevent overlap */
+      gap:12px;align-items:center;margin-top:10px;margin-bottom:0
     }
-    .logo-grid img{
-      width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid;
-    }
+    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
 
     /* PRINT */
     @page { size: A4 landscape; margin: 10mm; }
     @media print{
       body{background:#fff!important}
-      .navbar,.timezone-section,.footer,.controls,.surface > *:not(#certificate-generator){display:none!important}
+      .navbar,.timezone-section,.footer,.surface > *:not(#certificate-generator){display:none!important}
       .container{max-width:none;padding:0}
       .certificate-page{
         width:277mm!important;height:190mm!important;
         border:8mm solid #B8860B!important;border-radius:0!important;padding:15mm!important;margin:0!important;
-        display:flex;flex-direction:column; break-inside:avoid; page-break-inside:avoid;
+        display:flex;flex-direction:column;
       }
-      .print-page{page-break-after:always;}
-      .print-page:last-child{page-break-after:auto;}
       .content-wrap{flex:1 1 auto;min-height:0}
       .cert-bottom{margin-top:auto}
       .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm;margin-top:6mm}
@@ -117,6 +108,7 @@
       .cert-id{font-size:3.2mm!important}
     }
 
+    /* Footer */
     .cc-blue{background:#1a73e8}
     .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
     .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
@@ -226,7 +218,7 @@
   </footer>
 
   <script>
-    // API & logos
+    // ===== Settings =====
     const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbzzc8k3xWTxdyc7jfVpLISnSpY1qwaNB_QMmYC0ORkM9UVUbKk4De5cb5upCztCepN9/exec';
     const DEFAULT_LOGOS = [
       "https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3",
@@ -236,8 +228,10 @@
       "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
       "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
     ];
+    // Your signature image (Variant #3)
+    const SIGNATURE_URL = "https://github.com/user-attachments/assets/097d8633-52d1-41d0-90a7-1b0595df0e80";
 
-    // Helpers
+    // ===== Helpers =====
     const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     function rolesToText(roles, rolesText){ if(rolesText) return String(rolesText); if(Array.isArray(roles)) return roles.join(', '); return roles || 'Contributor'; }
     function normalizeCert(cert){
@@ -248,34 +242,21 @@
         location: esc(cert?.location || 'Location'),
         rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
         hackLogoUrl: cert?.hackLogoUrl || '',
-        logos: Array.isArray(cert?.logos) ? cert.logos : null
+        logos: Array.isArray(cert?.logos) ? cert.logos : null,
+        signatureUrl: cert?.signatureUrl || SIGNATURE_URL
       };
     }
-    // deterministic 8-hex hash
     function certHash(name, eventName, dateStr){
       const s = `${name}|${eventName}|${dateStr}`; let h = 0x811c9dc5;
       for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0; }
       return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
     }
-    function logosHTML(logoUrls){
-      const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
-      return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
-    }
-    function infoBoxHTML(){
-      return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
-    }
-    function setStatus(type, html){
-      const el = document.getElementById('certificateResult');
-      const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info';
-      el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
-    }
-    function toggleButton(loading){
-      const btn = document.getElementById('generateBtn');
-      if(!btn) return;
-      btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
-    }
+    function logosHTML(logoUrls){ const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS; return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join(''); }
+    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
+    function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
+    function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
 
-    // Certificate page HTML (LOGOS BELOW CERT ID)
+    // ===== Certificate page =====
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -296,21 +277,26 @@
             <div class="body-text">
               <p>In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
               <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.</p>
-              <br>
               <p><em>Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+              <br>
             </div>
           </div>
 
           <div class="cert-bottom">
             <div class="sig-block">
-              <div class="signature-script">Brian Bazurto</div>
+              ${
+                c.signatureUrl
+                  ? `<img class="sig-img" src="${c.signatureUrl}" alt="Signature" onerror="this.style.display='none'">`
+                  : `<div class="signature-script">Brian Bazurto</div>`
+              }
               <div class="sig-line"></div>
-              <div style="font-size:.95rem;font-weight:700">BRIAN BAZURTO</div>
+              <div style="font-size:.95rem;font-weight:700;margin-top:6px;">BRIAN BAZURTO</div>
               <div style="font-size:.9rem;font-style:italic">Code Crunch President</div>
               <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
               <div class="cert-id">Cert ID: ${idText}</div>
             </div>
-            <!-- Logos appear BELOW the Cert ID -->
+
+            <!-- Logos BELOW the Cert ID -->
             <div class="logo-grid">${logosHTML(c.logos)}</div>
           </div>
         </div>
@@ -324,8 +310,7 @@
         <meta charset="utf-8">
         <title>Certificates</title>
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-        <style>${css}</style>
-      `;
+        <style>${css}</style>`;
       const pages = certs.map(certPageHTML).join('');
       const html = `<!DOCTYPE html><html><head>${head}</head><body><div id="root">${pages}</div>
         <script>(function(){
@@ -334,7 +319,7 @@
             if(!imgs.length) return Promise.resolve();
             return Promise.all(imgs.map(im=>new Promise(r=>{im.onload=im.onerror=()=>r();})));
           }
-          waitImgs().then(function(){ ${autoPrint?'window.print();':''} });
+          waitImgs().then(function(){ ${autoPrint ? 'window.print();' : ''} });
         })();<\/script>
       </body></html>`;
 
@@ -343,7 +328,7 @@
       w.opener = null; w.document.open(); w.document.write(html); w.document.close();
     }
 
-    // Generate
+    // ===== Generate flow =====
     async function generateCertificate(){
       const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
       if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
@@ -372,13 +357,10 @@
           return true;
         });
 
-        if(!valid.length){
-          setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.');
-          return;
-        }
+        if(!valid.length){ setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.'); return; }
 
         const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
-        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…`);
+        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
         openCertificatesInNewTab(normalized, true);
       }catch(e){
         console.error(e);
@@ -388,24 +370,8 @@
       }
     }
 
-    // Clocks + init
-    function updateTimes(){
-      const now=new Date();
-      const set=(id,tz)=>{
-        const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh=String(t.getHours()).padStart(2,'0');
-        const mm=String(t.getMinutes()).padStart(2,'0');
-        const ss=String(t.getSeconds()).padStart(2,'0');
-        const el=document.getElementById(id);
-        if(el) el.textContent=`${hh}:${mm}:${ss}`;
-      };
-      set('miami-time',"America/New_York");
-      set('london-time',"Europe/London");
-      set('lagos-time',"Africa/Lagos");
-      set('tokyo-time',"Asia/Tokyo");
-      set('sydney-time',"Australia/Sydney");
-      set('mumbai-time',"Asia/Kolkata");
-    }
+    // ===== Clocks + init =====
+    function updateTimes(){const now=new Date();const set=(id,tz)=>{const t=new Date(now.toLocaleString("en-US",{timeZone:tz}));const hh=String(t.getHours()).padStart(2,'0');const mm=String(t.getMinutes()).padStart(2,'0');const ss=String(t.getSeconds()).padStart(2,'0');const el=document.getElementById(id);if(el) el.textContent=`${hh}:${mm}:${ss}`};set('miami-time',"America/New_York");set('london-time',"Europe/London");set('lagos-time',"Africa/Lagos");set('tokyo-time',"Asia/Tokyo");set('sydney-time',"Australia/Sydney");set('mumbai-time',"Asia/Kolkata");}
     document.addEventListener('DOMContentLoaded', ()=>{
       document.getElementById('year').textContent = new Date().getFullYear();
       document.getElementById('certificateResult').innerHTML = infoBoxHTML() + 'Enter your email above to check for available certificates...';
