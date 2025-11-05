@@ -13,6 +13,7 @@
       --warning:#ffc107;
       --text-secondary:#4b5563;
       --text-light:#6b7280;
+      --logo-h:52px; /* will be adjusted in the print tab */
     }
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
@@ -77,11 +78,24 @@
     .sig-line{border-top:2px solid #333;width:260px;margin:0 auto 8px}
     .cert-id{font-family:"Courier New", monospace;font-size:.9rem;color:#555;margin-top:6px}
 
+    /* ONE-ROW LOGOS (auto-shrink) */
     .logo-grid{
-      display:grid;grid-template-columns:repeat(auto-fit, minmax(52px,1fr));
-      gap:12px;align-items:center;margin-top:10px;margin-bottom:0
+      display:flex;           /* single row */
+      flex-wrap:nowrap;       /* never wrap */
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      margin-top:10px;
+      margin-bottom:0;
     }
-    .logo-grid img{width:100%;max-height:52px;object-fit:contain;page-break-inside:avoid;break-inside:avoid}
+    .logo-grid img{
+      width:auto;
+      max-width:100%;
+      height:auto;
+      max-height:var(--logo-h, 52px);
+      object-fit:contain;
+      page-break-inside:avoid;break-inside:avoid;
+    }
 
     /* EXTRA SPACE before signature */
     .sig-gap{height:24px;}
@@ -99,8 +113,6 @@
       }
       .content-wrap{flex:1 1 auto;min-height:0}
       .cert-bottom{margin-top:auto}
-      .logo-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:12mm;gap:6mm;margin-top:6mm}
-      .logo-grid img{max-height:10mm!important}
       .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
       .certificate-page h1{font-size:16mm!important}
       .certificate-page .sub{font-size:4mm!important}
@@ -110,7 +122,8 @@
       .sig-line{width:70mm!important}
       .cert-id{font-size:3.2mm!important}
       .sig-gap{height:10mm!important;}
-      .sig-img{max-height:14mm!important;} /* keep signature from touching the text */
+      .sig-img{max-height:14mm!important;}
+      .logo-grid{gap:8px;}
     }
 
     /* Footer */
@@ -168,19 +181,6 @@
   <main class="container">
     <!-- CERTIFICATE GENERATOR -->
     <section class="surface" id="certificate-generator">
-
-<!-- #
-#
-# replace below the hack name 
-#
-#
-#
-#
-#
-# -->
-
-
-
       <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE • 305 Hackathon Edition (Fall 2025)</h2>
       <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] — Download your volunteer certificate using your registeredemail address</p>
 
@@ -237,33 +237,20 @@
   </footer>
 
   <script>
-
-// <!-- #
-// #
-// # replace below API URL 
-// #
-// #
-// #
-// #
-// #
-// # -->
-
-    // ===== Settings =====
+    /* ===== Settings ===== */
     const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbzzc8k3xWTxdyc7jfVpLISnSpY1qwaNB_QMmYC0ORkM9UVUbKk4De5cb5upCztCepN9/exec';
     const DEFAULT_LOGOS = [
       "https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3",
       "https://github.com/user-attachments/assets/c0de6bf0-7ae4-4a00-a431-cf705ce5ab34",
       "https://github.com/user-attachments/assets/b8085208-d06d-4fff-a471-857c7808105c",
       "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-      "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-      "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
-      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
-            "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
+      "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
+      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
     ];
-    // Signature image
+    /* Signature image */
     const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
 
-    // ===== Helpers =====
+    /* ===== Helpers ===== */
     const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     function rolesToText(roles, rolesText){ if(rolesText) return String(rolesText); if(Array.isArray(roles)) return roles.join(', '); return roles || 'Contributor'; }
     function normalizeCert(cert){
@@ -283,12 +270,24 @@
       for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0; }
       return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
     }
-    function logosHTML(logoUrls){ const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS; return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join(''); }
-    function infoBoxHTML(){ return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates of Completion Awarded to Volunteers Who Have Successfully Fulfilled All Volunteer Hours and Requirements<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`; }
-    function setStatus(type, html){ const el = document.getElementById('certificateResult'); const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info'; el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`; }
-    function toggleButton(loading){ const btn = document.getElementById('generateBtn'); if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate'; }
+    function logosHTML(logoUrls){
+      const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
+      return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
+    }
+    function infoBoxHTML(){
+      return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
+    }
+    function setStatus(type, html){
+      const el = document.getElementById('certificateResult');
+      const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info';
+      el.innerHTML = infoBoxHTML() + `<div class="alert ${cls}">${html}</div>`;
+    }
+    function toggleButton(loading){
+      const btn = document.getElementById('generateBtn');
+      if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+    }
 
-    // ===== Certificate page =====
+    /* ===== Certificate page ===== */
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -316,10 +315,8 @@
 
           <div class="cert-bottom">
             <div class="sig-gap"></div>
-
             <div class="sig-block">
-              ${
-                c.signatureUrl
+              ${ c.signatureUrl
                   ? `<img class="sig-img" src="${c.signatureUrl}" alt="Signature" onerror="this.style.display='none'">`
                   : `<div class="signature-script">Brian Bazurto</div>`
               }
@@ -337,7 +334,7 @@
       </section>`;
     }
 
-    // Open clean print tab
+    /* Open clean print tab — auto-shrink logos to one row */
     function openCertificatesInNewTab(certs, autoPrint=true){
       const css = document.querySelector('style')?.innerHTML || '';
       const head = `
@@ -353,7 +350,23 @@
             if(!imgs.length) return Promise.resolve();
             return Promise.all(imgs.map(im=>new Promise(r=>{im.onload=im.onerror=()=>r();})));
           }
-          waitImgs().then(function(){ ${autoPrint ? 'window.print();' : ''} });
+          function fitLogos(){
+            document.querySelectorAll('.logo-grid').forEach(grid=>{
+              const n = grid.querySelectorAll('img').length || 1;
+              const gap = parseFloat(getComputedStyle(grid).gap)||12;
+              const w = grid.clientWidth || 600;
+              const perW = (w - gap*(n-1)) / n;
+              const h = Math.max(16, Math.min(52, Math.floor(perW * 0.55)));
+              grid.style.setProperty('--logo-h', h + 'px');
+            });
+          }
+          function afterLayout(){
+            fitLogos();
+            ${autoPrint ? 'window.print();' : ''}
+          }
+          window.addEventListener('resize', fitLogos);
+          waitImgs().then(afterLayout);
+          setTimeout(fitLogos, 0);
         })();<\/script>
       </body></html>`;
 
@@ -362,7 +375,7 @@
       w.opener = null; w.document.open(); w.document.write(html); w.document.close();
     }
 
-    // ===== Generate flow =====
+    /* ===== Generate flow ===== */
     async function generateCertificate(){
       const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
       if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
@@ -391,7 +404,10 @@
           return true;
         });
 
-        if(!valid.length){ setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.'); return; }
+        if(!valid.length){
+          setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.');
+          return;
+        }
 
         const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
         setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
@@ -404,7 +420,7 @@
       }
     }
 
-    // ===== Clocks + init =====
+    /* ===== Clocks + init ===== */
     function updateTimes(){
       const now=new Date();
       const set=(id,tz)=>{
