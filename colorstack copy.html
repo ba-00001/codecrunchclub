@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ColorStack Winter Hackathon</title>
+  <meta name="description" content="ColorStack Winter Hackathon — Dec 19, 2025 to Jan 12, 2026. Nationwide, virtual. Open to all National Members."/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    .hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1604076913837-52ab5629f45b?auto=format&fit=crop&w=2000&q=80');
+      background-size: cover; background-position: center;
+    }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- HERO -->
+  <header class="hero-bg text-white">
+    <div class="bg-black bg-opacity-30">
+      <div class="max-w-5xl mx-auto px-6 py-28 text-center">
+        <img class="mx-auto w-56 md:w-72 mb-6"
+             src="https://upload.wikimedia.org/wikipedia/commons/0/03/ColorStack_wordmark.png"
+             alt="ColorStack wordmark">
+        <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow">Winter Hackathon</h1>
+        <p class="mt-4 text-lg md:text-xl opacity-95">A nationwide sprint of coding, collaboration, and creativity.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- KEY INFO -->
+  <section class="py-14">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl border border-gray-100 shadow-sm">
+        <h3 class="font-semibold text-lg">Dates</h3>
+        <p class="text-gray-600 mt-2">Dec 19, 2025 — Jan 12, 2026</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-gray-100 shadow-sm">
+        <h3 class="font-semibold text-lg">Kick-off</h3>
+        <p class="text-gray-600 mt-2">Dec. 15 @ 3:00 p.m. EST</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-gray-100 shadow-sm">
+        <h3 class="font-semibold text-lg">Access</h3>
+        <p class="text-gray-600 mt-2">Nationwide • Virtual</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO STRIP (white background, solid card) -->
+  <section class="bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 bg-white mt-6">
+        <p class="text-center text-sm text-gray-500 mb-4">Presented by ColorStack</p>
+        <div class="flex flex-wrap md:flex-nowrap items-center justify-center gap-8">
+          <img class="h-10 md:h-12 object-contain" loading="lazy"
+               src="https://upload.wikimedia.org/wikipedia/commons/0/03/ColorStack_wordmark.png"
+               alt="ColorStack wordmark (black on white)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="bg-blue-50">
+    <div class="max-w-4xl mx-auto px-6 py-16 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold text-blue-900">Build • Collaborate • Innovate</h2>
+      <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+        Join us for a winter buildathon where beginners and seasoned hackers alike ship projects,
+        learn new tools, and connect with ColorStack members nationwide.
+      </p>
+      <p class="mt-3 text-xs uppercase tracking-wide text-gray-500">Open to all National Members</p>
+      <a href="https://ColorStackHack25.vercel.app" target="_blank" rel="noopener"
+         class="inline-block mt-6 bg-blue-700 hover:bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold transition">
+        COMING SOON Event Page
+      </a>
+    </div>
+  </section>
+
+  <!-- COMING SOON BAR -->
+  <section class="bg-gray-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 py-4 text-center"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-sm text-gray-500">
+    <div>
+      © <span id="year"></span> ColorStack • Winter Hackathon
+      <span class="mx-2">•</span>
+      Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span>
+      by
+      <a href="https://linkedin.com/in/IBA001" target="_blank" rel="noopener"
+         class="underline hover:no-underline">Brian Bazurto</a>
+    </div>
+  </footer>
+
+  <script>
+    // Auto-set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
