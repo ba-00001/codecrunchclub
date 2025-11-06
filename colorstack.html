@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ColorStack Winter Hackathon</title>
-  <meta name="description" content="ColorStack Winter Hackathon — Dec 19, 2025 to Jan 12, 2026. Nationwide, virtual. Open to all National Members."/>
+  <title>ColorStack Winter Hackathon — Dec 19, 2025 to Jan 12, 2026</title>
+  <meta name="description" content="Join the ColorStack Winter Hackathon: Dec 19, 2025 – Jan 12, 2026. Nationwide, virtual sprint of coding, collaboration, and creativity. Open to all ColorStack national members."/>
+  <meta name="keywords" content="ColorStack, hackathon, winter hackathon, student hackathon, coding competition, virtual hackathon, CS students, computer science, software engineering, ColorStack members"/>
+  <link rel="canonical" href="https://colorstackhack25.vercel.app/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://colorstackhack25.vercel.app/" />
+  <meta property="og:title" content="ColorStack Winter Hackathon — Dec 19, 2025 to Jan 12, 2026" />
+  <meta property="og:description" content="Nationwide, virtual sprint of coding, collaboration, and creativity. Open to all ColorStack national members." />
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/03/ColorStack_wordmark.png" />
+  <meta property="og:site_name" content="ColorStack Winter Hackathon" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ColorStack Winter Hackathon — Dec 19, 2025 to Jan 12, 2026" />
+  <meta name="twitter:description" content="Nationwide, virtual sprint of coding, collaboration, and creativity. Open to all ColorStack national members." />
+  <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/0/03/ColorStack_wordmark.png" />
+
+  <!-- JSON-LD Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "ColorStack Winter Hackathon",
+    "description": "Nationwide, virtual sprint of coding, collaboration, and creativity for ColorStack members.",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "startDate": "2025-12-19T15:00:00-05:00",
+    "endDate": "2026-01-12T23:59:00-05:00",
+    "image": ["https://upload.wikimedia.org/wikipedia/commons/0/03/ColorStack_wordmark.png"],
+    "url": "https://colorstackhack25.vercel.app/",
+    "organizer": {
+      "@type": "Organization",
+      "name": "ColorStack",
+      "url": "https://colorstack.org"
+    }
+  }
+  </script>
+
+  <!-- TailwindCSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
   <style>
     .hero-bg {
       background-image: url('https://images.unsplash.com/photo-1604076913837-52ab5629f45b?auto=format&fit=crop&w=2000&q=80');
@@ -47,7 +90,7 @@
     </div>
   </section>
 
-  <!-- LOGO STRIP (white background, solid card) -->
+  <!-- LOGO STRIP -->
   <section class="bg-white">
     <div class="max-w-5xl mx-auto px-6">
       <div class="rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 bg-white mt-6">
@@ -70,33 +113,24 @@
         learn new tools, and connect with ColorStack members nationwide.
       </p>
       <p class="mt-3 text-xs uppercase tracking-wide text-gray-500">Open to all National Members</p>
-      <a href="https://ColorStackHack25.vercel.app" target="_blank" rel="noopener"
+      <a href="https://colorstackhack25.vercel.app/" target="_blank" rel="noopener"
          class="inline-block mt-6 bg-blue-700 hover:bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold transition">
         COMING SOON Event Page
       </a>
     </div>
   </section>
 
-  <!-- COMING SOON BAR -->
-  <section class="bg-gray-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 py-4 text-center"></div>
-  </section>
-
   <!-- FOOTER -->
   <footer class="py-6 text-center text-sm text-gray-500">
-    <div>
-      © <span id="year"></span> ColorStack • Winter Hackathon
-      <span class="mx-2">•</span>
-      Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span>
-      by
-      <a href="https://linkedin.com/in/IBA001" target="_blank" rel="noopener"
-         class="underline hover:no-underline">Brian Bazurto</a>
-    </div>
+    © <span id="year"></span> ColorStack • Winter Hackathon
+    <span class="mx-2">•</span>
+    Made with ❤️ by
+    <a href="https://linkedin.com/in/IBA001" target="_blank" class="underline hover:no-underline">Brian Bazurto</a>
   </footer>
 
   <script>
-    // Auto-set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
