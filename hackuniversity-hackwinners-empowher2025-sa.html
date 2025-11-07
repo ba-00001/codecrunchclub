@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hackathon & Volunteer Certificates • Code Crunch</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --matrix-green:#00e676;
+      --cyber-blue:#00b0ff;
+      --neon-pink:#ff3d8d;
+      --hacker-purple:#8a2be2;
+      --warning:#ffc107;
+      --text-secondary:#4b5563;
+      --text-light:#6b7280;
+      --bg-color:#0d1117;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+
+    /* NAV */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
+
+    /* Timezone band */
+    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
+    .timezone-header{text-align:center;margin-bottom:18px}
+    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
+    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
+    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
+    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
+    .timezone-flag{font-size:18px;margin-bottom:6px}
+    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
+    .timezone-location{color:#5f6368;font-size:12px}
+
+    /* Main */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+
+    /* Portal buttons */
+    .portal-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
+      margin-top:14px
+    }
+    .portal-btn{
+      display:flex;flex-direction:column;gap:4px;
+      background:#111827;color:#fff;text-decoration:none;
+      padding:16px;border-radius:10px;border:2px solid #1f2937;
+      font-family:"Courier New",monospace;font-weight:700;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease
+    }
+    .portal-btn small{font-weight:500;opacity:.9}
+    .portal-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15);border-color:#2563eb}
+    .portal-note{margin-top:10px;color:#4b5563;font-size:.9rem;text-align:center}
+
+    /* Cards, checklist, FAQ */
+    .card{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
+    .card-title{font-size:20px;font-weight:600;margin-bottom:8px}
+    .card-description{color:#5f6368}
+
+    .checklist{list-style:none;padding:0;margin:12px 0}
+    .checklist-item{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+    .checklist-number{
+      width:28px;height:28px;border-radius:50%;
+      background:#1a73e8;color:#fff;display:flex;align-items:center;justify-content:center;
+      font-weight:700;flex:0 0 28px
+    }
+    .checklist-text{color:#374151;line-height:1.6}
+
+    .faq-section{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
+    .faq-title{font-size:20px;font-weight:600}
+    .faq-subtitle{color:#5f6368;margin-bottom:12px}
+    .faq-container{margin-top:8px}
+    .faq-item{border-top:1px solid #eee}
+    .faq-item:first-child{border-top:0}
+    .faq-question{
+      width:100%;text-align:left;background:#f8fafc;border:0;padding:12px;border-radius:8px;
+      display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:600
+    }
+    .faq-answer{display:none;padding:12px 4px;color:#374151}
+    .faq-item.open .faq-answer{display:block}
+    .faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+    /* Footer */
+    .cc-blue{background:#1a73e8}
+    .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
+    .footer h3{font-size:18px;font-weight:500;margin-bottom:16px;color:#fff}
+    .footer p{font-size:14px;opacity:.9;margin-bottom:16px;line-height:1.5}
+    .footer ul{list-style:none;padding:0;margin:0}
+    .footer li{margin-bottom:8px}
+    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.9;transition:opacity .2s ease}
+    .footer a:hover{opacity:1}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:8px;transition:color .2s ease}
+    .social-link:hover{color:#fbbf24}
+    .social-link i{font-size:18px;margin-bottom:4px}
+    .social-link span{font-size:11px;text-align:center}
+    .footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);text-align:center}
+    .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
+    .footer-bottom .credits{font-size:12px;opacity:.85}
+
+    @media (max-width:520px){.container{padding:16px}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TIMEZONE BAND -->
+  <div class="timezone-section">
+    <div class="timezone-header">
+      <h2>🏆 Hackathon & Volunteer Certificate Center</h2>
+    </div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location">Miami, FL (ET)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- CERTIFICATE PORTAL BUTTONS -->
+    <section class="surface" id="certificate-portals">
+      <h2 class="card-title" style="text-align:center">Choose your certificate portal</h2>
+      <p class="card-description" style="text-align:center">
+        These portals are for <strong>Hackathon Winners & Special Awards</strong> and for
+        <strong>event staff</strong>.
+        Select your event to access the correct certificates.
+      </p>
+
+      <div class="portal-grid">
+        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificate-summercodex2025.html">
+          <span>🏆 SummerCodeX — Summer 2025</span>
+          <small>Winners & Student Volunteer Certificates</small>
+        </a>
+
+        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305-fall2025.html">
+          <span>🏆 305 Hackathon Edition — Fall 2025</span>
+          <small>Winners & Student Volunteer Certificates</small>
+        </a>
+
+        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowher-10.13-20.25.html">
+          <span>💪 EmpowHer Hack — Fall 2025</span>
+          <small>Winners & Student Volunteer Certificates</small>
+        </a>
+
+        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowhermini-10.18.25.html">
+          <span>⚡ EmpowHer Mini HackDay — Fall 2025</span>
+          <small>Winners & Student Volunteer Certificates</small>
+        </a>
+      </div>
+
+      <div class="portal-note">
+        🔒 You’ll be asked to verify with the same email used during event registration, Devpost submission,
+        or official volunteer sign-up.
+      </div>
+    </section>
+
+    <!-- ELIGIBILITY INFORMATION -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">🏅 Who Can Receive Certificates?</h2>
+      <div class="card-description">
+        <p>Certificates are issued only to verified individuals and teams whose participation is confirmed in our records.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem;">
+
+        <!-- Hackathon Winners -->
+        <div style="background: rgba(255, 215, 0, 0.12); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #fbbf24;">
+          <h3 style="color:#b45309; margin-bottom: 1rem; font-size: 1.2rem;">🏆 Hackathon Winners & Awarded Teams</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>1st, 2nd, 3rd place teams</li>
+            <li>Track, category, and sponsor prize winners</li>
+            <li>Special recognition & honorable mention awards</li>
+            <li>Certificates of Achievement based on verified results</li>
+          </ul>
+        </div>
+
+
+
+   
+
+    
+
+        <!-- Event Team -->
+        <div style="background: rgba(138, 43, 226, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--hacker-purple);">
+          <h3 style="color: var(--hacker-purple); margin-bottom: 1rem; font-size: 1.2rem;">📋 Event Team & Organizers</h3>
+          <ul style="color: var(--text-secondary); font-family: 'Courier New', monospace; line-height: 1.6;">
+            <li>Core organizing team</li>
+            <li>Logistics & operations crew</li>
+            <li>Technical support volunteers</li>
+            <li>Academic & community partners</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CERTIFICATE VALUE -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">✨ Professional & Achievement Recognition</h2>
+      <div class="card-description">
+        <p>
+          Our certificates recognize both <strong>impact</strong> (judges, mentors, partners, organizers)
+          and <strong>excellence</strong> (winning hackathon teams). Each certificate is tied to verified data from registration,
+          Devpost, and official event records.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
+        <div style="background:rgba(0,255,65,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">📋</div>
+          <h4 style="color:var(--matrix-green);margin-bottom:.5rem;">Verified Credentials</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Proof of official achievement or service for your portfolio & records.</p>
+        </div>
+
+        <div style="background:rgba(0,212,255,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">🎓</div>
+          <h4 style="color:var(--cyber-blue);margin-bottom:.5rem;">Career & Academic Value</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Use certificates for applications, promotions, and academic files.</p>
+        </div>
+
+        <div style="background:rgba(255,0,128,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">🏅</div>
+          <h4 style="color:var(--neon-pink);margin-bottom:.5rem;">Highlight Achievements</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Showcase hackathon wins and leadership in innovation.</p>
+        </div>
+
+        <div style="background:rgba(138,43,226,0.05);padding:1rem;border-radius:8px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.5rem;">🤝</div>
+          <h4 style="color:var(--hacker-purple);margin-bottom:.5rem;">Community Impact</h4>
+          <p style="color:var(--text-light);font-size:.9rem;">Recognition for building and supporting the tech community.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="card" style="margin-top: 2rem;">
+      <h2 class="card-title">🔧 How to Get Your Certificate</h2>
+      <p class="card-description">
+        Follow these steps whether you are a <strong>winner</strong>, <strong>volunteer</strong>, or <strong>partner</strong>.
+      </p>
+
+      <ul class="checklist">
+        <li class="checklist-item">
+          <div class="checklist-number">1</div>
+          <div class="checklist-text">
+            <strong>Pick Your Event</strong><br>
+            Use the buttons at the top to open the correct event certificate portal.
+          </div>
+        </li>
+        <li class="checklist-item">
+          <div class="checklist-number">2</div>
+          <div class="checklist-text">
+            <strong>Verify Your Identity</strong><br>
+            Sign in with the same email / Google account used for registration, Devpost submission,
+            or official volunteer form. Winners are validated against official results.
+          </div>
+        </li>
+        <li class="checklist-item">
+          <div class="checklist-number">3</div>
+          <div class="checklist-text">
+            <strong>Generate & Download</strong><br>
+            Once verified, download your high-quality PDF certificate (or certificates) for your role or award.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" style="margin-top: 2rem;">
+      <h2 class="faq-title">❓ Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Everything you need to know about our certificate system</p>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>When are hackathon winner certificates available?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Winner and finalist certificates are typically available within
+              <strong>15–20 business days</strong> after results are confirmed, to allow time for verification.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What email should I use as a hackathon winner?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Use the same email you used for:
+              <strong>Devpost submission, team registration, or official sign-up.</strong>
+              If your team registered with a captain, certificates will be mapped from the official results sheet.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are these certificates officially recognized?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              <strong>Yes.</strong> Certificates are issued by Code Crunch / Hack University in partnership with our
+              affiliated organizations and sponsors, and are suitable for professional documentation.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Can I update my name on the certificate?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              We can correct <strong>spelling or preferred names</strong>. Contact us with proof of identity and event details,
+              and we’ll update records within 15–20 business days when possible.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What format are the certificates in?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Certificates are generated as <strong>high-quality PDFs</strong>, optimized for A4 landscape printing and digital use.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>I don’t see my team or my name. What should I do?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Verify that you’re using the correct event portal and email. If still missing, contact us with:
+              <strong>full name, team name, event, track, and role</strong> so we can manually verify.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="card" style="margin-top: 2rem; text-align: center;">
+      <h2 class="card-title">📞 Need Help?</h2>
+      <div class="card-description">
+        <p>Having trouble accessing a winner or volunteer certificate? We’ve got you.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;">
+          <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px;">
+            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">🔗 LinkedIn Support</h4>
+            <p style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
+              Contact <strong>Code Crunch Global</strong> on LinkedIn<br>
+              <small>Provide your name, event, role, and (if applicable) team name.</small>
+            </p>
+            <a href="https://codecrunchglobal-linkedin.vercel.app/" target="_blank" rel="noopener"
+               style="display:inline-block;margin-top:.75rem;padding:.5rem 1rem;background:var(--matrix-green);color:var(--bg-color);
+                      text-decoration:none;border-radius:6px;font-weight:600;transition:all .3s ease;font-family:'Courier New', monospace;">
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(255,193,7,0.1);border-radius:8px;border-left:4px solid var(--warning);">
+          <p style="color:var(--warning);font-family:'Courier New', monospace;margin:0;">
+            <strong>⚡ Quick Tip:</strong> Include your full name, event, team name (if winner), and the email used at registration for faster assistance.
+          </p>
+        </div>
+
+        <div style="margin-top:1rem;padding:1rem;background:rgba(138,43,226,0.1);border-radius:8px;border-left:4px solid var(--hacker-purple);">
+          <p style="color:var(--hacker-purple);font-family:'Courier New', monospace;margin:0;">
+            <strong>🚀 Pro Tip:</strong> Check with your team lead or captain first to confirm which email and spelling were used on the final submission.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻👩🏽‍💻🧑🏿‍💻</span></h3>
+          <p>
+            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+          </p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
+
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.9;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ toggler
+    function toggleFAQ(btn){
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      item.classList.toggle('open');
+    }
+
+    // Timezone clocks
+    function updateTimes() {
+      const now = new Date();
+      const set = (id, tz) => {
+        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh = String(t.getHours()).padStart(2,'0');
+        const mm = String(t.getMinutes()).padStart(2,'0');
+        const ss = String(t.getSeconds()).padStart(2,'0');
+        const el = document.getElementById(id);
+        if (el) el.textContent = `${hh}:${mm}:${ss}`;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      updateTimes();
+      setInterval(updateTimes, 1000);
+    });
+  </script>
+</body>
+</html>
