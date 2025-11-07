@@ -75,6 +75,12 @@
     .footer-bottom .credits{font-size:12px;opacity:.85}
 
     @media (max-width:520px){.container{padding:16px}}
+
+    .cta-db{
+        background:linear-gradient(45deg,#111827,#374151);
+      }
+
+
   </style>
 </head>
 <body>
@@ -281,21 +287,49 @@
 
         let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${email}</span>:</strong><br/>`;
 
-        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
-          data.forEach(entry => {
-            if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
-              html += `<div class="card-welcome">
-                        <strong style="color:#00ff99;font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
-                        <div class="cta">
-                          <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank" rel="noopener">🚀 JOIN DISCORD SERVER</a>
-                          <a class="cta-private" href="${entry.privateChannelLink}" target="_blank" rel="noopener">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
-                        </div>` +
-                        entry.discordInstructions
-                          .replace(/\n/g,'<br/>')
-                          .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
-                          .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
-                      `</div>`;
-            }
+        // if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
+        //   data.forEach(entry => {
+        //     if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
+        //       html += `<div class="card-welcome">
+        //                 <strong style="color:#00ff99;font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
+        //                 <div class="cta">
+        //                   <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank" rel="noopener">🚀 JOIN DISCORD SERVER</a>
+        //                   <a class="cta-private" href="${entry.privateChannelLink}" target="_blank" rel="noopener">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
+        //                 </div>` +
+        //                 entry.discordInstructions
+        //                   .replace(/\n/g,'<br/>')
+        //                   .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
+        //                   .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
+        //               `</div>`;
+        //     }
+
+        if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
+          html += `<div class="card-welcome">
+                    <strong style="color:#00ff99;font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
+                    <div class="cta">
+                      <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank" rel="noopener">
+                        🚀 JOIN DISCORD SERVER
+                      </a>
+                      <a class="cta-private" href="${entry.privateChannelLink}" target="_blank" rel="noopener">
+                        🔒 CHECK PRIVATE CHANNEL ACCESS
+                      </a>
+                      ${
+                        entry.eventRegistrationResponseSheetLink
+                          ? `<a class="cta-db" href="${entry.eventRegistrationResponseSheetLink}" target="_blank" rel="noopener">
+                              📊 VOLUNTEER RESPONSES DATABASE (GOOGLE SHEETS)
+                            </a>`
+                          : ''
+                      }
+                    </div>` +
+                    entry.discordInstructions
+                      .replace(/\n/g, '<br/>')
+                      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#fff">$1</strong>')
+                      .replace(/`(.*?)`/g, '<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
+                  `</div>`;
+        }
+
+
+
 
             html += `<div class="card-yes">
                       <strong>✅ Confirmed Volunteer</strong><br/>
