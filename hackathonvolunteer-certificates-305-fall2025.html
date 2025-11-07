@@ -289,7 +289,7 @@
       if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
     }
 
-    /* ===== Certificate page ===== */
+    /* ===== Certificate page Recognition/ ACHIEVEMENT ===== */
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -301,7 +301,7 @@
           <div class="content-wrap">
             <div style="text-align:center;margin-bottom:40px">
               <h1>CERTIFICATE</h1>
-              <p class="sub">OF ACHIEVEMENT</p>
+              <p class="sub">OF RECOGNITION</p>
             </div>
 
             <p class="presented">This certificate is presented to</p>
