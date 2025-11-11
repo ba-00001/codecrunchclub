@@ -88,6 +88,70 @@
   color: #1557b0;
 }
 
+  .list {
+    list-style-type: disc; /* adds filled circle bullets */
+    padding-left: 20px;    /* adds indentation */
+  }
+
+  .list2 {
+  list-style-type: decimal; /* default: 1, 2, 3 */
+  padding-left: 20px;
+}
+
+/* partners css */
+.partners-bar{
+  padding:10px 0;
+  background:#ffffff;
+}
+
+.partners-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 16px;
+  max-width:720px;
+  margin:0 auto;
+  background:#ffffff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.partners-label{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.partners-logos{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+}
+
+.partner-logo{
+  height:26px;
+  max-width:120px;
+  object-fit:contain;
+  transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  opacity:0.92;
+}
+
+.partner-logo:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 10px rgba(15,23,42,.12);
+  opacity:1;
+}
+
+
+/* end partners css */
+
+
+
   </style>
 </head>
 <body>
@@ -202,66 +266,66 @@
 
 <div class="card">
   <h1><strong>Registration Steps - Session B</strong></h1>
-  <ol class="list">
+  <ol class="list2">
       <li>
-      1. RSVP on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      RSVP on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      2. RSVP on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      RSVP on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      3. Register on <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">OneStopForm <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for tools/perks
+      Register on <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">OneStopForm <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for tools/perks
     </li>
     <li>
-      4. Register on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for submissions
+      Register on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for submissions
     </li>
     <li>
-      5. Join <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Code Crunch Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (check mentorship channels & schedules)
+      Join <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Code Crunch Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (check mentorship channels & schedules)
     </li>
     <li>
-      6. Read <strong><a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener noreferrer" class="arrow-link">Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Read <strong><a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener noreferrer" class="arrow-link">Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      7. Read <strong><a href="https://www.notion.so/305-Hack-Nov-25-Session-B-In-person-Agenda-29d7c6d4a1d080e0a0ead01c0ac3527a?source=copy_link" target="_blank" rel="noopener noreferrer" class="arrow-link">Event Agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Read <strong><a href="https://www.notion.so/305-Hack-Nov-25-Session-B-In-person-Agenda-29d7c6d4a1d080e0a0ead01c0ac3527a?source=copy_link" target="_blank" rel="noopener noreferrer" class="arrow-link">Event Agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      8. Create your <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
+      Create your <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
     </li>
     <li>
-      9. Submit final links by <strong>Nov 15 @ due time submission</strong>
+      Submit final links by <strong>Nov 15 @ due time submission</strong>
     </li>
   </ol>
 </div>
 
 <div class="card">
   <h2>Check-in Steps</h2>
-  <ol class="list">
+  <ol class="list2">
      <li>
-      1. Check-in with your Ticket on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Check-in with your Ticket on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      2. Check-in with your Ticket on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Check-in with your Ticket on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      3. Complete the <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSfO8IJlhzLB1TVGu42n8IcotrYd0ptF9h57mMzyh3JrYgAZJA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="arrow-link">Check-in Form <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Complete the <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSfO8IJlhzLB1TVGu42n8IcotrYd0ptF9h57mMzyh3JrYgAZJA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="arrow-link">Check-in Form <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      4. Add team members on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (edits allowed before deadline)
+      Add team members on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (edits allowed before deadline)
     </li>
     <li>
-      5. Create a <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">PUBLIC GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
+      Create a <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">PUBLIC GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
     </li>
     <li>
-      6. Check mentorship channels & schedules on <strong><a href="https://hackuniversitydiscordverify.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+      Check mentorship channels & schedules on <strong><a href="https://hackuniversitydiscordverify.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
     </li>
     <li>
-      7. Attend workshops (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
+      Attend workshops (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
     </li>
     <li>
-      8. Submit your project (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
+      Submit your project (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
     </li>
     <li>
-      9. View the Live Demos Presentation Order (see <strong><a href="https://docs.google.com/spreadsheets/d/12XawEQd-wbwozsYDKwPMr8Uj3yJcgdBinVPxudjWX_w/edit?usp=sharing">List <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
+      View the Live Demos Presentation Order (see <strong><a href="https://docs.google.com/spreadsheets/d/12XawEQd-wbwozsYDKwPMr8Uj3yJcgdBinVPxudjWX_w/edit?usp=sharing">List <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
     </li>
   </ol>
 </div>
@@ -376,6 +440,26 @@
 </section>
 
 
+<section class="partners-bar">
+  <div class="wrap">
+    <div class="partners-card">
+      <div class="partners-label">Partners</div>
+      <div class="partners-logos">
+        <!-- Example logos — replace src + href with your real partners -->
+        <a href="https://mlh.io" target="_blank" rel="noopener">
+          <img src="PATH/TO/mlh-logo.png" alt="Major League Hacking" class="partner-logo">
+        </a>
+        <a href="https://developers.google.com/community/gdg" target="_blank" rel="noopener">
+          <img src="PATH/TO/gdg-logo.png" alt="Google Developer Groups" class="partner-logo">
+        </a>
+        <a href="https://fiu.edu" target="_blank" rel="noopener">
+          <img src="PATH/TO/fiu-logo.png" alt="Florida International University" class="partner-logo">
+        </a>
+        <!-- Add/remove as needed -->
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
