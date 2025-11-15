@@ -978,7 +978,22 @@
           </div>
         `;
 
-        if (endDate < now) { past.push(html); } else { upcoming.push(html); }
+        // Fix: classify events using END OF DAY in Miami time (not local midnight)
+
+
+        const endOfDayET = new Date(
+          new Date(h.endDate + "T23:59:59").toLocaleString("en-US", {
+            timeZone: "America/New_York"
+          })
+        );
+
+        if (now > endOfDayET) {
+          past.push(html);
+        } else {
+          upcoming.push(html);
+        }
+
+
       });
 
       document.getElementById('upcoming-events').innerHTML = upcoming.length > 0 
