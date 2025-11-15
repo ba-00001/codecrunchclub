@@ -531,21 +531,37 @@
       const sec = s % 60;
       return { d, h, m, s: sec };
     }
-    function getEventStatus(startDateStr, endDateStr) {
-      const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
-      const end = asLocalDate(endDateStr);     end.setHours(23,59,59,999);
-      const now = nowInMiami();
-      if (now < start) {
-        const { d } = diffDHMS(start - now);
-        return { text: `${d} days left`, isPast: false, isLive: false, cls: 'countdown-upcoming' };
-      }
-      if (now <= end) {
-        const { d, h, m } = diffDHMS(end - now);
-        const label = d > 0 ? `${d}d ${h}h left` : `${h}h ${m}m left`;
-        return { text: `Live — ${label}`, isPast: false, isLive: true, cls: 'countdown-live' };
-      }
-      return { text: 'Completed', isPast: true, isLive: false, cls: 'countdown-past' };
-    }
+  function getEventStatus(startDateStr, endDateStr) {
+  const now = nowInMiami();
+
+  // Parse start-of-day ET
+  const start = new Date(
+    new Date(startDateStr + "T00:00:00").toLocaleString("en-US", {
+      timeZone: "America/New_York"
+    })
+  );
+
+  // Parse end-of-day ET (midnight end)
+  const end = new Date(
+    new Date(endDateStr + "T23:59:59").toLocaleString("en-US", {
+      timeZone: "America/New_York"
+    })
+  );
+
+  if (now < start) {
+    const { d } = diffDHMS(start - now);
+    return { text: `${d} days left`, isPast: false, isLive: false, cls: 'countdown-upcoming' };
+  }
+
+  if (now <= end) {
+    const { d, h, m } = diffDHMS(end - now);
+    const label = d > 0 ? `${d}d ${h}h left` : `${h}h ${m}m left`;
+    return { text: `Live — ${label}`, isPast: false, isLive: true, cls: 'countdown-live' };
+  }
+
+  return { text: 'Completed', isPast: true, isLive: false, cls: 'countdown-past' };
+}
+
 
     /* ---------- Hacking hours helpers ---------- */
     function parseLocalDateTime(str){
