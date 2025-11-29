@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Session B — In-Person · 305 Veterans & DefenseTech Hack</title>
-  <meta name="description" content="Fully in-person sprint for the 305 Veterans & DefenseTech Hack. Saturday 10 AM–11 PM with mentors, judging, food, and swag."/>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <title>Session B — Fully In-Person · CodeFest: Edition Dec 2025</title>
+  <meta name="description" content="Fully in-person 12-hour sprint for CodeFest: Edition Dec 2025. Saturday, Dec 6 with mentors, judging, food, swag, and live demos around marketing, business, finance, and AI."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{ --blue:#0b2a6f; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --bg:#ffffff; --soft:#f6f8ff; --r:14px; }
@@ -69,118 +69,112 @@
     }
 
     .arrow-link {
-  color: #1a73e8;
-  text-decoration: none;
-  position: relative;
-  font-weight: 500;
-}
+      color: #1a73e8;
+      text-decoration: none;
+      position: relative;
+      font-weight: 500;
+    }
 
-.arrow-link i {
-  margin-left: 6px;
-  font-size: 0.85em;
-  transition: transform 0.3s ease, color 0.3s ease;
-  transform: rotate(45deg);
-  color: #1a73e8;
-}
+    .arrow-link i {
+      margin-left: 6px;
+      font-size: 0.85em;
+      transition: transform 0.3s ease, color 0.3s ease;
+      transform: rotate(45deg);
+      color: #1a73e8;
+    }
 
-.arrow-link:hover i {
-  transform: rotate(45deg) translate(3px, -3px);
-  color: #1557b0;
-}
+    .arrow-link:hover i {
+      transform: rotate(45deg) translate(3px, -3px);
+      color: #1557b0;
+    }
 
+    /* bullet points  */
+    .list {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
 
-/* bullet points  */
-  .list {
-    list-style-type: disc; /* adds filled circle bullets */
-    padding-left: 20px;    /* adds indentation */
-  }
+    .list2 {
+      list-style-type: decimal;
+      padding-left: 20px;
+    }
 
-  .list2 {
-  list-style-type: decimal; /* default: 1, 2, 3 */
-  padding-left: 20px;
-}
+    /* partners css */
+    .partners-bar{
+      padding:10px 0;
+      background:#ffffff;
+    }
 
-/* partners css */
-.partners-bar{
-  padding:10px 0;
-  background:#ffffff;
-}
+    .partners-card{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 16px;
+      max-width:720px;
+      margin:0 auto;
+      background:#ffffff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+    }
 
-.partners-card{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:10px 16px;
-  max-width:720px;
-  margin:0 auto;
-  background:#ffffff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-}
+    .partners-label{
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--muted);
+      font-weight:700;
+    }
 
-.partners-label{
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--muted);
-  font-weight:700;
-}
+    .partners-logos{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0, 1fr));
+      align-items:center;
+      justify-items:center;
+      gap:18px;
+    }
 
-.partners-logos{
-  display:grid;
-  grid-template-columns:repeat(5, minmax(0, 1fr)); /* 5 per row */
-  align-items:center;
-  justify-items:center;
-  gap:18px;
-}
-/* works for 3 logos per row */
-/* .partners-logos{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:18px;
-} */
+    .partner-logo{
+      width:100%;
+      max-width:160px;
+      max-height:auto;
+      height:auto;
+    }
 
-/* .partner-logo{
-  height: auto;           
-  max-width:160px;       
-  object-fit:contain;
-  transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-  opacity:0.92;
-} */
+    .partner-logo:hover{
+      transform:translateY(-2px) scale(1.06);
+      box-shadow:0 4px 10px rgba(15,23,42,.12);
+      opacity:1;
+    }
 
-
-
-.partner-logo{
-  width:100%;
-  max-width:160px;
-  max-height:auto; /* optional cap */
-  height:auto;
-}
-
-
-.partner-logo:hover{
-  transform:translateY(-2px) scale(1.06); /* subtle grow on hover */
-  box-shadow:0 4px 10px rgba(15,23,42,.12);
-  opacity:1;
-}
-
-
-/* end partners css */
-
-
-
+    /* Challenge prompt lock card */
+    .locked-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:0.8rem;
+      background:#fef3c7;
+      color:#92400e;
+      border:1px solid #fcd34d;
+      font-weight:600;
+    }
   </style>
 </head>
 <body>
-<header>
+<!-- small sticky nav -->
+<header class="site-nav">
   <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
-    <div class="brand"><i class="fa-solid fa-location-dot"></i> 305 Hackathon Edition Nov 2025 | Session B — Fully In-Person</div>
-    <nav><a class="btn alt" href="https://305hacknov2025.vercel.app/">← All Sessions</a></nav>
+    <div class="brand">
+      <i class="fa-solid fa-location-dot"></i>
+      CodeFest: Edition Dec 2025 – Session B — Fully In-Person
+    </div>
+    <nav>
+      <a class="btn alt" href="https://codefesthack.vercel.app/">← All Sessions</a>
+    </nav>
   </div>
-
+</header>
 
 <!-- Page Title / Hero -->
 <header class="w-full bg-gray-50 border-b border-gray-200">
@@ -188,41 +182,50 @@
     <p class="text-xs sm:text-sm text-gray-500 mb-2">
       <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
       <span aria-hidden="true"> / </span>
-            <a href="https://hackuniversity-hackathons.vercel.app" class="underline hover:no-underline">Hackathons</a>
+      <a href="https://hackuniversity-hackathons.vercel.app" class="underline hover:no-underline">Hackathons</a>
       <span aria-hidden="true"> / </span>
-            <a href="https://305hacknov2025.vercel.app/" class="underline hover:no-underline">305 Hackathon Edition Nov 2025</a>
+      <a href="https://codefesthack.vercel.app/" class="underline hover:no-underline">CodeFest: Edition Dec 2025</a>
       <span aria-hidden="true"> / </span>
-      Session B | 305 Veterans &amp; DefenseTech Hack
+      Session B | CodeFest Fully In-Person Sprint
     </p>
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-      Session B — Fully In-Person
+      Session B — Fully In-Person · 12-Hour Sprint
     </h1>
     <p class="mt-2 text-gray-600 max-w-2xl">
-      Dates: <strong>Sat, Nov 15, 2025</strong> (ET).
+      Date: <strong>Saturday, Dec 6, 2025</strong> (ET).
     </p>
-        <p class="mt-2 text-gray-600 max-w-2xl">
-   A problem-solving competition with Tech(coding/development) and Technopreneurship (no code - business pitch) tracks.
-</p> 
 
+    <p class="mt-2 text-gray-600 max-w-2xl">
+      A two-part problem-solving competition that includes a traditional Hackathon (Tech – coding/development) and a 
+      Business Venture Arena competition (no-code pitch), all built around the theme of <strong>marketing, business strategy, and AI-powered innovation</strong>.
+    </p>
 
   </div>
 </header>
 
 <main>
-
   <section class="hero">
     <div class="wrap">
-      <p>This focused day of building with venue-only workshops, mentors, and live judging. Check in at 10:00 AM; demos begin near closing.</p>
-      <p class="meta" style="margin-top:6px;"><strong>Timeline:</strong> Continuous 12 hrs build window across Nov 15 (ET)</p>
-
+      <p>
+        A focused, fully in-person day of building with venue-only workshops, mentors, food, swag, and live judging.
+        Check in at <strong>10:00 AM</strong>; live demos begin near closing.
+      </p>
+      <p class="meta" style="margin-top:6px;">
+        <strong>Timeline:</strong> Continuous <strong>12-hour</strong> build window on <strong>Sat, Dec 6</strong> (ET).
+      </p>
       <div class="notice">
-        <strong>Heads up:</strong> The <em>Build</em> challenge prompt is revealed at the <strong>opening ceremony (ET)</strong>.
-        <strong>Live demos presentations are required</strong>; no live demo presentations = <strong>0 points</strong>. RSVP on <strong>Bevy Calendar event</strong> for automatic email updates.
+        <strong>Heads up:</strong> The <em>Build</em> challenge prompts are <strong>hidden</strong> until the
+        <strong>opening reveal at 11:00 AM EST on Saturday, Dec 6</strong>.<br/>
+        <strong>Live demo presentations are required</strong>; no live demo presentation = <strong>0 points</strong>.<br/>
+        RSVP on the <strong>Bevy event calendar</strong> for automatic email updates.
       </div>
       <div class="row" style="margin-top:12px;">
-        <a class="btn" href="https://hackuniversity-zoom.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-door-open"></i> Join Opening Ceremony</a>
-        <a class="btn alt" href="https://hackuniversity-zoom.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-flag-checkered"></i> Join Closing Ceremony</a>
-        <!-- <a class="btn alt" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i> Join Online Session</a> -->
+        <a class="btn" href="https://hackuniversity-zoom.vercel.app/" target="_blank" rel="noopener">
+          <i class="fa-solid fa-door-open"></i> Join Opening Ceremony
+        </a>
+        <a class="btn alt" href="https://hackuniversity-zoom.vercel.app/" target="_blank" rel="noopener">
+          <i class="fa-solid fa-flag-checkered"></i> Join Closing Ceremony
+        </a>
       </div>
     </div>
   </section>
@@ -230,39 +233,96 @@
   <section class="section wrap">
     <div class="grid">
       <div class="card">
-        <h2>Event Details</h2>
+        <h1><strong>Event Details</strong></h1>
+
         <div class="meta" style="margin:6px 0 8px">
-          <span><i class="fa-regular fa-calendar"></i> Saturday</span>
-          <span><i class="fa-regular fa-clock"></i> 10:00 AM – 11:00 PM</span>
+          <span><i class="fa-regular fa-calendar"></i> Saturday, Dec 6</span>
+          <span><i class="fa-regular fa-clock"></i> 10:00 AM – 10:00 PM (12 hrs)</span>
           <span><i class="fa-solid fa-building"></i> Everglades MPR (1st Floor)</span>
-          <span><i class="fa-solid fa-utensils"></i> Food & Swag</span>
+          <span><i class="fa-solid fa-utensils"></i> Food &amp; Swag</span>
         </div>
         <p>Plan for:</p>
         <ul class="list">
           <li>Check-in + kickoff (10:00 AM)</li>
-          <li>Mentor rounds and checkpoints</li>
-          <li>Submission window opens ~9:00 PM</li>
-          <li>Live demos and awards near close</li>
+          <li>Mentor rounds, checkpoints, and workshops</li>
+          <li>Submission window opens towards the end of the build</li>
+          <li>Live demos and awards near closing</li>
         </ul>
-        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn" href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener">Register on MLH</a>
-          <a class="btn alt" href="https://hackuniversity-calendar.vercel.app/" target="_blank" rel="noopener">Add to Calendar</a>
+        <div class="row" style="margin-top:10px">
+          <a class="btn" href="#" data-url="onestop" target="_blank" rel="noopener">Register (OneStopForm)</a>
+          <a class="btn alt" href="#" data-url="agenda" target="_blank" rel="noopener">Add to Calendar</a>
+          <a class="btn" href="#" data-url="agenda" target="_blank" rel="noopener">Agenda</a>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted);margin-top:6px;">
+          Participant tools, subscriptions/APIs, and certain perks may require registration with the OneStopForm (use your Gmail account).
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Venue &amp; Check-In</h2>
+        <ul class="list">
+          <li>Please bring a <strong>photo ID</strong> for check-in.</li>
+          <li><strong>Wi-Fi</strong> will be provided on site.</li>
+          <li><strong>Food</strong> will be served during lunch and dinner windows.</li>
+          <li>Please respect venue policies and the <strong>MLH Code of Conduct</strong>.</li>
+        </ul>
+        <div style="margin-top:10px">
+          <a class="btn alt" href="#" data-url="venueMap" target="_blank" rel="noopener">
+            <i class="fa-solid fa-map-location-dot"></i> Venue Map (PDF)
+          </a>
         </div>
       </div>
 
       <div class="card">
-        <h2>Themes</h2>
-        <p class="meta">Build for impact in defense, veteran services, resilience, and safety.</p>
+        <h1><strong>Themes</strong></h1>
+        <p class="meta">
+          Build solutions at the intersection of <strong>business, marketing, finance, and AI</strong>.
+        </p>
         <div style="margin-top:6px">
           <span class="pill">Open Worldwide</span>
           <span class="pill">All Majors</span>
           <span class="pill">All Universities</span>
           <span class="pill">High School Students (16+)</span>
-          <span class="pill">Veteran Health &amp; Services</span>
-          <span class="pill">DefenseTech &amp; Dual-Use</span>
-          <span class="pill">Cybersecurity</span>
-          <span class="pill">Emergency Response</span>
-          <span class="pill">Logistics &amp; Mobility</span>
+          <span class="pill">Marketing Analytics</span>
+          <span class="pill">Growth &amp; Customer Insights</span>
+          <span class="pill">Finance &amp; FinTech Tools</span>
+          <span class="pill">AI-Assisted Decision Making</span>
+          <span class="pill">Business Strategy &amp; Operations</span>
+        </div>
+      </div>
+
+      <!-- Challenge Prompts (Locked Until 11 AM EST) -->
+      <div class="card">
+        <h1><strong>Challenge Prompts</strong></h1>
+        <div id="challenge-locked">
+          <span class="locked-badge">
+            <i class="fa-solid fa-lock"></i> Locked until Sat, Dec 6 @ 11:00 AM EST
+          </span>
+          <p style="margin-top:8px;font-size:0.95rem;color:#4b5563;">
+            The detailed challenge prompts for both tracks will be <strong>unveiled live at 11:00 AM EST on Saturday, Dec 6</strong>.
+            Until then, prompts remain hidden on this page.
+          </p>
+          <p id="challenge-countdown" style="margin-top:6px;font-size:0.88rem;color:#6b7280;">
+            Countdown: calculating…
+          </p>
+        </div>
+
+        <div id="challenge-unlocked" style="display:none;">
+          <p style="font-size:0.95rem;color:#374151;">
+            ✅ The challenge prompts have been unlocked!<br/>
+            Please refer to the:
+          </p>
+          <ul class="list" style="margin-top:6px;">
+            <li><a href="#" data-url="agenda" class="arrow-link" target="_blank" rel="noopener">
+              Event Agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a> for the official prompt text and schedule.</li>
+            <li><a href="#" data-url="devpost" class="arrow-link" target="_blank" rel="noopener">
+              Devpost submission portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a> for any prompt clarifications and requirements.</li>
+            <li><a href="#" data-url="hackerGuide" class="arrow-link" target="_blank" rel="noopener">
+              Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i></a> for full rules, deliverables, and examples.</li>
+          </ul>
+          <p style="margin-top:6px;font-size:0.88rem;color:#6b7280;">
+            Any late updates or clarifications will be announced during the opening ceremony and in the event channels.
+          </p>
         </div>
       </div>
 
@@ -272,263 +332,218 @@
   <section class="section wrap">
     <div class="grid">
       <div class="card">
-        <h2>Venue & Check-In</h2>
-        <ul class="list">
-          <li>Please bring a photo ID for check-in.</li>
-          <li>Wi-Fi will be provided on site.</li>
-          <li>Food served during lunch and dinner windows.</li>
-          <li>Respect venue policies and MLH Code of Conduct.</li>
-        </ul>
-        <div style="margin-top:10px">
-          <a class="btn alt" href="https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqEAgBEC4YrwEYxwEYgAQYjgUyCggAEAAY4wIYgAQyEAgBEC4YrwEYxwEYgAQYjgUyBwgCEAAYgAQyCAgDEAAYFhgeMggIBBAAGBYYHjIICAUQABgWGB4yCAgGEAAYFhgeMggIBxAAGBYYHjIICAgQABgWGB4yCAgJEAAYFhge0gEINDc5M2owajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KRvwDe0wv9mIMd3HmrLsPNWd&daddr=1590+SW+111th+Ave,+Miami,+FL+33199" target="_blank" rel="noopener">Venue Map (PDF)</a>
-        </div>
+        <h1><strong>Registration Steps – Session B</strong></h1>
+        <ol class="list2">
+          <li>
+            RSVP on <strong><a href="#" data-url="bevyTicket" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+          </li>
+          <li>
+            Register on <strong><a href="#" data-url="onestop" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              OneStopForm <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for tools/perks
+          </li>
+          <li>
+            Register on <strong><a href="#" data-url="devpost" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for submissions
+          </li>
+          <li>
+            Join <strong><a href="#" data-url="discordServer" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Code Crunch Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (check mentorship channels &amp; schedules)
+          </li>
+          <li>
+            Read <strong><a href="#" data-url="hackerGuide" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+          </li>
+          <li>
+            Read <strong><a href="#" data-url="agenda" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Event Agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
+          </li>
+          <li>
+            Create your <strong><a href="#" data-url="githubNew" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
+          </li>
+          <li>
+            Submit final links by the <strong>Session B submission deadline on Dec 6</strong> (see agenda/Devpost).
+          </li>
+        </ol>
       </div>
 
-<div class="card">
-  <h1><strong>Registration Steps - Session B</strong></h1>
-  <ol class="list2">
-      <li>
-      RSVP on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      RSVP on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Register on <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">OneStopForm <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for tools/perks
-    </li>
-    <li>
-      Register on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> for submissions
-    </li>
-    <li>
-      Join <strong><a href="http://hackuniversity-registration.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Code Crunch Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (check mentorship channels & schedules)
-    </li>
-    <li>
-      Read <strong><a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener noreferrer" class="arrow-link">Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Read <strong><a href="https://www.notion.so/305-Hack-Nov-25-Session-B-In-person-Agenda-29d7c6d4a1d080e0a0ead01c0ac3527a?source=copy_link" target="_blank" rel="noopener noreferrer" class="arrow-link">Event Agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Create your <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
-    </li>
-    <li>
-      Submit final links by <strong>Nov 15 @ due time submission</strong>
-    </li>
-  </ol>
-</div>
-
-<div class="card">
-  <h2>Check-in Steps</h2>
-  <ol class="list2">
-     <li>
-      Check-in with your Ticket on <strong><a href="https://events.mlh.io/events/13283-305-hackathon-edition-nov-2025-session-b-fully-in-person-veterans-defensetech-hack" target="_blank" rel="noopener noreferrer" class="arrow-link">MLH Event Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Check-in with your Ticket on <strong><a href="https://gdg.community.dev/e/mcvpqa/" target="_blank" rel="noopener noreferrer" class="arrow-link">Bevy Event Ticket <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Complete the <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSfO8IJlhzLB1TVGu42n8IcotrYd0ptF9h57mMzyh3JrYgAZJA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="arrow-link">Check-in Form <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Add team members on <strong><a href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener noreferrer" class="arrow-link">Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (edits allowed before deadline)
-    </li>
-    <li>
-      Create a <strong><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="arrow-link">PUBLIC GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
-    </li>
-    <li>
-      Check mentorship channels & schedules on <strong><a href="https://hackuniversitydiscordverify.vercel.app/" target="_blank" rel="noopener noreferrer" class="arrow-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>
-    </li>
-    <li>
-      Attend workshops (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
-    </li>
-    <li>
-      Submit your project (see <strong><a href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="arrow-link">agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
-    </li>
-    <li>
-      View the Live Demos Presentation Order (see <strong><a href="https://docs.google.com/spreadsheets/d/12XawEQd-wbwozsYDKwPMr8Uj3yJcgdBinVPxudjWX_w/edit?usp=sharing">List <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
-    </li>
-  </ol>
-</div>
-
-
-
-
-
+      <div class="card">
+        <h1><strong>Check-in Steps – Session B</strong></h1>
+        <ol class="list2">
+          <li>
+            Check in at the <strong>registration desk</strong> with your photo ID and Bevy ticket.
+          </li>
+          <li>
+            Complete the <strong><a href="#" data-url="checkinForm"
+              target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Check-in Form <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (for attendance + swag tracking)
+          </li>
+          <li>
+            Add team members (if any) on <strong><a href="#" data-url="devpost" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              Devpost <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> (edits allowed before deadline)
+          </li>
+          <li>
+            Create a <strong><a href="#" data-url="githubNew" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              PUBLIC GitHub repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> and make your first commit
+          </li>
+          <li>
+            Check mentorship channels &amp; schedules on <strong>Discord</strong>.
+            <div style="font-size:0.88rem;color:#4b5563;margin-top:2px;">
+              You must already have access to the Code Crunch Discord server to view these channels.
+              The links below do <strong>not</strong> provide an invitation if you’re not already a member; they only provide direct access
+              for members who are already in the server.
+            </div>
+            <ul style="margin-top:4px;margin-left:18px;list-style-type:disc;font-size:0.88rem;color:#374151;">
+              <li>
+                Mentorship Q&amp;A channel: <strong>❓｜ask-hack-mentors</strong> —
+                <a href="#" data-url="discordMentorAsk" target="_blank" rel="noopener noreferrer" class="arrow-link">
+                  Open channel <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                Schedules &amp; availability: <strong>📅｜mentor-schedules</strong> —
+                <a href="#" data-url="discordMentorSchedule" target="_blank" rel="noopener noreferrer" class="arrow-link">
+                  View schedules <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                Mentorship voice room #1: <strong>🌴┃Mentorship 1</strong> —
+                <a href="#" data-url="discordMentorVoice1" target="_blank" rel="noopener noreferrer" class="arrow-link">
+                  Join voice room <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Attend workshops (see <strong><a href="#" data-url="agenda"
+              target="_blank" rel="noopener noreferrer" class="arrow-link">
+              agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
+          </li>
+          <li>
+            Submit your project (see <strong><a href="#" data-url="agenda"
+              target="_blank" rel="noopener noreferrer" class="arrow-link">
+              agenda <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong>)
+          </li>
+          <li>
+            View the Live Demos Presentation Order (see
+            <strong><a href="#" data-url="demosList" target="_blank" rel="noopener noreferrer" class="arrow-link">
+              List <i class="fa-solid fa-arrow-up-right-from-square"></i></a></strong> ) at the end of the agenda, which becomes available after the submission deadline.
+          </li>
+        </ol>
+      </div>
 
       <div class="card">
-        <h2>Resources</h2>
+        <h1><strong>Resources</strong></h1>
         <ul class="list">
           <li>Agenda &amp; checkpoints</li>
           <li>Hacker Guide &amp; Toolkit</li>
-          <li>Mentor Directory &amp; Office Hours (Find them on Discord Mentorship channels)</li>
-          <li>No Cost Subscriptions/APIs/Perks</li>
+          <li>Mentor Directory &amp; Office Hours (find them on Discord mentorship channels)</li>
+          <li>No-cost subscriptions/APIs/perks</li>
           <li>Devpost (submissions)</li>
         </ul>
-         <div class="row" style="margin-top:10px">
-          <a class="btn alt" href="https://docs.google.com/document/d/1yrAd3zaBf_rGtc25wO-fRimh_tTccunpeGAV16JD4aQ/edit?usp=sharing" target="_blank" rel="noopener">Agenda</a>
-          <a class="btn" href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener">Hacker Guide</a>
-          <a class="btn alt" href="https://hackuniversitydiscordverify.vercel.app/" target="_blank" rel="noopener">Discord Mentorship channels</a>
-          <a class="btn " href="https://hackuniversity-perks.vercel.app/" target="_blank" rel="noopener">Subscriptions/APIs/Perks</a>
-          <a class="btn alt" href="https://305hacknov2025sb.devpost.com/" target="_blank" rel="noopener">Devpost</a>
+        <div class="row" style="margin-top:10px">
+          <a class="btn" href="#" data-url="hackerGuide" target="_blank" rel="noopener">Hacker Guide</a>
+          <a class="btn" href="#" data-url="perks" target="_blank" rel="noopener">Subscriptions/APIs/Perks</a>
+          <a class="btn alt" href="#" data-url="devpost" target="_blank" rel="noopener">Devpost</a>
+          <a class="btn alt" href="#" data-url="photoAlbum" target="_blank" rel="noopener">
+            <i class="fa-regular fa-images"></i>&nbsp; Photo Album
+          </a>
         </div>
-        
-        
-        
+      </div>
+
+      <!-- Community Platforms Card -->
+      <div class="card">
+        <h1><strong>Community Platforms</strong></h1>
+        <p class="meta" style="margin-bottom:6px;">
+          Stay connected with Code Crunch &amp; Hack University across platforms for announcements, reminders, and ongoing support.
+        </p>
+        <div class="row" style="margin-top:8px;">
+          <a class="btn" href="https://hackuniversityplatforms.vercel.app/" data-url="discordServer" target="_blank" rel="noopener">
+            <i class="fab fa-discord"></i>&nbsp; Join Discord
+          </a>
+          <a class="btn alt" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">
+            <i class="fab fa-instagram"></i>&nbsp; Instagram
+          </a>
+          <a class="btn alt" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener">
+            <i class="fa-solid fa-users"></i>&nbsp; GroupMe
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- <section class="section wrap">
+  <section class="section wrap">
     <div class="card">
-      <h2>Tracks &amp; Judging</h2>
-      <p class="meta">Criteria: Technical Difficulty · Functionality · Innovation & Creativity · Design & User Experience · Impact & Usefulness · Presentation & Demo</p>
+      <h1><strong>Tracks &amp; Judging</strong></h1>
+      <p class="meta">
+        Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
+      </p>
+
       <div style="margin-top:6px;display:grid;gap:10px">
+        <!-- Track #1 -->
         <div class="card" style="border-style:dashed">
-          <strong>General Build [Track # 1]</strong>
-          <p>Prototype/simulation with README, short video, and a live link or screenshots.</p>
+          <strong>General Build [Track #1 — Hackathon Competition]</strong>
+          <p>
+            Build a marketing, business, finance, or AI-powered tool that delivers real measurable value.
+            This track focuses on prototypes that solve operational problems, automate workflows, provide analytics,
+            or enhance decision-making. Think dashboards, AI agents, automation tools, or data-driven insights
+            that teams could realistically pilot within 3–12 months.
+          </p>
+
+          <!-- Prompts -->
+          <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
+            <li>Create an AI marketing assistant that automates customer insights, content generation, or engagement analytics.</li>
+            <li>Build a financial planning or budgeting dashboard using live data, forecasting models, or AI-supported recommendations.</li>
+            <li>Develop an internal business operations tool — workflow automation, task routing, KPI monitoring, or team productivity analytics.</li>
+            <li>Design a customer-intelligence or market-research platform powered by sentiment analysis, LLMs, or trend prediction.</li>
+            <li>Build a revenue analysis or pricing optimization system that helps businesses make data-driven decisions quickly.</li>
+            <li>Create AI agents that reason, plan, and act to automate repetitive business or administrative processes.</li>
+            <li>Develop a finance/fintech tool — spending trackers, fraud signals, credit analysis, or cash-flow forecasting models.</li>
+          </ul>
+
+          <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
+            Deliverables: README, short demo video, and a live link or screenshots.
+            Read the <a href="#" data-url="hackerGuide" target="_blank" rel="noopener" class="arrow-link">
+              Hacker Guide <i class="fa-solid fa-arrow-up-right-from-square"></i></a> for full detailed instructions and requirements.
+          </p>
         </div>
+
+        <!-- Track #2 -->
         <div class="card" style="border-style:dashed">
-          <strong>Tech Unicorn (Pitch) [Track # 2]</strong>
-          <p>No-code pitch: deck + 2-min video + exec summary. Emphasize problem insight and GTM.</p>
+          <strong>Venture Arena (Pitch) [Track #2 — Business Venture Arena Competition]</strong>
+          <p>
+            Design a no-code startup, program, or business venture that solves a real marketing, business, or finance
+            problem using strategy, research, and AI-enabled insights. Clearly define your customer, validate your problem,
+            build a value proposition, and outline a realistic business model along with a launch and growth plan.
+          </p>
+
+          <!-- Prompts -->
+          <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
+            <li>Pitch a marketing-tech or AI-driven growth startup that helps brands acquire, engage, or retain customers more efficiently.</li>
+            <li>Design a business consulting venture that uses AI tools to help small businesses improve operations, finances, or branding.</li>
+            <li>Create a financial literacy or personal finance education platform targeted at students, families, or underserved communities.</li>
+            <li>Propose a marketplace or service connecting creators, freelancers, students, or niche communities to new opportunities.</li>
+            <li>Build a data-driven business idea solving gaps in customer research, consumer behavior, engagement analytics, or retention.</li>
+            <li>Pitch a subscription-based venture offering curated AI tools, business templates, workshops, or coaching programs.</li>
+            <li>Design a scalable startup leveraging partnerships with schools, nonprofits, brands, tech communities, or enterprises.</li>
+          </ul>
+
+          <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
+            Deliverables: Pitch deck, short video, and a brief executive summary.
+            Read the <a href="#" data-url="hackerGuide" target="_blank" rel="noopener" class="arrow-link">
+              Hacker Guide <i class="fa-solid fa-arrow-up-right-from-square"></i></a> for full detailed instructions and requirements.
+          </p>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
-
-<section class="section wrap">
-  <div class="card">
-    <h1><strong>Tracks &amp; Judging</strong></h1>
-    <p class="meta">
-      Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
-    </p>
-
-    <div style="margin-top:6px;display:grid;gap:10px">
-
-      <!-- Track #1 -->
-      <div class="card" style="border-style:dashed">
-        <strong>General Build [Track # 1]</strong>
-        <p>
-          Use software, data, or hardware prototypes to tackle real challenges faced by veterans, military families, or crisis responders —
-          from secure communication and mental health support to logistics, training, or disaster response.
-          Build something practical that could be piloted in the real world within 3–12 months.
-        </p>
-
-        <!-- Added Prompts -->
-        <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
-          <li>Develop a mission-ready prototype that boosts resilience, improves response time, or enhances quality of life for those who serve.</li>
-          <li>Create tools that help military families stay connected — logistics planners, check-in systems, or secure communication dashboards.</li>
-          <li>Build systems that empower crisis responders with predictive analytics, safer workflows, and rapid-deployment tech.</li>
-          <li>Design solutions that simplify veterans’ access to healthcare, benefits, housing, or education using automation and smart design.</li>
-          <li>Propose cybersecurity helpers, supply-chain monitors, threat-detection dashboards, or emergency response assistants.</li>
-        </ul>
-
-        <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
-          Deliverables: README, short demo video, and a live link or screenshots.
-          Read the <a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener" class="arrow-link">Hacker Guide</a> for full detailed instructions and requirements.
-        </p>
-      </div>
-
-      <!-- Track #2 -->
-      <div class="card" style="border-style:dashed">
-        <strong>Tech Unicorn (Pitch) [Track # 2]</strong>
-        <p>
-          Design a no-code startup or venture that delivers a scalable solution for veterans, defense, or public safety —
-          such as a platform, marketplace, training program, or service model.
-          Clearly define the problem, target users, business model, and how you’d realistically launch and grow it.
-        </p>
-
-        <!-- Added Prompts -->
-        <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
-          <li>Pitch a no-code venture with a high-impact solution for veteran or defense pain points — ready to launch in 2025.</li>
-          <li>Design a scalable program that supports veterans transitioning to tech, healthcare, business, or skilled trades.</li>
-          <li>Create a public-safety or crisis-response startup — training academies, AI-guided decision tools, or prep services.</li>
-          <li>Propose a business addressing gaps in mental health, family support, financial planning, or mobility.</li>
-          <li>Build a venture powered by partnerships — community networks, governments, nonprofits, or corporate sponsors.</li>
-        </ul>
-
-        <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
-          Deliverables: pitch deck, short video, and a brief executive summary.
-          Read the <a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener" class="arrow-link">Hacker Guide</a> for full detailed instructions and requirements.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<section class="section wrap">
-  <div class="card">
-    <h1><strong>Tracks &amp; Judging</strong></h1>
-    <p class="meta">
-      Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
-    </p>
-
-    <div style="margin-top:6px;display:grid;gap:10px">
-
-      <!-- Track #1 -->
-      <div class="card" style="border-style:dashed">
-        <strong>General Build [Track # 1]</strong>
-        <p>
-          Use software, data, or hardware prototypes to tackle real challenges faced by veterans, military families, or crisis responders —
-          from secure communication and mental health support to logistics, training, or disaster response.
-          Build something practical that could be piloted in the real world within 3–12 months.
-        </p>
-
-        <!-- Added Prompts -->
-        <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
-          <li>Develop a mission-ready prototype that boosts resilience, improves response time, or enhances quality of life for those who serve.</li>
-          <li>Create tools that help military families stay connected — logistics planners, check-in systems, or secure communication dashboards.</li>
-          <li>Build systems that empower crisis responders with predictive analytics, safer workflows, and rapid-deployment tech.</li>
-          <li>Design solutions that simplify veterans’ access to healthcare, benefits, housing, or education using automation and smart design.</li>
-          <li>Propose cybersecurity helpers, supply-chain monitors, threat-detection dashboards, or emergency response assistants.</li>
-        </ul>
-
-        <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
-          Deliverables: README, short demo video, and a live link or screenshots.
-          Read the <a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener" class="arrow-link">Hacker Guide</a> for full detailed instructions and requirements.
-        </p>
-      </div>
-
-      <!-- Track #2 -->
-      <div class="card" style="border-style:dashed">
-        <strong>Tech Unicorn (Pitch) [Track # 2]</strong>
-        <p>
-          Design a no-code startup or venture that delivers a scalable solution for veterans, defense, or public safety —
-          such as a platform, marketplace, training program, or service model.
-          Clearly define the problem, target users, business model, and how you’d realistically launch and grow it.
-        </p>
-
-        <!-- Added Prompts -->
-        <ul style="font-size:0.88rem; margin-top:6px; color:#374151; padding-left:18px; list-style:disc;">
-          <li>Pitch a no-code venture with a high-impact solution for veteran or defense pain points — ready to launch in 2025.</li>
-          <li>Design a scalable program that supports veterans transitioning to tech, healthcare, business, or skilled trades.</li>
-          <li>Create a public-safety or crisis-response startup — training academies, AI-guided decision tools, or prep services.</li>
-          <li>Propose a business addressing gaps in mental health, family support, financial planning, or mobility.</li>
-          <li>Build a venture powered by partnerships — community networks, governments, nonprofits, or corporate sponsors.</li>
-        </ul>
-
-        <p style="font-size:0.88rem;color:#6b7280;margin-top:4px;">
-          Deliverables: pitch deck, short video, and a brief executive summary.
-          Read the <a href="https://hackuniversity-hackerguide.vercel.app" target="_blank" rel="noopener" class="arrow-link">Hacker Guide</a> for full detailed instructions and requirements.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-  
-
-
-    <section class="section wrap">
-      <!-- Prizes Card -->
+  <section class="section wrap">
+    <!-- Prizes Card -->
     <div class="card">
       <h2><strong>Prizes &amp; Awards</strong></h2>
-      <p class="meta">Prizes or Awards for 1st Place Winners — Each Track</p>
+      <p class="meta">Prizes or awards for 1st Place Winners — Each Track</p>
       <ul style="margin-left:18px;margin-top:4px">
         <li>Each track will have a <strong>1st Place Winner</strong> announced after the live closing ceremony.</li>
         <li>Visit the <strong>Devpost submission portal</strong> to view the <strong>"Prizes"</strong> card located on the top-right section of the page.</li>
@@ -556,154 +571,144 @@
     </div>
   </section>
 
-  
-
   <!-- Judges / Mentors / Speakers Card -->
-       <section class="section wrap">
-  <div class="card">
-    <h2><strong>Judges, Mentors &amp; Speakers</strong></h2>
-    <ul style="margin-left:18px;margin-top:4px">
-      <li>The official list of judges, mentors, and speakers is displayed on the <strong>Devpost event page</strong>.</li>
-      <li>To view them:
-        <ul style="margin-top:4px;margin-left:18px;list-style-type:circle">
-          <li>Open the Devpost submission portal.</li>
-          <li>Scroll to the <strong>bottom of the page</strong> to find the Judges section.</li>
-          <li>Speaker and mentor details are also displayed in the same area.</li>
-        </ul>
-      </li>
-      <li>These listings are updated frequently to reflect:
-        <ul style="margin-top:4px;margin-left:18px;list-style-type:circle">
-          <li>New confirmations</li>
-          <li>Schedule adjustments</li>
-          <li>Partner or organization updates</li>
-        </ul>
-      </li>
-      <li>For the most accurate and recent information, always check Devpost.</li>
-    </ul>
-    <p class="meta">Devpost will show the confirmed names, titles, organization affiliations, and event designations (Judge, Mentor, Speaker) for each volunteer.</p>
-  </div>
-</section>
+  <section class="section wrap">
+    <div class="card">
+      <h2><strong>Judges, Mentors &amp; Speakers</strong></h2>
+      <ul style="margin-left:18px;margin-top:4px">
+        <li>The official list of judges, mentors, and speakers is displayed on the <strong>Devpost event page</strong>.</li>
+        <li>To view them:
+          <ul style="margin-top:4px;margin-left:18px;list-style-type:circle">
+            <li>Open the Devpost submission portal.</li>
+            <li>Scroll to the <strong>bottom of the page</strong> to find the Judges section.</li>
+            <li>Speaker and mentor details are also displayed in the same area.</li>
+          </ul>
+        </li>
+        <li>These listings are updated frequently to reflect:
+          <ul style="margin-top:4px;margin-left:18px;list-style-type:circle">
+            <li>New confirmations</li>
+            <li>Schedule adjustments</li>
+            <li>Partner or organization updates</li>
+          </ul>
+        </li>
+        <li>For the most accurate and recent information, always check Devpost.</li>
+      </ul>
+      <p class="meta">
+        Devpost will show the confirmed names, titles, organization affiliations, and event designations (Judge, Mentor, Speaker) for each volunteer
+        before the live demos at the closing ceremony.
+      </p>
 
+    </div>
+  </section>
 
-<section class="partners-bar">
-  <div class="wrap">
-    <div class="partners-card">
-      <div class="partners-label">Partners</div>
-      <div class="partners-logos">
+  <section class="partners-bar">
+    <div class="wrap">
+      <div class="partners-card">
+        <div class="partners-label">Partners</div>
+        <div class="partners-logos">
 
-        <!-- Hack University -->
-        <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/ecd88daf-1b57-4558-9ffc-e48f57f69473"
-               alt="Hack University"
-               class="partner-logo">
-        </a>
+          <!-- Hack University -->
+          <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/ecd88daf-1b57-4558-9ffc-e48f57f69473"
+                 alt="Hack University"
+                 class="partner-logo">
+          </a>
 
-                <!-- GDG @ FIU -->
-        <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/3c5f5ba2-dc08-48a1-9fd1-1be04cc002d1"
-               alt="Google Developer Group at FIU"
-               class="partner-logo">
-        </a>
+          <!-- GDG @ FIU -->
+          <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/3c5f5ba2-dc08-48a1-9fd1-1be04cc002d1"
+                 alt="Google Developer Group at FIU"
+                 class="partner-logo">
+          </a>
 
-        <!-- Code Crunch -->
-        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/d2bbc54d-c650-4345-8072-3fa858482b0c"
-               alt="Code Crunch"
-               class="partner-logo">
-        </a>
+          <!-- Code Crunch -->
+          <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/d2bbc54d-c650-4345-8072-3fa858482b0c"
+                 alt="Code Crunch"
+                 class="partner-logo">
+          </a>
 
-        <!-- ColorStack @ FIU -->
-        <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/6e2cd638-d9bf-4349-9e6f-8ee72bc02c27"
-               alt="ColorStack at FIU"
-               class="partner-logo">
-        </a>
+          <!-- ColorStack @ FIU -->
+          <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/6e2cd638-d9bf-4349-9e6f-8ee72bc02c27"
+                 alt="ColorStack at FIU"
+                 class="partner-logo">
+          </a>
 
-        <!-- CAHSI @ FIU -->
-        <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/a76dccce-8bba-4749-9bea-01016f514ccd"
-               alt="CAHSI at FIU"
-               class="partner-logo">
-        </a>
+          <!-- CAHSI @ FIU -->
+          <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/a76dccce-8bba-4749-9bea-01016f514ccd"
+                 alt="CAHSI at FIU"
+                 class="partner-logo">
+          </a>
 
-        <!-- Raspberry Pi Code Crunch @ FIU -->
-        <a href="https://raspberrypicodecrunch.vercel.app" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/0459d11d-52a4-4d9e-bb2b-b86022faf8fa"
-               alt="Raspberry Pi Code Crunch at FIU"
-               class="partner-logo">
-        </a>
+          <!-- Raspberry Pi Code Crunch @ FIU -->
+          <a href="https://raspberrypicodecrunch.vercel.app" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/0459d11d-52a4-4d9e-bb2b-b86022faf8fa"
+                 alt="Raspberry Pi Code Crunch at FIU"
+                 class="partner-logo">
+          </a>
 
-        <!-- FIU Honors College -->
-        <a href="https://honors.fiu.edu" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/da900255-8e06-4660-9e95-10d399bae635"
-               alt="FIU Honors College"
-               class="partner-logo">
-        </a>
+          <!-- FIU Honors College -->
+          <a href="https://honors.fiu.edu" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/da900255-8e06-4660-9e95-10d399bae635"
+                 alt="FIU Honors College"
+                 class="partner-logo">
+          </a>
 
-        <!-- FIU Business -->
-        <a href="https://business.fiu.edu" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/db3bc493-56d0-4054-aa1c-42517a82f1e2"
-               alt="FIU College of Business"
-               class="partner-logo">
-        </a>
+          <!-- FIU Business -->
+          <a href="https://business.fiu.edu" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/db3bc493-56d0-4054-aa1c-42517a82f1e2"
+                 alt="FIU College of Business"
+                 class="partner-logo">
+          </a>
 
-        <!-- Pino Global -->
-        <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/7f55c7da-6f6e-43b8-b3c4-5afbb2e74067"
-               alt="Pino Global"
-               class="partner-logo">
-        </a>
+          <!-- Pino Global -->
+          <a href="https://business.fiu.edu/faculty-and-research/centers-institutes/pino/" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/7f55c7da-6f6e-43b8-b3c4-5afbb2e74067"
+                 alt="Pino Global"
+                 class="partner-logo">
+          </a>
 
-        <!-- FIU College of Engineering & Computing -->
-        <a href="https://cec.fiu.edu" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/b33eb208-69cd-4eb6-9577-b9af1299411a"
-               alt="FIU College of Engineering & Computing"
-               class="partner-logo">
-        </a>
+          <!-- FIU College of Engineering & Computing -->
+          <a href="https://cec.fiu.edu" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/b33eb208-69cd-4eb6-9577-b9af1299411a"
+                 alt="FIU College of Engineering & Computing"
+                 class="partner-logo">
+          </a>
 
-        <!-- Knight Foundation School of Computing & Information Sciences (FIU KFSCIS) -->
-        <a href="https://cec.fiu.edu" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/586a7a30-1b06-4e50-a2ed-181955314e0d"
-               alt="Knight Foundation School of Computing & Information Sciences"
-               class="partner-logo">
-        </a>
+          <!-- Knight Foundation School of Computing & Information Sciences (FIU KFSCIS) -->
+          <a href="https://cec.fiu.edu" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/586a7a30-1b06-4e50-a2ed-181955314e0d"
+                 alt="Knight Foundation School of Computing & Information Sciences"
+                 class="partner-logo">
+          </a>
 
-        <!-- Google Developer Groups -->
-        <!-- <a href="https://developers.google.com/community/gdg" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/18f9a1bf-ce33-432d-bcbf-b33f8e3b534e"
-               alt="Google Developer Groups"
-               class="partner-logo">
-        </a> -->
+          <!-- UniBee -->
+          <a href="https://unibee.dev" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/6c5acfc7-815e-42a4-9fd6-bdc4a60c7caf"
+                 alt="UniBee"
+                 class="partner-logo">
+          </a>
 
-        <!-- UniBee -->
-        <a href="https://unibee.dev" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/6c5acfc7-815e-42a4-9fd6-bdc4a60c7caf"
-               alt="UniBee"
-               class="partner-logo">
-        </a>
+          <!-- Blackbox.ai -->
+          <a href="https://blackbox.ai" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/0af9e9c0-3f3f-42f7-8fd9-66a39b5051d2"
+                 alt="Blackbox AI"
+                 class="partner-logo">
+          </a>
 
-        <!-- Blackbox.ai -->
-        <a href="https://blackbox.ai" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/0af9e9c0-3f3f-42f7-8fd9-66a39b5051d2"
-               alt="Blackbox AI"
-               class="partner-logo">
-        </a>
+          <!-- Major League Hacking (MLH) -->
+          <a href="https://mlh.io" target="_blank" rel="noopener">
+            <img src="https://github.com/user-attachments/assets/a40c9aa3-5bb2-4ce5-a998-cc4f88959a26"
+                 alt="Major League Hacking"
+                 class="partner-logo">
+          </a>
 
-        <!-- Major League Hacking (MLH) -->
-        <a href="https://mlh.io" target="_blank" rel="noopener">
-          <img src="https://github.com/user-attachments/assets/a40c9aa3-5bb2-4ce5-a998-cc4f88959a26"
-               alt="Major League Hacking"
-               class="partner-logo">
-        </a>
-
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-
+  </section>
 </main>
 
 <!-- Footer -->
@@ -741,7 +746,7 @@
               <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
               <span class="hack-university-social-text">YouTube</span>
             </a>
-            <a href="https://hackuniversity-discord.vercel.app/" class="hack-university-social-link">
+            <a href="https://hackuniversitydiscordverify.vercel.app/" class="hack-university-social-link">
               <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
               <span class="hack-university-social-text">Discord</span>
             </a>
@@ -788,7 +793,34 @@
 </footer>
 
 <script>
+  // Global URL object (single source of truth)
+  const URLS = {
+    bevyTicket: 'https://gdg.community.dev/e/m9z9h4/',
+    onestop: 'http://hackuniversity-registration.vercel.app/',
+    devpost: 'https://codefesthack2025sa.devpost.com/',
+    hackerGuide: 'https://hackuniversity-hackerguide.vercel.app',
+    agenda: 'https://docs.google.com/document/d/1yhE4eLuzLrEJQMHhpF7CTIwLznHUVUPiBqsYgYctfYY/edit?usp=drive_link',
+    githubNew: 'https://github.com/new',
+    checkinForm: 'https://hackuniversityattendance.vercel.app/',
+    demosList: 'https://docs.google.com/document/d/1yhE4eLuzLrEJQMHhpF7CTIwLznHUVUPiBqsYgYctfYY/edit?usp=drive_link',
+    perks: 'https://hackuniversity-perks.vercel.app/',
+    discordVerify: 'https://hackuniversitydiscordverify.vercel.app/',
+    // Hub for joining/landing on Code Crunch / Hack University Discord
+    discordServer: 'https://hackuniversity-discord.vercel.app/',
+    // Mentorship channels (require existing server access)
+    discordMentorAsk: 'https://discord.com/channels/1280306702201389107/1373797661232332940',
+    discordMentorSchedule: 'https://discord.com/channels/1280306702201389107/1416559999064477717',
+    discordMentorVoice1: 'https://discord.com/channels/1280306702201389107/1328166712800968756',
+
+    // Venue map (same Everglades Hall MPR map used previously)
+    venueMap: 'https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqEAgBEC4YrwEYxwEYgAQYjgUyCggAEAAY4wIYgAQyEAgBEC4YrwEYxwEYgAQYjgUyBwgCEAAYgAQyCAgDEAAYFhgeMggIBBAAGBYYHjIICAUQABgWGB4yCAgGEAAYFhgeMggIBxAAGBYYHjIICAgQABgWGB4yCAgJEAAYFhge0gEINDc5M2owajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KRvwDe0wv9mIMd3HmrLsPNWd&daddr=1590+SW+111th+Ave,+Miami,+FL+33199',
+
+    // 👉 Photo album
+    photoAlbum: 'https://docs.google.com/document/d/1n1Jv6b-J8tmW7aFEQdpNGeqHBks_1BaoRLRBGm5X-0M/edit?usp=sharing'
+  };
+
   (function () {
+    // Click animation on footer / quick links
     const els = document.querySelectorAll('.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link');
     els.forEach(el => {
       el.addEventListener('click', function () {
@@ -802,7 +834,61 @@
       document.querySelectorAll('.hack-university-star').forEach(el => { el.style.animation = 'none'; });
     }
   })();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Attach hrefs from URLS object
+    document.querySelectorAll('[data-url]').forEach(function (el) {
+      const key = el.getAttribute('data-url');
+      if (URLS[key]) {
+        el.setAttribute('href', URLS[key]);
+      }
+    });
+
+    // Auto-update year in footer
+    const yearEl = document.querySelector('.hack-university-copyright');
+    if (yearEl) {
+      const year = new Date().getFullYear();
+      yearEl.textContent = yearEl.textContent.replace(/© \d{4}/, '© ' + year);
+    }
+
+    // Challenge prompt lock / countdown until Sat Dec 6, 2025 @ 11:00 AM EST
+    const lockedEl = document.getElementById('challenge-locked');
+    const unlockedEl = document.getElementById('challenge-unlocked');
+    const countdownEl = document.getElementById('challenge-countdown');
+
+    if (lockedEl && unlockedEl && countdownEl) {
+      // 11:00 AM EST on Dec 6, 2025 → UTC-05:00
+      const revealTime = new Date('2025-12-06T11:00:00-05:00');
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = revealTime - now;
+
+        if (diff <= 0) {
+          lockedEl.style.display = 'none';
+          unlockedEl.style.display = 'block';
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        let parts = [];
+        if (days > 0) parts.push(days + 'd');
+        if (hours > 0 || days > 0) parts.push(hours + 'h');
+        if (minutes > 0 || hours > 0 || days > 0) parts.push(minutes + 'm');
+        parts.push(seconds + 's');
+
+        countdownEl.textContent = 'Countdown to prompt reveal (ET): ' + parts.join(' ');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+  });
 </script>
 </body>
 </html>
-
