@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hack University — OneStop Form & Member Portal</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .main-card {
+      max-width: 1100px;
+      margin: 2rem auto 3rem auto;
+      background: #ffffff;
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+      padding: 1.75rem;
+    }
+
+    /* Quick links horizontal scroll strip */
+    .quick-links-strip {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .quick-links-strip::-webkit-scrollbar {
+      height: 6px;
+    }
+    .quick-links-strip::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .quick-links-strip::-webkit-scrollbar-thumb {
+      background: #cbd5f5;
+      border-radius: 999px;
+    }
+
+    .ql-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #111827;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+    .ql-btn i {
+      font-size: 1rem;
+    }
+    .ql-btn:hover {
+      background: #ffffff;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
+    }
+    .ql-instagram i { color: #E1306C; }
+    .ql-groupme i { color: #00AEEF; }
+    .ql-luma i { color: #7c3aed; }
+    .ql-googlecal i { color: #1a73e8; }
+
+    /* Status styles for cert portal */
+    #cert-status.info {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      color: #1e40af;
+      border-color: #93c5fd;
+    }
+    #cert-status.success {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      color: #065f46;
+      border-color: #6ee7b7;
+    }
+    #cert-status.error {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+
+    /* Sample certificate card */
+    .cert-sample-card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: linear-gradient(135deg, #f9fafb, #eef2ff);
+    }
+
+    /* Navigation */
+    .navbar { background: #fff; border-bottom: 1px solid #e8eaed; padding: 12px 0; position: sticky; top: 0; z-index: 1000;}
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;}
+    .nav-brand { font-size: 22px; font-weight: 500; color: #4285f4;}
+    .nav-brand a { color: inherit; text-decoration: none;}
+    .nav-links { display: flex; gap: 30px;}
+    .nav-link { color: #5f6368; text-decoration: none; font-weight: 400; font-size: 14px; padding: 8px 16px; border-radius: 4px; transition: .2s;}
+    .nav-link:hover { color: #1a73e8; background: #f1f3f4;}
+    
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://hackuniversity.vercel.app" target="_blank">Hack University Initiative</a>
+      </div>
+      <div class="nav-links">
+        <a href="https://gdgatfiu.vercel.app" class="nav-link">GDG @ FIU</a>
+        <a href="https://codecrunchglobal.vercel.app" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://colorstackatfiu.vercel.app" class="nav-link">ColorStack @ FIU</a>
+        <a href="https://cahsiatfiu.vercel.app" class="nav-link">CAHSI @ FIU</a>
+        <a href="https://raspberrypicodecrunch.vercel.app" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="w-full bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <p class="text-xs text-gray-500 mb-2">Hack University / OneStop Form</p>
+      <h1 class="text-4xl font-extrabold">Hack University — OneStop Form</h1>
+      <p class="mt-2 text-gray-600 max-w-2xl">
+        One place to join our organizations, community platforms, register for upcoming hackathons,
+        and sync important dates to your calendar.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Card -->
+  <main class="main-card">
+
+    <!-- Member Portal Label -->
+    <div class="mb-4">
+      <h2 class="text-2xl font-extrabold">Member & Hackathon Access Portal</h2>
+      <p class="text-sm text-gray-600">
+        Use your Gmail/Google account to update registrations, download certificates, or join platforms.
+      </p>
+    </div>
+
+    <!-- PUBLIC QUICK LINKS -->
+    <section aria-label="Quick links" class="mb-6">
+      <div class="quick-links-strip">
+        <div class="inline-flex space-x-2 pb-2 min-w-max">
+          <a class="ql-btn ql-instagram" href="https://hackuniversityplatforms.vercel.app/" target="_blank">
+            <i class="fa-brands fa-instagram"></i><span>Join Instagram Group Chat</span>
+          </a>
+
+          <a class="ql-btn ql-groupme" href="https://hackuniversityplatforms.vercel.app/" target="_blank">
+            <i class="fa-solid fa-message"></i><span>Join GroupMe Group Chat</span>
+          </a>
+
+          <a class="ql-btn ql-luma" href="http://hackuniversity-calendar.vercel.app/" target="_blank">
+            <i class="fa-solid fa-calendar-check"></i><span>Luma Calendar</span>
+          </a>
+
+          <a class="ql-btn ql-googlecal" href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank">
+            <i class="fa-regular fa-calendar"></i><span>Google Calendar</span>
+          </a>
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 mt-1">These links are open to everyone.</p>
+    </section>
+
+    <!-- TWO COLUMN LAYOUT -->
+    <section class="grid gap-8 lg:grid-cols-2">
+
+      <!-- LEFT: Member Login -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+
+        <div class="text-center mb-4">
+          <div class="w-14 h-14 rounded-xl bg-blue-600 text-white flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-user-check text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-blue-900">Existing Members & Participants</h3>
+          <p class="text-sm text-gray-700 mt-1">
+            Enter the <strong>same Gmail</strong> used to register.
+          </p>
+        </div>
+
+        <form id="cert-form" class="space-y-3">
+          <input
+            id="member-email"
+            type="email"
+            placeholder="Enter your registered Gmail"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 text-sm"
+            required
+          />
+
+          <button
+            id="generate-certificate"
+            class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold text-sm"
+          >
+            🔐 Sign in & unlock
+          </button>
+
+          <div id="cert-status" class="hidden p-3 rounded-lg border-2 text-center text-sm font-medium"></div>
+        </form>
+
+        <!-- Unlocked Section -->
+        <div id="certificate-result" class="hidden mt-6 bg-green-50 border border-green-200 rounded-lg p-5">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white">
+              <i class="fas fa-check text-xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-green-800 mt-2">Access Granted</h4>
+            <p class="text-green-700 text-sm">Welcome <span id="welcome-name"></span></p>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3 mb-3">
+            <button id="download-certificate" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg text-sm">
+              🏅 Certificate
+            </button>
+
+            <a id="cert-discord-link" href="#" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg text-sm text-center">
+              💬 Discord
+            </a>
+
+            <a id="cert-groupme-link" href="#" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg text-sm text-center">
+              👥 GroupMe
+            </a>
+          </div>
+
+          <div id="user-club-memberships" class="bg-white border border-green-200 rounded-lg p-4 mt-3">
+            <h5 class="text-green-800 font-bold text-center mb-2 text-sm">Your Active Memberships</h5>
+            <div id="user-clubs-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Registration -->
+      <div class="bg-white rounded-xl p-6 border border-indigo-100">
+
+        <div class="text-center mb-4">
+          <div class="w-14 h-14 bg-indigo-600 text-white flex items-center justify-center mx-auto rounded-xl mb-3">
+            <i class="fas fa-user-plus text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-indigo-900">New to Hack University?</h3>
+          <p class="text-sm text-gray-700">Complete the OneStop Form to join.</p>
+        </div>
+
+        <a
+          href="https://hackuniversity-onestopform.vercel.app/"
+          target="_blank"
+          class="block w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg text-center font-semibold text-sm"
+        >
+          🚀 Join & Register Now
+        </a>
+      </div>
+
+    </section>
+
+    <!-- LinkedIn Sample Certificate -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold mb-3">📜 LinkedIn Sample Membership Certificate</h2>
+
+      <div class="cert-sample-card p-6">
+        <div class="bg-white border border-gray-300 rounded-lg p-6 shadow-sm">
+          <h3 class="text-2xl font-extrabold text-center tracking-widest">🎓 HACK UNIVERSITY</h3>
+          <p class="text-center text-indigo-700 font-semibold">Official Membership Certificate</p>
+
+          <div class="mt-4 text-gray-800 text-sm leading-relaxed">
+            <p>This certifies that</p>
+            <p class="text-2xl font-semibold italic my-2">[Your Name]</p>
+            <p>is an official member of:</p>
+
+            <ul class="list-disc list-inside mt-2">
+              <li>Google Developer Club @ FIU</li>
+              <li>Code Crunch Global</li>
+              <li>ColorStack @ FIU</li>
+              <li>CAHSI @ FIU</li>
+              <li>Raspberry Pi Code Crunch</li>
+            </ul>
+
+            <p class="mt-3">
+              <strong>Member ID:</strong> HU-2025-#### <br>
+              <strong>Issued:</strong> [Date]
+            </p>
+          </div>
+        </div>
+
+        <!-- Copyable LinkedIn text -->
+        <div class="mt-4">
+          <label class="text-xs font-semibold text-gray-600">Copy text for LinkedIn:</label>
+          <textarea id="linkedin-sample" rows="5" class="w-full border border-gray-300 rounded-md px-3 py-2 text-xs">
+HACK UNIVERSITY — Official Membership Certificate
+
+This certifies that [Your Name] is an official member of:
+• Google Developer Club @ FIU
+• Code Crunch Global
+• ColorStack @ FIU
+• CAHSI @ FIU
+• Raspberry Pi Code Crunch
+
+Member ID: HU-2025-####
+Issued: [Date]
+          </textarea>
+
+          <button onclick="copyLinkedInSample()" class="mt-2 px-4 py-2 rounded-md bg-gray-900 text-white text-xs">
+            Copy sample text
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbwKujBRsNpb14Wt5fvjKxLONMAqB-W53fpFrRdzwcZZAFA65EEak6W862qALPhLH3BHGg/exec";
+
+    let certificateData = null;
+
+    function showStatus(type, message) {
+      const status = document.getElementById("cert-status");
+      status.className =
+        "p-3 rounded-lg border-2 text-center text-sm font-medium mt-1 " + type;
+      status.textContent = message;
+      status.classList.remove("hidden");
+    }
+
+    function hideStatus() {
+      document.getElementById("cert-status").classList.add("hidden");
+    }
+
+    function displayUserClubMemberships(clubs) {
+      const grid = document.getElementById("user-clubs-grid");
+      grid.innerHTML = "";
+
+      if (!clubs || clubs.length === 0) {
+        grid.innerHTML =
+          '<p class="col-span-full text-center text-gray-600 text-xs italic">No club data</p>';
+        return;
+      }
+
+      clubs.forEach((club) => {
+        const div = document.createElement("div");
+        div.className =
+          "p-2 bg-white border border-green-200 rounded text-center text-xs";
+
+        div.textContent = club.name || "Unknown Club";
+        grid.appendChild(div);
+      });
+    }
+
+    async function generateCertificate(event) {
+      event.preventDefault();
+      hideStatus();
+
+      const email = document.getElementById("member-email").value.trim();
+      const btn = document.getElementById("generate-certificate");
+
+      if (!email) {
+        showStatus("error", "❌ Please enter your email.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Checking…";
+
+      try {
+        const res = await fetch(API_URL + "?email=" + encodeURIComponent(email));
+        const data = await res.json();
+
+        if (!data || data.error || !data?.certificates?.length) {
+          showStatus("error", "❌ No membership found for this email.");
+          btn.disabled = false;
+          btn.textContent = "🔐 Sign in & unlock";
+          return;
+        }
+
+        const cert = data.certificates[0].certificateData || data.certificates[0];
+        certificateData = cert;
+
+        document.getElementById("welcome-name").textContent = cert.participantName;
+        document.getElementById("cert-discord-link").href =
+          cert.discordJoinLink || "https://codecrunchglobal-discordserver.vercel.app/";
+        document.getElementById("cert-groupme-link").href =
+          cert.groupmeLink || "https://hackuniversitygroupme.vercel.app/";
+
+        displayUserClubMemberships(cert.clubs || []);
+
+        document
+          .getElementById("certificate-result")
+          .classList.remove("hidden");
+
+        showStatus("success", "🎉 Access granted!");
+
+      } catch (error) {
+        showStatus("error", "❌ Error verifying membership.");
+      }
+
+      btn.disabled = false;
+      btn.textContent = "🔐 Sign in & unlock";
+    }
+
+    function copyLinkedInSample() {
+      const text = document.getElementById("linkedin-sample");
+      text.select();
+      document.execCommand("copy");
+    }
+  </script>
+
+</body>
+</html>
