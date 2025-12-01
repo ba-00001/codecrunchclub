@@ -980,7 +980,7 @@ async function generateCertificate(evt) {
   }
 }
 
-/* ------------ Certificate Download ------------ */
+/* ------------ Certificate Download (MIT/Stanford-style layout) ------------ */
 function downloadCertificate() {
   if (!certificateData) {
     alert("Please verify your membership first.");
@@ -1005,74 +1005,268 @@ function downloadCertificate() {
     c.participantName || "Member"
   )}</title>
 <style>
-@page { size: A4 landscape; margin: 0; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; margin: 0; padding: 0; font-family: "Times New Roman", serif; background: #f8f9fa; line-height: 1.4; }
-.container { display:flex; flex-direction:column; max-width:1100px; margin:0 auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12); }
-.sheet { width:100%; height:750px; margin:0 auto; background:#fff; border:15px solid #B8860B; padding:40px; position:relative; display:flex; flex-direction:column; justify-content:space-between; }
-.header { text-align:center; margin-bottom:40px; }
-.title { font-size:3.2rem; font-weight:700; letter-spacing:4px; color:#2c3e50; margin:0 0 12px; line-height:1.1; text-shadow:1px 1px 2px rgba(0,0,0,0.1); }
-.subtitle { font-size:1.2rem; letter-spacing:3px; color:#7f8c8d; text-transform:uppercase; margin:0; font-weight:500; }
-.main-content { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; padding:20px 0; }
-.presented { font-size:1.1rem; font-style:italic; color:#5d6d7e; margin-bottom:25px; }
-.name { font-size:3.0rem; font-weight:700; font-style:italic; color:#2c3e50; margin:25px 0; line-height:1.2; word-wrap:break-word; text-shadow:1px 1px 3px rgba(0,0,0,0.1); }
-.content { font-size:1.1rem; line-height:1.6; color:#5d6d7e; margin:25px auto; max-width:85%; }
-.info { font-size:1.1rem; font-weight:700; color:#34495e; margin:25px 0; line-height:1.5; }
-.footer-section { display:flex; justify-content:center; align-items:flex-end; margin-top:40px; min-height:90px; }
-.signature-area { text-align:center; max-width:350px; }
-.sig-line { border-top:2px solid #34495e; width:250px; margin:0 auto 10px; }
-.sig-name { font-weight:700; margin-bottom:4px; font-size:1.0rem; color:#2c3e50; }
-.sig-title { font-style:italic; color:#7f8c8d; font-size:0.9rem; line-height:1.4; }
-.controls { text-align:center; margin:15px 0 20px; padding:15px; background:#f8f9fa; border-radius:8px; border:1px solid #dee2e6; }
-.btn { padding:12px 24px; font-size:1.0rem; cursor:pointer; border:0; border-radius:6px; margin:0 10px; font-weight:600; transition:all .3s ease; }
-.btn-primary { background:#007bff; color:#fff; }
-.btn-secondary { background:#6c757d; color:#fff; }
-.btn:hover { transform:translateY(-2px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-@media print {
-  html, body { width:297mm!important; height:210mm!important; margin:0!important; padding:0!important; background:#fff!important; print-color-adjust:exact!important; -webkit-print-color-adjust:exact!important; }
-  .controls { display:none!important; }
-  .container { position:fixed!important; inset:0!important; width:297mm!important; height:210mm!important; max-width:none!important; padding:0!important; margin:0!important; box-shadow:none!important; background:#fff!important; border-radius:0!important; display:flex!important; align-items:center!important; justify-content:center!important; }
-  .sheet { width:277mm!important; height:190mm!important; border:10mm solid #B8860B!important; padding:20mm!important; page-break-inside:avoid!important; display:flex!important; flex-direction:column!important; justify-content:space-between!important; background:#fff!important; }
-  .header { margin-bottom:15mm!important; }
-  .title { font-size:2.8rem!important; margin-bottom:8mm!important; }
-  .subtitle { font-size:1.0rem!important; }
-  .name { font-size:2.5rem!important; margin:15mm 0!important; }
-  .content { font-size:1.0rem!important; margin:12mm auto!important; }
-  .info { font-size:1.0rem!important; margin:12mm 0!important; }
-  .sig-line { width:200px!important; }
-}
+  @page { size: A4 landscape; margin: 0; }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #e5e7eb;
+    font-family: "Times New Roman", Georgia, serif;
+    line-height: 1.4;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .controls {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 999px;
+    padding: 8px 16px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    z-index: 50;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 999px;
+    border: none;
+    font-weight: 600;
+    transition: all .2s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .btn-primary {
+    background: #1d4ed8;
+    color: #ffffff;
+  }
+
+  .btn-secondary {
+    background: #6b7280;
+    color: #ffffff;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  }
+
+  .certificate-wrapper {
+    width: 100%;
+    max-width: 1150px;
+  }
+
+  .sheet {
+    background: #fdfcf7;
+    border: 14px solid #b8860b; /* outer gold frame */
+    box-shadow: 0 18px 45px rgba(15,23,42,0.35);
+    width: 100%;
+  }
+
+  .sheet-inner {
+    border: 2px solid #d4af37; /* inner thin gold line */
+    margin: 18px;
+    padding: 40px 64px;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 2.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #111827;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #6b7280;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 840px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .presented {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #4b5563;
+    margin-bottom: 24px;
+  }
+
+  .name {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 24px;
+  }
+
+  .body-text {
+    font-size: 0.98rem;
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .info {
+    font-size: 0.95rem;
+    color: #111827;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #4b5563;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .footer-section {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .signature-block {
+    text-align: center;
+  }
+
+  .sig-line {
+    width: 260px;
+    border-top: 1.5px solid #111827;
+    margin: 0 auto 8px auto;
+  }
+
+  .sig-name {
+    font-size: 0.95rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .sig-title {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+
+  @media print {
+    html, body {
+      background: #ffffff !important;
+      padding: 0;
+    }
+
+    .controls {
+      display: none !important;
+    }
+
+    body {
+      display: block;
+    }
+
+    .certificate-wrapper {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .sheet {
+      border-width: 12pt;
+      box-shadow: none;
+    }
+
+    .sheet-inner {
+      margin: 14pt;
+      padding: 32pt 54pt;
+      min-height: auto;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="controls">
-  <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
-  <button class="btn btn-secondary" onclick="window.close()">✕ Close Window</button>
+  <button class="btn btn-primary" onclick="window.print()">Print Certificate</button>
+  <button class="btn btn-secondary" onclick="window.close()">Close</button>
 </div>
-<div class="container">
-  <div class="sheet">
-    <div class="header">
-      <div class="title">MEMBERSHIP CERTIFICATE</div>
-      <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
-    </div>
-    <div class="main-content">
-      <div class="presented">This certificate confirms that</div>
-      <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
-      <div class="content">
-        Is an official member of <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>,
-        recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across various student organizations.
-      </div>
-      <div class="info">
-        Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>
-        Membership ID: ${escapeHtml(c.membershipID || "Not available")}
-      </div>
-      <div class="content" style="font-style: italic; margin-top: 20px; font-size: 0.95rem;">
-        Join us in shaping the future of technology through collaboration, learning, and innovation across multiple student organizations and initiatives.
-      </div>
-    </div>
-    <div class="footer-section">
-      <div style="flex:1;"></div>
 
-      <div style="flex:1;"></div>
+<div class="certificate-wrapper">
+  <div class="sheet">
+    <div class="sheet-inner">
+      <header class="header">
+        <div class="title">MEMBERSHIP CERTIFICATE</div>
+        <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
+      </header>
+
+      <main class="main-content">
+        <div class="presented">This is to certify that</div>
+        <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
+
+        <div class="body-text">
+          Is an official member of
+          <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>,
+          recognized for their commitment to collaborative learning, innovation, and
+          multi-disciplinary technology development across student organizations and initiatives.
+        </div>
+
+        <div class="info">
+          Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>
+          Membership ID: ${escapeHtml(c.membershipID || "Not available")}
+        </div>
+
+        <div class="tagline">
+          Join us in shaping the future of technology through collaboration, learning,
+          and innovation across multiple communities in the Hack University Initiative.
+        </div>
+      </main>
+
+      <footer class="footer-section">
+        <div class="signature-block">
+          <div class="sig-line"></div>
+          <div class="sig-name">BRIAN BAZURTO</div>
+          <div class="sig-title">
+            President, ${escapeHtml(c.signatureClubText || "Hack University Initiative")}
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 </div>
@@ -1088,6 +1282,11 @@ html, body { width: 100%; height: 100%; margin: 0; padding: 0; font-family: "Tim
   win.document.close();
   win.focus();
 }
+
+
+
+
+
 
 /* ------------ Wire up ------------ */
 document.addEventListener("DOMContentLoaded", () => {
