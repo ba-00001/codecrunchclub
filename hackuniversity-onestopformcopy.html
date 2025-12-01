@@ -800,15 +800,17 @@ function displayUserClubMemberships(clubs) {
 
   clubsGrid.innerHTML = "";
 
-  const logoMap = {
-    "Hack University Worldwide": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
-    "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
-    "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-    "ColorStack at FIU": "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
-    "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
-    "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
-    "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
-  };
+const logoMap = {
+  "Hack University Worldwide": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+  "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+
+  // NEW CORRECT WORKING LOGOS
+  "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+  "ColorStack at FIU": "https://github.com/user-attachments/assets/b5a58539-32be-42b8-9148-b7e8a8d4afea",
+  "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+  "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
+  "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
+};
 
   if (!clubs.length) {
     clubsGrid.innerHTML = '<p class="text-sm text-gray-600 col-span-full text-center">No club memberships found in our records yet.</p>';

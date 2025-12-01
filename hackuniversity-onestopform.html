@@ -223,18 +223,27 @@
       register or update hackathon registration, unlock Discord &amp; GroupMe, and download your official membership certificate.
     </p>
 
-    <!-- New User CTA (register) -->
+    <!-- New User CTA (register + update) -->
     <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div class="text-sm text-gray-700">
         <span class="font-semibold">Already registered?</span> Enter your Gmail below to continue.
       </div>
-      <a
-        href="https://hackuniversity-onestopform.vercel.app/"
-        class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
-      >
-        <i class="fa-solid fa-user-plus"></i>
-        New here? Complete the OneStop Registration
-      </a>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a
+          href="https://hackuniversity-onestopform.vercel.app/"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
+        >
+          <i class="fa-solid fa-user-plus"></i>
+          New here? Complete the OneStop Registration
+        </a>
+        <a
+          href="https://hackuniversity-onestopform.vercel.app/"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+          Update My Information / Hackathon Registration (OneStop Form)
+        </a>
+      </div>
     </div>
   </div>
 </header>
@@ -373,6 +382,15 @@
             Continue with this email
           </button>
 
+          <!-- Under-email Update Info / Hack Registration button -->
+          <a
+            href="https://hackuniversity-onestopform.vercel.app/"
+            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
+          >
+            <i class="fa-solid fa-pen-to-square"></i>
+            Update My Information / Hackathon Registration (OneStop Form)
+          </a>
+
           <!-- Status Message -->
           <div
             id="cert-status"
@@ -395,6 +413,17 @@
             <p class="text-green-700 text-lg">
               Welcome <span id="welcome-name" class="font-bold"></span> — your membership has been verified.
             </p>
+          </div>
+
+          <!-- Update Info button inside Access Granted -->
+          <div class="mb-6 flex flex-col sm:flex-row sm:justify-center gap-3">
+            <a
+              href="https://hackuniversity-onestopform.vercel.app/"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+              Update My Information / Hackathon Registration (OneStop Form)
+            </a>
           </div>
 
           <!-- Main Action Buttons -->
@@ -429,85 +458,80 @@
             </a>
           </div>
 
-         <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
-  <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">
-    🌐 Join Organization-Specific Communities
-  </h4>
+          <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
+            <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">
+              🌐 Join Organization-Specific Communities
+            </h4>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Code Crunch Global -->
+              <div class="text-center">
+                <h5 class="font-semibold text-gray-700 mb-2 text-sm">Code Crunch Global</h5>
+                <div class="flex justify-center">
+                  <a href="https://codecrunchglobal-discordserver.vercel.app/"
+                     target="_blank"
+                     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
+                    <i class="fab fa-discord"></i> Discord
+                  </a>
+                </div>
+              </div>
 
+              <!-- ColorStack at FIU -->
+              <div class="text-center">
+                <h5 class="font-semibold text-gray-700 mb-2 text-sm">ColorStack at FIU</h5>
+                <div class="flex justify-center">
+                  <a href="https://colorstackatfiu-discordserver.vercel.app/"
+                     target="_blank"
+                     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
+                    <i class="fab fa-discord"></i> Discord
+                  </a>
+                </div>
+              </div>
 
+              <!-- CAHSI at FIU -->
+              <div class="text-center">
+                <h5 class="font-semibold text-gray-700 mb-2 text-sm">CAHSI at FIU</h5>
+                <div class="flex justify-center">
+                  <a href="https://cahsiatfiu-discordserver.vercel.app/"
+                     target="_blank"
+                     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
+                    <i class="fab fa-discord"></i> Discord
+                  </a>
+                </div>
+              </div>
 
-    <!-- Code Crunch Global -->
-    <div class="text-center">
-      <h5 class="font-semibold text-gray-700 mb-2 text-sm">Code Crunch Global</h5>
-      <div class="flex justify-center">
-        <a href="https://codecrunchglobal-discordserver.vercel.app/"
-           target="_blank"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
-          <i class="fab fa-discord"></i> Discord
-        </a>
-      </div>
-    </div>
+              <!-- GDG at FIU -->
+              <div class="text-center">
+                <h5 class="font-semibold text-gray-700 mb-2 text-sm">Google Developer Group (GDG) at FIU</h5>
+                <div class="flex justify-center">
+                  <a href="https://gdgatfiu-discordserver.vercel.app/"
+                     target="_blank"
+                     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
+                    <i class="fab fa-discord"></i> Discord
+                  </a>
+                </div>
+              </div>
 
-    <!-- ColorStack at FIU -->
-    <div class="text-center">
-      <h5 class="font-semibold text-gray-700 mb-2 text-sm">ColorStack at FIU</h5>
-      <div class="flex justify-center">
-        <a href="https://colorstackatfiu-discordserver.vercel.app/"
-           target="_blank"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
-          <i class="fab fa-discord"></i> Discord
-        </a>
-      </div>
-    </div>
-
-    <!-- CAHSI at FIU -->
-    <div class="text-center">
-      <h5 class="font-semibold text-gray-700 mb-2 text-sm">CAHSI at FIU</h5>
-      <div class="flex justify-center">
-        <a href="https://cahsiatfiu-discordserver.vercel.app/"
-           target="_blank"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
-          <i class="fab fa-discord"></i> Discord
-        </a>
-      </div>
-    </div>
-
-    <!-- GDG at FIU -->
-    <div class="text-center">
-      <h5 class="font-semibold text-gray-700 mb-2 text-sm">Google Developer Group (GDG) at FIU</h5>
-      <div class="flex justify-center">
-        <a href="https://gdgatfiu-discordserver.vercel.app/"
-           target="_blank"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
-          <i class="fab fa-discord"></i> Discord
-        </a>
-      </div>
-    </div>
-
-    <!-- Raspberry Pi Code Crunch -->
-    <div class="text-center">
-      <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
-      <div class="flex justify-center">
-        <a href="https://raspberrypicodecrunchdiscord.vercel.app/"
-           target="_blank"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
-          <i class="fab fa-discord"></i> Discord
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div>
-
+              <!-- Raspberry Pi Code Crunch -->
+              <div class="text-center">
+                <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
+                <div class="flex justify-center">
+                  <a href="https://raspberrypicodecrunchdiscord.vercel.app/"
+                     target="_blank"
+                     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
+                    <i class="fab fa-discord"></i> Discord
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- User's Club Memberships Display -->
           <div id="user-club-memberships" class="bg-blue-50 rounded-lg p-6 border border-blue-200">
             <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">🏢 Your Active Club Memberships</h4>
             <div id="user-clubs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             <p class="text-blue-600 text-sm text-center mt-4 italic">
-              Based on our records for your email address
+              Based on our records for your email address (all matching submissions)
             </p>
           </div>
         </div>
@@ -757,7 +781,7 @@ let certificateData = null;
 /* ------------ UI Helpers ------------ */
 function showStatus(type, message) {
   const statusEl = document.getElementById("cert-status");
-  statusEl.className = `p-4 rounded-lg border-2 text-center font-medium text-sm ${type}`;
+  statusEl.className = "p-4 rounded-lg border-2 text-center font-medium text-sm " + type;
   statusEl.textContent = "";
   statusEl.append(document.createTextNode(message));
   statusEl.classList.remove("hidden");
@@ -776,18 +800,26 @@ function displayUserClubMemberships(clubs) {
 
   clubsGrid.innerHTML = "";
 
-  const logoMap = {
-    "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
-    "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-    "ColorStack at FIU": "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
-    "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
-    "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
-    "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
-  };
+const logoMap = {
+  "Hack University Worldwide": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+  "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+
+  // NEW CORRECT WORKING LOGOS
+  "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+  "ColorStack at FIU": "https://github.com/user-attachments/assets/b5a58539-32be-42b8-9148-b7e8a8d4afea",
+  "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+  "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
+  "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
+};
+
+  if (!clubs.length) {
+    clubsGrid.innerHTML = '<p class="text-sm text-gray-600 col-span-full text-center">No club memberships found in our records yet.</p>';
+    return;
+  }
 
   clubs.forEach((club) => {
     const name = club.name || "Club";
-    const logo = logoMap[name] || logoMap["Hack University"];
+    const logo = club.logo || logoMap[name] || logoMap["Hack University"];
 
     const card = document.createElement("div");
     card.className = "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
@@ -806,7 +838,6 @@ function displayUserClubMemberships(clubs) {
     clubsGrid.appendChild(card);
   });
 }
-
 
 /* ------------ Membership Verification ------------ */
 async function generateCertificate(evt) {
@@ -855,30 +886,52 @@ async function generateCertificate(evt) {
     if (data && data.error) throw new Error(data.error);
 
     const certificates = Array.isArray(data?.certificates) ? data.certificates : [];
+
     if (certificates.length === 0) {
       showStatus(
         "error",
-        "❌ No membership found for this email address. Please register as a new member using the OneStopForm (button at the top), or contact us if you believe this is an error."
+        "❌ No membership found for this email address. Please register as a new member using the OneStop Form (buttons on this page), or contact us if you believe this is an error."
       );
       return;
     }
 
+    // Flatten all certificateData entries
+    const flat = certificates
+      .map((c) => c.certificateData || c)
+      .filter(Boolean);
+
+    // Choose the most recent membership (by memberDateSince) as primary
     const chosen =
-      certificates
-        .map((c) => c.certificateData || c)
-        .sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
+      flat.sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
 
     certificateData = chosen;
 
     document.getElementById("welcome-name").textContent =
       chosen.participantName || "Member";
 
+    // Use any link fields if you ever add them in the backend, fall back to defaults
     document.getElementById("cert-discord-link").href =
       chosen.discordJoinLink || "https://codecrunchglobal-discordserver.vercel.app/";
     document.getElementById("cert-groupme-link").href =
       chosen.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
 
-    displayUserClubMemberships(chosen.clubs || []);
+    // Merge clubs from ALL matching rows (avoid duplicates by name)
+    const clubMap = new Map();
+    flat.forEach((entry) => {
+      (entry.clubs || []).forEach((club) => {
+        const key = (club.name || "").toLowerCase();
+        if (!key) return;
+        if (!clubMap.has(key)) {
+          clubMap.set(key, {
+            name: club.name,
+            logo: club.logo,
+            description: club.description,
+          });
+        }
+      });
+    });
+    const mergedClubs = Array.from(clubMap.values());
+    displayUserClubMemberships(mergedClubs);
 
     showStatus("success", "🎉 Access granted! Your certificate and community links are ready.");
     resultSection.classList.remove("hidden");
@@ -995,13 +1048,13 @@ function downloadCertificate() {
 
   .sheet {
     background: #fdfcf7;
-    border: 14px solid #b8860b; /* outer gold frame */
+    border: 14px solid #b8860b;
     box-shadow: 0 18px 45px rgba(15,23,42,0.35);
     width: 100%;
   }
 
   .sheet-inner {
-    border: 2px solid #d4af37; /* inner thin gold line */
+    border: 2px solid #d4af37;
     margin: 18px;
     padding: 40px 64px;
     min-height: 620px;
@@ -1201,11 +1254,6 @@ function downloadCertificate() {
   win.document.close();
   win.focus();
 }
-
-
-
-
-
 
 /* ------------ Wire up ------------ */
 document.addEventListener("DOMContentLoaded", () => {
