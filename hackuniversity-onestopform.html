@@ -516,7 +516,7 @@
               <div class="text-center">
                 <h5 class="font-semibold text-gray-700 mb-2 text-sm">Raspberry Pi Code Crunch</h5>
                 <div class="flex justify-center">
-                  <a href="https://raspberrypicodecrunchdiscord.vercel.app/"
+                  <a href="https://codecrunchglobal-discordserver.vercel.app/"
                      target="_blank"
                      class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-1">
                     <i class="fab fa-discord"></i> Discord
@@ -819,7 +819,8 @@ const logoMap = {
 
   clubs.forEach((club) => {
     const name = club.name || "Club";
-    const logo = club.logo || logoMap[name] || logoMap["Hack University"];
+    const logo = club.logo || logoMap[name] || "";
+    const discord = club.discord || "";
 
     const card = document.createElement("div");
     card.className = "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
@@ -925,6 +926,7 @@ async function generateCertificate(evt) {
           clubMap.set(key, {
             name: club.name,
             logo: club.logo,
+            discord: club.discord,
             description: club.description,
           });
         }
