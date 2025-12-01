@@ -819,7 +819,7 @@ const logoMap = {
 
   clubs.forEach((club) => {
     const name = club.name || "Club";
-    const logo = club.logo;
+    const logo = club.logo || logoMap[name] ;
     const discord = club.discord ;
 
     const card = document.createElement("div");
