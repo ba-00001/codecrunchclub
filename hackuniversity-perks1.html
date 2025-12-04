@@ -231,13 +231,14 @@
       margin-top:10px;
       color:#e5e7eb;
       font-size:13px;
+      line-height:1.6;
     }
     .card-events ul{
       margin:8px 0 0 18px;
       padding:0;
     }
     .card-events li{
-      margin-bottom:6px;
+      margin-bottom:10px;
     }
     .card-events a{
       color:#22c55e;
@@ -245,7 +246,7 @@
     }
     .card-events a:hover{text-decoration:underline}
 
-    /* Footer (Hack University) */
+    /* Footer */
     .cc-blue{background:#1a73e8}
     .footer{
       color:#fff;
@@ -362,11 +363,11 @@
       </p>
     </section>
 
-    <!-- Login -->
+    <!-- Lookup -->
     <section class="surface">
       <div class="helper">
         <strong>Who can use this portal?</strong><br/>
-        This portal is for students and participants who registered for any Hack University / Code Crunch hackathon or business competition using their email. If you don’t see your record, make sure you submitted the latest version of the One-Stop form.
+        This portal is for students who registered for any Hack University / Code Crunch hackathon or business competition.
       </div>
 
       <div class="row">
@@ -377,11 +378,11 @@
       <div id="result" style="margin-top:12px;">
         <div class="info-box">
           <strong>📋 What you’ll see here:</strong><br/>
-          • Confirmation if your email is on file for Hack University / Code Crunch events<br/>
-          • Your latest registration timestamp, name, and institution<br/>
-          • A list of hackathons / competitions where you selected <em>Yes</em><br/>
-          • Perks links for each registered event<br/>
-          • Quick-access buttons to Discord, GroupMe, and organization membership links
+          • Confirmation of your registration<br/>
+          • Your timestamp, name, and institution<br/>
+          • Full list of hackathons from Column E → Column AI<br/>
+          • Personalized responses and perks links<br/>
+          • Quick-access community buttons
         </div>
         Awaiting email…
       </div>
@@ -394,21 +395,17 @@
       <div class="footer-grid">
         <div>
           <h3>Hack University <span>👨🏻‍💻👩🏽‍💻🧑🏿‍💻</span></h3>
-          <p>
-            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
-          </p>
+          <p>A collaborative student-led initiative empowering the next generation of innovators.</p>
           <p><a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">HackUniversity.vercel.app</a></p>
 
-          <div>
-            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
-            <div class="social-grid">
-              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
-              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
-              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
-            </div>
+          <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+          <div class="social-grid">
+            <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+            <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
           </div>
         </div>
 
@@ -437,209 +434,142 @@
       <div class="footer-bottom">
         <p>© <span id="year"></span> Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+          Built with ❤️ by <a href="#" target="_blank">Brian Bazurto</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ====== CONFIG ======
-    const ALLOWED_HOST = "codecrunchglobal.vercel.app";
-    // NOTE: replace this with the new Apps Script deployment URL for the STUDENT API
-    const API_URL = "https://script.google.com/macros/s/AKfycbxjud0yLqQr8HEbPlLgMeXXrxBHDEGUXqMgJfFDb3lYM5-QpAwy40cVl3vfNORLyNPPbA/exec";
-    const USE_API_KEY = false;
-    const API_KEY     = "REPLACE_WITH_SECURE";
+// === CONFIG ===
+const ALLOWED_HOST = "codecrunchglobal.vercel.app";
+const API_URL = "https://script.google.com/macros/s/AKfycbxjud0yLqQr8HEbPlLgMeXXrxBHDEGUXqMgJfFDb3lYM5-QpAwy40cVl3vfNORLyNPPbA/exec"; // <-- Update this
 
-    // Prefill email from ?email=
-    const prefill = new URLSearchParams(location.search).get('email');
-    if (prefill) document.getElementById('emailInput').value = prefill;
+function domainOK() {
+  return window.location.hostname === ALLOWED_HOST;
+}
 
-    function domainOK() {
-      const ok = window.location.hostname === ALLOWED_HOST;
-      if (!ok) {
-        document.getElementById('result').innerHTML =
-          `<div class="info-box">❌ This portal only works on <strong>${ALLOWED_HOST}</strong>.</div>`;
-      }
-      return ok;
-    }
+function infoBoxHTML(){
+  return `
+    <div class="info-box">
+      <strong>📧 Email Verification:</strong><br>
+      • Use the same email you used on the Hack University One-Stop Registration Form
+    </div>`;
+}
 
-    function infoBoxHTML() {
-      return `
-        <div class="info-box">
-          <strong>📧 Email Verification:</strong><br>
-          • Use the same email you used on the Hack University One-Stop Registration Form<br>
-          • This portal is for students / participants in Hack University & Code Crunch events
-        </div>`;
-    }
+// === MAIN LOOKUP FUNCTION ===
+async function checkStudentRegistrationStatus() {
+  if (!domainOK()) {
+    document.getElementById("result").innerHTML =
+      `<div class="info-box">❌ This portal only works on ${ALLOWED_HOST}</div>`;
+    return;
+  }
 
-    async function checkStudentRegistrationStatus() {
-      if (!domainOK()) return;
+  const email = document.getElementById('emailInput').value.trim();
+  const resultDiv = document.getElementById('result');
 
-      const email = (document.getElementById('emailInput').value || '').trim();
-      const resultDiv = document.getElementById('result');
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    resultDiv.innerHTML = infoBoxHTML() + "❌ Enter email.";
+    return;
+  }
 
-      if (!email) {
-        resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.';
-        return;
-      }
-      if (!emailRegex.test(email)) {
-        resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.';
-        return;
-      }
+  resultDiv.innerHTML = infoBoxHTML() + "⏳ Checking…";
 
-      resultDiv.innerHTML = infoBoxHTML() + '⏳ Looking up your registration…';
+  const url = new URL(API_URL);
+  url.searchParams.set("email", email);
+  url.searchParams.set("referer", window.location.href);
 
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('email', email);
-        url.searchParams.set('referer', window.location.href);
-        url.searchParams.set('details', '0');
-        if (USE_API_KEY) url.searchParams.set('key', API_KEY);
+  const resp = await fetch(url);
+  const data = await resp.json();
+  const entry = data[0];
 
-        const resp = await fetch(url.toString());
-        const data = await resp.json();
+  if (entry.status === "No entry") {
+    resultDiv.innerHTML = infoBoxHTML() + `
+      <div class="card-no">
+        ❌ No registration found for <strong>${email}</strong><br>
+        Make sure you submitted the One-Stop Registration Form.
+      </div>`;
+    return;
+  }
 
-        if (data.error) {
-          resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`;
-          return;
-        }
-        if (!Array.isArray(data)) {
-          resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.';
-          return;
-        }
+  // ======================
+  // BUILD UI FOR STUDENT
+  // ======================
+  let html = `
+    ${infoBoxHTML()}
+    <div class="card-welcome">
+      <strong style="color:#22c55e;font-size:1.05em;">🎉 Registration Found!</strong><br><br>
+      Review your hackathon & business competition selections, then join our communities:
+      <div class="cta">
+        <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank">🚀 Join Discord</a>
+        <a class="cta-groupme" href="${entry.groupmeLink}" target="_blank">👥 Join Hack University GroupMe</a>
+        <a class="cta-org" href="${entry.orgLinks.codeCrunch}" target="_blank">💻 Join Code Crunch</a>
+        <a class="cta-org" href="${entry.orgLinks.gdgAtFiu}" target="_blank">🌐 GDG @ FIU</a>
+        <a class="cta-org" href="${entry.orgLinks.colorStackFiu}" target="_blank">🎨 ColorStack @ FIU</a>
+        <a class="cta-org" href="${entry.orgLinks.cahsiFiu}" target="_blank">📚 CAHSI @ FIU</a>
+        <a class="cta-org" href="${entry.orgLinks.raspberryPiFiu}" target="_blank">🍓 Raspberry Pi Code Crunch</a>
+        <a class="cta-membership" href="${entry.membershipPortal}" target="_blank">🏅 Get Membership Certificate</a>
+      </div>
+    </div>
 
-        let html = infoBoxHTML() + `<strong>Lookup for 📧 <span style="color:#f9fafb">${email}</span>:</strong><br/>`;
+    <div class="card-yes">
+      <strong>✅ Student Record</strong><br>
+      • Timestamp: ${entry.timestamp}<br>
+      • Name: ${entry.basicInfo.name}<br>
+      • Institution: ${entry.basicInfo.institution}<br>
+      • Email: ${entry.email}<br>
+    </div>
+  `;
 
-        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
-          data.forEach(entry => {
-            const statusText = entry.status || "Registration found";
+  // ======================
+  // FULL EVENT LIST
+  // ======================
+  html += `
+    <div class="card-events">
+      <strong>📅 Your Hackathon & Competition Responses (E → AI)</strong>
+      <ul>
+        ${Object.entries(entry.events).map(([eventName, det]) => `
+          <li>
+            <strong>${eventName}</strong><br>
+            • Response: ${det.response}<br>
+            ${det.registered 
+              ? `<a href="${det.perksLink}" target="_blank">🎁 Claim your event perks</a>`
+              : `<span style="color:#f87171;">No perks available</span>`}
+          </li>
+        `).join("")}
+      </ul>
+    </div>
+  `;
 
-            const discordLink = entry.discordHackBusinessLink || entry.discordJoinLink || '#';
-            const groupmeLink = entry.groupmeLink || '#';
-            const orgLinks = entry.orgLinks || {};
-            const membershipPortalLink = entry.membershipPortalLink || '#';
+  resultDiv.innerHTML = html;
+}
 
-            html += `
-              <div class="card-welcome">
-                <strong style="color:#22c55e;font-size:1.05em;">🎉 Registration Found — Welcome to Hack University!</strong><br/><br/>
-                <div style="font-size:13px;line-height:1.5;margin-bottom:10px;">
-                  ${entry.studentInstructions
-                    ? entry.studentInstructions
-                        .replace(/\n/g,'<br/>')
-                    : "Review your events below and join our communities."}
-                </div>
-                <div class="cta">
-                  <a class="cta-discord" href="${discordLink}" target="_blank" rel="noopener">🚀 Join Hackathon & Biz Competition Discord</a>
-                  <a class="cta-groupme" href="${groupmeLink}" target="_blank" rel="noopener">👥 Join Hack University GroupMe</a>
-                  <a class="cta-org" href="${orgLinks.codeCrunch || '#'}" target="_blank" rel="noopener">💻 Join Code Crunch</a>
-                  <a class="cta-org" href="${orgLinks.gdgAtFiu || '#'}" target="_blank" rel="noopener">🌐 Join GDG @ FIU</a>
-                  <a class="cta-org" href="${orgLinks.colorStackFiu || '#'}" target="_blank" rel="noopener">🎨 Join ColorStack @ FIU</a>
-                  <a class="cta-org" href="${orgLinks.cahsiFiu || '#'}" target="_blank" rel="noopener">📚 Join CAHSI @ FIU</a>
-                  <a class="cta-org" href="${orgLinks.raspberryPiFiu || '#'}" target="_blank" rel="noopener">🍓 Join Raspberry Pi Code Crunch</a>
-                  <a class="cta-membership" href="${membershipPortalLink}" target="_blank" rel="noopener">🏅 Get Organization Membership / Certificate</a>
-                </div>
-              </div>
-            `;
+// === TIME ZONE CLOCKS ===
+function updateTimes() {
+  const zones = {
+    "miami-time": "America/New_York",
+    "london-time": "Europe/London",
+    "lagos-time": "Africa/Lagos",
+    "tokyo-time": "Asia/Tokyo",
+    "sydney-time": "Australia/Sydney",
+    "mumbai-time": "Asia/Kolkata"
+  };
+  const now = new Date();
+  Object.entries(zones).forEach(([id, tz]) => {
+    const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+    document.getElementById(id).textContent =
+      `${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}:${t.getSeconds().toString().padStart(2,'0')}`;
+  });
+}
 
-            const name = entry?.basicInfo?.name || "Not available";
-            const institution = entry?.basicInfo?.institution || "Not available";
+setInterval(updateTimes, 1000);
+updateTimes();
+document.getElementById('emailInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') checkStudentRegistrationStatus();
+});
+</script>
 
-            html += `
-              <div class="card-yes">
-                <strong>✅ Student Record Found</strong><br/>
-                • Status: ${statusText}<br/>
-                • Latest Form Timestamp (col F): ${entry.timestamp || "N/A"}<br/>
-                • Name (col C): ${name}<br/>
-                • Institution (col E): ${institution}<br/>
-                • Email (col B): ${entry.email || ""}<br/>
-              </div>
-            `;
-
-            const eventsSummary = entry.eventsSummary || [];
-            if (eventsSummary.length > 0) {
-              html += `
-                <div class="card-events">
-                  <strong>📚 Hackathons & Competitions where you said "Yes":</strong>
-                  <ul>
-              `;
-              eventsSummary.forEach(ev => {
-                html += `
-                  <li>
-                    <strong>${ev.event}</strong><br/>
-                    • Your response: ${ev.response || "Yes"}<br/>
-                    • <a href="${ev.perksLink || '#'}" target="_blank" rel="noopener">Claim your event perks here</a>
-                  </li>
-                `;
-              });
-              html += `
-                  </ul>
-                </div>
-              `;
-            } else {
-              html += `
-                <div class="card-events">
-                  <strong>ℹ️ No events marked as "Yes" yet.</strong><br/>
-                  We couldn’t detect any hackathon or competition where your response contained “yes”.<br/>
-                  If this seems wrong, please update your choices in the One-Stop Registration Form and try again after the sheet syncs.
-                </div>
-              `;
-            }
-          });
-
-          resultDiv.innerHTML = html;
-
-        } else {
-          html += `
-            <div class="card-no">
-              <strong>❌ No Record Found</strong><br/>
-              • We could not find a Hack University / Code Crunch registration for this email.<br/>
-              • Make sure you completed the latest One-Stop Registration Form with this exact email (no typos).<br/>
-              • If you just submitted, give the sheet a bit of time to update before trying again.
-            </div>
-          `;
-          resultDiv.innerHTML = html;
-        }
-
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = infoBoxHTML() + '❌ Network error. Please try again later.';
-      }
-    }
-
-    // Live time updates for the timezone band
-    function updateTimes() {
-      const now = new Date();
-      const set = (id, tz) => {
-        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh = String(t.getHours()).padStart(2,'0');
-        const mm = String(t.getMinutes()).padStart(2,'0');
-        const ss = String(t.getSeconds()).padStart(2,'0');
-        const out = `${hh}:${mm}:${ss}`;
-        const el = document.getElementById(id);
-        if (el) el.textContent = out;
-      };
-      set('miami-time',"America/New_York");
-      set('london-time',"Europe/London");
-      set('lagos-time',"Africa/Lagos");
-      set('tokyo-time',"Asia/Tokyo");
-      set('sydney-time',"Australia/Sydney");
-      set('mumbai-time',"Asia/Kolkata");
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      updateTimes();
-      setInterval(updateTimes, 1000);
-    });
-
-    // Enter to submit
-    document.getElementById('emailInput').addEventListener('keypress',(e)=>{
-      if (e.key === 'Enter') checkStudentRegistrationStatus();
-    });
-  </script>
 </body>
 </html>
