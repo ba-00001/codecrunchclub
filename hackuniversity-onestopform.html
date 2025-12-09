@@ -177,7 +177,7 @@
 </head>
 <body>
 
-<!-- Navigation Header -->
+<!-- ======================= NAVBAR ======================= -->
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
@@ -195,195 +195,188 @@
   </div>
 </nav>
 
-<!-- Hero/Title Section -->
-<header class="w-full bg-gray-50 border-b border-gray-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <p class="text-xs sm:text-sm text-gray-500 mb-2">
-      <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
-      <span aria-hidden="true"> / </span>
-      Member Login, Hackathon Registration/Updates &amp; Member Certificates
-    </p>
-
-    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-      Member &amp; Hackathon Access Portal
-    </h1>
-
-    <!-- OneStop Form tagline -->
-    <p class="mt-2 text-sm sm:text-base text-gray-700 font-semibold">
-      Hack University — OneStop Form
-    </p>
-    <p class="text-gray-600 max-w-3xl">
-      One place to join our organizations, community platforms, register for upcoming hackathons,
-      and sync important dates to your calendar.
-    </p>
-
-    <!-- Helper text for this page -->
-    <p class="mt-3 text-gray-600 max-w-2xl">
-      Use the same Gmail/Google account you used on the OneStopForm to verify your membership,
-      register or update hackathon registration, unlock Discord &amp; GroupMe, and download your official membership certificate.
-    </p>
-
-
-
-  </div>
-</header>
-
-<!-- Main Member Login & Certificate Section -->
-<section id="membership-certificate" class="py-12 bg-white">
+<!-- ======================= MAIN MEMBER / HACKATHON ACCESS SECTION ======================= -->
+<section id="membership-certificate" class="py-10 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- PUBLIC COMMUNITY PLATFORM BUTTONS -->
-    <div class="mb-8">
-      <h2 class="text-sm font-semibold text-gray-700 mb-2">
-        Community Platforms &amp; Calendars (open to everyone)
-      </h2>
-      <nav class="quick-links" aria-label="Quick links">
-        <a class="ql-btn ql-instagram" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener" aria-label="Join Instagram Group Chat">
-          <i class="fa-brands fa-instagram"></i><span>Join Instagram Group Chat</span>
-        </a>
-        <a class="ql-btn ql-groupme" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener" aria-label="Join GroupMe Group Chat">
-          <i class="fa-solid fa-message"></i><span>Join GroupMe Group Chat</span>
-        </a>
-        <a class="ql-btn ql-luma" href="http://hackuniversity-calendar.vercel.app/" target="_blank" rel="noopener" aria-label="Luma calendar">
-          <i class="fa-solid fa-calendar-check"></i><span>Luma Calendar</span>
-        </a>
-        <a class="ql-btn ql-googlecal" href="https://calendar.google.com/calendar/embed?src=84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" rel="noopener" aria-label="View events in Google Calendar">
-          <i class="fa-regular fa-calendar"></i><span>View Events [Google Calendar]</span>
-        </a>
-        <a class="ql-btn ql-googlecal" href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank" rel="noopener" aria-label="Add Hack University calendar to your Google Calendar">
-          <i class="fab fa-google"></i><span>Add to Google Calendar</span>
-        </a>
-        <!-- Locked Discord button (only conceptually unlocked after login) -->
-        <button type="button" class="ql-btn ql-disabled" disabled aria-disabled="true">
-          <i class="fa-brands fa-discord"></i>
-          <span>Organizations Discords (unlock after login)</span>
-          <i class="fa-solid fa-lock text-xs"></i>
-        </button>
-      </nav>
-    </div>
+    <!-- ======================= HERO / TITLE SECTION ======================= -->
+    <header class="w-full bg-gray-50 border-b border-gray-200 rounded-xl mb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <p class="text-xs sm:text-sm text-gray-500 mb-2">
+          <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+          <span aria-hidden="true"> / </span>
+          Member Login, Hackathon Registration/Updates &amp; Member Certificates
+        </p>
 
-    <!-- GRID: LEFT EXPLANATION + RIGHT LOGIN -->
-    <div class="grid lg:grid-cols-2 gap-10">
-      <!-- Left: Explanation + Locked preview -->
-      <div class="bg-gray-50 rounded-lg p-6 shadow-sm border border-gray-200">
-        <div class="text-center mb-6">
-          <div class="w-16 h-16 cc-blue rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <i class="fas fa-id-card text-2xl text-white" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-2xl font-bold cc-blue-text mb-2">
-            Account Verification &amp; Membership Access
-          </h3>
-          <p class="text-gray-600 text-sm">
-            Once verified, you can update your hackathon registration, access your membership certificate,
-            and join our community platforms. Use this portal for partner resume updates too.
-          </p>
-        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+          Hack University — OneStop Portal (Student Portal)
+        </h1>
+        <br>
+        <!-- OneStop Form tagline -->
 
-        <!-- Locked Preview Row (like screenshot) -->
-        <div aria-hidden="true" class="mb-6">
-          <h4 class="text-base font-semibold text-gray-800 mb-3">
-            🔒 What you’ll unlock after verification
-          </h4>
-          <div class="grid md:grid-cols-3 gap-4">
-            <button
-              type="button"
-              disabled
-              class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-sm md:text-base flex flex-col items-center justify-center gap-1 cursor-not-allowed"
-            >
-              <i class="fas fa-download text-lg" aria-hidden="true"></i>
-              <span class="text-center leading-snug">
-                Download<br/>Membership<br/>Certificate
-              </span>
-              <i class="fa-solid fa-lock text-xs" aria-hidden="true"></i>
+        <p class="text-gray-600 max-w-3xl">
+          One place to join our organizations, community platforms, register for upcoming hackathons &amp; Business Venture Arena,
+          and sync important dates to your calendar.
+        </p>
+
+        <!-- Helper text for this page -->
+        <p class="mt-3 text-gray-600 max-w-2xl">
+          Use the same Gmail/Google account you used on the OneStop Form to verify your membership,
+          register or update hackathon / Business Venture Arena registration, unlock Discord &amp; GroupMe,
+          and download your official membership certificate.
+        </p>
+
+        <!-- ======================= PUBLIC COMMUNITY PLATFORM BUTTONS ======================= -->
+        <div class="mt-4 mb-2">
+          <h2 class="text-sm font-semibold text-gray-700 mb-2">
+            Community Platforms &amp; Calendars (open to everyone)
+          </h2>
+          <nav class="quick-links" aria-label="Quick links">
+            <a class="ql-btn ql-instagram" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener" aria-label="Join Instagram Group Chat">
+              <i class="fa-brands fa-instagram"></i><span>Join Instagram Group Chat</span>
+            </a>
+            <a class="ql-btn ql-groupme" href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener" aria-label="Join GroupMe Group Chat">
+              <i class="fa-solid fa-message"></i><span>Join GroupMe Group Chat</span>
+            </a>
+            <a class="ql-btn ql-luma" href="http://hackuniversity-calendar.vercel.app/" target="_blank" rel="noopener" aria-label="Luma calendar">
+              <i class="fa-solid fa-calendar-check"></i><span>Luma Calendar</span>
+            </a>
+            <a class="ql-btn ql-googlecal" href="https://calendar.google.com/calendar/embed?src=84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" rel="noopener" aria-label="View events in Google Calendar">
+              <i class="fa-regular fa-calendar"></i><span>View Events [Google Calendar]</span>
+            </a>
+            <a class="ql-btn ql-googlecal" href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank" rel="noopener" aria-label="Add Hack University calendar to your Google Calendar">
+              <i class="fab fa-google"></i><span>Add to Google Calendar</span>
+            </a>
+            <!-- Locked Discord button (conceptually unlocked after login) -->
+            <button type="button" class="ql-btn ql-disabled" disabled aria-disabled="true">
+              <i class="fa-brands fa-discord"></i>
+              <span>Organizations Discords (unlock after login)</span>
+              <i class="fa-solid fa-lock text-xs"></i>
             </button>
-
-            <button
-              type="button"
-              disabled
-              class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-sm md:text-base flex flex-col items-center justify-center gap-1 cursor-not-allowed"
-            >
-              <i class="fab fa-discord text-lg" aria-hidden="true"></i>
-              <span class="text-center leading-snug">
-                Join<br/>Discord servers
-              </span>
-              <i class="fa-solid fa-lock text-xs" aria-hidden="true"></i>
-            </button>
-
-            <button
-              type="button"
-              disabled
-              class="w-full bg-gray-200 text-gray-500 px-6 py-4 rounded-lg font-bold text-sm md:text-base flex flex-col items-center justify-center gap-1 cursor-not-allowed"
-            >
-              <i class="fas fa-users text-lg" aria-hidden="true"></i>
-              <span class="text-center leading-snug">
-                Join<br/>GroupMe
-              </span>
-              <i class="fa-solid fa-lock text-xs" aria-hidden="true"></i>
-            </button>
-          </div>
-          <p class="text-xs text-gray-500 mt-2">
-            Verify with the same Gmail/Google account you used on the OneStopForm to unlock these.
-          </p>
-        </div>
-
-        <!-- Short bullets for what this email login does -->
-        <div class="mt-4 text-sm text-gray-700 space-y-1">
-          <p class="font-semibold text-gray-800">With this portal you can:</p>
-          <p>• Confirm your membership &amp; hackathon registrations.</p>
-          <p>• Download official membership certificates (PDF).</p>
-          <p>• Access Discord &amp; GroupMe for Hack University hackathons.</p>
-          <p>• Show verified memberships to partners/employers on your resume.</p>
+          </nav>
         </div>
       </div>
+    </header>
 
-      <!-- Right: Email form + status + result -->
-      <div class="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-        <!-- Email form -->
-        <form class="space-y-4" id="cert-form" novalidate>
-          <label for="member-email" class="block text-sm font-medium text-gray-700">
-            Enter your registered Gmail/Google account
-          </label>
-          <input
-            id="member-email"
-            type="email"
-            inputmode="email"
-            autocomplete="email"
-            placeholder="example@fiu.edu or example@gmail.com"
-            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-sm"
-            aria-describedby="cert-status"
-            required
-          />
+    <!-- ======================= UNIFIED ONE-STOP ACCESS CARD ======================= -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 sm:p-8">
 
-          <button
-            id="generate-certificate"
-            type="submit"
-            class="w-full cc-blue text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Continue with this email
-          </button>
+        <!-- Card header: OneStop Portal title + CTAs -->
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+         <div class="space-y-2 md:max-w-xl mx-auto text-center">
 
-          <!-- Under-email Update Info / Hack Registration button -->
-          <!-- <a
-            href="https://hackuniversity-onestopform.vercel.app/"
-            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
-          >
-            <i class="fa-solid fa-pen-to-square"></i>
-            Update My Information / Hackathon Registration (OneStop Form)
-          </a> -->
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-gray-900">
+              All-In-One Student Access Portal
+            </h2>
+            <p class="text-sm sm:text-base text-gray-700">
+              Verify your membership, manage hackathon and Business Venture Arena registrations,
+              unlock Discord &amp; GroupMe, download certificates, and confirm volunteer or leadership
+              participation — all using the same Gmail account you used on the OneStop Form.
+            </p>
+            <p class="text-xs text-gray-500 mt-1">
+              <strong>Coming Soon — Password Login:</strong>
+              By default, your login password is set to your registered email.
+              You may update your password anytime by signing in and submitting an update
+              through the OneStop Form.
+            </p>
 
-          <!-- Status Message -->
-          <div
-            id="cert-status"
-            class="hidden p-4 rounded-lg border-2 text-center font-medium text-sm"
-            role="status"
-            aria-live="polite"
-          ></div>
-        </form>
 
-        <!-- Certificate & Access Result -->
+
+
+                      <a
+              href="https://hackuniversity-onestopform.vercel.app/"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
+            >
+              <i class="fa-solid fa-user-plus"></i>
+              New here? Complete the OneStop Registration
+            </a>
+            <a
+              href="https://hackuniversity-onestopform.vercel.app/"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+              Update My OneStopForm Information
+            </a>
+
+
+
+
+
+
+          </div>
+
+
+        </div>
+
+        <hr class="my-6 border-gray-200" />
+
+        <!-- ======================= LOGIN FORM SECTION (Spotify-style flow) ======================= -->
+        <div class="max-w-2xl mx-auto">
+          <!-- EMAIL LOGIN FORM -->
+          <form class="space-y-4 text-left" id="cert-form" novalidate>
+            <div>
+              <p class="text-sm text-gray-700 mb-2">
+                <span class="font-semibold">Already registered?</span>
+                Enter your Gmail below to continue.
+              </p>
+
+              <label for="member-email" class="block text-xs font-medium text-gray-600">
+                Registered Gmail / Google Account
+              </label>
+              <input
+                id="member-email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="example@fiu.edu or example@gmail.com"
+                class="mt-1 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                aria-describedby="cert-status"
+                required
+              />
+            </div>
+
+            <button
+              id="generate-certificate"
+              type="submit"
+              class="w-full cc-blue text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continue with this email
+            </button>
+
+            <!-- subtle “or” divider -->
+            <div class="flex items-center gap-2 my-2">
+              <div class="flex-1 h-px bg-gray-200"></div>
+              <span class="text-xs tracking-wide text-gray-400 uppercase">or</span>
+              <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- With this portal you can… -->
+            <div class="text-sm text-gray-700">
+              <p class="font-semibold text-gray-800 mb-1">With this portal you can:</p>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Confirm your membership across Google Developer Group at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch.</li>
+                <li>Register or update your Hackathon &amp; Business Venture Arena participation details.</li>
+                <li>Download official membership certificates (PDF).</li>
+                <li>Access Discord &amp; GroupMe for Hack University hackathons and organization-specific events.</li>
+                <li>Show verified memberships &amp; leadership roles on your resume or LinkedIn.</li>
+              </ul>
+            </div>
+
+            <!-- Status Message -->
+            <div
+              id="cert-status"
+              class="hidden p-4 rounded-lg border-2 text-center font-medium text-sm"
+              role="status"
+              aria-live="polite"
+            ></div>
+          </form>
+        </div>
+
+        <!-- ======================= ACCESS GRANTED PANEL ======================= -->
         <div
           id="certificate-result"
-          class="hidden mt-8 bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6 border-2 border-green-200"
+          class="hidden mt-10 bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6 border-2 border-green-200"
         >
           <div class="text-center mb-6">
             <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -438,6 +431,7 @@
             </a>
           </div>
 
+          <!-- Organization-specific Discords -->
           <div class="bg-white rounded-lg p-6 border border-green-200 mb-6">
             <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">
               🌐 Join Organization-Specific Communities
@@ -515,13 +509,15 @@
             </p>
           </div>
         </div>
-      </div>
-    </div><!-- end grid -->
+        <!-- ============= END ACCESS GRANTED PANEL ============= -->
 
-    <!-- CERTIFICATE SAMPLE PREVIEW + TEXT -->
+      </div>
+    </div>
+
+    <!-- ======================= CERTIFICATE SAMPLE PREVIEW + TEXT ======================= -->
     <div class="mt-12 mb-10 bg-gray-50 border border-gray-200 rounded-xl p-6 lg:p-8">
       <div class="grid md:grid-cols-2 gap-6 items-center">
-        <!-- SAMPLE CERTIFICATE IMAGE (replace src with real certificate image if/when you have it) -->
+        <!-- SAMPLE CERTIFICATE IMAGE -->
         <div class="w-full">
           <div class="border border-dashed border-gray-300 rounded-lg overflow-hidden bg-white">
             <img
@@ -568,7 +564,7 @@
   </div>
 </section>
 
-<!-- Partner Organizations Section -->
+<!-- ======================= PARTNER ORGANIZATIONS ======================= -->
 <section class="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 relative overflow-hidden">
   <div class="absolute inset-0">
     <div class="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-white/10 rounded-full blur-xl animate-pulse"></div>
@@ -649,7 +645,7 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ======================= FOOTER ======================= -->
 <footer class="cc-blue text-white py-12">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-3 gap-8">
@@ -751,7 +747,7 @@
   </div>
 </footer>
 
-<!-- JS: Membership Lookup & Certificate -->
+<!-- ======================= JS: MEMBERSHIP LOOKUP & CERTIFICATE ======================= -->
 <script>
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzAhhReD7EpGsT_biQmcuqsMu1t1wCs4MQTGuGpGKax1EisZvT_8qtyBKQMPStcpyHXqA/exec";
@@ -780,17 +776,17 @@ function displayUserClubMemberships(clubs) {
 
   clubsGrid.innerHTML = "";
 
-const logoMap = {
-  "Hack University Worldwide": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
-  "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+  const logoMap = {
+    "Hack University Worldwide": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+    "Hack University": "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
 
-  // NEW CORRECT WORKING LOGOS
-  "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
-  "ColorStack at FIU": "https://github.com/user-attachments/assets/b5a58539-32be-42b8-9148-b7e8a8d4afea",
-  "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
-  "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
-  "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
-};
+    // NEW CORRECT WORKING LOGOS
+    "Code Crunch Global": "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+    "ColorStack at FIU": "https://github.com/user-attachments/assets/b5a58539-32be-42b8-9148-b7e8a8d4afea",
+    "CAHSI at FIU": "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+    "Google Developer Group at FIU": "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
+    "Raspberry Pi Code Crunch": "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c",
+  };
 
   if (!clubs.length) {
     clubsGrid.innerHTML = '<p class="text-sm text-gray-600 col-span-full text-center">No club memberships found in our records yet.</p>';
@@ -799,8 +795,8 @@ const logoMap = {
 
   clubs.forEach((club) => {
     const name = club.name || "Club";
-    const logo = club.logo || logoMap[name] ;
-    const discord = club.discord ;
+    const logo = club.logo || logoMap[name];
+    const discord = club.discord;
 
     const card = document.createElement("div");
     card.className = "bg-white rounded-lg p-4 border border-blue-200 text-center hover:shadow-md transition-shadow";
