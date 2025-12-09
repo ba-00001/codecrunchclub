@@ -277,118 +277,141 @@
 
         <!-- Card header: OneStop Portal title + CTAs -->
         <!-- ------------------------------------------------ -->
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div class="space-y-2">
-            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-gray-900">
-              Student Portal
-            </h1>
-            <p class="text-sm sm:text-base text-gray-700">
-              Verify membership, manage hackathon registrations, unlock Discord &amp; GroupMe,
-              download certificates, and submit volunteer or executive board applications using the same Gmail account.
-            </p>
-            <p class="mt-1 text-sm text-gray-700">
-              <span class="font-semibold">Already registered?</span> Enter your Gmail below to continue.
-            </p>
+        
+        <!-- <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 sm:p-8"> -->
 
-          <a
-              href="https://hackuniversity-onestopform.vercel.app/"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
-            >
-              <i class="fa-solid fa-user-plus"></i>
-              New here? Complete the OneStop Registration
-            </a>
+        <!-- ================= HEADER + INTRO ================= -->
+        <div class="space-y-3 text-center">
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+            Student Portal
+          </h1>
 
-
-
-          </div>
-
-          <div class="flex flex-col gap-2 sm:w-72">
-            <a
-              href="https://hackuniversity-onestopform.vercel.app/"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
-            >
-              <i class="fa-solid fa-user-plus"></i>
-              New here? Complete the OneStop Registration
-            </a>
-            <a
-              href="https://hackuniversity-onestopform.vercel.app/"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
-            >
-              <i class="fa-solid fa-pen-to-square"></i>
-              Update My Information / Hackathon Registration (OneStop Form)
-            </a>
-          </div>
-
-          
-        </div>
-
-        <hr class="my-6 border-gray-200" />
-
-        <!-- Spotify-style login flow: title + email field + main button -->
-        <!-- ------------------------------------------------ -->
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-2xl font-extrabold text-gray-900 mb-2">
-            All-In-One Student Access Portal <br>Membership, Hackathons & Business Venture Arena
-          </h2>
-          <p class="text-xs text-gray-500 mt-1">
-            <strong>Password Information:</strong> Your login password defaults to the email you registered with.  
-            If you wish to change it, you may update your password anytime through the OneStop Form.
+          <p class="text-sm sm:text-base text-gray-700 max-w-2xl mx-auto">
+            Verify membership, register for hackathons, access Business Venture Arena,
+            unlock Discord & GroupMe, download certificates, and manage your profile—
+            all using the same Gmail account across the Hack University ecosystem.
           </p>
-
-          <!-- EMAIL LOGIN FORM (keeps all original IDs for JS) -->
-          <form class="space-y-4 text-left" id="cert-form" novalidate>
-            <div>
-              <label for="member-email" class="block text-sm font-medium text-gray-700">
-                Enter your registered Gmail/Google account
-              </label>
-              <input
-                id="member-email"
-                type="email"
-                inputmode="email"
-                autocomplete="email"
-                placeholder="example@fiu.edu or example@gmail.com"
-                class="mt-1 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-sm"
-                aria-describedby="cert-status"
-                required
-              />
-            </div>
-
-            <button
-              id="generate-certificate"
-              type="submit"
-              class="w-full cc-blue text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Continue with this email
-            </button>
-
-            <!-- subtle “or” divider, like Spotify -->
-            <div class="flex items-center gap-2 my-2">
-              <div class="flex-1 h-px bg-gray-200"></div>
-              <span class="text-xs tracking-wide text-gray-400 uppercase">or</span>
-              <div class="flex-1 h-px bg-gray-200"></div>
-            </div>
-
-            <!-- “With this portal you can” bullets (moved from old left column) -->
-            <div class="text-sm text-gray-700">
-              <p class="font-semibold text-gray-800 mb-1">With this portal you can:</p>
-              <ul class="list-disc list-inside space-y-1">
-                <li>Confirm your Google Developer Group at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi code crunch membership</li>
-                <li>Register or update your hackathon & Business Venture Arena participation details.</li>
-                <li>Download official membership certificates (PDF).</li>
-                <li>Access Discord &amp; GroupMe for Hack University hackathons and organizations specific events.</li>
-                <li>Show verified memberships &amp; leadership roles on your resume.</li>
-              </ul>
-            </div>
-
-            <!-- Status Message (unchanged IDs/classes for JS) -->
-            <div
-              id="cert-status"
-              class="hidden p-4 rounded-lg border-2 text-center font-medium text-sm"
-              role="status"
-              aria-live="polite"
-            ></div>
-          </form>
         </div>
+
+        <!-- ================= BUTTON ROW ================= -->
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mt-6 mb-8">
+
+          <!-- NEW REGISTRATION -->
+          <a
+            href="https://hackuniversity-onestopform.vercel.app/"
+            class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold shadow-sm hover:bg-emerald-600 transition"
+          >
+            <i class="fa-solid fa-user-plus"></i>
+            New here? Complete OneStop Registration
+          </a>
+
+          <!-- UPDATE -->
+          <a
+            href="https://hackuniversity-onestopform.vercel.app/"
+            class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-emerald-500 text-emerald-700 bg-white text-sm font-semibold shadow-sm hover:bg-emerald-50 transition"
+          >
+            <i class="fa-solid fa-pen-to-square"></i>
+            Update My Information / Registration
+          </a>
+
+        </div>
+
+            <hr class="my-6 border-gray-200" />
+
+            <!-- ================= TITLE + PASSWORD NOTE ================= -->
+            <div class="text-center max-w-2xl mx-auto">
+              <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2 leading-snug">
+                All-In-One Student Access Portal <br>
+                <span class="text-gray-700 text-base font-semibold">
+                  Membership, Hackathons & Business Venture Arena
+                </span>
+              </h2>
+
+              <p class="text-xs text-gray-500 mt-1">
+                <strong>Password Information:</strong> Your default password is your registered email.
+                You may update it anytime through the OneStop Form.
+              </p>
+            </div>
+
+            <!-- ================= LOGIN FORM ================= -->
+            <form id="cert-form" class="max-w-xl mx-auto mt-7 space-y-5 text-left" novalidate>
+
+              <!-- Already Registered -->
+              <p class="text-sm text-gray-700 font-medium">
+                Already registered? Enter your Gmail below to continue.
+              </p>
+
+              <!-- Email Input -->
+              <div>
+                <label for="member-email" class="text-sm font-semibold text-gray-700">
+                  Email Address
+                </label>
+                <input
+                  id="member-email"
+                  type="email"
+                  placeholder="example@gmail.com"
+                  class="mt-1 w-full px-4 py-3 border-2 border-gray-200 rounded-lg
+                        focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                  required
+                />
+              </div>
+
+              <!-- Continue Button -->
+              <button
+                id="generate-certificate"
+                type="submit"
+                class="w-full cc-blue text-white px-8 py-3 rounded-full
+                      hover:bg-blue-700 transition-colors font-bold text-lg
+                      disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Continue with this email
+              </button>
+
+              <!-- OR Divider -->
+              <div class="flex items-center gap-2 my-2">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-xs text-gray-400 uppercase tracking-wide">or</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+              </div>
+
+              <!-- Portal Features -->
+              <div class="text-sm text-gray-700 space-y-1">
+                <p class="font-semibold text-gray-800">With this portal you can:</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Verify your Google Developer Group at FIU (GDG at FIU), Code Crunch, CAHSI at FIU, ColorStack, and Raspberry Pi memberships</li>
+                  <li>Register or update Hackathon & Business Venture Arena participation</li>
+                  <li>Download official membership certificates (PDF)</li>
+                  <li>Unlock Discord & GroupMe communities</li>
+                  <li>Show verified memberships & leadership roles on your resume</li>
+                </ul>
+              </div>
+
+              <!-- Dynamic Status Message -->
+              <div
+                id="cert-status"
+                class="hidden p-4 rounded-lg border-2 text-center font-medium text-sm"
+                role="status"
+                aria-live="polite"
+              ></div>
+
+            </form>
+
+            <!-- ================= ACCESS GRANTED (Kept as is) ================= -->
+            <div id="certificate-result" class="hidden mt-10"></div>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- ACCESS GRANTED PANEL (unchanged markup, now inside the same card) -->
         <!-- ------------------------------------------------ -->
@@ -533,7 +556,7 @@
         </div>
         <!-- ============= END ACCESS GRANTED PANEL ============= -->
 
-      </div>
+      <!-- </div> -->
     </div>
 
     <!-- ======================= CERTIFICATE SAMPLE PREVIEW + TEXT (unchanged) ======================= -->
