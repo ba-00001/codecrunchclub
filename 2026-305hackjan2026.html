@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>305 Hackathon & Business Venture Arena — January 2026 Edition</title>
+  <meta name="description" content="305 Hackathon & Business Venture Arena — January 2026 Edition. Hybrid global hackathon with an online week-long sprint (Session A) and an in-person 12-hour sprint (Session B) focused on AI in Healthcare & Biotech."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+    }
+    .btn-primary {
+      @apply inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition;
+    }
+    .btn-outline {
+      @apply inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-semibold text-blue-700 bg-white border border-blue-600 hover:bg-blue-50 transition;
+    }
+    .pill {
+      @apply inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-800 text-xs font-medium border border-blue-100;
+    }
+    .tab-active {
+      @apply bg-blue-600 text-white shadow-sm;
+    }
+    .tab-inactive {
+      @apply bg-white text-blue-700 border border-blue-200 hover:bg-blue-50;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Top Bar -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-sm text-slate-700">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white text-lg">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </span>
+        <div>
+          <div class="font-semibold text-slate-900">
+            305 Hackathon & Business Venture Arena — January 2026 Edition
+          </div>
+          <div class="text-xs text-slate-500">
+            Hosted by Hack University · Code Crunch · Global student & industry community
+          </div>
+        </div>
+      </div>
+      <a href="https://hackuniversity-calendar.vercel.app/" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-xs font-medium text-blue-700 hover:text-blue-900">
+        <i class="fa-regular fa-calendar"></i>
+        View all Hack University events
+        <i class="fa-solid fa-arrow-up-right-from-square text-[0.65rem]"></i>
+      </a>
+    </div>
+  </header>
+
+  <main class="py-6 sm:py-10">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <!-- Hero Card -->
+      <section class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 sm:p-8">
+        <div class="flex flex-col lg:flex-row gap-6">
+          <!-- Left: Main info -->
+          <div class="flex-1 space-y-4">
+            <div class="inline-flex items-center gap-2 text-xs font-medium text-blue-800 bg-blue-50 border border-blue-100 rounded-full px-3 py-1">
+              <i class="fa-solid fa-stethoscope"></i>
+              AI in Healthcare &amp; Biotech · Hybrid worldwide event
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+              305 Hackathon &amp; Business Venture Arena — January 2026 Edition
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-600">
+              A hybrid global hackathon that combines a traditional <strong>Tech build track</strong> and a
+              <strong>Business Venture Arena (pitch track)</strong>, all focused on
+              <span class="font-semibold">AI-powered innovation in healthcare, biotech, and patient outcomes</span>.
+            </p>
+
+            <div class="flex flex-wrap gap-3 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-calendar text-blue-600"></i>
+                <span>
+                  <strong>Session A (Online):</strong> January 16 – January 24, 2026 (EST)
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-location-dot text-blue-600"></i>
+                <span>
+                  <strong>Session B (In-Person):</strong> January 24, 2026 (EST), FIU Campus (Miami, FL)
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-clock text-blue-600"></i>
+                <span>
+                  192 hrs (Session A) · 12–13 hrs (Session B)
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">
+                <i class="fa-solid fa-globe-americas mr-1.5"></i> Open Worldwide
+              </span>
+              <span class="pill">
+                <i class="fa-solid fa-user-graduate mr-1.5"></i> All majors · All universities
+              </span>
+              <span class="pill">
+                <i class="fa-solid fa-school mr-1.5"></i> High school students (16+) welcome
+              </span>
+              <span class="pill">
+                <i class="fa-solid fa-suitcase mr-1.5"></i> Students · Founders · Professionals
+              </span>
+            </div>
+
+            <!-- Shared CTAs -->
+            <div class="flex flex-wrap gap-3 pt-2">
+              <a href="#" data-url="onestop" target="_blank" rel="noopener" class="btn-primary js-register-main">
+                <i class="fa-solid fa-rocket-launch mr-2"></i>
+                Register via One-Stop Form
+              </a>
+              <a href="#" data-url="bevy" target="_blank" rel="noopener" class="btn-outline">
+                <i class="fa-regular fa-calendar-check mr-2"></i>
+                RSVP on Bevy
+              </a>
+              <a href="#" data-url="agenda" target="_blank" rel="noopener" class="btn-outline">
+                <i class="fa-solid fa-list-check mr-2"></i>
+                View Agenda &amp; Deadlines
+              </a>
+              <a href="#" data-url="discord" target="_blank" rel="noopener" class="btn-outline">
+                <i class="fa-brands fa-discord mr-2"></i>
+                Join Discord
+              </a>
+            </div>
+
+            <p id="registration-note" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 max-w-xl">
+              <strong>One registration covers both sessions:</strong> Use the One-Stop Form once, then choose Session A (online),
+              Session B (in-person), or both. Exact room details for the in-person sprint will be emailed to all registered participants.
+            </p>
+          </div>
+
+          <!-- Right: Quick stats card -->
+          <aside class="w-full lg:w-72">
+            <div class="border border-slate-200 rounded-2xl bg-slate-50 p-4 space-y-4">
+              <h2 class="text-sm font-semibold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-satellite-dish text-blue-600"></i>
+                Active Missions
+              </h2>
+
+              <div class="space-y-3 text-xs">
+                <div class="rounded-xl bg-white border border-slate-200 p-3">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-slate-900">
+                      🧪 Session A — Online Sprint
+                    </span>
+                    <span class="text-[11px] text-emerald-600 font-semibold">
+                      192 hrs hacking
+                    </span>
+                  </div>
+                  <div class="text-slate-500 mt-0.5">
+                    January 16 – 24, 2026 · Virtual (synchronous & async)
+                  </div>
+                  <button type="button" class="mt-2 text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline decoration-dotted js-jump-session-a">
+                    View details
+                  </button>
+                </div>
+
+                <div class="rounded-xl bg-white border border-slate-200 p-3">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-slate-900">
+                      🏥 Session B — In-Person Sprint
+                    </span>
+                    <span class="text-[11px] text-emerald-600 font-semibold">
+                      12–13 hrs hacking
+                    </span>
+                  </div>
+                  <div class="text-slate-500 mt-0.5">
+                    January 24, 2026 · FIU Campus (Miami, FL)
+                  </div>
+                  <button type="button" class="mt-2 text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline decoration-dotted js-jump-session-b">
+                    View details
+                  </button>
+                </div>
+              </div>
+
+              <div class="text-[11px] text-slate-500 border-t border-slate-200 pt-3">
+                Registration is <span class="font-semibold text-emerald-700">free</span>.
+                Perks and tools (Cloud, APIs, credits) require completing the One-Stop Form using a Gmail account.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Session Toggle -->
+      <section class="mt-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-3 sm:p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div class="space-y-1">
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Choose which sprint you want to view
+                </h2>
+                <p class="text-xs text-slate-500">
+                  Both sessions share the same <strong>registration form</strong>, <strong>Bevy event</strong>,
+                  <strong>Devpost portal</strong> (if unified), and <strong>agenda document</strong>. The panels below
+                  explain how each sprint works.
+                </p>
+              </div>
+              <div class="flex bg-slate-50 rounded-xl p-1 gap-1">
+                <button id="tab-session-a" type="button" class="flex-1 text-xs font-semibold px-3 py-2 rounded-lg tab-active">
+                  Session A · Online Week-Long
+                </button>
+                <button id="tab-session-b" type="button" class="flex-1 text-xs font-semibold px-3 py-2 rounded-lg tab-inactive">
+                  Session B · In-Person Sprint
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Session Panels -->
+      <section class="mt-5 space-y-6">
+
+        <!-- SESSION A PANEL -->
+        <div id="panel-session-a" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-7">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white text-sm">
+              A
+            </span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">
+              Session A — Online Week-Long Sprint (Jan 16–24, 2026)
+            </h2>
+          </div>
+
+          <p class="text-sm text-slate-600 mb-4">
+            A continuous <strong>online build window</strong> where you can work from anywhere in the world, combining live sessions,
+            mentor office hours, and asynchronous work time. Teams can participate in the
+            <strong>Tech Build Track</strong> and/or the <strong>Business Venture Arena</strong> using the same registration.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- Details -->
+            <div class="space-y-3">
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Timeline &amp; Format
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li><strong>Build window:</strong> Friday, Jan 16 – Saturday, Jan 24, 2026 (EST)</li>
+                  <li>Opening ceremony + challenge prompt reveal (online)</li>
+                  <li>Live mentor hours and checkpoints throughout the week</li>
+                  <li>Submission deadline before the closing ceremony (see agenda)</li>
+                  <li>Live online demos &amp; judging (Tech track + Business track)</li>
+                </ul>
+              </div>
+
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Who is Session A best for?
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li>Participants outside Miami or outside the U.S.</li>
+                  <li>Students balancing classes, work, or caregiving.</li>
+                  <li>Anyone who prefers a longer build window.</li>
+                  <li>Teams who want more time to explore datasets &amp; APIs.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Registration & Steps -->
+            <div class="space-y-3">
+              <div class="border border-blue-100 rounded-xl p-3.5 bg-blue-50/60">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Quick Start — Session A
+                </h3>
+                <ol class="text-xs text-slate-700 space-y-1.5 list-decimal list-inside">
+                  <li>Complete the <strong>One-Stop Registration Form</strong> (select Session A).</li>
+                  <li>RSVP on <strong>Bevy</strong> to receive calendar invites &amp; email updates.</li>
+                  <li>Create/join a team on <strong>Devpost</strong> (if using a shared Devpost portal).</li>
+                  <li>Join the <strong>Discord server</strong> and verify your account.</li>
+                  <li>Read the <strong>Hacker Guide &amp; Agenda</strong> (tracks, judging criteria, deadlines).</li>
+                  <li>Make your first <strong>GitHub commit</strong> once you start building.</li>
+                </ol>
+
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <a href="#" data-url="onestop" target="_blank" rel="noopener" class="btn-primary text-xs js-register-session-a">
+                    Register for Session A
+                  </a>
+                  <a href="#" data-url="devpost" target="_blank" rel="noopener" class="btn-outline text-xs">
+                    Devpost (Projects &amp; Gallery)
+                  </a>
+                  <a href="#" data-url="hackerGuide" target="_blank" rel="noopener" class="btn-outline text-xs">
+                    Hacker Guide
+                  </a>
+                </div>
+              </div>
+
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Online Tools &amp; Mentorship
+                </h3>
+                <p class="text-xs text-slate-600 mb-2">
+                  All mentorship for Session A is coordinated via Discord. Times, Zoom links, and mentor bios are shared
+                  in the dedicated mentorship channels.
+                </p>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li>❓ <strong>ask-hack-mentors</strong> — Q&amp;A channel</li>
+                  <li>📅 <strong>mentor-schedules</strong> — office hours &amp; availability</li>
+                  <li>🌐 Live workshops &amp; panels (see agenda)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SESSION B PANEL -->
+        <div id="panel-session-b" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-7 hidden">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white text-sm">
+              B
+            </span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">
+              Session B — In-Person 12–13 Hour Sprint (Jan 24, 2026)
+            </h2>
+          </div>
+
+          <p class="text-sm text-slate-600 mb-4">
+            A <strong>full in-person build day</strong> at FIU in Miami, with co-located teams, mentors, workshops, food,
+            and live demos. Perfect if you want the energy of a physical hackathon and in-room feedback from judges and mentors.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- Details -->
+            <div class="space-y-3">
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Timeline &amp; Format
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li><strong>Date:</strong> Saturday, January 24, 2026 (EST)</li>
+                  <li>Check-in begins in the morning (see agenda for exact time).</li>
+                  <li>Opening ceremony &amp; challenge prompt reveal on-site.</li>
+                  <li>12–13 hours of building with mentors circulating between teams.</li>
+                  <li>On-site submission checks + live demo presentations.</li>
+                  <li>Awards &amp; closing remarks at the end of the day.</li>
+                </ul>
+              </div>
+
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Who is Session B best for?
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li>Participants in/near Miami or able to travel to FIU Campus.</li>
+                  <li>Teams that prefer intense, single-day focus.</li>
+                  <li>Anyone who loves in-person collaboration &amp; networking.</li>
+                  <li>Students who want photos, local mentors, and physical swag.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Registration & Venue -->
+            <div class="space-y-3">
+              <div class="border border-blue-100 rounded-xl p-3.5 bg-blue-50/60">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Quick Start — Session B
+                </h3>
+                <ol class="text-xs text-slate-700 space-y-1.5 list-decimal list-inside">
+                  <li>Complete the <strong>One-Stop Registration Form</strong> (select Session B).</li>
+                  <li>RSVP on <strong>Bevy</strong> to receive location &amp; check-in instructions.</li>
+                  <li>Optionally register on <strong>Devpost</strong> ahead of time (or during the event).</li>
+                  <li>Bring a <strong>photo ID</strong>, your laptop, and charger.</li>
+                  <li>Check in at the registration desk on event day.</li>
+                  <li>Follow the agenda for workshop times, submission windows, and demo order.</li>
+                </ol>
+
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <a href="#" data-url="onestop" target="_blank" rel="noopener" class="btn-primary text-xs js-register-session-b">
+                    Register for Session B
+                  </a>
+                  <a href="#" data-url="devpost" target="_blank" rel="noopener" class="btn-outline text-xs">
+                    Devpost (Projects &amp; Gallery)
+                  </a>
+                  <a href="#" data-url="agenda" target="_blank" rel="noopener" class="btn-outline text-xs">
+                    Agenda &amp; Room Details
+                  </a>
+                </div>
+              </div>
+
+              <div class="border border-slate-200 rounded-xl p-3.5">
+                <h3 class="text-sm font-semibold text-slate-900 mb-1.5">
+                  Venue, Food &amp; Policies
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                  <li>Venue: FIU Campus, Miami, FL (exact room/space will be listed in the agenda).</li>
+                  <li>Food: Light meals/snacks provided during the event (while supplies last).</li>
+                  <li>Wi-Fi: Campus guest/student Wi-Fi will be available.</li>
+                  <li>Please follow FIU and event <strong>Code of Conduct</strong> at all times.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Shared Tracks, Judging, Perks -->
+      <section class="mt-6 grid lg:grid-cols-2 gap-5">
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+          <h3 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-code-branch text-blue-600"></i>
+            Tracks &amp; Judging
+          </h3>
+          <p class="text-xs text-slate-600">
+            Both sessions share the same tracks and judging criteria. You may participate in one or both tracks, as long as you
+            follow the rules in the Hacker Guide and submit by the deadlines listed in the agenda.
+          </p>
+          <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+            <li><strong>Track 1 — Tech Build (Hackathon):</strong> AI tools, dashboards, agents, workflows, and prototypes.</li>
+            <li><strong>Track 2 — Business Venture Arena:</strong> Go-to-market strategies, subscription models, programs, or ventures.</li>
+          </ul>
+          <p class="text-xs text-slate-600">
+            Judges evaluate: <em>Problem clarity, relevance to theme, innovation, feasibility, technical or strategic depth,
+              user impact, and clarity of the demo/pitch.</em>
+          </p>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+          <h3 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-gift text-blue-600"></i>
+            Prizes, Perks &amp; Recognition
+          </h3>
+          <p class="text-xs text-slate-600">
+            Prize details and perks (cloud credits, subscriptions, etc.) may evolve as sponsors confirm support. Devpost is the
+            official source of truth for final prizes and winners.
+          </p>
+          <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+            <li>Prize cards will be listed on the <strong>Devpost</strong> page.</li>
+            <li>Tools and cloud credits are managed via the <strong>One-Stop Form</strong>.</li>
+            <li>All qualifying teams receive digital recognition, and winners may receive additional certificates or badges.</li>
+          </ul>
+          <a href="#" data-url="perks" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900">
+            View Perks &amp; Tools Overview
+            <i class="fa-solid fa-arrow-up-right-from-square text-[0.6rem]"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Certificates & Calendar -->
+      <section class="mt-6 grid lg:grid-cols-2 gap-5">
+        <!-- Certificates -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+          <h3 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-amber-500"></i>
+            Certificates &amp; Verification
+          </h3>
+          <p class="text-xs text-slate-600">
+            After the event, eligible participants will be able to access participation and winner certificates via the Hack
+            University certificate portal. Instructions will be emailed once certificates are ready.
+          </p>
+
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+            <div class="text-[10px] uppercase tracking-wide text-slate-500 mb-1">
+              Sample Layout
+            </div>
+            <div class="border border-slate-300 rounded-xl p-3 bg-white">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] font-semibold text-slate-700">
+                  Hack University · Code Crunch
+                </span>
+                <span class="text-[10px] text-slate-400">
+                  CERT-305-2026-XXXX
+                </span>
+              </div>
+              <div class="text-xs font-semibold text-slate-900 mb-0.5">
+                Certificate of Participation
+              </div>
+              <div class="text-[11px] text-slate-600 mb-2">
+                Awarded to <span class="font-semibold text-slate-900">[Your Name]</span> for participating in
+                <em>305 Hackathon &amp; Business Venture Arena — January 2026 Edition</em>.
+              </div>
+              <div class="text-[9px] text-slate-400 flex justify-between pt-1 border-t border-dashed border-slate-200">
+                <span>HackUniversity.vercel.app</span>
+                <span>Verify at /hack-winners</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-500">
+            To receive a certificate, make sure your <strong>One-Stop Form</strong> submission, check-in, and Devpost project
+            (if applicable) are completed correctly. The Hack Winners portal will be shared after results are finalized.
+          </p>
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+          <h3 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <i class="fa-regular fa-calendar-days text-blue-600"></i>
+            Event Calendar &amp; Reminders
+          </h3>
+          <p class="text-xs text-slate-600">
+            All major deadlines, workshops, mentor hours, and demo times are mirrored on the Hack University calendar.
+            You can subscribe to stay updated across both sessions.
+          </p>
+
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50 space-y-2">
+            <div class="text-[11px] text-slate-500">
+              Subscribe to the calendar to automatically see:
+            </div>
+            <ul class="text-[11px] text-slate-600 space-y-1 list-disc list-inside">
+              <li>Session A / Session B opening &amp; closing ceremonies</li>
+              <li>Submission deadlines &amp; Devpost cutoffs</li>
+              <li>Mentor blocks &amp; special workshops</li>
+            </ul>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <a href="https://hackuniversity-calendar.vercel.app/" target="_blank" rel="noopener" class="btn-outline text-[11px]">
+                Open Hack University Calendar
+              </a>
+              <a href="#" data-url="agenda" target="_blank" rel="noopener" class="btn-outline text-[11px]">
+                Open Agenda Doc
+              </a>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-500">
+            For the most accurate information, <strong>always cross-check the agenda document and Devpost</strong> before submitting.
+          </p>
+        </div>
+      </section>
+
+      <!-- Partners (simple version) -->
+      <section class="mt-6 bg-white border border-slate-200 rounded-2xl shadow-sm p-5">
+        <h3 class="text-sm font-semibold text-slate-900 flex items-center gap-2 mb-3">
+          <i class="fa-solid fa-handshake-angle text-blue-600"></i>
+          Organizers &amp; Community Partners
+        </h3>
+        <p class="text-xs text-slate-600 mb-3">
+          305 Hackathon &amp; Business Venture Arena — January 2026 Edition is part of the broader Hack University ecosystem,
+          powered by student leaders and industry mentors from multiple organizations.
+        </p>
+        <div class="flex flex-wrap gap-2 text-[11px] text-slate-700">
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            Hack University Initiative
+          </span>
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            Code Crunch Global
+          </span>
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            Google Developer Group at FIU (GDG @ FIU)
+          </span>
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            ColorStack @ FIU
+          </span>
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            CAHSI @ FIU
+          </span>
+          <span class="pill bg-slate-50 border-slate-200 text-slate-800">
+            Raspberry Pi Code Crunch
+          </span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-8 border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] text-slate-500">
+      <div>
+        © <span id="footer-year">2025</span> Hack University · Code Crunch.
+        <span class="hidden sm:inline">All rights reserved.</span>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://hackuniversity.vercel.app" target="_blank" class="flex items-center gap-1 hover:text-slate-700">
+          <i class="fa-solid fa-globe text-[10px]"></i>
+          HackUniversity.vercel.app
+        </a>
+        <a href="mailto:codecrunchclub@gmail.com" class="flex items-center gap-1 hover:text-slate-700">
+          <i class="fa-regular fa-envelope text-[10px]"></i>
+          codecrunchclub@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/iba001/" target="_blank" class="flex items-center gap-1 hover:text-slate-700">
+          <i class="fa-brands fa-linkedin text-[10px]"></i>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- URL config + behavior -->
+  <script>
+    // Toggle variable to auto-enable/disable registration
+    const REGISTRATION_OPEN = true; // set to false to disable register buttons
+
+    // Shared URL object (update with real links for Jan 2026)
+    const URLS = {
+      onestop: 'https://hackuniversity-registration.vercel.app/',           // One-Stop form (shared)
+      bevy: 'https://gdg.community.dev/',                                   // Bevy event link (update)
+      agenda: 'https://docs.google.com/document/d/...',                     // Agenda doc (update)
+      devpost: 'https://305hackjan2026.devpost.com/',                       // Devpost portal (unified or per session)
+      discord: 'https://hackuniversity-discord.vercel.app/',                // Discord landing
+      hackerGuide: 'https://hackuniversity-hackerguide.vercel.app',         // Hacker guide
+      perks: 'https://hackuniversity-perks.vercel.app/'                     // Perks overview
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Attach URLs
+      document.querySelectorAll('[data-url]').forEach(function (el) {
+        const key = el.getAttribute('data-url');
+        if (URLS[key]) el.setAttribute('href', URLS[key]);
+      });
+
+      // Registration open/close behavior
+      const registerButtons = document.querySelectorAll('.js-register-main, .js-register-session-a, .js-register-session-b');
+      const noteEl = document.getElementById('registration-note');
+
+      if (!REGISTRATION_OPEN) {
+        registerButtons.forEach(btn => {
+          btn.classList.add('opacity-50', 'cursor-not-allowed');
+          btn.classList.remove('hover:bg-blue-700');
+          btn.setAttribute('aria-disabled', 'true');
+          btn.removeAttribute('href');
+          btn.onclick = function (e) { e.preventDefault(); };
+          btn.innerHTML = '<i class="fa-regular fa-clock mr-2"></i>Registration coming soon';
+        });
+        if (noteEl) {
+          noteEl.textContent = 'Registration is not yet open. Please check back soon or subscribe to the Bevy event and Discord for announcements.';
+        }
+      }
+
+      // Session tab switching
+      const tabA = document.getElementById('tab-session-a');
+      const tabB = document.getElementById('tab-session-b');
+      const panelA = document.getElementById('panel-session-a');
+      const panelB = document.getElementById('panel-session-b');
+
+      function activateSession(session) {
+        const isA = session === 'a';
+        panelA.classList.toggle('hidden', !isA);
+        panelB.classList.toggle('hidden', isA);
+
+        if (isA) {
+          tabA.classList.remove('tab-inactive');
+          tabA.classList.add('tab-active');
+          tabB.classList.remove('tab-active');
+          tabB.classList.add('tab-inactive');
+        } else {
+          tabB.classList.remove('tab-inactive');
+          tabB.classList.add('tab-active');
+          tabA.classList.remove('tab-active');
+          tabA.classList.add('tab-inactive');
+        }
+      }
+
+      tabA.addEventListener('click', () => activateSession('a'));
+      tabB.addEventListener('click', () => activateSession('b'));
+
+      // "View details" jump buttons
+      document.querySelectorAll('.js-jump-session-a').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activateSession('a');
+          panelA.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+      document.querySelectorAll('.js-jump-session-b').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activateSession('b');
+          panelB.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Footer year
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+</html>
