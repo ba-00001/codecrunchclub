@@ -4,143 +4,259 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Volunteer Certificates • Code Crunch</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <!-- 🔒 STYLES UNCHANGED -->
-  <!-- (Your full CSS block remains exactly the same) -->
+
+  <style>
+    /* ================= GLOBAL ================= */
+    :root { --logo-h:52px; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Google Sans','Roboto',system-ui,sans-serif;
+      background:#f8f9fa;color:#202124;min-height:100vh
+    }
+
+    /* ================= NAV ================= */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0}
+    .nav-container{max-width:1100px;margin:auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#1a73e8;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:6px 10px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4}
+
+    /* ================= LAYOUT ================= */
+    .container{max-width:1100px;margin:auto;padding:24px}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+
+    .infobox{
+      background:#f8f9fa;
+      padding:1rem;
+      border-left:4px solid #28a745;
+      border-radius:8px;
+      margin-bottom:1rem;
+      font-size:14px;
+    }
+
+    .alert{padding:1rem;border-radius:6px;border:1px solid;margin-top:.5rem;white-space:pre-wrap}
+    .alert-info{background:#e3f2fd;color:#0d47a1}
+    .alert-ok{background:#e6f4ea;color:#1b5e20}
+    .alert-error{background:#fdecea;color:#7f1d1d}
+
+    /* ================= FORM ================= */
+    .cg-row{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+    .cg-input{
+      flex:1;
+      padding:.75rem;
+      border-radius:8px;
+      border:2px solid #ddd;
+      font-family:monospace;
+      font-size:1rem;
+    }
+    .cg-btn{
+      padding:.75rem 1.5rem;
+      background:#1a73e8;
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .cg-btn[disabled]{opacity:.6}
+
+    /* ================= CERTIFICATE ================= */
+    .certificate-page{
+      width:1123px;height:794px;
+      border:8px solid #B8860B;
+      padding:40px;
+      background:#fff;
+      font-family:"Times New Roman",serif;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+    }
+    .hack-logo{position:absolute;top:30px;right:30px;max-height:80px}
+    .participant-name{font-size:3rem;text-align:center;font-style:italic;margin:40px 0}
+    .body-text{text-align:center;font-size:1.1rem;line-height:1.8}
+    .sig-block{text-align:center;margin-top:auto}
+    .sig-img{max-height:70px;margin-bottom:8px}
+    .sig-line{width:260px;border-top:2px solid #333;margin:0 auto 6px}
+    .cert-id{font-family:monospace;font-size:.9rem;color:#555}
+
+    .logo-grid{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:10px;
+    }
+    .logo-grid img{max-height:var(--logo-h);object-fit:contain}
+
+    @page{size:A4 landscape;margin:10mm}
+    @media print{
+      body{background:#fff}
+      .navbar,.container > *:not(#certificate-generator){display:none}
+      .certificate-page{width:277mm;height:190mm;padding:15mm}
+    }
+  </style>
 </head>
 
 <body>
-  <!-- NAV (UNCHANGED) -->
-  <!-- TIMEZONE (UNCHANGED) -->
 
-  <main class="container">
-    <section class="surface" id="certificate-generator">
-      <h2 class="card-title" style="text-align:center">
-        GENERATE YOUR CERTIFICATE • EmpowHer Hackathon 2025 Session B (In-person)
-      </h2>
-      <p class="card-description" style="text-align:center">
-        [ OFFICIAL CERTIFICATE ] — Use your registered email
-      </p>
+<!-- ================= NAV ================= -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="https://hackuniversity.vercel.app" target="_blank">Hack University Initiative</a>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app">Code Crunch</a>
+      <a class="nav-link" href="https://hackuniversity-linkedin.vercel.app">LinkedIn</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html">Support Us</a>
+    </div>
+  </div>
+</nav>
 
-      <div class="cg-row">
-        <input type="email" id="certificateEmailInput" class="cg-input"
-               placeholder="Enter your registered email address"/>
-        <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">
-          🏆 Generate Certificate
-        </button>
-      </div>
+<!-- ================= MAIN ================= -->
+<main class="container">
+  <section class="surface" id="certificate-generator">
+    <h2 style="text-align:center">Volunteer Certificate Portal</h2>
+    <p style="text-align:center;margin-top:.25rem">
+      Use the email you registered with to check your certificate status.
+    </p>
 
-      <div id="certificateResult" class="surface" style="margin-top:1rem"></div>
-    </section>
-  </main>
+    <div class="cg-row">
+      <input id="certificateEmailInput" class="cg-input"
+             type="email" placeholder="you@example.com"/>
+      <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">
+        🏆 Generate Certificate
+      </button>
+    </div>
 
-  <!-- FOOTER (UNCHANGED) -->
+    <div id="certificateResult" class="surface" style="margin-top:1rem"></div>
+  </section>
+</main>
 
+<!-- ================= SCRIPT ================= -->
 <script>
-/* ================= SETTINGS ================= */
 const CERT_API_URL =
   'https://script.google.com/macros/s/AKfycbzswM2rda7UUR2XpWwkv-6T9EcKI_fKygwCRZk7kiWQCbMb0FxnAy3rfSuS5PdQtW5bOg/exec';
 
-/* ================= HELPERS ================= */
-const esc = s =>
-  String(s ?? '').replace(/[&<>"']/g, m =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
-  );
+const esc = s => String(s ?? '').replace(/[&<>"']/g,
+  m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
+);
 
-function setStatus(type, html) {
-  const cls =
-    type === 'ok' ? 'alert-ok' :
-    type === 'error' ? 'alert-error' : 'alert-info';
-
+function setStatus(type, html){
+  const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info';
   document.getElementById('certificateResult').innerHTML =
     `<div class="infobox">
-       <strong>🏆 Certificate Generator</strong><br>
-       Use your registered email to check eligibility
+       <strong>Certificate Status</strong><br>
+       This system verifies volunteer participation and donation status.
      </div>
      <div class="alert ${cls}">${html}</div>`;
 }
 
-function toggleButton(loading) {
-  const btn = document.getElementById('generateBtn');
-  btn.disabled = loading;
-  btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+function toggleButton(b){
+  const btn=document.getElementById('generateBtn');
+  btn.disabled=b;
+  btn.textContent=b?'⏳ Checking…':'🏆 Generate Certificate';
 }
 
-/* ================= CERT GENERATION ================= */
-async function generateCertificate() {
-  const email =
-    document.getElementById('certificateEmailInput').value.trim();
+function normalizeCert(c){
+  return {
+    participantName: esc(c.participantName),
+    hackathonName: esc(c.hackathonName),
+    date: esc(c.date),
+    location: esc(c.location),
+    rolesText: esc(c.rolesText),
+    hackLogoUrl: c.hackLogoUrl || '',
+  };
+}
 
-  if (!email) {
-    setStatus('error', '❌ Please enter your email address.');
-    return;
-  }
+function certPageHTML(c){
+  return `
+  <div class="certificate-page">
+    ${c.hackLogoUrl?`<img class="hack-logo" src="${c.hackLogoUrl}">`:''}
+    <h1 style="text-align:center;letter-spacing:3px">CERTIFICATE</h1>
+    <p style="text-align:center;letter-spacing:4px">OF PARTICIPATION</p>
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    setStatus('error', '❌ Please enter a valid email address.');
-    return;
-  }
+    <p style="text-align:center;margin-top:30px;font-style:italic">
+      This certificate is proudly presented to
+    </p>
+
+    <div class="participant-name">${c.participantName}</div>
+
+    <div class="body-text">
+      For contributions as <strong>${c.rolesText}</strong> at
+      <strong>${c.hackathonName}</strong>,
+      held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.
+    </div>
+
+    <div class="sig-block">
+      <img class="sig-img"
+        src="https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b">
+      <div class="sig-line"></div>
+      <strong>Brian Bazurto</strong><br>
+      Code Crunch President
+      <div class="cert-id">Verified Certificate</div>
+    </div>
+  </div>`;
+}
+
+function openCertificatesInNewTab(certs){
+  const html = `
+  <html><head>
+    <title>Certificate</title>
+    <style>${document.querySelector('style').innerHTML}</style>
+  </head>
+  <body>${certs.map(certPageHTML).join('')}</body></html>`;
+  const w=window.open('');
+  w.document.write(html);
+  w.document.close();
+  w.print();
+}
+
+async function generateCertificate(){
+  const email=document.getElementById('certificateEmailInput').value.trim();
+  if(!email){setStatus('error','Please enter your email.');return;}
 
   toggleButton(true);
-  setStatus('info', '⏳ Checking your volunteer record…');
+  setStatus('info','Checking records…');
 
-  try {
-    const res = await fetch(
+  try{
+    const res=await fetch(
       `${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`
     );
-    const payload = await res.json();
+    const data=await res.json();
+    const cert=data?.certificates?.[0];
 
-    const cert = payload?.certificates?.[0];
-    if (!cert) {
-      setStatus('error', 'No record found for this email.');
+    if(!cert){
+      setStatus('error','No record found for this email.');
       return;
     }
 
-    /* ✅ Always show ticket + DB link */
-    let headerInfo = `
-      <strong>Ticket ID:</strong> ${esc(cert.ticketId || '—')}<br>
-      <a href="${esc(cert.volunteerDatabaseUrl)}" target="_blank">
-        View Volunteer Database Record
-      </a><br><br>
-    `;
+    const header=
+      `<strong>Ticket ID:</strong> ${esc(cert.ticketId)}<br>
+       <a href="${esc(cert.volunteerDatabaseUrl)}" target="_blank">
+         View Volunteer Database Record
+       </a><br><br>`;
 
-    /* ❌ Donation not verified */
-    if (cert.status !== 'Certificate Available') {
-      setStatus(
-        'error',
-        headerInfo +
-        `<pre style="white-space:pre-wrap;font-family:inherit">
-${esc(cert.nextStepsMessage || cert.message)}
-</pre>`
-      );
+    if(cert.status!=='Certificate Available'){
+      setStatus('error', header + esc(cert.nextStepsMessage));
       return;
     }
 
-    /* ✅ Donation verified → generate certificate */
-    setStatus(
-      'ok',
-      headerInfo +
-      '<strong>✅ Certificate verified.</strong> Opening in a new tab…'
-    );
-
-    openCertificatesInNewTab(
-      [normalizeCert(cert.certificateData)],
-      true
-    );
-
-  } catch (err) {
-    console.error(err);
-    setStatus('error', '❌ Failed to check records. Please try again later.');
-  } finally {
-    toggleButton(false);
+    setStatus('ok', header + 'Certificate verified. Opening print view…');
+    openCertificatesInNewTab([normalizeCert(cert.certificateData)]);
   }
+  catch(e){
+    setStatus('error','System error. Please try again later.');
+  }
+  finally{toggleButton(false);}
 }
 
-/* ================= INIT ================= */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('certificateResult').innerHTML =
-    '<div class="infobox">Enter your email above to check your certificate status.</div>';
+    '<div class="infobox">Enter your email above to check your certificate.</div>';
 });
 </script>
 
