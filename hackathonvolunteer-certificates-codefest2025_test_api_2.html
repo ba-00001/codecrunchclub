@@ -401,61 +401,63 @@ async function generateCertificate(){
       ? payload.certificates
       : [];
 
-    /* =====================================================
-       ❌ HANDLE NOT VERIFIED / NO / PENDING FIRST
-       ===================================================== */
-    const blocked = certs.find(
+    // no records at all
+    if (!certs.length) {
+      setStatus('error', 'No record found for this email.');
+      return;
+    }
+
+    // split by status
+    const available = certs.filter(
+      c => c.status === 'Certificate Available' && c.certificateData
+    );
+
+    const blocked = certs.filter(
       c => c.status === 'Certificate Not Available'
     );
 
-    if (blocked) {
+    // ✅ PRIORITY 1 — any verified certificate wins
+    if (available.length > 0) {
+      const normalized = available.map(c =>
+        normalizeCert(c.certificateData)
+      );
+
+      setStatus(
+        'ok',
+        `✅ Found ${normalized.length} certificate(s). Opening in a new tab…`
+      );
+
+      openCertificatesInNewTab(normalized, true);
+      return;
+    }
+
+    // ❌ PRIORITY 2 — ONLY if all are unverified
+    if (blocked.length === certs.length) {
+      const b = blocked[0];
+
       setStatus(
         'error',
         `
-        <strong>${esc(blocked.message)}</strong><br><br>
+        <strong>${esc(b.message)}</strong><br><br>
 
-        <div><strong>Ticket ID:</strong> ${esc(blocked.ticketId || 'N/A')}</div>
+        <div><strong>Ticket ID:</strong> ${esc(b.ticketId || 'N/A')}</div>
 
         <div style="margin:8px 0">
-          <a href="${blocked.volunteerDatabaseUrl}"
-             target="_blank"
-             rel="noopener">
-             View Volunteer Database
+          <a href="${b.volunteerDatabaseUrl}" target="_blank" rel="noopener">
+            View Volunteer Database
           </a>
         </div>
 
         <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">
-${esc(blocked.nextStepsMessage)}
+${esc(b.nextStepsMessage)}
         </pre>
         `
       );
       return;
     }
 
-    /* =====================================================
-       ✅ HANDLE AVAILABLE CERTIFICATE
-       ===================================================== */
-    const available = certs.filter(
-      c => c.status === 'Certificate Available' && c.certificateData
-    );
-
-    if (!available.length) {
-      setStatus(
-        'error',
-        'No eligible certificate found for this email.'
-      );
-      return;
-    }
-
-    const normalized = available
-      .map(c => normalizeCert(c.certificateData));
-
-    setStatus(
-      'ok',
-      `✅ Found ${normalized.length} certificate(s). Opening in a new tab…`
-    );
-
-    openCertificatesInNewTab(normalized, true);
+    // fallback (should not happen)
+    setStatus('error', 'Unable to determine certificate status.');
 
   } catch (err) {
     console.error(err);
@@ -463,9 +465,8 @@ ${esc(blocked.nextStepsMessage)}
   } finally {
     toggleButton(false);
   }
+
 }
-
-
     /* ===== Clocks + init ===== */
     function updateTimes(){
       const now=new Date();
