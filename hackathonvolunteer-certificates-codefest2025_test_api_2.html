@@ -377,49 +377,94 @@
     }
 
     /* ===== Generate flow ===== */
-    async function generateCertificate(){
-      const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
-      if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('error','❌ Please enter a valid email address.'); return; }
+async function generateCertificate(){
+  const email = document.getElementById('certificateEmailInput').value.trim();
+  if(!email){
+    setStatus('error','❌ Please enter your email address.');
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    setStatus('error','❌ Please enter a valid email address.');
+    return;
+  }
 
-      setStatus('info','⏳ Checking for available certificates...'); toggleButton(true);
-      const ac = new AbortController(); const to = setTimeout(()=>ac.abort(),12000);
+  setStatus('info','⏳ Checking for available certificates...');
+  toggleButton(true);
 
-      try{
-        const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`, {signal:ac.signal});
-        const payload = await res.json().catch(()=>({}));
-        if(!res.ok) throw new Error(payload?.error || res.statusText);
+  try {
+    const res = await fetch(
+      `${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`
+    );
+    const payload = await res.json();
 
-        let certs = [];
-        if(Array.isArray(payload)) certs = payload;
-        else if(Array.isArray(payload?.certificates)) certs = payload.certificates;
-        else if(payload?.certificateData) certs = [payload];
-        else if(payload?.length) certs = payload;
-        else if(payload?.[0]) certs = [payload[0]];
+    const certs = Array.isArray(payload?.certificates)
+      ? payload.certificates
+      : [];
 
-        const base = certs.filter(c => c?.status === 'Certificate Available' && (c?.certificateData || c?.participantName));
-        const valid = base.filter(c => {
-          const role = String(c?.rolesText || '').toLowerCase().trim();
-          if(role === 'signed up as a judge but did not participate') return false;
-          if(role.includes('not participate')) return false;
-          return true;
-        });
+    /* =====================================================
+       ❌ HANDLE NOT VERIFIED / NO / PENDING FIRST
+       ===================================================== */
+    const blocked = certs.find(
+      c => c.status === 'Certificate Not Available'
+    );
 
-        if(!valid.length){
-          setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.');
-          return;
-        }
+    if (blocked) {
+      setStatus(
+        'error',
+        `
+        <strong>${esc(blocked.message)}</strong><br><br>
 
-        const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
-        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
-        openCertificatesInNewTab(normalized, true);
-      }catch(e){
-        console.error(e);
-        setStatus('error','❌ Failed to check records. Please try again later.');
-      }finally{
-        clearTimeout(to); toggleButton(false);
-      }
+        <div><strong>Ticket ID:</strong> ${esc(blocked.ticketId || 'N/A')}</div>
+
+        <div style="margin:8px 0">
+          <a href="${blocked.volunteerDatabaseUrl}"
+             target="_blank"
+             rel="noopener">
+             View Volunteer Database
+          </a>
+        </div>
+
+        <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">
+${esc(blocked.nextStepsMessage)}
+        </pre>
+        `
+      );
+      return;
     }
+
+    /* =====================================================
+       ✅ HANDLE AVAILABLE CERTIFICATE
+       ===================================================== */
+    const available = certs.filter(
+      c => c.status === 'Certificate Available' && c.certificateData
+    );
+
+    if (!available.length) {
+      setStatus(
+        'error',
+        'No eligible certificate found for this email.'
+      );
+      return;
+    }
+
+    const normalized = available
+      .map(c => normalizeCert(c.certificateData));
+
+    setStatus(
+      'ok',
+      `✅ Found ${normalized.length} certificate(s). Opening in a new tab…`
+    );
+
+    openCertificatesInNewTab(normalized, true);
+
+  } catch (err) {
+    console.error(err);
+    setStatus('error','❌ Failed to check records. Please try again later.');
+  } finally {
+    toggleButton(false);
+  }
+}
+
 
     /* ===== Clocks + init ===== */
     function updateTimes(){
