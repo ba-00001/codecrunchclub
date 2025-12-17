@@ -336,7 +336,7 @@
   <script>
     /* ===== Settings ===== */
     const CERT_API_URL =
-      'https://script.google.com/macros/s/AKfycby1DLlKXXeL9580Jh4OAjhPXToON3IR-RTcJKswSIcTeTJkq5dEAVZg3UnRGR50mqqXeQ/exec';
+      'https://script.google.com/macros/s/AKfycbxGz1r22uTGRMbDzuaVCfWamNkx9mQe9ryubwh8Sbc54yoDDU_mTsgKClr8ksTdQ7fiow/exec';
 
     const DEFAULT_LOGOS = [
     "https://github.com/user-attachments/assets/14ba2be9-c1c3-4860-8254-5cd6a9d6bcc3",
@@ -591,13 +591,27 @@
           const blocked = certs.find(c => c.status === 'Certificate Not Available');
 
           if (blocked?.nextStepsMessage) {
-            setStatus(
-              'error',
-              `<strong>${esc(blocked.message)}</strong><br><br>
-              <pre style="white-space:pre-wrap;font-family:inherit">
-        ${esc(blocked.nextStepsMessage)}
-              </pre>`
-            );
+          setStatus(
+            'error',
+            `
+            <strong>${esc(blocked.message)}</strong><br><br>
+
+            <div style="white-space:pre-wrap;line-height:1.6">
+              ${esc(blocked.nextStepsMessage)}
+              <br><br>
+
+              👉 <a
+                href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html"
+                target="_blank"
+                rel="noopener"
+                style="color:#1a73e8;font-weight:600;text-decoration:underline"
+              >
+                Register on Hack University OneStopForm
+              </a>
+            </div>
+            `
+          );
+
             return;
           }
 
