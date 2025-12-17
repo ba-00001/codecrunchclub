@@ -181,8 +181,8 @@
   <main class="container">
     <!-- CERTIFICATE GENERATOR -->
     <section class="surface" id="certificate-generator">
-      <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE • 305 Hackathon November 2025 Session B (In-person)</h2>
-      <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] — Download your volunteer certificate using your registeredemail address</p>
+      <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE • 305 Hackathon Edition Nov 2025 Session B/h2>
+      <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] — Download your volunteer certificate using your registered email address</p>
 
       <label for="certificateEmailInput" class="sr-only">Registered email address</label>
       <div class="cg-row">
@@ -238,7 +238,7 @@
 
   <script>
     /* ===== Settings ===== */
-    const CERT_API_URL = 'https://script.google.com';
+    const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbzFmu3yrjNKtDy1r68X7O_x9XdvvhReGF71bLQcie8j9GSuOVCGNBk3Ufk2tttUTdMK/exec';
     const DEFAULT_LOGOS = [
       "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
       "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
@@ -377,50 +377,117 @@
     }
 
     /* ===== Generate flow ===== */
-    async function generateCertificate(){
-      const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
-      if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('error','❌ Please enter a valid email address.'); return; }
+async function generateCertificate(){
+  const email = document.getElementById('certificateEmailInput').value.trim();
+  if(!email){
+    setStatus('error','❌ Please enter your email address.');
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    setStatus('error','❌ Please enter a valid email address.');
+    return;
+  }
 
-      setStatus('info','⏳ Checking for available certificates...'); toggleButton(true);
-      const ac = new AbortController(); const to = setTimeout(()=>ac.abort(),12000);
+  setStatus('info','⏳ Checking for available certificates...');
+  toggleButton(true);
 
-      try{
-        const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`, {signal:ac.signal});
-        const payload = await res.json().catch(()=>({}));
-        if(!res.ok) throw new Error(payload?.error || res.statusText);
+  try {
+    const res = await fetch(
+      `${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`
+    );
+    const payload = await res.json();
 
-        let certs = [];
-        if(Array.isArray(payload)) certs = payload;
-        else if(Array.isArray(payload?.certificates)) certs = payload.certificates;
-        else if(payload?.certificateData) certs = [payload];
-        else if(payload?.length) certs = payload;
-        else if(payload?.[0]) certs = [payload[0]];
+    const certs = Array.isArray(payload?.certificates)
+      ? payload.certificates
+      : [];
 
-        const base = certs.filter(c => c?.status === 'Certificate Available' && (c?.certificateData || c?.participantName));
-        const valid = base.filter(c => {
-          const role = String(c?.rolesText || '').toLowerCase().trim();
-          if(role === 'signed up as a judge but did not participate') return false;
-          if(role.includes('not participate')) return false;
-          return true;
-        });
-
-        if(!valid.length){
-          setStatus('error','No eligible certificate found for this email. If this seems wrong, please contact the organizers.');
-          return;
-        }
-
-        const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
-        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
-        openCertificatesInNewTab(normalized, true);
-      }catch(e){
-        console.error(e);
-        setStatus('error','❌ Failed to check records. Please try again later.');
-      }finally{
-        clearTimeout(to); toggleButton(false);
-      }
+    // no records at all
+    if (!certs.length) {
+      setStatus('error', 'No record found for this email.');
+      return;
     }
 
+    // split by status
+    const available = certs.filter(
+      c => c.status === 'Certificate Available' && c.certificateData
+    );
+
+    const blocked = certs.filter(
+      c => c.status === 'Certificate Not Available'
+    );
+
+    // ✅ PRIORITY 1 — any verified certificate wins
+if (available.length > 0) {
+  const normalized = available.map(c =>
+    normalizeCert(c.certificateData)
+  );
+
+  // collect ticket IDs (unique, non-empty)
+  const ticketIds = [
+    ...new Set(
+      available
+        .map(c => c.ticketId)
+        .filter(Boolean)
+    )
+  ];
+
+  setStatus(
+    'ok',
+    `
+    <strong>✅ Certificate Ready</strong><br><br>
+
+    <div>
+      <strong>Ticket ID${ticketIds.length > 1 ? 's' : ''}:</strong>
+      ${ticketIds.map(id => `<code>${esc(id)}</code>`).join(', ')}
+    </div>
+
+    <div style="margin-top:8px">
+      Your certificate will now open in a new tab for download or printing.
+    </div>
+    `
+  );
+
+  openCertificatesInNewTab(normalized, true);
+  return;
+}
+
+
+    // ❌ PRIORITY 2 — ONLY if all are unverified
+    if (blocked.length === certs.length) {
+      const b = blocked[0];
+
+      setStatus(
+        'error',
+        `
+        <strong>${esc(b.message)}</strong><br><br>
+
+        <div><strong>Ticket ID:</strong> ${esc(b.ticketId || 'N/A')}</div>
+
+        <div style="margin:8px 0">
+          <a href="${b.volunteerDatabaseUrl}" target="_blank" rel="noopener">
+            View Volunteer Database
+          </a>
+        </div>
+
+        <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">
+${esc(b.nextStepsMessage)}
+        </pre>
+        `
+      );
+      return;
+    }
+
+    // fallback (should not happen)
+    setStatus('error', 'Unable to determine certificate status.');
+
+  } catch (err) {
+    console.error(err);
+    setStatus('error','❌ Failed to check records. Please try again later.');
+  } finally {
+    toggleButton(false);
+  }
+
+}
     /* ===== Clocks + init ===== */
     function updateTimes(){
       const now=new Date();
