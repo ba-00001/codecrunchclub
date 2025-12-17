@@ -417,19 +417,40 @@ async function generateCertificate(){
     );
 
     // ✅ PRIORITY 1 — any verified certificate wins
-    if (available.length > 0) {
-      const normalized = available.map(c =>
-        normalizeCert(c.certificateData)
-      );
+if (available.length > 0) {
+  const normalized = available.map(c =>
+    normalizeCert(c.certificateData)
+  );
 
-      setStatus(
-        'ok',
-        `✅ Found ${normalized.length} certificate(s). Opening in a new tab…`
-      );
+  // collect ticket IDs (unique, non-empty)
+  const ticketIds = [
+    ...new Set(
+      available
+        .map(c => c.ticketId)
+        .filter(Boolean)
+    )
+  ];
 
-      openCertificatesInNewTab(normalized, true);
-      return;
-    }
+  setStatus(
+    'ok',
+    `
+    <strong>✅ Certificate Ready</strong><br><br>
+
+    <div>
+      <strong>Ticket ID${ticketIds.length > 1 ? 's' : ''}:</strong>
+      ${ticketIds.map(id => `<code>${esc(id)}</code>`).join(', ')}
+    </div>
+
+    <div style="margin-top:8px">
+      Your certificate will now open in a new tab for download or printing.
+    </div>
+    `
+  );
+
+  openCertificatesInNewTab(normalized, true);
+  return;
+}
+
 
     // ❌ PRIORITY 2 — ONLY if all are unverified
     if (blocked.length === certs.length) {
