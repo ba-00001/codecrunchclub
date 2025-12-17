@@ -9,54 +9,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f8f9fa;color:#202124}
+    :root{--logo-h:52px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',sans-serif;background:#f8f9fa;color:#202124}
 
-    .navbar{background:#fff;border-bottom:1px solid #ddd;padding:14px}
-    .nav-container{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}
-    .nav-brand a{font-weight:700;color:#1a73e8;text-decoration:none}
-    .nav-links a{margin-left:14px;color:#555;text-decoration:none;font-size:14px}
+    /* NAV */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
 
-    .container{max-width:1100px;margin:auto;padding:24px}
-    .surface{background:#fff;border:1px solid #ddd;border-radius:12px;padding:24px}
-
-    .cg-row{display:flex;gap:10px;flex-wrap:wrap}
-    .cg-input{flex:1;padding:12px;font-size:16px;border-radius:8px;border:2px solid #ccc}
-    .cg-btn{padding:12px 20px;border-radius:8px;border:none;font-weight:700;background:#0d6efd;color:#fff;cursor:pointer}
+    /* MAIN */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+    .cg-row{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+    .cg-input{flex:1 1 300px;padding:.75rem;border-radius:8px;border:2px solid #ddd;font-family:monospace}
+    .cg-btn{padding:.75rem 1.5rem;border-radius:8px;border:0;background:#007bff;color:#fff;font-weight:bold;cursor:pointer}
     .cg-btn[disabled]{opacity:.6;cursor:not-allowed}
 
-    .alert{margin-top:16px;padding:14px;border-radius:8px;border:1px solid}
-    .alert-ok{background:#e6f4ea;color:#155724;border-color:#c3e6cb}
-    .alert-error{background:#f8d7da;color:#721c24;border-color:#f5c6cb}
-    .alert-info{background:#e3f2fd;color:#084298;border-color:#bbdefb}
+    .infobox{background:#f8f9fa;padding:1rem;border-left:4px solid #28a745;border-radius:8px;margin-bottom:1rem}
+    .alert{padding:.75rem;border-radius:6px;border:1px solid}
+    .alert-ok{background:#d4edda;border-color:#c3e6cb;color:#155724}
+    .alert-error{background:#f8d7da;border-color:#f5c6cb;color:#721c24}
+    .alert-info{background:#e3f2fd;border-color:#bbdefb;color:#0066cc}
 
-    .mono{font-family:"Courier New",monospace;font-weight:700}
-    .btn-muted{
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 16px;
-      border-radius:6px;
-      background:#6c757d;
-      color:#fff;
-      text-decoration:none;
-      font-weight:600;
+    /* CERTIFICATE */
+    .certificate-page{
+      background:#fff;border:8px solid #B8860B;border-radius:10px;
+      width:1123px;height:794px;padding:40px;margin:0 auto;
+      display:flex;flex-direction:column;position:relative;
+      font-family:"Times New Roman",serif
     }
-    .copy-btn{
-      margin-top:10px;
-      background:#198754;
-    }
+    .certificate-page h1{text-align:center;font-size:3.5rem;letter-spacing:3px}
+    .sub{text-align:center;letter-spacing:4px;color:#666}
+    .participant-name{text-align:center;font-size:3rem;font-style:italic;margin:40px 0}
+    .body-text{text-align:center;font-size:1.1rem;line-height:1.8;color:#555}
+    .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px}
 
-    textarea{
-      width:100%;
-      min-height:260px;
-      margin-top:10px;
-      padding:10px;
-      font-family:Courier New,monospace;
-      font-size:14px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      resize:vertical;
-    }
+    .sig-block{text-align:center;margin-top:auto}
+    .sig-img{max-height:75px;display:block;margin:0 auto 6px}
+    .sig-line{border-top:2px solid #333;width:260px;margin:0 auto 8px}
+    .cert-id{font-family:monospace;font-size:.9rem;color:#555}
+
+    .logo-grid{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
+    .logo-grid img{max-height:var(--logo-h);object-fit:contain}
+
+    /* FOOTER */
+    .footer{background:#1a73e8;color:#fff;margin-top:40px;padding:32px 0}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-bottom{text-align:center;margin-top:24px;font-size:14px}
   </style>
 </head>
 
@@ -65,117 +68,91 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
-      <a href="https://hackuniversity.vercel.app" target="_blank">Hack University Initiative</a>
+      <a href="https://hackuniversity.vercel.app" target="_blank"><strong>Hack University Initiative</strong></a>
     </div>
     <div class="nav-links">
-      <a href="https://codecrunchglobal.vercel.app">Code Crunch</a>
-      <a href="https://gdgatfiu.vercel.app">GDG FIU</a>
-      <a href="https://colorstackatfiu.vercel.app">ColorStack</a>
+      <a href="https://codecrunchglobal.vercel.app" class="nav-link">Code Crunch Worldwide</a>
+      <a href="https://gdgatfiu.vercel.app" class="nav-link">GDG @ FIU</a>
+      <a href="https://colorstackatfiu.vercel.app" class="nav-link">ColorStack @ FIU</a>
+      <a href="https://cahsiatfiu.vercel.app" class="nav-link">CAHSI @ FIU</a>
     </div>
   </div>
 </nav>
 
 <main class="container">
   <section class="surface">
-    <h2 style="text-align:center">Generate Your Volunteer Certificate</h2>
-    <p style="text-align:center;color:#666">Use the email you registered with</p>
+    <h2 style="text-align:center">GENERATE YOUR CERTIFICATE</h2>
+    <p style="text-align:center">Use the email you registered with</p>
 
     <div class="cg-row">
-      <input id="emailInput" class="cg-input" type="email" placeholder="you@example.com"/>
-      <button id="btn" class="cg-btn">Check</button>
+      <input id="certificateEmailInput" class="cg-input" placeholder="Enter your email"/>
+      <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
     </div>
 
-    <div id="result"></div>
+    <div id="certificateResult" style="margin-top:1rem"></div>
   </section>
 </main>
 
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-bottom">
+      © <span id="year"></span> Hack University • Code Crunch
+    </div>
+  </div>
+</footer>
+
 <script>
-const CERT_API_URL =
-  'https://script.google.com/macros/s/AKfycbz8kaKWeN2V5pevaRaeVpg-erjXqc-tP8jjVrsuSLrKtYKWMgwyuhaKEC2pb6p74q2p_Q/exec';
+const CERT_API_URL = "https://script.google.com/macros/s/AKfycbyznIaxn2G1PZ3t_xnKnxRVeBZrKmpz0wSA_cWIt4GqbaNNOQg4iWF4EKYgPftm4H2EKw/exec";
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g,
-  m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
-);
-const nl2br = s => esc(s).replace(/\n/g,'<br>');
+const esc = s => String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-document.getElementById('btn').onclick = run;
-document.getElementById('emailInput').addEventListener('keydown',e=>{ if(e.key==='Enter') run(); });
+function setStatus(type, html){
+  const cls = type==='ok'?'alert-ok':type==='error'?'alert-error':'alert-info';
+  document.getElementById('certificateResult').innerHTML =
+    `<div class="alert ${cls}">${html}</div>`;
+}
 
-async function run(){
-  const email = document.getElementById('emailInput').value.trim();
-  const out = document.getElementById('result');
+function toggleButton(b){
+  const btn=document.getElementById('generateBtn');
+  btn.disabled=b;
+  btn.textContent=b?'⏳ Checking…':'🏆 Generate Certificate';
+}
 
-  if(!email){
-    out.innerHTML = alertHTML('error','Please enter your email address.');
-    return;
-  }
+async function generateCertificate(){
+  const email=document.getElementById('certificateEmailInput').value.trim();
+  if(!email){setStatus('error','Enter your email');return}
 
-  document.getElementById('btn').disabled = true;
-  out.innerHTML = alertHTML('info','Checking volunteer records…');
+  toggleButton(true);
+  setStatus('info','Checking records…');
 
   try{
-    const res = await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`);
-    const data = await res.json();
-    const list = data?.certificates || [];
-
-    if(!list.length){
-      out.innerHTML = alertHTML('error','No volunteer record found for this email.');
-      return;
-    }
-
-    const r = list[0];
+    const res=await fetch(`${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`);
+    const data=await res.json();
+    const cert=data.certificates?.[0];
+    if(!cert){setStatus('error','No record found');return}
 
     let html = `
-      <div class="alert alert-info">
-        <strong>Ticket ID:</strong>
-        <span class="mono">${esc(r.ticketId || '—')}</span><br><br>
-        <a class="btn-muted" href="${esc(r.volunteerDatabaseUrl)}" target="_blank">
-          📄 Volunteer Database responses
-        </a>
-      </div>
+      <strong>Ticket ID:</strong> ${esc(cert.ticketId || '—')}<br>
+      <a href="${esc(cert.volunteerDatabaseUrl)}" target="_blank">Volunteer Database Entry</a><br><br>
     `;
 
-    if(r.status !== 'Certificate Available'){
-      html += `
-        <div class="alert alert-error">
-          <strong>Certificate Not Available</strong><br>
-          ${esc(r.message)}
-        </div>
-
-        <div class="alert alert-info">
-          <strong>Next Steps</strong><br><br>
-          ${nl2br(r.nextStepsMessage)}
-          <textarea id="emailTemplate">${r.nextStepsMessage}</textarea>
-          <button class="cg-btn copy-btn" onclick="copyEmail()">📋 Copy Email Template</button>
-        </div>
-      `;
-      out.innerHTML = html;
+    if(cert.status!=='Certificate Available'){
+      html += `<pre style="white-space:pre-wrap">${esc(cert.nextStepsMessage || cert.message)}</pre>`;
+      setStatus('error',html);
       return;
     }
 
-    html += alertHTML('ok','Certificate available. Opening certificate in a new tab…');
-    out.innerHTML = html;
-
-    openCertificatesInNewTab([normalizeCert(r.certificateData)], true);
+    setStatus('ok',html + '✅ Certificate verified. Opening…');
+    openCertificatesInNewTab([cert.certificateData]);
 
   }catch(e){
-    console.error(e);
-    out.innerHTML = alertHTML('error','Failed to load records.');
+    setStatus('error','Error checking records');
   }finally{
-    document.getElementById('btn').disabled = false;
+    toggleButton(false);
   }
 }
 
-function alertHTML(type,msg){
-  return `<div class="alert alert-${type}">${msg}</div>`;
-}
-
-function copyEmail(){
-  const ta = document.getElementById('emailTemplate');
-  ta.select();
-  document.execCommand('copy');
-  alert('Email template copied to clipboard.');
-}
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 
 </body>
