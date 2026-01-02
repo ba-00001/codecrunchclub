@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hack University — Event Agendas</title>
+  <title>Hack University — Perks</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -221,6 +221,38 @@
     .nav-links { display:flex; gap:30px; }
     .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
     .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
+
+    /* Info note under title (added) */
+    .perks-note{
+      margin-top: 10px;
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-left: 5px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      padding: 14px 14px;
+      box-shadow: var(--shadow-sm);
+      color: var(--color-text-muted);
+      font-size: 14px;
+      max-width: 56rem;
+    }
+    .perks-note strong{ color: var(--color-text); }
+    .perks-note a{ color: var(--color-primary); font-weight:800; text-decoration: underline; }
+    .perks-note a:hover{ text-decoration:none; }
+
+    /* Perks button state badges (keeps same button style) */
+    .btn-soon{
+      background:#f3f4f6 !important;
+      color:#6b7280 !important;
+      border:1px solid #d1d5db;
+      pointer-events:none;
+      cursor:not-allowed;
+      box-shadow:none !important;
+      transform:none !important;
+    }
+    .btn-verify{
+      background: var(--color-primary) !important;
+      color:#fff !important;
+    }
   </style>
 </head>
 
@@ -250,15 +282,27 @@
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
         <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
         <span aria-hidden="true"> / </span>
-        Event Agendas 
+        Perks
       </p>
+
+      <!-- UPDATED TITLE -->
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Event Agendas
+        Perks • APIs • Credits • Swag
       </h1>
+
+      <!-- UPDATED DESCRIPTION (as requested) -->
       <p class="mt-2 text-gray-600 max-w-3xl">
-        This page lists each event’s <strong>agenda</strong> (the schedule/program flow), instead of linking to the event website.
-        For events where the agenda is not finalized, you’ll see “Agenda coming soon.”
+        This page lists each event’s perks bundle (APIs, credits, subscriptions, swag, prizes, and more).
+        If a bundle is not ready yet, you’ll see “Perks coming soon.”
+        Reddem of perks require verification via the One-Stop Form using a non-school Gmail (when applicable).
       </p>
+
+      <!-- Extra small verification note (helpful + same format) -->
+      <div class="perks-note">
+        <strong>Verification reminder:</strong> Some sponsor perks require the
+        <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">One-Stop Form</a>
+        (use a <strong>non-school Gmail</strong> when applicable).
+      </div>
     </div>
   </header>
 
@@ -315,11 +359,11 @@
         </li>
         <li>
           <a class="chip" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" aria-describedby="tip-reg" target="_blank" rel="noopener">
-            <i class="ico fas fa-user-plus" aria-hidden="true"></i> Hackathon Registration
+            <i class="ico fas fa-user-plus" aria-hidden="true"></i> One-Stop Form (Perks Verification)
           </a>
           <div class="tip" id="tip-reg" role="tooltip">
-            <p>Register for upcoming hackathons and secure your spot.</p>
-            <a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">Register Now</a>
+            <p>Required for perks verification (use a non-school Gmail when applicable).</p>
+            <a class="btn" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">Open Form</a>
           </div>
         </li>
         <li>
@@ -363,10 +407,12 @@
 
     <!-- EVENTS -->
     <div class="hackathons-section">
-      <h2>📅 EVENT AGENDAS — All Schedules Listed in Eastern Time (ET)</h2>
+      <!-- UPDATED SECTION TITLE -->
+      <h2>🎁 PERKS BUNDLES — APIs • Credits • Swag</h2>
 
+      <!-- UPDATED SUBTEXT -->
       <p class="mt-2 text-gray-600 max-w-3xl">
-        Each card shows the event details + a button to view the agenda. If an agenda link isn’t available yet, the button will say “Agenda (Soon)”.
+        Each card shows the event details + a button to view the perks bundle. If perks aren’t published yet, the button will say “Perks (Soon)”.
       </p>
       <br>
 
@@ -556,49 +602,113 @@
       return `<div class="hours-badge" title="Estimated hacking time">${txt}</div>`;
     }
 
-    /* ---------- Agenda helpers (NEW) ---------- */
-    function isAgendaAvailable(h){
-      const a = (h.agendaUrl || '').trim();
-      return !!a && !a.toLowerCase().includes('comingsoon');
-    }
-    function agendaButton(h){
-      // show agenda link if available; otherwise go to OneStop if desired or just disabled button
-      if (isAgendaAvailable(h)) {
-        return {
-          url: h.agendaUrl,
-          label: 'Agenda',
-          noteHtml: ''
-        };
-      }
+/* ---------- Perks helpers (FIXED + robust) ---------- */
+function isValidPerksUrl(url) {
+  const u = (url || '').trim();
+  if (!u || u === '#' || u.toLowerCase() === 'https://') return false;
 
-      // If you want One-Stop form as fallback for "agenda not ready" events, keep this logic:
-      // - For OneStop events, we nudge registration
-      if (h.registrationViaOneStop === true) {
-        return {
-          url: ONE_STOP_FORM_URL,
-          label: 'Register',
-          noteHtml: `
-            <div class="text-yellow-600 font-semibold text-sm">
-              Agenda coming soon — register now using the One-Stop Form.
-            </div>
-          `
-        };
-      }
+  // basic "looks like a URL" check
+  try {
+    const parsed = new URL(u);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
 
-      // Default: agenda coming soon, button disabled
+function perksState(h) {
+  const status = (h.perksStatus || '').toLowerCase().trim();
+  const url = (h.perksUrl || '').trim();
+
+  // If a real URL exists, always treat as available (even if event is past)
+  if (isValidPerksUrl(url)) return 'available';
+
+  // Otherwise use explicit status if provided
+  if (status === 'na' || status === 'not-available' || status === 'unavailable') return 'na';
+  if (status === 'available') return 'available'; // optional override (still needs URL to enable button)
+  if (status === 'soon' || status === 'coming-soon' || status === 'pending') return 'soon';
+
+  // Default behavior if no status set and no valid url
+  return 'soon';
+}
+
+function isEventPast(h) {
+  const now = nowInMiami();
+  const end = new Date(
+    new Date(h.endDate + "T23:59:59").toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
+  return now > end;
+}
+
+function perksButton(h) {
+  const state = perksState(h);
+  const past = isEventPast(h);
+
+  // ✅ Perks available (URL exists) — button always active
+  if (state === 'available' && isValidPerksUrl(h.perksUrl)) {
+
+    // ColorStack redemption message
+    if ((h.perksRedemption || '').toLowerCase() === 'colorstack-slack') {
       return {
-        url: '#',
-        label: 'Agenda (Soon)',
+        url: h.perksUrl,
+        label: 'Perks Bundle',
         noteHtml: `
-          <div class="text-yellow-600 font-semibold text-sm">
-            Agenda coming soon.
+          <div class="text-gray-500 font-semibold text-sm">
+            ${past
+              ? 'Event completed — perks window closed.'
+              : 'Redemption is handled through the ColorStack Slack — see the agenda post for details.'}
           </div>
         `
       };
     }
 
-    /* ---------- Hackathon data (UPDATED: add agendaUrl) ---------- */
-    // Replace url -> agendaUrl (keep url only if you still want it, but button will use agendaUrl now)
+    // Default (One-Stop)
+    return {
+      url: h.perksUrl,
+      label: 'Perks Bundle',
+      noteHtml: `
+        <div class="text-gray-500 font-semibold text-sm">
+          ${past
+            ? 'Event completed — perks window closed.'
+            : 'Redemption requires One-Stop Form verification (when applicable).'}
+        </div>
+      `
+    };
+  }
+
+  // 🚫 No perks for this event (disable)
+  if (state === 'na') {
+    return {
+      url: '#',
+      label: 'Perks (N/A)',
+      noteHtml: `
+        <div class="text-gray-500 font-semibold text-sm">
+          Perks not available for this event.
+        </div>
+      `
+    };
+  }
+
+  // ⏳ Perks coming soon (disable because URL not added yet)
+  return {
+    url: '#',
+    label: 'Perks (Soon)',
+    noteHtml: `
+      <div class="text-yellow-600 font-semibold text-sm">
+        Perks information coming soon — check back later.
+        <span class="text-gray-600 font-normal">
+          Redemption requires One-Stop Form verification (when applicable).
+        </span>
+      </div>
+    `
+  };
+}
+
+
+
+
+    /* ---------- Hackathon data (UPDATED: perksUrl/perksStatus) ---------- */
+    // Replace albumUrl/albumStatus with perksUrl/perksStatus (you can plug real perk pages later)
     const hackathons = [
       {
         name: '🪖 305 Hackathon: Edition Nov 2025 - Session A (Online)',
@@ -607,7 +717,8 @@
         endDate:   '2025-11-15',
         modality:  'virtual',
         hoursPreset: '1w',
-        agendaUrl: 'https://305hacknov2025.vercel.app/#agenda'
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
       },
       {
         name: '🪖 305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
@@ -617,7 +728,8 @@
         modality:  'in-person',
         hackStartTime: '2025-11-15T09:00',
         hackEndTime:   '2025-11-15T21:00',
-        agendaUrl: 'https://305hacknov2025.vercel.app/#agenda'
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
       },
 
       {
@@ -627,7 +739,8 @@
         endDate: '2025-12-06',
         modality: 'virtual',
         hoursPreset: '1w',
-        agendaUrl: 'https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2025-CodeFest-SA-Edition-Dec25.md'
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
       },
       {
         name: '🎆 CodeFest 2025 - Session B (In-person)',
@@ -637,7 +750,8 @@
         modality: 'in-person',
         hackStartTime: '2025-12-13T09:00',
         hackEndTime: '2025-12-13T21:00',
-        agendaUrl: 'https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2025-CodeFest-SB-Edition-Dec25.md'
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
       },
 
       {
@@ -647,7 +761,9 @@
         modality: 'virtual',
         hackStartTime: '2025-12-19T00:00',
         hackEndTime: '2026-01-12T23:59',
-        agendaUrl: 'https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929'
+        // Example: you can link to a perks post (Slack message / Devpost / docs) once ready
+        perksUrl: 'https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929',
+        perksRedemption: 'colorstack-slack'
       },
 
       {
@@ -658,8 +774,8 @@
         modality: 'virtual',
         hackStartTime: '2026-01-16T22:00',
         hackEndTime: '2026-01-24T22:00',
-        agendaUrl: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html#agenda',
-        registrationViaOneStop: false
+        perksUrl: '',
+        perksStatus: 'available'
       },
       {
         name: '🏥 305 Hackathon Edition Jan 2026 - Session B (In-person)',
@@ -669,8 +785,8 @@
         modality: 'in-person',
         hackStartTime: '2026-01-24T09:00',
         hackEndTime: '2026-01-24T22:00',
-        agendaUrl: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html#agenda',
-        registrationViaOneStop: false
+        perksUrl: '',
+        perksStatus: 'available'
       },
 
       {
@@ -681,8 +797,8 @@
         modality: 'virtual',
         hackStartTime: '2026-01-30T22:00',
         hackEndTime: '2026-02-14T22:00',
-        agendaUrl: '', // <- agenda not ready
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '🤖 305 Hackathon Edition Feb 2026 - Session B (In-person)',
@@ -692,8 +808,8 @@
         modality: 'in-person',
         hackStartTime: '2026-02-07T09:00',
         hackEndTime: '2026-02-07T22:00',
-        agendaUrl: '', // <- agenda not ready
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -704,8 +820,8 @@
         modality: 'virtual',
         hackStartTime: '2026-03-06T09:00',
         hackEndTime: '2026-03-14T21:00',
-        agendaUrl: 'https://hackfiestamiami2026.vercel.app/#agenda',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '🔥 Hack Fiesta Miami 2026 - Session B (In-person)',
@@ -715,8 +831,8 @@
         modality: 'in-person',
         hackStartTime: '2026-03-14T09:00',
         hackEndTime: '2026-03-14T21:00',
-        agendaUrl: 'https://hackfiestamiami2026.vercel.app/#agenda',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -727,8 +843,8 @@
         modality: 'virtual',
         hackStartTime: '2026-04-03T09:00',
         hackEndTime: '2026-04-11T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '⚖️ 305 Hackathon Edition Apr 2026 - Session B (In-person)',
@@ -738,8 +854,8 @@
         modality: 'in-person',
         hackStartTime: '2026-04-11T09:00',
         hackEndTime: '2026-04-11T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -750,8 +866,8 @@
         modality: 'virtual',
         hackStartTime: '2026-05-01T09:00',
         hackEndTime: '2026-05-09T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -762,8 +878,8 @@
         modality: 'virtual',
         hackStartTime: '2026-06-05T09:00',
         hackEndTime: '2026-06-13T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -774,8 +890,8 @@
         modality: 'virtual',
         hackStartTime: '2026-07-03T09:00',
         hackEndTime: '2026-07-11T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -786,8 +902,8 @@
         modality: 'virtual',
         hackStartTime: '2026-08-07T09:00',
         hackEndTime: '2026-08-15T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -798,8 +914,8 @@
         modality: 'virtual',
         hackStartTime: '2026-09-04T09:00',
         hackEndTime: '2026-09-12T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '🌱 305 Hackathon Edition Sep 2026 - Session B (In-person)',
@@ -809,8 +925,8 @@
         modality: 'in-person',
         hackStartTime: '2026-09-12T09:00',
         hackEndTime: '2026-09-12T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -821,8 +937,8 @@
         modality: 'virtual',
         hackStartTime: '2026-09-25T09:00',
         hackEndTime: '2026-10-19T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '👑 EmpowHER Hackathon 2026 - Session B (In-person)',
@@ -832,8 +948,8 @@
         modality: 'in-person',
         hackStartTime: '2026-10-03T09:00',
         hackEndTime: '2026-10-03T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -844,8 +960,8 @@
         modality: 'virtual',
         hackStartTime: '2026-10-30T09:00',
         hackEndTime: '2026-10-07T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '🪖 305 Hackathon Nov 2026 - Session B (In-person)',
@@ -855,8 +971,8 @@
         modality: 'in-person',
         hackStartTime: '2026-11-07T09:00',
         hackEndTime: '2026-11-07T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
       {
@@ -867,8 +983,8 @@
         modality: 'virtual',
         hackStartTime: '2026-11-13T09:00',
         hackEndTime: '2026-11-21T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
       {
         name: '🎆 CodeFest Hackathon 2026 - Session B (In-person)',
@@ -878,18 +994,76 @@
         modality: 'in-person',
         hackStartTime: '2026-11-21T09:00',
         hackEndTime: '2026-11-21T21:00',
-        agendaUrl: '',
-        registrationViaOneStop: true
+        perksUrl: '',
+        perksStatus: 'soon'
       },
 
-      // Past events (you can also add agendaUrl for these)
-      { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', hoursPreset: '3d', agendaUrl: 'https://305hackfall2025.vercel.app/#agenda' },
-      { name: '👑 EmpowHER Hackathon 2025', startDate: '2025-10-13', endDate: '2025-10-20', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://empowherhack2025.vercel.app/#agenda' },
-      { name: '👑 EmpowHER HackDAY 2025', startDate: '2025-10-18', endDate: '2025-10-18', modality: 'in-person', hoursPreset: '1d', agendaUrl: 'https://empowherhackdayfall25.vercel.app/#agenda' },
-      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://summercodexhack2025.vercel.app/#agenda' },
-      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://codestormhack2025.vercel.app/#agenda' },
-      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', hoursPreset: '3d', agendaUrl: 'https://305hackspring2025.vercel.app/#agenda' },
-      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', hoursLabel: '36', agendaUrl: 'https://hackfiestamiami2025.vercel.app/#agenda' }
+      // Past events examples
+      {
+        name: '🔥 HackFiesta Miami Edition 2025',
+        startDate: '2025-03-21',
+        endDate: '2025-03-23',
+        modality: 'virtual',
+        hoursLabel: '36',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '⚡ 305 Hackathon Edition Mar 2025',
+        startDate: '2025-03-29',
+        endDate: '2025-03-31',
+        modality: 'hybrid',
+        hoursPreset: '3d',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '⛈️ CodeStorm Edition 2025',
+        startDate: '2025-05-19',
+        endDate: '2025-05-26',
+        modality: 'virtual',
+        hoursPreset: '1w',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '🌟 SummerCodeX Edition 2025',
+        startDate: '2025-07-21',
+        endDate: '2025-07-28',
+        modality: 'virtual',
+        hoursPreset: '1w',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '🏙️ 305 Hackathon: Edition Sep 2025',
+        startDate: '2025-09-19',
+        endDate: '2025-09-21',
+        modality: 'in-person',
+        hoursPreset: '3d',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2025 - Session A (Online/Synchronous)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2025-10-13',
+        endDate: '2025-10-20',
+        modality: 'virtual',
+        hoursLabel: '192',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2025 - Session B (In-person)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2025-10-13',
+        endDate: '2025-10-13',
+        modality: 'in-person',
+        hoursPreset: '1d',
+        perksUrl: 'https://codecrunchglobal.vercel.app/404.html',          // add link when ready
+        perksStatus: 'soon'
+      }
     ];
 
     function getModalityClass(modality) {
@@ -928,13 +1102,12 @@
         const tz = getETAbbrev();
         const dateLine = `${range} (${tz})`;
 
-        const btn = agendaButton(h);
+        const btn = perksButton(h);
 
-        // Disable button styling if agenda isn't ready and we aren't linking to OneStop
         const isDisabled = (btn.url === '#');
         const linkAttrs = isDisabled
-          ? `href="#" aria-disabled="true" tabindex="-1" onclick="return false;" style="opacity:.6; cursor:not-allowed;"`
-          : `href="${btn.url}" target="_blank" rel="noopener"`;
+          ? `href="#" aria-disabled="true" tabindex="-1" onclick="return false;" class="hackathon-link btn-soon"`
+          : `href="${btn.url}" target="_blank" rel="noopener" class="hackathon-link"`;
 
         const html = `
           <div class="hackathon-item">
@@ -950,9 +1123,7 @@
               ${computeHoursBadge(h)}
               <div class="hackathon-countdown ${status.cls}">${status.text}</div>
 
-              <a ${linkAttrs} class="hackathon-link">
-                ${btn.label}
-              </a>
+              <a ${linkAttrs}>${btn.label}</a>
             </div>
           </div>
         `;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hack University — Event Agendas</title>
+  <title>Hack University — Photo Albums</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -221,6 +221,20 @@
     .nav-links { display:flex; gap:30px; }
     .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
     .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
+
+    /* Make the Team card behave like a hackathon card and span full width */
+    .team-card-as-item{
+      grid-column: 1 / -1;
+    }
+    /* Optional: give it the same hover feel as other cards */
+    .team-card-as-item .team-album-card{
+      transition: all var(--transition-base);
+    }
+    .team-card-as-item .team-album-card:hover{
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateX(3px);
+    }
   </style>
 </head>
 
@@ -237,7 +251,7 @@
         <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
         <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
         <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI @ FIU</a>
         <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
         <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
       </div>
@@ -250,14 +264,14 @@
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
         <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
         <span aria-hidden="true"> / </span>
-        Event Agendas 
+        Photo Albums
       </p>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Event Agendas
+        Photo Albums
       </h1>
       <p class="mt-2 text-gray-600 max-w-3xl">
-        This page lists each event’s <strong>agenda</strong> (the schedule/program flow), instead of linking to the event website.
-        For events where the agenda is not finalized, you’ll see “Agenda coming soon.”
+        This page lists each event’s <strong>photo album</strong> (highlights and media), instead of linking to the event website.
+        For events where the album is not finalized, you’ll see “Album coming soon.”
       </p>
     </div>
   </header>
@@ -363,10 +377,10 @@
 
     <!-- EVENTS -->
     <div class="hackathons-section">
-      <h2>📅 EVENT AGENDAS — All Schedules Listed in Eastern Time (ET)</h2>
+      <h2>📸 PHOTO ALBUMS — Event Highlights & Media</h2>
 
       <p class="mt-2 text-gray-600 max-w-3xl">
-        Each card shows the event details + a button to view the agenda. If an agenda link isn’t available yet, the button will say “Agenda (Soon)”.
+        Each card shows the event details + a button to view the photo album. If an album link isn’t available yet, the button will say “Album (Soon)”.
       </p>
       <br>
 
@@ -374,7 +388,28 @@
         <h3>🚀 UPCOMING</h3>
         <p>Sorted by date</p>
       </div>
-      <div class="hackathons-list" id="upcoming-events"></div>
+
+      <div class="hackathons-list" id="upcoming-events">
+        <!-- Meet the Team (PINNED FIRST CARD) -->
+        <div class="hackathon-item team-card-as-item" role="region" aria-label="Meet the Team album">
+          <div class="hackathon-info">
+            <div class="hackathon-name">Meet the Team – Organizations Album Featuring All Our Members</div>
+            <div class="hackathon-theme">Check the album or add your pics with us here • Google Drive album access is limited to team members.</div>
+            <div class="hackathon-date">Always available</div>
+          </div>
+
+          <div class="hackathon-actions">
+            <a class="hackathon-link" href="https://hackuniversity-album1.vercel.app" target="_blank" rel="noopener">
+              <i class="fas fa-image" aria-hidden="true"></i> Check / Add Photos
+            </a>
+
+            <a class="hackathon-link" style="background:#fff;color:var(--color-primary);border:1px solid #d2e3fc"
+               href="https://hackuniversity-album12.vercel.app" target="_blank" rel="noopener">
+              <i class="fab fa-google-drive" aria-hidden="true"></i> Google Drive Album (Team Only)
+            </a>
+          </div>
+        </div>
+      </div>
 
       <div class="section-header" style="margin-top: 48px;">
         <h3>📚 PAST</h3>
@@ -556,49 +591,66 @@
       return `<div class="hours-badge" title="Estimated hacking time">${txt}</div>`;
     }
 
-    /* ---------- Agenda helpers (NEW) ---------- */
-    function isAgendaAvailable(h){
-      const a = (h.agendaUrl || '').trim();
-      return !!a && !a.toLowerCase().includes('comingsoon');
+    /* ---------- Photo Album helpers (UPDATED: adds "not available") ---------- */
+    function albumState(h){
+      const status = (h.albumStatus || '').toLowerCase();
+      const url = (h.albumUrl || '').trim();
+
+      // If a real URL exists, always treat as available
+      if (url) return 'available';
+
+      // Otherwise use explicit status if provided
+      if (status === 'na' || status === 'not-available' || status === 'unavailable') return 'na';
+      if (status === 'soon' || status === 'coming-soon' || status === 'pending') return 'soon';
+
+      // Default behavior if no status set and no url
+      return 'soon';
     }
-    function agendaButton(h){
-      // show agenda link if available; otherwise go to OneStop if desired or just disabled button
-      if (isAgendaAvailable(h)) {
+
+    function albumButton(h){
+      const state = albumState(h);
+
+      if (state === 'available') {
+        return { url: h.albumUrl, label: 'Photo Album', noteHtml: '' };
+      }
+
+      if (state === 'na') {
         return {
-          url: h.agendaUrl,
-          label: 'Agenda',
-          noteHtml: ''
+          url: '#',
+          label: 'Album (N/A)',
+          noteHtml: `
+            <div class="text-gray-500 font-semibold text-sm">
+              Album not available for this event.
+            </div>
+          `
         };
       }
 
-      // If you want One-Stop form as fallback for "agenda not ready" events, keep this logic:
-      // - For OneStop events, we nudge registration
+      // state === 'soon'
       if (h.registrationViaOneStop === true) {
         return {
           url: ONE_STOP_FORM_URL,
           label: 'Register',
           noteHtml: `
             <div class="text-yellow-600 font-semibold text-sm">
-              Agenda coming soon — register now using the One-Stop Form.
+              Album coming soon — register now using the One-Stop Form.
             </div>
           `
         };
       }
 
-      // Default: agenda coming soon, button disabled
       return {
         url: '#',
-        label: 'Agenda (Soon)',
+        label: 'Album (Soon)',
         noteHtml: `
           <div class="text-yellow-600 font-semibold text-sm">
-            Agenda coming soon.
+            Album coming soon.
           </div>
         `
       };
     }
 
-    /* ---------- Hackathon data (UPDATED: add agendaUrl) ---------- */
-    // Replace url -> agendaUrl (keep url only if you still want it, but button will use agendaUrl now)
+    /* ---------- Hackathon data ---------- */
     const hackathons = [
       {
         name: '🪖 305 Hackathon: Edition Nov 2025 - Session A (Online)',
@@ -607,7 +659,7 @@
         endDate:   '2025-11-15',
         modality:  'virtual',
         hoursPreset: '1w',
-        agendaUrl: 'https://305hacknov2025.vercel.app/#agenda'
+        albumUrl: 'https://photos.app.goo.gl/zCuBbq1fxYJavWnm9'
       },
       {
         name: '🪖 305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
@@ -617,7 +669,7 @@
         modality:  'in-person',
         hackStartTime: '2025-11-15T09:00',
         hackEndTime:   '2025-11-15T21:00',
-        agendaUrl: 'https://305hacknov2025.vercel.app/#agenda'
+        albumUrl: 'https://photos.app.goo.gl/zCuBbq1fxYJavWnm9'
       },
 
       {
@@ -627,7 +679,7 @@
         endDate: '2025-12-06',
         modality: 'virtual',
         hoursPreset: '1w',
-        agendaUrl: 'https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2025-CodeFest-SA-Edition-Dec25.md'
+        albumUrl: 'https://photos.app.goo.gl/9U7RVWPZ3h5uKeGZ7'
       },
       {
         name: '🎆 CodeFest 2025 - Session B (In-person)',
@@ -637,7 +689,7 @@
         modality: 'in-person',
         hackStartTime: '2025-12-13T09:00',
         hackEndTime: '2025-12-13T21:00',
-        agendaUrl: 'https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2025-CodeFest-SB-Edition-Dec25.md'
+        albumUrl: 'https://photos.app.goo.gl/9U7RVWPZ3h5uKeGZ7'
       },
 
       {
@@ -647,7 +699,7 @@
         modality: 'virtual',
         hackStartTime: '2025-12-19T00:00',
         hackEndTime: '2026-01-12T23:59',
-        agendaUrl: 'https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929'
+        albumUrl: 'https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929'
       },
 
       {
@@ -658,7 +710,7 @@
         modality: 'virtual',
         hackStartTime: '2026-01-16T22:00',
         hackEndTime: '2026-01-24T22:00',
-        agendaUrl: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html#agenda',
+        albumUrl: 'https://photos.app.goo.gl/KVmw3Jyd5bAgvFwy6',
         registrationViaOneStop: false
       },
       {
@@ -669,7 +721,7 @@
         modality: 'in-person',
         hackStartTime: '2026-01-24T09:00',
         hackEndTime: '2026-01-24T22:00',
-        agendaUrl: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html#agenda',
+        albumUrl: 'https://photos.app.goo.gl/KVmw3Jyd5bAgvFwy6',
         registrationViaOneStop: false
       },
 
@@ -681,7 +733,7 @@
         modality: 'virtual',
         hackStartTime: '2026-01-30T22:00',
         hackEndTime: '2026-02-14T22:00',
-        agendaUrl: '', // <- agenda not ready
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -692,7 +744,7 @@
         modality: 'in-person',
         hackStartTime: '2026-02-07T09:00',
         hackEndTime: '2026-02-07T22:00',
-        agendaUrl: '', // <- agenda not ready
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -704,7 +756,7 @@
         modality: 'virtual',
         hackStartTime: '2026-03-06T09:00',
         hackEndTime: '2026-03-14T21:00',
-        agendaUrl: 'https://hackfiestamiami2026.vercel.app/#agenda',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -715,7 +767,7 @@
         modality: 'in-person',
         hackStartTime: '2026-03-14T09:00',
         hackEndTime: '2026-03-14T21:00',
-        agendaUrl: 'https://hackfiestamiami2026.vercel.app/#agenda',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -727,7 +779,7 @@
         modality: 'virtual',
         hackStartTime: '2026-04-03T09:00',
         hackEndTime: '2026-04-11T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -738,7 +790,7 @@
         modality: 'in-person',
         hackStartTime: '2026-04-11T09:00',
         hackEndTime: '2026-04-11T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -750,7 +802,7 @@
         modality: 'virtual',
         hackStartTime: '2026-05-01T09:00',
         hackEndTime: '2026-05-09T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -762,7 +814,7 @@
         modality: 'virtual',
         hackStartTime: '2026-06-05T09:00',
         hackEndTime: '2026-06-13T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -774,7 +826,7 @@
         modality: 'virtual',
         hackStartTime: '2026-07-03T09:00',
         hackEndTime: '2026-07-11T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -786,7 +838,7 @@
         modality: 'virtual',
         hackStartTime: '2026-08-07T09:00',
         hackEndTime: '2026-08-15T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -798,7 +850,7 @@
         modality: 'virtual',
         hackStartTime: '2026-09-04T09:00',
         hackEndTime: '2026-09-12T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -809,7 +861,7 @@
         modality: 'in-person',
         hackStartTime: '2026-09-12T09:00',
         hackEndTime: '2026-09-12T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -821,7 +873,7 @@
         modality: 'virtual',
         hackStartTime: '2026-09-25T09:00',
         hackEndTime: '2026-10-19T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -832,7 +884,7 @@
         modality: 'in-person',
         hackStartTime: '2026-10-03T09:00',
         hackEndTime: '2026-10-03T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -844,7 +896,7 @@
         modality: 'virtual',
         hackStartTime: '2026-10-30T09:00',
         hackEndTime: '2026-10-07T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -855,7 +907,7 @@
         modality: 'in-person',
         hackStartTime: '2026-11-07T09:00',
         hackEndTime: '2026-11-07T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
@@ -867,7 +919,7 @@
         modality: 'virtual',
         hackStartTime: '2026-11-13T09:00',
         hackEndTime: '2026-11-21T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
       {
@@ -878,18 +930,73 @@
         modality: 'in-person',
         hackStartTime: '2026-11-21T09:00',
         hackEndTime: '2026-11-21T21:00',
-        agendaUrl: '',
+        albumUrl: '',
         registrationViaOneStop: true
       },
 
-      // Past events (you can also add agendaUrl for these)
-      { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', hoursPreset: '3d', agendaUrl: 'https://305hackfall2025.vercel.app/#agenda' },
-      { name: '👑 EmpowHER Hackathon 2025', startDate: '2025-10-13', endDate: '2025-10-20', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://empowherhack2025.vercel.app/#agenda' },
-      { name: '👑 EmpowHER HackDAY 2025', startDate: '2025-10-18', endDate: '2025-10-18', modality: 'in-person', hoursPreset: '1d', agendaUrl: 'https://empowherhackdayfall25.vercel.app/#agenda' },
-      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://summercodexhack2025.vercel.app/#agenda' },
-      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', hoursPreset: '1w', agendaUrl: 'https://codestormhack2025.vercel.app/#agenda' },
-      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', hoursPreset: '3d', agendaUrl: 'https://305hackspring2025.vercel.app/#agenda' },
-      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', hoursLabel: '36', agendaUrl: 'https://hackfiestamiami2025.vercel.app/#agenda' }
+      // Past events
+      {
+        name: '🔥 HackFiesta Miami Edition 2025',
+        startDate: '2025-03-21',
+        endDate: '2025-03-23',
+        modality: 'virtual',
+        hoursLabel: '36',
+        albumUrl: '',
+        albumStatus: 'na'
+      },
+      {
+        name: '⚡ 305 Hackathon Edition Mar 2025',
+        startDate: '2025-03-29',
+        endDate: '2025-03-31',
+        modality: 'hybrid',
+        hoursPreset: '3d',
+        albumUrl: '',
+        albumStatus: 'na'
+      },
+      {
+        name: '⛈️ CodeStorm Edition 2025',
+        startDate: '2025-05-19',
+        endDate: '2025-05-26',
+        modality: 'virtual',
+        hoursPreset: '1w',
+        albumUrl: '',
+        albumStatus: 'na'
+      },
+      {
+        name: '🌟 SummerCodeX Edition 2025',
+        startDate: '2025-07-21',
+        endDate: '2025-07-28',
+        modality: 'virtual',
+        hoursPreset: '1w',
+        albumUrl: '',
+        albumStatus: 'na'
+      },
+      {
+        name: '🏙️ 305 Hackathon: Edition Sep 2025',
+        startDate: '2025-09-19',
+        endDate: '2025-09-21',
+        modality: 'in-person',
+        hoursPreset: '3d',
+        albumUrl: 'https://photos.app.goo.gl/D29qiuz4nkeTKTs86'
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2026 - Session A (Online/Synchronous)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2025-10-13',
+        endDate: '2025-10-20',
+        modality: 'virtual',
+        hoursLabel: '192',
+        albumUrl: 'https://photos.app.goo.gl/aXZn5AVC2HeMcu8V7'
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2026 - Session B (In-person)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2025-10-13',
+        endDate: '2025-10-13',
+        modality: 'in-person',
+        hoursPreset: '1d',
+        albumUrl: 'https://photos.app.goo.gl/aXZn5AVC2HeMcu8V7'
+      }
     ];
 
     function getModalityClass(modality) {
@@ -911,10 +1018,16 @@
       }
     }
 
+    /* ✅ UPDATED: preserves the pinned Team card on every re-render */
     function renderHackathons() {
       const now = nowInMiami();
       const upcoming = [];
       const past = [];
+
+      // Capture pinned Team card BEFORE overwrite
+      const upcomingEl = document.getElementById('upcoming-events');
+      const pinnedTeamCardEl = upcomingEl ? upcomingEl.querySelector('.team-card-as-item') : null;
+      const pinnedTeamHTML = pinnedTeamCardEl ? pinnedTeamCardEl.outerHTML : '';
 
       const sorted = [...hackathons].sort((a, b) => asLocalDate(a.startDate) - asLocalDate(b.startDate));
 
@@ -928,9 +1041,8 @@
         const tz = getETAbbrev();
         const dateLine = `${range} (${tz})`;
 
-        const btn = agendaButton(h);
+        const btn = albumButton(h);
 
-        // Disable button styling if agenda isn't ready and we aren't linking to OneStop
         const isDisabled = (btn.url === '#');
         const linkAttrs = isDisabled
           ? `href="#" aria-disabled="true" tabindex="-1" onclick="return false;" style="opacity:.6; cursor:not-allowed;"`
@@ -965,9 +1077,13 @@
         else upcoming.push(html);
       });
 
-      document.getElementById('upcoming-events').innerHTML = upcoming.length > 0
-        ? upcoming.join('')
-        : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No upcoming events at this time.</p>';
+      const upcomingHTML =
+        (pinnedTeamHTML ? pinnedTeamHTML : '') +
+        (upcoming.length > 0
+          ? upcoming.join('')
+          : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No upcoming events at this time.</p>');
+
+      document.getElementById('upcoming-events').innerHTML = upcomingHTML;
 
       document.getElementById('past-events').innerHTML = past.length > 0
         ? past.join('')
