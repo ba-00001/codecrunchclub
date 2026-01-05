@@ -73,156 +73,79 @@
       border-color: #fca5a5;
     }
 
-     /* =========================
-       Navbar (clean & sticky)
-       ========================= */
-    .navbar {
-      background: var(--color-bg-white);
-      border-bottom: 1px solid var(--color-border);
-      padding: 12px 0;
-      position: sticky; top: 0; z-index: 1000;
-      box-shadow: var(--shadow-sm);
-    }
-    .nav-container {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 20px;
-    }
-    .nav-brand { font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing:.2px; }
-    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
-    .nav-link {
-      color: var(--color-text-muted); font-weight: 500; font-size: 14px;
-      padding: 8px 12px; border-radius: var(--radius-sm);
-      transition: all var(--transition-base);
-    }
-    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
-
-
+  
 
     
-  /* =========================
-     Navbar (clean & sticky)
-     ========================= */
-  .navbar{
-    background: var(--color-bg-white);
-    border-bottom: 1px solid var(--color-border);
-    padding: 12px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-sm);
+/* =========================
+   Navbar (clean & sticky)
+   ========================= */
+.navbar {
+  background: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 12px 0;
+  position: sticky; top: 0; z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+.nav-container {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px;
+}
+.nav-brand { font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing:.2px; }
+.nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.nav-link {
+  color: var(--color-text-muted); font-weight: 500; font-size: 14px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+}
+.nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+
+/* =========================
+   Navbar (mobile toggle)
+   ========================= */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-white);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+.nav-toggle:hover {
+  background: #f1f3f4;
+  border-color: #d2e3fc;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .nav-toggle { display: inline-flex; }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
   }
 
-  .nav-container{
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    gap: 12px;
-  }
+  .nav-links.is-open { display: flex; }
 
-  .nav-brand a{
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--color-primary);
-    letter-spacing: .2px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: var(--radius-sm);
-    padding: 6px 8px;
-    transition: background var(--transition-base), color var(--transition-base);
-  }
-
-  .nav-brand a:hover{
-    background: #f1f3f4;
-    color: var(--color-primary-hover);
-  }
-
-  .nav-links{
-    display: flex;
-    gap: 10px;
+  .nav-container {
     flex-wrap: wrap;
-    align-items: center;
+    gap: 10px;
   }
 
-  .nav-link{
-    color: var(--color-text-muted);
-    font-weight: 600;
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    transition: background var(--transition-base), color var(--transition-base), transform var(--transition-base);
-    text-decoration: none;
-    line-height: 1;
+  .nav-link {
+    width: 100%;
+    padding: 10px 12px;
   }
+}
 
-  .nav-link:hover{
-    color: var(--color-primary);
-    background: #f1f3f4;
-    transform: translateY(-1px);
-  }
-
-  /* Focus ring for keyboard accessibility */
-  .nav-link:focus-visible,
-  .nav-toggle:focus-visible,
-  .nav-brand a:focus-visible{
-    outline: 3px solid rgba(26,115,232,.25);
-    outline-offset: 2px;
-  }
-
-  /* =========================
-     Navbar (mobile toggle)
-     ========================= */
-  .nav-toggle{
-    display: none; /* shown only on mobile */
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-white);
-    color: var(--color-text);
-    box-shadow: var(--shadow-sm);
-    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
-    cursor: pointer;
-  }
-
-  .nav-toggle:hover{
-    background: #f1f3f4;
-    border-color: #d2e3fc;
-    color: var(--color-primary);
-  }
-
-  @media (max-width: 768px){
-    .nav-toggle{ display: inline-flex; }
-
-    .nav-container{
-      flex-wrap: wrap; /* links drop below brand */
-    }
-
-    .nav-links{
-      display: none;  /* hidden by default */
-      width: 100%;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 6px;
-      padding: 10px 0 2px 0;
-    }
-
-    .nav-links.is-open{
-      display: flex; /* shown when toggled */
-    }
-
-    .nav-link{
-      width: 100%;
-      padding: 12px 12px;
-    }
-  }
     /* Quick Links (community platforms row) */
     .quick-links {
       display: flex;
@@ -305,7 +228,7 @@
   <div class="nav-container">
     <div class="nav-brand">
       <!-- Change href as you want (kept # like your version) -->
-      <a href="#" aria-label="Hack University Initiative Home">
+      <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Initiative Home">
         Hack University Initiative
       </a>
     </div>
@@ -323,8 +246,8 @@
 
     <!-- Links -->
     <div class="nav-links" id="huNavLinks">
-      <a class="nav-link" href="#partners">Partners</a>
-      <a class="nav-link" href="#mission">Mission</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-main-students.html#partners">Partners</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-main-students.html#mission">Mission</a>
       <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
       <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
     </div>
@@ -726,7 +649,7 @@
 </section>
 
 <!-- ======================= PARTNER ORGANIZATIONS ======================= -->
-<section class="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 relative overflow-hidden">
+<section id="partners" class="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 relative overflow-hidden">
   <div class="absolute inset-0">
     <div class="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-white/10 rounded-full blur-xl animate-pulse"></div>
     <div class="absolute bottom-1/3 right-1/4 w-24 h-24 md:w-48 md:h-48 bg-white/10 rounded-full blur-xl animate-pulse" style="animation-delay: -1s;"></div>
@@ -1420,9 +1343,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //nav bard version 1.5.2025 
   // ✅ Navbar JS (revised)
-  (function () {
-    const navbar = document.getElementById("huNavbar");
-    const toggleBtn = navbar?.querySelector(".nav-toggle");
+ (function () {
+    const toggleBtn = document.querySelector(".nav-toggle");
     const navLinks = document.getElementById("huNavLinks");
 
     if (!toggleBtn || !navLinks) return;
@@ -1430,7 +1352,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const setExpanded = (expanded) => {
       toggleBtn.setAttribute("aria-expanded", String(expanded));
       navLinks.classList.toggle("is-open", expanded);
-
       const icon = toggleBtn.querySelector("i");
       if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
     };
@@ -1441,7 +1362,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setExpanded(!expanded);
     });
 
-    // Close menu after clicking a same-page anchor link (e.g., #mission)
+    // Close menu after clicking a same-page anchor link
     navLinks.addEventListener("click", (e) => {
       const a = e.target.closest("a");
       if (!a) return;
@@ -1452,19 +1373,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Close menu when resizing to desktop
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) setExpanded(false);
-    });
-
-    // Close menu on Escape
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setExpanded(false);
-    });
-
-    // Close menu when clicking outside (mobile)
-    document.addEventListener("click", (e) => {
-      const isOpen = navLinks.classList.contains("is-open");
-      if (!isOpen) return;
-      const clickedInside = navbar.contains(e.target);
-      if (!clickedInside) setExpanded(false);
     });
 
     // Ensure initial state
