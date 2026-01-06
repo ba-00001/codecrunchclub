@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Application Status & Access • Code Crunch</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+
+    /* NAV */
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
+
+    /* Timezone band */
+    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
+    .timezone-header{text-align:center;margin-bottom:18px}
+    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
+    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
+    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
+    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
+    .timezone-flag{font-size:18px;margin-bottom:6px}
+    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
+    .timezone-location{color:#5f6368;font-size:12px}
+
+    /* Main */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .header{text-align:center;margin:24px 0}
+    .header h1{font-size:32px;font-weight:600}
+    .header p{margin-top:10px;color:#5f6368;line-height:1.6}
+    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
+    .subtitle{text-align:center;color:#5f6368}
+    .helper{background:#fff7ed;border:1px solid #ffedd5;color:#7c2d12;border-radius:8px;padding:12px;margin:16px 0}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .email-input{flex:1 1 320px;padding:12px;border:1px solid #d1d5db;border-radius:8px;font-size:14px}
+    .email-input:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 3px rgba(26,115,232,.15)}
+    .btn{padding:12px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+    .btn-primary{background:#1a73e8;color:#fff}
+    .btn-primary:hover{background:#1557b0}
+    #result{margin-top:16px;background:#111827;color:#d1fae5;border-radius:12px;padding:16px;font-family:monospace}
+
+    .info-box{background:#1a1a2e;border-left:4px solid #ffa500;border-radius:8px;padding:12px;margin-bottom:12px;color:#fff}
+    .card-welcome{background:#0f172a;border-left:4px solid #00ff99;border-radius:8px;padding:16px;margin:12px 0}
+    .card-yes{background:#052e16;border-left:4px solid #00ff99;border-radius:8px;padding:12px;margin-top:8px}
+    .card-no{background:#3f1d1d;border-left:4px solid #ff6b6b;border-radius:8px;padding:12px;margin-top:8px}
+
+    .cta{display:grid;gap:8px;margin:10px 0}
+    .cta a{display:block;text-align:center;color:#fff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px}
+    .cta-discord{background:linear-gradient(45deg,#7289da,#5865f2)}
+    .cta-private{background:linear-gradient(45deg,#43b581,#4caf50)}
+    .cta-db{background:linear-gradient(45deg,#111827,#374151)}
+    .cta-form3{background:linear-gradient(45deg,#b45309,#f59e0b)}
+    .cta-muted{opacity:.55;cursor:not-allowed;pointer-events:none;filter:grayscale(1)}
+    .muted-note{color:#cbd5e1;font-size:12px;opacity:.9;text-align:center;margin-top:4px}
+
+    /* Footer */
+    .cc-blue{background:#1a73e8}
+    .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
+    .footer h3{font-size:18px;font-weight:500;margin-bottom:16px;color:#fff}
+    .footer p{font-size:14px;opacity:.9;margin-bottom:16px;line-height:1.5}
+    .footer ul{list-style:none;padding:0;margin:0}
+    .footer li{margin-bottom:8px}
+    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.9;transition:opacity .2s ease}
+    .footer a:hover{opacity:1}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:8px;transition:color .2s ease}
+    .social-link:hover{color:#fbbf24}
+    .social-link i{font-size:18px;margin-bottom:4px}
+    .social-link span{font-size:11px;text-align:center}
+    .footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);text-align:center}
+    .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
+    .footer-bottom .credits{font-size:12px;opacity:.85}
+
+    @media (max-width:520px){.container{padding:16px}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TIMEZONE BAND -->
+  <div class="timezone-section">
+    <div class="timezone-header">
+      <h2>🏆 Hackathon HQ</h2>
+    </div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location">Miami, FL (EST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Header -->
+    <section class="header">
+      <h1>Volunteer Application Status &amp; Access</h1>
+      <p class="subtitle">
+        After authentication, volunteers can review their registration details and access volunteer-only tools.
+      </p>
+      <p class="subtitle" style="max-width:900px;margin:10px auto 0;">
+        Access this portal using the same Google account you used to complete <strong>Form No. 2</strong> (Volunteer Event Registration &amp; Donations).
+        Here, you can review your submitted responses from Form No. 2, confirm your registered events, and view your unique Ticket ID for each submission.
+      </p>
+    </section>
+
+    <!-- Login -->
+    <section class="surface" id="volunteer-login">
+      <div class="helper">
+        <strong>Accepted Volunteers Only:</strong> This portal is restricted to current volunteers who have been accepted and completed Form No. 2.
+      </div>
+
+      <div class="row">
+        <input id="emailInput" class="email-input" type="email" placeholder="your@email.com"/>
+        <button class="btn btn-primary" onclick="checkOfficialVolunteerStatus()">Sign In</button>
+      </div>
+
+      <div id="result" style="margin-top:12px;">
+        <div class="info-box">
+          <strong>What you can do in this portal:</strong><br/>
+          • Review your registration &amp; Ticket ID<br/>
+          • Access Form No. 3 (Project Evaluation Expo) when it becomes available<br/>
+          • Confirm or request Discord access for volunteer channels<br/>
+          • Volunteer Responses Database (available for select events only)<br/>
+          <br/>
+          Ticket IDs are generated per event submission and may be required for verification and support.
+        </div>
+        Awaiting email…
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p>
+            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+          </p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
+
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.9;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ====== CONFIG ======
+    const ALLOWED_HOST = "codecrunchglobal.vercel.app";
+    const API_URL = "https://script.google.com/macros/s/AKfycbws4kSTWdEfx9ZyQQQ1ZZzd5KQ3QMj-sSJVThOKzViNKLiD3wix1l8qnYt3i2Z9GXbttw/exec";
+    const USE_API_KEY = false;
+    const API_KEY     = "REPLACE_WITH_SECURE";
+
+    // Prefill email from ?email=
+    const prefill = new URLSearchParams(location.search).get('email');
+    if (prefill) document.getElementById('emailInput').value = prefill;
+
+    function domainOK() {
+      const ok = window.location.hostname === ALLOWED_HOST;
+      if (!ok) {
+        document.getElementById('result').innerHTML =
+          `<div class="info-box">❌ This portal only works on <strong>${ALLOWED_HOST}</strong>.</div>`;
+      }
+      return ok;
+    }
+
+    function infoBoxHTML(){ return `
+      <div class="info-box">
+        <strong>Volunteer Authentication:</strong><br>
+        • Use the email you used on <strong>Form No. 2</strong> (Volunteer Event Registration & Donations)<br>
+        • After verification you can review your Ticket ID, registered events, Form No. 3 access (when available), Discord access, and select event databases
+      </div>`; }
+
+    function isTrueish(v) {
+      if (v === null || v === undefined) return false;
+      const s = String(v).trim().toLowerCase();
+      return ["true","yes","y","1","checked"].includes(s);
+    }
+
+    function safeText(v){
+      if (v === null || v === undefined) return "";
+      return String(v).replace(/[<>]/g, "");
+    }
+
+    function renderField(label, value){
+      const v = safeText(value || "Not available");
+      if (!v || v === "Not available") return "";
+      return `• ${label}: ${v}<br/>`;
+    }
+
+    function buildForm3Link(entry){
+      // If your API returns a direct link later, use it.
+      // For now, use a placeholder when the flag is TRUE.
+      // Replace with your real Form No. 3 URL when ready.
+      const PLACEHOLDER_FORM3 = "https://codecrunchglobal.vercel.app/volunteer-form3.html";
+
+      const v = entry?.verification?.formNo3HackathonEvaluation ?? entry?.verification?.formNo3 ?? entry?.formNo3;
+      const on = isTrueish(v);
+      if (!on) {
+        return `
+          <a class="cta-form3 cta-muted" href="#" aria-disabled="true">Form No. 3 (Project Evaluation Expo) — Coming Soon</a>
+          <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
+        `;
+      }
+      return `<a class="cta-form3" href="${PLACEHOLDER_FORM3}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
+    }
+
+    function buildVolunteerDBLink(entry){
+      // You can switch to entry.links.volunteerResponsesDatabaseLink if you add it in the API later.
+      // For now, use your existing sheet link when "Volunteer Responses Database" is TRUE.
+      const v = entry?.verification?.volunteerResponsesDatabase ?? entry?.verification?.volunteerDb ?? entry?.volunteerResponsesDatabase;
+      const on = isTrueish(v);
+
+      if (!on) {
+        return `
+          <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
+          <div class="muted-note">Available for select events only.</div>
+        `;
+      }
+      const link = entry?.links?.eventRegistrationResponseSheetLink || entry?.eventRegistrationResponseSheetLink;
+      if (!link) {
+        return `
+          <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
+          <div class="muted-note">Database link is not configured.</div>
+        `;
+      }
+      return `<a class="cta-db" href="${link}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
+    }
+
+    async function checkOfficialVolunteerStatus() {
+      if (!domainOK()) return;
+
+      const email = (document.getElementById('emailInput').value || '').trim();
+      const resultDiv = document.getElementById('result');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.'; return; }
+      if (!emailRegex.test(email)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.'; return; }
+
+      resultDiv.innerHTML = infoBoxHTML() + '⏳ Verifying your volunteer status…';
+
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('email', email);
+        url.searchParams.set('referer', window.location.href);
+        url.searchParams.set('details', '0');
+        if (USE_API_KEY) url.searchParams.set('key', API_KEY);
+
+        const resp = await fetch(url.toString());
+        const data = await resp.json();
+
+        if (data.error) { resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`; return; }
+        if (!Array.isArray(data)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.'; return; }
+
+        let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${email}</span>:</strong><br/>`;
+
+        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
+          data.forEach(entry => {
+            // Main access card with tools
+            const discordJoin = entry?.links?.discordJoinLink || entry?.discordJoinLink;
+            const privateCh   = entry?.links?.privateChannelLink || entry?.privateChannelLink;
+
+            html += `<div class="card-welcome">
+                      <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
+                      <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
+                      <div class="cta" style="margin-top:12px;">
+                        ${buildVolunteerDBLink(entry)}
+                        ${buildForm3Link(entry)}
+                        ${discordJoin ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>` : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`}
+                        ${privateCh ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>` : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`}
+                      </div>
+                      ${entry.discordInstructions
+                        ? entry.discordInstructions
+                            .replace(/\n/g,'<br/>')
+                            .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
+                            .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>')
+                        : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
+                      }
+                    </div>`;
+
+            // Registration summary card
+            const basic = entry.basicInfo || {};
+            const verify = entry.verification || {};
+            const ticket = basic.ticketId || entry.ticketId || basic.githubProfile; // fallback (older code)
+
+            const donation = verify.donationCertificationQ26 ?? entry.donationCertificationQ26;
+            const regStatus = basic.eventRegistrationStatus ?? entry.eventRegistrationStatus;
+
+            html += `<div class="card-yes">
+                      <strong>✅ Confirmed Volunteer</strong><br/>
+                      ${renderField("Form No. 2 Timestamp", entry.timestamp)}
+                      ${renderField("Email", entry.email)}
+                      ${renderField("Job Title", basic.jobTitle)}
+                      ${renderField("Employer / Organization", basic.employer)}
+                      ${renderField("Discord Username", basic.discordUsername)}
+                      ${renderField("Ticket ID", ticket)}
+                      ${renderField("Event Registration Status", regStatus)}
+                      ${renderField("Donation Confirmation (Q26)", donation)}
+                    </div>`;
+          });
+
+          resultDiv.innerHTML = html;
+        } else {
+          html += `<div class="card-no">
+                    <strong>❌ Access Denied</strong><br/>
+                    • We could not find a confirmed Form No. 2 entry for this email.<br/>
+                    • This portal is restricted to current, accepted volunteers who completed Form No. 2.
+                  </div>`;
+          resultDiv.innerHTML = html;
+        }
+
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = infoBoxHTML() + '❌ Network error. Please try again later.';
+      }
+    }
+
+    // Live time updates for the timezone band
+    function updateTimes() {
+      const now = new Date();
+      const set = (id, tz) => {
+        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+        const hh = String(t.getHours()).padStart(2,'0');
+        const mm = String(t.getMinutes()).padStart(2,'0');
+        const ss = String(t.getSeconds()).padStart(2,'0');
+        const out = `${hh}:${mm}:${ss}`;
+        const el = document.getElementById(id);
+        if (el) el.textContent = out;
+      };
+      set('miami-time',"America/New_York");
+      set('london-time',"Europe/London");
+      set('lagos-time',"Africa/Lagos");
+      set('tokyo-time',"Asia/Tokyo");
+      set('sydney-time',"Australia/Sydney");
+      set('mumbai-time',"Asia/Kolkata");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTimes();
+      setInterval(updateTimes, 1000);
+    });
+
+    document.getElementById('emailInput').addEventListener('keypress',(e)=>{
+      if (e.key === 'Enter') checkOfficialVolunteerStatus();
+    });
+  </script>
+</body>
+</html>
