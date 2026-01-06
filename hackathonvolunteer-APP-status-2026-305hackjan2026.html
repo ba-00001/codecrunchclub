@@ -232,208 +232,203 @@
     </div>
   </footer>
 
-  <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ====== CONFIG ======
-    const ALLOWED_HOST = "codecrunchglobal.vercel.app";
-    const API_URL = "https://script.google.com/macros/s/AKfycbzarR5DNP9llYam923fcKUqbAyQbnXtyZB3okhAnO3mcx2wgs3hHxPemk_q9QqCR5RX/exec";
-    const USE_API_KEY = false;
-    const API_KEY     = "REPLACE_WITH_SECURE";
+  const ALLOWED_HOST = "codecrunchglobal.vercel.app";
+  const API_URL = "https://script.google.com/macros/s/AKfycbx0VT8s0M00NYCyDdF6JlnVAJRtmKeE4Rw6w5z8uetcu9xTHYRJpGF2VIrisvDTq_fw/exec";
 
-    // Prefill email from ?email=
-    const prefill = new URLSearchParams(location.search).get('email');
-    if (prefill) document.getElementById('emailInput').value = prefill;
+  const prefill = new URLSearchParams(location.search).get('email');
+  if (prefill) document.getElementById('emailInput').value = prefill;
 
-    function domainOK() {
-      const ok = window.location.hostname === ALLOWED_HOST;
-      if (!ok) {
-        document.getElementById('result').innerHTML =
-          `<div class="info-box">❌ This portal only works on <strong>${ALLOWED_HOST}</strong>.</div>`;
+  function domainOK() {
+    const ok = window.location.hostname === ALLOWED_HOST;
+    if (!ok) {
+      document.getElementById('result').innerHTML =
+        `<div class="info-box">❌ This portal only works on <strong>${ALLOWED_HOST}</strong>.</div>`;
+    }
+    return ok;
+  }
+
+  function infoBoxHTML(){ return `
+    <div class="info-box">
+      <strong>Volunteer Authentication:</strong><br>
+      • Use the email you used on <strong>Form No. 2</strong> (Volunteer Event Registration & Donations)<br>
+      • After verification you can review your Ticket ID, registered events, Form No. 3 access (when available), Discord access, and select event databases
+    </div>`; }
+
+  function safeText(v){
+    if (v === null || v === undefined) return "";
+    return String(v).replace(/[<>]/g, "");
+  }
+
+  function renderField(label, value){
+    const v = safeText(value || "Not available");
+    if (!v || v === "Not available") return "";
+    return `• ${label}: ${v}<br/>`;
+  }
+
+  function accessGrantedFromApi(entry){
+    const s = String(entry?.status || "").toLowerCase();
+    if (!s) return false;
+    if (s.includes("no entry")) return false;
+    if (s.includes("not accepted")) return false;
+    return true;
+  }
+
+  function buildForm3Link(entry){
+    const enabled = !!entry?.featureFlags?.formNo3Enabled;
+    const url = (entry?.links?.formNo3Url || "").trim();
+
+    if (!enabled || !url) {
+      return `
+        <a class="cta-form3 cta-muted" href="#" aria-disabled="true">Form No. 3 (Project Evaluation Expo) — Coming Soon</a>
+        <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
+      `;
+    }
+    return `<a class="cta-form3" href="${url}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
+  }
+
+  function buildVolunteerDBLink(entry){
+    const enabled = !!entry?.featureFlags?.volunteerDbEnabled;
+    const url = (entry?.links?.volunteerResponsesDatabaseUrl || "").trim();
+
+    if (!enabled || !url) {
+      return `
+        <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
+        <div class="muted-note">Available for select events only.</div>
+      `;
+    }
+    return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
+  }
+
+  // ✅ NEW: Mentor Schedule / Agenda sheet button
+  function buildMentorAgendaLink(entry){
+    const enabled = !!entry?.featureFlags?.mentorAgendaEnabled;
+    const url = (entry?.links?.mentorAgendaSheetUrl || "").trim();
+
+    if (!enabled || !url) {
+      return `
+        <a class="cta-db cta-muted" href="#" aria-disabled="true">Mentor Schedule / Agenda — Not Available</a>
+        <div class="muted-note">This is enabled when your event provides a schedule sheet.</div>
+      `;
+    }
+    return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Mentor Schedule / Agenda</a>`;
+  }
+
+  async function checkOfficialVolunteerStatus() {
+    if (!domainOK()) return;
+
+    const email = (document.getElementById('emailInput').value || '').trim();
+    const resultDiv = document.getElementById('result');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.'; return; }
+    if (!emailRegex.test(email)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.'; return; }
+
+    resultDiv.innerHTML = infoBoxHTML() + '⏳ Verifying your volunteer status…';
+
+    try {
+      const url = new URL(API_URL);
+      url.searchParams.set('email', email);
+      url.searchParams.set('referer', window.location.href);
+
+      const resp = await fetch(url.toString());
+      const data = await resp.json();
+
+      if (data.error) { resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`; return; }
+      if (!Array.isArray(data) || data.length === 0) { resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.'; return; }
+
+      const entry = data[0];
+      const granted = accessGrantedFromApi(entry);
+
+      let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${safeText(email)}</span>:</strong><br/>`;
+
+      if (!granted) {
+        html += `<div class="card-no">
+                  <strong>❌ Access Denied</strong><br/>
+                  • We could not find an accepted Form No. 2 entry for this email.<br/>
+                  • This portal is restricted to current, accepted volunteers who completed Form No. 2.
+                </div>`;
+        resultDiv.innerHTML = html;
+        return;
       }
-      return ok;
+
+      const discordJoin = (entry?.links?.discordJoinLink || "").trim();
+      const privateCh   = (entry?.links?.privateChannelLink || "").trim();
+
+      html += `<div class="card-welcome">
+                <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
+                <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
+                <div class="cta" style="margin-top:12px;">
+                  ${buildVolunteerDBLink(entry)}
+                  ${buildMentorAgendaLink(entry)}
+                  ${buildForm3Link(entry)}
+                  ${discordJoin
+                    ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>`
+                    : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`
+                  }
+                  ${privateCh
+                    ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>`
+                    : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`
+                  }
+                </div>
+                ${entry.discordInstructions
+                  ? safeText(entry.discordInstructions).replace(/\n/g,'<br/>')
+                  : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
+                }
+              </div>`;
+
+      const basic = entry.basicInfo || {};
+      const verify = entry.verification || {};
+
+      html += `<div class="card-yes">
+                <strong>✅ Confirmed Volunteer</strong><br/>
+                ${renderField("Form No. 2 Timestamp", entry.timestamp)}
+                ${renderField("Email", entry.email)}
+                ${renderField("Job Title", basic.jobTitle)}
+                ${renderField("Employer / Organization", basic.employer)}
+                ${renderField("Discord Username", basic.discordUsername)}
+                ${renderField("Ticket ID", basic.ticketId)}
+                ${renderField("Event Registration Status", basic.eventRegistrationStatus)}
+                ${renderField("Donation Confirmation (Q26)", verify.donationCertificationQ26)}
+              </div>`;
+
+      resultDiv.innerHTML = html;
+
+    } catch (err) {
+      console.error(err);
+      resultDiv.innerHTML = infoBoxHTML() + '❌ Network error. Please try again later.';
     }
+  }
 
-    function infoBoxHTML(){ return `
-      <div class="info-box">
-        <strong>Volunteer Authentication:</strong><br>
-        • Use the email you used on <strong>Form No. 2</strong> (Volunteer Event Registration & Donations)<br>
-        • After verification you can review your Ticket ID, registered events, Form No. 3 access (when available), Discord access, and select event databases
-      </div>`; }
+  function updateTimes() {
+    const now = new Date();
+    const set = (id, tz) => {
+      const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
+      const hh = String(t.getHours()).padStart(2,'0');
+      const mm = String(t.getMinutes()).padStart(2,'0');
+      const ss = String(t.getSeconds()).padStart(2,'0');
+      const el = document.getElementById(id);
+      if (el) el.textContent = `${hh}:${mm}:${ss}`;
+    };
+    set('miami-time',"America/New_York");
+    set('london-time',"Europe/London");
+    set('lagos-time',"Africa/Lagos");
+    set('tokyo-time',"Asia/Tokyo");
+    set('sydney-time',"Australia/Sydney");
+    set('mumbai-time',"Asia/Kolkata");
+  }
 
-    function isTrueish(v) {
-      if (v === null || v === undefined) return false;
-      const s = String(v).trim().toLowerCase();
-      return ["true","yes","y","1","checked"].includes(s);
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    updateTimes();
+    setInterval(updateTimes, 1000);
+  });
 
-    function safeText(v){
-      if (v === null || v === undefined) return "";
-      return String(v).replace(/[<>]/g, "");
-    }
+  document.getElementById('emailInput').addEventListener('keypress',(e)=>{
+    if (e.key === 'Enter') checkOfficialVolunteerStatus();
+  });
+</script>
 
-    function renderField(label, value){
-      const v = safeText(value || "Not available");
-      if (!v || v === "Not available") return "";
-      return `• ${label}: ${v}<br/>`;
-    }
-
-    function buildForm3Link(entry){
-      // If your API returns a direct link later, use it.
-      // For now, use a placeholder when the flag is TRUE.
-      // Replace with your real Form No. 3 URL when ready.
-      const PLACEHOLDER_FORM3 = "https://codecrunchglobal.vercel.app/volunteer-form3.html";
-
-      const v = entry?.verification?.formNo3HackathonEvaluation ?? entry?.verification?.formNo3 ?? entry?.formNo3;
-      const on = isTrueish(v);
-      if (!on) {
-        return `
-          <a class="cta-form3 cta-muted" href="#" aria-disabled="true">Form No. 3 (Project Evaluation Expo) — Coming Soon</a>
-          <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
-        `;
-      }
-      return `<a class="cta-form3" href="${PLACEHOLDER_FORM3}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
-    }
-
-    function buildVolunteerDBLink(entry){
-      // You can switch to entry.links.volunteerResponsesDatabaseLink if you add it in the API later.
-      // For now, use your existing sheet link when "Volunteer Responses Database" is TRUE.
-      const v = entry?.verification?.volunteerResponsesDatabase ?? entry?.verification?.volunteerDb ?? entry?.volunteerResponsesDatabase;
-      const on = isTrueish(v);
-
-      if (!on) {
-        return `
-          <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
-          <div class="muted-note">Available for select events only.</div>
-        `;
-      }
-      const link = entry?.links?.eventRegistrationResponseSheetLink || entry?.eventRegistrationResponseSheetLink;
-      if (!link) {
-        return `
-          <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
-          <div class="muted-note">Database link is not configured.</div>
-        `;
-      }
-      return `<a class="cta-db" href="${link}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
-    }
-
-    async function checkOfficialVolunteerStatus() {
-      if (!domainOK()) return;
-
-      const email = (document.getElementById('emailInput').value || '').trim();
-      const resultDiv = document.getElementById('result');
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!email) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.'; return; }
-      if (!emailRegex.test(email)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.'; return; }
-
-      resultDiv.innerHTML = infoBoxHTML() + '⏳ Verifying your volunteer status…';
-
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('email', email);
-        url.searchParams.set('referer', window.location.href);
-        url.searchParams.set('details', '0');
-        if (USE_API_KEY) url.searchParams.set('key', API_KEY);
-
-        const resp = await fetch(url.toString());
-        const data = await resp.json();
-
-        if (data.error) { resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`; return; }
-        if (!Array.isArray(data)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.'; return; }
-
-        let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${email}</span>:</strong><br/>`;
-
-        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
-          data.forEach(entry => {
-            // Main access card with tools
-            const discordJoin = entry?.links?.discordJoinLink || entry?.discordJoinLink;
-            const privateCh   = entry?.links?.privateChannelLink || entry?.privateChannelLink;
-
-            html += `<div class="card-welcome">
-                      <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
-                      <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
-                      <div class="cta" style="margin-top:12px;">
-                        ${buildVolunteerDBLink(entry)}
-                        ${buildForm3Link(entry)}
-                        ${discordJoin ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>` : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`}
-                        ${privateCh ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>` : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`}
-                      </div>
-                      ${entry.discordInstructions
-                        ? entry.discordInstructions
-                            .replace(/\n/g,'<br/>')
-                            .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
-                            .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>')
-                        : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
-                      }
-                    </div>`;
-
-            // Registration summary card
-            const basic = entry.basicInfo || {};
-            const verify = entry.verification || {};
-            const ticket = basic.ticketId || entry.ticketId || basic.githubProfile; // fallback (older code)
-
-            const donation = verify.donationCertificationQ26 ?? entry.donationCertificationQ26;
-            const regStatus = basic.eventRegistrationStatus ?? entry.eventRegistrationStatus;
-
-            html += `<div class="card-yes">
-                      <strong>✅ Confirmed Volunteer</strong><br/>
-                      ${renderField("Form No. 2 Timestamp", entry.timestamp)}
-                      ${renderField("Email", entry.email)}
-                      ${renderField("Job Title", basic.jobTitle)}
-                      ${renderField("Employer / Organization", basic.employer)}
-                      ${renderField("Discord Username", basic.discordUsername)}
-                      ${renderField("Ticket ID", ticket)}
-                      ${renderField("Event Registration Status", regStatus)}
-                      ${renderField("Donation Confirmation (Q26)", donation)}
-                    </div>`;
-          });
-
-          resultDiv.innerHTML = html;
-        } else {
-          html += `<div class="card-no">
-                    <strong>❌ Access Denied</strong><br/>
-                    • We could not find a confirmed Form No. 2 entry for this email.<br/>
-                    • This portal is restricted to current, accepted volunteers who completed Form No. 2.
-                  </div>`;
-          resultDiv.innerHTML = html;
-        }
-
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = infoBoxHTML() + '❌ Network error. Please try again later.';
-      }
-    }
-
-    // Live time updates for the timezone band
-    function updateTimes() {
-      const now = new Date();
-      const set = (id, tz) => {
-        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh = String(t.getHours()).padStart(2,'0');
-        const mm = String(t.getMinutes()).padStart(2,'0');
-        const ss = String(t.getSeconds()).padStart(2,'0');
-        const out = `${hh}:${mm}:${ss}`;
-        const el = document.getElementById(id);
-        if (el) el.textContent = out;
-      };
-      set('miami-time',"America/New_York");
-      set('london-time',"Europe/London");
-      set('lagos-time',"Africa/Lagos");
-      set('tokyo-time',"Asia/Tokyo");
-      set('sydney-time',"Australia/Sydney");
-      set('mumbai-time',"Asia/Kolkata");
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      updateTimes();
-      setInterval(updateTimes, 1000);
-    });
-
-    document.getElementById('emailInput').addEventListener('keypress',(e)=>{
-      if (e.key === 'Enter') checkOfficialVolunteerStatus();
-    });
-  </script>
 </body>
 </html>
