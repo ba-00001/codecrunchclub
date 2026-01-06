@@ -180,8 +180,54 @@
   <!-- FOOTER -->
   <footer class="cc-blue footer">
     <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p>
+            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+          </p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
+
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="#" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="#" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.9;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
       <div class="footer-bottom">
         <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
       </div>
     </div>
   </footer>
@@ -192,9 +238,9 @@
 
     // ====== CONFIG ======
     const ALLOWED_HOST = "codecrunchglobal.vercel.app";
-
-    // ✅ PUT YOUR CURRENT DEPLOYMENT URL HERE
     const API_URL = "https://script.google.com/macros/s/AKfycbwRZXO9XL10Nt5a7azSY0pJHQpjxUX6D5lXONAsVxrW_w7fl40NATVjSDaYv-_exiRU/exec";
+    const USE_API_KEY = false;
+    const API_KEY     = "REPLACE_WITH_SECURE";
 
     // Prefill email from ?email=
     const prefill = new URLSearchParams(location.search).get('email');
@@ -233,45 +279,43 @@
       return `• ${label}: ${v}<br/>`;
     }
 
-    // ✅ USE URL FROM API (if available)
     function buildForm3Link(entry){
-      const enabled = !!entry?.featureFlags?.formNo3Enabled || isTrueish(entry?.verification?.formNo3CellValue);
-      const url = entry?.links?.formNo3Url || "";
-      if (!enabled || !url) {
+      // If your API returns a direct link later, use it.
+      // For now, use a placeholder when the flag is TRUE.
+      // Replace with your real Form No. 3 URL when ready.
+      const PLACEHOLDER_FORM3 = "https://codecrunchglobal.vercel.app/volunteer-form3.html";
+
+      const v = entry?.verification?.formNo3HackathonEvaluation ?? entry?.verification?.formNo3 ?? entry?.formNo3;
+      const on = isTrueish(v);
+      if (!on) {
         return `
           <a class="cta-form3 cta-muted" href="#" aria-disabled="true">Form No. 3 (Project Evaluation Expo) — Coming Soon</a>
           <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
         `;
       }
-      return `<a class="cta-form3" href="${url}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
+      return `<a class="cta-form3" href="${PLACEHOLDER_FORM3}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
     }
 
     function buildVolunteerDBLink(entry){
-      const enabled = !!entry?.featureFlags?.volunteerDbEnabled || isTrueish(entry?.verification?.volunteerDbCellValue);
-      const url = entry?.links?.volunteerResponsesDatabaseUrl || "";
+      // You can switch to entry.links.volunteerResponsesDatabaseLink if you add it in the API later.
+      // For now, use your existing sheet link when "Volunteer Responses Database" is TRUE.
+      const v = entry?.verification?.volunteerResponsesDatabase ?? entry?.verification?.volunteerDb ?? entry?.volunteerResponsesDatabase;
+      const on = isTrueish(v);
 
-      if (!enabled || !url) {
+      if (!on) {
         return `
           <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
           <div class="muted-note">Available for select events only.</div>
         `;
       }
-      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
-    }
-
-    // ✅ ACCESS GRANTED VS DENIED (UPDATED)
-    // Rule:
-    // - Access Granted if a row exists AND Event Registration Status looks accepted
-    // - Otherwise: Not accepted (still show row summary if you want)
-    function isAcceptedStatus(statusText){
-      const s = String(statusText || "").toLowerCase();
-      return (
-        s.includes("volunteer admitted") ||
-        s.includes("you may participate") ||
-        s.includes("accepted") ||
-        s.includes("confirmed") ||
-        s.includes("admitted")
-      );
+      const link = entry?.links?.eventRegistrationResponseSheetLink || entry?.eventRegistrationResponseSheetLink;
+      if (!link) {
+        return `
+          <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
+          <div class="muted-note">Database link is not configured.</div>
+        `;
+      }
+      return `<a class="cta-db" href="${link}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
     }
 
     async function checkOfficialVolunteerStatus() {
@@ -290,6 +334,8 @@
         const url = new URL(API_URL);
         url.searchParams.set('email', email);
         url.searchParams.set('referer', window.location.href);
+        url.searchParams.set('details', '0');
+        if (USE_API_KEY) url.searchParams.set('key', API_KEY);
 
         const resp = await fetch(url.toString());
         const data = await resp.json();
@@ -299,64 +345,60 @@
 
         let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${email}</span>:</strong><br/>`;
 
-        // No rows
-        if (!data.length || data[0]?.status === "No entry") {
+        if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
+          data.forEach(entry => {
+            // Main access card with tools
+            const discordJoin = entry?.links?.discordJoinLink || entry?.discordJoinLink;
+            const privateCh   = entry?.links?.privateChannelLink || entry?.privateChannelLink;
+
+            html += `<div class="card-welcome">
+                      <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
+                      <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
+                      <div class="cta" style="margin-top:12px;">
+                        ${buildVolunteerDBLink(entry)}
+                        ${buildForm3Link(entry)}
+                        ${discordJoin ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>` : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`}
+                        ${privateCh ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>` : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`}
+                      </div>
+                      ${entry.discordInstructions
+                        ? entry.discordInstructions
+                            .replace(/\n/g,'<br/>')
+                            .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
+                            .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>')
+                        : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
+                      }
+                    </div>`;
+
+            // Registration summary card
+            const basic = entry.basicInfo || {};
+            const verify = entry.verification || {};
+            const ticket = basic.ticketId || entry.ticketId || basic.githubProfile; // fallback (older code)
+
+            const donation = verify.donationCertificationQ26 ?? entry.donationCertificationQ26;
+            const regStatus = basic.eventRegistrationStatus ?? entry.eventRegistrationStatus;
+
+            html += `<div class="card-yes">
+                      <strong>✅ Confirmed Volunteer</strong><br/>
+                      ${renderField("Form No. 2 Timestamp", entry.timestamp)}
+                      ${renderField("Email", entry.email)}
+                      ${renderField("Job Title", basic.jobTitle)}
+                      ${renderField("Employer / Organization", basic.employer)}
+                      ${renderField("Discord Username", basic.discordUsername)}
+                      ${renderField("Ticket ID", ticket)}
+                      ${renderField("Event Registration Status", regStatus)}
+                      ${renderField("Donation Confirmation (Q26)", donation)}
+                    </div>`;
+          });
+
+          resultDiv.innerHTML = html;
+        } else {
           html += `<div class="card-no">
                     <strong>❌ Access Denied</strong><br/>
-                    • We could not find a Form No. 2 entry for this email.<br/>
-                    • This portal is restricted to volunteers who completed Form No. 2.
+                    • We could not find a confirmed Form No. 2 entry for this email.<br/>
+                    • This portal is restricted to current, accepted volunteers who completed Form No. 2.
                   </div>`;
           resultDiv.innerHTML = html;
-          return;
         }
-
-        // We have at least one row (latest)
-        const entry = data[0];
-        const basic = entry.basicInfo || {};
-        const regStatus = basic.eventRegistrationStatus || entry.eventRegistrationStatus || "";
-        const accepted = isAcceptedStatus(regStatus);
-
-        if (accepted) {
-          const discordJoin = entry?.links?.discordJoinLink || "";
-          const privateCh   = entry?.links?.privateChannelLink || "";
-
-          html += `<div class="card-welcome">
-                    <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
-                    <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
-                    <div class="cta" style="margin-top:12px;">
-                      ${buildVolunteerDBLink(entry)}
-                      ${buildForm3Link(entry)}
-                      ${discordJoin ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>` : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`}
-                      ${privateCh ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>` : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`}
-                    </div>
-                  </div>`;
-        } else {
-          // Row exists, but status isn't accepted
-          html += `<div class="card-no">
-                    <strong>❌ Not Accepted Yet</strong><br/>
-                    • We found your Form No. 2 entry, but your registration status does not indicate acceptance yet.<br/>
-                    • If you believe this is a mistake, please contact the organizers.
-                  </div>`;
-        }
-
-        // Always show summary (accepted or not)
-        const verify = entry.verification || {};
-        const ticket = basic.ticketId || entry.ticketId || "Not available";
-        const donation = verify.donationCertificationQ26 ?? "Not available";
-
-        html += `<div class="card-yes">
-                  <strong>📌 Your Latest Form No. 2 Submission</strong><br/>
-                  ${renderField("Form No. 2 Timestamp", entry.timestamp)}
-                  ${renderField("Email", entry.email)}
-                  ${renderField("Job Title", basic.jobTitle)}
-                  ${renderField("Employer / Organization", basic.employer)}
-                  ${renderField("Discord Username", basic.discordUsername)}
-                  ${renderField("Ticket ID", ticket)}
-                  ${renderField("Event Registration Status", regStatus)}
-                  ${renderField("Donation Confirmation (Q26)", donation)}
-                </div>`;
-
-        resultDiv.innerHTML = html;
 
       } catch (err) {
         console.error(err);
