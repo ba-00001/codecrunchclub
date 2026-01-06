@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Crunch - Volunteer Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body{
+      font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:#f8f9fa; min-height:100vh; color:#202124;
+    }
+    .navbar{ background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000;}
+    .nav-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px;}
+    .nav-brand{ font-size:22px; font-weight:500; color:#4285f4;}
+    .nav-links{ display:flex; gap:30px;}
+    .nav-link{ color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s;}
+    .nav-link:hover{ color:#1a73e8; background:#f1f3f4;}
+
+    .timezone-section{ background:#fff; border-bottom:1px solid #e8eaed; padding:24px 20px; margin-bottom:32px;}
+    .timezone-header{ text-align:center; margin-bottom:25px;}
+    .timezone-header h2{ color:#202124; font-size:28px; font-weight:400; margin:0 0 20px;}
+    .timezone-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:20px; max-width:1200px; margin:0 auto;}
+    .timezone-item{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:16px; text-align:center; transition:.2s;}
+    .timezone-item:hover{ box-shadow:0 1px 6px rgba(32,33,36,.28); border-color:#dadce0;}
+    .timezone-flag{ font-size:20px; margin-bottom:8px;}
+    .timezone-time{ font-size:16px; font-weight:500; color:#1a73e8; margin-bottom:4px; font-family:'Roboto Mono',monospace;}
+    .timezone-location{ color:#5f6368; font-size:12px;}
+
+    .container{ max-width:1200px; margin:0 auto; padding:20px;}
+    .header{ text-align:center; color:#202124; margin-bottom:48px;}
+    .header h1{ font-size:32px; font-weight:400; margin-bottom:8px; color:#202124;}
+    .header p{ font-size:16px; color:#5f6368; line-height:1.5;}
+
+    .volunteer-cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; margin-bottom:50px;}
+    .card{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:24px; transition:.2s; position:relative; overflow:hidden;}
+    .card:hover{ box-shadow:0 2px 10px rgba(32,33,36,.28); border-color:#4285f4;}
+    .card-icon{ width:48px; height:48px; border-radius:50%; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; background:#1a73e8;}
+    .card h3{ font-size:20px; color:#202124; margin-bottom:8px; text-align:center; font-weight:500;}
+    .card p{ color:#5f6368; line-height:1.5; margin-bottom:16px; text-align:center; font-size:14px;}
+    .card-button{ display:block; width:100%; padding:12px 24px; background:#1a73e8; color:#fff; text-decoration:none; border-radius:4px; text-align:center; font-weight:500; font-size:14px; transition:.2s; border:none; cursor:pointer;}
+    .card-button:hover{ background:#1557b0; box-shadow:0 1px 3px rgba(32,33,36,.28);}
+
+
+     /* HACK OPERATIONS container (re-used) */
+    .hackathons-section{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:32px; }
+    .hackathons-section h2{ color:#202124; font-size:28px; font-weight:500; margin-bottom:16px; text-align:center; }
+    
+    .ops-desc{ max-width:820px; margin:0 auto; text-align:center; color:#5f6368; font-size:15px; line-height:1.6; }
+    .ops-cta{ margin-top:22px; display:flex; justify-content:center; }
+    .ops-cta a{ display:inline-flex; align-items:center; gap:.6rem; background:#1a73e8; color:#fff; text-decoration:none; font-weight:600; padding:12px 18px; border-radius:8px; transition:.2s; }
+    .ops-cta a:hover{ background:#1557b0; box-shadow:0 6px 16px rgba(26,115,232,.25); }
+
+
+
+    .section-header{ margin-bottom:24px;}
+    .section-header h3{ color:#202124; font-size:20px; font-weight:500; margin-bottom:4px;}
+    .section-header p{ color:#5f6368; font-size:14px; margin:0;}
+
+    .hackathons-list{ display:grid; gap:15px;}
+    .hackathon-item{ background:#fff; border:1px solid #dadce0; border-radius:8px; padding:20px; display:grid; grid-template-columns:1fr auto auto auto; gap:16px; align-items:center; transition:.2s;}
+    .hackathon-item:hover{ box-shadow:0 1px 6px rgba(32,33,36,.28); border-color:#4285f4;}
+    .hackathon-info{ display:flex; flex-direction:column; gap:4px;}
+    .hackathon-name{ font-weight:500; color:#202124; font-size:16px; margin-bottom:4px;}
+    .hackathon-date{ color:#5f6368; font-size:13px;}
+    .hackathon-mode{ padding:4px 8px; border-radius:4px; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:.3px;}
+    .mode-virtual{ background:#e8f0fe; color:#1a73e8; border:1px solid #d2e3fc;}
+    .mode-person{ background:#e6f4ea; color:#137333; border:1px solid #ceead6;}
+    .mode-hybrid{ background:#fff4e5; color:#ea8600; border:1px solid #fde68a;}
+    .mode-tbd{ background:#f3f4f6; color:#6b7280; border:1px solid #d1d5db;}
+
+    .hackathon-countdown{ background:#f8f9fa; color:#202124; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:500; text-align:center; min-width:80px;}
+    .countdown-upcoming{ background:#e8f0fe; color:#1a73e8; border:1px solid #d2e3fc;}
+    .countdown-past{ background:#fce8e6; color:#d33b01; border:1px solid #f9dedc;}
+
+    .hackathon-link{ background:#1a73e8; color:#fff; padding:8px 16px; border-radius:4px; text-decoration:none; font-weight:500; font-size:14px; transition:.2s;}
+    .hackathon-link:hover{ background:#1557b0; box-shadow:0 1px 3px rgba(32,33,36,.28);}
+
+    .cc-blue{ background:#1a73e8;}
+    .footer{ color:#fff; padding:32px 0 48px;}
+    .footer-container{ max-width:1200px; margin:0 auto; padding:0 20px;}
+    .footer-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin-bottom:32px;}
+    .footer h3{ font-size:18px; font-weight:500; margin-bottom:16px; color:#fff;}
+    .footer p{ font-size:14px; opacity:.8; margin-bottom:16px; line-height:1.5;}
+    .footer ul{ list-style:none; padding:0; margin:0;}
+    .footer li{ margin-bottom:8px;}
+    .footer a{ color:#fff; text-decoration:none; font-size:14px; opacity:.8; transition:opacity .2s;}
+    .footer a:hover{ opacity:1;}
+    .social-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:16px;}
+    .social-link{ display:flex; flex-direction:column; align-items:center; color:#fff; text-decoration:none; padding:8px; transition:color .2s;}
+    .social-link:hover{ color:#fbbf24;}
+    .social-link i{ font-size:18px; margin-bottom:4px;}
+    .social-link span{ font-size:11px; text-align:center;}
+    .footer-bottom{ margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.2); text-align:center;}
+    .footer-bottom p{ font-size:14px; opacity:.8; margin-bottom:8px;}
+    .footer-bottom .credits{ font-size:12px; opacity:.6;}
+    .footer-bottom .credits a{ color:#7dd3fc; text-decoration:none; font-weight:500;}
+    .footer-bottom .credits a:hover{ color:#bae6fd;}
+
+    /* policy note */
+    .policy-note {
+      background:#fff7ed; border:1px solid #fde68a; color:#8a4b00;
+      border-radius:8px; padding:14px 16px; margin:0 0 20px 0;
+      display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; font-size:14px;
+    }
+    .policy-note .icon { font-size:18px; line-height:1; }
+    .policy-note strong { font-weight:600; }
+
+    /* --- tiny helpers for the new cards --- */
+    .card .subtext{ color:#6b7280; font-size:12px; margin-top:8px; text-align:center;}
+    .badge{ display:inline-block; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:600; }
+    .badge-live{ background:#e6f4ea; color:#137333; border:1px solid #ceead6; }
+    .badge-warn{ background:#fff4e5; color:#b45309; border:1px solid #fde68a; }
+    .badge-lock{ background:#f3f4f6; color:#374151; border:1px solid #d1d5db; }
+    .card .small-note{ font-size:12px; color:#5f6368; margin-top:10px; line-height:1.45; text-align:left; }
+
+    @media (max-width:768px){
+      .nav-container{ flex-direction:column; gap:12px;}
+      .nav-links{ flex-wrap:wrap; justify-content:center; gap:8px;}
+      .nav-link{ font-size:11px; padding:6px 10px; white-space:nowrap;}
+      .timezone-grid{ grid-template-columns:repeat(2,1fr); gap:12px;}
+      .timezone-item{ padding:12px;}
+      .timezone-location{ font-size:10px;}
+      .header h1{ font-size:24px;}
+      .header p{ font-size:14px; padding:0 10px;}
+      .volunteer-cards{ gap:20px;}
+      .hackathon-item{ grid-template-columns:1fr; text-align:center; gap:10px; padding:16px;}
+      .hackathon-info{ text-align:center; margin-bottom:8px;}
+      .hackathon-name{ font-size:14px; line-height:1.3;}
+      .hackathon-date{ font-size:12px;}
+      .hackathon-mode,.hackathon-countdown{ font-size:11px; padding:4px 8px;}
+      .hackathon-link{ font-size:12px; padding:8px 12px;}
+      .card{ padding:18px;}
+      .card h3{ font-size:18px;}
+      .card p{ font-size:13px;}
+      .footer-grid{ grid-template-columns:1fr; gap:20px;}
+      .social-grid{ grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:480px){
+      .nav-link{ font-size:10px; padding:5px 8px;}
+      .timezone-grid{ grid-template-columns:1fr; gap:10px;}
+      .timezone-item{ padding:10px;}
+      .header h1{ font-size:20px;}
+      .hackathons-section{ padding:20px 16px;}
+      .hackathon-item{ padding:12px; gap:8px;}
+      .container{ padding:16px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Header -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://codecrunchglobal.vercel.app" class="nav-link">Code Crunch Worldwide</a>
+        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
+        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
+        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
+        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Time Zone Section -->
+  <div class="timezone-section">
+    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
+    <div class="timezone-grid">
+      <div class="timezone-item">
+        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-time" id="miami-time">--:--:--</div>
+        <div class="timezone-location" id="miami-label">Miami, FL (ET)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-time" id="london-time">--:--:--</div>
+        <div class="timezone-location">London (GMT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌍</div>
+        <div class="timezone-time" id="lagos-time">--:--:--</div>
+        <div class="timezone-location">Lagos (WAT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🌏</div>
+        <div class="timezone-time" id="tokyo-time">--:--:--</div>
+        <div class="timezone-location">Tokyo (JST)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-time" id="sydney-time">--:--:--</div>
+        <div class="timezone-location">Sydney (AEDT)</div>
+      </div>
+      <div class="timezone-item">
+        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-time" id="mumbai-time">--:--:--</div>
+        <div class="timezone-location">Mumbai (IST)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>VOLUNTEER GUIDE</h1>
+      <p>Join the Code Crunch volunteer collective and help shape the future of CS students during the school year and hackathons. Complete the volunteer steps to get confirmed and start your mission.</p>
+    </div>
+
+    <!-- FOUR CARDS -->
+    <div class="volunteer-cards">
+
+
+      
+            <!-- Certificates -->
+                <div class="card">
+                  <div class="card-icon"><i class="fa-solid fa-certificate"></i>  </div>
+                  
+                  <h3>Certificates</h3>
+                  <p>Access volunteer participation certificates.</p>
+                  <!-- TODO: Replace with your restricted Google Doc/Drive link -->
+                  <a class="card-button" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates.html" target="_blank" rel="noopener">
+                    Open Certificates
+                  </a>
+                  
+                </div>
+
+                <!-- Volunteer Resources Guide -->
+                <div class="card">
+                  <div class="card-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                  </div>
+                  <h3>Volunteer Resources Guide</h3>
+                  <p>Everything you need to support our hackathons and community events in one place.</p>
+
+                  <ul style="margin-left:18px;margin-top:4px">
+                    <li>Onboarding steps for new volunteers.</li>
+                    <li>Roles & expectations for Mentors, Judges, Speakers, and Operations teams.</li>
+                    <li>Check-in procedures, communication channels, and event-day workflows.</li>
+                    <!-- <li>Policies, Code of Conduct, and FAQ.</li> -->
+                    <br>
+                  </ul>
+
+                  <!-- TODO: Replace with your live Volunteer Resources Guide URL -->
+                  <a class="card-button"
+                    href="https://docs.google.com/document/d/1Nkz4_azksFo57v1IcF9ReBst9o6vLQHx7BcNPXXX8RY/edit?usp=sharing"
+                    target="_blank" rel="noopener">
+                    Open Volunteer Resources Guide
+                  </a>
+
+                  <div class="small-note">
+                    <ul style="margin-left:18px;margin-top:6px">
+                      <li>Recommended for all new and returning volunteers before each event.</li>
+                      <li>Updated regularly with the latest instructions, templates, and schedules.</li>
+                    </ul>
+                  </div>
+                </div>
+
+
+          <!-- Discord Access -->
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-table-list"></i></div>
+
+            <h3>Discord</h3>
+            <p>
+              Access to the official Code Crunch Discord server is granted to volunteers of
+              <strong>Form No. 1</strong> and <strong>Form No. 2</strong>, 
+              using the same Google account they used during registration.
+            </p>
+
+            <a class="card-button"
+              href="https://codecrunchglobal.vercel.app/hackathonvolunteer-logindiscord.html"
+              target="_blank"
+              rel="noopener">
+              Access Discord Server
+            </a>
+          </div>
+
+
+
+              <!-- Form No. 0 -->
+            <div class="card">
+              <div class="card-icon">📬</div>
+                <h3>Form No. 0</h3>
+              <p class="meta"><strong>Global Volunteer Mailing List</strong></p>
+
+              <p>
+                Sign up to receive email updates when new volunteer opportunities open for 
+                <strong>hackathons, technical workshops, fellowship or internship mentorship programs,</strong> 
+                and other Hack University events.
+              </p>
+              <a
+                class="card-button"
+                href="https://codecrunchvolunteerform-no0.vercel.app/"
+                target="_blank"
+                rel="noopener"
+              >
+                Join Form No. 0
+              </a>
+              <div class="small-note">
+                <strong>Note:</strong> This is an <strong>interest-only mailing list</strong>.
+                Opportunities are shared <strong>monthly or as needed</strong> depending on event schedules. 
+                Completing this form <strong>does not guarantee</strong> a volunteer or mentorship role.
+
+              </div>
+              <br>
+                <p>Read "Volunteer Resources Guide" for logistics, schedule, and expectations.</p>
+            </div>
+
+
+ 
+
+              <!-- Form No. 1 — Industry Leaders: Speakers & Mentors -->
+              <div class="card">
+                <div class="card-icon">🎤</div>
+                <h3>Form No. 1</h3>
+                <p class="meta"><strong>Speakers & Mentors</strong></p>
+                <p>
+                  Join our ecosystem as a volunteer mentor or guest speaker for upcoming 
+                  <strong>hackathons, semester events, and the Hack University Fellowship & Internship Program</strong> 
+                  if you are interested in helping students grow both technically and professionally.
+                </p>
+
+                <p><strong>Who should use this form?</strong></p>
+                <ul style="margin-left:18px;margin-top:4px">
+                  <li><strong>Technical Mentor:</strong> Support teams with software, AI, cloud, data, cybersecurity, or product engineering challenges.</li>
+                  <li><strong>Non-Technical Mentor:</strong> Guide students in product strategy, UX, business, social impact, pitch decks, and career navigation.</li>
+                  <li><strong>Technical Speaker:</strong> Deliver talks or workshops on tools, stacks, case studies, or technical best practices.</li>
+                  <li><strong>Non-Technical Speaker:</strong> Share your journey, leadership insights, entrepreneurship experiences, or industry perspectives.</li>
+                </ul>
+
+                <br>
+
+                <a class="card-button"
+                  href="https://codecrunchvolunteerform-no1.vercel.app/"
+                  target="_blank" rel="noopener">
+                  Open Form No. 1
+                </a>
+
+                <div class="small-note" style="margin-top:10px">
+                  <ul style="margin-left:18px;margin-top:6px">
+                    <li><strong>Note:</strong> You must complete this form for each event where you’d like to be considered as a speaker or mentor. This form includes upcoming events and is updated monthly — approximately one week after the most recent event concludes.</li>
+                    <li>This form is updated regularly based on each cohort’s focus areas and mentorship needs.</li>
+                    <li>After completing this form, please reach out to us on <strong>LinkedIn</strong> to review your application — this is our fastest communication channel.</li>
+                    <li>Completing this form <strong>does not guarantee</strong> a speaking or mentorship slot. Volunteers will receive a response via DM on LinkedIn after they send us a direct message following submission.</li>
+                    <li>We host <strong>one hackathon each month</strong>. A new registration form is added approximately 1 week after the current event ends.</li>
+                    <li>Please select the specific event(s) and role(s) — Mentor or Speaker — that you wish to support as a volunteer.</li>
+                    <li>This form is intended for external volunteers, industry partners, and community leaders interested in structured engagement opportunities.</li>
+                    <li>Read the <strong>Volunteer Resources Guide</strong> for logistics, schedules, and expectations.</li>
+                    <li>You can check your status anytime by logging in to the <strong>Volunteer Responses Database</strong> on our volunteer website.</li>
+                    <li>Ideal for professionals, alumni, founders, engineers, and community leaders supporting FIU and global students.</li>
+                  </ul>
+                </div>
+              </div>
+
+
+
+     
+
+
+          
+          <!-- Form No. 2 — Volunteer Donations & Event Registration -->
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
+            
+            <h3>Form No. 2</h3>
+            <p class="meta"><strong>Volunteer Donations & Event Registration</strong></p>
+
+            <p>
+              This form is for volunteers who are <strong>making a donation while registering</strong>
+              and would like to participate in a specific hackathon or semester event as an official supporter.
+            </p>
+
+            <p><strong>Who should use this form?</strong></p>
+            <ul style="margin-left:18px;margin-top:4px">
+              <li>Volunteers who wish to support an event through a donation and register for that same event.</li>
+              <li>Industry professionals, partners and community leaders providing financial or in-kind support linked to a specific event.</li>
+            </ul>
+          <br>
+            <p><strong>Available roles you can select in this form:</strong></p>
+            <ul style="margin-left:18px;margin-top:4px">
+              <li><strong>Judge</strong></li>
+              <li><strong>Dual Role: Judge &amp; Mentor</strong></li>
+              <li><strong>Mentor</strong></li>
+              <li><strong>Speaker</strong> (technical or non-technical)</li>
+              <li><strong>Multiple Roles</strong> (any combination of the above, subject to approval)</li>
+            </ul>
+              <br>
+            <!-- Live Form URL -->
+            <a class="card-button"
+              href="https://docs.google.com/document/d/1wNPG9l8MfihgGItGV_0ApGV_F-W2ABa2by5qCVKuR4s/edit?usp=sharing"
+              target="_blank" rel="noopener">
+              Open Form No. 2
+            </a>
+
+            <!-- Donations Guide -->
+            <p style="margin-top:10px;">
+              📘 <a href="https://codecrunchglobal.vercel.app/hackathonvolunteer-donationguide.html"
+                    target="_blank" rel="noopener">
+                View the Code Crunch Donations Guide
+              </a>
+            </p>
+
+            <div class="small-note" style="margin-top:10px">
+              <ul style="margin-left:18px;margin-top:6px">
+                <li><strong>Donation proof required:</strong> This form will ask you to upload a screenshot or confirmation of your donation while submitting.</li>
+                <li><strong>One donation = one event:</strong> Each donation and registration is valid for a single selected event only.</li>
+                <li>If you wish to support multiple events, please complete a separate donation and Form No. 2 submission for each event.</li>
+                <li>Each event has its own active registration window; responses are valid only while that event’s Form No. 2 is open.</li>
+                <li>We host <strong>one hackathon each month</strong>; new forms are published shortly after the previous event concludes.</li>
+                <li>After submitting, you may review your status through the <strong>Volunteer Responses Database</strong> using the same email provided in this form.</li>
+                <li>Read the <strong>Volunteer Resources Guide</strong> for logistics, schedules, and expectations for confirmed volunteers.</li>
+                <li>Ideal for professionals, alumni, founders, engineers, and community leaders supporting FIU and global students.</li>
+              </ul>
+            </div>
+          </div>
+
+
+
+
+
+
+ <!-- Form No. 3 — Hackathon Evaluation -->
+<div class="card">
+  <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
+
+  <h3>Form No. 3</h3>
+  <h3>Hackathon Evaluation Form</h3>
+ 
+  <p><strong>Who should use this form?</strong></p>
+  <ul style="margin-left:18px;margin-top:4px">
+    <li>Registered <strong>Judges</strong>.</li>
+    <li>Registered <strong>Dual Role: Judge &amp; Mentor</strong> volunteers.</li>
+    <li>Approved evaluation panel members confirmed for the current event.</li>
+  </ul>
+  <br>
+  <a class="card-button"
+     href="https://docs.google.com/document/d/1zJCDtL_W2ak0stmIorQfJJNjeK-qZQfDAigGfHKJw_U/edit?usp=sharing"
+     target="_blank" rel="noopener">
+    Open Form No. 3
+  </a>
+
+  <div class="small-note" style="margin-top:10px">
+    <ul style="margin-left:18px;margin-top:6px">
+      <li>We host <strong>one hackathon each month</strong>. Access to the evaluation form is granted approximately 1 hour before the event starts or at the official start time.</li>
+      <li>Each event has its own dedicated <strong>Form No. 3</strong> for hackathon evaluation.</li>
+      <li>Responses are valid only if submitted while the evaluation window is open — typically during <strong>Live Demos</strong> and the <strong>Closing Ceremony</strong> (see each event agenda for exact times).</li>
+      <li>This form is restricted to registered evaluators (Judges and approved Dual Role volunteers) for the specific event.</li>
+      <li>Judging evaluation links are provided only to confirmed volunteers registered through the official event forms.</li>
+    </ul>
+  </div>
+</div>
+
+    
+
+
+
+<!-- Volunteer Responses & Ticket ID Portal -->
+<div class="card">
+  <div class="card-icon">🎟️</div>
+
+  <h3>Volunteer Responses Database</h3>
+  <p class="meta"><strong>Review Your Registration & Ticket ID</strong></p>
+
+  <p>
+    Access this portal using the <strong>same Google account</strong> you used to complete 
+    <strong>Form No. 1, No. 2 (Volunteer Donations & Event Registration) and No. 3</strong>.  
+    Here, you can review your submitted responses from 
+    <strong>Form No. 1</strong>, <strong>Form No. 2</strong>, and <strong>Form No. 3</strong>, 
+    confirm your registered events, and view your unique <strong>Ticket ID</strong> for each submission.
+  </p>
+
+  <a class="card-button"
+     href="https://codecrunchglobal.vercel.app/hackathonvolunteer-logindiscord.html"
+     target="_blank"
+     rel="noopener">
+    Open Volunteer Responses Portal
+  </a>
+
+  <div class="small-note" style="margin-top:10px">
+    <strong>Access Rules:</strong>
+    <ul style="margin-left:18px;margin-top:6px">
+      <li>Access is granted only to respondents of <strong>Form No. 1</strong>, <strong>Form No. 2</strong>, or <strong>Form No. 3</strong> using the same Google account they used for submission.</li>
+      <li>All data is displayed in Google Sheets format with read-only permissions.</li>
+      <li>File name: <em>[Shared w/ Volunteers] – Code Crunch Events – Volunteer Registered Events</em>.</li>
+      <li>Each event includes a dedicated tab for its respective <strong>Form No. 2</strong> (e.g., “Form No. 2 — Hack Nov 2025”).</li>
+      <li>Additional tabs include:
+        <ul style="margin-left:18px;margin-top:4px">
+          <li><strong>Hack Judge Expo Lists</strong> — updated after each event.</li>
+          <li><strong>Hackathon Certificates Lists</strong> — published post-event for certificate generation.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+    </div>
+
+       <!-- 🚀 HACK OPERATIONS (REPLACED) -->
+    <div class="hackathons-section" id="hack-ops">
+      <h2>🚀 HACK OPERATIONS</h2>
+      <p class="ops-desc">
+        Find upcoming hackathons and explore past hackathons on our Hack University
+        <strong>Participate</strong> page.
+      </p>
+      <div class="ops-cta">
+        <a href="https://hackuniversity-hackathons.vercel.app/" target="_blank" rel="noopener" aria-label="Open Hack University Hackathons Events Page">
+          <i class="fa-solid fa-rocket"></i>
+          Open Hackathons Events Page
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="cc-blue footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <p>A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.</p>
+          <p><a href="#">HackUniversity.vercel.app</a></p>
+          <div>
+            <h4 style="font-size:14px;font-weight:500;margin-bottom:12px;">Connect With Us:</h4>
+            <div class="social-grid">
+              <a href="https://www.linkedin.com/company/hackuniversity" class="social-link"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="fab fa-discord"></i><span>Discord</span></a>
+              <a href="https://hackuniversity.vercel.app/" class="social-link"><i class="far fa-calendar-alt"></i><span>Calendar</span></a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Hackathons</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Join E-Board</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Join Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <div style="font-size:14px;opacity:.8;">
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+/* ============================
+   🕒 DST-safe clocks (Intl)
+   ============================ */
+function fmtTime(tz) {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz,
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false
+  }).format(new Date());
+}
+function tzAbbrev(tz) {
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz, timeZoneName: 'short'
+    }).formatToParts(new Date());
+    return parts.find(p => p.type === 'timeZoneName')?.value || '';
+  } catch { return ''; }
+}
+function updateTimes(){
+  // Miami (label shows EDT/EST automatically)
+  const miamiTZ = 'America/New_York';
+  const miamiTime = document.getElementById('miami-time');
+  const miamiLabel = document.getElementById('miami-label');
+  if (miamiTime)  miamiTime.textContent  = fmtTime(miamiTZ);
+  if (miamiLabel) miamiLabel.textContent = `Miami, FL (${tzAbbrev(miamiTZ)})`;
+
+  // Others: update times only
+  const map = [
+    ['london-time','Europe/London'],
+    ['lagos-time','Africa/Lagos'],
+    ['tokyo-time','Asia/Tokyo'],
+    ['sydney-time','Australia/Sydney'],
+    ['mumbai-time','Asia/Kolkata'],
+  ];
+  for (const [id, tz] of map) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = fmtTime(tz);
+  }
+}
+
+/* ============================
+   📅 Hackathon helpers
+   ============================ */
+function asLocalDate(ymd){
+  const [y,m,d] = ymd.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+function nowInMiami(){
+  return new Date(new Date().toLocaleString('en-US',{ timeZone:'America/New_York'}));
+}
+function formatDateMiami(dateStr){
+  const d = asLocalDate(dateStr);
+  return d.toLocaleDateString('en-US',{
+    year:'numeric', month:'long', day:'numeric', timeZone:'America/New_York'
+  });
+}
+function getEventStatus(startDateStr, endDateStr) {
+  const start = asLocalDate(startDateStr); start.setHours(0,0,0,0);
+  const end   = asLocalDate(endDateStr);   end.setHours(23,59,59,999);
+  const now   = nowInMiami();
+  const today = new Date(now); today.setHours(0,0,0,0);
+
+  if (today < start) {
+    const diffDays = Math.ceil((start - today) / (1000*60*60*24));
+    return { text: `${diffDays} days`, isPast:false, isLive:false };
+  }
+  if (now <= end) return { text:'Live', isPast:false, isLive:true };
+  return { text:'Completed', isPast:true, isLive:false };
+}
+
+/* ============================
+   🧠 Hackathon data
+   ============================ */
+const hackathons = [
+  { name:'🏙️ 305 Hackathon: Fall 2025 edition', startDate:'2025-09-19', endDate:'2025-09-21', modality:'in-person', url:'https://305hackfall2025.vercel.app' },
+  { name:'👑 EmpowHER Hackathon 2025',        startDate:'2025-10-13', endDate:'2025-10-20', modality:'virtual',   url:'https://empowherhack2025.vercel.app/' },
+  { name:'👑 EmpowHER HackDAY 2025',          startDate:'2025-10-18', endDate:'2025-10-18', modality:'in-person', url:'https://empowherhackdayfall25.vercel.app/' },
+  { name:'🎆 CodeFest 2025',                   startDate:'2025-12-08', endDate:'2025-12-15', modality:'virtual',   url:'https://codefesthack2025.vercel.app/' },
+  { name:'🔥 HackFiesta Miami 2026',           startDate:'2026-03-09', endDate:'2026-03-15', modality:'virtual',   url:'https://hackfiestamiami2026.vercel.app/' },
+  { name:'⚡ 305 Hackathon: Spring edition 2026', startDate:'2026-03-20', endDate:'2026-03-22', modality:'tbd',    url:'https://305hackspring2026.vercel.app/' },
+  { name:'🌟 SummerCodeX 2025',               startDate:'2025-07-21', endDate:'2025-07-28', modality:'virtual',   url:'#' },
+  { name:'⛈️ CodeStorm 2025',                 startDate:'2025-05-19', endDate:'2025-05-26', modality:'virtual',   url:'#' },
+  { name:'⚡ 305 Hackathon: Spring 2025 edition', startDate:'2025-03-29', endDate:'2025-03-31', modality:'hybrid', url:'#' },
+  { name:'🔥 HackFiesta Miami 2025',           startDate:'2025-03-21', endDate:'2025-03-23', modality:'virtual',   url:'#' }
+];
+function getModalityClass(m){
+  switch((m||'').toLowerCase()){
+    case 'virtual': return 'mode-virtual';
+    case 'in-person': return 'mode-person';
+    case 'hybrid': return 'mode-hybrid';
+    case 'tbd': default: return 'mode-tbd';
+  }
+}
+function getModalityText(m){
+  switch((m||'').toLowerCase()){
+    case 'in-person': return 'In Person';
+    case 'virtual': return 'Virtual';
+    case 'hybrid': return 'Hybrid';
+    case 'tbd': default: return 'TBD';
+  }
+}
+
+/* ============================
+   🧩 Render hackathons
+   ============================ */
+function renderHackathons(){
+  const now = nowInMiami();
+  const upcoming = [];
+  const past = [];
+
+  const sorted = [...hackathons].sort((a,b)=>asLocalDate(a.startDate)-asLocalDate(b.startDate));
+  sorted.forEach(h=>{
+    const endDate = asLocalDate(h.endDate);
+    const status  = getEventStatus(h.startDate, h.endDate);
+    const range = (h.startDate===h.endDate)
+      ? `${formatDateMiami(h.startDate)}`
+      : `${formatDateMiami(h.startDate)} - ${formatDateMiami(h.endDate)}`;
+    const dateLine = `${range} (${tzAbbrev('America/New_York')})`;
+
+    const item = `
+      <div class="hackathon-item">
+        <div class="hackathon-info">
+          <div class="hackathon-name">${h.name}</div>
+          <div class="hackathon-date">${dateLine}</div>
+        </div>
+        <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
+        <div class="hackathon-countdown ${status.isPast ? 'countdown-past' : 'countdown-upcoming'}">${status.text}</div>
+        <a href="${h.url}" class="hackathon-link" target="_blank" rel="noopener">Website</a>
+      </div>`;
+    if (endDate < now) past.push(item); else upcoming.push(item);
+  });
+
+  const up = document.getElementById('upcoming-events');
+  const pa = document.getElementById('past-events');
+  if (up) up.innerHTML = upcoming.join('');
+  if (pa) pa.innerHTML = past.join('');
+}
+
+/* ==========================================
+   🔒 Optional: Form No. 2 availability
+   ========================================== */
+const currentEventConfig = {
+  name: '305 Hack Edition — Nov 2025',
+  endDate: '2025-11-16',
+  registrationClose: '2025-12-01',
+  form2Url: 'https://your-form2-nov2025.example'
+};
+const d = s => { const [y,m,day]=s.split('-').map(Number); return new Date(y,m-1,day); };
+function daysUntil(date){
+  const t=new Date(); t.setHours(0,0,0,0);
+  const d0=d(date); d0.setHours(0,0,0,0);
+  return Math.ceil((d0 - t)/(1000*60*60*24));
+}
+(function updateForm2Card(){
+  const opensOn = new Date(d(currentEventConfig.endDate).getTime() + 2*24*60*60*1000);
+  const closesOn = d(currentEventConfig.registrationClose);
+  const now = new Date(); now.setHours(0,0,0,0);
+  const link = document.getElementById('form2-link');
+  const status = document.getElementById('form2-status');
+  if (!link || !status) return;
+
+  link.href = currentEventConfig.form2Url;
+  if (now < opensOn){
+    const days = daysUntil(opensOn.toISOString().slice(0,10));
+    status.innerHTML = `<span class="badge badge-lock">Locked</span> Opens in <strong>${days} day${days===1?'':'s'}</strong> — ${opensOn.toLocaleDateString()}.`;
+    link.style.pointerEvents='none'; link.style.opacity='.7';
+  } else if (now > closesOn){
+    status.innerHTML = `<span class="badge badge-warn">Closed</span> Donations & registration closed on <strong>${closesOn.toLocaleDateString()}</strong>.`;
+    link.style.pointerEvents='none'; link.style.opacity='.7';
+  } else {
+    status.innerHTML = `<span class="badge badge-live">Live</span> Accepting donations & registrations until <strong>${closesOn.toLocaleDateString()}</strong>.`;
+  }
+})();
+
+/* ============================
+   🚀 Init
+   ============================ */
+document.addEventListener('DOMContentLoaded', () => {
+  renderHackathons();
+  updateTimes();
+  setInterval(updateTimes, 1000);         // live clocks
+  setInterval(renderHackathons, 3600000); // refresh status hourly
+
+  const interactive = document.querySelectorAll('.card-button, .hackathon-link');
+  interactive.forEach(el=>{
+    el.addEventListener('click', ()=>{ el.style.transform='scale(0.95)'; setTimeout(()=>{ el.style.transform=''; },150); });
+    el.addEventListener('touchstart', ()=>{ el.style.opacity='0.9'; });
+    el.addEventListener('touchend', ()=>{ el.style.opacity=''; });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const targetSel = this.getAttribute('href');
+      if (targetSel && targetSel !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(targetSel);
+        if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
