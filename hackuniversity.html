@@ -274,9 +274,10 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
-      <a href="https://hackuniversity.vercel.app/">
-        <strong>Hack University Worldwide Initiative </strong><br>
-        <u>HackUniversity.vercel.app</u>
+      <a href="https://hackuniversity.vercel.app/" class="brand-text">
+        <strong class="brand-title">Hack University Worldwide Initiative</strong>
+        <span class="brand-sep">·</span>
+        <u class="brand-url">HackUniversity.vercel.app</u>
       </a>
     </div>
 
@@ -293,24 +294,39 @@
 
     <!-- Links -->
     <div class="nav-links" id="huNavLinks">
-      <a class="nav-link" href="#partners">Partners</a>
-      <a class="nav-link" href="#mission">Mission</a>
-      <a
-        class="nav-link"
-        href="https://codecrunchglobal.vercel.app/hackathons.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Hackathons</a>
-      <a
-        class="nav-link"
-        href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Calendar</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
     </div>
   </div>
 </nav>
+<style>
+  .brand-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    white-space: nowrap;
+    text-decoration: none;
+    line-height: 1;
+  }
 
+  .brand-title {
+    font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+    font-weight: 700;
+  }
+
+  .brand-url {
+    font-size: clamp(0.8rem, 2vw, 1.05rem);
+    color: #0f766e; /* safe non-black accent */
+    text-decoration: underline;
+  }
+
+  .brand-sep {
+    opacity: 0.6;
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+  }
+</style>
 
   <!-- HERO -->
   <header class="section" style="padding-top:48px;">
