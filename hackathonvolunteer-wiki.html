@@ -1780,6 +1780,45 @@
         navbar.style.backdropFilter = 'none';
       }
     });
+
+
+    //nav bar
+
+      (function () {
+    const toggleBtn = document.querySelector(".nav-toggle");
+    const navLinks = document.getElementById("huNavLinks");
+
+    if (!toggleBtn || !navLinks) return;
+
+    const setExpanded = (expanded) => {
+      toggleBtn.setAttribute("aria-expanded", String(expanded));
+      navLinks.classList.toggle("is-open", expanded);
+      const icon = toggleBtn.querySelector("i");
+      if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    };
+
+    // Toggle menu
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      setExpanded(!expanded);
+    });
+
+    // Close menu after clicking a same-page anchor link (e.g., #mission)
+    navLinks.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      const href = a.getAttribute("href") || "";
+      if (href.startsWith("#")) setExpanded(false);
+    });
+
+    // Close menu when resizing to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) setExpanded(false);
+    });
+
+    // Ensure initial state
+    setExpanded(false);
+  })();
   </script>
 </body>
 </html>
