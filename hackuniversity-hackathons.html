@@ -395,7 +395,22 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
-      <a href="https://hackuniversity.vercel.app/">Hack University Worldwide Initiative</a>
+      <!-- Title line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        aria-label="Hack University Worldwide Home"
+        class="brand-title"
+      >
+        Hack University Worldwide Initiative
+      </a>
+
+      <!-- URL line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        class="brand-url"
+      >
+        HackUniversity.vercel.app
+      </a>
     </div>
 
     <!-- Mobile toggle -->
@@ -411,13 +426,51 @@
 
     <!-- Links -->
     <div class="nav-links" id="huNavLinks">
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
+      <a class="nav-link" href="#partners">Partners</a>
+      <a class="nav-link" href="#mission">Mission</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackathons.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Hackathons</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Calendar</a>
     </div>
   </div>
 </nav>
+
+<!-- Embedded CSS AFTER HTML -->
+<style>
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-title,
+  .brand-url {
+    display: inline-block;
+    white-space: nowrap; /* NEVER wrap */
+    text-decoration: none;
+  }
+
+  .brand-title {
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3vw, 1.25rem);
+  }
+
+  .brand-url {
+    font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+    color: #0f766e; /* best non-black accent */
+    text-decoration: underline;
+  }
+</style>
+
 
 
 <script>
