@@ -215,48 +215,166 @@
     }
 
     /* NAVBAR */
-    .navbar { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
-    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-    .nav-brand { font-size:22px; font-weight:500; color:#4285f4; }
-    .nav-links { display:flex; gap:30px; }
-    .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
-    .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
-
-    /* Make the Team card behave like a hackathon card and span full width */
-    .team-card-as-item{
-      grid-column: 1 / -1;
+/* =========================
+       Navbar (clean & sticky)
+       ========================= */
+    .navbar {
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 0;
+      position: sticky; top: 0; z-index: 1000;
+      box-shadow: var(--shadow-sm);
     }
-    /* Optional: give it the same hover feel as other cards */
-    .team-card-as-item .team-album-card{
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 20px;
+    }
+    .nav-brand { font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing:.2px; }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav-link {
+      color: var(--color-text-muted); font-weight: 500; font-size: 14px;
+      padding: 8px 12px; border-radius: var(--radius-sm);
       transition: all var(--transition-base);
     }
-    .team-card-as-item .team-album-card:hover{
-      border-color: var(--color-primary);
-      box-shadow: var(--shadow-md);
-      transform: translateX(3px);
-    }
+    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+
+
+    /* =========================
+   Navbar (mobile toggle)
+   ========================= */
+.nav-toggle {
+  display: none; /* show only on mobile */
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-white);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.nav-toggle:hover {
+  background: #f1f3f4;
+  border-color: #d2e3fc;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .nav-toggle { display: inline-flex; }
+
+  .nav-links {
+    display: none;              /* hidden by default */
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .nav-links.is-open {
+    display: flex;              /* shown when toggled */
+  }
+
+  .nav-container {
+    flex-wrap: wrap;            /* allows links to drop below */
+    gap: 10px;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 10px 12px;
+  }
+}
+
+
   </style>
 </head>
 
 <body>
   <!-- Navigation Header -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
-          <strong>Hack University Initiative</strong>
-        </a>
-      </div>
-      <div class="nav-links">
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
-        <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI @ FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
-      </div>
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <!-- Title line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        aria-label="Hack University Worldwide Home"
+        class="brand-title"
+      >
+        Hack University Worldwide Initiative
+      </a>
+
+      <!-- URL line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        class="brand-url"
+      >
+        HackUniversity.vercel.app
+      </a>
     </div>
-  </nav>
+
+    <!-- Mobile toggle -->
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="huNavLinks"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Links -->
+    <div class="nav-links" id="huNavLinks">
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackathons.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Hackathons</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Calendar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Embedded CSS AFTER HTML -->
+<style>
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-title,
+  .brand-url {
+    display: inline-block;
+    white-space: nowrap; /* NEVER wrap */
+    text-decoration: none;
+  }
+
+  .brand-title {
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3vw, 1.25rem);
+  }
+
+  .brand-url {
+    font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+    color: #0f766e; /* best non-black accent */
+    text-decoration: underline;
+  }
+</style>
+
 
   <!-- Hero -->
   <header class="w-full bg-gray-50 border-b border-gray-200">
@@ -1157,6 +1275,45 @@
         navbar.style.backdropFilter = 'none';
       }
     });
+
+      //navbar toggle
+  (function () {
+    const toggleBtn = document.querySelector(".nav-toggle");
+    const navLinks = document.getElementById("huNavLinks");
+
+    if (!toggleBtn || !navLinks) return;
+
+    const setExpanded = (expanded) => {
+      toggleBtn.setAttribute("aria-expanded", String(expanded));
+      navLinks.classList.toggle("is-open", expanded);
+      const icon = toggleBtn.querySelector("i");
+      if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    };
+
+    // Toggle menu
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      setExpanded(!expanded);
+    });
+
+    // Close menu after clicking a same-page anchor link (e.g., #mission)
+    navLinks.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      const href = a.getAttribute("href") || "";
+      if (href.startsWith("#")) setExpanded(false);
+    });
+
+    // Close menu when resizing to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) setExpanded(false);
+    });
+
+    // Ensure initial state
+    setExpanded(false);
+  })();
+
+  //navbar toggle end 
   </script>
 </body>
 </html>
