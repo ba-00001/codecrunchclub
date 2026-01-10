@@ -387,13 +387,25 @@
 
 <body>
 
-  <!-- NAV -->
-<nav class="navbar" id="huNavbar">
+ <!-- NAV -->
+<nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
-      <!-- Change href as you want (kept # like your version) -->
-      <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Worldwide Home">
+      <!-- Title line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        aria-label="Hack University Worldwide Home"
+        class="brand-title"
+      >
         Hack University Worldwide Initiative
+      </a>
+
+      <!-- URL line -->
+      <a
+        href="https://hackuniversity.vercel.app/"
+        class="brand-url"
+      >
+        HackUniversity.vercel.app
       </a>
     </div>
 
@@ -405,18 +417,55 @@
       aria-controls="huNavLinks"
       aria-expanded="false"
     >
-      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <i class="fa-solid fa-bars"></i>
     </button>
 
     <!-- Links -->
     <div class="nav-links" id="huNavLinks">
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-main-students.html#partners">Partners</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-main-students.html#mission">Mission</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
-      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
+      <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackathons.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Hackathons</a>
+      <a
+        class="nav-link"
+        href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Calendar</a>
     </div>
   </div>
 </nav>
+
+<!-- Embedded CSS AFTER HTML -->
+<style>
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-title,
+  .brand-url {
+    display: inline-block;
+    white-space: nowrap; /* NEVER wrap */
+    text-decoration: none;
+  }
+
+  .brand-title {
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3vw, 1.25rem);
+  }
+
+  .brand-url {
+    font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+    color: #0f766e; /* best non-black accent */
+    text-decoration: underline;
+  }
+</style>
 
 
   <!-- HERO -->
@@ -591,7 +640,7 @@
     </div>
 
     <!-- COMMUNITY -->
-    <div class="portal-section">
+    <div class="grid gap-3">
       <div class="portal-section-label">Community</div>
 
       <a class="portal-row portal-row--soft"
@@ -599,8 +648,17 @@
          target="_blank">
         <div class="portal-row-left">
           <span class="portal-icon"><i class="fa-brands fa-discord"></i></span>
-          <span class="portal-label">Join Discord / GroupMe / Instagram</span>
+          <span class="portal-label">Join Discord (Requires OneStop Form Registration)</span>
         </div>
+
+      <a class="portal-row portal-row--soft"
+         href="https://hackuniversityplatforms.vercel.app/"
+         target="_blank">
+        <div class="portal-row-left">
+          <span class="portal-icon"><i class="fa-solid fa-users"></i></span>
+          <span class="portal-label">Join GroupMe / Instagram Group Chat</span>
+        </div>
+
       </a>
     </div>
   </div>
