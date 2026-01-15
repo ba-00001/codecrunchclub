@@ -810,7 +810,7 @@
       return s.includes('comingsoon') || s.includes('commingsoon');
     }
 
-    /* ---------- Button builders ---------- */
+    /* ---------- Modality helpers ---------- */
     function getModalityClass(modality) {
       switch ((modality || '').toLowerCase()) {
         case 'virtual': return 'mode-virtual';
@@ -830,26 +830,57 @@
       }
     }
 
-    function buildButtons(h){
-      // Primary
-      const registerEnabled = h.registrationViaOneStop === true;
-      const websiteEnabled = (h.registrationViaOneStop !== true) && isValidUrl(h.url) && !isComingSoonUrl(h.url);
+    /* ---------- Button rules (UPDATED) ---------- */
+    function buildButtons(h, isPast){
+      // Website is "ready" only if it's a real URL and not a coming-soon page
+      const websiteReady = isValidUrl(h.url) && !isComingSoonUrl(h.url);
 
-      const buttons = [
-        { key:'register', label:'Register', enabled: registerEnabled, url: ONE_STOP_FORM_URL },
-        { key:'website',  label:'Website',  enabled: websiteEnabled,  url: h.url }
+      /**
+       * RULES:
+       * 1) If website is ready AND event is NOT past:
+       *    - Register disappears
+       *    - Website label becomes "Website & Registration"
+       *    - It links to the website url (h.url)
+       *
+       * 2) After event ends (past):
+       *    - Register appears but disabled
+       *    - Website label becomes "Website" again
+       */
+      const primary = [];
+
+      if (!isPast && websiteReady) {
+        // One primary button that points to the website
+        primary.push({ key:'website', label:'Website & Registration', enabled:true, url: h.url });
+      } else {
+        // Normal mode:
+        // - if past: Register shows but disabled
+        // - if upcoming/live: Register enabled only if registrationViaOneStop === true
+        const registerEnabled = (!isPast) && (h.registrationViaOneStop === true);
+
+        primary.push({
+          key: 'register',
+          label: 'Register',
+          enabled: registerEnabled,
+          url: ONE_STOP_FORM_URL
+        });
+
+        primary.push({
+          key: 'website',
+          label: 'Website',
+          enabled: websiteReady,
+          url: h.url
+        });
+      }
+
+      const secondary = [
+        { key:'agenda',         label:'Agenda',          enabled: !!h.agendaEnable,          url: h.agendaUrl },
+        { key:'perks',          label:'Perks & Swag',     enabled: !!h.perksEnable,           url: h.perksUrl },
+        { key:'photoalbum',     label:'Photo Album',     enabled: !!h.photoAlbumEnable,      url: h.photoAlbumUrl },
+        { key:'mentorschedule', label:'Mentor Schedule', enabled: !!h.mentorScheduleEnable,  url: h.mentorScheduleUrl },
+        { key:'prizes',         label:'Prizes',          enabled: !!h.prizesEnable,          url: h.prizesUrl }
       ];
 
-      // Secondary (from your per-event enable/url flags)
-      buttons.push(
-        { key:'agenda',         label:'Agenda',         enabled: !!h.agendaEnable,         url: h.agendaUrl },
-        { key:'perks',          label:'Perks & Swag',    enabled: !!h.perksEnable,          url: h.perksUrl },
-        { key:'photoalbum',     label:'Photo Album',    enabled: !!h.photoAlbumEnable,     url: h.photoAlbumUrl },
-        { key:'mentorschedule', label:'Mentor Schedule',enabled: !!h.mentorScheduleEnable, url: h.mentorScheduleUrl },
-        { key:'prizes',         label:'Prizes',         enabled: !!h.prizesEnable,         url: h.prizesUrl }
-      );
-
-      return buttons;
+      return { primary, secondary };
     }
 
     function renderButtonLink(btn){
@@ -870,24 +901,7 @@
       `;
     }
 
-    function renderButtonsSplit(buttons){
-      const primaryKeys = new Set(['register','website']);
-      const primary = [];
-      const secondary = [];
-
-      for (const b of buttons){
-        const key = String(b.key || '').toLowerCase();
-        if (primaryKeys.has(key)) primary.push(b);
-        else secondary.push(b);
-      }
-
-      return {
-        primaryHtml: primary.map(renderButtonLink).join(''),
-        secondaryHtml: secondary.map(renderButtonLink).join('')
-      };
-    }
-
-    /* ---------- Hackathon data (all have the new flags) ---------- */
+    /* ---------- Hackathon data ---------- */
     const hackathons = [
       {
         name: '🪖 305 Hackathon: Edition Nov 2025 - Session A (Online)',
@@ -981,7 +995,7 @@
         hackStartTime: '2026-01-16T22:00',
         hackEndTime:   '2026-01-24T22:00',
         url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
-        registrationViaOneStop: true,
+        registrationViaOneStop: false,
         agendaEnable: true, agendaUrl: "https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2026-305-hackathon-SA-&-SB-JAN-2026.md",
         perksEnable:  true, perksUrl: "https://github.com/CODE-CRUNCH-CLUB/event-prizes/blob/main/2026-305-hackathon-SA-&-SB-JAN-2026.md",
         photoAlbumEnable:  true, photoAlbumUrl: "https://photos.google.com/share/AF1QipN4JtGK4n186ewkcYr5nypsPumWt99ypTrTyL9l1J__W5hlmtHl5UVg137HRBbZ3g?key=eGdBYlZNdS04aTQ3WWtTVGRKQ0g2UTh3c3ZWNVJn",
@@ -997,7 +1011,7 @@
         hackStartTime: '2026-01-24T09:00',
         hackEndTime:   '2026-01-24T22:00',
         url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
-        registrationViaOneStop: true,
+        registrationViaOneStop: false,
         agendaEnable: true, agendaUrl: "https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2026-305-hackathon-SA-&-SB-JAN-2026.md",
         perksEnable:  true, perksUrl: "https://github.com/CODE-CRUNCH-CLUB/event-prizes/blob/main/2026-305-hackathon-SA-&-SB-JAN-2026.md",
         photoAlbumEnable:  true, photoAlbumUrl: "https://photos.google.com/share/AF1QipN4JtGK4n186ewkcYr5nypsPumWt99ypTrTyL9l1J__W5hlmtHl5UVg137HRBbZ3g?key=eGdBYlZNdS04aTQ3WWtTVGRKQ0g2UTh3c3ZWNVJn",
@@ -1315,7 +1329,7 @@
         prizesEnable: false, prizesUrl: "https://"
       },
 
-      // Older / Past events (kept with flags)
+      // Older / Past events
       {
         name: '🏙️ 305 Hackathon: Fall 2025 edition',
         startDate: '2025-09-19',
@@ -1433,13 +1447,17 @@
         const tz = getETAbbrev();
         const dateLine = `${range} (${tz})`;
 
-        const note = (h.registrationViaOneStop === true)
+        const endOfDayET = new Date(
+          new Date(h.endDate + "T23:59:59").toLocaleString("en-US", { timeZone: "America/New_York" })
+        );
+        const isPast = now > endOfDayET;
+
+        const note = (h.registrationViaOneStop === true && (isComingSoonUrl(h.url) || !isValidUrl(h.url)))
           ? `Website coming soon — Register now using the One-Stop Form.`
           : ``;
 
-        // Build + render buttons (Register/Website primary, rest secondary)
-        const buttons = buildButtons(h);
-        const { primaryHtml, secondaryHtml } = renderButtonsSplit(buttons);
+        // ✅ UPDATED: apply your new primary-button behavior
+        const { primary, secondary } = buildButtons(h, isPast);
 
         const html = `
           <div class="hackathon-item">
@@ -1457,20 +1475,16 @@
             </div>
 
             <div class="h-actions-primary">
-              ${primaryHtml}
+              ${primary.map(renderButtonLink).join('')}
             </div>
 
             <div class="h-actions-secondary">
-              ${secondaryHtml}
+              ${secondary.map(renderButtonLink).join('')}
             </div>
           </div>
         `;
 
-        const endOfDayET = new Date(
-          new Date(h.endDate + "T23:59:59").toLocaleString("en-US", { timeZone: "America/New_York" })
-        );
-
-        if (now > endOfDayET) past.push(html);
+        if (isPast) past.push(html);
         else upcoming.push(html);
       });
 
