@@ -91,26 +91,17 @@
     .section-header p { color: var(--color-text-muted); font-size: 14px; margin: 0; }
 
     .hackathons-list { display: grid; gap: 14px; }
+
     .hackathon-item {
       background: var(--color-bg-white);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       padding: 18px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: var(--spacing-md);
-      align-items: center;
       transition: all var(--transition-base);
     }
     .hackathon-item:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); transform: translateX(3px); }
-    .hackathon-info { display: flex; flex-direction: column; gap: 4px; }
-    .hackathon-name { font-weight: 600; color: var(--color-text); font-size: 16px; }
-    .hackathon-theme { color: var(--color-text-muted); font-size: 12.5px; margin-top: -2px; }
-    .hackathon-date { color: var(--color-text-muted); font-size: 13px; }
 
-    .hackathon-actions{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
     .hackathon-mode { padding: 6px 10px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
-
     .hours-badge{
       padding: 6px 10px; border-radius: var(--radius-sm);
       background:#eef2ff; border:1px solid #dbeafe; color:#1e40af;
@@ -141,31 +132,95 @@
       align-items: center;
       justify-content: center;
       white-space: nowrap;
+      border: 1px solid transparent;
     }
     .hackathon-link:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); transform: translateY(-1px); }
 
-    /* ✅ NEW: Disabled button style */
     .hackathon-link.is-disabled{
-      background: #e5e7eb;
-      color: #6b7280;
-      border: 1px solid #d1d5db;
-      pointer-events: none;
+      background: #e5e7eb !important;
+      color: #6b7280 !important;
+      border: 1px solid #d1d5db !important;
+      box-shadow: none !important;
+      transform: none !important;
       cursor: not-allowed;
-      box-shadow: none;
-      transform: none;
-      opacity: .95;
-      text-decoration: none;
+      pointer-events: none;
+    }
+
+    /* ===== New Hackathon Card Layout ===== */
+    .h-card-top{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+    }
+    .h-title{
+      font-weight: 800;
+      color: var(--color-text);
+      font-size: 16px;
+    }
+    .h-subtitle{
+      color: var(--color-text-muted);
+      font-size: 13px;
+      margin-top:-2px;
+    }
+    .h-date{
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+    .h-note{
+      color: #b45309;
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .h-meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      margin-top: 10px;
+    }
+    .h-actions-primary{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .h-actions-secondary{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* secondary buttons look like “pills” */
+    .h-actions-secondary .hackathon-link{
+      background: #f1f3f4;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+    .h-actions-secondary .hackathon-link:hover{
+      background: #e8f0fe;
+      border-color: #d2e3fc;
+      color: var(--color-primary);
+    }
+    .h-actions-secondary .hackathon-link.is-disabled{
+      background:#f3f4f6 !important;
+      color:#9ca3af !important;
+      border-color:#e5e7eb !important;
+      pointer-events:none;
     }
 
     /* Responsive */
     @media (max-width: 940px){
-      .hackathon-item{ grid-template-columns: 1fr; }
-      .hackathon-actions{ justify-content:flex-start; }
+      .hackathon-item:hover { transform: none; }
     }
     @media (max-width: 520px) {
       .timezone-grid { grid-template-columns: 1fr; gap: 10px; }
       .hackathons-section { padding: 20px var(--spacing-md); }
       .container { padding: var(--spacing-md); }
+      .hackathon-item { padding: 16px; }
     }
 
     /* --- Footer --- */
@@ -230,9 +285,7 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
 
-    /* =========================
-       Navbar (clean & sticky + hamburger)
-       ========================= */
+    /* Navbar (clean & sticky + hamburger) */
     .navbar{
       background: var(--color-bg-white);
       border-bottom: 1px solid var(--color-border);
@@ -306,7 +359,6 @@
 
     @media (max-width: 768px){
       .nav-toggle{ display: inline-flex; }
-
       .nav-links{
         display: none;
         width: 100%;
@@ -315,15 +367,8 @@
         gap: 8px;
         padding-top: 12px;
       }
-
-      .nav-links.is-open{
-        display: flex;
-      }
-
-      .nav-link{
-        width: 100%;
-        padding: 10px 12px;
-      }
+      .nav-links.is-open{ display: flex; }
+      .nav-link{ width: 100%; padding: 10px 12px; }
     }
   </style>
 </head>
@@ -332,22 +377,16 @@
   <!-- NAV -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="nav-brand">
-        <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Worldwide Home" class="brand-title">
+      <div class="nav-brand" style="display:flex; flex-direction:column; line-height:1.1;">
+        <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Worldwide Home" class="brand-title" style="white-space:nowrap; font-weight:700; font-size: clamp(0.95rem, 3vw, 1.25rem);">
           Hack University Worldwide Initiative
         </a>
-        <a href="https://hackuniversity.vercel.app/" class="brand-url">
+        <a href="https://hackuniversity.vercel.app/" class="brand-url" style="white-space:nowrap; font-size: clamp(0.8rem, 2.5vw, 1.05rem); color:#0f766e; text-decoration:underline;">
           HackUniversity.vercel.app
         </a>
       </div>
 
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-label="Toggle navigation"
-        aria-controls="huNavLinks"
-        aria-expanded="false"
-      >
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="huNavLinks" aria-expanded="false">
         <i class="fa-solid fa-bars"></i>
       </button>
 
@@ -360,35 +399,10 @@
     </div>
   </nav>
 
-  <!-- Embedded CSS AFTER HTML -->
-  <style>
-    .nav-brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .brand-title,
-    .brand-url {
-      display: inline-block;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .brand-title {
-      font-weight: 700;
-      font-size: clamp(0.95rem, 3vw, 1.25rem);
-    }
-    .brand-url {
-      font-size: clamp(0.8rem, 2.5vw, 1.05rem);
-      color: #0f766e;
-      text-decoration: underline;
-    }
-  </style>
-
   <script>
     (function () {
       const toggleBtn = document.querySelector(".nav-toggle");
       const navLinks = document.getElementById("huNavLinks");
-
       if (!toggleBtn || !navLinks) return;
 
       const setExpanded = (expanded) => {
@@ -426,7 +440,6 @@
         <span aria-hidden="true"> / </span>
         Hackathon Events
       </p>
-
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
         Hackathon Events
       </h1>
@@ -592,7 +605,7 @@
       <h2>HACK OPERATIONS</h2>
 
       <p class="mt-2 text-gray-600 max-w-2xl">
-        A problem-solving competition with Tech(coding/development) and Technopreneurship (no code - business pitch) tracks.
+        A problem-solving competition with Tech (coding/development) and Technopreneurship (no code - business pitch) tracks.
       </p>
       <br>
 
@@ -682,8 +695,8 @@
 
     /* ---------- Time helpers ---------- */
     function asLocalDate(ymd) {
-      const [y, m, d] = ymd.split('-').map(Number);
-      return new Date(y, m - 1, d);
+      const [y, m, d] = String(ymd).split('-').map(Number);
+      return new Date(y, (m || 1) - 1, d || 1);
     }
     function nowInMiami() {
       return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -783,401 +796,21 @@
       return `<div class="hours-badge" title="Estimated hacking time">${txt}</div>`;
     }
 
-    /* ✅ NEW: Multi-button renderer (with disabled support) */
-    function isValidUrl(u){
-      const s = String(u || '').trim();
-      if (!s) return false;
-      if (s === '#' || s === 'https://' || s === 'http://') return false;
-      return /^https?:\/\//i.test(s);
+    /* ---------- URL helpers ---------- */
+    function isValidUrl(url){
+      try {
+        const u = new URL(String(url || ''));
+        return !!u.protocol && !!u.host;
+      } catch (e){
+        return false;
+      }
+    }
+    function isComingSoonUrl(url){
+      const s = String(url || '').toLowerCase();
+      return s.includes('comingsoon') || s.includes('commingsoon');
     }
 
-    function renderButtons(h, fallbackUrl, fallbackLabel) {
-      const hasButtons = Array.isArray(h.buttons) && h.buttons.length > 0;
-
-      // If registrationViaOneStop, show Register button enabled (always)
-      if (h.registrationViaOneStop === true) {
-        const btns = hasButtons ? [...h.buttons] : [];
-        const already = btns.some(b => String(b.key || '').toLowerCase() === 'register');
-        if (!already) {
-          btns.unshift({ key: 'register', label: 'Register', enabled: true, url: ONE_STOP_FORM_URL });
-        } else {
-          // if it exists, force it to the right URL + enabled
-          btns.forEach(b => {
-            if (String(b.key || '').toLowerCase() === 'register') {
-              b.enabled = true;
-              b.url = ONE_STOP_FORM_URL;
-            }
-          });
-        }
-
-        return btns.map(b => {
-          const enabled = !!b.enabled && isValidUrl(b.url);
-          const cls = enabled ? 'hackathon-link' : 'hackathon-link is-disabled';
-          const href = enabled ? b.url : '#';
-          const title = enabled ? '' : 'Coming soon';
-          return `
-            <a href="${href}"
-              class="${cls}"
-              target="_blank"
-              rel="noopener"
-              aria-disabled="${enabled ? 'false' : 'true'}"
-              tabindex="${enabled ? '0' : '-1'}"
-              title="${title}">
-              ${b.label}
-            </a>
-          `;
-        }).join('');
-      }
-
-      // If buttons[] exists, render them
-      if (hasButtons) {
-        return h.buttons.map(b => {
-          const enabled = !!b.enabled && isValidUrl(b.url);
-          const cls = enabled ? 'hackathon-link' : 'hackathon-link is-disabled';
-          const href = enabled ? b.url : '#';
-          const title = enabled ? '' : 'Coming soon';
-          return `
-            <a href="${href}"
-              class="${cls}"
-              target="_blank"
-              rel="noopener"
-              aria-disabled="${enabled ? 'false' : 'true'}"
-              tabindex="${enabled ? '0' : '-1'}"
-              title="${title}">
-              ${b.label}
-            </a>
-          `;
-        }).join('');
-      }
-
-      // Otherwise fallback to single button
-      const safeUrl = isValidUrl(fallbackUrl) ? fallbackUrl : '#';
-      const enabled = isValidUrl(fallbackUrl);
-      const cls = enabled ? 'hackathon-link' : 'hackathon-link is-disabled';
-      return `
-        <a href="${safeUrl}" class="${cls}" target="_blank" rel="noopener" aria-disabled="${enabled ? 'false':'true'}" tabindex="${enabled ? '0':'-1'}">
-          ${fallbackLabel}
-        </a>
-      `;
-    }
-
-    /* ---------- Hackathon data ---------- */
-    const hackathons = [
-      {
-        name: '🪖 305 Hackathon: Edition Nov 2025 - Session A (Online)',
-        theme: 'Theme: Veterans & DefenseTech',
-        startDate: '2025-11-07',
-        endDate:   '2025-11-15',
-        modality:  'virtual',
-        hoursPreset: '1w',
-        url: 'https://305hacknov2025.vercel.app/'
-      },
-      {
-        name: '🪖 305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
-        theme: 'Theme: Veterans & DefenseTech',
-        startDate: '2025-11-15',
-        endDate:   '2025-11-15',
-        modality:  'in-person',
-        hackStartTime: '2025-11-15T09:00',
-        hackEndTime:   '2025-11-15T21:00',
-        url: 'https://305hacknov2025.vercel.app/'
-      },
-
-      // December 2025
-      {
-        name: '🎆 CodeFest 2025 - Session A (Online/Synchronous)',
-        theme: 'Marketing, Business, Finance, and AI',
-        startDate: '2025-11-28',
-        endDate: '2025-12-06',
-        modality: 'virtual',
-        hoursPreset: '1w',
-        url: 'https://codefesthack2025.vercel.app/'
-      },
-      {
-        name: '🎆 CodeFest 2025 - Session B (In-person)',
-        theme: 'Marketing, Business, Finance, and AI',
-        startDate: '2025-12-06',
-        endDate: '2025-12-06',
-        modality: 'in-person',
-        hackStartTime: '2025-12-13T09:00',
-        hackEndTime: '2025-12-13T21:00',
-        url: 'https://codefesthack2025.vercel.app/'
-      },
-
-      // ColorStack Winter Hackathon
-      {
-        name: 'ColorStack Winter Hackathon (Available to U.S. National ColorStack Members Only)',
-        startDate: '2025-12-19',
-        endDate: '2026-01-12',
-        modality: 'virtual',
-        hackStartTime: '2025-12-19T00:00',
-        hackEndTime: '2026-01-12T23:59',
-        url: 'https://colorstackhack25.vercel.app/'
-      },
-
-      /* ✅ Example with multi-buttons + disabled */
-      {
-        name: '🏥 305 Hackathon Edition Jan 2026 - Session A (Online/Synchronous)',
-        theme: 'AI in Healthcare & Biotech',
-        startDate: '2026-01-16',
-        endDate: '2026-01-24',
-        modality: 'virtual',
-        hackStartTime: '2026-01-16T22:00',
-        hackEndTime: '2026-01-24T22:00',
-        url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
-        registrationViaOneStop: false,
-
-        buttons: [
-          { key: 'website', label: 'Website', enabled: true, url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html' },
-          { key: 'agenda', label: 'Agenda', enabled: false, url: 'https://' },
-          { key: 'perks', label: 'Perks & Swag', enabled: false, url: 'https://' },
-          { key: 'photos', label: 'Photo Album', enabled: false, url: 'https://' },
-          { key: 'mentors', label: 'Mentor Schedule', enabled: false, url: 'https://' }
-        ]
-      },
-
-      {
-        name: '🏥 305 Hackathon Edition Jan 2026 - Session B (In-person)',
-        theme: 'AI in Healthcare & Biotech',
-        startDate: '2026-01-24',
-        endDate: '2026-01-24',
-        modality: 'in-person',
-        hackStartTime: '2026-01-24T09:00',
-        hackEndTime: '2026-01-24T22:00',
-        url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
-        registrationViaOneStop: false
-      },
-
-      // February 2026
-      {
-        name: '🤖 305 Hackathon Edition Feb 2026 - Session A (Online/Synchronous)',
-        theme: 'Mechanical, Electrical & Hardware Innovation',
-        startDate: '2026-01-30',
-        endDate: '2026-02-07',
-        modality: 'virtual',
-        hackStartTime: '2026-01-30T22:00',
-        hackEndTime: '2026-02-14T22:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-commingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '🤖 305 Hackathon Edition Feb 2026 - Session B (In-person)',
-        theme: 'Mechanical, Electrical & Hardware Innovation',
-        startDate: '2026-02-07',
-        endDate: '2026-02-07',
-        modality: 'in-person',
-        hackStartTime: '2026-02-07T09:00',
-        hackEndTime: '2026-02-07T22:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-commingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // March 2026
-      {
-        name: '🔥 Hack Fiesta Miami 2026 - Session A (Online/Synchronous)',
-        theme: 'AI Startups & Venture Innovation',
-        startDate: '2026-03-06',
-        endDate: '2026-03-14',
-        modality: 'virtual',
-        hackStartTime: '2026-03-06T09:00',
-        hackEndTime: '2026-03-14T21:00',
-        url: 'https://hackfiestamiami2026.vercel.app/',
-        registrationViaOneStop: true
-      },
-      {
-        name: '🔥 Hack Fiesta Miami 2026 - Session B (In-person)',
-        theme: 'AI Startups & Venture Innovation',
-        startDate: '2026-03-14',
-        endDate: '2026-03-14',
-        modality: 'in-person',
-        hackStartTime: '2026-03-14T09:00',
-        hackEndTime: '2026-03-14T21:00',
-        url: 'https://hackfiestamiami2026.vercel.app/',
-        registrationViaOneStop: true
-      },
-
-      // April 2026
-      {
-        name: '⚖️ 305 Hackathon Edition Apr 2026 - Session A (Online/Synchronous)',
-        theme: 'Law, Compliance, & Cybersecurity',
-        startDate: '2026-04-03',
-        endDate: '2026-04-11',
-        modality: 'virtual',
-        hackStartTime: '2026-04-03T09:00',
-        hackEndTime: '2026-04-11T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '⚖️ 305 Hackathon Edition Apr 2026 - Session B (In-person)',
-        theme: 'Law, Compliance, & Cybersecurity',
-        startDate: '2026-04-11',
-        endDate: '2026-04-11',
-        modality: 'in-person',
-        hackStartTime: '2026-04-11T09:00',
-        hackEndTime: '2026-04-11T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // May 2026
-      {
-        name: '📈 CodeStorm 2026 - Online/Synchronous',
-        theme: 'Marketing, Media, & Creative AI',
-        startDate: '2026-05-01',
-        endDate: '2026-05-09',
-        modality: 'virtual',
-        hackStartTime: '2026-05-01T09:00',
-        hackEndTime: '2026-05-09T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // June 2026
-      {
-        name: '🤖 305 Hackathon Edition Jun 2026 - Online/Synchronous',
-        theme: 'Automation & Productivity Tools',
-        startDate: '2026-06-05',
-        endDate: '2026-06-13',
-        modality: 'virtual',
-        hackStartTime: '2026-06-05T09:00',
-        hackEndTime: '2026-06-13T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // July 2026
-      {
-        name: '💰 SummerCodeX 2026 - Online/Synchronous',
-        theme: 'Finance, FinTech & Data Science',
-        startDate: '2026-07-03',
-        endDate: '2026-07-11',
-        modality: 'virtual',
-        hackStartTime: '2026-07-03T09:00',
-        hackEndTime: '2026-07-11T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // August 2026
-      {
-        name: '🎓 305 Hackathon Edition Aug 2026 - Online/Synchronous',
-        theme: 'EdTech & Student Experience',
-        startDate: '2026-08-07',
-        endDate: '2026-08-15',
-        modality: 'virtual',
-        hackStartTime: '2026-08-07T09:00',
-        hackEndTime: '2026-08-15T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // September 2026
-      {
-        name: '🌱 305 Hackathon Edition Sep 2026 - Session A (Online/Synchronous)',
-        theme: 'CivicTech & Sustainability',
-        startDate: '2026-09-04',
-        endDate: '2026-09-12',
-        modality: 'virtual',
-        hackStartTime: '2026-09-04T09:00',
-        hackEndTime: '2026-09-12T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '🌱 305 Hackathon Edition Sep 2026 - Session B (In-person)',
-        theme: 'CivicTech & Sustainability',
-        startDate: '2026-09-12',
-        endDate: '2026-09-12',
-        modality: 'in-person',
-        hackStartTime: '2026-09-12T09:00',
-        hackEndTime: '2026-09-12T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // October 2026
-      {
-        name: '👑 EmpowHER Hackathon 2026 - Session A (Online/Synchronous)',
-        theme: 'Leadership & Accessibility',
-        startDate: '2026-09-25',
-        endDate: '2026-10-03',
-        modality: 'virtual',
-        hackStartTime: '2026-09-25T09:00',
-        hackEndTime: '2026-10-19T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '👑 EmpowHER Hackathon 2026 - Session B (In-person)',
-        theme: 'Leadership & Accessibility',
-        startDate: '2026-10-03',
-        endDate: '2026-10-03',
-        modality: 'in-person',
-        hackStartTime: '2026-10-03T09:00',
-        hackEndTime: '2026-10-03T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // November 2026
-      {
-        name: '🪖 305 Hackathon Nov 2026 - Session A (Online/Synchronous)',
-        theme: 'DefenseTech, Security, & Veterans Support',
-        startDate: '2026-10-30',
-        endDate: '2026-11-07',
-        modality: 'virtual',
-        hackStartTime: '2026-10-30T09:00',
-        hackEndTime: '2026-10-07T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '🪖 305 Hackathon Nov 2026 - Session B (In-person)',
-        theme: 'DefenseTech, Security, & Veterans Support',
-        startDate: '2026-11-07',
-        endDate: '2026-11-07',
-        modality: 'in-person',
-        hackStartTime: '2026-11-07T09:00',
-        hackEndTime: '2026-11-07T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // December 2026
-      {
-        name: '🎆 CodeFest Hackathon 2026 - Session A (Online/Synchronous)',
-        theme: 'Business, Marketing, Finance & AI',
-        startDate: '2026-11-13',
-        endDate: '2026-11-21',
-        modality: 'virtual',
-        hackStartTime: '2026-11-13T09:00',
-        hackEndTime: '2026-11-21T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-      {
-        name: '🎆 CodeFest Hackathon 2026 - Session B (In-person)',
-        theme: 'Business, Marketing, Finance & AI',
-        startDate: '2026-11-21',
-        endDate: '2026-11-21',
-        modality: 'in-person',
-        hackStartTime: '2026-11-21T09:00',
-        hackEndTime: '2026-11-21T21:00',
-        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
-        registrationViaOneStop: true
-      },
-
-      // Older events
-      { name: '🏙️ 305 Hackathon: Fall 2025 edition', startDate: '2025-09-19', endDate: '2025-09-21', modality: 'in-person', hoursPreset: '3d', url: 'https://305hackfall2025.vercel.app' },
-      { name: '👑 EmpowHER Hackathon 2025', startDate: '2025-10-13', endDate: '2025-10-20', modality: 'virtual', hoursPreset: '1w', url: 'https://empowherhack2025.vercel.app/' },
-      { name: '👑 EmpowHER HackDAY 2025', startDate: '2025-10-18', endDate: '2025-10-18', modality: 'in-person', hoursPreset: '1d', url: 'https://empowherhackdayfall25.vercel.app/' },
-      { name: '🌟 SummerCodeX 2025', startDate: '2025-07-21', endDate: '2025-07-28', modality: 'virtual', hoursPreset: '1w', url: 'https://summercodexhack2025.vercel.app/' },
-      { name: '⛈️ CodeStorm 2025', startDate: '2025-05-19', endDate: '2025-05-26', modality: 'virtual', hoursPreset: '1w', url: 'https://codestormhack2025.vercel.app/' },
-      { name: '⚡ 305 Hackathon: Spring 2025 edition', startDate: '2025-03-29', endDate: '2025-03-31', modality: 'hybrid', hoursPreset: '3d', url: 'https://305hackspring2025.vercel.app/' },
-      { name: '🔥 HackFiesta Miami 2025', startDate: '2025-03-21', endDate: '2025-03-23', modality: 'virtual', hoursLabel: '36', url: 'https://hackfiestamiami2025.vercel.app/' }
-    ];
-
+    /* ---------- Button builders ---------- */
     function getModalityClass(modality) {
       switch ((modality || '').toLowerCase()) {
         case 'virtual': return 'mode-virtual';
@@ -1197,6 +830,592 @@
       }
     }
 
+    function buildButtons(h){
+      // Primary
+      const registerEnabled = h.registrationViaOneStop === true;
+      const websiteEnabled = (h.registrationViaOneStop !== true) && isValidUrl(h.url) && !isComingSoonUrl(h.url);
+
+      const buttons = [
+        { key:'register', label:'Register', enabled: registerEnabled, url: ONE_STOP_FORM_URL },
+        { key:'website',  label:'Website',  enabled: websiteEnabled,  url: h.url }
+      ];
+
+      // Secondary (from your per-event enable/url flags)
+      buttons.push(
+        { key:'agenda',         label:'Agenda',         enabled: !!h.agendaEnable,         url: h.agendaUrl },
+        { key:'perks',          label:'Perks & Swag',    enabled: !!h.perksEnable,          url: h.perksUrl },
+        { key:'photoalbum',     label:'Photo Album',    enabled: !!h.photoAlbumEnable,     url: h.photoAlbumUrl },
+        { key:'mentorschedule', label:'Mentor Schedule',enabled: !!h.mentorScheduleEnable, url: h.mentorScheduleUrl },
+        { key:'prizes',         label:'Prizes',         enabled: !!h.prizesEnable,         url: h.prizesUrl }
+      );
+
+      return buttons;
+    }
+
+    function renderButtonLink(btn){
+      const enabled = !!btn.enabled && isValidUrl(btn.url);
+      const cls = enabled ? 'hackathon-link' : 'hackathon-link is-disabled';
+      const href = enabled ? btn.url : '#';
+      const title = enabled ? '' : 'Coming soon';
+      return `
+        <a href="${href}"
+          class="${cls}"
+          target="_blank"
+          rel="noopener"
+          aria-disabled="${enabled ? 'false' : 'true'}"
+          tabindex="${enabled ? '0' : '-1'}"
+          title="${title}">
+          ${btn.label}
+        </a>
+      `;
+    }
+
+    function renderButtonsSplit(buttons){
+      const primaryKeys = new Set(['register','website']);
+      const primary = [];
+      const secondary = [];
+
+      for (const b of buttons){
+        const key = String(b.key || '').toLowerCase();
+        if (primaryKeys.has(key)) primary.push(b);
+        else secondary.push(b);
+      }
+
+      return {
+        primaryHtml: primary.map(renderButtonLink).join(''),
+        secondaryHtml: secondary.map(renderButtonLink).join('')
+      };
+    }
+
+    /* ---------- Hackathon data (all have the new flags) ---------- */
+    const hackathons = [
+      {
+        name: '🪖 305 Hackathon: Edition Nov 2025 - Session A (Online)',
+        theme: 'Theme: Veterans & DefenseTech',
+        startDate: '2025-11-07',
+        endDate:   '2025-11-15',
+        modality:  'virtual',
+        hoursPreset: '1w',
+        url: 'https://305hacknov2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🪖 305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
+        theme: 'Theme: Veterans & DefenseTech',
+        startDate: '2025-11-15',
+        endDate:   '2025-11-15',
+        modality:  'in-person',
+        hackStartTime: '2025-11-15T09:00',
+        hackEndTime:   '2025-11-15T21:00',
+        url: 'https://305hacknov2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // CodeFest 2025
+      {
+        name: '🎆 CodeFest 2025 - Session A (Online/Synchronous)',
+        theme: 'Marketing, Business, Finance, and AI',
+        startDate: '2025-11-28',
+        endDate:   '2025-12-06',
+        modality:  'virtual',
+        hoursPreset: '1w',
+        url: 'https://codefesthack2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🎆 CodeFest 2025 - Session B (In-person)',
+        theme: 'Marketing, Business, Finance, and AI',
+        startDate: '2025-12-06',
+        endDate:   '2025-12-06',
+        modality:  'in-person',
+        hackStartTime: '2025-12-06T09:00',
+        hackEndTime:   '2025-12-06T21:00',
+        url: 'https://codefesthack2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // ColorStack Winter Hackathon
+      {
+        name: 'ColorStack Winter Hackathon (Available to U.S. National ColorStack Members Only)',
+        startDate: '2025-12-19',
+        endDate:   '2026-01-12',
+        modality:  'virtual',
+        hackStartTime: '2025-12-19T00:00',
+        hackEndTime:   '2026-01-12T23:59',
+        url: 'https://colorstackhack25.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // Jan 2026
+      {
+        name: '🏥 305 Hackathon Edition Jan 2026 - Session A (Online/Synchronous)',
+        theme: 'AI in Healthcare & Biotech',
+        startDate: '2026-01-16',
+        endDate:   '2026-01-24',
+        modality:  'virtual',
+        hackStartTime: '2026-01-16T22:00',
+        hackEndTime:   '2026-01-24T22:00',
+        url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🏥 305 Hackathon Edition Jan 2026 - Session B (In-person)',
+        theme: 'AI in Healthcare & Biotech',
+        startDate: '2026-01-24',
+        endDate:   '2026-01-24',
+        modality:  'in-person',
+        hackStartTime: '2026-01-24T09:00',
+        hackEndTime:   '2026-01-24T22:00',
+        url: 'https://codecrunchglobal.vercel.app/2026-305hackjan2026.html',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // Feb 2026
+      {
+        name: '🤖 305 Hackathon Edition Feb 2026 - Session A (Online/Synchronous)',
+        theme: 'Mechanical, Electrical & Hardware Innovation',
+        startDate: '2026-01-30',
+        endDate:   '2026-02-07',
+        modality:  'virtual',
+        hackStartTime: '2026-01-30T22:00',
+        hackEndTime:   '2026-02-14T22:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-commingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🤖 305 Hackathon Edition Feb 2026 - Session B (In-person)',
+        theme: 'Mechanical, Electrical & Hardware Innovation',
+        startDate: '2026-02-07',
+        endDate:   '2026-02-07',
+        modality:  'in-person',
+        hackStartTime: '2026-02-07T09:00',
+        hackEndTime:   '2026-02-07T22:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-commingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // March 2026
+      {
+        name: '🔥 Hack Fiesta Miami 2026 - Session A (Online/Synchronous)',
+        theme: 'AI Startups & Venture Innovation',
+        startDate: '2026-03-06',
+        endDate:   '2026-03-14',
+        modality:  'virtual',
+        hackStartTime: '2026-03-06T09:00',
+        hackEndTime:   '2026-03-14T21:00',
+        url: 'https://hackfiestamiami2026.vercel.app/',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🔥 Hack Fiesta Miami 2026 - Session B (In-person)',
+        theme: 'AI Startups & Venture Innovation',
+        startDate: '2026-03-14',
+        endDate:   '2026-03-14',
+        modality:  'in-person',
+        hackStartTime: '2026-03-14T09:00',
+        hackEndTime:   '2026-03-14T21:00',
+        url: 'https://hackfiestamiami2026.vercel.app/',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // April 2026
+      {
+        name: '⚖️ 305 Hackathon Edition Apr 2026 - Session A (Online/Synchronous)',
+        theme: 'Law, Compliance, & Cybersecurity',
+        startDate: '2026-04-03',
+        endDate:   '2026-04-11',
+        modality:  'virtual',
+        hackStartTime: '2026-04-03T09:00',
+        hackEndTime:   '2026-04-11T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '⚖️ 305 Hackathon Edition Apr 2026 - Session B (In-person)',
+        theme: 'Law, Compliance, & Cybersecurity',
+        startDate: '2026-04-11',
+        endDate:   '2026-04-11',
+        modality:  'in-person',
+        hackStartTime: '2026-04-11T09:00',
+        hackEndTime:   '2026-04-11T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // May 2026
+      {
+        name: '📈 CodeStorm 2026 - Online/Synchronous',
+        theme: 'Marketing, Media, & Creative AI',
+        startDate: '2026-05-01',
+        endDate:   '2026-05-09',
+        modality:  'virtual',
+        hackStartTime: '2026-05-01T09:00',
+        hackEndTime:   '2026-05-09T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // June 2026
+      {
+        name: '🤖 305 Hackathon Edition Jun 2026 - Online/Synchronous',
+        theme: 'Automation & Productivity Tools',
+        startDate: '2026-06-05',
+        endDate:   '2026-06-13',
+        modality:  'virtual',
+        hackStartTime: '2026-06-05T09:00',
+        hackEndTime:   '2026-06-13T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // July 2026
+      {
+        name: '💰 SummerCodeX 2026 - Online/Synchronous',
+        theme: 'Finance, FinTech & Data Science',
+        startDate: '2026-07-03',
+        endDate:   '2026-07-11',
+        modality:  'virtual',
+        hackStartTime: '2026-07-03T09:00',
+        hackEndTime:   '2026-07-11T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // August 2026
+      {
+        name: '🎓 305 Hackathon Edition Aug 2026 - Online/Synchronous',
+        theme: 'EdTech & Student Experience',
+        startDate: '2026-08-07',
+        endDate:   '2026-08-15',
+        modality:  'virtual',
+        hackStartTime: '2026-08-07T09:00',
+        hackEndTime:   '2026-08-15T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // Sep 2026
+      {
+        name: '🌱 305 Hackathon Edition Sep 2026 - Session A (Online/Synchronous)',
+        theme: 'CivicTech & Sustainability',
+        startDate: '2026-09-04',
+        endDate:   '2026-09-12',
+        modality:  'virtual',
+        hackStartTime: '2026-09-04T09:00',
+        hackEndTime:   '2026-09-12T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🌱 305 Hackathon Edition Sep 2026 - Session B (In-person)',
+        theme: 'CivicTech & Sustainability',
+        startDate: '2026-09-12',
+        endDate:   '2026-09-12',
+        modality:  'in-person',
+        hackStartTime: '2026-09-12T09:00',
+        hackEndTime:   '2026-09-12T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // EmpowHER 2026
+      {
+        name: '👑 EmpowHER Hackathon 2026 - Session A (Online/Synchronous)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2026-09-25',
+        endDate:   '2026-10-03',
+        modality:  'virtual',
+        hackStartTime: '2026-09-25T09:00',
+        hackEndTime:   '2026-10-03T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2026 - Session B (In-person)',
+        theme: 'Leadership & Accessibility',
+        startDate: '2026-10-03',
+        endDate:   '2026-10-03',
+        modality:  'in-person',
+        hackStartTime: '2026-10-03T09:00',
+        hackEndTime:   '2026-10-03T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // Nov 2026
+      {
+        name: '🪖 305 Hackathon Nov 2026 - Session A (Online/Synchronous)',
+        theme: 'DefenseTech, Security, & Veterans Support',
+        startDate: '2026-10-30',
+        endDate:   '2026-11-07',
+        modality:  'virtual',
+        hackStartTime: '2026-10-30T09:00',
+        hackEndTime:   '2026-11-07T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🪖 305 Hackathon Nov 2026 - Session B (In-person)',
+        theme: 'DefenseTech, Security, & Veterans Support',
+        startDate: '2026-11-07',
+        endDate:   '2026-11-07',
+        modality:  'in-person',
+        hackStartTime: '2026-11-07T09:00',
+        hackEndTime:   '2026-11-07T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // CodeFest 2026
+      {
+        name: '🎆 CodeFest Hackathon 2026 - Session A (Online/Synchronous)',
+        theme: 'Business, Marketing, Finance & AI',
+        startDate: '2026-11-13',
+        endDate:   '2026-11-21',
+        modality:  'virtual',
+        hackStartTime: '2026-11-13T09:00',
+        hackEndTime:   '2026-11-21T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🎆 CodeFest Hackathon 2026 - Session B (In-person)',
+        theme: 'Business, Marketing, Finance & AI',
+        startDate: '2026-11-21',
+        endDate:   '2026-11-21',
+        modality:  'in-person',
+        hackStartTime: '2026-11-21T09:00',
+        hackEndTime:   '2026-11-21T21:00',
+        url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
+        registrationViaOneStop: true,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+
+      // Older / Past events (kept with flags)
+      {
+        name: '🏙️ 305 Hackathon: Fall 2025 edition',
+        startDate: '2025-09-19',
+        endDate:   '2025-09-21',
+        modality:  'in-person',
+        hoursPreset: '3d',
+        url: 'https://305hackfall2025.vercel.app',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '👑 EmpowHER Hackathon 2025',
+        startDate: '2025-10-13',
+        endDate:   '2025-10-20',
+        modality:  'virtual',
+        hoursPreset: '1w',
+        url: 'https://empowherhack2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '👑 EmpowHER HackDAY 2025',
+        startDate: '2025-10-18',
+        endDate:   '2025-10-18',
+        modality:  'in-person',
+        hoursPreset: '1d',
+        url: 'https://empowherhackdayfall25.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🌟 SummerCodeX 2025',
+        startDate: '2025-07-21',
+        endDate:   '2025-07-28',
+        modality:  'virtual',
+        hoursPreset: '1w',
+        url: 'https://summercodexhack2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '⛈️ CodeStorm 2025',
+        startDate: '2025-05-19',
+        endDate:   '2025-05-26',
+        modality:  'virtual',
+        hoursPreset: '1w',
+        url: 'https://codestormhack2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '⚡ 305 Hackathon: Spring 2025 edition',
+        startDate: '2025-03-29',
+        endDate:   '2025-03-31',
+        modality:  'hybrid',
+        hoursPreset: '3d',
+        url: 'https://305hackspring2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      },
+      {
+        name: '🔥 HackFiesta Miami 2025',
+        startDate: '2025-03-21',
+        endDate:   '2025-03-23',
+        modality:  'virtual',
+        hoursLabel: '36',
+        url: 'https://hackfiestamiami2025.vercel.app/',
+        registrationViaOneStop: false,
+        agendaEnable: false, agendaUrl: "https://",
+        perksEnable: false, perksUrl: "https://",
+        photoAlbumEnable: false, photoAlbumUrl: "https://",
+        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
+        prizesEnable: false, prizesUrl: "https://"
+      }
+    ];
+
     function renderHackathons() {
       const now = nowInMiami();
       const upcoming = [];
@@ -1214,39 +1433,35 @@
         const tz = getETAbbrev();
         const dateLine = `${range} (${tz})`;
 
-        // Coming Soon / One-Stop Registration Logic
-        let isComingSoon = false;
-        let comingSoonMessage = "";
-        let buttonUrl = h.url;
-        let buttonLabel = "Website";
+        const note = (h.registrationViaOneStop === true)
+          ? `Website coming soon — Register now using the One-Stop Form.`
+          : ``;
 
-        if (h.registrationViaOneStop === true) {
-          isComingSoon = true;
-          comingSoonMessage = `
-            <div class="text-yellow-600 font-semibold text-sm">
-              Website coming soon — Register now using the One-Stop Form.
-            </div>
-          `;
-          buttonUrl = ONE_STOP_FORM_URL;
-          buttonLabel = "Register";
-        }
+        // Build + render buttons (Register/Website primary, rest secondary)
+        const buttons = buildButtons(h);
+        const { primaryHtml, secondaryHtml } = renderButtonsSplit(buttons);
 
         const html = `
           <div class="hackathon-item">
-            <div class="hackathon-info">
-              <div class="hackathon-name">${h.name}</div>
-              ${h.theme ? `<div class="hackathon-theme">${h.theme}</div>` : ''}
-              <div class="hackathon-date">${dateLine}</div>
-              ${isComingSoon ? comingSoonMessage : ""}
+            <div class="h-card-top">
+              <div class="h-title">${h.name}</div>
+              ${h.theme ? `<div class="h-subtitle">${h.theme}</div>` : ''}
+              <div class="h-date">${dateLine}</div>
+              ${note ? `<div class="h-note">${note}</div>` : ``}
             </div>
 
-            <div class="hackathon-actions">
+            <div class="h-meta-row">
               <div class="hackathon-mode ${getModalityClass(h.modality)}">${getModalityText(h.modality)}</div>
               ${computeHoursBadge(h)}
               <div class="hackathon-countdown ${status.cls}">${status.text}</div>
+            </div>
 
-              <!-- ✅ NEW: renders multiple buttons if provided; otherwise falls back -->
-              ${renderButtons(h, buttonUrl, buttonLabel)}
+            <div class="h-actions-primary">
+              ${primaryHtml}
+            </div>
+
+            <div class="h-actions-secondary">
+              ${secondaryHtml}
             </div>
           </div>
         `;
@@ -1300,7 +1515,6 @@
       setInterval(updateTimes, 1000);
       setInterval(renderHackathons, 60 * 1000);
 
-      // Footer year
       document.getElementById('year').textContent = new Date().getFullYear();
 
       // Mobile: toggle quick-link tooltips inline
