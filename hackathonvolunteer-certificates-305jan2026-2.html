@@ -469,13 +469,7 @@
 
             <div><strong>Ticket ID:</strong> ${esc(b.ticketId || 'N/A')}</div>
 
-            ${showDbLink ? `
-              <div style="margin:8px 0">
-                <a href="${b.volunteerDatabaseUrl}" target="_blank" rel="noopener">
-                  View Volunteer Database
-                </a>
-              </div>
-            ` : ''}
+
 
             <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">
 ${esc(nextSteps)}
