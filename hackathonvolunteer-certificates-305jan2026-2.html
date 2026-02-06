@@ -237,7 +237,7 @@
 
   <script>
     /* ===== Settings ===== */
-    const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbywJLL2YjV6wqhNHXZ5cqcWQa6fhcXOzaEs9NHrGahjyMyCy_Fsw19zLgHDvlBcUxs/exec';
+    const CERT_API_URL = 'https://script.google.com/macros/s/AKfycbzcb8WvunqFsd_Up-VWlKtU3eRIVCi3fvX1OQv7YqKx5BZLd7bUZSu7DRIJ3mb5Lt9d/exec';
     const DEFAULT_LOGOS = [
       "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
       "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
@@ -247,7 +247,6 @@
       "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
       "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
     ];
-    /* Signature image */
     const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
 
     /* ===== Helpers ===== */
@@ -275,7 +274,7 @@
       return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
     }
     function infoBoxHTML(){
-      return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
+      return `<div class="infobox"><strong style="color:#28a745">Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
     }
     function setStatus(type, html){
       const el = document.getElementById('certificateResult');
@@ -284,10 +283,10 @@
     }
     function toggleButton(loading){
       const btn = document.getElementById('generateBtn');
-      if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+      if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? 'Checking…' : 'Generate Certificate';
     }
 
-    /* ===== Certificate page Recognition/ ACHIEVEMENT ===== */
+    /* ===== Certificate page ===== */
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date||'').replace(/[^0-9]/g,'').slice(0,8)}-${hash8}`;
@@ -326,14 +325,12 @@
               <div class="cert-id">Cert ID: ${idText}</div>
             </div>
 
-            <!-- Logos BELOW the Cert ID -->
             <div class="logo-grid">${logosHTML(c.logos)}</div>
           </div>
         </div>
       </section>`;
     }
 
-    /* Open clean print tab — auto-shrink logos to one row */
     function openCertificatesInNewTab(certs, autoPrint=true){
       const css = document.querySelector('style')?.innerHTML || '';
       const head = `
@@ -378,113 +375,73 @@
     async function generateCertificate(){
       const email = document.getElementById('certificateEmailInput').value.trim();
       if(!email){
-        setStatus('error','❌ Please enter your email address.');
+        setStatus('error','Please enter your email address.');
         return;
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        setStatus('error','❌ Please enter a valid email address.');
+        setStatus('error','Please enter a valid email address.');
         return;
       }
 
-      setStatus('info','⏳ Checking for available certificates...');
+      setStatus('info','Checking for available certificates...');
       toggleButton(true);
 
       try {
+        // ✅ IMPORTANT: use location.origin so referer passes backend startsWith()
         const res = await fetch(
-          `${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.href)}`
+          `${CERT_API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(location.origin)}`
         );
         const payload = await res.json();
 
-        /* ✅ FIX 1: handle access denied or other API errors */
         if (payload?.error) {
           setStatus('error', esc(payload.error));
           return;
         }
 
-        const certs = Array.isArray(payload?.certificates)
-          ? payload.certificates
-          : [];
+        const certs = Array.isArray(payload?.certificates) ? payload.certificates : [];
 
-        /* ✅ FIX 2: show API "Not Found" message if provided */
         if (!certs.length) {
           const msg = payload?.message || 'No record was found for the email address provided. If you believe this is an error, please message us on LinkedIn so our team can assist.';
           setStatus('error', esc(msg));
           return;
         }
 
-        // split by status
-        const available = certs.filter(
-          c => c.status === 'Certificate Available' && c.certificateData
-        );
-        const blocked = certs.filter(
-          c => c.status === 'Certificate Not Available'
-        );
+        const available = certs.filter(c => c.status === 'Certificate Available' && c.certificateData);
+        const blocked = certs.filter(c => c.status === 'Certificate Not Available');
 
-        // ✅ PRIORITY 1 — any verified certificate wins
+        // ✅ verified wins
         if (available.length > 0) {
-          const normalized = available.map(c =>
-            normalizeCert(c.certificateData)
-          );
+          const normalized = available.map(c => normalizeCert(c.certificateData));
+          const ticketIds = [...new Set(available.map(c => c.ticketId).filter(Boolean))];
 
-          const ticketIds = [
-            ...new Set(
-              available
-                .map(c => c.ticketId)
-                .filter(Boolean)
-            )
-          ];
-
-          setStatus(
-            'ok',
-            `
-            <strong>✅ Certificate Ready</strong><br><br>
-            <div>
-              <strong>Ticket ID${ticketIds.length > 1 ? 's' : ''}:</strong>
-              ${ticketIds.map(id => `<code>${esc(id)}</code>`).join(', ')}
-            </div>
-            <div style="margin-top:8px">
-              Your certificate will now open in a new tab for download or printing.
-            </div>
-            `
-          );
+          setStatus('ok', `
+            <strong>Certificate Ready</strong><br><br>
+            <div><strong>Ticket ID${ticketIds.length > 1 ? 's' : ''}:</strong> ${ticketIds.map(id => `<code>${esc(id)}</code>`).join(', ')}</div>
+            <div style="margin-top:8px">Your certificate will now open in a new tab for download or printing.</div>
+          `);
 
           openCertificatesInNewTab(normalized, true);
           return;
         }
 
-        // ❌ PRIORITY 2 — ONLY if all are unverified
+        // ❌ all blocked
         if (blocked.length === certs.length) {
           const b = blocked[0];
           const nextSteps = String(b.nextStepsMessage || '');
 
-          /* ✅ Optional FIX 3: avoid duplicate DB link if already in nextStepsMessage */
-          const showDbLink =
-            b.volunteerDatabaseUrl &&
-            !nextSteps.includes(b.volunteerDatabaseUrl);
-
-          setStatus(
-            'error',
-            `
+          setStatus('error', `
             <strong>${esc(b.message)}</strong><br><br>
-
             <div><strong>Ticket ID:</strong> ${esc(b.ticketId || 'N/A')}</div>
-
-
-
-            <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">
-${esc(nextSteps)}
-            </pre>
-            `
-          );
+            <pre style="white-space:pre-wrap;font-family:inherit;margin-top:12px">${esc(nextSteps)}</pre>
+          `);
           return;
         }
 
-        // fallback (should not happen)
         setStatus('error', 'Unable to determine certificate status.');
 
       } catch (err) {
         console.error(err);
-        setStatus('error','❌ Failed to check records. Please try again later.');
+        setStatus('error','Failed to check records. Please try again later.');
       } finally {
         toggleButton(false);
       }
