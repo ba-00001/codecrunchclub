@@ -1,8 +1,1183 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="refresh" content="0; url=https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2026-hackfiesta-hackathon-SA-&-SB-FEB-2026.md">
-</head>
-<body></body>
-</html>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hack Fiesta Miami — February 2026 Edition (Mechanical, Electrical & Hardware Innovation)</title>
+  <meta name="description" content="Hack Fiesta Miami — February 2026 Edition. Mechanical, Electrical & Hardware Innovation. Session A: Online/Synchronous Feb 6–Feb 14, 2026. Session B: In-person Feb 14, 2026. Tracks: Tech Build, Business Venture Arena, 305 Excel Data Duel."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Favicon (Hack University square logo) -->
+  <link rel="icon" type="image/png" href="https://github.com/user-attachments/assets/ecd88daf-1b57-4558-9ffc-e48f57f69473"/>
+
+  <style>
+    :root{
+      --blue:#0b2a6f;
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --bg:#ffffff;
+      --soft:#f6f8ff;
+      --r:14px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{text-decoration:none}
+
+    /* Top nav */
+    header.site-nav{
+      border-bottom:1px solid var(--line);
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight:900;
+      color:var(--blue);
+      font-size:.95rem;
+    }
+
+    .section{padding:18px 16px}
+    h2{font-size:1.35rem;color:var(--blue);margin-bottom:8px}
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      padding:16px;
+      background:#fff;
+    }
+    .grid{display:grid;gap:14px}
+    @media(min-width:760px){ .grid{grid-template-columns:1fr 1fr} }
+    .list{list-style-type:disc;padding-left:20px}
+    .list2{list-style-type:decimal;padding-left:20px}
+    .pill{
+      display:inline-block;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.85rem;
+      color:var(--muted);
+      margin:4px 6px 0 0;
+    }
+
+    .btn{
+      display:inline-block;
+      background:var(--blue);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:.9rem;
+      border:2px solid transparent;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 16px rgba(15,23,42,.15);
+      background:#0a2561;
+    }
+    .btn.alt{
+      background:var(--blue);
+      color:#fff;
+      border-color:transparent;
+    }
+    .btn.alt:hover{
+      background:#0a2561;
+    }
+    .btn-disabled{
+      background:#9ca3af;
+      border-color:#9ca3af;
+      color:#e5e7eb;
+      cursor:not-allowed !important;
+      pointer-events:none;
+      box-shadow:none;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:.95rem;
+      margin-top:4px;
+    }
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Global actions bar */
+    .actions-bar{
+      padding:18px 16px 4px;
+      border-bottom:1px solid var(--line);
+      background:#f9fafb;
+    }
+    .subheading-label{
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:4px;
+    }
+
+    .arrow-link{
+      color:#1a73e8;
+      text-decoration:none;
+      position:relative;
+      font-weight:500;
+      font-size:.92rem;
+    }
+    .arrow-link i{
+      margin-left:6px;
+      font-size:0.8em;
+      transition:transform 0.3s ease, color 0.3s ease;
+      transform:rotate(45deg);
+      color:#1a73e8;
+    }
+    .arrow-link:hover i{
+      transform:rotate(45deg) translate(3px, -3px);
+      color:#1557b0;
+    }
+
+    /* Vertical buttons container (1–2 columns) */
+    .actions-vertical{
+      display:grid;
+      gap:10px;
+    }
+    .actions-vertical.two-col{
+      grid-template-columns:1fr;
+    }
+    @media(min-width:760px){
+      .actions-vertical.two-col{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+    .actions-vertical .btn{
+      width:100%;
+      text-align:left;
+      white-space:normal;
+    }
+
+    /* Partners */
+    .partners-bar{
+      padding:10px 0 26px;
+      background:#ffffff;
+      margin-top:12px;
+    }
+    .partners-card{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 16px;
+      max-width:900px;
+      margin:0 auto;
+      background:#ffffff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+    }
+    .partners-label{
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .partners-logos{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+      align-items:center;
+      justify-items:center;
+      gap:18px;
+      width:100%;
+    }
+    .partner-logo{
+      width:100%;
+      max-width:160px;
+      height:auto;
+      transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      opacity:.92;
+    }
+    .partner-logo:hover{
+      transform:translateY(-2px) scale(1.06);
+      box-shadow:0 4px 10px rgba(15,23,42,.12);
+      opacity:1;
+    }
+
+    /* Locked badge for prompts */
+    .locked-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid #fbbf24;
+      background:#fffbeb;
+      font-size:0.85rem;
+      color:#92400e;
+      font-weight:600;
+    }
+
+    /* Footer styles */
+    .hack-university-footer{
+      background:linear-gradient(135deg,#0b2a6f 0%,#0a2563 60%,#071c4a 100%);
+      color:#fff;
+      padding:3rem 0 1.25rem;
+      margin-top:3rem;
+    }
+    .hack-university-footer-container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    .hack-university-footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:1.5rem;
+      margin-bottom:1.5rem;
+    }
+    .hack-university-footer-title{
+      font-size:1.1rem;
+      font-weight:800;
+      margin-bottom:.75rem;
+      color:#fbbf24;
+    }
+    .hack-university-star{
+      font-size:.85rem;
+      animation:hu-pulse 2s infinite;
+    }
+    .hack-university-footer-description{
+      color:#e5e7eb;
+      margin-bottom:.6rem;
+      line-height:1.6;
+    }
+    .hack-university-footer-link{color:#93c5fd;text-decoration:none;}
+    .hack-university-footer-link:hover{color:#fbbf24;}
+    .hack-university-social-section{margin-top:1rem;}
+    .hack-university-social-title{
+      font-size:.95rem;
+      font-weight:700;
+      color:#f3f4f6;
+      margin-bottom:.5rem;
+    }
+    .hack-university-social-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+      gap:.5rem;
+    }
+    .hack-university-social-link{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      color:#e5e7eb;
+      padding:.45rem .5rem;
+      border-radius:.5rem;
+      transition:transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .hack-university-social-link:hover{
+      color:#fbbf24;
+      background:rgba(251,191,36,.08);
+      transform:translateY(-2px);
+    }
+    .hack-university-social-icon{font-size:1.05rem;}
+    .hack-university-social-text{font-size:.9rem;}
+    .hack-university-quick-links{list-style:none;padding:0;margin:0;}
+    .hack-university-quick-links li{margin-bottom:.45rem;}
+    .hack-university-quick-link{
+      color:#e5e7eb;
+      text-decoration:none;
+      display:inline-block;
+      padding:.2rem 0;
+      transition:color .2s ease, transform .2s ease, padding .2s ease;
+    }
+    .hack-university-quick-link:hover{
+      color:#fbbf24;
+      padding-left:.35rem;
+    }
+    .hack-university-contact-section{
+      color:#e5e7eb;
+      line-height:1.6;
+      font-style:normal;
+    }
+    .hack-university-contact-link{color:#93c5fd;text-decoration:none;}
+    .hack-university-contact-link:hover{color:#fbbf24;}
+    .hack-university-footer-bottom{
+      border-top:1px solid rgba(255,255,255,.15);
+      padding-top:1.25rem;
+      text-align:center;
+    }
+    .hack-university-copyright{
+      color:#cbd5e1;
+      margin-bottom:.4rem;
+      font-size:.95rem;
+    }
+    .hack-university-credits{
+      color:#9ca3af;
+      font-size:.875rem;
+    }
+    .hack-university-credits-link{color:#93c5fd;text-decoration:none;}
+    .hack-university-credits-link:hover{color:#fbbf24;}
+    @keyframes hu-pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+    @media(max-width:768px){
+      .hack-university-footer-grid{grid-template-columns:1fr;gap:1rem;}
+      .hack-university-social-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:640px){
+      .brand{font-size:.8rem;}
+      .actions-vertical .btn{ text-align:center; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Small sticky nav -->
+  <header class="site-nav">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="brand">
+        <i class="fa-solid fa-microchip"></i>
+        Hack Fiesta Miami — February 2026 Edition
+      </div>
+      <nav class="hidden sm:block">
+        <a class="btn alt" href="https://hackuniversity-hackathons.vercel.app/">
+          ← All Hackathons
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb + Hero -->
+  <header class="w-full bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p class="text-xs sm:text-sm text-gray-500 mb-2">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University Worldwide</a>
+        <span aria-hidden="true"> / </span>
+        <a href="https://hackuniversity-hackathons.vercel.app" class="underline hover:no-underline">Hackathons</a>
+        <span aria-hidden="true"> / </span>
+        Hack Fiesta Miami — February 2026 Edition
+      </p>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+        Hack Fiesta Miami — February 2026 Edition
+      </h1>
+
+      <!-- Hero Card -->
+      <section class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 sm:p-8 mt-5">
+        <div class="flex flex-col lg:flex-row gap-6">
+          <div class="flex-1 space-y-4">
+            <div class="inline-flex items-center gap-2 text-xs font-medium text-blue-800 bg-blue-50 border border-blue-100 rounded-full px-3 py-1">
+              <i class="fa-solid fa-microchip"></i>
+              Theme: Mechanical, Electrical &amp; Hardware Innovation · Hybrid worldwide event
+            </div>
+
+            <div class="mt-4 w-full max-w-none">
+              <p class="text-gray-600 leading-relaxed">
+                A hackathon is a fast-paced, hands-on problem-solving competition where you turn ideas into real solutions.
+                Hack University hackathons bring students from all majors together to build, pitch, and compete across
+                <strong>three different challenge tracks</strong>.
+              </p>
+
+              <p class="mt-3 text-gray-600 leading-relaxed">
+                <strong>A hybrid global 3-in-1 competition</strong> focused on hardware-first innovation—combining engineering builds,
+                entrepreneurship, and data challenges. This edition emphasizes <span class="font-semibold">real-world prototypes</span>,
+                rapid testing, and practical demos.
+              </p>
+
+              <div class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                  <h3 class="text-gray-900 font-extrabold text-base">
+                    Tech Build Hackathon <span class="font-semibold text-gray-700">(Code or Hardware)</span>
+                  </h3>
+                  <p class="mt-2 text-gray-600 text-sm leading-relaxed">
+                    Participants design and build technical solutions using software, hardware, or a combination of both.
+                  </p>
+                  <p class="mt-3 text-gray-700 text-sm leading-relaxed">
+                    <strong>Why it matters:</strong> Builds real engineering skills, rapid prototyping, and portfolio-ready projects
+                    that show hands-on execution.
+                  </p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                  <h3 class="text-gray-900 font-extrabold text-base">
+                    Business Venture Arena <span class="font-semibold text-gray-700">(Tech-to-Business Pitch)</span>
+                  </h3>
+                  <p class="mt-2 text-gray-600 text-sm leading-relaxed">
+                    Teams translate technical ideas into viable, impact-driven business or startup concepts.
+                  </p>
+                  <p class="mt-3 text-gray-700 text-sm leading-relaxed">
+                    <strong>Why it matters:</strong> Helps students explain how a build becomes a product—users, pricing, distribution,
+                    and real adoption.
+                  </p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                  <h3 class="text-gray-900 font-extrabold text-base">
+                    305 Excel Data Duel <span class="font-semibold text-gray-700">(Live Data Analytics Challenge)</span>
+                  </h3>
+                  <p class="mt-2 text-gray-600 text-sm leading-relaxed">
+                    A live analytics competition where participants solve timed Excel-based data challenges, earn points, and compete for a top score.
+                  </p>
+                  <p class="mt-3 text-gray-700 text-sm leading-relaxed">
+                    <strong>Why it matters:</strong> Strengthens analytical thinking and decision-making skills used in engineering,
+                    business, and operations.
+                  </p>
+                </div>
+              </div>
+
+              <p class="mt-5 text-gray-600 leading-relaxed">
+                Open to everyone worldwide — beginners, advanced builders, and non-tech majors welcome.
+                No prior experience needed. Ages 16+ accepted (under 18 requires parental or guardian consent).
+              </p>
+            </div>
+
+            <p class="text-slate-700">Two ways to participate with shared tracks, judges, and perks.</p>
+
+            <div class="flex flex-wrap gap-3 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-calendar text-blue-600"></i>
+                <span><strong>Session B (In-Person):</strong> February 14, 2026 (ET)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-clock text-blue-600"></i>
+                <span>12 hrs (Session B)</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-calendar text-blue-600"></i>
+                <span><strong>Session A (Online &amp; synchronous):</strong> February 6 – February 14, 2026 (ET)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-clock text-blue-600"></i>
+                <span>Build window (Session A)</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="pill"><i class="fa-solid fa-globe-americas mr-1.5"></i> Open Worldwide</span>
+              <span class="pill"><i class="fa-solid fa-user-graduate mr-1.5"></i> All majors · All universities</span>
+              <span class="pill"><i class="fa-solid fa-school mr-1.5"></i> High school students (16+) welcome</span>
+              <span class="pill"><i class="fa-solid fa-suitcase mr-1.5"></i> Students · Founders · Professionals</span>
+            </div>
+
+            <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 max-w-xl">
+              <strong>One registration covers both sessions:</strong> Use the same <strong>OneStopForm registration form</strong>, then choose
+              Session A (online &amp; synchronous), Session B (in-person), or both. Exact room details for the in-person session are found on the agenda.
+              Use <strong>Bevy calendar RSVP</strong>, <strong>Devpost submission portal</strong>, and <strong>Agenda</strong> for both sessions.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <!-- Registration & Check-In (FIRST) -->
+  <section class="actions-bar">
+    <div class="wrap">
+      <div class="subheading-label">Registration &amp; Check-In</div>
+
+      <div class="actions-vertical two-col">
+        <a class="btn" data-role="mlh" data-url="mlh">
+          <i class="fa-solid fa-id-card"></i>&nbsp; Register on MLH — Link coming soon
+        </a>
+
+        <a class="btn alt" data-url="onestop">
+          <i class="fa-solid fa-list-check"></i>&nbsp; OneStop Registration (required for perks: APIs, subscriptions, credits)
+        </a>
+
+        <a class="btn alt" data-url="bevy" data-toggle="bevyEnabled">
+          <i class="fa-regular fa-calendar-check"></i>&nbsp; Bevy Calendar RSVP (required)
+        </a>
+
+        <a class="btn alt" data-url="devpost">
+          <i class="fa-solid fa-code-branch"></i>&nbsp; Devpost Registration (required for submissions &amp; project gallery)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global actions (SECOND) -->
+  <section class="actions-bar">
+    <div class="wrap">
+      <div class="subheading-label">Global actions</div>
+
+      <div class="actions-vertical two-col">
+        <a class="btn alt" data-url="agenda">
+          <i class="fa-regular fa-calendar"></i>&nbsp; View Agenda &amp; Timeline
+        </a>
+
+        <a class="btn alt" data-url="devpost">
+          <i class="fa-regular fa-folder-open"></i>&nbsp; Devpost Event Page
+        </a>
+
+        <a class="btn alt" data-url="hackerGuide">
+          <i class="fa-solid fa-book-open"></i>&nbsp; Hacker Guide &amp; Toolkit
+        </a>
+
+        <a class="btn" data-url="photoAlbum">
+          <i class="fa-solid fa-photo-film"></i>&nbsp; Photo Album &amp; Project Gallery
+        </a>
+
+        <a class="btn" data-url="perks">
+          <i class="fa-solid fa-gift"></i>&nbsp; Perks &amp; Credits
+        </a>
+
+        <a class="btn" data-url="prizes">
+          <i class="fa-solid fa-trophy"></i>&nbsp; Prizes Overview
+        </a>
+
+        <a class="btn" data-url="kickoffA" data-toggle="kickoffAEnabled">
+          <i class="fa-solid fa-door-open"></i>&nbsp; Kickoff — Session A (Online Zoom)
+        </a>
+
+        <a class="btn" data-url="kickoffB" data-toggle="kickoffBEnabled">
+          <i class="fa-solid fa-door-open"></i>&nbsp; Kickoff — Session B (In-Person)
+        </a>
+
+        <a class="btn alt" data-url="closingA" data-toggle="closingAEnabled">
+          <i class="fa-solid fa-flag-checkered"></i>&nbsp; Hybrid Closing &amp; Live Demos — Session A &amp; B (Zoom)
+        </a>
+
+        <a class="btn" data-url="preEventWorkshops" data-toggle="preEventEnabled">
+          <i class="fa-solid fa-chalkboard-user"></i>&nbsp; Pre-Event &amp; Hybrid Workshops (Zoom)
+        </a>
+
+        <a class="btn" data-url="mentorsschedule" data-toggle="preEventEnabled">
+          <i class="fa-solid fa-chalkboard-user"></i>&nbsp; Mentor Office Hours &amp; Support (Discord)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Tracks Overview (SAME AS PREVIOUS, UPDATED THEME TEXT) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="card">
+        <div class="subheading-label">Track Competition Overview</div>
+        <h2><strong>Tracks &amp; Judging — Shared Across Both Sessions</strong></h2>
+        <p class="meta">
+          Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
+        </p>
+
+        <div style="margin-top:8px;display:grid;gap:10px;">
+          <div class="card" style="border-style:dashed;">
+            <strong>Track Competition 1 — Tech Build (Hackathon)</strong>
+            <p style="margin-top:4px;font-size:.95rem;color:#374151;">
+              Code or hardware project. Build a solution centered on <strong>mechanical, electrical, embedded, or hardware innovation</strong>
+              (sensors, devices, robotics, automation, wearables, IoT, energy, manufacturing, etc.).
+              Prototypes should be realistic to pilot within 3–12 months.
+            </p>
+            <p style="margin-top:6px;font-size:.9rem;color:#374151;">
+              <strong>Required focus (both sessions):</strong> your solution should be oriented toward a <strong>first responder app/workflow</strong>
+              enhanced with <strong>AI</strong> (see “sample prompts” after kickoff).
+            </p>
+          </div>
+
+          <div class="card" style="border-style:dashed;">
+            <strong>Track Competition 2 — Business Venture Arena (No-Code)</strong>
+            <p style="margin-top:4px;font-size:.95rem;color:#374151;">
+              Shark Tank–style pitch. Design a no-code startup, program, or business model that commercializes a hardware-first idea.
+              Clearly define your customer, validate the problem, and present a go-to-market plan, sustainability model, and impact strategy.
+            </p>
+            <p style="margin-top:6px;font-size:.9rem;color:#374151;">
+              <strong>Required focus (both sessions):</strong> the venture should support <strong>first responders</strong> and show how <strong>AI</strong>
+              improves outcomes, speed, coordination, or safety.
+            </p>
+          </div>
+
+          <div class="card" style="border-style:dashed;">
+            <strong>Track Competition 3 — 305 Excel Data Duel (Live Challenge Track)</strong>
+            <p style="margin-top:4px;font-size:.95rem;color:#374151;">
+              A live, esports-style Excel competition where participants solve real-world data challenges in timed rounds.
+              Challenges focus on data cleaning, formulas, logic, analysis, and interpretation. Participants earn points
+              based on accuracy and completion, with a single top-scoring winner determined at the end.
+            </p>
+            <p style="margin-top:6px;font-size:.9rem;color:#374151;">
+              The Live Challenge Track takes place <strong>during Session B (In-Person)</strong>.
+              Participation details, challenge access, and rules will be released <strong>during the event</strong>
+              and listed on the official <strong>agenda</strong>.
+            </p>
+            <p style="margin-top:6px;font-size:.9rem;color:var(--muted);">
+              Open to <strong>beginners and advanced participants</strong>. No prior Excel or data analytics experience is required.
+            </p>
+          </div>
+        </div>
+
+        <p style="margin-top:10px;font-size:.9rem;color:var(--muted);">
+          Full prompts for each track unlock <strong>only after the opening ceremony</strong> for each session.
+          Session A will publish <strong>sample prompts</strong> at kickoff; Session B will do the same in-person.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- SESSION B FIRST -->
+    <section class="section">
+      <div class="wrap">
+        <div class="subheading-label">Session B · In-Person 12-Hour Sprint</div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h2><strong>Session B — In-Person Sprint (Sat, Feb 14, 2026)</strong></h2>
+          <p style="margin-top:4px;color:#4b5563;font-size:.95rem;">
+            Join us <strong>in person</strong> for a focused 12-hour sprint with live workshops, mentors, food, swag, and closing demos.
+            <strong>Find the building and room number in the event agenda.</strong>
+          </p>
+          <div class="meta" style="margin:8px 0 6px;">
+            <span><i class="fa-regular fa-calendar"></i> Sat, Feb 14, 2026 (ET)</span>
+            <span><i class="fa-regular fa-clock"></i> 10:00 AM – 10:00 PM (12 hrs)</span>
+            <span><i class="fa-solid fa-users"></i> In-Person</span>
+            <span><i class="fa-solid fa-burger"></i> Food &amp; swag available (in-person only)</span>
+          </div>
+
+          <ul class="list" style="font-size:.95rem;color:#374151;margin-top:6px;">
+            <li><strong>Kickoff &amp; sample prompt reveal (Session B):</strong> Sat, Feb 14 @ 10:00 AM ET (see Zoom/venue details in agenda).</li>
+            <li><strong>Required build focus:</strong> create a <strong>first responder app/workflow</strong> enhanced with <strong>AI</strong> (details after kickoff).</li>
+            <li><strong>Live mentor rounds, checkpoints, and office hours</strong> throughout the day.</li>
+            <li><strong>Closing ceremony &amp; live demos (for Session A &amp; B):</strong> Sat, Feb 14 (time posted in agenda).</li>
+          </ul>
+
+          <p style="margin-top:8px;font-size:.9rem;color:var(--muted);">
+            Refer to the <strong>Shared Registration Steps (Both Sessions)</strong> above for OneStop, Devpost, Bevy, and Discord instructions.
+          </p>
+
+          <div class="row" style="margin-top:10px;">
+            <a class="btn alt" data-url="agenda">View Agenda &amp; Timeline</a>
+            <a class="btn alt" data-url="devpost">Devpost Event Page</a>
+          </div>
+        </div>
+
+        <!-- Session B: Tracks & Judging (locked/unlocked) -->
+        <div class="card" style="margin-bottom:14px;">
+          <h2><strong>Tracks &amp; Judging — Session B (In-Person)</strong></h2>
+          <p class="meta">
+            Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
+          </p>
+
+          <!-- LOCKED STATE - SESSION B -->
+          <div id="challenge-locked-b" style="margin-top:8px;">
+            <span class="locked-badge">
+              <i class="fa-solid fa-lock"></i> Sample prompts locked until Sat, Feb 14 @ 10:00 AM ET
+            </span>
+            <p style="margin-top:8px;font-size:.95rem;color:#4b5563;">
+              The sample prompts and full prompt structure will be unveiled <strong>live at the in-person opening ceremony</strong>
+              on <strong>Sat, Feb 14 @ 10:00 AM ET</strong>. Until then, prompts remain hidden on this page.
+            </p>
+            <p id="challenge-countdown-b" style="margin-top:6px;font-size:.88rem;color:#6b7280;">
+              Countdown to prompt reveal (ET): calculating…
+            </p>
+          </div>
+
+          <!-- UNLOCKED STATE - SESSION B -->
+          <div id="challenge-unlocked-b" style="display:none;margin-top:10px;">
+            <p style="font-size:.95rem;color:#374151;">
+              ✅ The <strong>Session B</strong> sample prompts are now live. Your build should center on a
+              <strong>first responder app/workflow</strong> enhanced with <strong>AI</strong>. Review the
+              <a href="#" data-url="hackerGuide" target="_blank" rel="noopener" class="arrow-link">
+                Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a> for deliverables and submission rules.
+            </p>
+
+            <h3 style="margin-top:10px;font-size:1rem;font-weight:700;color:#1f2937;">
+              Sample Prompt (Session B) — First Responder + AI
+            </h3>
+            <ul class="list" style="margin-top:4px;font-size:.95rem;color:#374151;">
+              <li><strong>Build a First Responder App with AI:</strong> create a system that improves dispatch, triage, on-scene coordination, or post-incident reporting.</li>
+              <li>Include at least one of: <strong>real-time guidance</strong>, <strong>risk detection</strong>, <strong>resource routing</strong>, <strong>incident summarization</strong>, or <strong>handoff notes</strong>.</li>
+              <li>If hardware is used, show how sensors/devices improve safety, detection, or communication for responders.</li>
+            </ul>
+
+            <p style="margin-top:8px;font-size:.88rem;color:#6b7280;">
+              In-person teams must deliver a <strong>live demo</strong> during the closing ceremony. No live demo presentation
+              may result in <strong>0 points</strong>, even if a Devpost submission exists. See the agenda for the demo schedule and room details.
+            </p>
+          </div>
+        </div>
+
+        <!-- Session B: Registration & Check-in -->
+        <div class="card">
+          <h2><strong>Registration &amp; Check-In — Session B (In-Person)</strong></h2>
+          <ol class="list2" style="font-size:.95rem;color:#374151;">
+            <li>Complete the <strong>MLH &amp; OneStop Registration</strong> once and indicate that you will attend <strong>Session B (In-Person)</strong>.</li>
+            <li>RSVP on the <strong>Bevy event</strong> for Session B once it is active (calendar invites &amp; announcements).</li>
+            <li>Register or create your project on <strong>Devpost</strong> and invite your teammates (solo or up to 4).</li>
+            <li>Check in day-of with your photo ID and confirm your attendance (see agenda for building &amp; room).</li>
+            <li><strong>Live demo required:</strong> present in person during the closing ceremony based on the demo schedule.</li>
+          </ol>
+          <p style="margin-top:10px;font-size:.9rem;color:var(--muted);">
+            See the <strong>Shared Registration Steps (Both Sessions)</strong> above for full details on perks, Devpost setup,
+            Discord, and GitHub requirements.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SESSION A (ONLINE) -->
+    <section class="section">
+      <div class="wrap">
+        <div class="subheading-label">Session A · Online / Synchronous Sprint</div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h2><strong>Session A — Online / Synchronous Sprint (Feb 6–Feb 14, 2026)</strong></h2>
+          <p style="margin-top:4px;color:#4b5563;font-size:.95rem;">
+            Prefer to build remotely? <strong>Session A is online &amp; synchronous</strong> with checkpoints, mentor support,
+            and a multi-day build window from <strong>Feb 6 to Feb 14</strong>.
+          </p>
+
+          <div class="meta" style="margin:8px 0 6px;">
+            <span><i class="fa-regular fa-calendar"></i> Feb 6–Feb 14, 2026 (ET)</span>
+            <span><i class="fa-regular fa-clock"></i> Online build window</span>
+            <span><i class="fa-solid fa-globe"></i> Online / Synchronous checkpoints</span>
+          </div>
+
+          <ul class="list" style="font-size:.95rem;color:#374151;margin-top:6px;">
+            <li><strong>Online kickoff &amp; sample prompt reveal (Session A):</strong> Fri, Feb 6 @ 10:00 PM ET (Zoom link in agenda).</li>
+            <li><strong>Required build focus:</strong> create a <strong>first responder app/workflow</strong> enhanced with <strong>AI</strong> (details after kickoff).</li>
+            <li><strong>Mentor Q&amp;A and async office hours</strong> across the week (see Discord and schedule links).</li>
+            <li><strong>Closing ceremony &amp; virtual live demos (for Session A &amp; B):</strong> Sat, Feb 14 (time posted in agenda).</li>
+          </ul>
+
+          <p style="margin-top:8px;font-size:.9rem;color:var(--muted);">
+            Refer to the <strong>Shared Registration Steps (Both Sessions)</strong> above for OneStop, Devpost, Bevy, and Discord instructions.
+          </p>
+
+          <div class="row" style="margin-top:10px;">
+            <a class="btn alt" data-url="agenda">View Agenda &amp; Timeline</a>
+            <a class="btn alt" data-url="devpost">Devpost Event Page</a>
+          </div>
+        </div>
+
+        <!-- Session A: Tracks & Judging (locked/unlocked) -->
+        <div class="card" style="margin-bottom:14px;">
+          <h2><strong>Tracks &amp; Judging — Session A (Online)</strong></h2>
+          <p class="meta">
+            Criteria: Technical Difficulty · Functionality · Innovation &amp; Creativity · Design &amp; User Experience · Impact &amp; Usefulness · Presentation &amp; Demo
+          </p>
+
+          <!-- LOCKED STATE - SESSION A -->
+          <div id="challenge-locked-a" style="margin-top:8px;">
+            <span class="locked-badge">
+              <i class="fa-solid fa-lock"></i> Sample prompts locked until Fri, Feb 6 @ 10:00 PM ET
+            </span>
+            <p style="margin-top:8px;font-size:.95rem;color:#4b5563;">
+              The sample prompts and full prompt structure will be unveiled at the <strong>online kickoff</strong>
+              on <strong>Fri, Feb 6 @ 10:00 PM ET</strong>. Until then, prompts remain hidden on this page.
+            </p>
+            <p id="challenge-countdown-a" style="margin-top:6px;font-size:.88rem;color:#6b7280;">
+              Countdown to prompt reveal (ET): calculating…
+            </p>
+          </div>
+
+          <!-- UNLOCKED STATE - SESSION A -->
+          <div id="challenge-unlocked-a" style="display:none;margin-top:10px;">
+            <p style="font-size:.95rem;color:#374151;">
+              ✅ The <strong>Session A</strong> sample prompts are now live. Your build should center on a
+              <strong>first responder app/workflow</strong> enhanced with <strong>AI</strong>. Review the
+              <a href="#" data-url="hackerGuide" target="_blank" rel="noopener" class="arrow-link">
+                Hacker Guide &amp; Toolkit <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              for all virtual rules and deliverables.
+            </p>
+
+            <h3 style="margin-top:10px;font-size:1rem;font-weight:700;color:#1f2937;">
+              Sample Prompt (Session A) — First Responder + AI
+            </h3>
+            <ul class="list" style="margin-top:4px;font-size:.95rem;color:#374151;">
+              <li><strong>Build a First Responder App with AI:</strong> create a system that improves dispatch, triage, on-scene coordination, or post-incident reporting.</li>
+              <li>Include at least one of: <strong>real-time guidance</strong>, <strong>risk detection</strong>, <strong>resource routing</strong>, <strong>incident summarization</strong>, or <strong>handoff notes</strong>.</li>
+              <li>If you add hardware, describe the device workflow and provide a clear demo (video is fine for online).</li>
+            </ul>
+
+            <p style="margin-top:8px;font-size:.88rem;color:#6b7280;">
+              Online teams must join a <strong>live virtual demo slot</strong> during the closing ceremony. Make sure your Devpost submission
+              includes the correct demo link so judges can join your session.
+            </p>
+          </div>
+        </div>
+
+        <!-- Session A: Registration & Check-in -->
+        <div class="card">
+          <h2><strong>Registration &amp; Check-In — Session A (Online / Synchronous)</strong></h2>
+          <ol class="list2" style="font-size:.95rem;color:#374151;">
+            <li>Complete the <strong>OneStop Registration</strong> once and indicate that you will attend <strong>Session A (Online)</strong>.</li>
+            <li>RSVP to the event on <strong>Bevy</strong> to receive calendar invites and Zoom links for Session A.</li>
+            <li>Register your project on <strong>Devpost</strong> and invite teammates (solo or up to 4).</li>
+            <li>Join the <strong>Discord server</strong> to access mentorship channels &amp; schedules.</li>
+            <li>After kickoff, make your <strong>first GitHub commit</strong> and keep your Devpost draft updated.</li>
+            <li>Submit your final project on <strong>Devpost</strong> by the shared deadline listed in the agenda.</li>
+          </ol>
+          <p style="margin-top:10px;font-size:.9rem;color:var(--muted);">
+            Online participants receive access to <strong>perks such as APIs, subscriptions, and credits</strong> when eligible.
+            Prize details for this edition are available in the <strong>hackathon agenda</strong> and on the Devpost “Prizes” card.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prizes & Awards (Shared) -->
+    <section class="section">
+      <div class="wrap">
+        <div class="card">
+          <h2><strong>Prizes &amp; Awards — Shared Across Tracks</strong></h2>
+          <p class="meta">
+            Details for prizes and awards are maintained in the <strong>official hackathon agenda</strong> and on Devpost.
+          </p>
+          <ul class="list" style="margin-top:4px;font-size:.95rem;color:#374151;">
+            <li>Each track will have at least one <strong>1st Place winner</strong> (subject to final sponsorship and participation).</li>
+            <li>Full prize descriptions and eligibility are listed on the <strong>Devpost “Prizes”</strong> section.</li>
+            <li>Any updates or changes to prizes are reflected first in the <strong>agenda</strong> and Devpost page.</li>
+            <li>The <strong>Project Gallery</strong> on Devpost will show all projects once the gallery opens before live demos.</li>
+            <li>If your project does not appear in the gallery, double-check that it is marked as <strong>“Published”</strong> on Devpost.</li>
+          </ul>
+          <div class="row" style="margin-top:10px;">
+            <a class="btn" data-url="perks" target="_blank" rel="noopener">
+              View Perks &amp; Credits Overview
+            </a>
+            <a class="btn alt" data-url="devpost" target="_blank" rel="noopener">
+              Open Devpost “Prizes” Section
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Platforms & Partners -->
+    <section class="section">
+      <div class="wrap">
+        <div class="grid">
+          <div class="card">
+            <h2><strong>Community Platforms</strong></h2>
+            <p class="meta" style="margin-bottom:6px;">
+              Stay connected with Code Crunch &amp; Hack University for announcements, reminders, and mentorship.
+            </p>
+            <div class="row" style="margin-top:8px;">
+              <a class="btn" data-url="discordServer" target="_blank" rel="noopener">
+                <i class="fab fa-discord"></i>&nbsp; Join Discord
+              </a>
+              <a class="btn" data-url="instagramGroup" target="_blank" rel="noopener">
+                <i class="fab fa-instagram"></i>&nbsp; Instagram Group
+              </a>
+              <a class="btn" data-url="groupme" target="_blank" rel="noopener">
+                <i class="fa-solid fa-users"></i>&nbsp; GroupMe
+              </a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2><strong>Judges, Mentors &amp; Speakers</strong></h2>
+            <ul class="list" style="margin-top:4px;font-size:.95rem;color:#374151;">
+              <li>The official list of judges, mentors, and speakers is displayed on the <strong>Devpost event page</strong>.</li>
+              <li>To view them, open Devpost and scroll to the bottom sections where roles are listed.</li>
+              <li>These listings are updated as new confirmations are added or schedules change.</li>
+              <li>Always refer to Devpost for the most recent information about who is judging or mentoring.</li>
+            </ul>
+            <p class="meta">Devpost is the <strong>source of truth</strong> for project listings, volunteer roles, and prize information.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-bar">
+      <div class="wrap">
+        <div class="partners-card">
+          <div class="partners-label">Partners</div>
+          <div class="partners-logos">
+            <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/ecd88daf-1b57-4558-9ffc-e48f57f69473" alt="Hack University" class="partner-logo">
+            </a>
+            <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/3c5f5ba2-dc08-48a1-9fd1-1be04cc002d1" alt="Google Developer Group at FIU" class="partner-logo">
+            </a>
+            <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/d2bbc54d-c650-4345-8072-3fa858482b0c" alt="Code Crunch" class="partner-logo">
+            </a>
+            <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/6e2cd638-d9bf-4349-9e6f-8ee72bc02c27" alt="ColorStack at FIU" class="partner-logo">
+            </a>
+            <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/a76dccce-8bba-4749-9bea-01016f514ccd" alt="CAHSI at FIU" class="partner-logo">
+            </a>
+            <a href="https://raspberrypicodecrunch.vercel.app" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/0459d11d-52a4-4d9e-bb2b-b86022faf8fa" alt="Raspberry Pi Code Crunch at FIU" class="partner-logo">
+            </a>
+            <a href="https://unibee.dev" target="_blank" rel="noopener">
+              <img src="https://github.com/user-attachments/assets/6c5acfc7-815e-42a4-9fd6-bdc4a60c7caf" alt="UniBee" class="partner-logo">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="hack-university-footer" role="contentinfo">
+    <div class="hack-university-footer-container">
+      <div class="hack-university-footer-grid">
+        <div>
+          <h3 class="hack-university-footer-title">
+            Hack University
+            <span class="hack-university-star">👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻 👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻 🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span>
+          </h3>
+          <p class="hack-university-footer-description">
+            A collaborative effort uniting multiple student organizations and global communities to empower
+            the next generation of innovators, developers, and leaders.
+          </p>
+          <p class="hack-university-footer-description">
+            <a data-url="hackuniversityHomepage" class="hack-university-footer-link">HackUniversity.vercel.app</a>
+          </p>
+
+          <div class="hack-university-social-section">
+            <h4 class="hack-university-social-title">Connect With Us</h4>
+            <div class="hack-university-social-grid">
+              <a data-url="hackuniversityLinkedin" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="fab fa-linkedin hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">LinkedIn</span>
+              </a>
+              <a data-url="hackuniversityInstagram" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="fab fa-instagram hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">Instagram</span>
+              </a>
+              <a data-url="hackuniversityGithub" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="fab fa-github hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">GitHub</span>
+              </a>
+              <a data-url="hackuniversityYoutube" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="fab fa-youtube hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">YouTube</span>
+              </a>
+              <a data-url="hackuniversityDiscord" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="fab fa-discord hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">Discord</span>
+              </a>
+              <a data-url="hackuniversityCalendar" target="_blank" rel="noopener" class="hack-university-social-link">
+                <i class="far fa-calendar-alt hack-university-social-icon" aria-hidden="true"></i>
+                <span class="hack-university-social-text">Calendar</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="hack-university-footer-title">Quick Links</h3>
+          <ul class="hack-university-quick-links">
+            <li><a data-url="hackuniversityMission" class="hack-university-quick-link">Mission</a></li>
+            <li><a data-url="hackuniversityCalendar" class="hack-university-quick-link">Events</a></li>
+            <li><a data-url="hackuniversityHackathon" class="hack-university-quick-link">Hackathons</a></li>
+            <li><a data-url="hackuniversityMembership" class="hack-university-quick-link">Membership</a></li>
+            <li><a data-url="hackuniversityEboard" class="hack-university-quick-link">Join E-Board</a></li>
+            <li><a data-url="hackuniversityResources" class="hack-university-quick-link">Resources</a></li>
+            <li><a data-url="hackuniversityDiscord" class="hack-university-quick-link" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="hack-university-footer-title">Contact</h3>
+          <address class="hack-university-contact-section">
+            Florida International University<br/>
+            Miami, FL<br/>
+            <a href="mailto:codecrunchclub@gmail.com" class="hack-university-contact-link">codecrunchclub@gmail.com</a>
+          </address>
+        </div>
+      </div>
+
+      <div class="hack-university-footer-bottom">
+        <p class="hack-university-copyright">© 2025 Hack University. All rights reserved.</p>
+        <p class="hack-university-credits">
+          Built with ❤️ for the tech community by
+          <a data-url="brianbazurtoLinkedin" target="_blank" class="hack-university-credits-link">Brian Bazurto</a>
+          · Powered by innovation and collaboration
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== CONFIG TOGGLE FLAGS =====
+    const CONFIG = {
+      mlhEnabled: true,         // set true when MLH registration is ready for this event
+      bevyEnabled: true,
+      kickoffAEnabled: true,
+      kickoffBEnabled: true,
+      closingAEnabled: true,
+      closingBEnabled: true,
+      preEventEnabled: true,
+      hybridEnabled: true
+    };
+
+    // ===== GLOBAL URL OBJECT (single source of truth) =====
+    // NOTE: Replace the placeholder links below with Hack Fiesta links when ready.
+    const URLS = {
+      // Core pages (PLACEHOLDERS - update)
+      agenda: 'https://github.com/CODE-CRUNCH-CLUB/event-agenda/blob/main/2026-hackfiesta-hackathon-SA-&-SB-FEB-2026.md',
+      perks: 'https://hackuniversity-hackathons.vercel.app/',
+      prizes: 'https://github.com/CODE-CRUNCH-CLUB/event-prizes/blob/main/2026-hackfiestamiami-hackathon-SA-&-SB-FEB-2026.md',
+      photoAlbum: 'https://photos.app.goo.gl/QaQsG1Ck32TRofBb8',
+      mentorsschedule: 'https://hackuniversity-discord.vercel.app/',
+
+      // Registration platforms (PLACEHOLDERS - update)
+      devpost: 'https://305hackfeb2026.devpost.com/',
+      onestop: 'https://hackuniversity-registration.vercel.app/',
+      bevy: 'https://gdg.community.dev/e/m53d78/',
+      mlh: 'https://events.mlh.io/events/13536-hack-fiesta-miami-edition-february-2026-hack-day-with-multiple-tracks?_gl=1*2hy0qx*_ga*MTEyOTU1NTYzNS4xNzQ1NTMxMjM1*_ga_E5KT6TC4TK*czE3NzA1MDI1MjkkbzE2MCRnMSR0MTc3MDUwMjcwMSRqNDEkbDAkaDA.',
+
+      hackerGuide: 'https://hackuniversity-hackerguide.vercel.app',
+      discordServer: 'https://hackuniversity-discord.vercel.app/',
+      instagramGroup: 'https://hackuniversityplatforms.vercel.app/',
+      groupme: 'https://hackuniversityplatforms.vercel.app/',
+
+      // Footer + social links
+      hackuniversityInstagram: 'https://www.instagram.com/codecrunchclub/',
+      hackuniversityLinkedin: 'https://www.linkedin.com/company/hack-university-worldwide',
+      hackuniversityGithub: 'https://github.com/CODE-CRUNCH-CLUB',
+      hackuniversityYoutube: 'https://www.youtube.com/@CODECRUNCH-WORLDWIDE',
+      hackuniversityDiscord: 'https://hackuniversity-discord.vercel.app/',
+      hackuniversityCalendar: 'https://hackuniversity-calendar.vercel.app/',
+      brianbazurtoLinkedin: 'https://www.linkedin.com/in/iba001/',
+
+      // Quick links
+      hackuniversityHackathon: 'https://codecrunchglobal.vercel.app/hackathons.html',
+      hackuniversityEboard: 'https://hackuniversity-eboard.vercel.app/',
+      hackuniversityMembership: 'https://hackuniversity-membership.vercel.app/',
+      hackuniversityResources: 'https://codecrunchglobal.vercel.app/index.html#resources',
+      hackuniversityMission: 'https://hackuniversity.vercel.app/',
+      hackuniversityHomepage: 'https://hackuniversity.vercel.app/',
+
+      // Zoom / router hub
+      kickoffA: 'https://hackuniversity-zoom.vercel.app/',
+      kickoffB: 'https://hackuniversity-zoom.vercel.app/',
+      closingA: 'https://hackuniversity-zoom.vercel.app/',
+      closingB: 'https://hackuniversity-zoom.vercel.app/',
+      preEventWorkshops: 'https://hackuniversity-zoom.vercel.app/',
+      hybridWorkshops: 'https://hackuniversity-zoom.vercel.app/'
+    };
+
+    (function () {
+      const els = document.querySelectorAll(
+        '.hack-university-social-link, .hack-university-quick-link, .hack-university-footer-link'
+      );
+      els.forEach(el => {
+        el.addEventListener('click', function () {
+          this.style.transform = 'scale(0.97)';
+          setTimeout(() => { this.style.transform=''; }, 120);
+        });
+        el.addEventListener('touchstart', function () { this.style.opacity='0.9'; });
+        el.addEventListener('touchend', function () { this.style.opacity=''; });
+      });
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.hack-university-star').forEach(el => { el.style.animation = 'none'; });
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Attach hrefs from URLS object
+      document.querySelectorAll('[data-url]').forEach(function (el) {
+        const key = el.getAttribute('data-url');
+        if (URLS[key]) {
+          el.setAttribute('href', URLS[key]);
+
+          const isExternal = /^https?:\/\//i.test(URLS[key]);
+          if (isExternal) {
+            el.setAttribute('target', '_blank');
+            el.setAttribute('rel', 'noopener');
+          } else {
+            el.removeAttribute('target');
+            el.removeAttribute('rel');
+          }
+        }
+      });
+
+      // Auto-update year in footer
+      const yearEl = document.querySelector('.hack-university-copyright');
+      if (yearEl) {
+        const year = new Date().getFullYear();
+        yearEl.textContent = yearEl.textContent.replace(/© \d{4}/, '© ' + year);
+      }
+
+      // Toggle-based visibility for buttons
+      document.querySelectorAll('[data-toggle]').forEach(el => {
+        const key = el.getAttribute('data-toggle');
+        if (Object.prototype.hasOwnProperty.call(CONFIG, key)) {
+          if (!CONFIG[key]) el.style.display = 'none';
+        }
+      });
+
+      // Special handling for MLH button (enable/disable instead of hide)
+      const mlhBtn = document.querySelector('[data-role="mlh"]');
+      if (mlhBtn) {
+        if (!CONFIG.mlhEnabled) {
+          mlhBtn.classList.add('btn-disabled');
+          mlhBtn.innerHTML = '<i class="fa-solid fa-id-card"></i>&nbsp; Register on MLH — Link coming soon';
+          mlhBtn.removeAttribute('href');
+          mlhBtn.removeAttribute('target');
+          mlhBtn.removeAttribute('rel');
+        } else {
+          mlhBtn.classList.remove('btn-disabled');
+          mlhBtn.innerHTML = '<i class="fa-solid fa-id-card"></i>&nbsp; Register on MLH — Required by sponsor';
+          if (URLS.mlh) {
+            mlhBtn.setAttribute('href', URLS.mlh);
+            mlhBtn.setAttribute('target','_blank');
+            mlhBtn.setAttribute('rel','noopener');
+          }
+        }
+      }
+
+      // Challenge prompt lock / countdown helper
+      function initChallengeCountdown(revealTimeString, suffix) {
+        const lockedEl = document.getElementById('challenge-locked-' + suffix);
+        const unlockedEl = document.getElementById('challenge-unlocked-' + suffix);
+        const countdownEl = document.getElementById('challenge-countdown-' + suffix);
+        if (!lockedEl || !unlockedEl || !countdownEl) return;
+
+        const revealTime = new Date(revealTimeString);
+
+        function updateCountdown() {
+          const now = new Date();
+          const diff = revealTime - now;
+
+          if (diff <= 0) {
+            lockedEl.style.display = 'none';
+            unlockedEl.style.display = 'block';
+            return;
+          }
+
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / (3600 * 24));
+          const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          let parts = [];
+          if (days > 0) parts.push(days + 'd');
+          if (hours > 0 || days > 0) parts.push(hours + 'h');
+          if (minutes > 0 || hours > 0 || days > 0) parts.push(minutes + 'm');
+          parts.push(seconds + 's');
+
+          countdownEl.textContent = 'Countdown to prompt reveal (ET): ' + parts.join(' ');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      // Session B prompt reveal: Sat Feb 14, 2026 @ 10:00 AM ET
+      initChallengeCountdown('2026-02-14T10:00:00-05:00', 'b');
+
+      // Session A sample prompts reveal: Fri Feb 6, 2026 @ 10:00 PM ET
+      initChallengeCountdown('2026-02-06T22:00:00-05:00', 'a');
+    });
+  </script>
+</body>
+</html>
