@@ -297,7 +297,10 @@
         <h2 class="text-2xl font-bold text-gray-800 mb-4">🔔 Google Calendar Tips</h2>
 
         <p class="text-gray-600 max-w-2xl mx-auto mb-6">
-          #1 – Please note that all events take place in <strong>Eastern Time (ET)</strong>, Miami, FL, USA.
+          #1 – Please note that all events take place in <strong>Eastern Time (ET)</strong>, Miami, FL, USA —
+        <span id="et-clock" class="font-semibold text-gray-800"></span>
+        <span class="text-gray-500">(<span id="et-date"></span>)</span>
+
         </p>
 
         <p class="text-gray-600 max-w-2xl mx-auto mb-6">
@@ -692,6 +695,54 @@
       // Ensure initial state
       setExpanded(false);
     })();
+
+
+
+    // script Eastern Time Clock
+
+
+  function startETClock() {
+    const clockEl = document.getElementById("et-clock");
+    const dateEl = document.getElementById("et-date");
+    if (!clockEl || !dateEl) return;
+
+    const tz = "America/New_York";
+
+    const tick = () => {
+      const now = new Date();
+
+      // Time (e.g., 2:41:09 PM ET)
+      const timeStr = new Intl.DateTimeFormat("en-US", {
+        timeZone: tz,
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      }).format(now);
+
+      // Date (e.g., Sun, Feb 8, 2026)
+      const dateStr = new Intl.DateTimeFormat("en-US", {
+        timeZone: tz,
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }).format(now);
+
+      clockEl.textContent = `${timeStr} ET`;
+      dateEl.textContent = dateStr;
+    };
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  document.addEventListener("DOMContentLoaded", startETClock);
+
+    // end of script Eastern Time Clock
+
+
+
   </script>
 </body>
 </html>
