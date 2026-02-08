@@ -53,14 +53,19 @@
     a { color: inherit; text-decoration: none; }
 
     /* =========================
-       Navbar (clean & sticky)
+       Navbar (clean & sticky) — UPDATED to FIXED
        ========================= */
     .navbar {
       background: var(--color-bg-white);
       border-bottom: 1px solid var(--color-border);
       padding: 12px 0;
-      position: sticky; top: 0; z-index: 1000;
       box-shadow: var(--shadow-sm);
+
+      position: fixed;   /* UPDATED */
+      top: 0;            /* UPDATED */
+      left: 0;           /* UPDATED */
+      right: 0;          /* UPDATED */
+      z-index: 2000;     /* UPDATED: above clock */
     }
     .nav-container {
       max-width: 1200px; margin: 0 auto;
@@ -262,6 +267,87 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
+
+    /* =========================
+       Fixed Event Clock Bar
+       BELOW navbar (no space) — UPDATED
+       ========================= */
+    :root{
+      --navbar-h: 64px;     /* desktop navbar height estimate */
+      --navbar-h-m: 72px;   /* mobile navbar height estimate */
+      --clock-bar-h: 44px;
+    }
+
+    .event-clock-bar{
+      position: fixed;
+      top: var(--navbar-h);   /* BELOW navbar */
+      left: 0;
+      right: 0;
+      z-index: 1900;          /* under navbar, above content */
+      height: var(--clock-bar-h);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      padding: 0 14px;
+    }
+
+    .event-clock-label{
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .event-clock-time{
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+
+    .event-clock-date{
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px){
+      .event-clock-bar{
+        top: var(--navbar-h-m);
+      }
+    }
+
+    @media (max-width: 640px){
+      .event-clock-bar{
+        height: 40px;            /* slightly shorter */
+        padding: 0 10px;
+      }
+      .event-clock-time{
+        font-size: 12.5px;
+      }
+      .event-clock-date{
+        font-size: 12px;
+      }
+      .event-clock-date{
+        display: none;           /* optional: hide date on tiny screens */
+      }
+    }
+
+    /* Push page content below navbar + clock */
+    body{
+      padding-top: calc(var(--navbar-h) + var(--clock-bar-h));
+    }
+    @media (max-width: 768px){
+      body{
+        padding-top: calc(var(--navbar-h-m) + var(--clock-bar-h));
+      }
+    }
   </style>
 </head>
 
@@ -320,6 +406,15 @@
   </div>
 </nav>
 
+<!-- FIXED EVENT CLOCK BAR (Always Visible, BELOW NAVBAR) -->
+<div class="event-clock-bar" role="status" aria-label="Event Clock — Eastern Time">
+  <span class="event-clock-label">
+    Event Clock — <strong>Eastern Time (ET)</strong> · Miami, FL
+  </span>
+  <span id="et-clock" class="event-clock-time"></span>
+  <span class="event-clock-date">(<span id="et-date"></span>)</span>
+</div>
+
 <!-- Embedded CSS AFTER HTML -->
 <style>
   .nav-brand {
@@ -374,9 +469,6 @@
 
       <!-- UPDATED: HERO BUTTONS + PHOTO ALBUM -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7">
-        <!-- <a class="btn btn-primary" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">
-          <i class="fa-solid fa-rocket-launch"></i> Join Hack University
-        </a> -->
         <a class="btn btn-ghost" href="#partners">
           <i class="fa-regular fa-compass"></i> Explore Organization Partners
         </a>
@@ -390,7 +482,6 @@
         </a>
       </div>
 
-      <!-- OPTIONAL: HERO ONE-LINER (kept in) -->
       <p class="subtitle text-sm mt-4">
         Hack University Library — Lowkey, No Skips: photos across GDG at FIU, Code Crunch, ColorStack, CAHSI at FIU, and Raspberry Pi Code Crunch.
       </p>
@@ -748,14 +839,11 @@
         <ul class="subtitle">
           <li><a href="#mission">Mission</a></li>
           <li><a href="https://hackuniversity-calendar.vercel.app/" target="_blank">Events</a></li>
-
-          <!-- ADDED: PHOTO ALBUM LINK -->
           <li>
             <a href="https://photos.app.goo.gl/71FC5SLTQcPRbXjx6" target="_blank" rel="noopener noreferrer">
               Photo Album
             </a>
           </li>
-
           <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank">Hackathons</a></li>
           <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank">Membership</a></li>
           <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank">Join E-Board</a></li>
@@ -784,7 +872,7 @@
 </footer>
 
 <script>
-  //navbar toggle
+  // Navbar toggle (mobile)
   (function () {
     const toggleBtn = document.querySelector(".nav-toggle");
     const navLinks = document.getElementById("huNavLinks");
@@ -798,13 +886,11 @@
       if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
     };
 
-    // Toggle menu
     toggleBtn.addEventListener("click", () => {
       const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
       setExpanded(!expanded);
     });
 
-    // Close menu after clicking a same-page anchor link (e.g., #mission)
     navLinks.addEventListener("click", (e) => {
       const a = e.target.closest("a");
       if (!a) return;
@@ -812,16 +898,54 @@
       if (href.startsWith("#")) setExpanded(false);
     });
 
-    // Close menu when resizing to desktop
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) setExpanded(false);
     });
 
-    // Ensure initial state
     setExpanded(false);
   })();
 
-  //navbar toggle end
+  // Event FIXED Clock Bar (Eastern Time)
+  (function () {
+    let etClockInterval = null;
+
+    function startETClock() {
+      const clockEl = document.getElementById("et-clock");
+      const dateEl = document.getElementById("et-date");
+      if (!clockEl || !dateEl) return;
+
+      const tz = "America/New_York";
+
+      const tick = () => {
+        const now = new Date();
+
+        const timeStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        }).format(now);
+
+        const dateStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        }).format(now);
+
+        clockEl.textContent = `${timeStr} ET`;
+        dateEl.textContent = dateStr;
+      };
+
+      tick();
+      if (etClockInterval) clearInterval(etClockInterval);
+      etClockInterval = setInterval(tick, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", startETClock);
+  })();
 </script>
 
 </body>
