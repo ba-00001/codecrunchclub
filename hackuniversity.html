@@ -76,57 +76,54 @@
     }
     .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
 
-
     /* =========================
-   Navbar (mobile toggle)
-   ========================= */
-.nav-toggle {
-  display: none; /* show only on mobile */
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-white);
-  color: var(--color-text);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
-}
+       Navbar (mobile toggle)
+       ========================= */
+    .nav-toggle {
+      display: none; /* show only on mobile */
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-white);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
 
-.nav-toggle:hover {
-  background: #f1f3f4;
-  border-color: #d2e3fc;
-  color: var(--color-primary);
-}
+    .nav-toggle:hover {
+      background: #f1f3f4;
+      border-color: #d2e3fc;
+      color: var(--color-primary);
+    }
 
-@media (max-width: 768px) {
-  .nav-toggle { display: inline-flex; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: inline-flex; }
 
-  .nav-links {
-    display: none;              /* hidden by default */
-    width: 100%;
-    flex-direction: column;
-    gap: 8px;
-    padding-top: 12px;
-  }
+      .nav-links {
+        display: none;              /* hidden by default */
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 12px;
+      }
 
-  .nav-links.is-open {
-    display: flex;              /* shown when toggled */
-  }
+      .nav-links.is-open {
+        display: flex;              /* shown when toggled */
+      }
 
-  .nav-container {
-    flex-wrap: wrap;            /* allows links to drop below */
-    gap: 10px;
-  }
+      .nav-container {
+        flex-wrap: wrap;            /* allows links to drop below */
+        gap: 10px;
+      }
 
-  .nav-link {
-    width: 100%;
-    padding: 10px 12px;
-  }
-}
-
-
+      .nav-link {
+        width: 100%;
+        padding: 10px 12px;
+      }
+    }
 
     /* =========================
        Generic Container
@@ -350,55 +347,56 @@
   }
 </style>
 
+<!-- HERO -->
+<header class="section" style="padding-top:48px;">
+  <div class="container">
+    <div class="text-center mt-6">
+      <h1 class="title-xl">Empowering Tomorrow’s Innovators</h1>
+      <p class="subtitle max-w-3xl mx-auto mt-4 text-lg">
+        A global ecosystem supported by
+        <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Google Developer Group at Florida International University (GDG at FIU)
+        </a>,
+        <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Code Crunch
+        </a>,
+        <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          ColorStack at FIU
+        </a>,
+        <a href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          CAHSI at FIU
+        </a>, and
+        <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Raspberry Pi Code Crunch
+        </a>,
+        enabling collaboration between students, builders, and industry through hackathons, mentorship, and hands-on projects.
+      </p>
 
-  <!-- HERO -->
-  <header class="section" style="padding-top:48px;">
-    <div class="container">
+      <!-- UPDATED: HERO BUTTONS + PHOTO ALBUM -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7">
+        <!-- <a class="btn btn-primary" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">
+          <i class="fa-solid fa-rocket-launch"></i> Join Hack University
+        </a> -->
+        <a class="btn btn-ghost" href="#partners">
+          <i class="fa-regular fa-compass"></i> Explore Organization Partners
+        </a>
 
-
-      <div class="text-center mt-6">
-        <h1 class="title-xl">Empowering Tomorrow’s Innovators</h1>
-          <p class="subtitle max-w-3xl mx-auto mt-4 text-lg">
-            A global ecosystem supported by
-            <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-              Google Developer Group at Florida International University (GDG at FIU)
-            </a>,
-            <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-              Code Crunch
-            </a>,
-            <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-              ColorStack at FIU
-            </a>,
-            <a href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-              CAHSI at FIU
-            </a>, and
-            <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-              Raspberry Pi Code Crunch
-            </a>,
-            enabling collaboration between students, builders, and industry through hackathons, mentorship, and hands-on projects.
-          </p>
-
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7">
-          <!-- <a class="btn btn-primary" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">
-            <i class="fa-solid fa-rocket-launch"></i> Join Hack University
-          </a> -->
-          <a class="btn btn-ghost" href="#partners">
-            <i class="fa-regular fa-compass"></i> Explore Organization Partners
-          </a>
-        </div>
+        <a class="btn btn-light"
+           href="https://photos.app.goo.gl/71FC5SLTQcPRbXjx6"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Hack University Photo Album (Google Photos)">
+          <i class="fa-regular fa-images"></i> Photo Album
+        </a>
       </div>
+
+      <!-- OPTIONAL: HERO ONE-LINER (kept in) -->
+      <p class="subtitle text-sm mt-4">
+        Hack University Library — Lowkey, No Skips: photos across GDG at FIU, Code Crunch, ColorStack, CAHSI at FIU, and Raspberry Pi Code Crunch.
+      </p>
     </div>
-  </header>
-
-
-
-
-
-
-
-
-
+  </div>
+</header>
 
 <!-- QUICK ACTIONS (Students / Companies / Industry) -->
 <section class="section" style="padding-top:0;">
@@ -409,7 +407,7 @@
       <article class="hu-card p-6 md:p-7">
         <h3 class="title-md">For Students</h3>
         <p class="subtitle mt-2">
-           Membership (OneStop Form), hackathons (OneStop Form), E-board Applications (OneStop Form), programs, Hacker guides, and community access. — all in one place.
+          Membership (OneStop Form), hackathons (OneStop Form), E-board Applications (OneStop Form), programs, Hacker guides, and community access. — all in one place.
         </p>
 
         <div class="divider"></div>
@@ -444,8 +442,6 @@
            href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html">
           <i class="fa-solid fa-building"></i> Go to Company Portal
         </a>
-
-
       </article>
 
       <!-- Industry -->
@@ -461,359 +457,331 @@
            href="https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html">
           <i class="fa-solid fa-user-tie"></i> Go to Volunteer Portal
         </a>
-
       </article>
 
     </div>
   </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- PARTNER ORGANIZATIONS -->
-  <section id="partners" class="section" style="padding-top:0;">
-    <div class="container">
-      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
-        <h2 class="title-md">Connect with Our Partner Organizations</h2>
-        <a class="btn btn-ghost" href="#mission"><i class="fa-regular fa-circle-question"></i> What is HU?</a>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- GDG -->
-        <article class="hu-card p-6">
-          <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener" class="block">
-            <div class="flex justify-center">
-              <img class="h-16 object-contain" loading="lazy"
-                   src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27"
-                   alt="Google Developer Club at FIU"/>
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold">Google Developer Club</h3>
-            <p class="subtitle text-sm mt-1">at Florida International University</p>
-          </a>
-          <p>
-            <br>Google Developer Group focused on building community and sharing knowledge around Google technologies and software development. Open Worldwide | All Universities | All Majors | High School Students (16+)
-          </p>
-          <div class="divider"></div>
-          <nav class="grid grid-cols-3 gap-2">
-            <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
-             
-          
-          </nav>
-          <div class="mt-3">
-            <a class="btn btn-primary w-full" href="https://gdgatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
-          </div>
-        </article>
-
-        <!-- Code Crunch -->
-        <article class="hu-card p-6">
-          <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener" class="block">
-            <div class="flex justify-center">
-              <img class="h-16 object-contain" loading="lazy"
-                   src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e"
-                   alt="Code Crunch Worldwide"/>
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold">Code Crunch Worldwide</h3>
-            <p class="subtitle text-sm mt-1">Global coding community</p>
-          </a>
-            <p>
-            <br>An interdisciplinary tech club dedicated to coding, technical interview prep, and hackathons. Open Worldwide | All Universities | All Majors | High School Students (16+)
-
-          </p>
-          <div class="divider"></div>
-          <nav class="grid grid-cols-3 gap-2">
-            <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
-             
-          
-          </nav>
-          <div class="mt-3">
-            <a class="btn btn-primary w-full" href="https://codecrunchglobal.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
-          </div>
-        </article>
-
-        <!-- ColorStack -->
-        <article class="hu-card p-6">
-          <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener" class="block">
-            <div class="flex justify-center">
-              <img class="h-16 object-contain" loading="lazy"
-                   src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036"
-                   alt="ColorStack at FIU"/>
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold">ColorStack</h3>
-            <p class="subtitle text-sm mt-1">at Florida International University</p>
-          </a>
-            <p>
-            <br>Part of a national network of 120+ chapters, focused on mentorship, community, and career pathways for underrepresented students in tech. Open Worldwide | All Universities | All Majors | High School Students (16+)
-
-          </p>
-          <div class="divider"></div>
-          <nav class="grid grid-cols-3 gap-2">
-            <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
-             
-          
-          </nav>
-          <div class="mt-3">
-            <a class="btn btn-primary w-full" href="https://colorstackatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
-          </div>
-        </article>
-
-        <!-- CAHSI -->
-        <article class="hu-card p-6">
-          <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener" class="block">
-            <div class="flex justify-center">
-              <img class="h-16 object-contain" loading="lazy"
-                   src="https://github.com/user-attachments/assets/0c9b5533-3b83-4f27-99ef-67185a345355"
-                   alt="CAHSI at FIU"/>
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold">CAHSI</h3>
-            <p class="subtitle text-sm mt-1">at Florida International University</p>
-          </a>
-                      <p>
-            <br>Part of the Computing Alliance of Hispanic-Serving Institutions (CAHSI) network across 60+ universities, expanding access to computing research and tech careers. Open Worldwide | All Universities | All Majors | High School Students (16+)
-
-          </p>
-          <div class="divider"></div>
-          <nav class="grid grid-cols-3 gap-2">
-            <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
-             
-          
-          </nav>
-          <div class="mt-3">
-            <a class="btn btn-primary w-full" href="https://cahsiatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
-          </div>
-        </article>
-
-        <!-- Raspberry Pi -->
-        <article class="hu-card p-6">
-          <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener" class="block">
-            <div class="flex justify-center">
-              <img class="h-16 object-contain" loading="lazy"
-                   src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
-                   alt="Raspberry Pi Code Crunch"/>
-            </div>
-            <h3 class="mt-4 text-xl font-extrabold">Raspberry Pi</h3>
-            <p class="subtitle text-sm mt-1">Code Crunch Community</p>
-          </a>
-                                <p>
-            <br>A hands-on, project-based club and learning platform featuring structured learning paths, video tutorials, certificates, and resources in coding, AI, and electronics. Open Worldwide | All Universities | All Majors | High School Students (13+)
-
-          </p>
-          <div class="divider"></div>
-          <nav class="grid grid-cols-3 gap-2">
-            <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-            <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
-             
-          
-          </nav>
-          <div class="mt-3">
-            <a class="btn btn-primary w-full" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
-          </div>
-        </article>
-      </div>
+<!-- PARTNER ORGANIZATIONS -->
+<section id="partners" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+      <h2 class="title-md">Connect with Our Partner Organizations</h2>
+      <a class="btn btn-ghost" href="#mission"><i class="fa-regular fa-circle-question"></i> What is HU?</a>
     </div>
-  </section>
 
-  <!-- STATS -->
-  <section class="section" style="padding-top:0;">
-    <div class="container">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-        <div class="hu-card p-6 text-center">
-          <div class="text-4xl font-extrabold" style="color:#1d4ed8;">1000+</div>
-          <div class="subtitle mt-1">Active Members</div>
-        </div>
-        <div class="hu-card p-6 text-center">
-          <div class="text-4xl font-extrabold" style="color:#1d4ed8;">17+</div>
-          <div class="subtitle mt-1">Countries</div>
-        </div>
-        <div class="hu-card p-6 text-center">
-          <div class="text-4xl font-extrabold" style="color:#1d4ed8;">112+</div>
-          <div class="subtitle mt-1">Universities</div>
-        </div>
-        <div class="hu-card p-6 text-center">
-          <div class="text-4xl font-extrabold" style="color:#1d4ed8;">170+</div>
-          <div class="subtitle mt-1">Events Hosted</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MISSION / ABOUT -->
-  <section id="mission" class="section" style="padding-top:0;">
-    <div class="container">
-      <article class="hu-card p-7 md:p-8">
-        <h2 class="title-md">Our Mission</h2>
-        <p class="subtitle mt-3 text-lg">
-          Founded in <span style="color:#1d4ed8;font-weight:600;">August 2024</span>, Hack University unites multiple student organizations and global communities to
-          <span style="color:#1d4ed8;font-weight:600;">empower the next generation of innovators</span> through workshops, hackathons, and mentorship across disciplines and borders.
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- GDG -->
+      <article class="hu-card p-6">
+        <a href="https://gdgatfiu.vercel.app" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27"
+                 alt="Google Developer Club at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">Google Developer Club</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Google Developer Group focused on building community and sharing knowledge around Google technologies and software development. Open Worldwide | All Universities | All Majors | High School Students (16+)
         </p>
-
         <div class="divider"></div>
-
-        <div class="grid md:grid-cols-2 gap-5">
-          <div class="hu-card p-5">
-            <h3 class="font-extrabold text-xl">Membership Benefits</h3>
-            <ul class="mt-3 space-y-2 text-sm subtitle">
-              <li>• Access to 20 annual interdisciplinary hackathons</li>
-              <li>• Interview prep, resume reviews, and coaching</li>
-              <li>• Startup pitch development & entrepreneurship mentoring</li>
-              <li>• Executive Board application opportunities</li>
-              <li>• Cross-discipline networking and industry access</li>
-            </ul>
-          </div>
-          <div class="hu-card p-5">
-            <h3 class="font-extrabold text-xl">Community Access</h3>
-            <ul class="mt-3 space-y-2 text-sm subtitle">
-              <li><strong>Discord:</strong> coding help, team formation, mentorship (secured after OneStop)</li>
-              <li><strong>GroupMe:</strong> quick coordination & announcements (Open to all)</li>
-              <li><strong>Instagram Group</strong> highlights & networking (Open to all)</li>
-            </ul>
-          </div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-ghost" href="https://gdgatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a class="btn btn-primary w-full" href="https://gdgatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
         </div>
+      </article>
 
-        <div class="divider"></div>
-
-        <div class="hu-card p-5">
-          <h3 class="font-extrabold text-xl" style="color:#166534;">Who Can Join?</h3>
-          <p class="subtitle mt-2"><strong>All majors welcome — no coding experience required.</strong></p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4 text-center">
-            <div class="hu-card p-3"><div class="text-2xl">💻</div><div class="text-sm mt-1">CS</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">⚙️</div><div class="text-sm mt-1">Engineering</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">💼</div><div class="text-sm mt-1">Business</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🏥</div><div class="text-sm mt-1">Health</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">⚖️</div><div class="text-sm mt-1">Law</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🎨</div><div class="text-sm mt-1">Design</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">📚</div><div class="text-sm mt-1">Education</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🧬</div><div class="text-sm mt-1">Biology</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🧮</div><div class="text-sm mt-1">Math</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🔬</div><div class="text-sm mt-1">Chemistry</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🌍</div><div class="text-sm mt-1">Env. Sci</div></div>
-            <div class="hu-card p-3"><div class="text-2xl">🌟</div><div class="text-sm mt-1">Any Major</div></div>
+      <!-- Code Crunch -->
+      <article class="hu-card p-6">
+        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e"
+                 alt="Code Crunch Worldwide"/>
           </div>
+          <h3 class="mt-4 text-xl font-extrabold">Code Crunch Worldwide</h3>
+          <p class="subtitle text-sm mt-1">Global coding community</p>
+        </a>
+        <p>
+          <br>An interdisciplinary tech club dedicated to coding, technical interview prep, and hackathons. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a class="btn btn-primary w-full" href="https://codecrunchglobal.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
+        </div>
+      </article>
+
+      <!-- ColorStack -->
+      <article class="hu-card p-6">
+        <a href="https://colorstackatfiu.vercel.app" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036"
+                 alt="ColorStack at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">ColorStack</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Part of a national network of 120+ chapters, focused on mentorship, community, and career pathways for underrepresented students in tech. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-ghost" href="https://colorstackatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a class="btn btn-primary w-full" href="https://colorstackatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
+        </div>
+      </article>
+
+      <!-- CAHSI -->
+      <article class="hu-card p-6">
+        <a href="https://cahsiatfiu.vercel.app" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/0c9b5533-3b83-4f27-99ef-67185a345355"
+                 alt="CAHSI at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">CAHSI</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Part of the Computing Alliance of Hispanic-Serving Institutions (CAHSI) network across 60+ universities, expanding access to computing research and tech careers. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-ghost" href="https://cahsiatfiu.vercel.app" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a class="btn btn-primary w-full" href="https://cahsiatfiu.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
+        </div>
+      </article>
+
+      <!-- Raspberry Pi -->
+      <article class="hu-card p-6">
+        <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
+                 alt="Raspberry Pi Code Crunch"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">Raspberry Pi</h3>
+          <p class="subtitle text-sm mt-1">Code Crunch Community</p>
+        </a>
+        <p>
+          <br>A hands-on, project-based club and learning platform featuring structured learning paths, video tutorials, certificates, and resources in coding, AI, and electronics. Open Worldwide | All Universities | All Majors | High School Students (13+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a class="btn btn-ghost" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-ghost" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a class="btn btn-ghost" href="https://hackuniversity-attendance.vercel.app/" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a class="btn btn-primary w-full" href="https://raspberrypicodecrunch.vercel.app/" target="_blank"><i class="fa-solid fa-globe-americas"></i> Website</a>
         </div>
       </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="section" style="padding-top:0;">
-    <div class="container max-w-4xl">
-      <div class="hu-card p-8 md:p-10 text-center">
-        <h3 class="title-md">Ready to Transform Your Future?</h3>
-        <p class="subtitle mt-3 text-lg">
-          Join a global community of builders and get access to exclusive opportunities, mentorship, and resources.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-          <a class="btn btn-light" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">
-            <i class="fa-solid fa-rocket"></i> Join Hack University Now
-          </a>
-          <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener">
-            <i class="fa-regular fa-calendar"></i> View Calendar
-          </a>
-        </div>
-        <p class="subtitle text-sm mt-3">100% Free • Open to All Majors • Global Community • Instant Access</p>
+<!-- STATS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">1000+</div>
+        <div class="subtitle mt-1">Active Members</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">17+</div>
+        <div class="subtitle mt-1">Countries</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">112+</div>
+        <div class="subtitle mt-1">Universities</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">170+</div>
+        <div class="subtitle mt-1">Events Hosted</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div>
-          <h4>Hack University</h4>
-          <p>Empowering the next generation of innovators through collaboration and hands-on learning.</p>
-          <a class="inline-block mt-2 font-semibold" href="http://HackUniversity.vercel.app" target="_blank" rel="noopener">
-            HackUniversity.vercel.app ↗
-          </a>
+<!-- MISSION / ABOUT -->
+<section id="mission" class="section" style="padding-top:0;">
+  <div class="container">
+    <article class="hu-card p-7 md:p-8">
+      <h2 class="title-md">Our Mission</h2>
+      <p class="subtitle mt-3 text-lg">
+        Founded in <span style="color:#1d4ed8;font-weight:600;">August 2024</span>, Hack University unites multiple student organizations and global communities to
+        <span style="color:#1d4ed8;font-weight:600;">empower the next generation of innovators</span> through workshops, hackathons, and mentorship across disciplines and borders.
+      </p>
 
-          <div class="social-grid mt-4">
-            <a class="social-btn" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-github"></i></a>
-            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="social-btn" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
-            <a class="social-btn" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
-          </div>
-        </div>
+      <div class="divider"></div>
 
-        <div>
-          <h4>Quick Links</h4>
-          <ul class="subtitle">
-            <li><a href="#mission">Mission</a></li>
-            <li><a href="https://hackuniversity-calendar.vercel.app/" target="_blank">Events</a></li>
-            <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank">Hackathons</a></li>
-            <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank">Membership</a></li>
-            <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank">Join E-Board</a></li>
-            <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" target="_blank">Resources</a></li>
-            <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank">Join Discord</a></li>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="hu-card p-5">
+          <h3 class="font-extrabold text-xl">Membership Benefits</h3>
+          <ul class="mt-3 space-y-2 text-sm subtitle">
+            <li>• Access to 20 annual interdisciplinary hackathons</li>
+            <li>• Interview prep, resume reviews, and coaching</li>
+            <li>• Startup pitch development & entrepreneurship mentoring</li>
+            <li>• Executive Board application opportunities</li>
+            <li>• Cross-discipline networking and industry access</li>
           </ul>
         </div>
-
-        <div>
-          <h4>Contact</h4>
-                    <address class="text-sm opacity-80 not-italic">
-                        Florida International University<br>
-                        Miami, FL<br>
-                        <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100 text-decoration-none focus-visible">codecrunchclub@gmail.com</a>
-                    </address>      
+        <div class="hu-card p-5">
+          <h3 class="font-extrabold text-xl">Community Access</h3>
+          <ul class="mt-3 space-y-2 text-sm subtitle">
+            <li><strong>Discord:</strong> coding help, team formation, mentorship (secured after OneStop)</li>
+            <li><strong>GroupMe:</strong> quick coordination & announcements (Open to all)</li>
+            <li><strong>Instagram Group</strong> highlights & networking (Open to all)</li>
+          </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2025 Hack University.</p>
-        <div class="credits">
-          Built with ❤️ by <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a>.
+      <div class="divider"></div>
+
+      <div class="hu-card p-5">
+        <h3 class="font-extrabold text-xl" style="color:#166534;">Who Can Join?</h3>
+        <p class="subtitle mt-2"><strong>All majors welcome — no coding experience required.</strong></p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4 text-center">
+          <div class="hu-card p-3"><div class="text-2xl">💻</div><div class="text-sm mt-1">CS</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">⚙️</div><div class="text-sm mt-1">Engineering</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">💼</div><div class="text-sm mt-1">Business</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🏥</div><div class="text-sm mt-1">Health</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">⚖️</div><div class="text-sm mt-1">Law</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🎨</div><div class="text-sm mt-1">Design</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">📚</div><div class="text-sm mt-1">Education</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🧬</div><div class="text-sm mt-1">Biology</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🧮</div><div class="text-sm mt-1">Math</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🔬</div><div class="text-sm mt-1">Chemistry</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🌍</div><div class="text-sm mt-1">Env. Sci</div></div>
+          <div class="hu-card p-3"><div class="text-2xl">🌟</div><div class="text-sm mt-1">Any Major</div></div>
         </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:0;">
+  <div class="container max-w-4xl">
+    <div class="hu-card p-8 md:p-10 text-center">
+      <h3 class="title-md">Ready to Transform Your Future?</h3>
+      <p class="subtitle mt-3 text-lg">
+        Join a global community of builders and get access to exclusive opportunities, mentorship, and resources.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+        <a class="btn btn-light" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener">
+          <i class="fa-solid fa-rocket"></i> Join Hack University Now
+        </a>
+        <a class="btn btn-ghost" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener">
+          <i class="fa-regular fa-calendar"></i> View Calendar
+        </a>
+      </div>
+      <p class="subtitle text-sm mt-3">100% Free • Open to All Majors • Global Community • Instant Access</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div>
+        <h4>Hack University</h4>
+        <p>Empowering the next generation of innovators through collaboration and hands-on learning.</p>
+        <a class="inline-block mt-2 font-semibold" href="http://HackUniversity.vercel.app" target="_blank" rel="noopener">
+          HackUniversity.vercel.app ↗
+        </a>
+
+        <div class="social-grid mt-4">
+          <a class="social-btn" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="social-btn" href="https://hackuniversity-discord.vercel.app/" target="_blank"><i class="fab fa-discord"></i></a>
+          <a class="social-btn" href="https://hackuniversity-calendar.vercel.app/" target="_blank"><i class="far fa-calendar-alt"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="subtitle">
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="https://hackuniversity-calendar.vercel.app/" target="_blank">Events</a></li>
+
+          <!-- ADDED: PHOTO ALBUM LINK -->
+          <li>
+            <a href="https://photos.app.goo.gl/71FC5SLTQcPRbXjx6" target="_blank" rel="noopener noreferrer">
+              Photo Album
+            </a>
+          </li>
+
+          <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank">Hackathons</a></li>
+          <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank">Membership</a></li>
+          <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank">Join E-Board</a></li>
+          <li><a href="https://codecrunchglobal.vercel.app/index.html#resources" target="_blank">Resources</a></li>
+          <li><a href="https://hackuniversity-discord.vercel.app/" target="_blank">Join Discord</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <address class="text-sm opacity-80 not-italic">
+          Florida International University<br>
+          Miami, FL<br>
+          <a href="mailto:codecrunchclub@gmail.com" class="hover:opacity-100 text-decoration-none focus-visible">codecrunchclub@gmail.com</a>
+        </address>
       </div>
     </div>
-  </footer>
+
+    <div class="footer-bottom">
+      <p>© 2025 Hack University.</p>
+      <div class="credits">
+        Built with ❤️ by <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a>.
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
   //navbar toggle
@@ -853,11 +821,8 @@
     setExpanded(false);
   })();
 
-  //navbar toggle end 
+  //navbar toggle end
 </script>
-
-
-
 
 </body>
 </html>
