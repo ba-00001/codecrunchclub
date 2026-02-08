@@ -3,11 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hack University Partner Calendars & Zoom Page</title>
+  <title>HackUniversity.vercel.app - Partner Calendars & Zoom Page</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
   <style>
+    /* =========================
+       Design Tokens (MISSING BEFORE)
+       ========================= */
+    :root{
+      --color-primary:#1a73e8;
+      --color-primary-hover:#1557b0;
+
+      --color-text:#202124;
+      --color-text-muted:#5f6368;
+
+      --color-bg-white:#ffffff;
+      --color-border:#e5e7eb;
+
+      --radius-sm:10px;
+      --shadow-sm:0 2px 10px rgba(0,0,0,.06);
+      --transition-base:all .2s ease;
+    }
+
     /* Global Utilities */
     .text-decoration-none { text-decoration: none !important; }
     .text-decoration-none:hover { text-decoration: none !important; }
@@ -57,57 +76,172 @@
     ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
-    /* Header above the card */
+    /* Header above the page content */
     .site-header { width:100%; }
     .site-header-inner { max-width:1200px; margin:0 auto; padding: 14px 20px; }
     .crumbs { font-size: 12px; color:#6b7280; }
 
-    /* NAVBAR */
-    .navbar { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
-    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-    .nav-brand { font-size:22px; font-weight:500; color:#4285f4; }
-    .nav-links { display:flex; gap:30px; }
-    .nav-link { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
-    .nav-link:hover { color:#1a73e8; background:#f1f3f4; }
-    @media (max-width:768px){
-      .nav-container{ flex-direction:column; gap:12px; }
-      .nav-links{ flex-wrap:wrap; justify-content:center; gap:8px; }
-      .nav-link{ font-size:11px; padding:6px 10px; white-space:nowrap; }
+    /* =========================
+       Navbar (clean & sticky)
+       ========================= */
+    .navbar {
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 0;
+      position: sticky; top: 0; z-index: 1000;
+      box-shadow: var(--shadow-sm);
     }
-    @media (max-width:480px){
-      .nav-link{ font-size:10px; padding:5px 8px; }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 20px;
+    }
+
+    /* Brand block (MISSING BEFORE) */
+    .nav-brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      gap: 2px;
+    }
+    .brand-title{
+      color: var(--color-primary);
+      font-weight: 800;
+      font-size: 18px;
+      text-decoration:none;
+      letter-spacing:.2px;
+    }
+    .brand-title:hover{ text-decoration:none; }
+
+    .brand-url{
+      font-size: 12px;
+      color: var(--color-text-muted);
+      text-decoration:none;
+    }
+    .brand-url:hover{ color: var(--color-primary); }
+
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav-link {
+      color: var(--color-text-muted); font-weight: 500; font-size: 14px;
+      padding: 8px 12px; border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+      text-decoration: none;
+    }
+    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+
+    /* =========================
+       Navbar (mobile toggle)
+       ========================= */
+    .nav-toggle {
+      display: none; /* show only on mobile */
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-white);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
+
+    .nav-toggle:hover {
+      background: #f1f3f4;
+      border-color: #d2e3fc;
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: inline-flex; }
+
+      .nav-links {
+        display: none;              /* hidden by default */
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 12px;
+      }
+
+      .nav-links.is-open {
+        display: flex;              /* shown when toggled */
+      }
+
+      .nav-container {
+        flex-wrap: wrap;            /* allows links to drop below */
+        gap: 10px;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: 10px 12px;
+      }
     }
   </style>
 </head>
 
 <body class="bg-gray-50">
-  <!-- NAV OUTSIDE -->
+
+  <!-- NAV (single navbar only) -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
+        <a
+          href="https://hackuniversity.vercel.app/"
+          aria-label="Hack University Worldwide Home"
+          class="brand-title"
+        >
+          Hack University Worldwide Initiative
+        </a>
+        <a
+          href="https://hackuniversity.vercel.app/"
+          class="brand-url"
+        >
+          HackUniversity.vercel.app /  Partner Calendars & Zoom Page
+        </a>
       </div>
-      <div class="nav-links">
-        <a href="https://codecrunchglobal.vercel.app/" class="nav-link">Code Crunch Worldwide</a>
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+
+      <!-- Mobile toggle -->
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-controls="huNavLinks"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Links -->
+      <div class="nav-links" id="huNavLinks">
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
+        <a
+          class="nav-link"
+          href="https://codecrunchglobal.vercel.app/hackathons.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Hackathons</a>
+        <a
+          class="nav-link"
+          href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Calendar</a>
       </div>
     </div>
-
-    <!-- HEADER OUTSIDE -->
-    <header class="site-header">
-      <div class="site-header-inner">
-        <p class="crumbs">
-          <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
-          <span aria-hidden="true"> / </span>
-          Partner Calendars & Zoom Page
-        </p>
-      </div>
-    </header>
   </nav>
+
+  <!-- Breadcrumb / header (NOT a second navbar) -->
+  <!-- <header class="site-header">
+    <div class="site-header-inner">
+      <p class="crumbs">
+        <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline" target="_blank" rel="noopener">Hack University</a>
+        <span aria-hidden="true"> / </span>
+        Partner Calendars & Zoom Page
+      </p>
+    </div> -->
+  </header>
 
   <!-- Header / Zoom Hero Section -->
   <section class="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 relative overflow-hidden">
@@ -120,29 +254,36 @@
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
         Hack University <br>Partner Calendars & Zoom Page
       </h1>
+
       <p class="text-lg text-white/80 max-w-3xl mx-auto mb-6">
-        Use this page to join the Hack University Zoom for hybrid and virtual sessions.
+        Use the calendar below as the source of truth for all event details.
+        The Zoom link on this page is the shared Zoom meeting used for all
+        <strong>hybrid</strong> and <strong>virtual</strong> events.
         <span class="font-semibold">
-          Before joining Zoom, please check & subcribe the Hack University Google Calendar below
+          Please check and subscribe to the Hack University Google Calendar below
         </span>
-        to confirm that a Hack University hybrid or online event is currently scheduled.
+        to confirm that an event is scheduled before joining.
+      </p>
+
+      <p class="text-sm text-white/60 text-center mb-4 max-w-3xl mx-auto">
+        One shared calendar for events hosted across our partner organizations:
+        <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:underline">GDG at FIU</a>,
+        <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:underline">Code Crunch</a>,
+        <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:underline">ColorStack at FIU</a>,
+        <a href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:underline">CAHSI at FIU</a>, and
+        <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:underline">Raspberry Pi Code Crunch</a>.
       </p>
 
       <div class="flex flex-col items-center gap-4 mt-8">
-        <!-- Join Zoom Button -->
-        <a href="https://zoomlink-hackathons.vercel.app/"
-           target="_blank"
-           rel="noopener"
-           class="btn-hover inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold shadow-lg text-decoration-none">
+        <a
+          href="https://zoomlink-hackathons.vercel.app/"
+          target="_blank"
+          rel="noopener"
+          class="btn-hover inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold shadow-lg text-decoration-none"
+        >
           <i class="fas fa-video"></i>
           Join Zoom Meeting
         </a>
-
-        <p class="text-sm text-white/80 max-w-xl">
-          🔔 Tip: If you don’t see a Hack University event happening right now on the embedded
-          <strong>Google Calendar</strong>,
-          there might not be an event currently scheduled — please note that all events take place in Eastern Time (EST).
-        </p>
       </div>
     </div>
   </section>
@@ -151,7 +292,7 @@
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Hack University Main Calendar -->
+      <!-- Tips -->
       <div class="mb-8 text-center">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">🔔 Google Calendar Tips</h2>
 
@@ -169,58 +310,49 @@
         <p class="text-gray-600 max-w-2xl mx-auto mb-6">
           #3 – If you have any questions about the event schedule, please reach out to us on
           <a href="https://www.linkedin.com/company/codecrunchworldwide"
-            class="text-blue-600 underline hover:text-blue-800"
-            target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
+             class="text-blue-600 underline hover:text-blue-800"
+             target="_blank" rel="noopener noreferrer">LinkedIn</a>
           (fastest response),
           <a href="https://hackuniversityplatforms.vercel.app/"
-            class="text-blue-600 underline hover:text-blue-800"
-            target="_blank" rel="noopener noreferrer">
-            Instagram Group Chat
-          </a>,
+             class="text-blue-600 underline hover:text-blue-800"
+             target="_blank" rel="noopener noreferrer">Instagram Group Chat</a>,
           or
           <a href="https://hackuniversityplatforms.vercel.app/"
-            class="text-blue-600 underline hover:text-blue-800"
-            target="_blank" rel="noopener noreferrer">
-            GroupMe
-          </a>.
+             class="text-blue-600 underline hover:text-blue-800"
+             target="_blank" rel="noopener noreferrer">GroupMe</a>.
         </p>
 
-
         <div class="flex flex-wrap justify-center gap-4 mb-8">
-
-
-          <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000
-"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="btn-hover bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2">
+          <!-- FIXED: removed trailing newline in href -->
+          <a
+            href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-hover bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2"
+          >
             <i class="fas fa-external-link-alt"></i>
             View Hack University [Google Calendar]
           </a>
 
-          <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="btn-hover bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2">
+          <a
+            href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-hover bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold text-decoration-none flex items-center gap-2"
+          >
             <i class="fab fa-google"></i>
             Subscribe to Google Calendar
           </a>
         </div>
       </div>
 
-
-
-
-       <!-- ✅ GOOGLE CALENDAR MOVED: AFTER ORG CALENDARS -->
+      <!-- Live Calendar Embed -->
       <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-16">
         <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">
-          Big Tech Community Live Calendar - Hack University 
+          Big Tech Community Live Calendar - Hack University
         </h2>
 
         <p class="text-sm text-gray-600 text-center mb-4 max-w-3xl mx-auto">
-          One shared calendar for events hosted across our partner organizations:
           <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GDG at FIU</a>,
           <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Code Crunch</a>,
           <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ColorStack at FIU</a>,
@@ -241,12 +373,10 @@
             frameborder="0"
             scrolling="no"
             loading="lazy"
-            allowfullscreen>
-          </iframe>
-        </div>
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
-
 
       <!-- Partner calendars heading -->
       <div class="mb-8">
@@ -262,6 +392,7 @@
 
       <!-- ORG CARDS GRID -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
         <!-- Google Developer Group at FIU -->
         <div class="calendar-card bg-white rounded-2xl p-6 shadow-lg border border-gray-200 text-center">
           <div class="mb-6 flex justify-center">
@@ -270,6 +401,7 @@
           </div>
           <h3 class="text-xl font-bold mb-2 text-gray-800">Google Developer Group</h3>
           <p class="text-gray-600 text-sm mb-4">at Florida International University</p>
+
           <div class="flex flex-col items-center gap-2">
             <a href="https://gdgatfiubevycalendar.vercel.app/"
                target="_blank"
@@ -294,7 +426,7 @@
               <i class="far fa-calendar-alt"></i>
               View Google Calendar
             </a>
-            
+
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
@@ -302,7 +434,6 @@
               <i class="fab fa-google"></i>
               Subscribe to Google Calendar
             </a>
-
           </div>
         </div>
 
@@ -314,7 +445,6 @@
           </div>
           <h3 class="text-xl font-bold mb-2 text-gray-800">Code Crunch Global</h3>
           <p class="text-gray-600 text-sm mb-4">Global coding community</p>
- 
 
           <div class="flex flex-col items-center gap-2">
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
@@ -324,7 +454,7 @@
               <i class="far fa-calendar-alt"></i>
               View Google Calendar
             </a>
-            
+
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
@@ -332,7 +462,6 @@
               <i class="fab fa-google"></i>
               Subscribe to Google Calendar
             </a>
-
           </div>
         </div>
 
@@ -345,15 +474,15 @@
           <h3 class="text-xl font-bold mb-2 text-gray-800">ColorStack</h3>
           <p class="text-gray-600 text-sm mb-4">at Florida International University</p>
 
-        <div class="flex flex-col items-center gap-2">
+          <div class="flex flex-col items-center gap-2">
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
-                class="btn-hover bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
+               class="btn-hover bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
               <i class="far fa-calendar-alt"></i>
               View Google Calendar
             </a>
-            
+
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
@@ -361,9 +490,7 @@
               <i class="fab fa-google"></i>
               Subscribe to Google Calendar
             </a>
-
           </div>
-
         </div>
 
         <!-- CAHSI at FIU -->
@@ -375,16 +502,15 @@
           <h3 class="text-xl font-bold mb-2 text-gray-800">CAHSI</h3>
           <p class="text-gray-600 text-sm mb-4">at Florida International University</p>
 
-
-        <div class="flex flex-col items-center gap-2">
+          <div class="flex flex-col items-center gap-2">
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
-                class="btn-hover bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
+               class="btn-hover bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
               <i class="far fa-calendar-alt"></i>
               View Google Calendar
             </a>
-            
+
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
@@ -392,10 +518,7 @@
               <i class="fab fa-google"></i>
               Subscribe to Google Calendar
             </a>
-
           </div>
-
-
         </div>
 
         <!-- Raspberry Pi Code Crunch -->
@@ -407,30 +530,26 @@
           <h3 class="text-xl font-bold mb-2 text-gray-800">Raspberry Pi</h3>
           <p class="text-gray-600 text-sm mb-4">Code Crunch Community</p>
 
-        <div class="flex flex-col items-center gap-2">
+          <div class="flex flex-col items-center gap-2">
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
-                 class="btn-hover bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
+               class="btn-hover bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
               <i class="far fa-calendar-alt"></i>
               View Google Calendar
             </a>
-            
+
             <a href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
                target="_blank"
                rel="noopener noreferrer"
-                class="btn-hover bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
+               class="btn-hover bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-semibold text-decoration-none inline-flex items-center gap-2">
               <i class="fab fa-google"></i>
               Subscribe to Google Calendar
             </a>
           </div>
-
         </div>
 
       </div>
-
-     
-
     </div>
   </section>
 
@@ -536,6 +655,43 @@
       const yearSpan = document.getElementById("current-year");
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    // Navbar toggle (mobile)
+    (function () {
+      const toggleBtn = document.querySelector(".nav-toggle");
+      const navLinks = document.getElementById("huNavLinks");
+
+      if (!toggleBtn || !navLinks) return;
+
+      const setExpanded = (expanded) => {
+        toggleBtn.setAttribute("aria-expanded", String(expanded));
+        navLinks.classList.toggle("is-open", expanded);
+        const icon = toggleBtn.querySelector("i");
+        if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+      };
+
+      // Toggle menu
+      toggleBtn.addEventListener("click", () => {
+        const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+        setExpanded(!expanded);
+      });
+
+      // Close menu after clicking any link that includes an anchor (#...)
+      navLinks.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (!a) return;
+        const href = a.getAttribute("href") || "";
+        if (href.includes("#")) setExpanded(false);
+      });
+
+      // Close menu when resizing to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+
+      // Ensure initial state
+      setExpanded(false);
+    })();
   </script>
 </body>
 </html>
