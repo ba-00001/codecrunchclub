@@ -1,88 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Volunteer Discord Login • Code Crunch</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      color: #202124;
+      min-height: 100vh
+    }
 
     /* NAV */
-    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
-    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
-    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
-    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
-    .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
-    .nav-link:hover{background:#f1f3f4;color:#1a73e8}
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #e8eaed;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .nav-brand a {
+      color: #4285f4;
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 600
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .nav-link {
+      color: #5f6368;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 6px
+    }
+
+    .nav-link:hover {
+      background: #f1f3f4;
+      color: #1a73e8
+    }
 
     /* Timezone band */
-    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
-    .timezone-header{text-align:center;margin-bottom:18px}
-    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
-    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
-    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
-    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
-    .timezone-flag{font-size:18px;margin-bottom:6px}
-    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
-    .timezone-location{color:#5f6368;font-size:12px}
+    .timezone-section {
+      background: #ffffff;
+      border-bottom: 1px solid #e8eaed;
+      padding: 24px 20px;
+      margin-bottom: 24px
+    }
+
+    .timezone-header {
+      text-align: center;
+      margin-bottom: 18px
+    }
+
+    .timezone-header h2 {
+      color: #202124;
+      font-size: 24px;
+      font-weight: 600
+    }
+
+    .timezone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .timezone-item {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      transition: all .2s ease
+    }
+
+    .timezone-item:hover {
+      box-shadow: 0 1px 6px rgba(32, 33, 36, .28)
+    }
+
+    .timezone-flag {
+      font-size: 18px;
+      margin-bottom: 6px
+    }
+
+    .timezone-time {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a73e8;
+      margin-bottom: 4px;
+      font-family: 'Roboto Mono', monospace
+    }
+
+    .timezone-location {
+      color: #5f6368;
+      font-size: 12px
+    }
 
     /* Main */
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    .header{text-align:center;margin:24px 0}
-    .header h1{font-size:32px;font-weight:600}
-    .header p{margin-top:10px;color:#5f6368;line-height:1.6}
-    .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
-    .title{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px}
-    .subtitle{text-align:center;color:#5f6368}
-    .helper{background:#fff7ed;border:1px solid #ffedd5;color:#7c2d12;border-radius:8px;padding:12px;margin:16px 0}
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .email-input{flex:1 1 320px;padding:12px;border:1px solid #d1d5db;border-radius:8px;font-size:14px}
-    .email-input:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 3px rgba(26,115,232,.15)}
-    .btn{padding:12px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-    .btn-primary{background:#1a73e8;color:#fff}
-    .btn-primary:hover{background:#1557b0}
-    #result{margin-top:16px;background:#111827;color:#d1fae5;border-radius:12px;padding:16px;font-family:monospace}
-    .info-box{background:#1a1a2e;border-left:4px solid #ffa500;border-radius:8px;padding:12px;margin-bottom:12px;color:#fff}
-    .card-welcome{background:#0f172a;border-left:4px solid #00ff99;border-radius:8px;padding:16px;margin:12px 0}
-    .cta{display:grid;gap:8px;margin:10px 0}
-    .cta a{display:block;text-align:center;color:#fff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px}
-    .cta-discord{background:linear-gradient(45deg,#7289da,#5865f2)}
-    .cta-private{background:linear-gradient(45deg,#43b581,#4caf50)}
-    .card-yes{background:#052e16;border-left:4px solid #00ff99;border-radius:8px;padding:12px;margin-top:8px}
-    .card-no{background:#3f1d1d;border-left:4px solid #ff6b6b;border-radius:8px;padding:12px;margin-top:8px}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px
+    }
+
+    .header {
+      text-align: center;
+      margin: 24px 0
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 600
+    }
+
+    .header p {
+      margin-top: 10px;
+      color: #5f6368;
+      line-height: 1.6
+    }
+
+    .surface {
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: 12px;
+      padding: 24px
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 8px
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #5f6368
+    }
+
+    .helper {
+      background: #fff7ed;
+      border: 1px solid #ffedd5;
+      color: #7c2d12;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 16px 0
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .email-input {
+      flex: 1 1 320px;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px
+    }
+
+    .email-input:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, .15)
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .btn-primary {
+      background: #1a73e8;
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: #1557b0
+    }
+
+    #result {
+      margin-top: 16px;
+      background: #111827;
+      color: #d1fae5;
+      border-radius: 12px;
+      padding: 16px;
+      font-family: monospace
+    }
+
+    .info-box {
+      background: #1a1a2e;
+      border-left: 4px solid #ffa500;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      color: #fff
+    }
+
+    .card-welcome {
+      background: #0f172a;
+      border-left: 4px solid #00ff99;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 12px 0
+    }
+
+    .cta {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0
+    }
+
+    .cta a {
+      display: block;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 8px
+    }
+
+    .cta-discord {
+      background: linear-gradient(45deg, #7289da, #5865f2)
+    }
+
+    .cta-private {
+      background: linear-gradient(45deg, #43b581, #4caf50)
+    }
+
+    .card-yes {
+      background: #052e16;
+      border-left: 4px solid #00ff99;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 8px
+    }
+
+    .card-no {
+      background: #3f1d1d;
+      border-left: 4px solid #ff6b6b;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 8px
+    }
 
     /* Footer (Hack University) */
-    .cc-blue{background:#1a73e8}
-    .footer{color:#fff;padding:32px 0 48px 0;margin-top:40px}
-    .footer-container{max-width:1200px;margin:0 auto;padding:0 20px}
-    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
-    .footer h3{font-size:18px;font-weight:500;margin-bottom:16px;color:#fff}
-    .footer p{font-size:14px;opacity:.9;margin-bottom:16px;line-height:1.5}
-    .footer ul{list-style:none;padding:0;margin:0}
-    .footer li{margin-bottom:8px}
-    .footer a{color:#fff;text-decoration:none;font-size:14px;opacity:.9;transition:opacity .2s ease}
-    .footer a:hover{opacity:1}
-    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
-    .social-link{display:flex;flex-direction:column;align-items:center;color:#fff;text-decoration:none;padding:8px;transition:color .2s ease}
-    .social-link:hover{color:#fbbf24}
-    .social-link i{font-size:18px;margin-bottom:4px}
-    .social-link span{font-size:11px;text-align:center}
-    .footer-bottom{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);text-align:center}
-    .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
-    .footer-bottom .credits{font-size:12px;opacity:.85}
+    .cc-blue {
+      background: #1a73e8
+    }
 
-    @media (max-width:520px){.container{padding:16px}}
+    .footer {
+      color: #fff;
+      padding: 32px 0 48px 0;
+      margin-top: 40px
+    }
 
-    .cta-db{
-        background:linear-gradient(45deg,#111827,#374151);
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px
+    }
+
+    .footer h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: #fff
+    }
+
+    .footer p {
+      font-size: 14px;
+      opacity: .9;
+      margin-bottom: 16px;
+      line-height: 1.5
+    }
+
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    .footer li {
+      margin-bottom: 8px
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .9;
+      transition: opacity .2s ease
+    }
+
+    .footer a:hover {
+      opacity: 1
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px
+    }
+
+    .social-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px;
+      transition: color .2s ease
+    }
+
+    .social-link:hover {
+      color: #fbbf24
+    }
+
+    .social-link i {
+      font-size: 18px;
+      margin-bottom: 4px
+    }
+
+    .social-link span {
+      font-size: 11px;
+      text-align: center
+    }
+
+    .footer-bottom {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+      text-align: center
+    }
+
+    .footer-bottom p {
+      font-size: 14px;
+      opacity: .9;
+      margin-bottom: 8px
+    }
+
+    .footer-bottom .credits {
+      font-size: 12px;
+      opacity: .85
+    }
+
+    @media (max-width:520px) {
+      .container {
+        padding: 16px
       }
+    }
 
-
+    .cta-db {
+      background: linear-gradient(45deg, #111827, #374151);
+    }
   </style>
 </head>
+
 <body>
   <!-- NAV -->
   <nav class="navbar">
@@ -144,31 +461,35 @@
     <section class="header">
       <h1>Volunteer Discord Login & Volunteer Database Responses Access</h1>
       <p class="subtitle">
-        Use the same gmail/google account you registered with on <strong>Form No. 2</strong>. We’ll check it against the volunteer list.
+        Use the same gmail/google account you registered with on <strong>Form No. 2</strong>. We’ll check it against the
+        volunteer list.
       </p>
     </section>
 
     <!-- Login -->
     <section class="surface" id="volunteer-login">
       <div class="helper">
-        <strong>Accepted Volunteers Only:</strong> Access is restricted to current volunteers who have been accepted and completed Form No. 2.
+        <strong>Accepted Volunteers Only:</strong> Access is restricted to current volunteers who have been accepted and
+        completed Form No. 2.
       </div>
 
       <div class="row">
-        <input id="emailInput" class="email-input" type="email" placeholder="your@email.com"/>
+        <input id="emailInput" class="email-input" type="email" placeholder="your@email.com" />
         <button class="btn btn-primary" onclick="checkOfficialVolunteerStatus()">Sign In</button>
       </div>
 
       <div id="result" style="margin-top:12px;">
         <div class="info-box">
-          <strong>📋 What you'll have access to:</strong><br/>
-          • Link to join the official Discord server<br/>
-          • Steps to access the private volunteer channel<br/>
-          • Direct link to verify access to the private volunteer channel (all communications and updates are handled here)<br/>
-          • Event registration forms (all volunteers)<br/>
-          • Event registration response sheet (all volunteers)<br/>
-          • Hackathon judge evaluation forms (access available only to registered volunteers)<br/>
-          • Volunteer certificates page (all volunteers — certificates are issued only to those who complete their volunteering duties)
+          <strong>📋 What you'll have access to:</strong><br />
+          • Link to join the official Discord server<br />
+          • Steps to access the private volunteer channel<br />
+          • Direct link to verify access to the private volunteer channel (all communications and updates are handled
+          here)<br />
+          • Event registration forms (all volunteers)<br />
+          • Event registration response sheet (all volunteers)<br />
+          • Hackathon judge evaluation forms (access available only to registered volunteers)<br />
+          • Volunteer certificates page (all volunteers — certificates are issued only to those who complete their
+          volunteering duties)
         </div>
         Awaiting email…
       </div>
@@ -180,9 +501,11 @@
     <div class="footer-container">
       <div class="footer-grid">
         <div>
-          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻
+              👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
           <p>
-            A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
+            A collaborative effort uniting multiple student organizations and global communities with a mission to
+            empower the next generation of innovators, developers, and leaders.
           </p>
           <p><a href="#">HackUniversity.vercel.app</a></p>
 
@@ -215,7 +538,7 @@
         <div>
           <h3>Contact</h3>
           <div style="font-size:14px;opacity:.9;">
-            Miami, FL<br/>
+            Miami, FL<br />
             <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
           </div>
         </div>
@@ -224,7 +547,8 @@
       <div class="footer-bottom">
         <p>© <span id="year"></span> Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation
+          and collaboration
         </div>
       </div>
     </div>
@@ -238,7 +562,7 @@
     const ALLOWED_HOST = "codecrunchglobal.vercel.app";
     const API_URL = "https://script.google.com/macros/s/AKfycbws4kSTWdEfx9ZyQQQ1ZZzd5KQ3QMj-sSJVThOKzViNKLiD3wix1l8qnYt3i2Z9GXbttw/exec";
     const USE_API_KEY = false;
-    const API_KEY     = "REPLACE_WITH_SECURE";
+    const API_KEY = "REPLACE_WITH_SECURE";
 
     // Prefill email from ?email=
     const prefill = new URLSearchParams(location.search).get('email');
@@ -253,12 +577,46 @@
       return ok;
     }
 
-    function infoBoxHTML(){ return `
+    function infoBoxHTML() {
+      return `
       <div class="info-box">
         <strong>📋 Email Verification:</strong><br>
         • Use the email you used to register and confirm on <strong>Form No. 2</strong><br>
         • Accepted volunteers only (Judges, Mentors, Speakers, Organizers)
-      </div>`; }
+      </div>`;
+    }
+
+    // ✅ NEW: Handle dynamic buttons from API
+    function buildAdditionalButtons(entry) {
+      const btns = entry?.additionalButtons;
+      if (!Array.isArray(btns)) return "";
+      return btns.map(b => {
+        const url = (b.url || "").trim();
+        const label = (b.label || "").replace(/[<>]/g, "");
+        if (!url || !label) return "";
+        let cls = "cta-db";
+        if (b.type === "discord") cls = "cta-discord";
+        else if (b.type === "private") cls = "cta-private";
+        return `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${label}</a>`;
+      }).join("");
+    }
+
+    function getLink(entry, key) {
+      if (entry && entry[key]) return entry[key];
+      if (entry && entry.links && entry.links[key]) return entry.links[key];
+      return "";
+    }
+
+    function safeText(v) {
+      if (v === null || v === undefined) return "";
+      return String(v).replace(/[<>]/g, "");
+    }
+
+    function renderField(label, value) {
+      const v = safeText(value || "Not available");
+      if (!v || v === "Not available") return "";
+      return `• ${label}: ${v}<br/>`;
+    }
 
     async function checkOfficialVolunteerStatus() {
       if (!domainOK()) return;
@@ -289,47 +647,43 @@
 
         if (data.length > 0 && data[0].status && data[0].status !== "No entry") {
           data.forEach(entry => {
-            // if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink) {
-            //   html += `<div class="card-welcome">
-            //             <strong style="color:#00ff99;font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
-            //             <div class="cta">
-            //               <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank" rel="noopener">🚀 JOIN DISCORD SERVER</a>
-            //               <a class="cta-private" href="${entry.privateChannelLink}" target="_blank" rel="noopener">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
-            //             </div>` +
-            //             entry.discordInstructions
-            //               .replace(/\n/g,'<br/>')
-            //               .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
-            //               .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
-            //           `</div>`;
-            // }
+            // Check for instructions or links to decide if we show the welcome card
+            const hasInstructions = !!entry.discordInstructions;
+            const hasLinks = getLink(entry, 'discordJoinLink') || getLink(entry, 'privateChannelLink');
 
-              if (entry.discordInstructions && entry.discordJoinLink && entry.privateChannelLink && entry.eventRegistrationResponseSheetLink) {
+            if (hasInstructions || hasLinks) {
               html += `<div class="card-welcome">
                         <strong style="color:#00ff99;font-size:1.05em;">🎉 Access Granted — Welcome!</strong><br/><br/>
                         <div class="cta">
-                          <a class="cta-private" href="${entry.eventRegistrationResponseSheetLink}" target="_blank" rel="noopener">Volunteer Database responses</a>
-                          <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank" rel="noopener">🚀 JOIN DISCORD SERVER</a>
-                          <a class="cta-private" href="${entry.privateChannelLink}" target="_blank" rel="noopener">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
+                          ${buildAdditionalButtons(entry)}
+                          ${getLink(entry, 'formNo3Url') ? `<a class="cta-form3" href="${getLink(entry, 'formNo3Url')}" target="_blank" rel="noopener">Form no3 Hackathon Evaluation Form</a>` : ''}
+                          ${getLink(entry, 'volunteerResponsesDatabaseUrl') ? `<a class="cta-db" href="${getLink(entry, 'volunteerResponsesDatabaseUrl')}" target="_blank" rel="noopener">Volunteer Resources Guide: Requirements, Volunteer Process, Onboarding Guide, & Donation Registration guide</a>` : ''}
+                          ${getLink(entry, 'mentorAgendaSheetUrl') ? `<a class="cta-db" href="${getLink(entry, 'mentorAgendaSheetUrl')}" target="_blank" rel="noopener">Mentor Schedule for agenda</a>` : ''}
+                          <a class="cta-private" href="${getLink(entry, 'eventRegistrationResponseSheetLink') || getLink(entry, 'volunteerResponsesDatabaseUrl')}" target="_blank" rel="noopener">Volunteer Database responses</a>
+                          <a class="cta-discord" href="${getLink(entry, 'discordJoinLink')}" target="_blank" rel="noopener">🚀 JOIN DISCORD SERVER</a>
+                          <a class="cta-private" href="${getLink(entry, 'privateChannelLink')}" target="_blank" rel="noopener">🔒 CHECK PRIVATE CHANNEL ACCESS</a>
                         </div>` +
-                        entry.discordInstructions
-                          .replace(/\n/g,'<br/>')
-                          .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#fff">$1</strong>')
-                          .replace(/`(.*?)`/g,'<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
-                      `</div>`;
+                (entry.discordInstructions || "")
+                  .replace(/\n/g, '<br/>')
+                  .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#fff">$1</strong>')
+                  .replace(/`(.*?)`/g, '<code style="background:#333;padding:2px 6px;border-radius:3px;color:#ffaa00;">$1</code>') +
+                `</div>`;
             }
 
-
+            const basic = entry.basicInfo || {};
+            const verify = entry.verification || {};
 
             html += `<div class="card-yes">
                       <strong>✅ Confirmed Volunteer</strong><br/>
-                      • Status: ${entry.status}<br/>
-                      • Form-2 Timestamp: ${entry.timestamp}<br/>
-                      • Email: ${entry.email}<br/>` +
-                      (entry?.basicInfo?.position && entry.basicInfo.position!=="Not available" ? `• Position: ${entry.basicInfo.position}<br/>` : '') +
-                      (entry?.basicInfo?.company && entry.basicInfo.company!=="Not available" ? `• Company: ${entry.basicInfo.company}<br/>` : '') +
-                      (entry?.basicInfo?.discordUsername && entry.basicInfo.discordUsername!=="Not available" ? `• Discord: ${entry.basicInfo.discordUsername}<br/>` : '') +
-                      (entry?.basicInfo?.githubProfile && entry.basicInfo.githubProfile!=="Not available" ? `• TICKET ID [1ST TIME REGISTRATION]: <a href="${entry.basicInfo.githubProfile}" target="_blank" style="color:#00ff99;">${entry.basicInfo.githubProfile}</a><br/>` : '') +
-                    `</div>`;
+                      ${renderField("Form No. 2 Timestamp", entry.timestamp)}
+                      ${renderField("Email", entry.email)}
+                      ${renderField("Job Title", basic.jobTitle)}
+                      ${renderField("Employer / Organization", basic.employer)}
+                      ${renderField("Discord Username", basic.discordUsername)}
+                      ${renderField("Ticket ID", basic.ticketId)}
+                      ${renderField("Event Registration Status", basic.eventRegistrationStatus)}
+                      ${renderField("Donation Confirmation (Q26)", verify.donationCertificationQ26)}
+                    </div>`;
           });
 
           resultDiv.innerHTML = html;
@@ -353,20 +707,20 @@
     function updateTimes() {
       const now = new Date();
       const set = (id, tz) => {
-        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh = String(t.getHours()).padStart(2,'0');
-        const mm = String(t.getMinutes()).padStart(2,'0');
-        const ss = String(t.getSeconds()).padStart(2,'0');
+        const t = new Date(now.toLocaleString("en-US", { timeZone: tz }));
+        const hh = String(t.getHours()).padStart(2, '0');
+        const mm = String(t.getMinutes()).padStart(2, '0');
+        const ss = String(t.getSeconds()).padStart(2, '0');
         const out = `${hh}:${mm}:${ss}`;
         const el = document.getElementById(id);
         if (el) el.textContent = out;
       };
-      set('miami-time',"America/New_York");
-      set('london-time',"Europe/London");
-      set('lagos-time',"Africa/Lagos");
-      set('tokyo-time',"Asia/Tokyo");
-      set('sydney-time',"Australia/Sydney");
-      set('mumbai-time',"Asia/Kolkata");
+      set('miami-time', "America/New_York");
+      set('london-time', "Europe/London");
+      set('lagos-time', "Africa/Lagos");
+      set('tokyo-time', "Asia/Tokyo");
+      set('sydney-time', "Australia/Sydney");
+      set('mumbai-time', "Asia/Kolkata");
     }
 
     // Init
@@ -376,9 +730,10 @@
     });
 
     // Enter to submit
-    document.getElementById('emailInput').addEventListener('keypress',(e)=>{
+    document.getElementById('emailInput').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') checkOfficialVolunteerStatus();
     });
   </script>
 </body>
+
 </html>

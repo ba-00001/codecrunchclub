@@ -572,7 +572,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const ALLOWED_HOST = "codecrunchglobal.vercel.app";
-    const API_URL = "https://script.google.com/macros/s/AKfycbx0VT8s0M00NYCyDdF6JlnVAJRtmKeE4Rw6w5z8uetcu9xTHYRJpGF2VIrisvDTq_fw/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbz12knF5vvbat14KkV-E_eGsJjJBBVxyLg-HV4-zmbnwXgs6XO02JHsS7LAbU_JswtR/exec";
 
     const prefill = new URLSearchParams(location.search).get('email');
     if (prefill) document.getElementById('emailInput').value = prefill;
@@ -624,7 +624,7 @@
         <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
       `;
       }
-      return `<a class="cta-form3" href="${url}" target="_blank" rel="noopener">Open Form No. 3 (Project Evaluation Expo)</a>`;
+      return `<a class="cta-form3" href="${url}" target="_blank" rel="noopener">Form no3 Hackathon Evaluation Form</a>`;
     }
 
     function buildVolunteerDBLink(entry) {
@@ -637,7 +637,7 @@
         <div class="muted-note">Available for select events only.</div>
       `;
       }
-      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Responses Database</a>`;
+      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Resources Guide: Requirements, Volunteer Process, Onboarding Guide, & Donation Registration guide</a>`;
     }
 
     // ✅ NEW: Mentor Schedule / Agenda sheet button
@@ -651,7 +651,7 @@
         <div class="muted-note">This is enabled when your event provides a schedule sheet.</div>
       `;
       }
-      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Mentors Schedule (Google Sheet) — Completion Required for All Volunteers</a>`;
+      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Mentor Schedule for agenda</a>`;
     }
 
     // ✅ NEW: Handle dynamic buttons from API
@@ -732,6 +732,9 @@
             ? safeText(entry.discordInstructions).replace(/\n/g, '<br/>')
             : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
           }
+                <div style="margin-top:15px; text-align:center; color:#cbd5e1; font-size:0.9em;">
+                  Questions ? Message us on Linkedin with Ticked ID
+                </div>
               </div>`;
 
         const basic = entry.basicInfo || {};
