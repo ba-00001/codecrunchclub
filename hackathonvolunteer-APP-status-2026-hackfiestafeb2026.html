@@ -632,10 +632,7 @@
       const url = (entry?.links?.volunteerResponsesDatabaseUrl || "").trim();
 
       if (!enabled || !url) {
-        return `
-        <a class="cta-db cta-muted" href="#" aria-disabled="true">Volunteer Responses Database — Not Available</a>
-        <div class="muted-note">Available for select events only.</div>
-      `;
+ 
       }
       return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Resources Guide: Requirements, Volunteer Process, Onboarding Guide, & Donation Registration guide</a>`;
     }
