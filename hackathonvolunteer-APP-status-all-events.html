@@ -582,14 +582,14 @@
 
     const ALLOWED_HOST = "codecrunchglobal.vercel.app";
     // IMPORTANT: Update this URL to your new/updated Google Apps Script deployment
-    const API_URL = "https://script.google.com/macros/s/AKfycbx75IwMKKkTQh8DkLuD6qoE5jTVvWc_gSaoI4pAIVj8sy_9UYvXAdOBexnk0SI2R5P1/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbyA6LqselGD0_Dp9QBGmrwbfcCYfDqn1um4aonBy7do9puyqY4e6qeg67ZCHz0LIS9h/exec";
 
     // --- EVENT CONFIGURATION ---
     // Add new events here. The 'id' must match the key in your Google Apps Script 'sheetMap'.
     const EVENTS = [
-      { id: "305_JAN_2026", name: "305 Hackathon Edition January 2026" },
-      { id: "HACK_FIESTA_FEB_2026", name: "Hack Fiesta Miami February 2026" },
-      { id: "CODEFEST_DEC_2025", name: "CodeFest December 2025" }
+      { id: "305_JAN_2026", name: "🏥 305 Hackathon Jan 2026" },
+      { id: "HACK_FIESTA_FEB_2026", name: "🔥 Hack Fiesta Miami Feb 2026" },
+      { id: "CODEFEST_DEC_2025", name: "🎆 CodeFest Dec 2025" }
     ];
 
     // Populate Dropdown
@@ -713,10 +713,17 @@
             ? `<a class="cta-private" href="${entry.links.privateChannelLink}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>`
             : ''}
                 </div>
-                ${entry.discordInstructions
+                
+                <!-- DYNAMIC INSTRUCTIONS FROM COLUMN P -->
+                <div style="margin-top:15px; color:#cbd5e1; font-size:0.9em; line-height:1.5;">
+                  ${entry.discordInstructions
             ? safeText(entry.discordInstructions).replace(/\n/g, '<br/>')
-            : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
-          }
+            : "Discord instructions will appear here if included for your event."}
+                </div>
+
+                <!-- HARDCODED TEXT PLACEHOLDER (Empty for future use) -->
+                <div style="margin-top:15px; text-align:center; color:#cbd5e1; font-size:0.9em;">
+                </div>
               </div>`;
 
         const basic = entry.basicInfo || {};
