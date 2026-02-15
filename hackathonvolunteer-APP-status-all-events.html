@@ -175,15 +175,18 @@
       margin-top: 12px
     }
 
-    .email-input {
+    .email-input,
+    .event-select {
       flex: 1 1 320px;
       padding: 12px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
-      font-size: 14px
+      font-size: 14px;
+      background-color: #fff;
     }
 
-    .email-input:focus {
+    .email-input:focus,
+    .event-select:focus {
       outline: none;
       border-color: #1a73e8;
       box-shadow: 0 0 0 3px rgba(26, 115, 232, .15)
@@ -471,15 +474,13 @@
   <main class="container">
     <!-- Header -->
     <section class="header">
-      <h1>Volunteer Application Status &amp; Access Portal [Hack Fiesta Miami February 2026]</h1>
+      <h1>Volunteer Application Status &amp; Access Portal</h1>
       <p class="subtitle">
-        After authentication, volunteers can review their registration details and access volunteer-only tools.
+        Select your event below, then sign in to review your registration details and access volunteer-only tools.
       </p>
       <p class="subtitle" style="max-width:900px;margin:10px auto 0;">
         Access this portal using the same Google account you used to complete <strong>Form No. 2</strong> (Volunteer
         Event Registration &amp; Donations).
-        Here, you can review your submitted responses from Form No. 2, confirm your registered events, and view your
-        unique Ticket ID for each submission.
       </p>
     </section>
 
@@ -488,6 +489,14 @@
       <div class="helper">
         <strong>Accepted Volunteers Only:</strong> This portal is restricted to current volunteers who have been
         accepted and completed Form No. 2.
+      </div>
+
+      <!-- Event Selection Dropdown -->
+      <div class="row" style="margin-bottom: 10px;">
+        <select id="eventSelect" class="event-select" style="cursor: pointer;">
+          <option value="" disabled selected>Select your event...</option>
+          <!-- Options populated by JS -->
+        </select>
       </div>
 
       <div class="row">
@@ -505,7 +514,7 @@
           <br />
           Ticket IDs are generated per event submission and may be required for verification and support.
         </div>
-        Awaiting email…
+        Awaiting event selection and email…
       </div>
     </section>
   </main>
@@ -572,8 +581,25 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const ALLOWED_HOST = "codecrunchglobal.vercel.app";
-    // IMPORTANT: Deploy Google Script as Web App -> Execute as: "Me", Who has access: "Anyone"
-    const API_URL = "https://script.google.com/macros/s/AKfycbyA6LqselGD0_Dp9QBGmrwbfcCYfDqn1um4aonBy7do9puyqY4e6qeg67ZCHz0LIS9h/exec";
+    // IMPORTANT: Update this URL to your new/updated Google Apps Script deployment
+    const API_URL = "https://script.google.com/macros/s/AKfycbyTkiOgCgV2r-co2K7C-O_5OJOjQDyz3YQJVE2lzQ2lQZgD9gVMR73g0mjhPQDu_Z_C/exec";
+
+    // --- EVENT CONFIGURATION ---
+    // Add new events here. The 'id' must match the key in your Google Apps Script 'sheetMap'.
+    const EVENTS = [
+      { id: "305_JAN_2026", name: "305 Hackathon Edition January 2026" },
+      { id: "HACK_FIESTA_FEB_2026", name: "Hack Fiesta Miami February 2026" },
+      { id: "CODEFEST_DEC_2025", name: "CodeFest December 2025" }
+    ];
+
+    // Populate Dropdown
+    const eventSelect = document.getElementById('eventSelect');
+    EVENTS.forEach(ev => {
+      const opt = document.createElement('option');
+      opt.value = ev.id;
+      opt.textContent = ev.name;
+      eventSelect.appendChild(opt);
+    });
 
     const prefill = new URLSearchParams(location.search).get('email');
     if (prefill) document.getElementById('emailInput').value = prefill;
@@ -591,8 +617,8 @@
       return `
     <div class="info-box">
       <strong>Volunteer Authentication:</strong><br>
-      • Use the email you used on <strong>Form No. 2</strong> (Volunteer Event Registration & Donations)<br>
-      • After verification you can review your Ticket ID, registered events, Form No. 3 access (when available), Discord access, and select event databases
+      • Use the email you used on <strong>Form No. 2</strong><br>
+      • Select the correct event from the dropdown
     </div>`;
     }
 
@@ -615,44 +641,7 @@
       return true;
     }
 
-    function buildForm3Link(entry) {
-      const enabled = !!entry?.featureFlags?.formNo3Enabled;
-      const url = (entry?.links?.formNo3Url || "").trim();
-
-      if (!enabled || !url) {
-        return `
-        <a class="cta-form3 cta-muted" href="#" aria-disabled="true">Form No. 3 (Project Evaluation Expo) — Coming Soon</a>
-        <div class="muted-note">This link will become available when your event opens Form No. 3.</div>
-      `;
-      }
-      return `<a class="cta-form3" href="${url}" target="_blank" rel="noopener">Form no3 Hackathon Evaluation Form</a>`;
-    }
-
-    function buildVolunteerDBLink(entry) {
-      const enabled = !!entry?.featureFlags?.volunteerDbEnabled;
-      const url = (entry?.links?.volunteerResponsesDatabaseUrl || "").trim();
-
-      if (!enabled || !url) {
-
-      }
-      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Volunteer Resources Guide: Requirements, Volunteer Process, Onboarding Guide, & Donation Registration guide</a>`;
-    }
-
-    // ✅ NEW: Mentor Schedule / Agenda sheet button
-    function buildMentorAgendaLink(entry) {
-      const enabled = !!entry?.featureFlags?.mentorAgendaEnabled;
-      const url = (entry?.links?.mentorAgendaSheetUrl || "").trim();
-
-      if (!enabled || !url) {
-        return `
-        <a class="cta-db cta-muted" href="#" aria-disabled="true">Mentor Schedule / Agenda — Not Available</a>
-        <div class="muted-note">This is enabled when your event provides a schedule sheet.</div>
-      `;
-      }
-      return `<a class="cta-db" href="${url}" target="_blank" rel="noopener">Mentor Schedule for agenda</a>`;
-    }
-
-    // ✅ NEW: Handle dynamic buttons from API
+    // Helper to build dynamic buttons from API response
     function buildAdditionalButtons(entry) {
       const btns = entry?.additionalButtons;
       if (!Array.isArray(btns)) return "";
@@ -672,9 +661,11 @@
       if (!domainOK()) return;
 
       const email = (document.getElementById('emailInput').value || '').trim();
+      const eventId = document.getElementById('eventSelect').value;
       const resultDiv = document.getElementById('result');
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+      if (!eventId) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please select an event.'; return; }
       if (!email) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter your email.'; return; }
       if (!emailRegex.test(email)) { resultDiv.innerHTML = infoBoxHTML() + '❌ Please enter a valid email.'; return; }
 
@@ -683,15 +674,18 @@
       try {
         const url = new URL(API_URL);
         url.searchParams.set('email', email);
+        url.searchParams.set('event', eventId); // Send selected event ID
         url.searchParams.set('referer', window.location.href);
 
         const resp = await fetch(url.toString());
         const data = await resp.json();
 
         if (data.error) { resultDiv.innerHTML = infoBoxHTML() + `❌ Error: ${data.error}`; return; }
-        if (!Array.isArray(data) || data.length === 0) { resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.'; return; }
+        // Handle array response (API returns array of matches)
+        const entry = Array.isArray(data) ? data[0] : data;
 
-        const entry = data[0];
+        if (!entry) { resultDiv.innerHTML = infoBoxHTML() + '❌ Unexpected response. Try again later.'; return; }
+
         const granted = accessGrantedFromApi(entry);
 
         let html = infoBoxHTML() + `<strong>Login for 📧 <span style="color:#fff">${safeText(email)}</span>:</strong><br/>`;
@@ -699,48 +693,30 @@
         if (!granted) {
           html += `<div class="card-no">
                   <strong>❌ Access Denied</strong><br/>
-                  • We could not find an accepted Form No. 2 entry for this email.<br/>
-                  • This portal is restricted to current, accepted volunteers who completed Form No. 2.
+                  • We could not find an accepted Form No. 2 entry for this email in the selected event.<br/>
+                  • Ensure you selected the correct event and used the registration email.
                 </div>`;
           resultDiv.innerHTML = html;
           return;
         }
 
-        const discordJoin = (entry?.links?.discordJoinLink || "").trim();
-        const privateCh = (entry?.links?.privateChannelLink || "").trim();
-
+        // Build UI based on API response
         html += `<div class="card-welcome">
                 <strong style="color:#00ff99;font-size:1.05em;">Access Granted</strong><br/>
                 <span style="color:#cbd5e1;">Review your registration details and open volunteer-only tools below.</span>
                 <div class="cta" style="margin-top:12px;">
-                  ${buildVolunteerDBLink(entry)}
-                  ${buildMentorAgendaLink(entry)}
-                  ${buildForm3Link(entry)}
                   ${buildAdditionalButtons(entry)}
-                  ${discordJoin
-            ? `<a class="cta-discord" href="${discordJoin}" target="_blank" rel="noopener">Join Discord Server</a>`
-            : `<a class="cta-discord cta-muted" href="#" aria-disabled="true">Join Discord Server</a>`
-          }
-                  ${privateCh
-            ? `<a class="cta-private" href="${privateCh}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>`
-            : `<a class="cta-private cta-muted" href="#" aria-disabled="true">Check Private Volunteer Channel Access</a>`
-          }
+                  ${entry.links?.discordJoinLink
+            ? `<a class="cta-discord" href="${entry.links.discordJoinLink}" target="_blank" rel="noopener">Join Discord Server</a>`
+            : ''}
+                  ${entry.links?.privateChannelLink
+            ? `<a class="cta-private" href="${entry.links.privateChannelLink}" target="_blank" rel="noopener">Check Private Volunteer Channel Access</a>`
+            : ''}
                 </div>
                 ${entry.discordInstructions
             ? safeText(entry.discordInstructions).replace(/\n/g, '<br/>')
             : `<div class="muted-note">Discord instructions will appear here if included for your event.</div>`
           }
-          <div style="margin-top:15px; text-align:center; color:#cbd5e1; font-size:0.9em;">
-                  Find event details on HackUniversity.vercel.app -> Select Hackathons on the menu -> Click your event's page<br/>
-                  Zoom link is available on on HackUniversity.vercel.app -> Select Calendar on the menu -> Click on Zoom button<br/>
-                  Live Demos ususally take place at 8pm EST on the day of the event. The event Agenda will be posted on the event page. If the time changes oo there is a delay it will 
-                  be announced on the Discord server announcement channel and private volunteer channel.<br/>
-                  Thank you for supporting the hackathon! We look forward to an amazing event together!
-                </div>
-          
-          <div style="margin-top:15px; text-align:center; color:#cbd5e1; font-size:0.9em;">
-                  Questions ? Message us on Linkedin with Ticked ID
-                </div>
               </div>`;
 
         const basic = entry.basicInfo || {};
