@@ -340,6 +340,8 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbzAhhReD7EpGsT_biQmcuqsMu1t1wCs4MQTGuGpGKax1EisZvT_8qtyBKQMPStcpyHXqA/exec";
+    const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
+    const ALL_ORGS_TEXT = "Google Developer Club at FIU, Code Crunch Worldwide, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch";
     let certificateData = null;
 
     const form = document.getElementById("cert-form");
@@ -437,9 +439,11 @@
   .subtitle { text-align: center; font-size: .95rem; letter-spacing: .32em; color: #6b7280; margin-bottom: 30px; }
   .presented { text-align: center; font-style: italic; color: #4b5563; margin-bottom: 16px; }
   .name { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 24px; }
-  .body { text-align: center; max-width: 820px; margin: 0 auto; line-height: 1.7; color: #374151; }
+  .body { text-align: center; max-width: 860px; margin: 0 auto; line-height: 1.7; color: #374151; }
   .info { text-align: center; margin-top: 24px; font-weight: 600; }
   .sign { margin-top: 56px; text-align: center; }
+  .tagline { text-align: center; max-width: 860px; margin: 18px auto 0; color: #4b5563; font-style: italic; font-size: .94rem; line-height: 1.6; }
+  .sig-img { display: block; width: 220px; max-width: 60%; height: auto; margin: 0 auto 8px; object-fit: contain; }
   .line { width: 260px; border-top: 1.5px solid #111827; margin: 0 auto 8px; }
   .controls { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #d1d5db; border-radius: 999px; padding: 8px 14px; display: flex; gap: 8px; }
   .btn { border: 0; border-radius: 999px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
@@ -453,10 +457,18 @@
   <div class="title">MEMBERSHIP CERTIFICATE</div>
   <div class="subtitle">HACK UNIVERSITY INITIATIVE</div>
   <div class="presented">This is to certify that</div>
-  <div class="name">${escapeHtml(c.participantName || "Hack University Member")}</div>
-  <div class="body">Is an official member of <strong>${escapeHtml(c.clubText || "Hack University Initiative")}</strong>, recognized for commitment to collaborative learning and innovation across student organizations.</div>
+  <div class="name">${escapeHtml(c.participantName || "Student Name")}</div>
+  <div class="body">Is an official member of <strong>${escapeHtml(ALL_ORGS_TEXT)}</strong>, recognized for their commitment to collaborative learning, innovation, and multi-disciplinary technology development across student organizations and initiatives.</div>
   <div class="info">Member Since: ${escapeHtml(c.memberDateSince || "Not specified")}<br>Membership ID: ${escapeHtml(c.membershipID || "Not available")}</div>
-  <div class="sign"><div class="line"></div><div><strong>BRIAN BAZURTO</strong><br><small>President, ${escapeHtml(c.signatureClubText || "Hack University Initiative")}</small></div></div>
+  <div class="tagline">Join us in shaping the future of technology through collaboration, learning, and innovation across multiple communities in the Hack University Initiative.</div>
+  <div class="sign">
+    <img class="sig-img" src="${escapeHtml(SIGNATURE_URL)}" alt="Brian Bazurto signature">
+    <div class="line"></div>
+    <div>
+      <strong>BRIAN BAZURTO</strong><br>
+      <small>President, ${escapeHtml(ALL_ORGS_TEXT)}</small>
+    </div>
+  </div>
 </div></div>
 </body>
 </html>`;
