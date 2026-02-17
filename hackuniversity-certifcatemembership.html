@@ -183,6 +183,64 @@
       padding: 16px;
       display: none;
     }
+    .memberships-box {
+      margin-top: 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .memberships-title {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-align: center;
+    }
+    .memberships-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .membership-card {
+      background: #fff;
+      border: 1px solid #dbeafe;
+      border-radius: 9px;
+      padding: 10px;
+      text-align: center;
+    }
+    .membership-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 7px;
+    }
+    .membership-name {
+      font-size: .86rem;
+      font-weight: 700;
+      color: #1f2937;
+      line-height: 1.3;
+    }
+    .membership-desc {
+      font-size: .75rem;
+      color: #64748b;
+      margin-top: 3px;
+      line-height: 1.25;
+    }
+    .membership-status {
+      margin-top: 6px;
+      font-size: .76rem;
+      font-weight: 700;
+      color: #15803d;
+    }
+    .memberships-note {
+      margin: 10px 0 0;
+      text-align: center;
+      color: #2563eb;
+      font-size: .78rem;
+      font-style: italic;
+    }
 
     .footer { background: var(--color-primary); color: #fff; padding: 32px 0 48px; margin-top: 24px; }
     .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -232,6 +290,7 @@
       .nav-link { width: 100%; padding: 10px 12px; }
       .event-clock-bar { top: var(--navbar-h-m); }
       body { padding-top: calc(var(--navbar-h-m) + var(--clock-bar-h)); }
+      .memberships-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -241,6 +300,7 @@
       .event-clock-bar { height: 40px; padding: 0 10px; }
       .event-clock-time { font-size: 12.5px; }
       .event-clock-date { display: none; }
+      .memberships-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -285,6 +345,12 @@
       <div id="cert-result" class="result">
         <p>Welcome <strong id="welcome-name">Member</strong>. Your membership is verified.</p>
         <button id="download-certificate" type="button" class="btn btn-main"><i class="fa-solid fa-download"></i> Download Membership Certificate</button>
+
+        <div class="memberships-box" id="user-club-memberships">
+          <h3 class="memberships-title">Your Active Club Memberships</h3>
+          <div id="user-clubs-grid" class="memberships-grid"></div>
+          <p class="memberships-note">Based on our records for your email address (all matching submissions)</p>
+        </div>
       </div>
     </section>
   </main>
@@ -351,6 +417,7 @@
     const resultEl = document.getElementById("cert-result");
     const welcomeEl = document.getElementById("welcome-name");
     const downloadBtn = document.getElementById("download-certificate");
+    const clubsGrid = document.getElementById("user-clubs-grid");
 
     function setStatus(type, message) {
       statusEl.className = `status show ${type}`;
@@ -369,6 +436,70 @@
         .replace(/>/g, "&gt;")
         .replace(/\"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+
+    function displayUserClubMemberships(clubs) {
+      if (!clubsGrid) return;
+      clubsGrid.innerHTML = "";
+
+      const fallbackLogo = "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6";
+      const catalog = [
+        {
+          name: "Hack University Worldwide",
+          description: "",
+          logo: "https://hackuniversity.vercel.app/favicon.ico"
+        },
+        {
+          name: "Code Crunch Global",
+          description: "Main coding and hackathon community",
+          logo: "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e"
+        },
+        {
+          name: "ColorStack at FIU",
+          description: "Career development in tech",
+          logo: "https://github.com/user-attachments/assets/b5a58539-32be-42b8-9148-b7e8a8d4afea"
+        },
+        {
+          name: "CAHSI at FIU",
+          description: "Advancement & support for computing pathways",
+          logo: "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85"
+        },
+        {
+          name: "Google Developer Group at FIU",
+          description: "Google technologies and development",
+          logo: "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27"
+        },
+        {
+          name: "Raspberry Pi Code Crunch",
+          description: "Hardware programming and IoT projects",
+          logo: "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
+        }
+      ];
+
+      const byName = new Map(catalog.map((c) => [c.name.toLowerCase(), c]));
+      const activeNames = new Set();
+      clubs.forEach((club) => {
+        const n = (club?.name || "").trim().toLowerCase();
+        if (!n) return;
+        activeNames.add(n);
+      });
+
+      // Always include Hack University Worldwide as umbrella membership.
+      activeNames.add("hack university worldwide");
+
+      const ordered = catalog.filter((item) => activeNames.has(item.name.toLowerCase()));
+
+      ordered.forEach((club) => {
+        const card = document.createElement("div");
+        card.className = "membership-card";
+        card.innerHTML = `
+          <img class="membership-logo" src="${escapeHtml(club.logo || fallbackLogo)}" alt="${escapeHtml(club.name)} Logo" onerror="this.onerror=null;this.src='${fallbackLogo}'">
+          <div class="membership-name">${escapeHtml(club.name)}</div>
+          ${club.description ? `<div class="membership-desc">${escapeHtml(club.description)}</div>` : ""}
+          <div class="membership-status">✅ Active Member</div>
+        `;
+        clubsGrid.appendChild(card);
+      });
     }
 
     async function verifyMembership(evt) {
@@ -399,10 +530,22 @@
         const rows = Array.isArray(data?.certificates) ? data.certificates : [];
         if (!rows.length) return setStatus("error", "No membership found for this email.");
 
-        const chosen = rows
+        const flat = rows
           .map((c) => c.certificateData || c)
-          .filter(Boolean)
+          .filter(Boolean);
+
+        const chosen = flat
           .sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
+
+        const clubMap = new Map();
+        flat.forEach((entry) => {
+          (entry.clubs || []).forEach((club) => {
+            const key = (club.name || "").toLowerCase();
+            if (!key) return;
+            if (!clubMap.has(key)) clubMap.set(key, { name: club.name || "" });
+          });
+        });
+        displayUserClubMemberships(Array.from(clubMap.values()));
 
         certificateData = chosen;
         welcomeEl.textContent = chosen.participantName || "Member";
