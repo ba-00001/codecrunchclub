@@ -286,7 +286,21 @@
 
       <div id="result" class="result">
         <p>Welcome <strong id="welcome-name">Member</strong>. Your membership is verified and Discord access is ready.</p>
-        <a id="discord-link" class="btn btn-main" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Open Discord Access</a>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <a id="discord-link" class="btn btn-main" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Join Hackathon Discord</a>
+          <a id="groupme-link" class="btn btn-main" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-users"></i> Join Hackathon GroupMe</a>
+        </div>
+
+        <div style="margin-top:14px; background:#fff; border:1px solid #dbe7ff; border-radius:10px; padding:12px;">
+          <h3 style="margin:0 0 10px; font-size:1rem; color:#1f3f7f;">🌐 Join Organization-Specific Communities</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <a class="btn btn-main" style="margin-top:0;" href="https://codecrunchglobal-discordserver.vercel.app/" target="_blank" rel="noopener noreferrer">Code Crunch Global Discord</a>
+            <a class="btn btn-main" style="margin-top:0;" href="https://colorstackatfiu-discordserver.vercel.app/" target="_blank" rel="noopener noreferrer">ColorStack at FIU Discord</a>
+            <a class="btn btn-main" style="margin-top:0;" href="https://cahsiatfiu-discordserver.vercel.app/" target="_blank" rel="noopener noreferrer">CAHSI at FIU Discord</a>
+            <a class="btn btn-main" style="margin-top:0;" href="https://gdgatfiu-discordserver.vercel.app/" target="_blank" rel="noopener noreferrer">Google Developer Group (GDG) at FIU Discord</a>
+            <a class="btn btn-main" style="margin-top:0; grid-column:1 / -1;" href="https://codecrunchglobal-discordserver.vercel.app/" target="_blank" rel="noopener noreferrer">Raspberry Pi Code Crunch Discord</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -351,6 +365,7 @@
     const resultEl = document.getElementById("result");
     const welcomeName = document.getElementById("welcome-name");
     const discordLink = document.getElementById("discord-link");
+    const groupmeLink = document.getElementById("groupme-link");
 
     function setStatus(type, message) {
       statusEl.className = `status show ${type}`;
@@ -397,6 +412,7 @@
 
         welcomeName.textContent = chosen.participantName || "Member";
         discordLink.href = chosen.discordJoinLink || DEFAULT_DISCORD_URL;
+        groupmeLink.href = chosen.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
         resultEl.style.display = "block";
         setStatus("success", "Membership verified. Continue to Discord.");
       } catch (err) {
