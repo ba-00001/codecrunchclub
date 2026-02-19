@@ -1,944 +1,939 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <title>Donate & Sponsor — Code Crunch Hackathons 2025–2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate and Sponsor | Hack University Initiative</title>
+  <meta name="description" content="Support monthly Hack University hackathons through donations and sponsorships that fund student innovation, mentorship, and career pathways." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <style>
-    :root{
-      --primary:#2563eb;--secondary:#1e40af;--accent:#f59e0b;--text:#1f2937;--text-light:#6b7280;--bg:#f8fafc;--card:#ffffff;--success:#10b981;--warning:#f59e0b
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden;padding-top:80px}
-    .navbar{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(37,99,235,.1);z-index:1000;transition:.3s}
-    .nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:80px}
-    .nav-logo{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
-    .nav-menu{display:flex;list-style:none;gap:32px}
-    .nav-menu li a{text-decoration:none;color:var(--text);font-weight:500;transition:.3s;position:relative}
-    .nav-menu li a:hover{color:var(--primary)}
-    .nav-menu li a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--primary);transition:.3s}
-    .nav-menu li a:hover::after{width:100%}
-    .hamburger{display:none;flex-direction:column;cursor:pointer;padding:8px;background:none;border:none}
-    .hamburger span{width:25px;height:3px;background:var(--text);margin:3px 0;transition:.3s;border-radius:2px}
-    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-    .hamburger.active span:nth-child(2){opacity:0}
-    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
-    .nav-menu.mobile{position:fixed;top:80px;left:-100%;width:100%;height:calc(100vh - 80px);background:rgba(255,255,255,.98);backdrop-filter:blur(10px);flex-direction:column;justify-content:flex-start;align-items:center;padding-top:50px;transition:left .3s;gap:40px;display:none}
-    .nav-menu.mobile.active{left:0}
-    @media(max-width:768px){
-      .nav-menu{display:none}.hamburger{display:flex}.nav-menu.mobile{display:flex}
-    }
-    .bg-pattern{position:fixed;inset:0;background:
-      radial-gradient(circle at 20% 20%, rgba(37,99,235,.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(245,158,11,.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 60%, rgba(16,185,129,.05) 0%, transparent 50%);
-      z-index:-1;animation:float 20s ease-in-out infinite}
-    @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(1deg)}}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    header{padding:60px 0 30px;text-align:center;position:relative}
-    .badge{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:8px 20px;border-radius:50px;font-size:14px;font-weight:700;margin-bottom:16px;letter-spacing:.4px}
-    h1{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;margin:6px 0 12px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.08}
-    .subtitle{font-size:1.05rem;color:var(--text-light);max-width:820px;margin:0 auto 22px}
-    .contact-strip{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;color:var(--text-light);font-weight:600}
-    .chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(37,99,235,.15);padding:8px 14px;border-radius:999px}
-    .main{display:grid;gap:28px;margin:10px 0 70px}
-    .card{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 4px 30px rgba(0,0,0,.08);border:1px solid rgba(255,255,255,.2);position:relative;overflow:hidden}
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent))}
-    .card h2{font-size:1.6rem;margin-bottom:12px}
-    .muted{color:var(--text-light)}
-    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:14px}
-    .kpi{padding:18px;background:rgba(37,99,235,.04);border-left:4px solid var(--primary);border-radius:10px}
-    .kpi strong{display:block;font-size:1.3rem}
-    .dotlist{margin:10px 0 4px;padding-left:20px}
-    .dotlist li{margin:6px 0}
-    .table-wrap{overflow:auto;border:1px solid rgba(0,0,0,.06);border-radius:12px;background:#fff}
-    table{width:100%;border-collapse:collapse;font-size:.97rem}
-    thead th{position:sticky;top:0;background:#f3f6ff;color:#1f2a44;text-align:left;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.06)}
-    tbody td{padding:11px 14px;border-bottom:1px solid rgba(0,0,0,.06)}
-    tbody tr:nth-child(even){background:#fafbff}
-    .tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.82rem;border:1px solid rgba(37,99,235,.25);color:#1f2a44;background:rgba(37,99,235,.06)}
-    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;border:2px solid transparent}
-    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
-    .btn-outline{background:transparent;color:var(--primary);border-color:var(--primary)}
-    .note{background:rgba(245,158,11,.08);border-left:4px solid var(--accent);padding:12px;border-radius:8px;margin-top:10px;color:#6b4a0b}
-    /* footer{text-align:center;padding:46px 0;color:var(--text-light)}
-    footer a{color:var(--primary);font-weight:700;text-decoration:none}
-    footer a:hover{text-decoration:underline} */
-
-    /* Tier picker (added) */
-    .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
-    .tier-card{background:#fff;border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:14px}
-    .tier-card h4{margin:0 0 6px}
-    .tier-price{font-weight:800}
-    .tier-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .tier-cta a{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700;border:2px solid transparent}
-    .tier-cta .primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
-    .tier-cta .outline{background:transparent;color:var(--primary);border-color:var(--primary)}
-
-    @media (max-width:768px){
-      .cta{flex-direction:column}
-    }
-
-
-    /* NAVBAR (same as your previous, now naturally full-width) */
-    .navbar1 { background:#fff; border-bottom:1px solid #e8eaed; padding:12px 0; position:sticky; top:0; z-index:1000; }
-    .nav-container1 { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-    .nav-brand1 { font-size:22px; font-weight:500; color:#4285f4; }
-    .nav-links1 { display:flex; gap:30px; }
-    .nav-link1 { color:#5f6368; text-decoration:none; font-weight:400; font-size:14px; padding:8px 16px; border-radius:4px; transition:.2s; }
-    .nav-link1:hover { color:#1a73e8; background:#f1f3f4; }
-    @media (max-width:768px){
-      .nav-container1{ flex-direction:column; gap:12px; }
-      .nav-links1{ flex-wrap:wrap; justify-content:center; gap:8px; }
-      .nav-link1{ font-size:11px; padding:6px 10px; white-space:nowrap; }
-    }
-    @media (max-width:480px){
-      .nav-link1{ font-size:10px; padding:5px 8px; }
-    }
-
-        /* 
-        
-        Universal Footer
-        
-        
-      */
-    /* ---- Footer Universal – minimal tokens (safe if your page lacks global vars) ---- */
     :root {
-      --fu-primary: #1a73e8;
-      --fu-primary-ink: #e3f2ff;
-      --fu-bg: var(--fu-primary);
-      --fu-text: #ffffff;
-      --fu-text-dim: rgba(255,255,255,.95);
-      --fu-divider: rgba(255,255,255,.25);
-
-      --fu-radius-sm: 8px;
-      --fu-shadow-lg: 0 6px 20px rgba(0,0,0,.25);
+      --brand-900: #0f274f;
+      --brand-800: #163f7a;
+      --brand-700: #1d5cb3;
+      --brand-600: #2f7de1;
+      --accent-600: #0d9488;
+      --text-900: #10213d;
+      --text-700: #3c4e6b;
+      --text-500: #667891;
+      --surface-100: #f4f7fb;
+      --surface-000: #ffffff;
+      --line-200: #dce4f0;
+      --line-300: #cbd7e8;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-sm: 0 4px 16px rgba(16, 33, 61, 0.06);
+      --shadow-md: 0 16px 40px rgba(16, 33, 61, 0.12);
     }
 
-    /* Container & base */
-    .footer-universal {
-      background: var(--fu-bg);
-      color: var(--fu-text);
-      padding: 32px 0 48px;
-    }
-    .footer-universal__container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Links */
-    .footer-universal a {
-      color: var(--fu-primary-ink);
-      text-decoration: none;
-      transition: opacity .2s ease, text-decoration-color .2s ease;
-    }
-    .footer-universal a:hover {
-      opacity: .95;
-      text-decoration: underline;
-    }
-
-    /* Grid */
-    .footer-universal__grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr .8fr; /* About | Quick | Contact */
-      gap: clamp(20px, 3vw, 48px);
-      align-items: start;
-      margin-bottom: 32px;
-    }
-    .footer-universal__heading {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .footer-universal__p {
-      font-size: 15px;
-      opacity: .9;
-      line-height: 1.6;
-      margin: 10px 0;
-    }
-
-    /* Lists */
-    .footer-universal__list {
-      list-style: none;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    .footer-universal__li {
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", "Segoe UI", Roboto, sans-serif;
+      color: var(--text-900);
+      background:
+        radial-gradient(circle at 0% 0%, #e8f1ff 0%, transparent 44%),
+        radial-gradient(circle at 90% 10%, #ddf7f4 0%, transparent 38%),
+        var(--surface-100);
+      line-height: 1.6;
+      padding-top: 76px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, 92vw);
+      margin: 0 auto;
+    }
+
+    .top-strip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1200;
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-200);
+    }
+
+    .top-strip .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-height: 40px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .partner-link {
+      color: var(--text-700);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .partner-link:hover {
+      color: var(--brand-700);
+    }
+
+    .main-nav {
+      position: sticky;
+      top: 40px;
+      z-index: 1100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line-200);
+    }
+
+    .main-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--brand-900);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-700);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--brand-600);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--brand-700);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line-300);
+      background: var(--surface-000);
+      border-radius: 10px;
+      color: var(--text-700);
+      font-size: 1rem;
+      width: 42px;
+      height: 42px;
+    }
+
+    .hero {
+      padding: 62px 0 36px;
+      animation: reveal 0.6s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #b9cef0;
+      background: #eaf2ff;
+      color: var(--brand-800);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4.8vw, 3.8rem);
+      line-height: 1.07;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      margin-bottom: 16px;
+      color: var(--brand-900);
+    }
+
+    .hero-copy {
+      font-size: 1.05rem;
+      color: var(--text-700);
+      max-width: 880px;
+    }
+
+    .quick-contact {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line-300);
+      background: var(--surface-000);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-700);
+    }
+
+    .stat-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--surface-000);
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      line-height: 1.1;
+      color: var(--brand-800);
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      font-size: 0.9rem;
+      color: var(--text-500);
+      font-weight: 600;
+    }
+
+    .section {
+      margin: 22px 0;
+      background: var(--surface-000);
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      animation: reveal 0.6s ease both;
+    }
+
+    .section:nth-of-type(2) { animation-delay: 0.05s; }
+    .section:nth-of-type(3) { animation-delay: 0.1s; }
+    .section:nth-of-type(4) { animation-delay: 0.15s; }
+
+    .section-head {
+      padding: 26px 28px 8px;
+    }
+
+    .section-head h2 {
+      font-size: 1.55rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--text-700);
+      max-width: 850px;
+    }
+
+    .section-body {
+      padding: 8px 28px 30px;
+    }
+
+    .list {
+      padding-left: 20px;
+      color: var(--text-700);
+      display: grid;
+      gap: 8px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-md);
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 0.93rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid #e6edf7;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f7fd;
+      color: var(--text-700);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .panel {
+      border: 1px solid var(--line-200);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .panel h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: var(--brand-900);
+    }
+
+    .panel p {
+      color: var(--text-700);
+      font-size: 0.94rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand-700), var(--brand-900));
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--line-300);
+      color: var(--brand-800);
+      background: #f6f9ff;
+    }
+
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .tier {
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-md);
+      background: var(--surface-000);
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tier h3 {
+      font-size: 1.06rem;
+      color: var(--brand-900);
+    }
+
+    .tier .price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--brand-800);
+    }
+
+    .tier ul {
+      padding-left: 20px;
+      color: var(--text-700);
+      font-size: 0.9rem;
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-block {
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-md);
+      background: #f8fbff;
+      padding: 18px;
+      margin-top: 8px;
+      display: grid;
+      gap: 10px;
+      color: var(--text-700);
+    }
+
+    .footer {
+      margin-top: 38px;
+      background: var(--brand-900);
+      color: #ffffff;
+      padding: 32px 0 46px;
+    }
+
+    .footer-container {
+      width: min(1140px, 92vw);
+      margin: 0 auto;
+    }
+
+    .footer a {
+      color: #d8e8ff;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer a:hover {
+      opacity: 0.95;
+      text-decoration: underline;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr 0.9fr;
+      gap: clamp(20px, 3vw, 44px);
+      margin-bottom: 30px;
+    }
+
+    .footer h4 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      font-size: 0.95rem;
+      opacity: 0.96;
+      line-height: 1.65;
+    }
+
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer li {
       margin: 8px 0;
     }
 
-    /* “Connect with us” */
-    .footer-universal__connect-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin: 18px 0 10px;
-      opacity: .95;
-    }
-
-    /* Social grid */
-    .footer-universal__social {
+    .social-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(80px, 1fr));
-      gap: 14px 18px;
-      margin-top: 10px;
+      grid-template-columns: repeat(6, minmax(54px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      max-width: 420px;
     }
-    .footer-universal__social-item {
+
+    .social-btn {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      padding: 8px;
+      justify-content: center;
+      padding: 10px;
       border-radius: 10px;
-      text-align: center;
-      background: rgba(255,255,255,.06);
-      transition: transform .15s ease, background .15s ease;
+      background: rgba(255, 255, 255, 0.08);
+      transition: transform 0.15s ease, background 0.15s ease;
     }
-    .footer-universal__social-item:hover {
+
+    .social-btn:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,.12);
-    }
-    .footer-universal__social-item i {
-      font-size: 22px; /* uses Font Awesome in your page */
-    }
-    .footer-universal__social-item span {
-      font-size: 12px;
-      opacity: .95;
+      background: rgba(255, 255, 255, 0.16);
     }
 
-    /* Bottom line */
-    .footer-universal__bottom {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--fu-divider);
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
       text-align: center;
     }
-    .footer-universal__bottom p {
+
+    .footer-bottom p {
       margin: 0 0 8px;
-      font-size: 14px;
-      opacity: .95;
+      font-size: 0.9rem;
     }
-    .footer-universal__credits {
-      font-size: 13px;
-      opacity: .9;
+
+    .footer-bottom .credits {
+      font-size: 0.84rem;
+      opacity: 0.94;
     }
-    .footer-universal__credits a {
+
+    .footer-bottom .credits a {
       color: #bfe6ff;
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    /* Responsive */
-    @media (max-width: 960px) {
-      .footer-universal__grid { grid-template-columns: 1fr 1fr; }
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+    @media (max-width: 980px) {
+      body {
+        padding-top: 120px;
+      }
+
+      .main-nav {
+        top: 56px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        left: 4vw;
+        right: 4vw;
+        top: 132px;
+        background: #ffffff;
+        border: 1px solid var(--line-200);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        padding: 12px;
+        gap: 8px;
+        flex-direction: column;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 8px;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .split-grid,
+      .sponsor-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 640px) {
-      .footer-universal__grid { grid-template-columns: 1fr; }
-      .footer-universal__social { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
-      .footer-universal { padding-bottom: 32px; }
+      .section-head,
+      .section-body {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .top-strip .container {
+        justify-content: flex-start;
+      }
+
+      .social-grid {
+        grid-template-columns: repeat(3, minmax(54px, 1fr));
+      }
     }
-    
-    /* keeps the blue light color of footer*/
-    @media (prefers-color-scheme: dark) {
-      .footer-universal { --fu-bg:#1a73e8; }
-    }
-
-    /* A11y nicety */
-    .footer-universal *:focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: 2px;
-    }
-
-
-
-
-
-    /* 
-
-    universal footer end 
-
-    */
-  .site-note { text-align:center; padding:46px 0; color:var(--text-light); }
-  .site-note a { color:var(--primary); font-weight:700; text-decoration:none; }
-  .site-note a:hover { text-decoration:underline; }
-
-
-      /* ---------- Page Hero / Breadcrumb ---------- */
-      .page-hero{
-        width:100%;
-        background:#f9fafb; /* matches bg-gray-50 vibe */
-        border-bottom:1px solid #e5e7eb; /* gray-200 */
-      }
-      .page-hero__inner{
-        max-width:1200px;
-        margin:0 auto;
-        padding:18px 20px 24px; /* compact top, comfy bottom */
-      }
-      .page-hero__crumbs{
-        font-size:12px;
-        color:#6b7280; /* text-light */
-        margin:0 0 8px;
-      }
-      .page-hero__link{
-        color:#6b7280;
-        text-decoration:underline;
-        text-underline-offset:2px;
-      }
-      .page-hero__link:hover{ text-decoration:none; color:var(--primary); }
-      .page-hero__sep{ margin:0 6px; color:#9ca3af; }
-      .page-hero__current{ color:#374151; font-weight:600; }
-
-      .page-hero__title{
-        font-size:clamp(1.75rem, 3.4vw, 2.25rem);
-        line-height:1.15;
-        font-weight:800;
-        color:#111827; /* near-black */
-        margin:2px 0 6px;
-      }
-      .page-hero__subtitle{
-        max-width:820px;
-        font-size:0.98rem;
-        color:#4b5563; /* gray-600 */
-        margin:0;
-      }
-      @media (max-width:640px){
-        .page-hero__inner{ padding:16px 16px 20px; }
-        .page-hero__crumbs{ font-size:11px; }
-        .page-hero__title{ font-size:1.65rem; }
-      }
-
-  /* ---------- end Page Hero / Breadcrumb ---------- */
-
   </style>
 </head>
 <body>
-
-  <!-- NAV OUTSIDE -->
-  <nav class="navbar1">
-    <div class="nav-container1">
-      <!-- <div class="nav-brand1">
-        <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener"><strong>Hack University Initiative</strong></a>
-      </div> -->
-      <div class="nav-links1">
-        <a href="https://codecrunchglobal.vercel.app/" class="nav-link1">Code Crunch Worldwide</a>
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link1">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link1">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link1">Google Developer Group at FIU</a>
-        <a href="https://raspberrypicodecrunch.vercel.app/" class="nav-link1">Raspberry Pi Code Crunch</a>
-        <!-- <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link1">Support Us</a> -->
-      </div>
+  <div class="top-strip">
+    <div class="container">
+      <a class="partner-link" href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener">Code Crunch Worldwide</a>
+      <a class="partner-link" href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener">ColorStack at FIU</a>
+      <a class="partner-link" href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener">CAHSI at FIU</a>
+      <a class="partner-link" href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener">Google Developer Group at FIU</a>
+      <a class="partner-link" href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener">Raspberry Pi Code Crunch</a>
     </div>
-</nav>
+  </div>
 
-  <div class="bg-pattern"></div>
-
-  <!-- Nav -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a class="nav-logo" href="https://hackuniversity.vercel.app/">Hack University Initiative</a>
-      <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#format">Format</a></li>
+  <nav class="main-nav" aria-label="Primary navigation">
+    <div class="container">
+      <a class="brand" href="https://hackuniversity.vercel.app/">Hack University Initiative</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">Menu</button>
+      <ul class="nav-links" id="mobileNav">
+        <li><a href="#overview">Overview</a></li>
         <li><a href="#calendar">Calendar</a></li>
-        <li><a href="#audience">Audience</a></li>
-        <li><a href="#donations">Donations</a></li>
+        <li><a href="#hackathon-list">Hackathon List</a></li>
+        <li><a href="#support">Donation Focus</a></li>
         <li><a href="#sponsorship">Sponsorship</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <ul class="nav-menu mobile">
-        <li><a href="#about">About</a></li>
-        <li><a href="#format">Format</a></li>
-        <li><a href="#calendar">Calendar</a></li>
-        <li><a href="#audience">Audience</a></li>
-        <li><a href="#donations">Donations</a></li>
-        <li><a href="#sponsorship">Sponsorship</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
-
-
-
-
-    
   </nav>
 
-  <div class="container">
-    <header>
-      
-
-<!-- Page Title / Hero (Breadcrumb + Title) — no <header> tag -->
-
-    <p class="page-hero__crumbs">
-      <a href="https://hackuniversity.vercel.app" class="page-hero__link">Hack University</a>
-      <span class="page-hero__sep" aria-hidden="true"> /</span>
-      <span class="page-hero__current" aria-current="page">Donate &amp; Sponsor</span>
+  <header class="hero container" id="overview">
+    <span class="eyebrow">Corporate and Community Partnerships</span>
+    <h1>Invest in Student Innovation Through Year-Round Hackathons</h1>
+    <p class="hero-copy">
+      Hack University runs monthly hackathons and mini-hacks that give students practical experience in AI, cloud, cybersecurity, DevOps, blockchain, XR, and product strategy. Your support directly funds mentorship, project resources, and equitable access for students across majors and backgrounds.
     </p>
+    <div class="quick-contact">
+      <span class="pill">Email: codecrunchclub@gmail.com</span>
+      <a class="pill" href="https://codecrunch.cs.fiu.edu" target="_blank" rel="noopener">Website: codecrunch.cs.fiu.edu</a>
+      <span class="pill">Instagram: @codecrunchclub</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><strong>2,450+</strong><span>Annual participants</span></div>
+      <div class="stat"><strong>12 + 12</strong><span>Hackathons and mini-hacks per year</span></div>
+      <div class="stat"><strong>112+</strong><span>Universities represented</span></div>
+      <div class="stat"><strong>70%</strong><span>Early-career talent pipeline</span></div>
+    </div>
+  </header>
 
-
-
-
-
-
-
-      
-      <h1>Donate & Sponsor</h1>
-      <p class="subtitle">Fuel monthly student hackathons open to all majors — where creators, coders, designers, and innovators build real-world tech, mentorship, and career opportunities across AI, Cloud, Cybersecurity, DevOps, Blockchain, XR, and Web3. Students from every background — business, design, engineering, health, and the arts — collaborate to turn ideas into impact through hands-on learning and industry mentorship.</p>
-
-      <div class="contact-strip">
-        <span class="chip">📧 codecrunchclub@gmail.com</span>
-        <a class="chip" href="https://CodeCrunch.cs.fiu.edu" target="_blank" rel="noopener">🌐 CodeCrunch.cs.fiu.edu</a>
-        <span class="chip">📱 IG: @codecrunchclub</span>
+  <main class="container">
+    <section class="section">
+      <div class="section-head">
+        <h2>Program Structure</h2>
+        <p>Each monthly event includes two tracks so both technical and non-technical students can participate and deliver meaningful outcomes.</p>
       </div>
-    </header>
+      <div class="section-body split-grid">
+        <article class="panel">
+          <h3>Tech Challenge (Build Track)</h3>
+          <p>Participants design and build working software or hardware solutions. Example: an AI-powered study group matching platform.</p>
+        </article>
+        <article class="panel">
+          <h3>Technopreneurship Challenge (No-Code Track)</h3>
+          <p>Participants build an evidence-based business pitch and implementation roadmap. Example: a campus logistics startup concept.</p>
+        </article>
+      </div>
+    </section>
 
-    <main class="main">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- 01 About -->
-      <section id="about" class="card">
-        <h2>01 — About Code Crunch Hackathons</h2>
-
-          <p class="mt-2 text-gray-600 max-w-2xl">
-  Hack University hackathons are problem-solving competitions that tackle challenges from interdisciplinary areas and feature two main tracks:<br>
-  • <strong>Tech challenge</strong> (coding/development) - <em>Example: Build an AI-powered study group app</em><br>
-  • <strong>Technopreneurship challenge</strong> (<strong>no code</strong> - business pitch only) - <em>Example: Pitch a sustainable campus delivery service</em><br><br>
-</p>
-
-         <p class="mt-2 text-gray-600 max-w-2xl">
-  Hack University events allow students to:<br>
-  • <strong>Build real-world tech</strong> in AI, Cloud, Cybersecurity, DevOps, Blockchain, XR & Web3<br>
-  • <strong>Collaborate</strong> through industry mentorship & workshops<br>
-  • <strong>Compete</strong> in the Tech challenge & Technopreneurship challenge (Shark Tank style)<br>
-  • <strong>Develop</strong> leadership & entrepreneurial skills<br>
-  • <strong>Network</strong> with peers & professionals<br>
-
-</p>
-
-        <p class="muted" style="margin-top:8px">Each hackathon is part of the Tech Unicorn Challenge Pitch where teams build disruptive technologies that drive real-world change.</p>
-      </section>
-
-      <!-- Standard Format -->
-      <section id="format" class="card">
-        <h2>01.1 Standard Hackathon Format</h2>
-        <p class="muted">Every hackathon includes 2 structured sessions (Challenges for all Majors & No-Code Track <em>[Tech Unicorn]</em> ).</p>
-        <div class="table-wrap" style="margin-top:12px">
+    <section class="section" id="calendar">
+      <div class="section-head">
+        <h2>Standard Event Format</h2>
+        <p>We combine long-form project development with focused execution windows to maximize both learning and shipping outcomes.</p>
+      </div>
+      <div class="section-body">
+        <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>Session</th>
-                <th>Schedule</th>
-                <th>Purpose</th>
+                <th>Timing</th>
+                <th>Primary Outcome</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Hackathon: Week-Long Online Build Sprint</strong></td>
-                <td>Fri → Sat (<span class="tag">~168 hrs</span>)</td>
-                <td>Team formation, workshops & planning</td>
+                <td><strong>Week-Long Online Build Sprint</strong></td>
+                <td>Friday to Friday (about 168 hours)</td>
+                <td>Team formation, workshops, mentor check-ins, solution architecture</td>
               </tr>
               <tr>
-                <td><strong>Mini-Hack: 12-Hour Hack Sprint</strong></td>
-                <td>Sat 9 AM → Sat 9 PM (<span class="tag">12 hrs</span>)</td>
-                <td>Build & submit final project, held between academic peaks</td>
+                <td><strong>Mini-Hack Build Sprint</strong></td>
+                <td>Saturday 9:00 AM to 9:00 PM (12 hours)</td>
+                <td>Rapid build, final delivery, and judging in a concentrated format</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="muted" style="margin-top:10px">Format varies per event: <strong>Virtual / Hybrid / In-Person (TBD)</strong></p>
-      </section>
+      </div>
+    </section>
 
-      <!-- 02 Calendar -->
-      <section id="calendar" class="card">
-        <h2>02 — Annual Hackathon Calendar (12 / Year + Mini-Hacks)</h2>
-        <div class="table-wrap" style="margin-top:10px">
+    <section class="section" id="hackathon-list">
+      <div class="section-head">
+        <h2>Annual Hackathon List</h2>
+        <p>The monthly lineup is a core part of Hack University. Each month includes a primary themed hackathon, with mini-hack sessions layered in during the year.</p>
+      </div>
+      <div class="section-body">
+        <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>Month</th>
-                <th>Hackathon</th>
-                <th>Theme</th>
-                <th>Description</th>
-                <th>Format</th>
-                <th>Duration</th>
+                <th>Hackathon Edition</th>
+                <th>Theme Area</th>
+                <th>Focus</th>
               </tr>
             </thead>
             <tbody>
-              <!-- January - First row -->
               <tr>
-                <td rowspan="2">Jan</td>
-                <td rowspan="2">305 Hackathon Edition January [Healthcare & AI Edition]</td>
-                <td rowspan="2">AI in Healthcare & Biotech</td>
-                <td rowspan="2">Students create innovative diagnostic tools, digital health platforms, and assistive tech that merge healthcare and AI.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Jan</strong></td>
+                <td>HealthTech Hackathon</td>
+                <td>Health and MedTech</td>
+                <td>Projects improving patient experience, diagnostics, and digital health workflows.</td>
               </tr>
-              <!-- January - Second row -->
               <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
+                <td><strong>Feb</strong></td>
+                <td>Hack The Future</td>
+                <td>AI and Automation</td>
+                <td>Solutions that apply AI to productivity, education, and decision support.</td>
               </tr>
-
-              <!-- February - First row -->
               <tr>
-                <td rowspan="2">Feb</td>
-                <td rowspan="2">305 Hackathon Edition February [Engineering & Robotics Edition]</td>
-                <td rowspan="2">Mechanical, Electrical & Hardware Innovation</td>
-                <td rowspan="2">Students build next-gen IoT systems, robotics, and hardware-software integrations for smarter engineering.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Mar</strong></td>
+                <td>Women in Tech and Diversity Hackathon</td>
+                <td>Inclusive Innovation</td>
+                <td>Products that expand access, equity, and opportunity in technology.</td>
               </tr>
-              <!-- February - Second row -->
               <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
+                <td><strong>Apr</strong></td>
+                <td>EarthTech Hackathon</td>
+                <td>Climate and Sustainability</td>
+                <td>Data-driven and software-first solutions for environmental resilience.</td>
               </tr>
-
-              <!-- March - First row -->
               <tr>
-                <td rowspan="2">Mar</td>
-                <td rowspan="2">Hack Fiesta Miami [Startup & AI Innovation Edition]</td>
-                <td rowspan="2">AI Startups & Venture Innovation</td>
-                <td rowspan="2">Students launch AI-powered startups with real business potential, from concept to investor-ready pitch.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>May</strong></td>
+                <td>CodeVerse Summit</td>
+                <td>AI and Data Systems</td>
+                <td>Scalable products powered by machine learning and modern data platforms.</td>
               </tr>
-              <!-- March - Second row -->
               <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
+                <td><strong>Jun</strong></td>
+                <td>SecureBuild Hackathon</td>
+                <td>Cybersecurity and Cloud</td>
+                <td>Secure-by-design tools, threat prevention, and resilient infrastructure.</td>
               </tr>
-
-              <!-- April - First row -->
               <tr>
-                <td rowspan="2">Apr</td>
-                <td rowspan="2">305 Hackathon Edition April [Cyber Law & Compliance Edition]</td>
-                <td rowspan="2">Law, Compliance, & Cybersecurity</td>
-                <td rowspan="2">Students design secure, ethical, and compliant digital systems addressing privacy, legal tech, and cyber risk.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Jul</strong></td>
+                <td>SummerCodeX</td>
+                <td>Finance and FinTech</td>
+                <td>Platforms for modern payments, financial inclusion, and analytics.</td>
               </tr>
-              <!-- April - Second row -->
               <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
+                <td><strong>Aug</strong></td>
+                <td>305 Hackathon: Campus Reboot Edition</td>
+                <td>EdTech and Student Experience</td>
+                <td>Tools that improve learning outcomes, engagement, and campus operations.</td>
               </tr>
-
-              <!-- May - Single row -->
               <tr>
-                <td>May</td>
-                <td>CodeStorm 2026 [Marketing & Creative AI Edition]</td>
-                <td>Marketing, Media, & Creative AI</td>
-                <td>Students reinvent branding, analytics, and digital storytelling using data-driven and generative AI tools.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Sep</strong></td>
+                <td>305 Hackathon: Fall Edition</td>
+                <td>CivicTech and Sustainability</td>
+                <td>Community-centered technologies for cities, public services, and climate action.</td>
               </tr>
-
-              <!-- June - Single row -->
               <tr>
-                <td>Jun</td>
-                <td>305 Hackathon Edition June [Automation & Bot Edition]</td>
-                <td>Automation & Productivity Tools</td>
-                <td>Students build intelligent bots, workflow automation tools, and assistants that enhance efficiency.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Oct</strong></td>
+                <td>EmpowHER Hackathon</td>
+                <td>Leadership and Accessibility</td>
+                <td>Solutions that improve accessibility and leadership development outcomes.</td>
               </tr>
-
-              <!-- July - Single row -->
               <tr>
-                <td>Jul</td>
-                <td>SummerCodeX [Finance & FinTech Edition]</td>
-                <td>Finance, FinTech & Data Science</td>
-                <td>Students create data-driven platforms that modernize finance, trading, and financial decision-making.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
+                <td><strong>Nov</strong></td>
+                <td>Veterans and DefenseTech Hack</td>
+                <td>Defense and Public Service</td>
+                <td>Projects supporting veterans, emergency response, and public safety.</td>
               </tr>
-
-              <!-- August - Single row -->
               <tr>
-                <td>Aug</td>
-                <td>305 Hackathon Edition August [Campus Reboot Edition]</td>
-                <td>EdTech & Student Experience</td>
-                <td>Students redefine learning, student engagement, and campus innovation through technology.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
-              </tr>
-
-              <!-- September - First row -->
-              <tr>
-                <td rowspan="2">Sep</td>
-                <td rowspan="2">305 Hackathon Edition September [Fall Edition]</td>
-                <td rowspan="2">CivicTech & Sustainability</td>
-                <td rowspan="2">Students tackle challenges in climate, energy, and infrastructure for resilient, sustainable cities.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
-              </tr>
-              <!-- September - Second row -->
-              <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
-              </tr>
-
-              <!-- October - First row -->
-              <tr>
-                <td rowspan="2">Oct</td>
-                <td rowspan="2">EmpowHER Hackathon [Leadership & Accessibility Edition]</td>
-                <td rowspan="2">Leadership & Accessibility</td>
-                <td rowspan="2">Students empower accessibility through leadership-driven innovation.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
-              </tr>
-              <!-- October - Second row -->
-              <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
-              </tr>
-
-              <!-- November - First row -->
-              <tr>
-                <td rowspan="2">Nov</td>
-                <td rowspan="2">305 Veterans & DefenseTech Hack [Veterans Edition]</td>
-                <td rowspan="2">Veterans & DefenseTech</td>
-                <td rowspan="2">Students build solutions for national defense, veteran support, and community resilience.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
-              </tr>
-              <!-- November - Second row -->
-              <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
-              </tr>
-
-              <!-- December - First row -->
-              <tr>
-                <td rowspan="2">Dec</td>
-                <td rowspan="2">CodeFest [End-of-Year Innovation Edition]</td>
-                <td rowspan="2">End-of-Year Innovation for Business, Marketing, Finance & AI </td>
-                <td rowspan="2">Students conclude the year by merging business insight and AI strategy to solve real-world corporate challenges.</td>
-                <td>Session A <br> Online/Synchronous</td>
-                <td>168 Hrs Hacking</td>
-              </tr>
-              <!-- December - Second row -->
-              <tr>
-                <td>Session B <br> In-Person</td>
-                <td>12 Hrs Hacking</td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-        <p class="muted" style="margin-top:10px">…monthly hackathons continue into the current calendar year under the same format.</p>
-      </section>
-
-      <!-- 03 Audience & Reach -->
-      <section id="audience" class="card">
-        <h2>03 — Audience & Reach</h2>
-        <div class="kpis">
-          <div class="kpi"><strong>2,450+</strong> annual participants</div>
-          <div class="kpi"><strong>85%</strong> STEM majors</div>
-          <div class="kpi"><strong>70%</strong> freshmen/sophomores (talent pipeline)</div>
-          <div class="kpi"><strong>112+</strong> universities represented</div>
-        </div>
-        <p class="muted" style="margin-top:12px">Collaboration with FIU, MLH, Google Developer Groups, CAHSI, ColorStack, Raspberry Pi Code Crunch, Miami Tech Works, and industry partners.</p>
-      </section>
-
-      <!-- 04 Donations -->
-      <section id="donations" class="card">
-        <h2>04 — Donations: Best Way to Support Students</h2>
-        <ul class="dotlist">
-          <li>Hardware & cloud credits</li>
-          <li>Operational logistics (food, venue, staffing)</li>
-          <li>Accessibility initiatives</li>
-          <li>Mentor/speaker engagement resources</li>
-        </ul>
-        <div class="cta">
-          <a class="btn btn-primary" href="https://docs.google.com/document/d/e/2PACX-1vR1pWeZfJGwYmvBvYOxSzGF-hFfoEa8PL-cnNv72NiKzVpIxLVeTkdYrvMXOv9zwaOHzupxhxtPCpP4/pub" target="_blank" rel="noopener">📘 View the Code Crunch Donations Guide</a>
-          <!-- <a class="btn btn-outline" href="https://www.linkedin.com/company/code-crunch-club" target="_blank" rel="noopener">💬 Message Us on LinkedIn</a> -->
-        </div>
-        <p class="note">Donations sustain hackathons and student success year-round.</p>
-      </section>
-
-      <!-- 05 Sponsorship -->
-      <section id="sponsorship" class="card">
-        <h2>05 — Sponsorship: Optional Event Partnership</h2>
-        <p class="muted">
-          Email <strong>codecrunchclub@gmail.com</strong> to set up a sponsorship agreement.
-          You can review details and confirm your sponsorship level by tier below or in our:
-          <a href="https://codecrunchglobal.vercel.app/cc-prospectus.html" target="_blank" rel="noopener"><strong>PROSPECTUS / Sponsorship Org. Package</strong></a>.
-        </p>
-
-        <!-- Quick Tier Picker -->
-        <div class="tier-grid" aria-label="Sponsorship Tiers">
-          <div class="tier-card">
-            <h4>🥉 Bronze</h4>
-            <div class="tier-price">$1,500</div>
-            <!-- <ul class="dotlist">
-              <li>Logo on site/materials (small)</li>
-              <li>Social shoutouts (small)</li>
-              <li>Sponsor booth</li>
-              <li>Mentor & judge participation</li>
-              <li>Basic metrics + résumé book (~300)</li>
-            </ul> -->
-            <div class="tier-cta">
-              <!-- <a class="primary" href="mailto:codecrunchclub@gmail.com?subject=Bronze%20Sponsorship%20($1.5K)" aria-label="Email to Sponsor Bronze">Choose Bronze</a> -->
-              <a class="outline" href="https://codecrunchglobal.vercel.app/cc-prospectus.html" target="_blank" rel="noopener">Open PROSPECTUS / Sponsorship Org. Package</a>
-            </div>
-          </div>
-
-          <div class="tier-card">
-            <h4>🥈 Silver</h4>
-            <div class="tier-price">$3,000</div>
-            <!-- <ul class="dotlist">
-              <li>Logo on site/materials (medium)</li>
-              <li>Social shoutouts (medium)</li>
-              <li>Sponsor booth + 60-min workshop</li>
-              <li>Custom prize/track eligible</li>
-              <li>Detailed analytics + résumé ~400</li>
-            </ul> -->
-            <div class="tier-cta">
-              <!-- <a class="primary" href="mailto:codecrunchclub@gmail.com?subject=Silver%20Sponsorship%20($3K)" aria-label="Email to Sponsor Silver">Choose Silver</a> -->
-              <a class="outline" href="https://codecrunchglobal.vercel.app/cc-prospectus.html" target="_blank" rel="noopener">Open PROSPECTUS / Sponsorship Org. Package</a>
-            </div>
-          </div>
-
-          <div class="tier-card">
-            <h4>🥇 Gold</h4>
-            <div class="tier-price">$5,500</div>
-            <!-- <ul class="dotlist">
-              <li>Logo on site/materials (large)</li>
-              <li>Featured shoutouts</li>
-              <li>Sponsor booth + 120-min workshop</li>
-              <li>Opening ceremony demo</li>
-              <li>Full data package + résumé ~600</li>
-            </ul> -->
-            <div class="tier-cta">
-              <!-- <a class="primary" href="mailto:codecrunchclub@gmail.com?subject=Gold%20Sponsorship%20($5.5K)" aria-label="Email to Sponsor Gold">Choose Gold</a> -->
-              <a class="outline" href="https://codecrunchglobal.vercel.app/cc-prospectus.html" target="_blank" rel="noopener">Open PROSPECTUS / Sponsorship Org. Package</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Detailed Comparison Table -->
-        <!-- <h3 style="margin:14px 0 10px">📍 Hackathons w/ Organization Sponsorship Packages</h3> -->
-        <!-- <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Sponsorship Tier</th>
-                <th>🥉 Bronze ($1.5K)</th>
-                <th>🥈 Silver ($3K)</th>
-                <th>🥇 Gold ($5.5K)</th>
-              </tr>
-            </thead> -->
-            <!-- <tbody>
-              <tr><td><strong>Organization Social Media Recognition</strong></td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr>
-                <td><strong>[Logo Placement] at Non-Hack Events (1 year)</strong><br/>• Website & several non-hack materials<br/>• Non-hack flyers</td>
-                <td>Small logo on website & materials<br/>Small logo on flyers (as space allows)</td>
-                <td>Medium logo on website & materials<br/>Logo size on flyers (as space allows)</td>
-                <td>Large logo on website & materials<br/>Large logo on flyers (as space allows)</td>
-              </tr>
-              <tr><td><strong>Social Media Shoutouts</strong></td><td>Small</td><td>Medium</td><td>Featured</td></tr>
-              <tr><td><strong>Sponsor Booth **</strong></td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td><strong>Custom Prize Sponsorship</strong></td><td>✖</td><td>✅</td><td>✅</td></tr>
-              <tr><td><strong>Custom Track Sponsorship</strong></td><td>✖</td><td>✅</td><td>✅</td></tr>
-              <tr><td><strong>Workshop / Talk **</strong></td><td>30 min</td><td>60 min</td><td>120 min</td></tr>
-              <tr><td><strong>Opening Ceremony Demo **</strong></td><td>✖</td><td>✅</td><td>✅</td></tr>
-              <tr><td><strong>Mentor & Judge Participation **</strong></td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr>
-                <td><strong>Post-Event Participant Insights</strong></td>
-                <td>Basic metrics + résumé book (~300). PDF/Word ≤ 7 days.</td>
-                <td>Detailed analytics + top 10 schools, track engagement. Résumé ~400. PDF/Word ≤ 7 days.</td>
-                <td>Full data package + opt-in contacts (Excel). Raw résumé book. Résumé ~600. PDF/Word ≤ 7 days.</td>
+                <td><strong>Dec</strong></td>
+                <td>CodeFest: End-of-Year Innovation Edition</td>
+                <td>Business, AI, and Product Strategy</td>
+                <td>Capstone projects integrating technical execution with market impact.</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="muted" style="margin-top:10px">** Virtual or in-person, depending on hack format</p>
+      </div>
+    </section>
 
-        <h3 style="margin:16px 0 6px">Enhanced visibility & recruiting access:</h3>
-        <ul class="dotlist">
-          <li>Branding across events and media</li>
-          <li>Sponsor booth (virtual or FIU campus)</li>
-          <li>Workshop / Tech Talk opportunities</li>
-          <li>Mentorship & judging roles</li>
-          <li>Résumé book + talent data insights</li>
-          <li>Custom track or prize support</li>
-        </ul> -->
-      </section>
-
-      <!-- 06 Why Partner -->
-      <section class="card">
-        <h2>06 — Why Partner with Code Crunch?</h2>
-        <ul class="dotlist">
-          <li>Continuous visibility (12 months of hackathons)</li>
-          <li>Access to top early-career talent</li>
-          <li>Strengthens Miami’s tech ecosystem</li>
-          <li>Drives ethical innovation</li>
+    <section class="section" id="support">
+      <div class="section-head">
+        <h2>Donation Priorities</h2>
+        <p>Donations are the most flexible and scalable way to support students across all hackathons throughout the year.</p>
+      </div>
+      <div class="section-body">
+        <ul class="list">
+          <li>Cloud and tooling credits, hardware kits, and platform access for student teams</li>
+          <li>Operational logistics including food, venue support, and event staffing</li>
+          <li>Accessibility initiatives that expand participation for underrepresented students</li>
+          <li>Mentor and speaker infrastructure that strengthens project quality and career readiness</li>
         </ul>
-        <p class="muted" style="margin-top:10px"><em>“Innovation begins where opportunity meets community.”</em></p>
-      </section>
-
-      <!-- 07 Contact -->
-      <section id="contact" class="card">
-        <h2>07 — Contact & Partnership</h2>
-        <div class="kpis" style="margin-top:6px">
-          <div class="kpi"><strong>📧</strong> codecrunchclub@gmail.com</div>
-          <div class="kpi"><strong>🌐</strong> <a href="https://CodeCrunch.cs.fiu.edu" target="_blank" rel="noopener">CodeCrunch.cs.fiu.edu</a></div>
-          <div class="kpi"><strong>📱</strong> Instagram: @codecrunchclub</div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://docs.google.com/document/d/e/2PACX-1vR1pWeZfJGwYmvBvYOxSzGF-hFfoEa8PL-cnNv72NiKzVpIxLVeTkdYrvMXOv9zwaOHzupxhxtPCpP4/pub" target="_blank" rel="noopener">View Donations Guide</a>
+          <a class="btn btn-outline" href="mailto:codecrunchclub@gmail.com?subject=Donation%20Inquiry%20-%20Hack%20University">Discuss a Donation</a>
         </div>
-        <!-- <div class="cta" style="margin-top:14px">
-          <a class="btn btn-primary" href="https://docs.google.com/document/d/1fiMPj6baHyA9dEk74JuJmQxj_n7d6fJy_OlUBFyAaeE/edit?usp=sharing" target="_blank" rel="noopener">📘 Donations & Sponsorship Guide</a>
-          <a class="btn btn-outline" href="https://www.linkedin.com/company/code-crunch-club" target="_blank" rel="noopener">💬 Connect on LinkedIn</a>
-        
-        </div> -->
-      </section>
+      </div>
+    </section>
 
-
- <footer class="site-note">
-      <h3>Building Tomorrow’s Tech Leaders Today</h3>
-      <p>Questions? <a href="https://www.linkedin.com/company/code-crunch-club" target="_blank" rel="noopener">Message us on LinkedIn</a>.</p>
-
-    </footer>
-
-
-
-
-
-    <!-- Requires Font Awesome on the page for icons -->
-<footer class="footer-universal" role="contentinfo">
-  <div class="footer-universal__container">
-    <div class="footer-universal__grid">
-      <!-- About -->
-      <section aria-labelledby="footer-universal-about">
-        <h3 id="footer-universal-about" class="footer-universal__heading">
-          Hack University <span aria-hidden="true">🧑🏻‍💻🧑🏼‍💻🧑🏽‍💻🧑🏾‍💻🧑🏿‍💻</span>
-        </h3>
-        <p class="footer-universal__p">
-          A collaborative effort uniting multiple student organizations and global communities with a mission
-          to empower the next generation of innovators, developers, and leaders.
-        </p>
-        <p class="footer-universal__p">
-          <a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">HackUniversity.vercel.app</a>
-        </p>
-
-        <div class="footer-universal__connect-title">Connect With Us</div>
-        <div class="footer-universal__social">
-          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on LinkedIn" target="_blank" rel="noopener">
-            <i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span>
-          </a>
-          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on Instagram" target="_blank" rel="noopener">
-            <i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span>
-          </a>
-          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on GitHub" target="_blank" rel="noopener">
-            <i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
-          </a>
-          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Hack University on YouTube" target="_blank" rel="noopener">
-            <i class="fab fa-youtube" aria-hidden="true"></i><span>YouTube</span>
-          </a>
-          <a class="footer-universal__social-item" href="https://hackuniversity.vercel.app" aria-label="Join our Discord" target="_blank" rel="noopener">
-            <i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
-          </a>
-          <a class="footer-universal__social-item" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" aria-label="Events Calendar" target="_blank" rel="noopener">
-            <i class="far fa-calendar-alt" aria-hidden="true"></i><span>Calendar</span>
-          </a>
+    <section class="section" id="sponsorship">
+      <div class="section-head">
+        <h2>Sponsorship Tiers</h2>
+        <p>Sponsorship is ideal for organizations seeking recurring brand visibility, recruiting access, and direct engagement with student builders.</p>
+      </div>
+      <div class="section-body">
+        <div class="sponsor-grid">
+          <article class="tier">
+            <h3>Bronze</h3>
+            <div class="price">$1,500</div>
+            <ul>
+              <li>Brand placement in event materials</li>
+              <li>Social recognition and sponsor listing</li>
+              <li>Mentor and judge participation options</li>
+            </ul>
+          </article>
+          <article class="tier">
+            <h3>Silver</h3>
+            <div class="price">$3,000</div>
+            <ul>
+              <li>Expanded brand placement and event mentions</li>
+              <li>Workshop opportunity and candidate visibility</li>
+              <li>Deeper analytics and participation insight</li>
+            </ul>
+          </article>
+          <article class="tier">
+            <h3>Gold</h3>
+            <div class="price">$5,500</div>
+            <ul>
+              <li>Featured placement across events and media</li>
+              <li>Priority speaking and recruiting visibility</li>
+              <li>Comprehensive post-event reporting package</li>
+            </ul>
+          </article>
         </div>
-      </section>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://codecrunchglobal.vercel.app/cc-prospectus.html" target="_blank" rel="noopener">Open Sponsorship Prospectus</a>
+          <a class="btn btn-outline" href="mailto:codecrunchclub@gmail.com?subject=Sponsorship%20Inquiry%20-%20Hack%20University">Start Sponsorship Conversation</a>
+        </div>
+      </div>
+    </section>
 
-      <!-- Quick Links -->
-      <nav aria-labelledby="footer-universal-links">
-        <h3 id="footer-universal-links" class="footer-universal__heading">Quick Links</h3>
-        <ul class="footer-universal__list">
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Mission</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Events</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Hackathons</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Membership</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Join E-Board</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Resources</a></li>
-          <li class="footer-universal__li"><a href="https://hackuniversity.vercel.app/">Join Discord</a></li>
-        </ul>
-      </nav>
+    <section class="section" id="contact">
+      <div class="section-head">
+        <h2>Contact and Next Steps</h2>
+        <p>We can prepare a contribution path aligned to your priorities, whether your goal is student impact, recruiting, or community investment.</p>
+      </div>
+      <div class="section-body">
+        <div class="contact-block">
+          <p><strong>Primary contact:</strong> codecrunchclub@gmail.com</p>
+          <p><strong>Website:</strong> <a href="https://codecrunch.cs.fiu.edu" target="_blank" rel="noopener">codecrunch.cs.fiu.edu</a></p>
+          <p><strong>Instagram:</strong> @codecrunchclub</p>
+          <p><strong>Partnership portal:</strong> <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" target="_blank" rel="noopener">codecrunchglobal.vercel.app/hackuniversitydonate.html</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-      <!-- Contact -->
-      <section aria-labelledby="footer-universal-contact">
-        <h3 id="footer-universal-contact" class="footer-universal__heading">Contact</h3>
-        <p class="footer-universal__p" style="margin:0 0 8px">Miami, FL</p>
-        <p class="footer-universal__p" style="margin:0">
-          <a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a>
-        </p>
-      </section>
-    </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h4>Hack University</h4>
+          <p>Empowering the next generation of innovators through collaboration and hands-on learning.</p>
+          <a href="https://hackuniversity.vercel.app/" target="_blank" rel="noopener">HackUniversity.vercel.app</a>
+          <div class="social-grid">
+            <a class="social-btn" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a class="social-btn" href="https://codecrunchglobal.vercel.app/hackuniversity-discord.html" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            <a class="social-btn" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener" aria-label="Calendar"><i class="far fa-calendar-alt"></i></a>
+          </div>
+        </div>
 
-    <div class="footer-universal__bottom">
-      <p>© <span id="footer-universal-year"></span> Hack University. All rights reserved.</p>
-      <div class="footer-universal__credits">
-        Built with ❤️ for the tech community by
-        <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a> · Powered by innovation and collaboration
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener">Events</a></li>
+            <li><a href="https://photos.app.goo.gl/71FC5SLTQcPRbXjx6" target="_blank" rel="noopener">Photo Album</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener">Hackathons</a></li>
+            <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank" rel="noopener">Membership</a></li>
+            <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank" rel="noopener">Join E-Board</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank" rel="noopener">Resources</a></li>
+            <li><a href="https://codecrunchglobal.vercel.app/hackuniversity-discord.html" target="_blank" rel="noopener">Join Discord</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <p>Florida International University<br />Miami, FL</p>
+          <p><a href="mailto:codecrunchclub@gmail.com">codecrunchclub@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hack University. All rights reserved.</p>
+        <div class="credits">
+          Built with ❤️ for the tech community by <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a> · Powered by innovation and collaboration
+        </div>
       </div>
     </div>
-  </div>
-</footer>
-
-
-
-    </main>
-
-   
-
-
-
-
-
-</div>
+  </footer>
 
   <script>
+    (function () {
+      var toggle = document.getElementById("menuToggle");
+      var nav = document.getElementById("mobileNav");
+      if (toggle && nav) {
+        toggle.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", String(open));
+        });
 
-
-  // javascript  footer
-  (function () {
-    var el = document.getElementById('footer-universal-year');
-    if (el) el.textContent = new Date().getFullYear();
-  })();
-  // End javascript for footer
-
-
-
-
-    // Mobile menu
-    const hamburger=document.querySelector('.hamburger');
-    const mobileMenu=document.querySelector('.nav-menu.mobile');
-    hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');mobileMenu.classList.toggle('active')});
-    document.querySelectorAll('.nav-menu.mobile a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('active');mobileMenu.classList.remove('active')}));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click',e=>{
-        if(anchor.getAttribute('href')==='#') return;
-        e.preventDefault();
-        const t=document.querySelector(anchor.getAttribute('href'));
-        t && t.scrollIntoView({behavior:'smooth',block:'start'});
-      })
-    });
-
-    // Navbar bg tweak on scroll
-    window.addEventListener('scroll',()=>{
-      const nav=document.querySelector('.navbar');
-      nav.style.background = (window.scrollY>50)?'rgba(255,255,255,.98)':'rgba(255,255,255,.95)';
-    });
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>
