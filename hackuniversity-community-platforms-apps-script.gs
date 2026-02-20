@@ -18,6 +18,7 @@
 const SPREADSHEET_ID = "REPLACE_WITH_YOUR_SPREADSHEET_ID";
 const SIGNUPS_SHEET = "Signups";
 const CONFIG_SHEET = "Config";
+const ALLOWED_ORIGIN = "https://codecrunchglobal.vercel.app";
 
 function doGet(e) {
   const action = (e && e.parameter && e.parameter.action) ? String(e.parameter.action) : "";
@@ -50,9 +51,14 @@ function doPost(e) {
     const school = normalize_(params.school);
     const graduationYear = normalize_(params.graduationYear);
     const email = normalize_(params.email).toLowerCase();
+    const agreeTerms = normalize_(params.agreeTerms).toLowerCase();
+    const agreeMlh = normalize_(params.agreeMlh).toLowerCase();
     const pageUrl = normalize_(params.pageUrl);
+    if (!isAllowedPageUrl_(pageUrl)) {
+      return jsonOutput_({ ok: false, error: `Blocked origin. Allowed origin: ${ALLOWED_ORIGIN}` });
+    }
 
-    const validationError = validateInput_(firstName, lastName, school, graduationYear, email);
+    const validationError = validateInput_(firstName, lastName, school, graduationYear, email, agreeTerms, agreeMlh);
     if (validationError) {
       return jsonOutput_({ ok: false, error: validationError });
     }
@@ -63,6 +69,8 @@ function doPost(e) {
       school: school,
       graduationYear: graduationYear,
       email: email,
+      agreeTerms: agreeTerms,
+      agreeMlh: agreeMlh,
       pageUrl: pageUrl,
       userAgent: normalize_(params.userAgent)
     });
@@ -77,7 +85,7 @@ function doPost(e) {
   }
 }
 
-function validateInput_(firstName, lastName, school, graduationYear, email) {
+function validateInput_(firstName, lastName, school, graduationYear, email, agreeTerms, agreeMlh) {
   if (!firstName || !lastName || !school || !graduationYear || !email) {
     return "All fields are required.";
   }
@@ -85,6 +93,12 @@ function validateInput_(firstName, lastName, school, graduationYear, email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return "Invalid email format.";
+  }
+  if (agreeTerms !== "yes") {
+    return "Terms agreement is required.";
+  }
+  if (agreeMlh !== "yes") {
+    return "MLH acknowledgment is required.";
   }
 
   return "";
@@ -102,6 +116,8 @@ function appendSignupRow_(payload) {
       "school",
       "graduation_year",
       "email",
+      "agree_terms",
+      "agree_mlh",
       "source_page",
       "user_agent"
     ]);
@@ -116,6 +132,8 @@ function appendSignupRow_(payload) {
     payload.school,
     payload.graduationYear,
     payload.email,
+    payload.agreeTerms,
+    payload.agreeMlh,
     payload.pageUrl || "",
     payload.userAgent || ""
   ]);
@@ -149,6 +167,15 @@ function getOrCreateSheet_(sheetName) {
 
 function normalize_(value) {
   return String(value == null ? "" : value).trim();
+}
+
+function isAllowedPageUrl_(pageUrl) {
+  try {
+    if (!pageUrl) return false;
+    return new URL(pageUrl).origin === ALLOWED_ORIGIN;
+  } catch (error) {
+    return false;
+  }
 }
 
 function jsonOutput_(data) {

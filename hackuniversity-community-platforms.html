@@ -211,6 +211,39 @@
       font-size: .82rem;
       line-height: 1.45;
     }
+    .consent-wrap {
+      margin-top: 16px;
+      border: 1px solid #d2e3fc;
+      border-radius: 12px;
+      background: #f8fbff;
+      padding: 14px;
+    }
+    .consent-title {
+      margin: 0 0 10px;
+      font-size: .92rem;
+      font-weight: 800;
+      color: #1f3f7f;
+    }
+    .consent-item {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 10px;
+      font-size: .88rem;
+      line-height: 1.5;
+      color: #202124;
+    }
+    .consent-item input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+    }
+    .consent-item a {
+      color: #174ea6;
+      text-decoration: underline;
+      font-weight: 700;
+    }
 
     .footer { background: var(--color-primary); color: #fff; padding: 32px 0 48px; margin-top: 24px; }
     .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -339,6 +372,28 @@
           </div>
         </div>
 
+        <div class="consent-wrap">
+          <p class="consent-title">Organization Rules and Disclosures</p>
+
+          <label class="consent-item" for="agree-terms">
+            <input id="agree-terms" name="agreeTerms" type="checkbox" required />
+            <span>
+              <strong>TERMS AND CONDITIONS OF PARTICIPATION</strong>
+              (<a href="https://codecrunchglobal-termsandconditio.vercel.app/" target="_blank" rel="noopener noreferrer">View Terms</a>)<br />
+              I have read and agree to the Organization TERMS AND CONDITIONS OF PARTICIPATION.
+            </span>
+          </label>
+
+          <label class="consent-item" for="agree-mlh">
+            <input id="agree-mlh" name="agreeMlh" type="checkbox" required />
+            <span>
+              <strong>MLH PARTNERED EVENTS (IF APPLICABLE)</strong>
+              (<a href="https://codecrunchglobal-termsandconditio.vercel.app/" target="_blank" rel="noopener noreferrer">View Section 5</a>)<br />
+              I acknowledge that I have read and agree to the MLH Code of Conduct, MLH Privacy Policy, and MLH Contest Terms and Conditions as referenced in SECTION 5 - MLH PARTNERED EVENTS (IF APPLICABLE) of the TERMS AND CONDITIONS OF PARTICIPATION. I authorize the organization to share my application and registration information with Major League Hacking for event administration, ranking, and related purposes in accordance with the MLH Privacy Policy. I further confirm my agreement to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.
+            </span>
+          </label>
+        </div>
+
         <button id="submit-btn" type="submit" class="btn btn-main">
           <i class="fa-solid fa-paper-plane"></i> Submit and Unlock Community Links
         </button>
@@ -418,8 +473,10 @@
       #5 API JSON returned { ok: false } with server-side validation/error.
       #6 Network/CORS/fetch error (wrong deployment access, blocked request, offline).
       #7 Unexpected client/runtime error.
+      #8 Form must be submitted from allowed domain only.
     */
-    const API_URL = "https://script.google.com/macros/s/AKfycbwS_PV38PgNZzzB0wQEZ25gtMw688RK3WQe9o6hA4tjakrz6l_xhfqz81cX9YjItrHEXw/exec";
+    const ALLOWED_ORIGIN = "https://codecrunchglobal.vercel.app";
+    const API_URL = "https://script.google.com/macros/s/AKfycbx15_JMFHH-WSgp7HnE_gT2NeyylzJBh0XLbSpoHE-1cnThk_8natvGsFexxNWIPGHhRA/exec";
 
     const form = document.getElementById("community-access-form");
     const submitBtn = document.getElementById("submit-btn");
@@ -432,6 +489,8 @@
     const schoolInput = document.getElementById("school");
     const gradYearInput = document.getElementById("grad-year");
     const emailInput = document.getElementById("email");
+    const agreeTermsInput = document.getElementById("agree-terms");
+    const agreeMlhInput = document.getElementById("agree-mlh");
 
     const discordLink = document.getElementById("discord-link");
     const groupmeLink = document.getElementById("groupme-link");
@@ -463,7 +522,8 @@
         4: "Invalid API response format. Ensure the script returns JSON.",
         5: "API rejected the request. Check Apps Script logs and sheet settings.",
         6: "Network request failed. Check internet and Web App access = Anyone.",
-        7: "Unexpected error while submitting. Please try again."
+        7: "Unexpected error while submitting. Please try again.",
+        8: `This form can only be submitted from ${ALLOWED_ORIGIN}.`
       };
       return prefix + (defaults[code] || "Unknown submit error.");
     }
@@ -488,6 +548,8 @@
       const school = (schoolInput.value || "").trim();
       const graduationYear = (gradYearInput.value || "").trim();
       const email = (emailInput.value || "").trim().toLowerCase();
+      const agreeTerms = Boolean(agreeTermsInput && agreeTermsInput.checked);
+      const agreeMlh = Boolean(agreeMlhInput && agreeMlhInput.checked);
 
       if (!firstName || !lastName || !school || !graduationYear || !email) {
         return setStatus("error", "Please complete all required fields.");
@@ -495,8 +557,17 @@
       if (!isValidEmail(email)) {
         return setStatus("error", "Please enter a valid email format.");
       }
+      if (!agreeTerms) {
+        return setStatus("error", "Please check the Terms and Conditions agreement box.");
+      }
+      if (!agreeMlh) {
+        return setStatus("error", "Please check the MLH partnered events acknowledgment box.");
+      }
       if (!API_URL || API_URL.includes("REPLACE_WITH")) {
         return setStatus("error", buildErrorMessage(1));
+      }
+      if (window.location.origin !== ALLOWED_ORIGIN) {
+        return setStatus("error", buildErrorMessage(8));
       }
 
       const originalButton = submitBtn.innerHTML;
@@ -512,6 +583,8 @@
           school,
           graduationYear,
           email,
+          agreeTerms: agreeTerms ? "yes" : "no",
+          agreeMlh: agreeMlh ? "yes" : "no",
           pageUrl: window.location.href,
           userAgent: navigator.userAgent
         });
