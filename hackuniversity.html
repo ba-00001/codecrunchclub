@@ -296,6 +296,20 @@
     .portal-link:hover {
       background: #e8f0fe;
     }
+    .portal-menu-label {
+      margin: 4px 4px 0;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #5f6368;
+    }
+    .photo-album-dropdown {
+      width: min(100%, 460px);
+    }
+    .photo-album-dropdown .portal-menu {
+      text-align: left;
+    }
 
     
     .audience-grid {
@@ -600,14 +614,80 @@
           <i class="fa-regular fa-compass"></i> Explore Organization Partners
         </a>
 
-        <a class="btn btn-light"
-           href="#"
-           data-link-key="resource.AlbumHackUniversity"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Hack University Photo Album (Google Photos)">
-          <i class="fa-regular fa-images"></i> Photo Album
-        </a>
+        <details class="portal-dropdown photo-album-dropdown">
+          <summary class="btn portal-trigger" aria-label="Open photo albums menu">
+            <span class="portal-trigger-main">
+              <i class="fa-regular fa-images"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Photo Albums</span>
+                <span class="portal-subtitle">Choose an event or organization album</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="portal-menu-label">Photo Albums</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.AlbumHackUniversity">
+              <i class="fa-regular fa-images"></i> ALL ORGS ALBUM Photos (HACK UNIVERSITY)
+            </a>
+
+            <p class="portal-menu-label">Event Albums</p>
+
+             <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_305HackathonMarch">
+              <i class="fa-regular fa-images"></i> 2026 - 305 Hackathon March Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_HackFiestaMiamiFebruary">
+              <i class="fa-regular fa-images"></i> 2026 - Hack Fiesta Miami February Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_gdgStudyJams">
+              <i class="fa-regular fa-images"></i> 2026 - Spring GDG at FIU Study Jams Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_305HackathonJanuary">
+              <i class="fa-regular fa-images"></i> 2026 - 305 Hackathon January Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_Winterhackathon">
+              <i class="fa-regular fa-images"></i> 2025 - ColorStack Winter Hackathon Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_CodeFestDecember">
+              <i class="fa-regular fa-images"></i> 2025 - Code Fest December Edition Album
+            </a>
+
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_DevFestNovember">
+              <i class="fa-regular fa-images"></i> 2025 - DevFest November Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_EmpowerHackathonOctober">
+              <i class="fa-regular fa-images"></i> 2025 - Empower Hackathon October Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_305HackathonSeptember">
+              <i class="fa-regular fa-images"></i> 2025 -305 Hackathon September Edition Album
+            </a>
+
+            <p class="portal-menu-label">ORGS Individual Albums</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumGdgatFiu">
+              <i class="fa-regular fa-images"></i> GDG at FIU Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumCodeCrunchWorldwide">
+              <i class="fa-regular fa-images"></i> Code Crunch WorldWide Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumColorStackFiu">
+              <i class="fa-regular fa-images"></i> ColorStack at FIU
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumCahsiatFiu">
+              <i class="fa-regular fa-images"></i> CAHSI at FIU Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumRaspberryPiCodeCrunchatFiu">
+              <i class="fa-regular fa-images"></i> Raspberry Pi Code Crunch at FIU Album
+            </a>
+          </div>
+        </details>
       </div>
 
       <p class="subtitle text-sm mt-4">
@@ -1065,6 +1145,28 @@
 
 
     { key: "resource.AlbumHackUniversity", href: "https://hackuniversity-photos.vercel.app/", newTab: false },
+    { key: "resource.album2026_305HackathonMarch", href: "https://photos.app.goo.gl/S9YCZ6MgeTtreDKq6", newTab: true },
+    { key: "resource.album2026_HackFiestaMiamiFebruary", href: "https://photos.app.goo.gl/QaQsG1Ck32TRofBb8", newTab: true },
+    { key: "resource.album2026_gdgStudyJams", href: "https://photos.app.goo.gl/75igz9FH4cQzF4t68", newTab: true },
+    { key: "resource.album2026_305HackathonJanuary", href: "https://photos.google.com/share/AF1QipN4JtGK4n186ewkcYr5nypsPumWt99ypTrTyL9l1J__W5hlmtHl5UVg137HRBbZ3g?key=eGdBYlZNdS04aTQ3WWtTVGRKQ0g2UTh3c3ZWNVJn", newTab: true },
+    { key: "resource.album2025_Winterhackathon", href: "https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929", newTab: true },
+    { key: "resource.album2025_CodeFestDecember", href: "https://photos.app.goo.gl/9U7RVWPZ3h5uKeGZ7", newTab: true },
+    { key: "resource.album2025_DevFestNovember", href: "https://photos.app.goo.gl/vcns8Qwjsayofj2s7", newTab: true },
+    { key: "resource.album2025_305HackathonNovember", href: "https://photos.app.goo.gl/zCuBbq1fxYJavWnm9", newTab: true },
+    { key: "resource.album2025_EmpowerHackathonOctober", href: "https://photos.app.goo.gl/aXZn5AVC2HeMcu8V7", newTab: true },
+    { key: "resource.album2025_305HackathonSeptember", href: "https://photos.app.goo.gl/D29qiuz4nkeTKTs86", newTab: true },
+
+
+
+
+    
+    { key: "resource.albumGdgatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumCodeCrunchWorldwide", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumColorStackatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumCahsiatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumRaspberryPiCodeCrunchatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+
+
     { key: "resource.SubscribeGooglecalendar", href: "https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t", newTab: true },
     { key: "resource.partners", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#partners", newTab: false },
     { key: "resource.gdg", href: "https://gdgatfiu.vercel.app", newTab: true },
