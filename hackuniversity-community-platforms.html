@@ -244,6 +244,31 @@
       text-decoration: underline;
       font-weight: 700;
     }
+    .consent-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .consent-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid #c7dafd;
+      background: #eef4ff;
+      color: #174ea6;
+      font-size: .86rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 10px 12px;
+    }
+    .consent-btn:hover {
+      background: #e3edff;
+      color: #113b83;
+    }
 
     .footer { background: var(--color-primary); color: #fff; padding: 32px 0 48px; margin-top: 24px; }
     .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -392,6 +417,15 @@
               I acknowledge that I have read and agree to the MLH Code of Conduct, MLH Privacy Policy, and MLH Contest Terms and Conditions as referenced in SECTION 5 - MLH PARTNERED EVENTS (IF APPLICABLE) of the TERMS AND CONDITIONS OF PARTICIPATION. I authorize the organization to share my application and registration information with Major League Hacking for event administration, ranking, and related purposes in accordance with the MLH Privacy Policy. I further confirm my agreement to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.
             </span>
           </label>
+
+          <div class="consent-actions">
+            <a class="consent-btn" href="https://codecrunchglobal-termsandconditio.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-file-contract"></i> Open Terms
+            </a>
+            <a class="consent-btn" href="https://codecrunchglobal-termsandconditio.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-scale-balanced"></i> Open MLH Section
+            </a>
+          </div>
         </div>
 
         <button id="submit-btn" type="submit" class="btn btn-main">
@@ -476,7 +510,7 @@
       #8 Form must be submitted from allowed domain only.
     */
     const ALLOWED_ORIGIN = "https://codecrunchglobal.vercel.app";
-    const API_URL = "https://script.google.com/macros/s/AKfycbxBHDPNloqm6ll97Ib0LNco_0JPQjXTHlyvluxwX0XSVB9zxpDDubnE5IrJTzscgdfk-w/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzcP_0Jg0ikVyg0A_vYEwQbCO0h5FU1S08mW_uuiSavsbCsXp8hhvYy-JfRR3Uqi06pew/exec";
 
     const form = document.getElementById("community-access-form");
     const submitBtn = document.getElementById("submit-btn");

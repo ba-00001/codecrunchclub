@@ -16,9 +16,15 @@
  */
 
 const SPREADSHEET_ID = "REPLACE_WITH_YOUR_SPREADSHEET_ID";
-const SIGNUPS_SHEET = "Signups";
+const SIGNUPS_SHEET = "Sheet1";
 const CONFIG_SHEET = "Config";
 const ALLOWED_ORIGIN = "https://codecrunchglobal.vercel.app";
+const DEFAULT_LINKS = {
+  discord: "",
+  groupme: "https://hackuniversity-groupme.vercel.app",
+  instagramPrivate: "https://hackuniversity-iggroup.vercel.app",
+  mailingList: ""
+};
 
 function doGet(e) {
   const action = (e && e.parameter && e.parameter.action) ? String(e.parameter.action) : "";
@@ -152,10 +158,10 @@ function getJoinLinks_() {
   }
 
   return {
-    discord: map.discord_url || "",
-    groupme: map.groupme_url || "",
-    instagramPrivate: map.instagram_private_url || "",
-    mailingList: map.mailing_list_url || ""
+    discord: map.discord_url || DEFAULT_LINKS.discord,
+    groupme: map.groupme_url || DEFAULT_LINKS.groupme,
+    instagramPrivate: map.instagram_private_url || DEFAULT_LINKS.instagramPrivate,
+    mailingList: map.mailing_list_url || DEFAULT_LINKS.mailingList
   };
 }
 
