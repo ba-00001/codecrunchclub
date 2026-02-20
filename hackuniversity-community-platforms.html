@@ -303,8 +303,9 @@
 
   <main class="container">
     <section class="card">
-      <h1>Community Platforms Access</h1>
-      <p class="sub">Enter your details to join the community platforms and mailing list. After submit, your links will load securely from the Google Apps Script API.</p>
+      <h1>Community Platforms </h1>
+      <p class="sub">Access to private instagram group and GroupMe (If not acccount, the invite link will promt you to create an account first)</p>
+      <p class="sub">Enter your details to join the community platforms and mailing list</p>
 
       <form id="community-access-form" novalidate>
         <div class="grid field-row">
@@ -325,11 +326,15 @@
 
         <div class="grid field-row">
           <div>
-            <label for="grad-year">Year / Graduation</label>
-            <input id="grad-year" name="graduationYear" type="text" maxlength="40" placeholder="Ex: Sophomore or 2028" required />
+            <label for="grad-year">Current  Year / Semester/ Graduation</label>
+            <input id="grad-year" name="graduationYear" type="text" maxlength="40" placeholder="Ex: Sophomore / Spring / 2028" required />
           </div>
           <div>
-            <label for="email">Email</label>
+            <label for="Gmail">Email</label>
+            <input id="Gmail" name="Gmail" type="Gmail" autocomplete="Gmail" placeholder="name@Gmail.com" required />
+          </div>
+           <div>
+            <label for="email">School Email</label>
             <input id="email" name="email" type="email" autocomplete="email" placeholder="name@school.edu" required />
           </div>
         </div>
@@ -349,7 +354,7 @@
           <a id="instagram-link" class="btn join-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Join IG Private Group</a>
           <a id="mailing-link" class="btn join-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-envelope"></i> Join Mailing List</a>
         </div>
-        <p class="notice">For security, community invite URLs are fetched from the API and are not hardcoded in this HTML.</p>
+        <p class="notice">For security, community invites are only available after verification.</p>
       </div>
     </section>
   </main>
@@ -404,7 +409,7 @@
   </footer>
 
   <script>
-    const API_URL = "REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzgmBcyFzVCEwKjNAlPkNQRFTWatltgjMOGNTdhDWT9aT9MwfNgTSwdokeSoMAdXupCBA/exec";
 
     const form = document.getElementById("community-access-form");
     const submitBtn = document.getElementById("submit-btn");
@@ -588,5 +593,4 @@
   </script>
 </body>
 </html>
-
 
