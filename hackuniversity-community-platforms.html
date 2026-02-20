@@ -409,7 +409,17 @@
   </footer>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzgmBcyFzVCEwKjNAlPkNQRFTWatltgjMOGNTdhDWT9aT9MwfNgTSwdokeSoMAdXupCBA/exec";
+    /*
+      Submit Error Guide:
+      #1 API URL missing or placeholder.
+      #2 Request timed out (network or Apps Script delay).
+      #3 HTTP error from API (deployment/access/permissions issue).
+      #4 API returned non-JSON (often Apps Script not deployed as Web App).
+      #5 API JSON returned { ok: false } with server-side validation/error.
+      #6 Network/CORS/fetch error (wrong deployment access, blocked request, offline).
+      #7 Unexpected client/runtime error.
+    */
+    const API_URL = "https://script.google.com/macros/s/AKfycbwS_PV38PgNZzzB0wQEZ25gtMw688RK3WQe9o6hA4tjakrz6l_xhfqz81cX9YjItrHEXw/exec";
 
     const form = document.getElementById("community-access-form");
     const submitBtn = document.getElementById("submit-btn");
@@ -442,6 +452,22 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
+    function buildErrorMessage(code, detail) {
+      const prefix = `Error #${code}: `;
+      if (detail) return `${prefix}${detail}`;
+
+      const defaults = {
+        1: "API URL is not configured yet.",
+        2: "Request timed out. Please try again.",
+        3: "Server returned an HTTP error. Check Apps Script deployment settings.",
+        4: "Invalid API response format. Ensure the script returns JSON.",
+        5: "API rejected the request. Check Apps Script logs and sheet settings.",
+        6: "Network request failed. Check internet and Web App access = Anyone.",
+        7: "Unexpected error while submitting. Please try again."
+      };
+      return prefix + (defaults[code] || "Unknown submit error.");
+    }
+
     function setJoinLink(anchor, url) {
       if (url) {
         anchor.href = url;
@@ -470,7 +496,7 @@
         return setStatus("error", "Please enter a valid email format.");
       }
       if (!API_URL || API_URL.includes("REPLACE_WITH")) {
-        return setStatus("error", "API URL is not configured yet.");
+        return setStatus("error", buildErrorMessage(1));
       }
 
       const originalButton = submitBtn.innerHTML;
@@ -504,12 +530,19 @@
         clearTimeout(timeout);
 
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+          throw new Error(buildErrorMessage(3, `HTTP ${response.status}. Check deployed version + access settings.`));
         }
 
-        const data = await response.json();
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (jsonErr) {
+          throw new Error(buildErrorMessage(4, "Response was not JSON."));
+        }
+
         if (!data || !data.ok) {
-          throw new Error(data && data.error ? data.error : "Unknown API error");
+          const serverMessage = data && data.error ? data.error : "Unknown API error";
+          throw new Error(buildErrorMessage(5, serverMessage));
         }
 
         const fullName = `${firstName} ${lastName}`.trim();
@@ -525,10 +558,15 @@
         setStatus("success", "Submitted successfully. Your join links are now unlocked.");
       } catch (error) {
         if (error && error.name === "AbortError") {
-          setStatus("error", "Request timed out. Please try again.");
+          setStatus("error", buildErrorMessage(2));
+        } else if (error && error.message && /Error #/.test(error.message)) {
+          setStatus("error", error.message);
+        } else if (error && error.message && /Failed to fetch|NetworkError|Load failed/i.test(error.message)) {
+          setStatus("error", buildErrorMessage(6));
         } else {
-          setStatus("error", "Could not submit right now. Please try again.");
+          setStatus("error", buildErrorMessage(7));
         }
+        console.error("[Community Submit Error]", error);
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalButton;
@@ -593,4 +631,3 @@
   </script>
 </body>
 </html>
-
