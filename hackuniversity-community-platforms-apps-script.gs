@@ -53,8 +53,9 @@ function doPost(e) {
     const email = normalize_(params.email).toLowerCase();
     const agreeTerms = normalize_(params.agreeTerms).toLowerCase();
     const agreeMlh = normalize_(params.agreeMlh).toLowerCase();
+    const origin = normalize_(params.origin);
     const pageUrl = normalize_(params.pageUrl);
-    if (!isAllowedPageUrl_(pageUrl)) {
+    if (!isAllowedOrigin_(origin, pageUrl)) {
       return jsonOutput_({ ok: false, error: `Blocked origin. Allowed origin: ${ALLOWED_ORIGIN}` });
     }
 
@@ -169,13 +170,15 @@ function normalize_(value) {
   return String(value == null ? "" : value).trim();
 }
 
-function isAllowedPageUrl_(pageUrl) {
-  try {
-    if (!pageUrl) return false;
-    return new URL(pageUrl).origin === ALLOWED_ORIGIN;
-  } catch (error) {
-    return false;
-  }
+function isAllowedOrigin_(origin, pageUrl) {
+  const cleanedOrigin = normalize_(origin).toLowerCase().replace(/\/+$/, "");
+  const allowed = ALLOWED_ORIGIN.toLowerCase().replace(/\/+$/, "");
+  const cleanedPageUrl = normalize_(pageUrl).toLowerCase();
+
+  if (cleanedOrigin && cleanedOrigin === allowed) return true;
+  if (cleanedPageUrl && cleanedPageUrl.indexOf(allowed + "/") === 0) return true;
+  if (cleanedPageUrl && cleanedPageUrl === allowed) return true;
+  return false;
 }
 
 function jsonOutput_(data) {
