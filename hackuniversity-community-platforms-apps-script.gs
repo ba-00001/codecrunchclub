@@ -55,8 +55,14 @@ function doPost(e) {
     const firstName = normalize_(params.firstName);
     const lastName = normalize_(params.lastName);
     const school = normalize_(params.school);
+    const majorProgram = normalize_(params.majorProgram);
     const graduationYear = normalize_(params.graduationYear);
+    const personalEmail = normalize_(params.personalEmail).toLowerCase();
     const email = normalize_(params.email).toLowerCase();
+    const discordUser = normalize_(params.discordUser);
+    const phoneNumber = normalize_(params.phoneNumber);
+    const age = normalize_(params.age);
+    const location = normalize_(params.location);
     const agreeTerms = normalize_(params.agreeTerms).toLowerCase();
     const agreeMlh = normalize_(params.agreeMlh).toLowerCase();
     const origin = normalize_(params.origin);
@@ -65,7 +71,7 @@ function doPost(e) {
       return jsonOutput_({ ok: false, error: `Blocked origin. Allowed origin: ${ALLOWED_ORIGIN}` });
     }
 
-    const validationError = validateInput_(firstName, lastName, school, graduationYear, email, agreeTerms, agreeMlh);
+    const validationError = validateInput_(firstName, lastName, school, majorProgram, graduationYear, personalEmail, email, discordUser, phoneNumber, age, location, agreeTerms, agreeMlh);
     if (validationError) {
       return jsonOutput_({ ok: false, error: validationError });
     }
@@ -74,8 +80,14 @@ function doPost(e) {
       firstName: firstName,
       lastName: lastName,
       school: school,
+      majorProgram: majorProgram,
       graduationYear: graduationYear,
+      personalEmail: personalEmail,
       email: email,
+      discordUser: discordUser,
+      phoneNumber: phoneNumber,
+      age: age,
+      location: location,
       agreeTerms: agreeTerms,
       agreeMlh: agreeMlh,
       pageUrl: pageUrl,
@@ -92,14 +104,20 @@ function doPost(e) {
   }
 }
 
-function validateInput_(firstName, lastName, school, graduationYear, email, agreeTerms, agreeMlh) {
-  if (!firstName || !lastName || !school || !graduationYear || !email) {
+function validateInput_(firstName, lastName, school, majorProgram, graduationYear, personalEmail, email, discordUser, phoneNumber, age, location, agreeTerms, agreeMlh) {
+  if (!firstName || !lastName || !school || !majorProgram || !graduationYear || !personalEmail || !email || !discordUser || !phoneNumber || !age || !location) {
     return "All fields are required.";
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(personalEmail)) {
+    return "Invalid personal email format.";
+  }
   if (!emailRegex.test(email)) {
     return "Invalid email format.";
+  }
+  if (!/^\d{1,3}$/.test(age) || Number(age) < 13 || Number(age) > 120) {
+    return "Invalid age. Must be between 13 and 120.";
   }
   if (agreeTerms !== "yes") {
     return "Terms agreement is required.";
@@ -121,8 +139,14 @@ function appendSignupRow_(payload) {
       "last_name",
       "full_name",
       "school",
+      "major_program",
       "graduation_year",
+      "personal_email",
       "email",
+      "discord_user",
+      "phone_number",
+      "age",
+      "location",
       "agree_terms",
       "agree_mlh",
       "source_page",
@@ -137,8 +161,14 @@ function appendSignupRow_(payload) {
     payload.lastName,
     fullName,
     payload.school,
+    payload.majorProgram,
     payload.graduationYear,
+    payload.personalEmail,
     payload.email,
+    payload.discordUser,
+    payload.phoneNumber,
+    payload.age,
+    payload.location,
     payload.agreeTerms,
     payload.agreeMlh,
     payload.pageUrl || "",

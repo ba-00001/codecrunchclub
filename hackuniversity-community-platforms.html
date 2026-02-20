@@ -382,19 +382,47 @@
           <input id="school" name="school" type="text" autocomplete="organization" placeholder="Ex: Florida International University" required />
         </div>
 
+        <div class="field-row">
+          <label for="major-program">Major / Program</label>
+          <input id="major-program" name="majorProgram" type="text" placeholder="Ex: BS of Science in CS" required />
+        </div>
+
         <div class="grid field-row">
           <div>
             <label for="grad-year">Current  Year / Semester/ Graduation</label>
             <input id="grad-year" name="graduationYear" type="text" maxlength="40" placeholder="Ex: Sophomore / Spring / 2028" required />
           </div>
           <div>
-            <label for="Gmail">Email</label>
-            <input id="Gmail" name="Gmail" type="Gmail" autocomplete="Gmail" placeholder="name@Gmail.com" required />
+            <label for="personal-email">Personal Email</label>
+            <input id="personal-email" name="personalEmail" type="email" autocomplete="email" placeholder="name@gmail.com" required />
           </div>
-           <div>
+        </div>
+
+        <div class="grid field-row">
+          <div>
             <label for="email">School Email</label>
             <input id="email" name="email" type="email" autocomplete="email" placeholder="name@school.edu" required />
           </div>
+          <div>
+            <label for="discord-user">Discord Username</label>
+            <input id="discord-user" name="discordUser" type="text" autocomplete="username" placeholder="Ex: codecrunchfan#1234 or @codecrunchfan" required />
+          </div>
+        </div>
+
+        <div class="grid field-row">
+          <div>
+            <label for="phone-number">Phone Number</label>
+            <input id="phone-number" name="phoneNumber" type="tel" autocomplete="tel" placeholder="Ex: +1 305 555 1234" required />
+          </div>
+          <div>
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="13" max="120" placeholder="Ex: 18" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label for="location">City / State or Province / Country</label>
+          <input id="location" name="location" type="text" autocomplete="address-level2" placeholder="Ex: Miami, Florida, USA" required />
         </div>
 
         <div class="consent-wrap">
@@ -436,8 +464,8 @@
           <a id="instagram-link" class="btn join-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Join IG Private Group</a>
           <a id="mailing-link" class="btn join-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-envelope"></i> Join Mailing List</a>
         </div>
+        <p class="notice">If you do not have a GroupMe account, the invite link will prompt you to create one first, then you must reopen the invite link to join.</p>
         <p class="notice">For security, community invites are only available after verification.</p>
-        <p class="notice">For security, community invites are only available after verification. If you do not have a GroupMe account, the invite link will prompt you to create one first, then you must reopen the invite link to join.</p>
       </div>
     </section>
   </main>
@@ -504,7 +532,7 @@
       #8 Form must be submitted from allowed domain only.
     */
     const ALLOWED_ORIGIN = "https://codecrunchglobal.vercel.app";
-    const API_URL = "https://script.google.com/macros/s/AKfycbzcP_0Jg0ikVyg0A_vYEwQbCO0h5FU1S08mW_uuiSavsbCsXp8hhvYy-JfRR3Uqi06pew/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbyvVaeB0Rpbn-rfF8qUUfp6vk4G-oY2J_xDnDdZ79Bz6murlbtdEcNDWAQZGAer9sWApA/exec";
 
     const form = document.getElementById("community-access-form");
     const submitBtn = document.getElementById("submit-btn");
@@ -515,8 +543,14 @@
     const firstNameInput = document.getElementById("first-name");
     const lastNameInput = document.getElementById("last-name");
     const schoolInput = document.getElementById("school");
+    const majorProgramInput = document.getElementById("major-program");
     const gradYearInput = document.getElementById("grad-year");
+    const personalEmailInput = document.getElementById("personal-email");
     const emailInput = document.getElementById("email");
+    const discordUserInput = document.getElementById("discord-user");
+    const phoneNumberInput = document.getElementById("phone-number");
+    const ageInput = document.getElementById("age");
+    const locationInput = document.getElementById("location");
     const agreeTermsInput = document.getElementById("agree-terms");
     const agreeMlhInput = document.getElementById("agree-mlh");
 
@@ -574,16 +608,28 @@
       const firstName = (firstNameInput.value || "").trim();
       const lastName = (lastNameInput.value || "").trim();
       const school = (schoolInput.value || "").trim();
+      const majorProgram = (majorProgramInput.value || "").trim();
       const graduationYear = (gradYearInput.value || "").trim();
+      const personalEmail = (personalEmailInput.value || "").trim().toLowerCase();
       const email = (emailInput.value || "").trim().toLowerCase();
+      const discordUser = (discordUserInput.value || "").trim();
+      const phoneNumber = (phoneNumberInput.value || "").trim();
+      const age = (ageInput.value || "").trim();
+      const location = (locationInput.value || "").trim();
       const agreeTerms = Boolean(agreeTermsInput && agreeTermsInput.checked);
       const agreeMlh = Boolean(agreeMlhInput && agreeMlhInput.checked);
 
-      if (!firstName || !lastName || !school || !graduationYear || !email) {
+      if (!firstName || !lastName || !school || !majorProgram || !graduationYear || !personalEmail || !email || !discordUser || !phoneNumber || !age || !location) {
         return setStatus("error", "Please complete all required fields.");
+      }
+      if (!isValidEmail(personalEmail)) {
+        return setStatus("error", "Please enter a valid personal email format.");
       }
       if (!isValidEmail(email)) {
         return setStatus("error", "Please enter a valid email format.");
+      }
+      if (!/^\d{1,3}$/.test(age) || Number(age) < 13 || Number(age) > 120) {
+        return setStatus("error", "Please enter a valid age (13-120).");
       }
       if (!agreeTerms) {
         return setStatus("error", "Please check the Terms and Conditions agreement box.");
@@ -609,8 +655,14 @@
           firstName,
           lastName,
           school,
+          majorProgram,
           graduationYear,
+          personalEmail,
           email,
+          discordUser,
+          phoneNumber,
+          age,
+          location,
           agreeTerms: agreeTerms ? "yes" : "no",
           agreeMlh: agreeMlh ? "yes" : "no",
           origin: window.location.origin,
