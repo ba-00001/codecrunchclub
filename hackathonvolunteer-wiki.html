@@ -524,11 +524,11 @@ background: #fff;
 <nav class="navbar">
  <div class="nav-container">
  <div class="nav-brand">
- <a href="#" data-link-key="navBrandHome" aria-label="Hack University Worldwide Home" class="brand-title">
- Hack University Worldwide Initiative
+ <a href="#" data-link-key="navBrandHome" aria-label="Code Crunch Workwide Home" class="brand-title">
+ Code Crunch Workwide
  </a>
  <a href="#" data-link-key="navBrandMission" class="brand-url">
- HackUniversity.vercel.app / Home
+ CodeCrunchGlobal.vercel.app / Home
  </a>
  </div>
 
@@ -611,6 +611,14 @@ background: #fff;
  <h2>VOLUNTEERS - Forms, Status & Resources</h2>
 
  <div class="hackathons-list" id="pinned-cards"></div>
+ <div class="vh-row" style="margin-top:10px">
+ <details class="vh-qa vh-qa-formatted">
+ <summary><span class="vh-summary-text">All Event Form No. 2 Status</span></summary>
+ <div class="vh-qa-content">
+ <div id="form2-status-list"></div>
+ </div>
+ </details>
+ </div>
 
  <div class="section-header upcoming-header">
  <h3>UPCOMING</h3>
@@ -2300,6 +2308,36 @@ function bindForm2RegistrationSelector(){
  });
  }
 
+ function getForm2AvailabilityLabel(h){
+ const now = nowInMiami();
+ const hasUrl = safeUrl(h.formNo2Url) !== '#';
+ const isUpcomingByEnd = (() => {
+ const end = parseMiamiDateBoundary((h.endDate || '').trim(), true);
+ if (!end) return false;
+ return now <= end;
+ })();
+ if (hasUrl) return 'Available';
+ return isUpcomingByEnd ? 'Coming Soon' : 'Not Available';
+ }
+
+ function renderForm2StatusList(){
+ const container = document.getElementById('form2-status-list');
+ if (!container) return;
+
+ const rows = [...hackathons].map((h, idx) => {
+ const label = getForm2AvailabilityLabel(h);
+ const color = label === 'Available' ? '#137333' : (label === 'Coming Soon' ? '#b45309' : '#d33b01');
+ return `
+ <div style="padding:8px 0;border-bottom:1px solid #eee;font-size:13px;line-height:1.45">
+ <strong>${idx + 1}. ${h.name.trim()}</strong>
+ <span style="color:${color};font-weight:700"> - ${label}</span>
+ </div>
+ `;
+ }).join('');
+
+ container.innerHTML = rows;
+ }
+
  /* -----------------------------------------------------------
  PINNED CARDS (always first in UPCOMING)
  ----------------------------------------------------------- */
@@ -2540,6 +2578,7 @@ function bindForm2RegistrationSelector(){
 
  // Render pinned cards before the upcoming list
  document.getElementById('pinned-cards').innerHTML = pinnedCardsHTML();
+ renderForm2StatusList();
  bindForm2RegistrationSelector();
  bindCertificateSelector();
 

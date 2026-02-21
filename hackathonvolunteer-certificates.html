@@ -21,45 +21,71 @@
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#202124;min-height:100vh}
 
-    /* NAV */
-    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;position:sticky;top:0;z-index:100}
-    .nav-container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
-    .nav-brand a{color:#4285f4;text-decoration:none;font-size:22px;font-weight:600}
-    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    /* NAV + ORG CLOCK (same layout style as volunteer wiki) */
+    :root{
+      --navbar-h:64px;
+      --navbar-h-m:72px;
+      --clock-bar-h:44px;
+      --world-toggle-h:38px;
+    }
+    .navbar{background:#fff;border-bottom:1px solid #e8eaed;padding:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.05);position:fixed;top:0;left:0;right:0;z-index:2000}
+    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+    .nav-brand{display:flex;flex-direction:column;line-height:1.1}
+    .brand-title,.brand-url{display:inline-block;white-space:nowrap;text-decoration:none}
+    .brand-title{font-weight:700;font-size:clamp(0.95rem,3vw,1.25rem);color:#1a73e8}
+    .brand-url{font-size:clamp(0.8rem,2.5vw,1.05rem);color:#0f766e;text-decoration:underline}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
     .nav-link{color:#5f6368;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
     .nav-link:hover{background:#f1f3f4;color:#1a73e8}
-
-    /* Timezone band */
-    .timezone-section{background:#ffffff;border-bottom:1px solid #e8eaed;padding:24px 20px;margin-bottom:24px}
-    .timezone-header{text-align:center;margin-bottom:18px}
-    .timezone-header h2{color:#202124;font-size:24px;font-weight:600}
-    .timezone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1100px;margin:0 auto}
-    .timezone-item{background:#ffffff;border:1px solid #dadce0;border-radius:8px;padding:14px;text-align:center;transition:all .2s ease}
-    .timezone-item:hover{box-shadow:0 1px 6px rgba(32,33,36,.28)}
-    .timezone-flag{font-size:18px;margin-bottom:6px}
-    .timezone-time{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:4px;font-family:'Roboto Mono',monospace}
-    .timezone-location{color:#5f6368;font-size:12px}
+    .nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:6px;border:1px solid #dadce0;background:#fff;color:#202124}
+    .event-clock-bar{
+      position:fixed;top:var(--navbar-h);left:0;right:0;z-index:1900;height:var(--clock-bar-h);
+      display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border-bottom:1px solid #dadce0;padding:0 14px
+    }
+    .event-clock-label{font-size:12.5px;color:#5f6368;font-weight:700;white-space:nowrap}
+    .event-clock-time{font-size:13px;font-weight:900;color:#202124;white-space:nowrap}
+    .event-clock-date{font-size:12.5px;color:#5f6368;white-space:nowrap}
+    .world-clock-wrap{
+      position:fixed;top:calc(var(--navbar-h) + var(--clock-bar-h));left:0;right:0;z-index:1850;background:#fff;border-bottom:1px solid #e8eaed
+    }
+    .world-clock-toggle{
+      width:100%;height:var(--world-toggle-h);border:0;background:#fff;color:#1a73e8;font-weight:700;font-size:13px;cursor:pointer
+    }
+    .world-clock-bar{
+      display:none;gap:12px;overflow:auto;white-space:nowrap;padding:8px 12px 10px;border-top:1px solid #f1f3f4;justify-content:center
+    }
+    .world-clock-bar.open{display:flex}
+    .world-clock-item{border:1px solid #dadce0;border-radius:8px;padding:6px 10px;background:#fff;min-width:140px;text-align:center}
+    .world-clock-time{font-size:13px;font-weight:700;color:#1a73e8;font-family:'Roboto Mono',monospace}
+    .world-clock-date{font-size:11px;color:#6b7280;margin-top:2px}
+    .world-clock-location{font-size:11.5px;color:#5f6368}
 
     /* Main */
     .container{max-width:1100px;margin:0 auto;padding:24px}
     .surface{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:24px}
 
-    /* Portal buttons */
-    .portal-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:14px;
-      margin-top:14px
+    /* Certificate selector */
+    .portal-picker{
+      margin-top:14px;
+      border:1px solid #dadce0;
+      border-radius:10px;
+      padding:14px;
+      background:#fff;
     }
+    .portal-select{
+      width:100%;
+      min-height:44px;
+      border:1px solid #dadce0;
+      border-radius:8px;
+      padding:0 10px;
+      font-size:14px;
+      color:#202124;
+      background:#fff;
+    }
+    .portal-grid,
     .portal-btn{
-      display:flex;flex-direction:column;gap:4px;
-      background:#111827;color:#fff;text-decoration:none;
-      padding:16px;border-radius:10px;border:2px solid #1f2937;
-      font-family:"Courier New",monospace;font-weight:700;
-      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease
+      display:none !important;
     }
-    .portal-btn small{font-weight:500;opacity:.9}
-    .portal-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15);border-color:#2563eb}
     .portal-note{margin-top:10px;color:#4b5563;font-size:.9rem;text-align:center}
 
     /* Cards, checklist, FAQ */
@@ -110,7 +136,18 @@
     .footer-bottom p{font-size:14px;opacity:.9;margin-bottom:8px}
     .footer-bottom .credits{font-size:12px;opacity:.85}
 
-    @media (max-width:520px){.container{padding:16px}}
+    body{padding-top:calc(var(--navbar-h) + var(--clock-bar-h) + var(--world-toggle-h))}
+    @media (max-width:768px){
+      .nav-toggle{display:inline-flex}
+      .nav-links{display:none;width:100%;flex-direction:column;gap:8px;padding-top:12px}
+      .nav-links.is-open{display:flex}
+      .nav-container{flex-wrap:wrap;gap:10px}
+      .nav-link{width:100%;padding:10px 12px}
+      .event-clock-bar{top:var(--navbar-h-m)}
+      .world-clock-wrap{top:calc(var(--navbar-h-m) + var(--clock-bar-h))}
+      body{padding-top:calc(var(--navbar-h-m) + var(--clock-bar-h) + var(--world-toggle-h))}
+    }
+    @media (max-width:520px){.container{padding:16px}.event-clock-date{display:none}}
   </style>
 </head>
 <body>
@@ -118,54 +155,36 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="https://codecrunchglobal.vercel.app" target="_blank" rel="noopener"><strong>Code Crunch</strong></a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners" aria-label="Code Crunch Worldwide Home" class="brand-title">Code Crunch Worldwide</a>
+        <a href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission" class="brand-url">CodeCrunchGlobal.vercel.app / Home</a>
       </div>
-      <div class="nav-links">
-        <a href="https://colorstackatfiu.vercel.app/" class="nav-link">ColorStack at FIU</a>
-        <a href="https://cahsiatfiu.vercel.app/" class="nav-link">CAHSI at FIU</a>
-        <a href="https://gdgatfiu.vercel.app/" class="nav-link">Google Developer Group at FIU</a>
-        <a href="https://raspberrypicrunch.vercel.app/" class="nav-link">Raspberry Pi Code Crunch</a>
-        <a href="https://codecrunchglobal.vercel.app/hackuniversitydonate.html" class="nav-link">Support Us</a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="huNavLinks" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="nav-links" id="huNavLinks">
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
       </div>
     </div>
   </nav>
 
-  <!-- TIMEZONE BAND -->
-  <div class="timezone-section">
-    <div class="timezone-header">
-      <h2>🏆 Hackathon HQ</h2>
-    </div>
-    <div class="timezone-grid">
-      <div class="timezone-item">
-        <div class="timezone-flag">🇺🇸 - HQ</div>
-        <div class="timezone-time" id="miami-time">--:--:--</div>
-        <div class="timezone-location">Miami, FL (ET)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇪🇺</div>
-        <div class="timezone-time" id="london-time">--:--:--</div>
-        <div class="timezone-location">London (GMT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌍</div>
-        <div class="timezone-time" id="lagos-time">--:--:--</div>
-        <div class="timezone-location">Lagos (WAT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🌏</div>
-        <div class="timezone-time" id="tokyo-time">--:--:--</div>
-        <div class="timezone-location">Tokyo (JST)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇦🇺</div>
-        <div class="timezone-time" id="sydney-time">--:--:--</div>
-        <div class="timezone-location">Sydney (AEDT)</div>
-      </div>
-      <div class="timezone-item">
-        <div class="timezone-flag">🇮🇳</div>
-        <div class="timezone-time" id="mumbai-time">--:--:--</div>
-        <div class="timezone-location">Mumbai (IST)</div>
-      </div>
+  <div class="event-clock-bar" role="status" aria-label="Event Clock - Eastern Time">
+    <span class="event-clock-label">Organization Clock - <strong>Eastern Time (ET)</strong> - Miami, FL</span>
+    <span id="et-clock" class="event-clock-time">--:--:-- ET</span>
+    <span class="event-clock-date">(<span id="et-date"></span>)</span>
+  </div>
+
+  <div class="world-clock-wrap">
+    <button id="world-clock-toggle" class="world-clock-toggle" type="button" aria-expanded="false" aria-controls="world-clock-bar">World Clocks</button>
+    <div id="world-clock-bar" class="world-clock-bar">
+      <div class="world-clock-item"><div class="world-clock-time" id="miami-time">--:--:--</div><div class="world-clock-date" id="miami-date">---</div><div class="world-clock-location">Miami, FL (ET)</div></div>
+      <div class="world-clock-item"><div class="world-clock-time" id="london-time">--:--:--</div><div class="world-clock-date" id="london-date">---</div><div class="world-clock-location">London (GMT)</div></div>
+      <div class="world-clock-item"><div class="world-clock-time" id="lagos-time">--:--:--</div><div class="world-clock-date" id="lagos-date">---</div><div class="world-clock-location">Lagos (WAT)</div></div>
+      <div class="world-clock-item"><div class="world-clock-time" id="tokyo-time">--:--:--</div><div class="world-clock-date" id="tokyo-date">---</div><div class="world-clock-location">Tokyo (JST)</div></div>
+      <div class="world-clock-item"><div class="world-clock-time" id="sydney-time">--:--:--</div><div class="world-clock-date" id="sydney-date">---</div><div class="world-clock-location">Sydney (AEDT)</div></div>
+      <div class="world-clock-item"><div class="world-clock-time" id="mumbai-time">--:--:--</div><div class="world-clock-date" id="mumbai-date">---</div><div class="world-clock-location">Mumbai (IST)</div></div>
     </div>
   </div>
 
@@ -174,86 +193,18 @@
          CERTIFICATE PORTAL BUTTONS
          ========================= -->
     <section class="surface" id="certificate-portals">
-      <h2 class="card-title" style="text-align:center">Choose your certificate portal</h2>
+      <h2 class="card-title" style="text-align:center">Choose your Thank you certificate portal</h2>
       <p class="card-description" style="text-align:center">
         Pick the event you attended to open its certificate page.
       </p>
-
-        <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-2026-hackfiestamiamifeb2026.html">
-          <span>🏆 Hack Fiesta Miami Edition Feb 2026 — Session A & B</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a> 
-
-       <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305jan2026.html">
-          <span>🏆 305 Hackathon: Jan 2026 — Session A & B</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a> 
-
-        <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-codefest2025.html">
-          <span>🏆 CodeFest Edition: Dec 2025 — Session A & B</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a> 
-
-         <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sb.html">
-          <span>⚡ 305 Hackathon Edition Nov'25 Session B (In-Person 12hrs)</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a> 
-      
-         <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sa.html">
-          <span>🏆 305 Hackathon Edition Nov'25 Session A (Online)</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a> 
-      
-
-         <div class="portal-grid"></div>
-      <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowhermini-10.18.25.html">
-          <span>⚡ EmpowHer Session B (In-Person 12hrs) — Fall 2025</span>
-          <!-- <small>Open certificate portal soon - We are preparing it for you</small> -->
-          <small>Open certificate portal</small>
-        </a>
-
-
-         <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowher-10.13-20.25.html">
-          <span>💪 EmpowHer Hack Session A — Fall 2025</span>
-          <!-- <small>Open certificate portal- Comming Soon</small> -->
-           <small>Open certificate portal soon - We are preparing it for you</small>
-        </a>
-
-
-         <div class="portal-grid"></div>
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305-fall2025.html">
-          <span>🏆 305 Hackathon Edition Sep 2025 (In-Person)</span>
-          <small>Open certificate portal</small>
-        </a>
-
-            <div class="portal-grid">
-        <a class="portal-btn" href="https://codecrunchglobal.vercel.app/hackathonvolunteer-certificate-summercodex2025.html">
-          <span>🏆 SummerCodeX — Summer 2025</span>
-          <small>Open certificate portal</small>
-        </a>
-
-    
-
-
-
-
-
-
+      <div class="portal-picker">
+        <select id="certificate-portal-select" class="portal-select" aria-label="Choose your Thank you certificate portal">
+          <option value="">Select your event certificate portal</option>
+        </select>
       </div>
 
       <div class="portal-note">
-        🔒 You’ll be asked to verify with the same email used at registration on the next page.
+        You will be asked to verify with the same email used at registration on the next page.
       </div>
     </section>
 
@@ -499,16 +450,30 @@
       item.classList.toggle('open');
     }
 
-    // Timezone clocks
+    // World clocks
     function updateTimes() {
       const now = new Date();
       const set = (id, tz) => {
-        const t = new Date(now.toLocaleString("en-US",{timeZone:tz}));
-        const hh = String(t.getHours()).padStart(2,'0');
-        const mm = String(t.getMinutes()).padStart(2,'0');
-        const ss = String(t.getSeconds()).padStart(2,'0');
-        const el = document.getElementById(id);
-        if (el) el.textContent = `${hh}:${mm}:${ss}`;
+        const timeEl = document.getElementById(id);
+        const dateEl = document.getElementById(id.replace('-time','-date'));
+        if (timeEl) {
+          timeEl.textContent = new Intl.DateTimeFormat("en-US", {
+            timeZone: tz,
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+          }).format(now).toUpperCase();
+        }
+        if (dateEl){
+          dateEl.textContent = new Intl.DateTimeFormat("en-US", {
+            timeZone: tz,
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+          }).format(now);
+        }
       };
       set('miami-time',"America/New_York");
       set('london-time',"Europe/London");
@@ -516,6 +481,143 @@
       set('tokyo-time',"Asia/Tokyo");
       set('sydney-time',"Australia/Sydney");
       set('mumbai-time',"Asia/Kolkata");
+    }
+
+    function startETClock(){
+      const clockEl = document.getElementById("et-clock");
+      const dateEl = document.getElementById("et-date");
+      if (!clockEl || !dateEl) return;
+      const tz = "America/New_York";
+      const tick = () => {
+        const now = new Date();
+        const timeStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz, hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true
+        }).format(now);
+        const dateStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz, weekday: "short", month: "short", day: "numeric", year: "numeric"
+        }).format(now);
+        clockEl.textContent = `${timeStr} ET`;
+        dateEl.textContent = dateStr;
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    function syncTopOffsetPadding(){
+      const nav = document.querySelector(".navbar");
+      const orgClock = document.querySelector(".event-clock-bar");
+      const worldWrap = document.querySelector(".world-clock-wrap");
+      const navH = nav ? nav.getBoundingClientRect().height : 0;
+      const orgH = orgClock ? orgClock.getBoundingClientRect().height : 0;
+      const worldH = worldWrap ? worldWrap.getBoundingClientRect().height : 0;
+      document.body.style.paddingTop = `${Math.ceil(navH + orgH + worldH)}px`;
+    }
+
+    const certificateEvents = [
+      // 2026
+      { year: 2026, name: "305 Hackathon Edition Jan 2026 - Session A & B", endDate: "2026-01-24", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305jan2026.html" },
+      { year: 2026, name: "Hack Fiesta Miami Edition Feb 2026 - Session A & B", endDate: "2026-02-14", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-2026-hackfiestamiamifeb2026.html" },
+      { year: 2026, name: "305 Hackathon Edition March 2026 - Session A & B", endDate: "2026-03-20", url: "#" },
+      { year: 2026, name: "305 Hackathon Edition Apr 2026 - Session A & B", endDate: "2026-04-11", url: "#" },
+      { year: 2026, name: "CodeStorm 2026 - Session A & B", endDate: "2026-05-16", url: "#" },
+      { year: 2026, name: "305 Hackathon Edition Jun 2026 - Session A & B", endDate: "2026-06-13", url: "#" },
+      { year: 2026, name: "SummerCodeX 2026 - Session A & B", endDate: "2026-07-11", url: "#" },
+      { year: 2026, name: "305 Hackathon Edition Aug 2026 - Session A & B", endDate: "2026-08-15", url: "#" },
+      { year: 2026, name: "305 Hackathon Edition Sep 2026 - Session A & B", endDate: "2026-09-12", url: "#" },
+      { year: 2026, name: "EmpowHER Hackathon 2026 - Session A & B", endDate: "2026-10-03", url: "#" },
+      { year: 2026, name: "305 Hackathon Nov 2026 - Session A & B", endDate: "2026-11-07", url: "#" },
+      { year: 2026, name: "CodeFest Hackathon 2026 - Session A & B", endDate: "2026-11-21", url: "#" },
+
+      // 2025
+      { year: 2025, name: "305 Hackathon Edition Nov 2025 - Session A (Online)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sa.html" },
+      { year: 2025, name: "305 Hackathon Edition Nov 2025 - Session B (In-Person)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sb.html" },
+      { year: 2025, name: "CodeFest Dec 2025 - Session A & B", endDate: "2025-12-06", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-codefest2025.html" },
+      { year: 2025, name: "ColorStack Winter Hackathon Dec 2025", endDate: "2026-01-12", url: "#" },
+      { year: 2025, name: "305 Hackathon Sep 2025 edition", endDate: "2025-09-21", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305-fall2025.html" },
+      { year: 2025, name: "EmpowHER Hackathon Oct 2025 - Session A", endDate: "2025-10-20", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowher-10.13-20.25.html" },
+      { year: 2025, name: "EmpowHER HackDAY Oct 025 - Session B", endDate: "2025-10-18", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowhermini-10.18.25.html" },
+      { year: 2025, name: "SummerCodeX Jul 2025", endDate: "2025-07-28", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificate-summercodex2025.html" },
+      { year: 2025, name: "CodeStorm May 2025", endDate: "2025-05-26", url: "#" },
+      { year: 2025, name: "305 Hackathon Mar 2025 edition", endDate: "2025-03-31", url: "#" },
+      { year: 2025, name: "HackFiesta Miami Mar 2025", endDate: "2025-03-23", url: "#" }
+    ];
+
+    function asLocalDate(ymd){
+      const [y,m,d] = ymd.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+
+    function renderCertificatePortalSelector(){
+      const section = document.getElementById("certificate-portals");
+      if (!section) return;
+
+      let select = document.getElementById("certificate-portal-select");
+      if (!select) {
+        const picker = document.createElement("div");
+        picker.className = "portal-picker";
+        picker.innerHTML = `
+          <select id="certificate-portal-select" class="portal-select" aria-label="Choose your Thank you certificate portal">
+            <option value="">Select your event certificate portal</option>
+          </select>
+        `;
+        const note = section.querySelector(".portal-note");
+        if (note) section.insertBefore(picker, note);
+        else section.appendChild(picker);
+        select = picker.querySelector("select");
+      }
+
+      const note = section.querySelector(".portal-note");
+      if (note) {
+        note.textContent = "You will be asked to verify with the same email used at registration on the next page.";
+      }
+
+      const now = new Date();
+      // Status rules:
+      // No URL (#/missing) + upcoming => Coming Soon
+      // No URL + past => Not Available
+      // URL present => Available
+      // Rubric:
+      // URL exists -> Available
+      // no URL + upcoming -> Coming Soon
+      // no URL + past -> Not Available
+      const years = [...new Set(certificateEvents.map(e => e.year))].sort((a,b) => b - a);
+      const groupsHtml = years.map((year) => {
+        const yearEvents = certificateEvents.filter(e => e.year === year);
+        const upcoming = yearEvents
+          .filter(e => asLocalDate(e.endDate) >= now)
+          .sort((a,b) => asLocalDate(a.endDate) - asLocalDate(b.endDate));
+        const closed = yearEvents
+          .filter(e => asLocalDate(e.endDate) < now)
+          .sort((a,b) => asLocalDate(b.endDate) - asLocalDate(a.endDate));
+
+        const renderOption = (e, state) => {
+          const hasUrl = !!(e.url && e.url.trim() && e.url.trim() !== "#");
+          const disabled = !hasUrl;
+          const note = hasUrl ? "" : (state === "upcoming" ? " (Coming Soon)" : " (Not Available)");
+          return `<option value="${hasUrl ? e.url : ""}" ${disabled ? "disabled" : ""}>${e.name}${note}</option>`;
+        };
+
+        const upcomingHtml = upcoming.length ? upcoming.map(e => renderOption(e, "upcoming")).join("") : `<option value="" disabled>None</option>`;
+        const closedHtml = closed.length ? closed.map(e => renderOption(e, "closed")).join("") : `<option value="" disabled>None</option>`;
+
+        return `
+          <optgroup label="Event Season ${year}">
+            <option value="" disabled>--- Upcoming / Opening Soon ---</option>
+            ${upcomingHtml}
+            <option value="" disabled>--- Closed / Completed ---</option>
+            ${closedHtml}
+          </optgroup>
+        `;
+      }).join("");
+
+      select.innerHTML = `<option value="">Select your event certificate portal</option>${groupsHtml}`;
+      select.addEventListener("change", () => {
+        const selected = select.options[select.selectedIndex];
+        const url = select.value;
+        if (!url || selected.disabled) return;
+        window.open(url, "_blank", "noopener");
+      });
     }
 
     // Init
@@ -536,9 +638,48 @@
       });
 
       // Live clocks
+      startETClock();
       updateTimes();
       setInterval(updateTimes, 1000);
+      const worldToggle = document.getElementById("world-clock-toggle");
+      const worldBar = document.getElementById("world-clock-bar");
+      if (worldToggle && worldBar){
+        const setWorldToggleLabel = (open) => {
+          worldToggle.textContent = open ? "World Clocks ▲" : "World Clocks ▼";
+          worldToggle.setAttribute("aria-expanded", String(open));
+          syncTopOffsetPadding();
+        };
+        setWorldToggleLabel(false);
+        worldToggle.addEventListener("click", () => {
+          const open = worldBar.classList.toggle("open");
+          setWorldToggleLabel(open);
+        });
+      }
+      const toggleBtn = document.querySelector(".nav-toggle");
+      const navLinks = document.getElementById("huNavLinks");
+      if (toggleBtn && navLinks){
+        const setExpanded = (expanded) => {
+          toggleBtn.setAttribute("aria-expanded", String(expanded));
+          navLinks.classList.toggle("is-open", expanded);
+          const icon = toggleBtn.querySelector("i");
+          if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+          syncTopOffsetPadding();
+        };
+        toggleBtn.addEventListener("click", () => {
+          const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+          setExpanded(!expanded);
+        });
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 768) setExpanded(false);
+          syncTopOffsetPadding();
+        });
+        setExpanded(false);
+      }
+      syncTopOffsetPadding();
+      renderCertificatePortalSelector();
     });
   </script>
 </body>
 </html>
+
+
