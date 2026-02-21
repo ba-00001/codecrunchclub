@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
  <meta charset="UTF-8" />
@@ -361,6 +361,66 @@
  display: grid;
  gap: 10px;
  }
+.vh-row{
+ display: block;
+ width: 100%;
+}
+.vh-group-title{
+ font-size: 12px;
+ font-weight: 900;
+ letter-spacing: .08em;
+ text-transform: uppercase;
+ color: var(--color-primary);
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ margin: 6px 0 2px;
+ }
+ .vh-group-title::before,
+ .vh-group-title::after{
+ content: "";
+ flex: 1 1 auto;
+ height: 1px;
+ background: #d2e3fc;
+ }
+.vh-row .vh-qa{
+ width: 100%;
+ margin: 0;
+}
+.pinned-stack .vh-row > .hackathon-link{
+ width: 100%;
+ display: flex;
+ justify-content: flex-start;
+ padding: 12px 14px;
+ min-height: 46px;
+ }
+.vh-picker{
+ width: 100%;
+ border: 1px solid var(--color-border);
+ border-radius: var(--radius-md);
+ background: #fff;
+ padding: 12px 14px;
+ }
+.vh-picker-title{
+ font-size: 13px;
+ font-weight: 800;
+ margin-bottom: 8px;
+ }
+.vh-picker-controls{
+ display: flex;
+ gap: 8px;
+ flex-wrap: wrap;
+ }
+.vh-select{
+ flex: 1 1 420px;
+ min-height: 42px;
+ border: 1px solid var(--color-border);
+ border-radius: var(--radius-sm);
+ background: #fff;
+ color: var(--color-text);
+ font-size: 13px;
+ padding: 0 10px;
+ }
  .vh-qa{
  border: 1px solid var(--color-border);
  border-radius: var(--radius-md);
@@ -391,13 +451,31 @@
  .vh-qa[open] summary::after{
  content: "-";
  }
- .vh-qa-content{
- padding: 0 0 14px;
- }
- .vh-box{
- border: 1px solid var(--color-border);
- border-radius: var(--radius-md);
- background: #fff;
+.vh-qa-content{
+padding: 0 0 14px;
+}
+.vh-qa-formatted summary{
+ padding-left: 2px;
+}
+.vh-qa-formatted .vh-summary-text{
+ display: inline-block;
+ border-left: 3px solid #d2e3fc;
+ padding-left: 10px;
+}
+.vh-qa-formatted .vh-qa-content{
+ padding-left: 14px;
+}
+.vh-qa-formatted .vh-qa-content p{
+ margin-bottom: 8px;
+}
+.vh-qa-formatted .vh-qa-content ul,
+.vh-qa-formatted .vh-qa-content ol{
+ margin-left: 18px;
+}
+.vh-box{
+border: 1px solid var(--color-border);
+border-radius: var(--radius-md);
+background: #fff;
  padding: 12px 14px;
  }
  .vh-box h4{
@@ -435,6 +513,8 @@
  }
  @media (max-width: 900px){
  .vh-grid{ grid-template-columns: 1fr; }
+ .vh-row{ flex-direction: column; }
+ .vh-row .vh-qa{ width: 100%; }
  }
  </style>
 </head>
@@ -444,10 +524,10 @@
 <nav class="navbar">
  <div class="nav-container">
  <div class="nav-brand">
- <a href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners" aria-label="Hack University Worldwide Home" class="brand-title">
+ <a href="#" data-link-key="navBrandHome" aria-label="Hack University Worldwide Home" class="brand-title">
  Hack University Worldwide Initiative
  </a>
- <a href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission" class="brand-url">
+ <a href="#" data-link-key="navBrandMission" class="brand-url">
  HackUniversity.vercel.app / Home
  </a>
  </div>
@@ -463,10 +543,10 @@
  </button>
 
  <div class="nav-links" id="huNavLinks">
- <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
- <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
- <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
- <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
+ <a class="nav-link" href="#" data-link-key="navPartners">Partners</a>
+ <a class="nav-link" href="#" data-link-key="navMission">Mission</a>
+ <a class="nav-link" href="#" data-link-key="navHackathons" target="_blank" rel="noopener noreferrer">Hackathons</a>
+ <a class="nav-link" href="#" data-link-key="navCalendar" target="_blank" rel="noopener noreferrer">Calendar</a>
  </div>
  </div>
 </nav>
@@ -511,7 +591,7 @@
  <header class="w-full bg-gray-50 border-b border-gray-200">
  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
  <p class="text-xs sm:text-sm text-gray-500 mb-2">
- <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
+ <a href="#" data-link-key="heroHackUniversityHome" class="underline hover:no-underline">Hack University</a>
  <span aria-hidden="true"> / </span>
  Volunteers
  </p>
@@ -528,7 +608,7 @@
  <!-- EVENTS -->
  <div class="hackathons-section">
  <!-- Pinned cards render here -->
- <h2>VOLUNTEERS - Forms and Updates</h2>
+ <h2>VOLUNTEERS - Forms, Status & Resources</h2>
 
  <div class="hackathons-list" id="pinned-cards"></div>
 
@@ -560,31 +640,31 @@
  <div>
  <h4>Hack University</h4>
  <p>Empowering the next generation of innovators through collaboration and hands-on learning.</p>
- <a class="inline-block mt-2 font-semibold" href="https://codecrunchglobal.vercel.app/hackuniversity-discord.html" target="_blank" rel="noopener">
+ <a class="inline-block mt-2 font-semibold" href="#" data-link-key="footerHackUniversityMainCta" target="_blank" rel="noopener">
  HackUniversity.vercel.app ->
  </a>
 
  <div class="social-grid mt-4">
- <a class="social-btn" href="https://www.linkedin.com/showcase/hack-university-global/" target="_blank"><i class="fab fa-linkedin"></i></a>
- <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-instagram"></i></a>
- <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-github"></i></a>
- <a class="social-btn" href="https://hackuniversity-directory.vercel.app/" target="_blank"><i class="fab fa-youtube"></i></a>
- <a class="social-btn" href="https://codecrunchglobal.vercel.app/hackuniversity-discord.html" target="_blank"><i class="fab fa-discord"></i></a>
- <a class="social-btn" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank"><i class="far fa-calendar-alt"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialLinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialDirectoryInstagram" target="_blank"><i class="fab fa-instagram"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialDirectoryGithub" target="_blank"><i class="fab fa-github"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialDirectoryYoutube" target="_blank"><i class="fab fa-youtube"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialDiscord" target="_blank"><i class="fab fa-discord"></i></a>
+ <a class="social-btn" href="#" data-link-key="footerSocialCalendar" target="_blank"><i class="far fa-calendar-alt"></i></a>
  </div>
  </div>
 
  <div>
  <h4>Quick Links</h4>
  <ul class="subtitle">
- <li><a href="https://codecrunchglobal.vercel.app/hackuniversity.html/#mission">Mission</a></li>
- <li><a href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank">Events</a></li>
- <li><a href="https://photos.app.goo.gl/71FC5SLTQcPRbXjx6" target="_blank" rel="noopener noreferrer">Photo Album</a></li>
- <li><a href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank">Hackathons</a></li>
- <li><a href="https://hackuniversity-membership.vercel.app/" target="_blank">Membership</a></li>
- <li><a href="https://hackuniversity-eboard.vercel.app/" target="_blank">Join E-Board</a></li>
- <li><a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank">Resources</a></li>
- <li><a href="https://codecrunchglobal.vercel.app/hackuniversity-discord.html" target="_blank">Join Discord</a></li>
+ <li><a href="#" data-link-key="footerQuickMission">Mission</a></li>
+ <li><a href="#" data-link-key="footerQuickEvents" target="_blank">Events</a></li>
+ <li><a href="#" data-link-key="footerQuickPhotoAlbum" target="_blank" rel="noopener noreferrer">Photo Album</a></li>
+ <li><a href="#" data-link-key="footerQuickHackathons" target="_blank">Hackathons</a></li>
+ <li><a href="#" data-link-key="footerQuickMembership" target="_blank">Membership</a></li>
+ <li><a href="#" data-link-key="footerQuickEboard" target="_blank">Join E-Board</a></li>
+ <li><a href="#" data-link-key="footerQuickResources" target="_blank">Resources</a></li>
+ <li><a href="#" data-link-key="footerQuickDiscord" target="_blank">Join Discord</a></li>
  </ul>
  </div>
 
@@ -601,7 +681,7 @@
  <div class="footer-bottom">
  <p>(c) 2025 Hack University.</p>
  <div class="credits">
- Built with care by <a href="https://www.linkedin.com/in/iba001/" target="_blank" rel="noopener">Brian Bazurto</a>.
+ Built with care by <a href="#" data-link-key="footerCreditsBuilder" target="_blank" rel="noopener">Brian Bazurto</a>.
  </div>
  </div>
  </div>
@@ -620,7 +700,7 @@
  'https://docs.google.com/forms/d/e/1FAIpQLSdw_lVcTcq7LvLwZbjRx2UVMjLQSR_VdlWQ-3WHezgIr_6oAg/viewform?usp=dialog';
 
  const VOLUNTEER_PORTAL_URL =
- 'https://codecrunchglobal.vercel.app/volunteer-application-status.html';
+ 'https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html';
 
  const VOLUNTEER_GUIDE_URL =
  'https://docs.google.com/document/d/e/2PACX-1vQpAuDXFTB4q2obx1KeW3IBKIQMun2RrXMA62nvvQEQWb1ENcWIAx9Qn2E2uvFEkzSufJfp3Q6UAOXl/pub';
@@ -629,15 +709,49 @@
  'https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates.html';
 
  const DISCORD_VOLUNTEERS_URL =
- 'https://codecrunchglobal.vercel.app/hackathonvolunteer-logindiscord.html';
+ 'https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html';
 
- const ALL_EVENTS_WEBSITE_URL =
- 'https://hackuniversity-hackathons.vercel.app/';
+const ALL_EVENTS_WEBSITE_URL =
+'https://hackuniversity-hackathons.vercel.app/';
 
- /* -----------------------------------------------------------
- JSON BUTTON RULES (Tri-State)
- - true => enabled + visible
- - false => disabled but visible
+ const STATIC_LINKS = {
+ navBrandHome: 'https://codecrunchglobal.vercel.app/hackuniversity.html#partners',
+ navBrandMission: 'https://codecrunchglobal.vercel.app/hackuniversity.html#mission',
+ navPartners: 'https://codecrunchglobal.vercel.app/hackuniversity.html#partners',
+ navMission: 'https://codecrunchglobal.vercel.app/hackuniversity.html#mission',
+ navHackathons: 'https://codecrunchglobal.vercel.app/hackathons.html',
+ navCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ heroHackUniversityHome: 'https://hackuniversity.vercel.app',
+ footerHackUniversityMainCta: 'https://codecrunchglobal.vercel.app/hackuniversity-discord.html',
+ footerSocialLinkedIn: 'https://www.linkedin.com/showcase/hack-university-global/',
+ footerSocialDirectoryInstagram: 'https://hackuniversity-directory.vercel.app/',
+ footerSocialDirectoryGithub: 'https://hackuniversity-directory.vercel.app/',
+ footerSocialDirectoryYoutube: 'https://hackuniversity-directory.vercel.app/',
+ footerSocialDiscord: 'https://codecrunchglobal.vercel.app/hackuniversity-discord.html',
+ footerSocialCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ footerQuickMission: 'https://codecrunchglobal.vercel.app/hackuniversity.html/#mission',
+ footerQuickEvents: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ footerQuickPhotoAlbum: 'https://photos.app.goo.gl/71FC5SLTQcPRbXjx6',
+ footerQuickHackathons: 'https://codecrunchglobal.vercel.app/hackathons.html',
+ footerQuickMembership: 'https://hackuniversity-membership.vercel.app/',
+ footerQuickEboard: 'https://hackuniversity-eboard.vercel.app/',
+ footerQuickResources: 'https://codecrunchglobal.vercel.app/hacks-toolkit.html',
+ footerQuickDiscord: 'https://codecrunchglobal.vercel.app/hackuniversity-discord.html',
+ footerCreditsBuilder: 'https://www.linkedin.com/in/iba001/'
+ };
+
+ function applyStaticLinks(){
+ document.querySelectorAll('[data-link-key]').forEach((el) => {
+ const key = el.getAttribute('data-link-key');
+ const url = STATIC_LINKS[key];
+ if (url) el.setAttribute('href', url);
+ });
+ }
+
+/* -----------------------------------------------------------
+JSON BUTTON RULES (Tri-State)
+- true => enabled + visible
+- false => disabled but visible
  - "off" => hidden (not displayed)
  ----------------------------------------------------------- */
 
@@ -847,31 +961,41 @@
  `;
  }
 
- function eventNoteHtml(h, status){
- const isPast = !!status?.isPast;
+function eventNoteHtml(h, status){
+const isPast = !!status?.isPast;
+const now = nowInMiami();
 
- // Completed override
- if (isPast) {
- return `
- <div class="text-red-600 font-semibold text-sm" style="margin-top:6px">
+// Completed override
+if (isPast) {
+return `
+<div class="text-red-600 font-semibold text-sm" style="margin-top:6px">
  Event completed.
  </div>
  `;
  }
 
  // Coming soon note when Form No. 2 is not enabled/ready (and not hidden)
- const isHidden = (h.formNo2State === 'off');
- if (isHidden) return '';
+const isHidden = (h.formNo2State === 'off');
+if (isHidden) return '';
 
- const missingUrl = safeUrl(h.formNo2Url) === '#';
- const notEnabled = (h.formNo2State !== true);
+const missingUrl = safeUrl(h.formNo2Url) === '#';
+const notEnabled = (h.formNo2State !== true);
+const withinWindow = isForm2OpenWindow(h, now);
 
- if (notEnabled || missingUrl) {
- return `
- <div class="text-yellow-600 font-semibold text-sm" style="margin-top:6px">
- Event registration form coming soon join Form No. 1 to receive updates via email.
- </div>
- `;
+if (!notEnabled && !missingUrl && withinWindow) {
+return `
+<div class="text-green-700 font-semibold text-sm" style="margin-top:6px">
+"Form No. 2 Event Registration" is available. Register in the section <strong>VOLUNTEERS - Forms, Status & Resources</strong> by selecting your preferred event.
+</div>
+`;
+}
+
+if (notEnabled || missingUrl || !withinWindow) {
+return `
+<div class="text-yellow-600 font-semibold text-sm" style="margin-top:6px">
+Join Form No. 1 to receive updates via email when the event Form no.2 stauts is "coming soon".
+</div>
+`;
  }
 
  return '';
@@ -881,24 +1005,43 @@
  EVENTS DATA
  ----------------------------------------------------------- */
 
+ // Event object sections (applies to each item below):
+ // - Core event details: name/theme/dates/modality/url
+ // - Form No. 1 controls: mailing list visibility + link
+ // - Form No. 2 controls: availability state, URL, and optional date windows
+ // - Certificate controls: URL and optional timing windows
+ // - Portal controls: status portal visibility + link
  const hackathons = [
  {
+ // Core event details
  name: ' 305 Hackathon: Edition Nov 2025 - Session A (Online)',
  theme: 'Theme: Veterans & DefenseTech',
- startDate: '2025-11-07',
- endDate: '2025-11-15',
- modality: 'virtual',
- hoursPreset: '1w',
- url: 'https://305hacknov2025.vercel.app/',
+ startDate: '2025-11-07', // event start date (YYYY-MM-DD)
+ endDate: '2025-11-15', // event end date (YYYY-MM-DD)
+ modality: 'virtual', // in-person | virtual | hybrid | tbd
+ hoursPreset: '1w', // optional duration badge preset shown on card
+ url: 'https://305hacknov2025.vercel.app/', // event website URL
 
+ // Form No. 1 (Volunteer Mailing List)
  formNo1State: true, //mailing list always enabled
- formNo1Url: FORM_NO_1_URL,
+ formNo1Url: FORM_NO_1_URL, // Form No. 1 URL
 
+ // Form No. 2 (Event Registration)
  formNo2State: false, // false disable, true enable, "off" hide
- formNo2Url: '#',
+ formNo2Url: '#', // Form No. 2 URL ("#" or "" => Coming Soon)
 
+ formNo2EnableDate: '', // optional date to enable Form No. 2 option
+ formNo2DisplayDate: '', // optional date used for ordering in selector
+ formNo2CloseDate: '', // optional date to close/disable Form No. 2 option
+
+ // Thank-You Recognition Certificates
+ certificateUrl: VOLUNTEER_CERT_URL, // certificate page URL
+ certificateEnableDate: '', // optional; default = endDate + 10 business days
+ certificateDisplayDate: '', // optional date used for ordering in selector
+
+ // Volunteer status/access portal
  reviewTicketState: false,
- reviewTicketUrl: VOLUNTEER_PORTAL_URL
+ reviewTicketUrl: VOLUNTEER_PORTAL_URL // status/access portal URL
  },
  {
  name:' 305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
@@ -915,6 +1058,14 @@
 
  formNo2State: false, // false disable, true enable, "off" hide
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -936,6 +1087,14 @@
  formNo2State: false, // false disable, true enable, "off" hide
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -955,6 +1114,14 @@
  formNo2State: false, // false disable, true enable, "off" hide
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -973,6 +1140,14 @@
 
  formNo2State: 'off', // false disable, true enable, "off" hide
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: 'off',
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -995,6 +1170,14 @@
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSdqUVPG90356Sp94-FBCdgadZUB5lanjPvLAqYG3KkXQes_LA/viewform?usp=dialog',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-2026-305hackjan2026.html"
  },
@@ -1014,6 +1197,14 @@
 
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSdqUVPG90356Sp94-FBCdgadZUB5lanjPvLAqYG3KkXQes_LA/viewform?usp=dialog',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-2026-305hackjan2026.html"
@@ -1036,6 +1227,14 @@
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSeq5MG-EJ0OTVAR3IA2jv99hqHpQexSAJ_LHlDsMbFbM3vcWg/viewform?usp=dialog',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html"
  },
@@ -1056,6 +1255,14 @@
 
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSeq5MG-EJ0OTVAR3IA2jv99hqHpQexSAJ_LHlDsMbFbM3vcWg/viewform?usp=dialog',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html"
@@ -1078,6 +1285,14 @@
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSeBrDWH9NkWSPuw9-0VJW-YNsg4PxWqYVu2gLDhbAz3t7o0Gw/viewform?usp=dialog',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html"
  },
@@ -1097,6 +1312,14 @@
 
  formNo2State: true,
  formNo2Url: 'https://docs.google.com/forms/d/e/1FAIpQLSeBrDWH9NkWSPuw9-0VJW-YNsg4PxWqYVu2gLDhbAz3t7o0Gw/viewform?usp=dialog',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: true,
  reviewTicketUrl: "https://codecrunchglobal.vercel.app/hackathonvolunteer-APP-status-all-events.html"
@@ -1119,6 +1342,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1138,6 +1369,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1160,6 +1399,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1180,6 +1427,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1202,6 +1457,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1222,6 +1485,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1244,6 +1515,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1263,6 +1542,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1285,6 +1572,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1304,6 +1599,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1326,6 +1629,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1345,6 +1656,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1367,6 +1686,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1387,6 +1714,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1406,6 +1741,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1422,6 +1765,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1440,6 +1791,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1456,6 +1815,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1474,6 +1841,14 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  },
@@ -1490,6 +1865,14 @@
 
  formNo2State: false,
  formNo2Url: '#',
+
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
 
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
@@ -1508,10 +1891,414 @@
  formNo2State: false,
  formNo2Url: '#',
 
+ formNo2EnableDate: '',
+ formNo2DisplayDate: '',
+ formNo2CloseDate: '',
+
+ certificateUrl: VOLUNTEER_CERT_URL,
+ certificateEnableDate: '',
+ certificateDisplayDate: '',
+
  reviewTicketState: false,
  reviewTicketUrl: VOLUNTEER_PORTAL_URL
  }
  ];
+
+function hasForm2Link(h){
+return typeof h.formNo2Url === 'string' && h.formNo2Url.trim() !== '' && h.formNo2Url.trim() !== '#';
+}
+
+function parseMiamiDateBoundary(dateStr, isEnd){
+ if (!dateStr) return null;
+ const t = isEnd ? "23:59:59" : "00:00:00";
+ return new Date(
+ new Date(`${dateStr}T${t}`).toLocaleString("en-US", { timeZone: "America/New_York" })
+ );
+}
+
+function formatDateYYYYMMDD(d){
+ const y = d.getFullYear();
+ const m = String(d.getMonth() + 1).padStart(2, '0');
+ const day = String(d.getDate()).padStart(2, '0');
+ return `${y}-${m}-${day}`;
+}
+
+function addBusinessDaysFromDateStr(startDateStr, businessDays){
+ if (!startDateStr || !businessDays) return startDateStr || '';
+ const d = new Date(`${startDateStr}T12:00:00`);
+ let added = 0;
+ while (added < businessDays){
+ d.setDate(d.getDate() + 1);
+ const day = d.getDay();
+ if (day !== 0 && day !== 6) added += 1;
+ }
+ return formatDateYYYYMMDD(d);
+}
+
+// Optional per-event Form No. 2 controls in hackathons[]:
+// - formNo2EnableDate: YYYY-MM-DD (optional; if empty and URL exists, it can appear immediately)
+// - formNo2DisplayDate: YYYY-MM-DD (default = startDate)
+// - formNo2CloseDate: YYYY-MM-DD (default = endDate)
+// - formNo2Url: URL (already supported)
+function getForm2Dates(h){
+ const enableDate = (h.formNo2EnableDate || '').trim();
+ const displayDate = (h.formNo2DisplayDate || h.startDate || '').trim();
+ const closeDate = (h.formNo2CloseDate || h.endDate || '').trim();
+ return { enableDate, displayDate, closeDate };
+}
+
+function isForm2Closed(h, now){
+ const { closeDate } = getForm2Dates(h);
+ const closeAt = parseMiamiDateBoundary(closeDate, true);
+ if (!closeAt) return false;
+ return now > closeAt;
+}
+
+function isForm2OpenWindow(h, now){
+ const { enableDate, closeDate } = getForm2Dates(h);
+ const startsAt = parseMiamiDateBoundary(enableDate, false);
+ const closesAt = parseMiamiDateBoundary(closeDate, true);
+ if (startsAt && now < startsAt) return false;
+ if (closesAt && now > closesAt) return false;
+ return true;
+}
+
+// Optional per-event Certificate controls in hackathons[]:
+// - certificateUrl: URL (default = VOLUNTEER_CERT_URL)
+// - certificateEnableDate: YYYY-MM-DD (default = endDate + 10 business days)
+// - certificateDisplayDate: YYYY-MM-DD (default = certificateEnableDate)
+function getCertificateDates(h){
+ const defaultEnable = addBusinessDaysFromDateStr((h.endDate || '').trim(), 10);
+ const enableDate = (h.certificateEnableDate || defaultEnable || '').trim();
+ const displayDate = (h.certificateDisplayDate || enableDate || '').trim();
+ return { enableDate, displayDate };
+}
+
+function getCertificateUrl(h){
+ const perEvent = (h.certificateUrl || '').trim();
+ return perEvent || VOLUNTEER_CERT_URL;
+}
+
+function hasCertificateLink(h){
+ const u = safeUrl(getCertificateUrl(h));
+ return u !== '#';
+}
+
+function isCertificateOpenWindow(h, now){
+ const { enableDate } = getCertificateDates(h);
+ const startsAt = parseMiamiDateBoundary(enableDate, false);
+ if (startsAt && now < startsAt) return false;
+ return true;
+}
+
+function isPastEventByEndDate(h, now){
+const endOfDayET = new Date(
+new Date(h.endDate + "T23:59:59").toLocaleString("en-US", { timeZone: "America/New_York" })
+);
+return now > endOfDayET;
+}
+
+ // Pinned action visibility windows:
+ // - show: true/false
+ // - startDate: YYYY-MM-DD (optional)
+ // - endDate: YYYY-MM-DD (optional, visible through end-of-day ET)
+ const PINNED_ACTION_WINDOWS = {
+ formNo1MailingListBtn: { show: true, startDate: '', endDate: '' },
+ viewAllEventsBtn: { show: true, startDate: '', endDate: '' },
+ policyBtn: { show: true, startDate: '', endDate: '' },
+ formNo2Selector: { show: true, startDate: '', endDate: '' },
+ volunteerGuideBtn: { show: true, startDate: '', endDate: '' },
+ accessComboBtn: { show: true, startDate: '', endDate: '' }
+ };
+
+ function toETBoundary(dateStr, isEnd){
+ if (!dateStr) return null;
+ const t = isEnd ? "23:59:59" : "00:00:00";
+ return new Date(
+ new Date(`${dateStr}T${t}`).toLocaleString("en-US", { timeZone: "America/New_York" })
+ );
+ }
+
+ function isPinnedActionVisible(actionKey){
+ const cfg = PINNED_ACTION_WINDOWS[actionKey] || {};
+ if (cfg.show === false) return false;
+ const now = nowInMiami();
+ const startsAt = toETBoundary(cfg.startDate, false);
+ const endsAt = toETBoundary(cfg.endDate, true);
+ if (startsAt && now < startsAt) return false;
+ if (endsAt && now > endsAt) return false;
+ return true;
+ }
+
+ function renderPinnedActionRow(actionKey, innerHtml){
+ if (!isPinnedActionVisible(actionKey)) return '';
+ return `
+ <div class="vh-row">
+ ${innerHtml}
+ </div>
+ `;
+ }
+
+function renderForm2OptionGroups(){
+ const now = nowInMiami();
+ const seasons = [2026, 2025];
+
+ return seasons.map((seasonYear) => {
+ const items = [...hackathons]
+ .filter(h => String(h.startDate || '').startsWith(String(seasonYear)))
+ .sort((a, b) => asLocalDate(b.endDate || b.startDate) - asLocalDate(a.endDate || a.startDate));
+
+ if (!items.length) return '';
+
+ const grouped = new Map();
+ items.forEach((h) => {
+ const rawName = (h.name || '').trim();
+ const noParens = rawName.replace(/\s*\([^)]*\)\s*$/g, '').trim();
+ const sessionMatch = noParens.match(/\s*-\s*Session\s*([AB])\b/i);
+ const session = sessionMatch ? sessionMatch[1].toUpperCase() : '';
+ const baseName = noParens
+ .replace(/\s*-\s*Session\s*[AB]\b.*$/i, '')
+ .replace(new RegExp(`\\b${seasonYear}\\b`, 'g'), '')
+ .replace(/\s{2,}/g, ' ')
+ .replace(/\s+-\s+$/g, '')
+ .trim();
+ const key = baseName.toLowerCase();
+ if (!grouped.has(key)) {
+ grouped.set(key, { baseName, events: [], sessions: new Set() });
+ }
+ const g = grouped.get(key);
+ g.events.push(h);
+ if (session) g.sessions.add(session);
+ });
+
+const groups = [...grouped.values()].map((g) => {
+const eventsByRecent = [...g.events].sort((a, b) => asLocalDate(b.endDate || b.startDate) - asLocalDate(a.endDate || a.startDate));
+const closed = eventsByRecent.every(ev => isForm2Closed(ev, now));
+const firstWithLink = eventsByRecent.find(ev => hasForm2Link(ev));
+const hasLink = !!firstWithLink;
+const latestDate = (getForm2Dates(eventsByRecent[0]).displayDate || eventsByRecent[0].startDate);
+const upcomingProximity = Math.min(...eventsByRecent
+.filter(ev => !isForm2Closed(ev, now))
+.map(ev => Math.abs(asLocalDate(getForm2Dates(ev).displayDate || ev.startDate).getTime() - now.getTime())));
+const sessions = g.sessions;
+let sessionSuffix = '';
+ if (sessions.has('A') && sessions.has('B')) sessionSuffix = ' | Session A & B';
+ else if (sessions.has('A')) sessionSuffix = ' | Session A';
+ else if (sessions.has('B')) sessionSuffix = ' | Session B';
+
+const selectableEvent = eventsByRecent.find(ev => hasForm2Link(ev) && isForm2OpenWindow(ev, now));
+return {
+label: `${seasonYear} - ${g.baseName}${sessionSuffix}`,
+value: selectableEvent ? selectableEvent.formNo2Url : '',
+disabled: !selectableEvent,
+closed,
+hasLink,
+latestDate,
+upcomingProximity
+};
+ });
+
+ const upcomingGroups = groups
+ .filter(g => !g.closed)
+ .sort((a, b) => {
+ const d = a.upcomingProximity - b.upcomingProximity;
+ if (d !== 0) return d;
+ return asLocalDate(a.latestDate) - asLocalDate(b.latestDate);
+ });
+
+ const closedGroups = groups
+ .filter(g => g.closed)
+ .sort((a, b) => asLocalDate(b.latestDate) - asLocalDate(a.latestDate));
+
+ const renderOption = (g) => {
+const note = g.closed ? ' (Closed)' : (!g.hasLink ? ' (Coming Soon)' : (g.disabled ? ' (Not Open Yet)' : ''));
+return `<option value="${g.value}" ${g.disabled ? 'disabled' : ''}>${g.label}${note}</option>`;
+};
+
+ const upcomingOptions = upcomingGroups.length
+ ? upcomingGroups.map(renderOption).join('')
+ : '<option value="" disabled>None</option>';
+
+ const closedOptions = closedGroups.length
+ ? closedGroups.map(renderOption).join('')
+ : '<option value="" disabled>None</option>';
+
+ return `
+ <optgroup label="Hackathon / Event Season ${seasonYear}">
+ <option value="" disabled>--- Upcoming ---</option>
+ ${upcomingOptions}
+ <option value="" disabled>--- Closed ---</option>
+ ${closedOptions}
+ </optgroup>
+ `;
+}).join('');
+}
+
+function renderCertificateOptionGroups(){
+ const now = nowInMiami();
+ const seasons = [2026, 2025];
+
+ return seasons.map((seasonYear) => {
+ const items = [...hackathons]
+ .filter(h => String(h.startDate || '').startsWith(String(seasonYear)))
+ .sort((a, b) => asLocalDate(b.endDate || b.startDate) - asLocalDate(a.endDate || a.startDate));
+
+ if (!items.length) return '';
+
+ const grouped = new Map();
+ items.forEach((h) => {
+ const rawName = (h.name || '').trim();
+ const noParens = rawName.replace(/\s*\([^)]*\)\s*$/g, '').trim();
+ const sessionMatch = noParens.match(/\s*-\s*Session\s*([AB])\b/i);
+ const session = sessionMatch ? sessionMatch[1].toUpperCase() : '';
+ const baseName = noParens
+ .replace(/\s*-\s*Session\s*[AB]\b.*$/i, '')
+ .replace(new RegExp(`\\b${seasonYear}\\b`, 'g'), '')
+ .replace(/\s{2,}/g, ' ')
+ .replace(/\s+-\s+$/g, '')
+ .trim();
+ const key = baseName.toLowerCase();
+ if (!grouped.has(key)) {
+ grouped.set(key, { baseName, events: [], sessions: new Set() });
+ }
+ const g = grouped.get(key);
+ g.events.push(h);
+ if (session) g.sessions.add(session);
+ });
+
+ const groups = [...grouped.values()].map((g) => {
+ const eventsByRecent = [...g.events].sort((a, b) => asLocalDate(b.endDate || b.startDate) - asLocalDate(a.endDate || a.startDate));
+ const closed = eventsByRecent.every(ev => isPastEventByEndDate(ev, now));
+ const latestDate = eventsByRecent[0].endDate || eventsByRecent[0].startDate;
+ const upcomingProximity = Math.min(...eventsByRecent
+ .filter(ev => !isPastEventByEndDate(ev, now))
+ .map(ev => Math.abs(asLocalDate(getCertificateDates(ev).displayDate || ev.startDate).getTime() - now.getTime())));
+ const sessions = g.sessions;
+ let sessionSuffix = '';
+ if (sessions.has('A') && sessions.has('B')) sessionSuffix = ' | Session A & B';
+ else if (sessions.has('A')) sessionSuffix = ' | Session A';
+ else if (sessions.has('B')) sessionSuffix = ' | Session B';
+
+ const label = `${seasonYear} - ${g.baseName}${sessionSuffix}`;
+ const selectableEvent = eventsByRecent.find(ev => hasCertificateLink(ev) && isCertificateOpenWindow(ev, now));
+ const hasLink = eventsByRecent.some(ev => hasCertificateLink(ev));
+ const value = selectableEvent
+ ? `${safeUrl(getCertificateUrl(selectableEvent))}?event=${encodeURIComponent(label)}`
+ : '';
+
+ return {
+ label,
+ value,
+ disabled: !selectableEvent,
+ closed,
+ hasLink,
+ latestDate,
+ upcomingProximity
+ };
+ });
+
+ const upcomingGroups = groups
+ .filter(g => !g.closed)
+ .sort((a, b) => {
+ const d = a.upcomingProximity - b.upcomingProximity;
+ if (d !== 0) return d;
+ return asLocalDate(a.latestDate) - asLocalDate(b.latestDate);
+ });
+
+ const closedGroups = groups
+ .filter(g => g.closed)
+ .sort((a, b) => asLocalDate(b.latestDate) - asLocalDate(a.latestDate));
+
+ const renderOption = (g) => {
+ const note = !g.hasLink ? ' (Coming Soon)' : (g.disabled ? ' (Available After Verification Window)' : '');
+ return `<option value="${g.value}" ${g.disabled ? 'disabled' : ''}>${g.label}${note}</option>`;
+ };
+
+ const upcomingOptions = upcomingGroups.length
+ ? upcomingGroups.map(renderOption).join('')
+ : '<option value="" disabled>None</option>';
+
+ const closedOptions = closedGroups.length
+ ? closedGroups.map(renderOption).join('')
+ : '<option value="" disabled>None</option>';
+
+ return `
+ <optgroup label="Hackathon / Event Season ${seasonYear}">
+ <option value="" disabled>--- Upcoming ---</option>
+ ${upcomingOptions}
+ <option value="" disabled>--- Closed ---</option>
+ ${closedOptions}
+ </optgroup>
+ `;
+ }).join('');
+ }
+
+function renderForm2RegistrationSelectorHTML(){
+ const groups = renderForm2OptionGroups();
+ return `
+ <div class="vh-picker">
+ <div class="vh-picker-title">
+ <i class="fas fa-file-signature" aria-hidden="true"></i> Form No. 2 Event Registration
+ </div>
+ <div class="vh-picker-controls">
+ <select id="volunteer-form2-event-select" class="vh-select" aria-label="Select event Form No. 2">
+ <option value="">Select Event Form No. 2</option>
+ ${groups}
+ </select>
+ </div>
+ <div class="vh-note" style="font-size:11.5px">
+ Event registration form coming soon join Form No. 1 to receive updates via email.
+ </div>
+ <div class="vh-note" style="font-size:11.5px">
+ Upcoming is sorted by closest to current date. Closed is sorted by most recently closed first.
+ </div>
+ </div>
+ `;
+}
+
+ function renderThankYouCertificatesSelectorHTML(){
+ const groups = renderCertificateOptionGroups();
+ return `
+ <div class="vh-picker">
+ <div class="vh-picker-title">
+ <i class="fas fa-award" aria-hidden="true"></i> Thank-You Recognition Certificates
+ </div>
+ <div class="vh-picker-controls">
+ <select id="volunteer-cert-event-select" class="vh-select" aria-label="Select event for Thank-You Recognition Certificates">
+ <option value="">Select Event for Thank-You Recognition Certificates</option>
+ ${groups}
+ </select>
+ </div>
+ <div class="vh-note" style="font-size:11.5px">
+ Certificate requests are available after an event closes. Thank-You Recognition Certificates are only available for eligible volunteers. Certificates are generally available after two business weeks from the event end date, and timing may vary based on volunteer verification. Certificates are issued to eligible volunteers who complete all required steps successfully within the process timeline.
+ </div>
+ </div>
+ `;
+ }
+
+function bindForm2RegistrationSelector(){
+ const select = document.getElementById('volunteer-form2-event-select');
+ if (!select) return;
+
+ select.addEventListener('change', () => {
+ const selected = select.options[select.selectedIndex];
+ const url = select.value;
+ if (!url || (selected && selected.disabled)) return;
+ window.open(url, '_blank', 'noopener');
+ });
+}
+
+ function bindCertificateSelector(){
+ const select = document.getElementById('volunteer-cert-event-select');
+ if (!select) return;
+
+ select.addEventListener('change', () => {
+ const selected = select.options[select.selectedIndex];
+ const url = select.value;
+ if (!url || (selected && selected.disabled)) return;
+ window.open(url, '_blank', 'noopener');
+ });
+ }
 
  /* -----------------------------------------------------------
  PINNED CARDS (always first in UPCOMING)
@@ -1521,60 +2308,14 @@
  const volunteerHubCard = `
  <div class="hackathon-item team-card-as-item pinned-stack" role="region" aria-label="Volunteer hub">
  <div class="hackathon-info">
- <div class="vh-actions" style="margin-bottom:10px">
- <a class="hackathon-link"
- href="${ALL_EVENTS_WEBSITE_URL}"
- target="_blank" rel="noopener">
- <i class="far fa-calendar-alt" aria-hidden="true"></i> View All Events
- </a>
- <a class="hackathon-link secondary"
- href="${FORM_NO_1_URL}"
- target="_blank" rel="noopener">
+ <div class="vh-accordion">
+ <div class="vh-group-title">Events Information</div>
+ ${renderPinnedActionRow('formNo1MailingListBtn', `
+ <a class="hackathon-link secondary" href="${FORM_NO_1_URL}" target="_blank" rel="noopener">
  <i class="fas fa-envelope" aria-hidden="true"></i> Join Form No. 1 Volunteer Mailing List
  </a>
- <a class="hackathon-link"
- href="${VOLUNTEER_GUIDE_URL}"
- target="_blank" rel="noopener">
- <i class="fa-solid fa-book-open" aria-hidden="true"></i> Volunteer Resources Guide
- </a>
- </div>
-
- <div class="vh-accordion">
- <details class="vh-qa">
- <summary>All Hackathons Events Website Hub</summary>
- <div class="vh-qa-content">
- <p>View every Hack University hackathon website in one place (dates, details, agenda, and times).</p>
- <p>
- <a class="hackathon-link" href="${ALL_EVENTS_WEBSITE_URL}" target="_blank" rel="noopener">
- <i class="far fa-calendar-alt" aria-hidden="true"></i> View All Events
- </a>
- </p>
- </div>
- </details>
-
- <details class="vh-qa" open>
- <summary>Volunteer Resources Guide</summary>
- <div class="vh-qa-content">
- <p>Logistics, onboarding, and day-of workflows for confirmed volunteers.</p>
- <ul>
- <li>Onboarding steps for new volunteers</li>
- <li>Roles & expectations (Mentors, Judges, Speakers, Operations)</li>
- <li>Check-in procedures, communication, and event-day workflows</li>
- </ul>
- </div>
- </details>
-
- <details class="vh-qa">
- <summary>Discord (Volunteer Access)</summary>
- <div class="vh-qa-content">
- <p>
- Access to the official Code Crunch Discord server is granted to
- <strong>Form No. 2</strong> volunteers using the <strong>same Google account</strong>
- used during registration. Access at Volunteer Application Status & Access.
- </p>
- </div>
- </details>
-
+ `)}
+ <div class="vh-row">
  <details class="vh-qa">
  <summary>Form No. 1 Volunteer Mailing List</summary>
  <div class="vh-qa-content">
@@ -1587,22 +2328,18 @@
  </div>
  </div>
  </details>
-
- <details class="vh-qa">
- <summary>Form No. 2 Event Registration (Official Support)</summary>
- <div class="vh-qa-content">
- <p>
- For volunteers who want to support a specific hackathon or semester event as an official supporter.
- </p>
- <ul>
- <li><strong>Who:</strong> Volunteers, industry professionals, partners, alumni, and community leaders</li>
- <li><strong>Roles:</strong> Dual Role (Judge & Mentor), Speaker (when applicable), Operations (when applicable)</li>
- </ul>
  </div>
- </details>
 
- <details class="vh-qa">
- <summary>Two Registration Paths + Participation Policy</summary>
+ <div class="vh-group-title">Volunteer Resources</div>
+ ${renderPinnedActionRow('viewAllEventsBtn', `
+ <a class="hackathon-link" href="${ALL_EVENTS_WEBSITE_URL}" target="_blank" rel="noopener">
+ <i class="far fa-calendar-alt" aria-hidden="true"></i> View All Event Websites: Details, Agenda, and Times
+ </a>
+ `)}
+
+ <div class="vh-row">
+ <details class="vh-qa vh-qa-formatted" id="volunteer-policy-details">
+ <summary><span class="vh-summary-text">Two Registration Paths / Participation Policy</span></summary>
  <div class="vh-qa-content">
  <p>All volunteers may participate at no cost. No registration fee is required.</p>
  <ol>
@@ -1632,26 +2369,63 @@
  </div>
  </div>
  </details>
+ </div>
 
- <details class="vh-qa">
- <summary>Verification & Thank-You Recognition Certificates</summary>
+
+ <div class="vh-row">
+ <details class="vh-qa vh-qa-formatted">
+ <summary><span class="vh-summary-text">Form No. 2 Event Registration (Official Support)</span></summary>
  <div class="vh-qa-content">
- <p>Maria Lopez-Anon verifies donation submissions only.</p>
- <p>After verification, Code Crunch / Hack University:</p>
- <ul>
- <li>Confirms volunteer participation</li>
- <li>Confirms role completion</li>
- <li>Issues the Thank-You Recognition Certificate, when applicable</li>
- </ul>
  <p>
- Volunteers requesting a certificate must email their donation confirmation to Maria Lopez-Anon and CC
- <strong>codecrunchclub@gmail.com</strong>.
+ For volunteers who want to support a specific hackathon or semester event as an official supporter.
+ </p>
+ <ul>
+ <li><strong>Who:</strong> Volunteers, industry professionals, partners, alumni, and community leaders</li>
+ <li><strong>Roles:</strong> Dual Role (Judge & Mentor), Speaker (when applicable), Operations (when applicable)</li>
+ </ul>
+ </div>
+ </details>
+ </div>
+
+ ${renderPinnedActionRow('formNo2Selector', renderForm2RegistrationSelectorHTML())}
+
+
+ ${renderPinnedActionRow('volunteerGuideBtn', `
+ <a class="hackathon-link" href="${VOLUNTEER_GUIDE_URL}" target="_blank" rel="noopener">
+ <i class="fa-solid fa-book-open" aria-hidden="true"></i> Volunteer Resources Guide
+ </a>
+ `)}
+ <div class="vh-row">
+ <details class="vh-qa vh-qa-formatted" open>
+ <summary><span class="vh-summary-text">Volunteer Resources Guide</span></summary>
+ <div class="vh-qa-content">
+ <p>Logistics, onboarding, and day-of workflows for confirmed volunteers.</p>
+ <ul>
+ <li>Onboarding steps for new volunteers</li>
+ <li>Roles & expectations (Mentors, Judges, Speakers, Operations)</li>
+ <li>Check-in procedures, communication, and event-day workflows</li>
+ </ul>
+ </div>
+ </details>
+ </div>
+
+
+ <div class="vh-row">
+ <details class="vh-qa">
+ <summary>Discord (Volunteer Access)</summary>
+ <div class="vh-qa-content">
+ <p>
+ Access to the official Code Crunch Discord server is granted to
+ <strong>Form No. 2</strong> volunteers using the <strong>same Google account</strong>
+ used during registration. Access at Volunteer Application Status & Access.
  </p>
  </div>
  </details>
+ </div>
 
- <details class="vh-qa">
- <summary>Volunteer Application Status & Access</summary>
+ <div class="vh-row">
+ <details class="vh-qa vh-qa-formatted">
+ <summary><span class="vh-summary-text">Volunteer Application Status & Access</span></summary>
  <div class="vh-qa-content">
  <p>
  After authentication, volunteers can review their registration details and access volunteer-only tools.
@@ -1666,6 +2440,7 @@
  <ul>
  <li>Review your registration & <strong>Ticket ID</strong></li>
  <li>Confirm or request <strong>Discord access</strong> for volunteer channels</li>
+  <li>Form no. 3 - Event Live Expo Project Evaluation</li>
  <li>Volunteer Responses Database (available for select events only)</li>
  </ul>
  <div class="vh-note">
@@ -1673,6 +2448,41 @@
  </div>
  </div>
  </details>
+ </div>
+
+
+ ${renderPinnedActionRow('accessComboBtn', `
+ <a class="hackathon-link" href="${VOLUNTEER_PORTAL_URL}" target="_blank" rel="noopener">
+ <i class="fab fa-discord" aria-hidden="true"></i> Discord Access
+ <span aria-hidden="true"> | </span>
+ <i class="fas fa-right-to-bracket" aria-hidden="true"></i> Volunteer Event Portal Login
+ <span aria-hidden="true"> | </span>
+ <i class="fas fa-ticket" aria-hidden="true"></i> Volunteer Application Status & Access
+ </a>
+ `)}
+
+
+ <div class="vh-row">
+ <details class="vh-qa vh-qa-formatted">
+ <summary><span class="vh-summary-text">Volunteering Verification & Thank-You Recognition Certificates</span></summary>
+ <div class="vh-qa-content">
+ <p>Maria Lopez-Anon verifies donation submissions only.</p>
+ <p>After verification, Code Crunch / Hack University:</p>
+ <ul>
+ <li>Confirms volunteer participation</li>
+ <li>Confirms role completion</li>
+ <li>Issues the Thank-You Recognition Certificate, when applicable</li>
+ </ul>
+ <p>
+ Volunteers requesting a certificate must email their donation confirmation to Maria Lopez-Anon and CC
+ <strong>codecrunchclub@gmail.com</strong>.
+ </p>
+ </div>
+ </details>
+ </div>
+ <div class="vh-row">
+ ${renderThankYouCertificatesSelectorHTML()}
+ </div>
  </div>
  </div>
 
@@ -1703,35 +2513,6 @@
  const tz = getETAbbrev();
  const dateLine = `${range} (${tz})`;
 
- // Per-event buttons (tri-state)
- const reviewBtn = renderTriStateButton({
- state: h.reviewTicketState,
- url: h.reviewTicketUrl || VOLUNTEER_PORTAL_URL,
- label: 'Volunteer Application Status & Access Portal',
- icon: 'fas fa-ticket',
- variant: 'primary',
- title: 'Volunteer portal access (ticket, discord access, and status)'
- });
-
- const form2Btn = renderTriStateButton({
- state: h.formNo2State,
- url: h.formNo2Url,
- label: 'Form No. 2 Event Registration',
- icon: 'fas fa-file-signature',
- variant: 'primary',
- title: 'Volunteer Event Registration (Form No. 2)',
- forceDisabled: status.isPast // If completed, registration is disabled but visible (unless "off")
- });
-
- const form1Btn = renderTriStateButton({
- state: h.formNo1State,
- url: h.formNo1Url || FORM_NO_1_URL,
- label: 'Form No. 1 Mailing List',
- icon: 'fas fa-envelope',
- variant: 'secondary',
- title: 'Join the volunteer mailing list'
- });
-
  const html = `
  <div class="hackathon-item">
  <div class="hackathon-info">
@@ -1739,11 +2520,6 @@
  ${h.theme ? `<div class="hackathon-theme">${h.theme}</div>` : ''}
  <div class="hackathon-date">${dateLine}</div>
  ${eventNoteHtml(h, status)}
- <div class="vh-actions" style="margin-top:10px">
- ${reviewBtn}
- ${form2Btn}
- ${form1Btn}
- </div>
  </div>
 
  <div class="hackathon-actions">
@@ -1764,6 +2540,8 @@
 
  // Render pinned cards before the upcoming list
  document.getElementById('pinned-cards').innerHTML = pinnedCardsHTML();
+ bindForm2RegistrationSelector();
+ bindCertificateSelector();
 
  const upcomingHTML = (upcoming.length > 0
  ? upcoming.join('')
@@ -1776,10 +2554,11 @@
  : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No past events to display.</p>';
  }
 
- document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
+ applyStaticLinks();
  renderHackathons();
  setInterval(renderHackathons, 60 * 1000);
- });
+});
 
  (function () {
  const toggleBtn = document.querySelector(".nav-toggle");
@@ -1861,5 +2640,7 @@
  </script>
 </body>
 </html>
+
+
 
 
