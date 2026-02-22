@@ -606,7 +606,7 @@
     ];
     const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
 
-    const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxF0O_ob9WwWJiZOUWygO3Ye7MDs74SUW4r06RYTlQKdEZ8q-okz9HQP2Iv8ezF198s/exec";
+    const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbzHxoLmpKJ8A1GBqqfQwy62xTcct7E-L74bjPnNs6NLNfMUUmVQeAaLn60vSU3zVcNp/exec";
 
     const certificateEvents = [
       // 2026
@@ -643,6 +643,34 @@
     }
 
     const esc = s => String(s ?? "").replace(/[&<>\"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
+    // User-facing numbered error messages.
+    // Error #1: Request came from a blocked or unknown origin.
+    // Error #2: Required query parameters are missing.
+    // Error #3: Event sheet is not ready yet (certificate data not published yet).
+    const CERTIFICATE_ERROR_MESSAGES = {
+      "#1": "Access to certificates is not allowed from this page. Please open the official Code Crunch certificate page and try again.",
+      "#2": "Please enter both your registered email and selected event, then try again.",
+      "#3": "Certificates are not available yet. Please wait for 2 business weeks after the event to download your certificate. If it has already been more than 2 business weeks, reach us on LinkedIn."
+    };
+
+    function getCertificateApiErrorMessage(payload){
+      const rawError = String(payload?.error || "").trim();
+      const rawCode = String(payload?.errorCode || "").trim().toUpperCase();
+
+      // Backend can send explicit numeric code aliases.
+      if (rawCode === "CC-1001" || rawCode === "#1") return `Error #1: ${CERTIFICATE_ERROR_MESSAGES["#1"]}`;
+      if (rawCode === "CC-1002" || rawCode === "#2") return `Error #2: ${CERTIFICATE_ERROR_MESSAGES["#2"]}`;
+      if (rawCode === "CC-1004" || rawCode === "#3") return `Error #3: ${CERTIFICATE_ERROR_MESSAGES["#3"]}`;
+
+      // Backward-compatible parsing for old backend error strings.
+      if (/access denied/i.test(rawError)) return `Error #1: ${CERTIFICATE_ERROR_MESSAGES["#1"]}`;
+      if (/missing required parameters/i.test(rawError)) return `Error #2: ${CERTIFICATE_ERROR_MESSAGES["#2"]}`;
+      if (/sheet tab not found/i.test(rawError)) return `Error #3: ${CERTIFICATE_ERROR_MESSAGES["#3"]}`;
+
+      if (payload?.userMessage) return String(payload.userMessage);
+      return "Could not generate certificate right now. Please try again later.";
+    }
+
     function rolesToText(roles, rolesText){
       if (rolesText) return String(rolesText);
       if (Array.isArray(roles)) return roles.join(", ");
@@ -879,7 +907,7 @@
         const payload = await res.json().catch(() => ({}));
 
         if (payload?.error) {
-          setFeedback(esc(payload.error), "#d33b01");
+          setFeedback(esc(getCertificateApiErrorMessage(payload)), "#d33b01");
           return;
         }
 
