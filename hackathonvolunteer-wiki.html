@@ -2277,17 +2277,24 @@ function renderForm2RegistrationSelectorHTML(){
 }
 
  function renderThankYouCertificatesSelectorHTML(){
- const groups = renderCertificateOptionGroups();
+ const certificateUrl = safeUrl(VOLUNTEER_CERT_URL);
+ const disabled = certificateUrl === '#';
  return `
  <div class="vh-picker">
  <div class="vh-picker-title">
  <i class="fas fa-award" aria-hidden="true"></i> Thank-You Recognition Certificates
  </div>
  <div class="vh-picker-controls">
- <select id="volunteer-cert-event-select" class="vh-select" aria-label="Select event for Thank-You Recognition Certificates">
- <option value="">Select Event for Thank-You Recognition Certificates</option>
- ${groups}
- </select>
+ <button
+ id="volunteer-cert-button"
+ class="hackathon-link secondary"
+ type="button"
+ data-url="${certificateUrl}"
+ ${disabled ? 'disabled aria-disabled="true"' : ''}
+ style="width:100%;justify-content:center"
+ >
+ Thank-You Recognition Certificates
+ </button>
  </div>
  <div class="vh-note" style="font-size:11.5px">
  Certificate requests are available after an event closes. Thank-You Recognition Certificates are only available for eligible volunteers. Certificates are generally available after two business weeks from the event end date, and timing may vary based on volunteer verification. Certificates are issued to eligible volunteers who complete all required steps successfully within the process timeline.
@@ -2309,13 +2316,12 @@ function bindForm2RegistrationSelector(){
 }
 
  function bindCertificateSelector(){
- const select = document.getElementById('volunteer-cert-event-select');
- if (!select) return;
+ const button = document.getElementById('volunteer-cert-button');
+ if (!button) return;
 
- select.addEventListener('change', () => {
- const selected = select.options[select.selectedIndex];
- const url = select.value;
- if (!url || (selected && selected.disabled)) return;
+ button.addEventListener('click', () => {
+ const url = button.getAttribute('data-url') || '';
+ if (!url || url === '#' || button.disabled) return;
  window.open(url, '_blank', 'noopener');
  });
  }
