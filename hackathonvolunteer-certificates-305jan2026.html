@@ -55,7 +55,7 @@
 
     /* CERTIFICATE PAGE */
     .certificate-page{
-      background:#fff;border:8px solid #B8860B;border-radius:10px;color:#333;
+      background:#fff;border:10px solid #B8860B;border-radius:10px;color:#333;
       font-family:"Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
       width:1123px;height:794px;padding:40px;
       display:flex;flex-direction:column;page-break-inside:avoid;
@@ -64,7 +64,7 @@
     .certificate-page::before{
       content:"";
       position:absolute;
-      top:10px;right:10px;bottom:10px;left:10px;
+      top:12px;right:12px;bottom:12px;left:12px;
       border:2px solid #D4AF37;
       border-radius:6px;
       pointer-events:none;
@@ -108,19 +108,32 @@
     .sig-gap{height:24px;}
 
     /* PRINT */
-    @page { size: A4 landscape; margin: 10mm; }
+    @page { size: A4 landscape; margin: 0; }
     @media print{
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
       body{background:#fff!important}
       .navbar,.timezone-section,.footer,.surface > *:not(#certificate-generator){display:none!important}
-      .container{max-width:none;padding:0}
+      .container{max-width:none;padding:0!important;margin:0!important}
+      .print-page{
+        width:297mm!important;
+        height:210mm!important;
+        page-break-after:always;
+        break-after:page;
+        margin:0!important;
+      }
+      .print-page:last-child{
+        page-break-after:auto;
+        break-after:auto;
+      }
       .certificate-page{
-        width:277mm!important;height:190mm!important;
-        border:8mm solid #B8860B!important;border-radius:0!important;padding:15mm!important;margin:0!important;
+        width:297mm!important;height:210mm!important;
+        border:4mm solid #B8860B!important;border-radius:0!important;padding:14mm!important;margin:0!important;
         display:flex;flex-direction:column;
+        box-shadow:none!important;
       }
       .certificate-page::before{
         top:4mm;right:4mm;bottom:4mm;left:4mm;
-        border:1.2mm solid #D4AF37;
+        border:1.2mm solid #D4AF37!important;
         border-radius:0;
       }
       .content-wrap{flex:1 1 auto;min-height:0}
