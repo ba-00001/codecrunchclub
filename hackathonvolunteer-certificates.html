@@ -677,29 +677,30 @@
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date || "").replace(/[^0-9]/g, "").slice(0, 8)}-${hash8}`;
       return `
-      <section style="width:100%;max-width:1200px;min-height:820px;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px;box-shadow:0 3px 12px rgba(32,33,36,.15);font-family:'Google Sans','Roboto',Arial,sans-serif;color:#202124">
-        <div style="text-align:center;margin-bottom:26px">
+      <section style="position:relative;width:100%;max-width:1200px;min-height:820px;background:#fff;border:10px solid #8C1515;border-radius:10px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px;box-shadow:0 8px 24px rgba(32,33,36,.16);font-family:'Cormorant Garamond','Times New Roman',serif;color:#2d2d2d">
+        <div style="position:absolute;top:12px;right:12px;bottom:12px;left:12px;border:2px solid #D4AF37;border-radius:6px;pointer-events:none"></div>
+        <div style="position:relative;text-align:center;margin-bottom:26px">
           ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" style="height:74px;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">` : ""}
-          <h1 style="margin:0;font-size:3rem;letter-spacing:.04em;color:#1a73e8">CERTIFICATE</h1>
-          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.1em;color:#5f6368">OF RECOGNITION</p>
+          <h1 style="margin:0;font-size:3.7rem;letter-spacing:.1em;color:#6f1111;font-weight:700">CERTIFICATE</h1>
+          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.4em;color:#B8860B;text-transform:uppercase">of Recognition</p>
         </div>
 
-        <p style="text-align:center;font-size:1rem;margin:0 0 10px;color:#5f6368">This certificate is presented to</p>
-        <h2 style="text-align:center;margin:0 0 20px;font-size:2.2rem;color:#111827">${c.participantName}</h2>
-        <p style="text-align:center;font-size:1rem;line-height:1.65;color:#374151;margin:0 auto;max-width:920px">
+        <p style="text-align:center;font-size:1.3rem;font-style:italic;margin:14px 0 10px;color:#3f3f3f">This certificate is presented to</p>
+        <h2 style="text-align:center;margin:0 0 20px;font-size:3.2rem;color:#6f1111;font-style:italic;font-weight:600">${c.participantName}</h2>
+        <p style="text-align:center;font-size:1.35rem;line-height:1.55;color:#404040;margin:0 auto;max-width:960px">
           In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
           <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on
           <strong>${c.date}</strong>.
         </p>
 
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:58px;gap:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:58px;gap:20px;position:relative">
           <div style="flex:1"></div>
           <div style="text-align:center;min-width:320px">
             ${c.signatureUrl ? `<img src="${c.signatureUrl}" alt="Signature" style="max-height:72px;object-fit:contain" onerror="this.style.display='none'">` : ""}
-            <div style="height:1px;background:#1f2937;margin:8px 0 6px"></div>
-            <div style="font-weight:700">BRIAN BAZURTO</div>
-            <div style="font-size:.9rem;font-style:italic">Code Crunch President</div>
-            <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
+            <div style="height:1px;background:#6f1111;margin:8px 0 6px"></div>
+            <div style="font-weight:700;color:#2f2f2f">BRIAN BAZURTO</div>
+            <div style="font-size:.95rem;font-style:italic;color:#3f3f3f">Code Crunch President</div>
+            <div style="font-size:.95rem;font-style:italic;color:#3f3f3f">Hack University Initiative</div>
             <div style="font-size:.82rem;color:#6b7280;margin-top:8px">Cert ID: ${idText}</div>
           </div>
           <div style="flex:1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px">${logosHTML(c.logos)}</div>
@@ -709,9 +710,13 @@
     function openCertificatesInNewTab(certs, autoPrint = true){
       const pages = certs.map(certPageHTML).join("");
       const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
       <style>
-      body{margin:0;padding:18px;background:#f3f4f6;font-family:'Google Sans','Roboto',Arial,sans-serif;color:#111827}
-      @media print{body{background:#fff;padding:0}section{border:none !important;border-radius:0 !important;margin:0 !important;break-after:page}}
+      body{margin:0;padding:18px;background:#f3f4f6;font-family:'Cormorant Garamond','Times New Roman',serif;color:#111827}
+      @media print{
+      body{background:#fff;padding:0}
+      section{border:none !important;border-radius:0 !important;margin:0 !important;break-after:page}
+      }
       </style></head><body>${pages}
       <script>(function(){${autoPrint ? "window.print();" : ""}})();<\/script></body></html>`;
       const w = window.open("", "_blank", "width=1300,height=900,scrollbars=yes,resizable=yes");
