@@ -6,10 +6,14 @@
   <title>Volunteer Certificates • Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --primary:#1a73e8;
-      --primary-dark:#1557b0;
+      --primary:#8C1515;
+      --primary-dark:#6f1111;
+      --stanford-gold:#B8860B;
+      --stanford-gold-light:#D4AF37;
+      --stanford-ink:#2d2d2d;
       --matrix-green:#00e676;
       --cyber-blue:#00b0ff;
       --warning:#ffc107;
@@ -57,8 +61,8 @@
 
     /* CERTIFICATE PAGE */
     .certificate-page{
-      background:#fff;border:10px solid #B8860B;border-radius:10px;color:#202124;
-      font-family:"Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
+      background:#fff;border:10px solid var(--primary);border-radius:10px;color:var(--stanford-ink);
+      font-family:"Cormorant Garamond","Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
       width:1123px;height:794px;padding:40px;
       display:flex;flex-direction:column;page-break-inside:avoid;
       position:relative;
@@ -67,15 +71,28 @@
       content:"";
       position:absolute;
       top:12px;right:12px;bottom:12px;left:12px;
-      border:2px solid #D4AF37;
+      border:2px solid var(--stanford-gold-light);
       border-radius:6px;
       pointer-events:none;
     }
-    .certificate-page h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:3px;color:var(--primary)}
-    .certificate-page .sub{font-size:1.2rem;color:var(--cyber-blue);letter-spacing:4px}
-    .presented{font-style:italic;margin:30px 0;font-size:1.1rem;text-align:center;color:var(--text-secondary)}
-    .participant-name{font-size:3rem;font-weight:700;margin:40px 0;font-style:italic;text-align:center;color:var(--primary-dark)}
-    .body-text{font-size:1.1rem;line-height:1.8;margin:30px 0;color:var(--text-secondary);text-align:center}
+    .certificate-page h1{font-size:4rem;font-weight:700;margin-bottom:.35rem;letter-spacing:4px;color:var(--primary-dark)}
+    .certificate-page .sub{
+      font-size:1.1rem;
+      color:var(--stanford-gold);
+      letter-spacing:6px;
+      text-transform:uppercase;
+    }
+    .presented{font-style:italic;margin:34px 0 24px;font-size:1.3rem;text-align:center;color:#3d3d3d}
+    .participant-name{
+      font-size:4rem;
+      font-weight:600;
+      margin:24px 0 30px;
+      font-style:italic;
+      text-align:center;
+      color:var(--primary-dark);
+      line-height:1.05;
+    }
+    .body-text{font-size:1.4rem;line-height:1.55;margin:16px auto 26px;color:#3f3f3f;text-align:center;max-width:95%}
     .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px;object-fit:contain}
 
     .content-wrap{flex:1 1 auto;min-height:0}
@@ -125,7 +142,7 @@
       }
       .certificate-page{
         width:100%!important;height:100%!important;
-        border:4mm solid #B8860B!important;border-radius:0!important;padding:14mm!important;margin:0!important;
+        border:4mm solid var(--primary)!important;border-radius:0!important;padding:14mm!important;margin:0!important;
         display:flex;flex-direction:column;
         box-shadow:none!important;
         overflow:hidden!important;
@@ -138,7 +155,7 @@
       }
       .certificate-page::before{
         top:4mm;right:4mm;bottom:4mm;left:4mm;
-        border:1.2mm solid #D4AF37!important;
+        border:1.2mm solid var(--stanford-gold-light)!important;
         border-radius:0;
       }
       .content-wrap{flex:1 1 auto;min-height:0}
@@ -146,8 +163,8 @@
       .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
       .certificate-page h1{font-size:16mm!important}
       .certificate-page .sub{font-size:4mm!important}
-      .participant-name{font-size:12mm!important}
-      .presented,.body-text{font-size:3.5mm!important}
+      .participant-name{font-size:13mm!important}
+      .presented,.body-text{font-size:3.9mm!important}
       .signature-script{font-size:8mm!important}
       .sig-line{width:70mm!important}
       .cert-id{font-size:3.2mm!important}
