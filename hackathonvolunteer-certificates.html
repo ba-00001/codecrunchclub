@@ -677,7 +677,7 @@
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date || "").replace(/[^0-9]/g, "").slice(0, 8)}-${hash8}`;
       return `
-      <section style="position:relative;width:100%;max-width:1200px;min-height:820px;background:#fff;border:10px solid #8C1515;border-radius:10px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px;box-shadow:0 8px 24px rgba(32,33,36,.16);font-family:'Cormorant Garamond','Times New Roman',serif;color:#2d2d2d">
+      <section class="cert-sheet" style="position:relative;width:100%;max-width:1200px;background:#fff;border:10px solid #8C1515;border-radius:10px;padding:30px 38px;box-sizing:border-box;margin:0 auto 12px;box-shadow:0 8px 24px rgba(32,33,36,.16);font-family:'Cormorant Garamond','Times New Roman',serif;color:#2d2d2d">
         <div style="position:absolute;top:12px;right:12px;bottom:12px;left:12px;border:2px solid #D4AF37;border-radius:6px;pointer-events:none"></div>
         <div style="position:relative;text-align:center;margin-bottom:26px">
           ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" style="height:74px;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">` : ""}
@@ -714,8 +714,23 @@
       <style>
       body{margin:0;padding:18px;background:#f3f4f6;font-family:'Cormorant Garamond','Times New Roman',serif;color:#111827}
       @media print{
-      body{background:#fff;padding:0}
-      section{border:none !important;border-radius:0 !important;margin:0 !important;break-after:page}
+      @page{size:landscape;margin:0}
+      body{background:#fff;padding:0;margin:0}
+      .cert-sheet{
+        border-radius:0 !important;
+        margin:0 !important;
+        box-shadow:none !important;
+        page-break-inside:avoid;
+        break-inside:avoid;
+      }
+      .cert-sheet + .cert-sheet{
+        page-break-before:always;
+        break-before:page;
+      }
+      .cert-sheet:last-child{
+        page-break-after:auto;
+        break-after:auto;
+      }
       }
       </style></head><body>${pages}
       <script>(function(){${autoPrint ? "window.print();" : ""}})();<\/script></body></html>`;
