@@ -671,39 +671,43 @@
     }
     function logosHTML(logoUrls){
       const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
-      return arr.map(u => `<img src="${u}" alt="Partner Logo" style="max-height:38px;max-width:120px;object-fit:contain">`).join("");
+      return arr.map(u => `<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join("");
     }
     function certPageHTML(c){
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date || "").replace(/[^0-9]/g, "").slice(0, 8)}-${hash8}`;
       return `
-      <section class="cert-sheet" style="position:relative;width:100%;max-width:1200px;background:#fff;border:10px solid #8C1515;border-radius:10px;padding:30px 38px;box-sizing:border-box;margin:0 auto 12px;box-shadow:0 8px 24px rgba(32,33,36,.16);font-family:'Cormorant Garamond','Times New Roman',serif;color:#2d2d2d">
-        <div style="position:absolute;top:12px;right:12px;bottom:12px;left:12px;border:2px solid #D4AF37;border-radius:6px;pointer-events:none"></div>
-        <div style="position:relative;text-align:center;margin-bottom:26px">
-          ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" style="height:74px;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">` : ""}
-          <h1 style="margin:0;font-size:3.7rem;letter-spacing:.1em;color:#6f1111;font-weight:700">CERTIFICATE</h1>
-          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.4em;color:#B8860B;text-transform:uppercase">of Recognition</p>
-        </div>
-
-        <p style="text-align:center;font-size:1.3rem;font-style:italic;margin:14px 0 10px;color:#3f3f3f">This certificate is presented to</p>
-        <h2 style="text-align:center;margin:0 0 20px;font-size:3.2rem;color:#6f1111;font-style:italic;font-weight:600">${c.participantName}</h2>
-        <p style="text-align:center;font-size:1.35rem;line-height:1.55;color:#404040;margin:0 auto;max-width:960px">
-          In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-          <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on
-          <strong>${c.date}</strong>.
-        </p>
-
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:58px;gap:20px;position:relative">
-          <div style="flex:1"></div>
-          <div style="text-align:center;min-width:320px">
-            ${c.signatureUrl ? `<img src="${c.signatureUrl}" alt="Signature" style="max-height:72px;object-fit:contain" onerror="this.style.display='none'">` : ""}
-            <div style="height:1px;background:#6f1111;margin:8px 0 6px"></div>
-            <div style="font-weight:700;color:#2f2f2f">BRIAN BAZURTO</div>
-            <div style="font-size:.95rem;font-style:italic;color:#3f3f3f">Code Crunch President</div>
-            <div style="font-size:.95rem;font-style:italic;color:#3f3f3f">Hack University Initiative</div>
-            <div style="font-size:.82rem;color:#6b7280;margin-top:8px">Cert ID: ${idText}</div>
+      <section class="print-page cert-sheet">
+        <div class="certificate-page">
+          ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" class="hack-logo" onerror="this.style.display='none'">` : ""}
+          <div class="content-wrap">
+            <div style="text-align:center;margin-bottom:40px">
+              <h1>CERTIFICATE</h1>
+              <p class="sub">OF RECOGNITION</p>
+            </div>
+            <p class="presented">This certificate is presented to</p>
+            <h2 class="participant-name">${c.participantName}</h2>
+            <div class="body-text">
+              <p>In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
+              <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.<em> Your insights helped shape a fair and impactful competition experience for all participants.</em></p>
+              <br>
+            </div>
           </div>
-          <div style="flex:1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px">${logosHTML(c.logos)}</div>
+          <div class="cert-bottom">
+            <div class="sig-gap"></div>
+            <div class="sig-block">
+              ${c.signatureUrl
+                ? `<img class="sig-img" src="${c.signatureUrl}" alt="Signature" onerror="this.style.display='none'">`
+                : `<div class="signature-script">Brian Bazurto</div>`
+              }
+              <div class="sig-line"></div>
+              <div style="font-size:.95rem;font-weight:700;margin-top:6px;">BRIAN BAZURTO</div>
+              <div style="font-size:.9rem;font-style:italic">Code Crunch President</div>
+              <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
+              <div class="cert-id">Cert ID: ${idText}</div>
+            </div>
+            <div class="logo-grid">${logosHTML(c.logos)}</div>
+          </div>
         </div>
       </section>`;
     }
@@ -711,68 +715,102 @@
       const pages = certs.map(certPageHTML).join("");
       const printScript = autoPrint ? `
       (function(){
-        async function waitForImages(){
-          const imgs = Array.from(document.images || []);
-          if (!imgs.length) return;
-          await Promise.all(imgs.map((img) => {
-            if (img.decode) {
-              return img.decode().catch(() => {});
-            }
-            if (img.complete) return Promise.resolve();
-            return new Promise((resolve) => {
-              img.onload = img.onerror = () => resolve();
-            });
-          }));
+        function waitImgs(){
+          const imgs = [...document.images].filter(x => !x.complete || x.naturalWidth === 0);
+          if (!imgs.length) return Promise.resolve();
+          return Promise.all(imgs.map(img => new Promise(r => { img.onload = img.onerror = () => r(); })));
         }
-        async function waitForFonts(){
-          if (document.fonts && document.fonts.ready) {
-            try { await document.fonts.ready; } catch (_) {}
-          }
+        function waitFonts(){
+          if (document.fonts && document.fonts.ready) return document.fonts.ready.catch(() => {});
+          return Promise.resolve();
         }
-        function nextPaint(){
-          return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        function fitLogos(){
+          document.querySelectorAll('.logo-grid').forEach(grid => {
+            const n = grid.querySelectorAll('img').length || 1;
+            const gap = parseFloat(getComputedStyle(grid).gap) || 12;
+            const w = grid.clientWidth || 600;
+            const perW = (w - gap * (n - 1)) / n;
+            const h = Math.max(16, Math.min(52, Math.floor(perW * 0.55)));
+            grid.style.setProperty('--logo-h', h + 'px');
+          });
         }
-        async function runPrint(){
-          await waitForImages();
-          await waitForFonts();
-          await nextPaint();
-          // Let Chrome settle final layout before opening print preview.
-          await new Promise((r) => setTimeout(r, 180));
-          try { window.dispatchEvent(new Event('resize')); } catch (_) {}
-          try { window.focus(); } catch (_) {}
-          setTimeout(() => window.print(), 120);
+        function afterLayout(){
+          fitLogos();
+          setTimeout(() => window.print(), 140);
         }
-        if (document.readyState === 'complete') {
-          runPrint().catch(() => setTimeout(() => window.print(), 300));
-        } else {
-          window.addEventListener('load', () => {
-            runPrint().catch(() => setTimeout(() => window.print(), 300));
-          }, { once: true });
-        }
+        window.addEventListener('resize', fitLogos);
+        Promise.all([waitImgs(), waitFonts()])
+          .then(() => requestAnimationFrame(() => requestAnimationFrame(afterLayout)))
+          .catch(() => setTimeout(() => window.print(), 260));
       })();
       ` : "";
       const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
+      <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
       <style>
-      body{margin:0;padding:18px;background:#f3f4f6;font-family:'Cormorant Garamond','Times New Roman',serif;color:#111827}
+      :root{
+        --primary:#8C1515;
+        --primary-dark:#6f1111;
+        --stanford-gold:#B8860B;
+        --stanford-gold-light:#D4AF37;
+        --stanford-ink:#2d2d2d;
+        --text-secondary:#4b5563;
+        --logo-h:52px;
+      }
+      *{box-sizing:border-box}
+      body{margin:0;padding:18px;background:#f3f4f6;color:#202124}
+      .certificate-page{
+        background:#fff;border:10px solid var(--primary);border-radius:10px;color:var(--stanford-ink);
+        font-family:"Cormorant Garamond","Times New Roman",serif;margin:0 auto 24px;box-sizing:border-box;
+        width:1123px;height:794px;padding:40px;
+        display:flex;flex-direction:column;page-break-inside:avoid;position:relative;
+      }
+      .certificate-page::before{
+        content:"";position:absolute;top:12px;right:12px;bottom:12px;left:12px;
+        border:2px solid var(--stanford-gold-light);border-radius:6px;pointer-events:none;
+      }
+      .certificate-page h1{font-size:4rem;font-weight:700;margin-bottom:.35rem;letter-spacing:4px;color:var(--primary-dark);text-align:center}
+      .certificate-page .sub{font-size:1.1rem;color:var(--stanford-gold);letter-spacing:6px;text-transform:uppercase;text-align:center}
+      .presented{font-style:italic;margin:34px 0 24px;font-size:1.3rem;text-align:center;color:#3d3d3d}
+      .participant-name{font-size:4rem;font-weight:600;margin:24px 0 30px;font-style:italic;text-align:center;color:var(--primary-dark);line-height:1.05}
+      .body-text{font-size:1.4rem;line-height:1.55;margin:16px auto 26px;color:#3f3f3f;text-align:center;max-width:95%}
+      .hack-logo{position:absolute;top:30px;right:30px;max-width:150px;max-height:80px;object-fit:contain}
+      .content-wrap{flex:1 1 auto;min-height:0}
+      .cert-bottom{margin-top:auto}
+      .sig-block{text-align:center;max-width:360px;margin:0 auto}
+      .sig-img{max-height:75px;object-fit:contain;margin:0 auto 6px;display:block}
+      .signature-script{font-family:'Great Vibes',cursive;font-size:2.1rem;line-height:1;transform:rotate(-2deg);color:#222;letter-spacing:.5px;margin-bottom:10px}
+      .sig-line{border-top:2px solid var(--primary-dark);width:260px;margin:0 auto 8px}
+      .cert-id{font-family:"Courier New",monospace;font-size:.9rem;color:var(--text-secondary);margin-top:6px}
+      .logo-grid{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:12px;align-items:center;margin-top:10px;margin-bottom:0}
+      .logo-grid img{width:auto;max-width:100%;height:auto;max-height:var(--logo-h,52px);object-fit:contain;page-break-inside:avoid;break-inside:avoid}
+      .sig-gap{height:24px}
+      @page { size: landscape; margin: 0; }
       @media print{
-      @page{size:landscape;margin:0}
-      body{background:#fff;padding:0;margin:0}
-      .cert-sheet{
-        border-radius:0 !important;
-        margin:0 !important;
-        box-shadow:none !important;
-        page-break-inside:avoid;
-        break-inside:avoid;
-      }
-      .cert-sheet + .cert-sheet{
-        page-break-before:always;
-        break-before:page;
-      }
-      .cert-sheet:last-child{
-        page-break-after:auto;
-        break-after:auto;
-      }
+        *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+        body{background:#fff!important;padding:0;margin:0}
+        .print-page{width:100%!important;height:100%!important;page-break-after:auto;break-after:auto;margin:0!important}
+        .certificate-page{
+          width:100%!important;height:100%!important;
+          border:4mm solid var(--primary)!important;border-radius:0!important;padding:14mm!important;margin:0!important;
+          display:flex;flex-direction:column;box-shadow:none!important;overflow:hidden!important;
+          page-break-after:always;break-after:page;
+        }
+        .certificate-page:last-child{page-break-after:auto;break-after:auto}
+        .certificate-page::before{top:4mm;right:4mm;bottom:4mm;left:4mm;border:1.2mm solid var(--stanford-gold-light)!important;border-radius:0}
+        .content-wrap{flex:1 1 auto;min-height:0}
+        .cert-bottom{margin-top:auto}
+        .hack-logo{top:8mm!important;right:8mm!important;max-width:30mm!important;max-height:18mm!important}
+        .certificate-page h1{font-size:16mm!important}
+        .certificate-page .sub{font-size:4mm!important}
+        .participant-name{font-size:13mm!important}
+        .presented,.body-text{font-size:3.9mm!important}
+        .signature-script{font-size:8mm!important}
+        .sig-line{width:70mm!important}
+        .cert-id{font-size:3.2mm!important}
+        .sig-gap{height:10mm!important}
+        .sig-img{max-height:14mm!important}
+        .logo-grid{gap:8px}
       }
       </style></head><body>${pages}
       <script>${printScript}<\/script></body></html>`;
