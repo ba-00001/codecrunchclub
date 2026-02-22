@@ -115,6 +115,50 @@
     .portal-generate-btn:hover{background:#1557b0}
     .portal-generate-btn:disabled{opacity:.55;cursor:not-allowed}
     .portal-generator-feedback{font-size:.86rem;color:#4b5563;text-align:center}
+    .feedback-card{
+      margin-top:8px;
+      border:1px solid #f6c7bf;
+      background:#fff7f5;
+      border-radius:10px;
+      padding:12px;
+      text-align:left;
+    }
+    .feedback-title{
+      font-weight:700;
+      color:#b42318;
+      margin-bottom:8px;
+      line-height:1.4;
+    }
+    .feedback-copy-row{
+      display:flex;
+      justify-content:flex-end;
+      margin-bottom:8px;
+    }
+    .feedback-copy-btn{
+      border:1px solid #dadce0;
+      background:#fff;
+      color:#1a73e8;
+      border-radius:8px;
+      min-height:34px;
+      padding:0 12px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .feedback-copy-btn:hover{background:#f8fbff}
+    .feedback-pre{
+      margin:0;
+      padding:10px;
+      border:1px solid #e6e8eb;
+      border-radius:8px;
+      background:#fff;
+      color:#5f6368;
+      font-size:.84rem;
+      line-height:1.55;
+      white-space:pre-wrap;
+      word-break:break-word;
+      max-height:260px;
+      overflow:auto;
+    }
 
     /* Cards, checklist, FAQ */
     .card{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
@@ -670,6 +714,26 @@
       if (payload?.userMessage) return String(payload.userMessage);
       return "Could not generate certificate right now. Please try again later.";
     }
+    function renderBlockedFeedback(feedbackEl, message, nextStepsMessage){
+      if (!feedbackEl) return;
+      const title = esc(message || "Certificate not available yet.");
+      const nextRaw = String(nextStepsMessage || "").trim();
+      if (!nextRaw) {
+        feedbackEl.innerHTML = `<div class="feedback-card"><div class="feedback-title">${title}</div></div>`;
+        feedbackEl.style.color = "#d33b01";
+        return;
+      }
+
+      feedbackEl.innerHTML =
+        `<div class="feedback-card">` +
+          `<div class="feedback-title">${title}</div>` +
+          `<div class="feedback-copy-row">` +
+            `<button id="copy-next-steps-btn" class="feedback-copy-btn" type="button">Copy Message</button>` +
+          `</div>` +
+          `<pre id="certificate-next-steps-text" class="feedback-pre">${esc(nextRaw)}</pre>` +
+        `</div>`;
+      feedbackEl.style.color = "#d33b01";
+    }
 
     function rolesToText(roles, rolesText){
       if (rolesText) return String(rolesText);
@@ -935,8 +999,7 @@
         if (blocked.length === certs.length) {
           const b = blocked[0] || {};
           const msg = b.message || "Certificate not available yet.";
-          const next = b.nextStepsMessage ? `<br><br>${esc(b.nextStepsMessage)}` : "";
-          setFeedback(`<strong>${esc(msg)}</strong>${next}`, "#d33b01");
+          renderBlockedFeedback(feedback, msg, b.nextStepsMessage);
           return;
         }
 
@@ -1136,6 +1199,25 @@
       const generateBtn = document.getElementById("certificate-generate-btn");
       const emailInput = document.getElementById("certificate-email-input");
       if (generateBtn) generateBtn.addEventListener("click", handleGenerateCertificate);
+      const feedbackPanel = document.getElementById("certificate-generator-feedback");
+      if (feedbackPanel) {
+        feedbackPanel.addEventListener("click", async (e) => {
+          const target = e.target;
+          if (!(target instanceof HTMLElement)) return;
+          if (target.id !== "copy-next-steps-btn") return;
+          const pre = document.getElementById("certificate-next-steps-text");
+          const textToCopy = pre ? pre.textContent || "" : "";
+          if (!textToCopy.trim()) return;
+          try {
+            await navigator.clipboard.writeText(textToCopy);
+            target.textContent = "Copied";
+            setTimeout(() => { target.textContent = "Copy Message"; }, 1400);
+          } catch (err) {
+            target.textContent = "Copy failed";
+            setTimeout(() => { target.textContent = "Copy Message"; }, 1400);
+          }
+        });
+      }
       if (emailInput) {
         emailInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") handleGenerateCertificate();
