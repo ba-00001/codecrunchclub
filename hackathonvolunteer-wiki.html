@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
  <meta charset="UTF-8" />
@@ -108,7 +108,7 @@
  .mode-hybrid { background: var(--color-warning-bg); color: #ea8600; border: 1px solid #fde68a; }
  .mode-tbd { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
 
- .hackathon-link {
+.hackathon-link {
  background: var(--color-primary);
  color: var(--color-bg-white);
  padding: 8px 14px;
@@ -123,7 +123,7 @@
  justify-content: center;
  white-space: nowrap;
  gap: 8px;
- }
+}
  .hackathon-link:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); transform: translateY(-1px); }
 
  /* Secondary button style */
@@ -393,6 +393,9 @@
  justify-content: flex-start;
  padding: 12px 14px;
  min-height: 46px;
+ white-space: normal;
+ overflow-wrap: anywhere;
+ word-break: break-word;
  }
 .vh-picker{
  width: 100%;
@@ -413,6 +416,7 @@
  }
 .vh-select{
  flex: 1 1 420px;
+ min-width: 0;
  min-height: 42px;
  border: 1px solid var(--color-border);
  border-radius: var(--radius-sm);
@@ -515,6 +519,14 @@ background: #fff;
  .vh-grid{ grid-template-columns: 1fr; }
  .vh-row{ flex-direction: column; }
  .vh-row .vh-qa{ width: 100%; }
+ .vh-picker-controls{
+ width: 100%;
+ }
+ .vh-select{
+ flex: 1 1 100%;
+ width: 100%;
+ max-width: 100%;
+ }
  }
  </style>
 </head>
@@ -728,7 +740,7 @@ const ALL_EVENTS_WEBSITE_URL =
  navPartners: 'https://codecrunchglobal.vercel.app/hackuniversity.html#partners',
  navMission: 'https://codecrunchglobal.vercel.app/hackuniversity.html#mission',
  navHackathons: 'https://codecrunchglobal.vercel.app/hackathons.html',
- navCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ navCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity.html#calendar',
  heroHackUniversityHome: 'https://hackuniversity.vercel.app',
  footerHackUniversityMainCta: 'https://codecrunchglobal.vercel.app/hackuniversity-discord.html',
  footerSocialLinkedIn: 'https://www.linkedin.com/showcase/hack-university-global/',
@@ -736,9 +748,9 @@ const ALL_EVENTS_WEBSITE_URL =
  footerSocialDirectoryGithub: 'https://hackuniversity-directory.vercel.app/',
  footerSocialDirectoryYoutube: 'https://hackuniversity-directory.vercel.app/',
  footerSocialDiscord: 'https://codecrunchglobal.vercel.app/hackuniversity-discord.html',
- footerSocialCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ footerSocialCalendar: 'https://codecrunchglobal.vercel.app/hackuniversity.html#calendar',
  footerQuickMission: 'https://codecrunchglobal.vercel.app/hackuniversity.html/#mission',
- footerQuickEvents: 'https://codecrunchglobal.vercel.app/hackuniversity-calendar.html',
+ footerQuickEvents: 'https://codecrunchglobal.vercel.app/hackuniversity.html#calendar',
  footerQuickPhotoAlbum: 'https://photos.app.goo.gl/71FC5SLTQcPRbXjx6',
  footerQuickHackathons: 'https://codecrunchglobal.vercel.app/hackathons.html',
  footerQuickMembership: 'https://hackuniversity-membership.vercel.app/',
@@ -2679,6 +2691,7 @@ document.addEventListener('DOMContentLoaded', function () {
  </script>
 </body>
 </html>
+
 
 
 

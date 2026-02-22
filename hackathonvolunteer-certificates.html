@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Volunteer Certificates • Code Crunch</title>
+  <title>Volunteer Certificates - Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <style>
@@ -87,6 +87,34 @@
       display:none !important;
     }
     .portal-note{margin-top:10px;color:#4b5563;font-size:.9rem;text-align:center}
+    .portal-generator{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+    .portal-email{
+      width:100%;
+      min-height:44px;
+      border:1px solid #dadce0;
+      border-radius:8px;
+      padding:0 12px;
+      font-size:14px;
+      color:#202124;
+      background:#fff;
+    }
+    .portal-generate-btn{
+      min-height:44px;
+      border:0;
+      border-radius:8px;
+      background:#1a73e8;
+      color:#fff;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .portal-generate-btn:hover{background:#1557b0}
+    .portal-generate-btn:disabled{opacity:.55;cursor:not-allowed}
+    .portal-generator-feedback{font-size:.86rem;color:#4b5563;text-align:center}
 
     /* Cards, checklist, FAQ */
     .card{background:#fff;border:1px solid #dadce0;border-radius:12px;padding:20px}
@@ -165,7 +193,7 @@
         <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#partners">Partners</a>
         <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#mission">Mission</a>
         <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackathons.html" target="_blank" rel="noopener noreferrer">Hackathons</a>
-        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity-calendar.html" target="_blank" rel="noopener noreferrer">Calendar</a>
+        <a class="nav-link" href="https://codecrunchglobal.vercel.app/hackuniversity.html#calendar" target="_blank" rel="noopener noreferrer">Calendar</a>
       </div>
     </div>
   </nav>
@@ -200,19 +228,73 @@
       <div class="portal-picker">
         <select id="certificate-portal-select" class="portal-select" aria-label="Choose your Thank you certificate portal">
           <option value="">Select your event certificate portal</option>
+          <optgroup label="Event Season 2026">
+            <option value="" disabled>--- Upcoming ---</option>
+            <option value="305_MAR_2026">305 Hackathon Edition Mar 2026 - Session A and B</option>
+            <option value="305_APR_2026">305 Hackathon Edition Apr 2026 - Session A and B</option>
+            <option value="CODESTORM_MAY_2026">CodeStorm 2026 - Session A and B</option>
+            <option value="305_JUN_2026">305 Hackathon Edition Jun 2026 - Session A and B</option>
+            <option value="SUMMERCODEX_JUL_2026">SummerCodeX 2026 - Session A and B</option>
+            <option value="305_AUG_2026">305 Hackathon Edition Aug 2026 - Session A and B</option>
+            <option value="305_SEP_2026">305 Hackathon Edition Sep 2026 - Session A and B</option>
+            <option value="EMPOWHER_OCT_2026">EmpowHER Hackathon 2026 - Session A and B</option>
+            <option value="305_NOV_2026">305 Hackathon Nov 2026 - Session A and B</option>
+            <option value="CODEFEST_NOV_2026">CodeFest Hackathon 2026 - Session A and B</option>
+            <option value="" disabled>--- Past ---</option>
+            <option value="HACK_FIESTA_FEB_2026">Hack Fiesta Miami Edition Feb 2026 - Session A and B</option>
+            <option value="305_JAN_2026">305 Hackathon Edition Jan 2026 - Session A and B</option>
+          </optgroup>
+          <optgroup label="Event Season 2025">
+            <option value="" disabled>--- Upcoming ---</option>
+            <option value="" disabled>None</option>
+            <option value="" disabled>--- Past ---</option>
+            <option value="WINTER_HACKATHON_DEC_2025">ColorStack Winter Hackathon Dec 2025</option>
+            <option value="CODEFEST_DEC_2025">CodeFest Dec 2025 - Session A and B</option>
+            <option value="305_NOV_2025_SA">305 Hackathon Edition Nov 2025 - Session A (Online)</option>
+            <option value="305_NOV_2025_SB">305 Hackathon Edition Nov 2025 - Session B (In-Person)</option>
+            <option value="EMPOWHER_OCT_2025_SA">EmpowHER Hackathon Oct 2025 - Session A</option>
+            <option value="EMPOWHER_OCT_2025_SB">EmpowHER HackDAY Oct 2025 - Session B</option>
+            <option value="305_SEP_2025">305 Hackathon Sep 2025 Edition</option>
+            <option value="SUMMERCODEX_JUL_2025">SummerCodeX Jul 2025</option>
+            <option value="CODESTORM_MAY_2025">CodeStorm May 2025</option>
+            <option value="305_MAR_2025">305 Hackathon Mar 2025 Edition</option>
+            <option value="HACKFIESTA_MAR_2025">HackFiesta Miami Mar 2025</option>
+          </optgroup>
         </select>
+        <div class="portal-generator">
+          <input
+            id="certificate-email-input"
+            class="portal-email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="Enter your registered email"
+            aria-label="Enter your registered email"
+          />
+          <button id="certificate-generate-btn" class="portal-generate-btn" type="button">
+            Generate Certificate
+          </button>
+          <div id="certificate-generator-feedback" class="portal-generator-feedback" aria-live="polite"></div>
+        </div>
       </div>
 
       <div class="portal-note">
         You will be asked to verify with the same email used at registration on the next page.
       </div>
+      <div class="portal-note" style="text-align:left;margin-top:14px">
+        <strong>Certificate Generator:</strong><br>
+        - Official certificates for confirmed participants<br>
+        - Use your registered email<br>
+        - Opens a clean tab for Print / Save as PDF<br>
+        <span style="font-size:.86rem;color:#6b7280">Enter your email above to check for available certificates...</span>
+      </div>
     </section>
 
     <!-- Eligibility Information Section -->
     <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">🏆 Who Can Request Certificates?</h2>
+      <h2 class="card-title">Who Can Request Certificates?</h2>
       <div class="card-description">
-        <p>Certificates are available for elegible & verified volunteers who contributed to our hackathon events in official capacities</p>
+        <p>Certificates are available for eligible and verified volunteers who contributed to our hackathon events in official capacities.</p>
       </div>
 
 
@@ -220,32 +302,32 @@
 
     <!-- Certificate Value Section -->
     <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">✨ Professional Recognition</h2>
+      <h2 class="card-title">Professional Recognition</h2>
       <div class="card-description">
         <p>Our official certificates provide valuable professional documentation and recognition for your contributions to technology education and innovation.</p>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
         <div style="background:rgba(0,255,65,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">📋</div>
+          <div style="font-size:2rem;margin-bottom:.5rem;">1</div>
           <h4 style="color:var(--matrix-green);margin-bottom:.5rem;">Official Documentation</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Verified proof of professional service and community contribution</p>
         </div>
 
         <div style="background:rgba(0,212,255,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">🎓</div>
+          <div style="font-size:2rem;margin-bottom:.5rem;">2</div>
           <h4 style="color:var(--cyber-blue);margin-bottom:.5rem;">Portfolio Enhancement</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Professional credential for academic and career portfolios</p>
         </div>
 
         <div style="background:rgba(255,0,128,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">🤝</div>
+          <div style="font-size:2rem;margin-bottom:.5rem;">3</div>
           <h4 style="color:var(--neon-pink);margin-bottom:.5rem;">Community Impact</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Recognition of dedication to technology education</p>
         </div>
 
         <div style="background:rgba(138,43,226,0.05);padding:1rem;border-radius:8px;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:.5rem;">✅</div>
+          <div style="font-size:2rem;margin-bottom:.5rem;">4</div>
           <h4 style="color:var(--hacker-purple);margin-bottom:.5rem;">Industry Engagement</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Demonstrates active participation in tech innovation</p>
         </div>
@@ -254,7 +336,7 @@
 
     <!-- How It Works Section -->
     <section class="card" style="margin-top: 2rem;">
-      <h2 class="card-title">🔧 How to Get Your Certificate</h2>
+      <h2 class="card-title">How to Get Your Certificate</h2>
       <p class="card-description">Simple 3-step process to download your official participation certificate</p>
 
       <ul class="checklist">
@@ -262,7 +344,7 @@
           <div class="checklist-number">1</div>
           <div class="checklist-text">
             <strong>Pick Your Event</strong><br>
-            Use the buttons above to go to the event’s certificate portal.
+            Use the event selector above to choose the certificate portal.
           </div>
         </li>
         <li class="checklist-item">
@@ -284,34 +366,34 @@
 
     <!-- Enhanced FAQ Section -->
     <section class="faq-section" style="margin-top: 2rem;">
-      <h2 class="faq-title">❓ Frequently Asked Questions</h2>
+      <h2 class="faq-title">Frequently Asked Questions</h2>
       <p class="faq-subtitle">Everything you need to know about our certificate system</p>
 
       <div class="faq-container">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
             <span>How long after an event are certificates available?</span>
-            <span class="faq-arrow">▼</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
-            <p>Certificates are typically available <strong>15–20 business days</strong> after the event concludes to allow time for verification and processing.</p>
+            <p>Certificates are typically available <strong>15-20 business days</strong> after the event concludes to allow time for verification and processing.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
             <span>What if my email address has changed since the event?</span>
-            <span class="faq-arrow">▼</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
-            <p>Try your <strong>original email</strong> first. If it doesn’t work, contact us at <a href="https://codecrunchglobal-linkedin.vercel.app/">codecrunchglobal-linkedin.vercel.app</a> with both your old and new emails so we can update your record.</p>
+            <p>Try your <strong>original email</strong> first. If it does not work, contact us at <a href="https://codecrunchglobal-linkedin.vercel.app/">codecrunchglobal-linkedin.vercel.app</a> with both your old and new emails so we can update your record.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
             <span>Are these certificates officially recognized?</span>
-            <span class="faq-arrow">▼</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
             <p><strong>Yes.</strong> Certificates are issued by Code Crunch, supported by Hack University Worldwide, Google Developer Group at FIU, CAHSI at FIU, ColorStack at FIU, and Raspberry Pi Code Crunch.</p>
@@ -321,17 +403,17 @@
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
             <span>Can I update my name on the certificate?</span>
-            <span class="faq-arrow">▼</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
-            <p>We can correct <strong>spelling or preferred names</strong>. Contact support at <a href="https://codecrunchglobal-linkedin.vercel.app/">the LinkedIn page</a> and we’ll update records within 15–20 business days.</p>
+            <p>We can correct <strong>spelling or preferred names</strong>. Contact support at <a href="https://codecrunchglobal-linkedin.vercel.app/">the LinkedIn page</a> and we will update records within 15-20 business days.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
             <span>What format are the certificates in?</span>
-            <span class="faq-arrow">▼</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
             <p>Certificates are generated as <strong>high-quality PDFs</strong> optimized for A4 landscape printing and digital use.</p>
@@ -340,11 +422,11 @@
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>I don’t see my participation record. What should I do?</span>
-            <span class="faq-arrow">▼</span>
+            <span>I do not see my participation record. What should I do?</span>
+            <span class="faq-arrow">v</span>
           </button>
           <div class="faq-answer">
-            <p>Try any <strong>alternate emails</strong> you used. If still missing, message us with your full name, event name, and role — we’ll manually verify.</p>
+            <p>Try any <strong>alternate emails</strong> you used. If still missing, message us with your full name, event name, and role - we will manually verify.</p>
           </div>
         </div>
       </div>
@@ -352,13 +434,13 @@
 
     <!-- Contact Support Section -->
     <section class="card" style="margin-top: 2rem; text-align: center;">
-      <h2 class="card-title">📞 Need Help?</h2>
+      <h2 class="card-title">Need Help?</h2>
       <div class="card-description">
         <p>Having trouble with your certificate? Our support team is here to help!</p>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;">
           <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px;">
-            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">🔗 LinkedIn Support</h4>
+            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">LinkedIn Support</h4>
             <p style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
               Contact <strong>Code Crunch Global</strong> on LinkedIn<br>
               <small>Connect with Code Crunch directly</small>
@@ -373,13 +455,13 @@
 
         <div style="margin-top:1.5rem;padding:1rem;background:rgba(255,193,7,0.1);border-radius:8px;border-left:4px solid var(--warning);">
           <p style="color:var(--warning);font-family:'Courier New', monospace;margin:0;">
-            <strong>⚡ Quick Tip:</strong> Include your full name, event name, and role for faster assistance.
+            <strong>Quick Tip:</strong> Include your full name, event name, and role for faster assistance.
           </p>
         </div>
 
         <div style="margin-top:1rem;padding:1rem;background:rgba(138,43,226,0.1);border-radius:8px;border-left:4px solid var(--hacker-purple);">
           <p style="color:var(--hacker-purple);font-family:'Courier New', monospace;margin:0;">
-            <strong>🚀 Pro Tip:</strong> For fastest response, reach out via LinkedIn first, then follow up in Discord if needed.
+            <strong>Pro Tip:</strong> For fastest response, reach out via LinkedIn first, then follow up in Discord if needed.
           </p>
         </div>
       </div>
@@ -391,7 +473,7 @@
     <div class="footer-container">
       <div class="footer-grid">
         <div>
-          <h3>Hack University <span>👨🏻‍💻 👨🏼‍💻 👨🏽‍💻 👨🏾‍💻 👨🏿‍💻👩🏻‍💻 👩🏼‍💻 👩🏽‍💻 👩🏾‍💻 👩🏿‍💻🧑🏻‍💻 🧑🏼‍💻 🧑🏽‍💻 🧑🏾‍💻 🧑🏿‍💻</span></h3>
+          <h3>Hack University</h3>
           <p>
             A collaborative effort uniting multiple student organizations and global communities with a mission to empower the next generation of innovators, developers, and leaders.
           </p>
@@ -433,9 +515,9 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <p>(c) <span id="year"></span> Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
+          Built for the tech community by <a href="#" target="_blank">Brian Bazurto</a> | Powered by innovation and collaboration
         </div>
       </div>
     </div>
@@ -513,38 +595,227 @@
       document.body.style.paddingTop = `${Math.ceil(navH + orgH + worldH)}px`;
     }
 
+    const DEFAULT_LOGOS = [
+      "https://github.com/user-attachments/assets/223a12cb-c5ea-4009-a442-2ad144c8e1d6",
+      "https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27",
+      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+      "https://github.com/user-attachments/assets/c9298abf-c85b-4ff8-8b92-e7f38ddcc846",
+      "https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e",
+      "https://github.com/user-attachments/assets/c4f4805e-db3b-47a2-9a7f-0b124a66dd85",
+      "https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
+    ];
+    const SIGNATURE_URL = "https://github.com/user-attachments/assets/02be41eb-2259-4d6d-9a07-1122f79d6f4b";
+
+    const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxF0O_ob9WwWJiZOUWygO3Ye7MDs74SUW4r06RYTlQKdEZ8q-okz9HQP2Iv8ezF198s/exec";
+
     const certificateEvents = [
       // 2026
-      { year: 2026, name: "305 Hackathon Edition Jan 2026 - Session A & B", endDate: "2026-01-24", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305jan2026.html" },
-      { year: 2026, name: "Hack Fiesta Miami Edition Feb 2026 - Session A & B", endDate: "2026-02-14", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-2026-hackfiestamiamifeb2026.html" },
-      { year: 2026, name: "305 Hackathon Edition March 2026 - Session A & B", endDate: "2026-03-20", url: "#" },
-      { year: 2026, name: "305 Hackathon Edition Apr 2026 - Session A & B", endDate: "2026-04-11", url: "#" },
-      { year: 2026, name: "CodeStorm 2026 - Session A & B", endDate: "2026-05-16", url: "#" },
-      { year: 2026, name: "305 Hackathon Edition Jun 2026 - Session A & B", endDate: "2026-06-13", url: "#" },
-      { year: 2026, name: "SummerCodeX 2026 - Session A & B", endDate: "2026-07-11", url: "#" },
-      { year: 2026, name: "305 Hackathon Edition Aug 2026 - Session A & B", endDate: "2026-08-15", url: "#" },
-      { year: 2026, name: "305 Hackathon Edition Sep 2026 - Session A & B", endDate: "2026-09-12", url: "#" },
-      { year: 2026, name: "EmpowHER Hackathon 2026 - Session A & B", endDate: "2026-10-03", url: "#" },
-      { year: 2026, name: "305 Hackathon Nov 2026 - Session A & B", endDate: "2026-11-07", url: "#" },
-      { year: 2026, name: "CodeFest Hackathon 2026 - Session A & B", endDate: "2026-11-21", url: "#" },
+      { year: 2026, eventId: "305_JAN_2026", name: "305 Hackathon Edition Jan 2026 - Session A and B", endDate: "2026-01-24", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305jan2026.html", certificateApiUrl: "" },
+      { year: 2026, eventId: "HACK_FIESTA_FEB_2026", name: "Hack Fiesta Miami Edition Feb 2026 - Session A and B", endDate: "2026-02-14", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-2026-hackfiestamiamifeb2026.html", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_MAR_2026", name: "305 Hackathon Edition Mar 2026 - Session A and B", endDate: "2026-03-20", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_APR_2026", name: "305 Hackathon Edition Apr 2026 - Session A and B", endDate: "2026-04-11", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "CODESTORM_MAY_2026", name: "CodeStorm 2026 - Session A and B", endDate: "2026-05-16", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_JUN_2026", name: "305 Hackathon Edition Jun 2026 - Session A and B", endDate: "2026-06-13", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "SUMMERCODEX_JUL_2026", name: "SummerCodeX 2026 - Session A and B", endDate: "2026-07-11", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_AUG_2026", name: "305 Hackathon Edition Aug 2026 - Session A and B", endDate: "2026-08-15", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_SEP_2026", name: "305 Hackathon Edition Sep 2026 - Session A and B", endDate: "2026-09-12", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "EMPOWHER_OCT_2026", name: "EmpowHER Hackathon 2026 - Session A and B", endDate: "2026-10-03", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "305_NOV_2026", name: "305 Hackathon Nov 2026 - Session A and B", endDate: "2026-11-07", url: "#", certificateApiUrl: "" },
+      { year: 2026, eventId: "CODEFEST_NOV_2026", name: "CodeFest Hackathon 2026 - Session A and B", endDate: "2026-11-21", url: "#", certificateApiUrl: "" },
 
       // 2025
-      { year: 2025, name: "305 Hackathon Edition Nov 2025 - Session A (Online)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sa.html" },
-      { year: 2025, name: "305 Hackathon Edition Nov 2025 - Session B (In-Person)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sb.html" },
-      { year: 2025, name: "CodeFest Dec 2025 - Session A & B", endDate: "2025-12-06", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-codefest2025.html" },
-      { year: 2025, name: "ColorStack Winter Hackathon Dec 2025", endDate: "2026-01-12", url: "#" },
-      { year: 2025, name: "305 Hackathon Sep 2025 edition", endDate: "2025-09-21", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305-fall2025.html" },
-      { year: 2025, name: "EmpowHER Hackathon Oct 2025 - Session A", endDate: "2025-10-20", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowher-10.13-20.25.html" },
-      { year: 2025, name: "EmpowHER HackDAY Oct 025 - Session B", endDate: "2025-10-18", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowhermini-10.18.25.html" },
-      { year: 2025, name: "SummerCodeX Jul 2025", endDate: "2025-07-28", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificate-summercodex2025.html" },
-      { year: 2025, name: "CodeStorm May 2025", endDate: "2025-05-26", url: "#" },
-      { year: 2025, name: "305 Hackathon Mar 2025 edition", endDate: "2025-03-31", url: "#" },
-      { year: 2025, name: "HackFiesta Miami Mar 2025", endDate: "2025-03-23", url: "#" }
+      { year: 2025, eventId: "305_NOV_2025_SA", name: "305 Hackathon Edition Nov 2025 - Session A (Online)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sa.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "305_NOV_2025_SB", name: "305 Hackathon Edition Nov 2025 - Session B (In-Person)", endDate: "2025-11-15", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305nov2025-sb.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "CODEFEST_DEC_2025", name: "CodeFest Dec 2025 - Session A and B", endDate: "2025-12-06", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-codefest2025.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "WINTER_HACKATHON_DEC_2025", name: "ColorStack Winter Hackathon Dec 2025", endDate: "2026-01-12", url: "#", certificateApiUrl: "" },
+      { year: 2025, eventId: "305_SEP_2025", name: "305 Hackathon Sep 2025 Edition", endDate: "2025-09-21", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-305-fall2025.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "EMPOWHER_OCT_2025_SA", name: "EmpowHER Hackathon Oct 2025 - Session A", endDate: "2025-10-20", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowher-10.13-20.25.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "EMPOWHER_OCT_2025_SB", name: "EmpowHER HackDAY Oct 2025 - Session B", endDate: "2025-10-18", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificates-empowhermini-10.18.25.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "SUMMERCODEX_JUL_2025", name: "SummerCodeX Jul 2025", endDate: "2025-07-28", url: "https://codecrunchglobal.vercel.app/hackathonvolunteer-certificate-summercodex2025.html", certificateApiUrl: "" },
+      { year: 2025, eventId: "CODESTORM_MAY_2025", name: "CodeStorm May 2025", endDate: "2025-05-26", url: "#", certificateApiUrl: "" },
+      { year: 2025, eventId: "305_MAR_2025", name: "305 Hackathon Mar 2025 Edition", endDate: "2025-03-31", url: "#", certificateApiUrl: "" },
+      { year: 2025, eventId: "HACKFIESTA_MAR_2025", name: "HackFiesta Miami Mar 2025", endDate: "2025-03-23", url: "#", certificateApiUrl: "" }
     ];
 
     function asLocalDate(ymd){
       const [y,m,d] = ymd.split('-').map(Number);
       return new Date(y, m - 1, d);
+    }
+
+    const esc = s => String(s ?? "").replace(/[&<>\"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
+    function rolesToText(roles, rolesText){
+      if (rolesText) return String(rolesText);
+      if (Array.isArray(roles)) return roles.join(", ");
+      return roles || "Contributor";
+    }
+    function normalizeCert(cert){
+      return {
+        participantName: esc(cert?.participantName || "Participant"),
+        hackathonName: esc(cert?.hackathonName || "Hackathon"),
+        date: esc(cert?.date || "Date"),
+        location: esc(cert?.location || "Location"),
+        rolesText: esc(rolesToText(cert?.roles, cert?.rolesText)),
+        hackLogoUrl: cert?.hackLogoUrl || "",
+        logos: Array.isArray(cert?.logos) ? cert.logos : null,
+        signatureUrl: cert?.signatureUrl || SIGNATURE_URL
+      };
+    }
+    function certHash(name, eventName, dateStr){
+      const s = `${name}|${eventName}|${dateStr}`;
+      let h = 0x811c9dc5;
+      for (let i = 0; i < s.length; i++){
+        h ^= s.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return ("00000000" + h.toString(16)).slice(-8).toUpperCase();
+    }
+    function logosHTML(logoUrls){
+      const arr = logoUrls && logoUrls.length ? logoUrls : DEFAULT_LOGOS;
+      return arr.map(u => `<img src="${u}" alt="Partner Logo" style="max-height:38px;max-width:120px;object-fit:contain">`).join("");
+    }
+    function certPageHTML(c){
+      const hash8 = certHash(c.participantName, c.hackathonName, c.date);
+      const idText = `CC-${(c.date || "").replace(/[^0-9]/g, "").slice(0, 8)}-${hash8}`;
+      return `
+      <section style="width:100%;max-width:1200px;min-height:820px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px">
+        <div style="text-align:center;margin-bottom:26px">
+          ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" style="height:74px;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">` : ""}
+          <h1 style="margin:0;font-size:3rem;letter-spacing:.04em">CERTIFICATE</h1>
+          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.1em">OF RECOGNITION</p>
+        </div>
+        <p style="text-align:center;font-size:1rem;margin:0 0 10px">This certificate is presented to</p>
+        <h2 style="text-align:center;margin:0 0 20px;font-size:2.2rem;color:#111827">${c.participantName}</h2>
+        <p style="text-align:center;font-size:1rem;line-height:1.65;color:#374151;margin:0 auto;max-width:920px">
+          In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
+          <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.
+        </p>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:58px;gap:20px">
+          <div style="flex:1"></div>
+          <div style="text-align:center;min-width:320px">
+            ${c.signatureUrl ? `<img src="${c.signatureUrl}" alt="Signature" style="max-height:72px;object-fit:contain" onerror="this.style.display='none'">` : ""}
+            <div style="height:1px;background:#1f2937;margin:8px 0 6px"></div>
+            <div style="font-weight:700">BRIAN BAZURTO</div>
+            <div style="font-size:.9rem;font-style:italic">Code Crunch President</div>
+            <div style="font-size:.9rem;font-style:italic">Hack University Initiative</div>
+            <div style="font-size:.82rem;color:#6b7280;margin-top:8px">Cert ID: ${idText}</div>
+          </div>
+          <div style="flex:1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px">${logosHTML(c.logos)}</div>
+        </div>
+      </section>`;
+    }
+    function openCertificatesInNewTab(certs, autoPrint = true){
+      const pages = certs.map(certPageHTML).join("");
+      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
+      <style>
+      body{margin:0;padding:18px;background:#f3f4f6;font-family:Arial,sans-serif;color:#111827}
+      @media print{body{background:#fff;padding:0}section{border:none !important;border-radius:0 !important;margin:0 !important;break-after:page}}
+      </style></head><body>${pages}
+      <script>(function(){${autoPrint ? "window.print();" : ""}})();<\/script></body></html>`;
+      const w = window.open("", "_blank", "width=1300,height=900,scrollbars=yes,resizable=yes");
+      if (!w) {
+        alert("Please allow pop-ups to view/print your certificate.");
+        return;
+      }
+      w.opener = null;
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+    }
+
+    function isValidEmail(email){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+    }
+
+    async function handleGenerateCertificate(){
+      const select = document.getElementById("certificate-portal-select");
+      const emailInput = document.getElementById("certificate-email-input");
+      const btn = document.getElementById("certificate-generate-btn");
+      const feedback = document.getElementById("certificate-generator-feedback");
+      if (!select || !emailInput || !btn) return;
+
+      const selectedValue = (select.value || "").trim();
+      let event = certificateEvents.find((item) => item.eventId === selectedValue) || null;
+      if (!event) {
+        const selectedIndex = selectedValue === "" ? NaN : Number(selectedValue);
+        event = Number.isInteger(selectedIndex) ? certificateEvents[selectedIndex] : null;
+      }
+      const email = (emailInput.value || "").trim().toLowerCase();
+
+      const setFeedback = (msg, color) => {
+        if (!feedback) return;
+        feedback.innerHTML = msg;
+        feedback.style.color = color || "#4b5563";
+      };
+
+      if (!event) {
+        setFeedback("Select an event first.", "#d33b01");
+        return;
+      }
+      if (!isValidEmail(email)) {
+        setFeedback("Enter a valid registered email address.", "#d33b01");
+        return;
+      }
+
+      const apiEndpoint = (event.certificateApiUrl || CERTIFICATE_API_URL || "").trim();
+      const hasApi = !!apiEndpoint;
+      if (!hasApi) {
+        const now = new Date();
+        const state = asLocalDate(event.endDate) >= now ? "Coming Soon" : "Not Available";
+        setFeedback(`Certificates for this event are ${state}.`, state === "Coming Soon" ? "#b45309" : "#d33b01");
+        return;
+      }
+
+      btn.disabled = true;
+      setFeedback("Generating certificate access...", "#1a73e8");
+      try {
+        const endpoint = new URL(apiEndpoint);
+        endpoint.searchParams.set("email", email);
+        endpoint.searchParams.set("event", event.eventId || "");
+        endpoint.searchParams.set("referer", location.href);
+        const res = await fetch(endpoint.toString());
+        const payload = await res.json().catch(() => ({}));
+
+        if (payload?.error) {
+          setFeedback(esc(payload.error), "#d33b01");
+          return;
+        }
+
+        const certs = Array.isArray(payload?.certificates) ? payload.certificates : [];
+        if (!certs.length) {
+          const msg = payload?.message || "No record was found for this email in the selected event.";
+          setFeedback(esc(msg), "#d33b01");
+          return;
+        }
+
+        const available = certs.filter(c => c.status === "Certificate Available" && c.certificateData);
+        const blocked = certs.filter(c => c.status === "Certificate Not Available");
+
+        if (available.length > 0) {
+          const normalized = available.map(c => normalizeCert(c.certificateData));
+          const ticketIds = [...new Set(available.map(c => c.ticketId).filter(Boolean))];
+          setFeedback(
+            `<strong>Certificate Ready</strong><br>${ticketIds.length ? `Ticket ID${ticketIds.length > 1 ? "s" : ""}: ${ticketIds.map(id => `<code>${esc(id)}</code>`).join(", ")}<br>` : ""}Opening in a new print-ready tab...`,
+            "#137333"
+          );
+          openCertificatesInNewTab(normalized, true);
+          return;
+        }
+
+        if (blocked.length === certs.length) {
+          const b = blocked[0] || {};
+          const msg = b.message || "Certificate not available yet.";
+          const next = b.nextStepsMessage ? `<br><br>${esc(b.nextStepsMessage)}` : "";
+          setFeedback(`<strong>${esc(msg)}</strong>${next}`, "#d33b01");
+          return;
+        }
+
+        setFeedback("Unable to determine certificate status for this event.", "#d33b01");
+        return;
+      } catch (err) {
+        setFeedback(err && err.message ? err.message : "Could not generate certificate right now.", "#d33b01");
+      } finally {
+        btn.disabled = false;
+      }
     }
 
 
@@ -569,61 +840,106 @@
 
       const note = section.querySelector(".portal-note");
       if (note) {
-        note.textContent = "You will be asked to verify with the same email used at registration on the next page.";
+        note.textContent = "Enter the same email used at registration.";
       }
 
       const now = new Date();
-      // Status rules:
-      // No URL (#/missing) + upcoming => Coming Soon
-      // No URL + past => Not Available
-      // URL present => Available
-      // Rubric:
-      // URL exists -> Available
-      // no URL + upcoming -> Coming Soon
-      // no URL + past -> Not Available
       const years = [...new Set(certificateEvents.map(e => e.year))].sort((a,b) => b - a);
-      const groupsHtml = years.map((year) => {
-        const yearEvents = certificateEvents.filter(e => e.year === year);
+      select.innerHTML = "";
+      const rootOption = document.createElement("option");
+      rootOption.value = "";
+      rootOption.textContent = "Select your event certificate portal";
+      select.appendChild(rootOption);
+      if (!years.length) {
+        const empty = document.createElement("option");
+        empty.value = "";
+        empty.disabled = true;
+        empty.textContent = "No events configured";
+        select.appendChild(empty);
+        return;
+      }
+
+      const appendEventOption = (groupEl, eventObj) => {
+        const hasApi = !!((eventObj.certificateApiUrl || CERTIFICATE_API_URL || "").trim());
+        const opt = document.createElement("option");
+        opt.value = String(eventObj.eventId || eventObj.index);
+        opt.disabled = false;
+        opt.textContent = `${eventObj.name}${hasApi ? "" : " (Coming Soon)"}`;
+        groupEl.appendChild(opt);
+      };
+
+      years.forEach((year) => {
+        const yearEvents = certificateEvents
+          .map((e, idx) => ({ ...e, index: idx }))
+          .filter(e => e.year === year);
+
         const upcoming = yearEvents
-          .filter(e => asLocalDate(e.endDate) >= now)
-          .sort((a,b) => asLocalDate(a.endDate) - asLocalDate(b.endDate));
-        const closed = yearEvents
-          .filter(e => asLocalDate(e.endDate) < now)
-          .sort((a,b) => asLocalDate(b.endDate) - asLocalDate(a.endDate));
+          .filter((e) => asLocalDate(e.endDate) >= now)
+          .sort((a, b) => asLocalDate(a.endDate) - asLocalDate(b.endDate)); // closest upcoming first
 
-        const renderOption = (e, state) => {
-          const hasUrl = !!(e.url && e.url.trim() && e.url.trim() !== "#");
-          const disabled = !hasUrl;
-          const note = hasUrl ? "" : (state === "upcoming" ? " (Coming Soon)" : " (Not Available)");
-          return `<option value="${hasUrl ? e.url : ""}" ${disabled ? "disabled" : ""}>${e.name}${note}</option>`;
-        };
+        const past = yearEvents
+          .filter((e) => asLocalDate(e.endDate) < now)
+          .sort((a, b) => asLocalDate(b.endDate) - asLocalDate(a.endDate)); // closest past first, oldest last
 
-        const upcomingHtml = upcoming.length ? upcoming.map(e => renderOption(e, "upcoming")).join("") : `<option value="" disabled>None</option>`;
-        const closedHtml = closed.length ? closed.map(e => renderOption(e, "closed")).join("") : `<option value="" disabled>None</option>`;
+        const group = document.createElement("optgroup");
+        group.label = `Event Season ${year}`;
 
-        return `
-          <optgroup label="Event Season ${year}">
-            <option value="" disabled>--- Upcoming / Opening Soon ---</option>
-            ${upcomingHtml}
-            <option value="" disabled>--- Closed / Completed ---</option>
-            ${closedHtml}
-          </optgroup>
-        `;
-      }).join("");
+        const upHeader = document.createElement("option");
+        upHeader.value = "";
+        upHeader.disabled = true;
+        upHeader.textContent = "--- Upcoming ---";
+        group.appendChild(upHeader);
+        if (upcoming.length) {
+          upcoming.forEach((eventObj) => appendEventOption(group, eventObj));
+        } else {
+          const noneUp = document.createElement("option");
+          noneUp.value = "";
+          noneUp.disabled = true;
+          noneUp.textContent = "None";
+          group.appendChild(noneUp);
+        }
 
-      select.innerHTML = `<option value="">Select your event certificate portal</option>${groupsHtml}`;
-      select.addEventListener("change", () => {
-        const selected = select.options[select.selectedIndex];
-        const url = select.value;
-        if (!url || selected.disabled) return;
-        window.open(url, "_blank", "noopener");
+        const pastHeader = document.createElement("option");
+        pastHeader.value = "";
+        pastHeader.disabled = true;
+        pastHeader.textContent = "--- Past ---";
+        group.appendChild(pastHeader);
+        if (past.length) {
+          past.forEach((eventObj) => appendEventOption(group, eventObj));
+        } else {
+          const nonePast = document.createElement("option");
+          nonePast.value = "";
+          nonePast.disabled = true;
+          nonePast.textContent = "None";
+          group.appendChild(nonePast);
+        }
+
+        select.appendChild(group);
       });
+      const feedback = document.getElementById("certificate-generator-feedback");
+      select.addEventListener("change", () => {
+        if (!feedback) return;
+        const selected = select.options[select.selectedIndex];
+        if (!select.value || selected.disabled) {
+          feedback.textContent = "";
+          return;
+        }
+        feedback.textContent = "Event selected. Enter your registered email and click Generate Certificate.";
+        feedback.style.color = "#4b5563";
+      });
+    }
+
+    try {
+      renderCertificatePortalSelector();
+    } catch (err) {
+      console.error("Immediate renderCertificatePortalSelector failed:", err);
     }
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
       // Footer year
-      document.getElementById('year').textContent = new Date().getFullYear();
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       // FAQ fade-in animation
       const faqItems = document.querySelectorAll('.faq-item');
@@ -645,7 +961,7 @@
       const worldBar = document.getElementById("world-clock-bar");
       if (worldToggle && worldBar){
         const setWorldToggleLabel = (open) => {
-          worldToggle.textContent = open ? "World Clocks ▲" : "World Clocks ▼";
+          worldToggle.textContent = open ? "World Clocks ^" : "World Clocks v";
           worldToggle.setAttribute("aria-expanded", String(open));
           syncTopOffsetPadding();
         };
@@ -676,10 +992,28 @@
         setExpanded(false);
       }
       syncTopOffsetPadding();
-      renderCertificatePortalSelector();
+      try {
+        renderCertificatePortalSelector();
+      } catch (err) {
+        const feedback = document.getElementById("certificate-generator-feedback");
+        if (feedback) {
+          feedback.textContent = "Could not load event list. Refresh the page and check browser console.";
+          feedback.style.color = "#d33b01";
+        }
+        console.error("renderCertificatePortalSelector failed:", err);
+      }
+      const generateBtn = document.getElementById("certificate-generate-btn");
+      const emailInput = document.getElementById("certificate-email-input");
+      if (generateBtn) generateBtn.addEventListener("click", handleGenerateCertificate);
+      if (emailInput) {
+        emailInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") handleGenerateCertificate();
+        });
+      }
     });
   </script>
 </body>
 </html>
+
 
 

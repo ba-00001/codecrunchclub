@@ -826,6 +826,123 @@
   </div>
 </section>
 
+<!-- CALENDAR -->
+<section id="calendar" class="section" style="padding-top:0;">
+  <div class="container">
+    <article class="hu-card p-6 md:p-8">
+      <h2 class="title-md">Big Tech Community Live Calendar - Hack University</h2>
+      <p class="section-lead">
+        Confirm active and upcoming in-person, hybrid, and virtual sessions before joining.
+      </p>
+
+      <div class="grid gap-3 mt-5">
+        <details class="portal-dropdown">
+          <summary class="btn w-full portal-trigger">
+            <span class="portal-trigger-main">
+              <i class="fa-regular fa-calendar-check"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Calendar Source of Truth</span>
+                <span class="portal-subtitle">Event details and shared Zoom notice</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="subtitle text-sm leading-relaxed">
+              Use the calendar below as the source of truth for all event details. The Zoom link on this page is the shared Zoom meeting used for all hybrid and virtual events. Please check and subscribe to the Hack University Google Calendar below to confirm that an event is scheduled before joining.
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              One shared calendar for events hosted across our partner organizations:
+              <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GDG at FIU</a>,
+              <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Code Crunch</a>,
+              <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ColorStack at FIU</a>,
+              <a href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">CAHSI at FIU</a>, and
+              <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Raspberry Pi Code Crunch</a>.
+            </p>
+          </div>
+        </details>
+
+        <details class="portal-dropdown">
+          <summary class="btn w-full portal-trigger">
+            <span class="portal-trigger-main">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Google Calendar Tips</span>
+                <span class="portal-subtitle">Before you join Zoom</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="subtitle text-sm leading-relaxed">
+              #1 - Please note that all events take place in Eastern Time (ET), Miami, FL, USA --
+              <span id="tip-et-clock" class="font-semibold"></span>
+              (<span id="tip-et-date"></span>)
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              #2 - Before joining Zoom, open the Google Calendar to verify that there is an active or upcoming in-person, hybrid, or virtual session. Our Google Calendar events include important details such as event location or any additional forms required, if applicable. If nothing is listed on the calendar, there may not be a public event happening at this time.
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              #3 - If you have any questions about the event schedule, please reach out to us on
+              <a href="https://www.linkedin.com/company/codecrunchworldwide" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              (fastest response),
+              <a href="https://hackuniversityplatforms.vercel.app/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Instagram Group Chat</a>,
+              or
+              <a href="https://hackuniversityplatforms.vercel.app/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">GroupMe</a>.
+            </p>
+          </div>
+        </details>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mt-5">
+        <a
+          href="https://zoomlink-hackathons.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          <i class="fa-solid fa-video"></i> Join Zoom Meeting
+        </a>
+        <a
+          href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost"
+        >
+          <i class="fa-regular fa-calendar"></i> View Hack University [Google Calendar]
+        </a>
+        <a
+          href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-light"
+        >
+          <i class="fa-brands fa-google"></i> Subscribe to Google Calendar
+        </a>
+      </div>
+
+      <div class="hu-card p-4 md:p-5 mt-6">
+        <h3 class="font-extrabold text-xl text-center">Big Tech Community Live Calendar - Hack University</h3>
+        <p class="subtitle text-sm text-center mt-2 max-w-3xl mx-auto">
+          Use this live Google Calendar view to confirm that a Hack University event is scheduled, including room location and whether the Zoom meeting is active right now or starting soon.
+        </p>
+        <div class="mt-4">
+          <iframe
+            title="Big Tech Community Google Calendar"
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+            class="w-full"
+            style="height:1200px;border:1px solid #777;border-radius:12px;"
+            frameborder="0"
+            scrolling="no"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- PARTNER ORGANIZATIONS -->
 <section id="partners" class="section" style="padding-top:0;">
   <div class="container">
@@ -1146,7 +1263,7 @@
     { key: "nav.mission", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#mission", newTab: false },
     { key: "resource.gdg", href: "https://gdgatfiu.vercel.app/", newTab: true },
     { key: "nav.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
-    { key: "nav.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity-calendar.html", newTab: true },
+    { key: "nav.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
     { key: "resource.gdg", href: "https://gdgatfiu.vercel.app", newTab: true },
         { key: "partner.codeCrunchHome", href: "https://codecrunchglobal.vercel.app/", newTab: true },
     { key: "partner.colorStackHome", href: "https://colorstackatfiu.vercel.app/", newTab: true },
@@ -1190,7 +1307,7 @@
     { key: "resource.zoom", href: "https://hackuniversity-zoom.vercel.app/", newTab: true },
     { key: "resource.photos", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
     { key: "resource.toolkitHackerGuide", href: "https://codecrunchglobal.vercel.app/hacks-toolkit.html", newTab: true },
-    { key: "resource.hackuniversityCalendar", href: "https://codecrunchglobal.vercel.app/hackuniversity-calendar.html", newTab: true },
+    { key: "resource.hackuniversityCalendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
 
     { key: "resource.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
     { key: "resource.membershipHackuniversity", href: "https://hackuniversity-onestopform.vercel.app/", newTab: true },
@@ -1203,7 +1320,7 @@
     { key: "student.join", href: "https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html", newTab: true },
     { key: "student.login", href: "https://codecrunchglobal.vercel.app/hackuniversity-main-students.html", newTab: false },
     { key: "student.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
-    { key: "student.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity-calendar.html", newTab: true },
+    { key: "student.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
 
 
 
@@ -1294,6 +1411,8 @@
     function startETClock() {
       const clockEl = document.getElementById("et-clock");
       const dateEl = document.getElementById("et-date");
+      const tipClockEl = document.getElementById("tip-et-clock");
+      const tipDateEl = document.getElementById("tip-et-date");
       if (!clockEl || !dateEl) return;
 
       const tz = "America/New_York";
@@ -1319,6 +1438,8 @@
 
         clockEl.textContent = `${timeStr} ET`;
         dateEl.textContent = dateStr;
+        if (tipClockEl) tipClockEl.textContent = `${timeStr} ET`;
+        if (tipDateEl) tipDateEl.textContent = dateStr;
       };
 
       tick();
@@ -1332,6 +1453,7 @@
 
 </body>
 </html>
+
 
 
 
