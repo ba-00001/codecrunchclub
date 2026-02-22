@@ -8,14 +8,14 @@
 
   <style>
     :root{
-      --matrix-green:#00e676;
-      --cyber-blue:#00b0ff;
-      --neon-pink:#ff3d8d;
-      --hacker-purple:#8a2be2;
+      --primary:#1a73e8;
+      --primary-dark:#1557b0;
+      --accent:#0f172a;
+      --accent-soft:#f1f5f9;
       --warning:#ffc107;
       --text-secondary:#4b5563;
       --text-light:#6b7280;
-      --bg-color:#0d1117;
+      --bg-color:#202124;
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
@@ -310,25 +310,25 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
         <div style="background:rgba(0,255,65,0.05);padding:1rem;border-radius:8px;text-align:center;">
           <div style="font-size:2rem;margin-bottom:.5rem;">1</div>
-          <h4 style="color:var(--matrix-green);margin-bottom:.5rem;">Official Documentation</h4>
+          <h4 style="color:var(--primary);margin-bottom:.5rem;">Official Documentation</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Verified proof of professional service and community contribution</p>
         </div>
 
         <div style="background:rgba(0,212,255,0.05);padding:1rem;border-radius:8px;text-align:center;">
           <div style="font-size:2rem;margin-bottom:.5rem;">2</div>
-          <h4 style="color:var(--cyber-blue);margin-bottom:.5rem;">Portfolio Enhancement</h4>
+          <h4 style="color:var(--primary-dark);margin-bottom:.5rem;">Portfolio Enhancement</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Professional credential for academic and career portfolios</p>
         </div>
 
         <div style="background:rgba(255,0,128,0.05);padding:1rem;border-radius:8px;text-align:center;">
           <div style="font-size:2rem;margin-bottom:.5rem;">3</div>
-          <h4 style="color:var(--neon-pink);margin-bottom:.5rem;">Community Impact</h4>
+          <h4 style="color:var(--primary);margin-bottom:.5rem;">Community Impact</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Recognition of dedication to technology education</p>
         </div>
 
         <div style="background:rgba(138,43,226,0.05);padding:1rem;border-radius:8px;text-align:center;">
           <div style="font-size:2rem;margin-bottom:.5rem;">4</div>
-          <h4 style="color:var(--hacker-purple);margin-bottom:.5rem;">Industry Engagement</h4>
+          <h4 style="color:var(--primary-dark);margin-bottom:.5rem;">Industry Engagement</h4>
           <p style="color:var(--text-light);font-size:.9rem;">Demonstrates active participation in tech innovation</p>
         </div>
       </div>
@@ -440,13 +440,13 @@
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;">
           <div style="background: rgba(0, 255, 65, 0.1); padding: 1.5rem; border-radius: 12px;">
-            <h4 style="color: var(--matrix-green); margin-bottom: 1rem;">LinkedIn Support</h4>
+            <h4 style="color: var(--primary); margin-bottom: 1rem;">LinkedIn Support</h4>
             <p style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
               Contact <strong>Code Crunch Global</strong> on LinkedIn<br>
               <small>Connect with Code Crunch directly</small>
             </p>
             <a href="https://codecrunchglobal-linkedin.vercel.app/" target="_blank" rel="noopener"
-               style="display:inline-block;margin-top:.75rem;padding:.5rem 1rem;background:var(--matrix-green);color:var(--bg-color);
+               style="display:inline-block;margin-top:.75rem;padding:.5rem 1rem;background:var(--primary);color:#fff;
                       text-decoration:none;border-radius:6px;font-weight:600;transition:all .3s ease;font-family:'Courier New', monospace;">
               Connect on LinkedIn
             </a>
@@ -459,8 +459,8 @@
           </p>
         </div>
 
-        <div style="margin-top:1rem;padding:1rem;background:rgba(138,43,226,0.1);border-radius:8px;border-left:4px solid var(--hacker-purple);">
-          <p style="color:var(--hacker-purple);font-family:'Courier New', monospace;margin:0;">
+        <div style="margin-top:1rem;padding:1rem;background:rgba(26,115,232,0.08);border-radius:8px;border-left:4px solid var(--primary-dark);">
+          <p style="color:var(--primary-dark);font-family:'Courier New', monospace;margin:0;">
             <strong>Pro Tip:</strong> For fastest response, reach out via LinkedIn first, then follow up in Discord if needed.
           </p>
         </div>
@@ -677,18 +677,21 @@
       const hash8 = certHash(c.participantName, c.hackathonName, c.date);
       const idText = `CC-${(c.date || "").replace(/[^0-9]/g, "").slice(0, 8)}-${hash8}`;
       return `
-      <section style="width:100%;max-width:1200px;min-height:820px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px">
+      <section style="width:100%;max-width:1200px;min-height:820px;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:34px 42px;box-sizing:border-box;break-after:page;margin:0 auto 16px;box-shadow:0 3px 12px rgba(32,33,36,.15);font-family:'Google Sans','Roboto',Arial,sans-serif;color:#202124">
         <div style="text-align:center;margin-bottom:26px">
           ${c.hackLogoUrl ? `<img src="${c.hackLogoUrl}" alt="Hack Logo" style="height:74px;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">` : ""}
-          <h1 style="margin:0;font-size:3rem;letter-spacing:.04em">CERTIFICATE</h1>
-          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.1em">OF RECOGNITION</p>
+          <h1 style="margin:0;font-size:3rem;letter-spacing:.04em;color:#1a73e8">CERTIFICATE</h1>
+          <p style="margin:8px 0 0;font-size:1rem;letter-spacing:.1em;color:#5f6368">OF RECOGNITION</p>
         </div>
-        <p style="text-align:center;font-size:1rem;margin:0 0 10px">This certificate is presented to</p>
+
+        <p style="text-align:center;font-size:1rem;margin:0 0 10px;color:#5f6368">This certificate is presented to</p>
         <h2 style="text-align:center;margin:0 0 20px;font-size:2.2rem;color:#111827">${c.participantName}</h2>
         <p style="text-align:center;font-size:1rem;line-height:1.65;color:#374151;margin:0 auto;max-width:920px">
           In recognition of your outstanding contributions as a <strong>${c.rolesText}</strong> at the
-          <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on <strong>${c.date}</strong>.
+          <strong>${c.hackathonName}</strong>, held in <strong>${c.location}</strong> on
+          <strong>${c.date}</strong>.
         </p>
+
         <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:58px;gap:20px">
           <div style="flex:1"></div>
           <div style="text-align:center;min-width:320px">
@@ -707,7 +710,7 @@
       const pages = certs.map(certPageHTML).join("");
       const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
       <style>
-      body{margin:0;padding:18px;background:#f3f4f6;font-family:Arial,sans-serif;color:#111827}
+      body{margin:0;padding:18px;background:#f3f4f6;font-family:'Google Sans','Roboto',Arial,sans-serif;color:#111827}
       @media print{body{background:#fff;padding:0}section{border:none !important;border-radius:0 !important;margin:0 !important;break-after:page}}
       </style></head><body>${pages}
       <script>(function(){${autoPrint ? "window.print();" : ""}})();<\/script></body></html>`;
