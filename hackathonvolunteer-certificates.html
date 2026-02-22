@@ -711,27 +711,44 @@
       const pages = certs.map(certPageHTML).join("");
       const printScript = autoPrint ? `
       (function(){
-        function waitForImages(){
+        async function waitForImages(){
           const imgs = Array.from(document.images || []);
-          if (!imgs.length) return Promise.resolve();
-          return Promise.all(imgs.map((img) => {
+          if (!imgs.length) return;
+          await Promise.all(imgs.map((img) => {
+            if (img.decode) {
+              return img.decode().catch(() => {});
+            }
             if (img.complete) return Promise.resolve();
             return new Promise((resolve) => {
               img.onload = img.onerror = () => resolve();
             });
           }));
         }
-        function waitForFonts(){
-          if (document.fonts && document.fonts.ready) return document.fonts.ready.catch(() => {});
-          return Promise.resolve();
+        async function waitForFonts(){
+          if (document.fonts && document.fonts.ready) {
+            try { await document.fonts.ready; } catch (_) {}
+          }
         }
         function nextPaint(){
           return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         }
-        Promise.all([waitForImages(), waitForFonts()])
-          .then(nextPaint)
-          .then(() => setTimeout(() => window.print(), 60))
-          .catch(() => setTimeout(() => window.print(), 120));
+        async function runPrint(){
+          await waitForImages();
+          await waitForFonts();
+          await nextPaint();
+          // Let Chrome settle final layout before opening print preview.
+          await new Promise((r) => setTimeout(r, 180));
+          try { window.dispatchEvent(new Event('resize')); } catch (_) {}
+          try { window.focus(); } catch (_) {}
+          setTimeout(() => window.print(), 120);
+        }
+        if (document.readyState === 'complete') {
+          runPrint().catch(() => setTimeout(() => window.print(), 300));
+        } else {
+          window.addEventListener('load', () => {
+            runPrint().catch(() => setTimeout(() => window.print(), 300));
+          }, { once: true });
+        }
       })();
       ` : "";
       const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
