@@ -709,6 +709,31 @@
     }
     function openCertificatesInNewTab(certs, autoPrint = true){
       const pages = certs.map(certPageHTML).join("");
+      const printScript = autoPrint ? `
+      (function(){
+        function waitForImages(){
+          const imgs = Array.from(document.images || []);
+          if (!imgs.length) return Promise.resolve();
+          return Promise.all(imgs.map((img) => {
+            if (img.complete) return Promise.resolve();
+            return new Promise((resolve) => {
+              img.onload = img.onerror = () => resolve();
+            });
+          }));
+        }
+        function waitForFonts(){
+          if (document.fonts && document.fonts.ready) return document.fonts.ready.catch(() => {});
+          return Promise.resolve();
+        }
+        function nextPaint(){
+          return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        }
+        Promise.all([waitForImages(), waitForFonts()])
+          .then(nextPaint)
+          .then(() => setTimeout(() => window.print(), 60))
+          .catch(() => setTimeout(() => window.print(), 120));
+      })();
+      ` : "";
       const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Certificates</title>
       <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
       <style>
@@ -733,7 +758,7 @@
       }
       }
       </style></head><body>${pages}
-      <script>(function(){${autoPrint ? "window.print();" : ""}})();<\/script></body></html>`;
+      <script>${printScript}<\/script></body></html>`;
       const w = window.open("", "_blank", "width=1300,height=900,scrollbars=yes,resizable=yes");
       if (!w) {
         alert("Please allow pop-ups to view/print your certificate.");
