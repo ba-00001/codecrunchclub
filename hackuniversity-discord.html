@@ -329,7 +329,7 @@
   <main class="container">
     <section class="card">
       <h1>Discord Access Login</h1>
-      <p class="sub">Enter the same OneStop email used during registration. After verification, your Discord access will unlock.</p>
+      <p class="sub">You will have access to GroupMe, private IG group, and Teams, as well as each organization's Discord. Also join the Teams App community group.</p>
 
       <form id="discord-login-form" novalidate>
         <label for="member-email">Registered Gmail / Google Account</label>
@@ -344,6 +344,8 @@
         <div class="result-actions">
           <a id="discord-link" class="btn btn-main btn-main-tight" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Join Hackathon Discord</a>
           <a id="groupme-link" class="btn btn-main btn-main-tight" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-users"></i> Join Hackathon GroupMe</a>
+          <a id="private-ig-link" class="btn btn-main btn-main-tight" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Join Private IG Group</a>
+          <a id="teams-community-link" class="btn btn-main btn-main-tight" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft"></i> Join Teams App Community</a>
         </div>
 
         <div class="community-box">
@@ -412,6 +414,8 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbzAhhReD7EpGsT_biQmcuqsMu1t1wCs4MQTGuGpGKax1EisZvT_8qtyBKQMPStcpyHXqA/exec";
     const DEFAULT_DISCORD_URL = "https://hackuniversity-discord.vercel.app/";
+    const DEFAULT_PRIVATE_IG_URL = "https://hackuniversity-directory.vercel.app/";
+    const DEFAULT_TEAMS_COMMUNITY_URL = "https://teams.live.com/l/community/FAAMasb0XtSxuIciQI";
 
     const form = document.getElementById("discord-login-form");
     const emailInput = document.getElementById("member-email");
@@ -421,6 +425,8 @@
     const welcomeName = document.getElementById("welcome-name");
     const discordLink = document.getElementById("discord-link");
     const groupmeLink = document.getElementById("groupme-link");
+    const privateIgLink = document.getElementById("private-ig-link");
+    const teamsCommunityLink = document.getElementById("teams-community-link");
 
     function setStatus(type, message) {
       statusEl.className = `status show ${type}`;
@@ -468,6 +474,8 @@
         welcomeName.textContent = chosen.participantName || "Member";
         discordLink.href = chosen.discordJoinLink || DEFAULT_DISCORD_URL;
         groupmeLink.href = chosen.groupmeLink || "https://codecrunchglobal-groupme.vercel.app/";
+        privateIgLink.href = chosen.privateIgGroupLink || DEFAULT_PRIVATE_IG_URL;
+        teamsCommunityLink.href = chosen.teamsCommunityLink || DEFAULT_TEAMS_COMMUNITY_URL;
         resultEl.style.display = "block";
         setStatus("success", "Membership verified. Continue to Discord.");
       } catch (err) {
