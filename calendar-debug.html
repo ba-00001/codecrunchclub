@@ -283,7 +283,10 @@
           rawJson.textContent = JSON.stringify(payload, null, 2);
 
           if (!response.ok) {
-            throw new Error(payload.error || `Request failed with ${response.status}`);
+            const message = typeof payload.error === "string"
+              ? payload.error
+              : JSON.stringify(payload.error || payload);
+            throw new Error(message || `Request failed with ${response.status}`);
           }
 
           calendarId.textContent = payload.calendarId || "N/A";
