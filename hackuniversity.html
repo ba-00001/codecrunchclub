@@ -869,7 +869,7 @@
         #calendar .hu-inline-actions a, #calendar .hu-inline-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 10px; border: 1px solid transparent; font-size: 14px; font-weight: 800; }
         #calendar .hu-inline-actions a { background: var(--color-primary); color: #fff; }
         #calendar .hu-inline-actions a.alt { background: #eef4ff; color: #174ea6; border-color: #c7dafd; }
-        #calendar .hu-inline-actions .disabled { background: #e5e7eb; color: #6b7280; border-color: #d1d5db; pointer-events: none; box-shadow: none; opacity: .95; }
+        #calendar .hu-inline-actions .disabled { background: #e5e7eb; color: #6b7280; border-color: #d1d5db; box-shadow: none; opacity: .95; cursor: not-allowed; }
         #calendar .hu-inline-more { margin-top: 16px; display: inline-flex; align-items: center; justify-content: center; padding: 11px 16px; border-radius: 999px; border: 1px solid #c7dafd; background: #fff; color: #174ea6; font-weight: 800; cursor: pointer; }
         #calendar .hu-inline-more[hidden] { display: none !important; }
         @media (max-width: 640px) {
@@ -952,6 +952,8 @@
               <p>One shared calendar for events hosted across GDG at FIU, Code Crunch, ColorStack at FIU, CAHSI at FIU, and Raspberry Pi Code Crunch.</p>
               <p>#1 - Please note that all events take place in Eastern Time (ET), Miami, FL, USA -- <span id="hu-inline-tip-et-clock" class="font-semibold"></span> (<span id="hu-inline-tip-et-date"></span>)</p>
               <p>#2 - Before joining Zoom, open the Google Calendar to verify that there is an active or upcoming in-person, hybrid, or virtual session.</p>
+              <a id="zoom-meeting-link" class="btn btn-primary-soft is-disabled" href="#" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">Join Shared Zoom Meeting</a>
+              <p id="calendar-status-note" class="calendar-status-note">Zoom unlocks 15 minutes before eligible virtual or hybrid sessions.</p>
             </div>
           </details>
 
@@ -984,6 +986,8 @@
           const SHARED_ZOOM_URL = 'https://zoomlink-hackathons.vercel.app/';
           const GOOGLE_CALENDAR_SUBSCRIBE_URL = 'https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t';
           const GOOGLE_CALENDAR_VIEW_URL = 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000';
+          const ZOOM_UNLOCK_LEAD_MS = 15 * 60 * 1000;
+          const HYBRID_ZOOM_GRACE_MS = 30 * 60 * 1000;
           const PAGE_SIZE = 30;
           const hackathons = Array.isArray(window.HACKATHONS_DATA) ? window.HACKATHONS_DATA : [];
           const upcomingEl = document.getElementById('hu-inline-upcoming');
@@ -1069,6 +1073,75 @@
             return new Date(y, mo - 1, d, h, mi, 0, 0);
           }
 
+          function getEventModeLabel(source) {
+            const value = String(source || '').toLowerCase();
+            if (value.includes('hybrid')) return 'hybrid';
+            if (/(virtual|online|remote|zoom|synchronous)/.test(value)) return 'virtual';
+            return '';
+          }
+
+          function getZoomWindow(start, end, mode) {
+            if (!(start instanceof Date) || Number.isNaN(start.getTime())) return null;
+            if (!(end instanceof Date) || Number.isNaN(end.getTime())) return null;
+            if (!mode) return null;
+
+            const unlockAt = new Date(start.getTime() - ZOOM_UNLOCK_LEAD_MS);
+            const closesAt = new Date(end.getTime() + (mode === 'hybrid' ? HYBRID_ZOOM_GRACE_MS : 0));
+            return { unlockAt, closesAt };
+          }
+
+          function isZoomWindowOpen(start, end, mode) {
+            const windowRange = getZoomWindow(start, end, mode);
+            if (!windowRange) return false;
+            const now = new Date();
+            return now >= windowRange.unlockAt && now <= windowRange.closesAt;
+          }
+
+          function getZoomDisabledMessage(start, end, mode) {
+            const windowRange = getZoomWindow(start, end, mode);
+            if (!windowRange) {
+              return 'This Zoom link is only available for eligible virtual or hybrid sessions.';
+            }
+
+            const unlockText = formatDateTime(windowRange.unlockAt);
+            const closeText = formatDateTime(windowRange.closesAt);
+
+            if (mode === 'hybrid') {
+              return `This Zoom link unlocks at ${unlockText} ET and stays available until ${closeText} ET for this hybrid session.`;
+            }
+
+            return `This Zoom link unlocks at ${unlockText} ET and stays available until ${closeText} ET for this virtual session.`;
+          }
+
+          function getHackathonZoomSupport(hackathon) {
+            const mode = getEventModeLabel(hackathon.modality);
+            if (!mode) return null;
+
+            const start = parseLocalDateTime(hackathon.hackStartTime) || new Date(`${hackathon.startDate}T00:00:00`);
+            const end = parseLocalDateTime(hackathon.hackEndTime) || new Date(`${hackathon.endDate}T23:59:59`);
+            if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return null;
+
+            return {
+              enabled: isZoomWindowOpen(start, end, mode),
+              message: getZoomDisabledMessage(start, end, mode)
+            };
+          }
+
+          function getCalendarZoomSupport(event) {
+            const mode = getEventModeLabel(`${event.summary || ''} ${event.location || ''}`);
+            if (!mode) return null;
+
+            const start = new Date(event.start);
+            const end = new Date(event.end);
+            if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return null;
+
+            return {
+              mode,
+              enabled: isZoomWindowOpen(start, end, mode),
+              message: getZoomDisabledMessage(start, end, mode)
+            };
+          }
+
           function getHackathonStatus(hackathon) {
             const now = nowMiami();
             const start = new Date(new Date(hackathon.startDate + 'T00:00:00').toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -1104,16 +1177,24 @@
             return { label: 'TBD', cls: '' };
           }
 
-          function makeAction(label, url, enabled, alt) {
+          function makeAction(label, url, enabled, alt, options = {}) {
             const safeUrl = enabled && isValidUrl(url) ? url : '#';
-            const classes = [''];
+            const classes = [];
+            const attrs = [];
             if (alt) classes.push('alt');
-            if (!enabled || !isValidUrl(url)) classes.push('disabled');
-            return `<a class="${classes.join(' ').trim()}" href="${safeUrl}" target="_blank" rel="noopener">${label}</a>`;
+            if (!enabled || !isValidUrl(url)) {
+              classes.push('disabled');
+              attrs.push('aria-disabled="true"', 'data-disabled-link="true"');
+              if (options.disabledMessage) {
+                attrs.push(`data-disabled-message="${escapeHtml(options.disabledMessage)}"`);
+              }
+            }
+            return `<a class="${classes.join(' ').trim()}" href="${safeUrl}" target="_blank" rel="noopener" ${attrs.join(' ')}>${label}</a>`;
           }
 
           function buildHackathonButtons(hackathon, isPast, isLive, websiteReady) {
             const primary = [];
+            const zoomSupport = getHackathonZoomSupport(hackathon);
 
             if (!isPast && websiteReady) {
               primary.push({
@@ -1135,7 +1216,12 @@
             }
 
             const secondary = [
-              { label: 'Zoom Meeting', enabled: isLive, url: SHARED_ZOOM_URL },
+              {
+                label: 'Zoom Meeting',
+                enabled: !!zoomSupport?.enabled,
+                url: SHARED_ZOOM_URL,
+                disabledMessage: zoomSupport?.message
+              },
               { label: 'Agenda', enabled: !!hackathon.agendaEnable, url: hackathon.agendaUrl },
               { label: 'Perks & Swag', enabled: !!hackathon.perksEnable, url: hackathon.perksUrl },
               { label: 'Photo Album', enabled: !!hackathon.photoAlbumEnable, url: hackathon.photoAlbumUrl },
@@ -1177,7 +1263,7 @@
                 </div>
                 <div class="hu-inline-actions">
                   ${buttons.primary.map((button) => makeAction(button.label, button.url, button.enabled, false)).join('')}
-                  ${buttons.secondary.map((button) => makeAction(button.label, button.url, button.enabled, true)).join('')}
+                  ${buttons.secondary.map((button) => makeAction(button.label, button.url, button.enabled, true, { disabledMessage: button.disabledMessage })).join('')}
                 </div>
               </div>
             `;
@@ -1199,24 +1285,8 @@
             return '';
           }
 
-          function getHybridZoomMarkup(event) {
-            if (!/hybrid/i.test(String(event.summary || ''))) return '';
-            const start = new Date(event.start);
-            const end = new Date(event.end);
-            if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return '';
-
-            const now = new Date();
-            const unlockAt = new Date(start.getTime() - 15 * 60 * 1000);
-            const expiresAt = new Date(end.getTime() + 30 * 60 * 1000);
-
-            if (now >= unlockAt && now <= expiresAt) {
-              return `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> <a href="${SHARED_ZOOM_URL}" target="_blank" rel="noopener">Join here</a></div>`;
-            }
-
-            return '<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Join here available 15 min before the event starts and 30 min after the event ends.</div>';
-          }
-
           function renderCalendarCard(event) {
+            const zoomSupport = getCalendarZoomSupport(event);
             return `
               <div class="hu-inline-card is-calendar">
                 <div class="hu-inline-card-top">
@@ -1226,11 +1296,12 @@
                 <div class="hu-inline-meta"><strong>Starts:</strong> ${escapeHtml(formatDateTime(event.start))} ${getETAbbrev(new Date(event.start))}</div>
                 <div class="hu-inline-meta"><strong>Ends:</strong> ${escapeHtml(formatDateTime(event.end))} ${getETAbbrev(new Date(event.end))}</div>
                 <div class="hu-inline-meta"><strong>Location / Link:</strong> ${escapeHtml(event.location || 'Details available in Google Calendar')}</div>
-                ${getHybridZoomMarkup(event)}
+                ${zoomSupport ? `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Shared Zoom link for ${escapeHtml(zoomSupport.mode)} sessions.</div>` : ''}
                 <div class="hu-inline-badges">
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
                 <div class="hu-inline-actions">
+                  ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('See This Event on Google Calendar', event.htmlLink, true, false)}
                   ${makeAction('Subscribe to Google Calendar', GOOGLE_CALENDAR_SUBSCRIBE_URL, true, true)}
                   ${makeAction('View Hack University [Google Calendar]', GOOGLE_CALENDAR_VIEW_URL, true, true)}
@@ -1290,6 +1361,15 @@
             renderList(upcomingEl, filteredUpcoming, upcomingVisible, upcomingMoreEl, 'No upcoming events at this time.');
             renderList(pastEl, filteredPast, pastVisible, pastMoreEl, 'No past events to display.');
           }
+
+          root.addEventListener('click', (event) => {
+            const disabledLink = event.target.closest('a[data-disabled-link]');
+            if (!disabledLink || !root.contains(disabledLink)) return;
+
+            event.preventDefault();
+            const message = disabledLink.getAttribute('data-disabled-message');
+            if (message) window.alert(message);
+          });
 
           async function loadCalendarEvents() {
             try {
@@ -1904,6 +1984,10 @@
     const zoomLink = document.getElementById("zoom-meeting-link");
     const statusNote = document.getElementById("calendar-status-note");
     if (!zoomLink || !statusNote) return;
+    const SHARED_ZOOM_URL = "https://zoomlink-hackathons.vercel.app/";
+    const ZOOM_UNLOCK_LEAD_MS = 15 * 60 * 1000;
+    const HYBRID_ZOOM_GRACE_MS = 30 * 60 * 1000;
+    const CALENDAR_STATUS_URL = "/api/calendar-status?debug=1&since=2024-08-01T00:00:00-04:00";
 
     const formatEt = (isoString) => {
       if (!isoString) return "";
@@ -1921,33 +2005,69 @@
       }).format(date);
     };
 
+    const getEventMode = (event) => {
+      const source = `${event?.summary || ""} ${event?.location || ""}`.toLowerCase();
+      if (source.includes("hybrid")) return "hybrid";
+      if (/(virtual|online|remote|zoom|synchronous)/.test(source)) return "virtual";
+      return "";
+    };
+
+    const getZoomWindow = (event) => {
+      const mode = getEventMode(event);
+      if (!mode) return null;
+
+      const start = new Date(event.start);
+      const end = new Date(event.end);
+      if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return null;
+
+      return {
+        mode,
+        start,
+        end,
+        unlockAt: new Date(start.getTime() - ZOOM_UNLOCK_LEAD_MS),
+        closesAt: new Date(end.getTime() + (mode === "hybrid" ? HYBRID_ZOOM_GRACE_MS : 0))
+      };
+    };
+
     const setEnabled = (enabled) => {
       zoomLink.classList.toggle("is-disabled", !enabled);
       zoomLink.setAttribute("aria-disabled", String(!enabled));
       if (enabled) {
+        zoomLink.href = SHARED_ZOOM_URL;
         zoomLink.removeAttribute("tabindex");
       } else {
+        zoomLink.href = "#";
         zoomLink.setAttribute("tabindex", "-1");
       }
     };
 
-    const applyStatus = (payload) => {
-      if (payload?.hasLiveEvent && payload.activeEvent) {
-        const endTime = formatEt(payload.activeEvent.end);
+    const applyStatus = (events) => {
+      const now = new Date();
+      const zoomEvents = (Array.isArray(events) ? events : [])
+        .map((event) => ({ event, window: getZoomWindow(event) }))
+        .filter((item) => item.window)
+        .sort((a, b) => a.window.start - b.window.start);
+
+      const active = zoomEvents.find((item) => now >= item.window.unlockAt && now <= item.window.closesAt);
+
+      if (active) {
+        const endTime = formatEt(active.window.closesAt.toISOString());
         setEnabled(true);
         statusNote.textContent = endTime
-          ? `Zoom is live now for "${payload.activeEvent.summary}" until ${endTime} ET.`
-          : `Zoom is live now for "${payload.activeEvent.summary}".`;
+          ? `Zoom is live now for "${active.event.summary}" until ${endTime} ET.`
+          : `Zoom is live now for "${active.event.summary}".`;
         return;
       }
 
       setEnabled(false);
 
-      if (payload?.nextEvent?.start) {
-        const nextStart = formatEt(payload.nextEvent.start);
-        const label = payload.nextEvent.summary || "The next event";
+      const next = zoomEvents.find((item) => now < item.window.unlockAt);
+
+      if (next) {
+        const nextStart = formatEt(next.window.unlockAt.toISOString());
+        const label = next.event.summary || "The next event";
         statusNote.textContent = nextStart
-          ? `${label} starts ${nextStart} ET. Zoom will unlock when the event begins.`
+          ? `${label} is next. Zoom unlocks at ${nextStart} ET, 15 minutes before the session starts.`
           : "No live Zoom event right now. Check the calendar for the next session.";
         return;
       }
@@ -1957,7 +2077,7 @@
 
     async function loadCalendarStatus() {
       try {
-        const response = await fetch("/api/calendar-status", {
+        const response = await fetch(CALENDAR_STATUS_URL, {
           headers: { Accept: "application/json" }
         });
 
@@ -1966,13 +2086,19 @@
         }
 
         const payload = await response.json();
-        applyStatus(payload);
+        applyStatus(payload?.upcomingEvents);
       } catch (error) {
         setEnabled(false);
         statusNote.textContent = "Unable to verify calendar status right now. Please use the Google Calendar link above.";
         console.error("[calendar-status]", error);
       }
     }
+
+    zoomLink.addEventListener("click", (event) => {
+      if (zoomLink.getAttribute("aria-disabled") !== "true") return;
+      event.preventDefault();
+      window.alert(statusNote.textContent || "Zoom is not available yet for this event.");
+    });
 
     document.addEventListener("DOMContentLoaded", loadCalendarStatus);
   })();
