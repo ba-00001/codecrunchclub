@@ -1,5 +1,5 @@
 const CALENDAR_ID =
-  "ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t";
+  "84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12@group.calendar.google.com";
 
 const GOOGLE_API_BASE = "https://www.googleapis.com/calendar/v3/calendars";
 
