@@ -904,7 +904,8 @@
         .logo-grid{gap:8px}
       }
       </style></head><body>${pages}
-      <script>${printScript}<\/script></body></html>`;
+      <script>${printScript}<\/script>  <script src="js/shared-footer-loader.js"></script>
+</body></html>`;
       const w = window.open("", "_blank", "width=1300,height=900,scrollbars=yes,resizable=yes");
       if (!w) {
         alert("Please allow pop-ups to view/print your certificate.");
@@ -1224,6 +1225,7 @@
       }
     });
   </script>
+  <script src="js/shared-footer-loader.js"></script>
 </body>
 </html>
 

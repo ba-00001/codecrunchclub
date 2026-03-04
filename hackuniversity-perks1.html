@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hack University • Student Portal Lookup</title>
+  <title>Hack University â€¢ Student Portal Lookup</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <style>
@@ -318,36 +318,36 @@
   <!-- TIMEZONE BAND -->
   <div class="timezone-section">
     <div class="timezone-header">
-      <h2>🏆 Hack University HQ</h2>
+      <h2>ðŸ† Hack University HQ</h2>
     </div>
     <div class="timezone-grid">
       <div class="timezone-item">
-        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-flag">ðŸ‡ºðŸ‡¸ - HQ</div>
         <div class="timezone-time" id="miami-time">--:--:--</div>
         <div class="timezone-location">Miami, FL (EST)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-flag">ðŸ‡ªðŸ‡º</div>
         <div class="timezone-time" id="london-time">--:--:--</div>
         <div class="timezone-location">London (GMT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🌍</div>
+        <div class="timezone-flag">ðŸŒ</div>
         <div class="timezone-time" id="lagos-time">--:--:--</div>
         <div class="timezone-location">Lagos (WAT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🌏</div>
+        <div class="timezone-flag">ðŸŒ</div>
         <div class="timezone-time" id="tokyo-time">--:--:--</div>
         <div class="timezone-location">Tokyo (JST)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-flag">ðŸ‡¦ðŸ‡º</div>
         <div class="timezone-time" id="sydney-time">--:--:--</div>
         <div class="timezone-location">Sydney (AEDT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-flag">ðŸ‡®ðŸ‡³</div>
         <div class="timezone-time" id="mumbai-time">--:--:--</div>
         <div class="timezone-location">Mumbai (IST)</div>
       </div>
@@ -377,14 +377,14 @@
 
       <div id="result" style="margin-top:12px;">
         <div class="info-box">
-          <strong>📋 What you’ll see here:</strong><br/>
-          • Confirmation of your registration<br/>
-          • Your timestamp, name, and institution<br/>
-          • Full list of hackathons from Column E → Column AI<br/>
-          • Personalized responses and perks links<br/>
-          • Quick-access community buttons
+          <strong>ðŸ“‹ What youâ€™ll see here:</strong><br/>
+          â€¢ Confirmation of your registration<br/>
+          â€¢ Your timestamp, name, and institution<br/>
+          â€¢ Full list of hackathons from Column E â†’ Column AI<br/>
+          â€¢ Personalized responses and perks links<br/>
+          â€¢ Quick-access community buttons
         </div>
-        Awaiting email…
+        Awaiting emailâ€¦
       </div>
     </section>
   </main>
@@ -394,7 +394,7 @@
     <div class="footer-container">
       <div class="footer-grid">
         <div>
-          <h3>Hack University <span>👨🏻‍💻👩🏽‍💻🧑🏿‍💻</span></h3>
+          <h3>Hack University <span>ðŸ‘¨ðŸ»â€ðŸ’»ðŸ‘©ðŸ½â€ðŸ’»ðŸ§‘ðŸ¿â€ðŸ’»</span></h3>
           <p>A collaborative student-led initiative empowering the next generation of innovators.</p>
           <p><a href="https://hackuniversity.vercel.app" target="_blank" rel="noopener">HackUniversity.vercel.app</a></p>
 
@@ -432,9 +432,9 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <p>Â© <span id="year"></span> Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ by <a href="#" target="_blank">Brian Bazurto</a>
+          Built with â¤ï¸ by <a href="#" target="_blank">Brian Bazurto</a>
         </div>
       </div>
     </div>
@@ -454,8 +454,8 @@ function domainOK() {
 function infoBoxHTML(){
   return `
     <div class="info-box">
-      <strong>📧 Email Verification:</strong><br>
-      • Use the same email you used on the Hack University One-Stop Registration Form
+      <strong>ðŸ“§ Email Verification:</strong><br>
+      â€¢ Use the same email you used on the Hack University One-Stop Registration Form
     </div>`;
 }
 
@@ -463,7 +463,7 @@ function infoBoxHTML(){
 async function checkStudentRegistrationStatus() {
   if (!domainOK()) {
     document.getElementById("result").innerHTML =
-      `<div class="info-box">❌ This portal only works on ${ALLOWED_HOST}</div>`;
+      `<div class="info-box">âŒ This portal only works on ${ALLOWED_HOST}</div>`;
     return;
   }
 
@@ -471,11 +471,11 @@ async function checkStudentRegistrationStatus() {
   const resultDiv = document.getElementById('result');
 
   if (!email) {
-    resultDiv.innerHTML = infoBoxHTML() + "❌ Enter email.";
+    resultDiv.innerHTML = infoBoxHTML() + "âŒ Enter email.";
     return;
   }
 
-  resultDiv.innerHTML = infoBoxHTML() + "⏳ Checking…";
+  resultDiv.innerHTML = infoBoxHTML() + "â³ Checkingâ€¦";
 
   const url = new URL(API_URL);
   url.searchParams.set("email", email);
@@ -488,7 +488,7 @@ async function checkStudentRegistrationStatus() {
   if (entry.status === "No entry") {
     resultDiv.innerHTML = infoBoxHTML() + `
       <div class="card-no">
-        ❌ No registration found for <strong>${email}</strong><br>
+        âŒ No registration found for <strong>${email}</strong><br>
         Make sure you submitted the One-Stop Registration Form.
       </div>`;
     return;
@@ -500,26 +500,26 @@ async function checkStudentRegistrationStatus() {
   let html = `
     ${infoBoxHTML()}
     <div class="card-welcome">
-      <strong style="color:#22c55e;font-size:1.05em;">🎉 Registration Found!</strong><br><br>
+      <strong style="color:#22c55e;font-size:1.05em;">ðŸŽ‰ Registration Found!</strong><br><br>
       Review your hackathon & business competition selections, then join our communities:
       <div class="cta">
-        <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank">🚀 Join Hackathons & Business Arena Competition Discord</a>
-        <a class="cta-groupme" href="${entry.groupmeLink}" target="_blank">👥 Join Hack University GroupMe</a>
-        <a class="cta-org" href="${entry.orgLinks.codeCrunch}" target="_blank">💻 Join Code Crunch Worlwide Discord</a>
-        <a class="cta-org" href="${entry.orgLinks.gdgAtFiu}" target="_blank">🌐 Google Developer Group at FIU (GDG at FIU) Discord</a>
-        <a class="cta-org" href="${entry.orgLinks.colorStackFiu}" target="_blank">🎨 ColorStack at FIU Discord</a>
-        <a class="cta-org" href="${entry.orgLinks.cahsiFiu}" target="_blank">📚 CAHSI at FIU Discord</a>
-        <a class="cta-org" href="${entry.orgLinks.raspberryPiFiu}" target="_blank">🍓 Raspberry Pi Code Crunch Discord</a>
-        <a class="cta-membership" href="${entry.membershipPortal}" target="_blank">🏅 Get Membership Certificate</a>
+        <a class="cta-discord" href="${entry.discordJoinLink}" target="_blank">ðŸš€ Join Hackathons & Business Arena Competition Discord</a>
+        <a class="cta-groupme" href="${entry.groupmeLink}" target="_blank">ðŸ‘¥ Join Hack University GroupMe</a>
+        <a class="cta-org" href="${entry.orgLinks.codeCrunch}" target="_blank">ðŸ’» Join Code Crunch Worlwide Discord</a>
+        <a class="cta-org" href="${entry.orgLinks.gdgAtFiu}" target="_blank">ðŸŒ Google Developer Group at FIU (GDG at FIU) Discord</a>
+        <a class="cta-org" href="${entry.orgLinks.colorStackFiu}" target="_blank">ðŸŽ¨ ColorStack at FIU Discord</a>
+        <a class="cta-org" href="${entry.orgLinks.cahsiFiu}" target="_blank">ðŸ“š CAHSI at FIU Discord</a>
+        <a class="cta-org" href="${entry.orgLinks.raspberryPiFiu}" target="_blank">ðŸ“ Raspberry Pi Code Crunch Discord</a>
+        <a class="cta-membership" href="${entry.membershipPortal}" target="_blank">ðŸ… Get Membership Certificate</a>
       </div>
     </div>
 
     <div class="card-yes">
-      <strong>✅ Student Record</strong><br>
-      • Timestamp: ${entry.timestamp}<br>
-      • Name: ${entry.basicInfo.name}<br>
-      • Institution: ${entry.basicInfo.institution}<br>
-      • Email: ${entry.email}<br>
+      <strong>âœ… Student Record</strong><br>
+      â€¢ Timestamp: ${entry.timestamp}<br>
+      â€¢ Name: ${entry.basicInfo.name}<br>
+      â€¢ Institution: ${entry.basicInfo.institution}<br>
+      â€¢ Email: ${entry.email}<br>
     </div>
   `;
 
@@ -528,14 +528,14 @@ async function checkStudentRegistrationStatus() {
   // ======================
   html += `
     <div class="card-events">
-      <strong>📅 Your Hackathon & Competition Responses (E → AI)</strong>
+      <strong>ðŸ“… Your Hackathon & Competition Responses (E â†’ AI)</strong>
       <ul>
         ${Object.entries(entry.events).map(([eventName, det]) => `
           <li>
             <strong>${eventName}</strong><br>
-            • Response: ${det.response}<br>
+            â€¢ Response: ${det.response}<br>
             ${det.registered 
-              ? `<a href="${det.perksLink}" target="_blank">🎁 Claim your event perks</a>`
+              ? `<a href="${det.perksLink}" target="_blank">ðŸŽ Claim your event perks</a>`
               : `<span style="color:#f87171;">No perks available</span>`}
           </li>
         `).join("")}
@@ -571,5 +571,6 @@ document.getElementById('emailInput').addEventListener('keypress', e => {
 });
 </script>
 
+  <script src="js/shared-footer-loader.js"></script>
 </body>
 </html>

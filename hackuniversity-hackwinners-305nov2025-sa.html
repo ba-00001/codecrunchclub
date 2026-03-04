@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hackathon Winner Certificates • Code Crunch</title>
+  <title>Hackathon Winner Certificates â€¢ Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
@@ -196,35 +196,35 @@
 
   <!-- TIMEZONE BAND -->
   <div class="timezone-section">
-    <div class="timezone-header"><h2>🏆 Hackathon Winners Certificate Portal</h2></div>
+    <div class="timezone-header"><h2>ðŸ† Hackathon Winners Certificate Portal</h2></div>
     <div class="timezone-grid">
       <div class="timezone-item">
-        <div class="timezone-flag">🇺🇸 - HQ</div>
+        <div class="timezone-flag">ðŸ‡ºðŸ‡¸ - HQ</div>
         <div class="timezone-time" id="miami-time">--:--:--</div>
         <div class="timezone-location">Miami, FL (ET)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇪🇺</div>
+        <div class="timezone-flag">ðŸ‡ªðŸ‡º</div>
         <div class="timezone-time" id="london-time">--:--:--</div>
         <div class="timezone-location">London (GMT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🌍</div>
+        <div class="timezone-flag">ðŸŒ</div>
         <div class="timezone-time" id="lagos-time">--:--:--</div>
         <div class="timezone-location">Lagos (WAT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🌏</div>
+        <div class="timezone-flag">ðŸŒ</div>
         <div class="timezone-time" id="tokyo-time">--:--:--</div>
         <div class="timezone-location">Tokyo (JST)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇦🇺</div>
+        <div class="timezone-flag">ðŸ‡¦ðŸ‡º</div>
         <div class="timezone-time" id="sydney-time">--:--:--</div>
         <div class="timezone-location">Sydney (AEDT)</div>
       </div>
       <div class="timezone-item">
-        <div class="timezone-flag">🇮🇳</div>
+        <div class="timezone-flag">ðŸ‡®ðŸ‡³</div>
         <div class="timezone-time" id="mumbai-time">--:--:--</div>
         <div class="timezone-location">Mumbai (IST)</div>
       </div>
@@ -235,10 +235,10 @@
     <!-- WINNER CERTIFICATE GENERATOR -->
     <section class="surface" id="certificate-generator">
       <h2 class="card-title" style="text-align:center">
-        GENERATE YOUR WINNER CERTIFICATE • 305 Hackathon Session A (Online)
+        GENERATE YOUR WINNER CERTIFICATE â€¢ 305 Hackathon Session A (Online)
       </h2>
       <p class="card-description" style="text-align:center">
-        [ OFFICIAL HACKATHON WINNER CERTIFICATE ] — Use the same email you used for
+        [ OFFICIAL HACKATHON WINNER CERTIFICATE ] â€” Use the same email you used for
         <strong>OneStopForm</strong><strong>official registration</strong>.
         Certificates are issued only to verified registered teams, finalists, and special awardees.
       </p>
@@ -253,7 +253,7 @@
           autocomplete="email"
         />
         <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">
-          🏆 Generate Winner Certificate
+          ðŸ† Generate Winner Certificate
         </button>
       </div>
 
@@ -325,9 +325,9 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
+        <p>Â© <span id="year"></span> Hack University. All rights reserved.</p>
         <div class="credits">
-          Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a>
+          Built with â¤ï¸ for the tech community by <a href="#" target="_blank">Brian Bazurto</a>
         </div>
       </div>
     </div>
@@ -370,7 +370,7 @@
 
     function rolesToText(roles, rolesText){
       // For winners pages, rolesText is:
-      // "Project Name — Track / Prize"
+      // "Project Name â€” Track / Prize"
       if (rolesText) return String(rolesText);
       if (Array.isArray(roles)) return roles.join(', ');
       return roles || 'Hackathon Winner';
@@ -409,10 +409,10 @@
     function infoBoxHTML(){
       return `
         <div class="infobox">
-          <strong style="color:#28a745">🏆 Winner Certificate Generator:</strong><br>
-          • For officially verified hackathon winners & special awardees<br>
-          • Use the same email used to register on OneStopForm Hack registration, Devpost submission and event check in<br>
-          • Certificates open in a new tab ready for Print / Save as PDF
+          <strong style="color:#28a745">ðŸ† Winner Certificate Generator:</strong><br>
+          â€¢ For officially verified hackathon winners & special awardees<br>
+          â€¢ Use the same email used to register on OneStopForm Hack registration, Devpost submission and event check in<br>
+          â€¢ Certificates open in a new tab ready for Print / Save as PDF
         </div>`;
     }
 
@@ -432,8 +432,8 @@
       if (!btn) return;
       btn.disabled = !!loading;
       btn.textContent = loading
-        ? '⏳ Checking…'
-        : '🏆 Generate Winner Certificate';
+        ? 'â³ Checkingâ€¦'
+        : 'ðŸ† Generate Winner Certificate';
     }
 
     /* ===== Winner Certificate Layout ===== */
@@ -533,7 +533,8 @@
         waitImgs().then(afterLayout);
         setTimeout(fitLogos, 0);
       })();<\/script>
-      </body></html>`;
+        <script src="js/shared-footer-loader.js"></script>
+</body></html>`;
 
       const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
       if (!w){
@@ -552,15 +553,15 @@
       const email = (emailInput?.value || '').trim();
 
       if (!email){
-        setStatus('error', '❌ Please enter your email address.');
+        setStatus('error', 'âŒ Please enter your email address.');
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        setStatus('error', '❌ Please enter a valid email address.');
+        setStatus('error', 'âŒ Please enter a valid email address.');
         return;
       }
 
-      setStatus('info', '⏳ Checking winner records…');
+      setStatus('info', 'â³ Checking winner recordsâ€¦');
       toggleButton(true);
 
       const ac = new AbortController();
@@ -603,14 +604,14 @@
 
         setStatus(
           'ok',
-          `<strong>✅ Winner certificate${normalized.length>1?'s':''} found.</strong> Opening in a new tab…<br>
+          `<strong>âœ… Winner certificate${normalized.length>1?'s':''} found.</strong> Opening in a new tabâ€¦<br>
            <small>Tip: In the print dialog, disable browser headers/footers for a clean certificate.</small>`
         );
         openCertificatesInNewTab(normalized, true);
 
       }catch(e){
         console.error(e);
-        setStatus('error', '❌ Failed to verify winner records. Please try again or contact support.');
+        setStatus('error', 'âŒ Failed to verify winner records. Please try again or contact support.');
       }finally{
         clearTimeout(to);
         toggleButton(false);
@@ -641,7 +642,7 @@
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       document.getElementById('certificateResult').innerHTML =
-        infoBoxHTML() + 'Enter your email above to check if a hackathon winner certificate is available…';
+        infoBoxHTML() + 'Enter your email above to check if a hackathon winner certificate is availableâ€¦';
 
       const input = document.getElementById('certificateEmailInput');
       if (input){
@@ -654,5 +655,6 @@
       setInterval(updateTimes, 1000);
     });
   </script>
+  <script src="js/shared-footer-loader.js"></script>
 </body>
 </html>

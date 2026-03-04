@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Volunteer Certificates • Code Crunch</title>
+  <title>Volunteer Certificates â€¢ Code Crunch</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
@@ -167,27 +167,27 @@
 
   <!-- TIMEZONE BAND -->
   <div class="timezone-section">
-    <div class="timezone-header"><h2>🏆 Hackathon HQ</h2></div>
+    <div class="timezone-header"><h2>ðŸ† Hackathon HQ</h2></div>
     <div class="timezone-grid">
-      <div class="timezone-item"><div class="timezone-flag">🇺🇸 - HQ</div><div class="timezone-time" id="miami-time">--:--:--</div><div class="timezone-location">Miami, FL (ET)</div></div>
-      <div class="timezone-item"><div class="timezone-flag">🇪🇺</div><div class="timezone-time" id="london-time">--:--:--</div><div class="timezone-location">London (GMT)</div></div>
-      <div class="timezone-item"><div class="timezone-flag">🌍</div><div class="timezone-time" id="lagos-time">--:--:--</div><div class="timezone-location">Lagos (WAT)</div></div>
-      <div class="timezone-item"><div class="timezone-flag">🌏</div><div class="timezone-time" id="tokyo-time">--:--:--</div><div class="timezone-location">Tokyo (JST)</div></div>
-      <div class="timezone-item"><div class="timezone-flag">🇦🇺</div><div class="timezone-time" id="sydney-time">--:--:--</div><div class="timezone-location">Sydney (AEDT)</div></div>
-      <div class="timezone-item"><div class="timezone-flag">🇮🇳</div><div class="timezone-time" id="mumbai-time">--:--:--</div><div class="timezone-location">Mumbai (IST)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸ‡ºðŸ‡¸ - HQ</div><div class="timezone-time" id="miami-time">--:--:--</div><div class="timezone-location">Miami, FL (ET)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸ‡ªðŸ‡º</div><div class="timezone-time" id="london-time">--:--:--</div><div class="timezone-location">London (GMT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸŒ</div><div class="timezone-time" id="lagos-time">--:--:--</div><div class="timezone-location">Lagos (WAT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸŒ</div><div class="timezone-time" id="tokyo-time">--:--:--</div><div class="timezone-location">Tokyo (JST)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸ‡¦ðŸ‡º</div><div class="timezone-time" id="sydney-time">--:--:--</div><div class="timezone-location">Sydney (AEDT)</div></div>
+      <div class="timezone-item"><div class="timezone-flag">ðŸ‡®ðŸ‡³</div><div class="timezone-time" id="mumbai-time">--:--:--</div><div class="timezone-location">Mumbai (IST)</div></div>
     </div>
   </div>
 
   <main class="container">
     <!-- CERTIFICATE GENERATOR -->
     <section class="surface" id="certificate-generator">
-      <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE • EmpowHer Hackathon 2025 Session A (Online/Synchronous)</h2>
-      <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] — Download your volunteer certificate using your registeredemail address</p>
+      <h2 class="card-title" style="text-align:center">GENERATE YOUR CERTIFICATE â€¢ EmpowHer Hackathon 2025 Session A (Online/Synchronous)</h2>
+      <p class="card-description" style="text-align:center">[ OFFICIAL CERTIFICATE ] â€” Download your volunteer certificate using your registeredemail address</p>
 
       <label for="certificateEmailInput" class="sr-only">Registered email address</label>
       <div class="cg-row">
         <input type="email" id="certificateEmailInput" class="cg-input" placeholder="Enter your registered email address" autocomplete="email"/>
-        <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">🏆 Generate Certificate</button>
+        <button id="generateBtn" class="cg-btn" onclick="generateCertificate()">ðŸ† Generate Certificate</button>
       </div>
 
       <div id="certificateResult" class="surface" aria-live="polite" aria-atomic="true" style="margin-top:1rem"></div>
@@ -230,8 +230,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© <span id="year"></span> Hack University. All rights reserved.</p>
-        <div class="credits">Built with ❤️ for the tech community by <a href="#" target="_blank">Brian Bazurto</a></div>
+        <p>Â© <span id="year"></span> Hack University. All rights reserved.</p>
+        <div class="credits">Built with â¤ï¸ for the tech community by <a href="#" target="_blank">Brian Bazurto</a></div>
       </div>
     </div>
   </footer>
@@ -277,7 +277,7 @@
       return arr.map(u=>`<img src="${u}" alt="Partner Logo" onerror="this.style.display='none'">`).join('');
     }
     function infoBoxHTML(){
-      return `<div class="infobox"><strong style="color:#28a745">🏆 Certificate Generator:</strong><br>• Official Certificates for confirmed participants<br>• Use your registered email<br>• Opens a clean tab for Print / Save as PDF</div>`;
+      return `<div class="infobox"><strong style="color:#28a745">ðŸ† Certificate Generator:</strong><br>â€¢ Official Certificates for confirmed participants<br>â€¢ Use your registered email<br>â€¢ Opens a clean tab for Print / Save as PDF</div>`;
     }
     function setStatus(type, html){
       const el = document.getElementById('certificateResult');
@@ -286,7 +286,7 @@
     }
     function toggleButton(loading){
       const btn = document.getElementById('generateBtn');
-      if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? '⏳ Checking…' : '🏆 Generate Certificate';
+      if(!btn) return; btn.disabled=!!loading; btn.textContent = loading ? 'â³ Checkingâ€¦' : 'ðŸ† Generate Certificate';
     }
 
     /* ===== Certificate page Recognition/ ACHIEVEMENT ===== */
@@ -335,7 +335,7 @@
       </section>`;
     }
 
-    /* Open clean print tab — auto-shrink logos to one row */
+    /* Open clean print tab â€” auto-shrink logos to one row */
     function openCertificatesInNewTab(certs, autoPrint=true){
       const css = document.querySelector('style')?.innerHTML || '';
       const head = `
@@ -369,7 +369,8 @@
           waitImgs().then(afterLayout);
           setTimeout(fitLogos, 0);
         })();<\/script>
-      </body></html>`;
+        <script src="js/shared-footer-loader.js"></script>
+</body></html>`;
 
       const w = window.open('', '_blank', 'width=1300,height=900,scrollbars=yes,resizable=yes');
       if(!w){ alert('Please allow pop-ups to view/print your certificate.'); return; }
@@ -379,10 +380,10 @@
     /* ===== Generate flow ===== */
     async function generateCertificate(){
       const email = (document.getElementById('certificateEmailInput')?.value || '').trim();
-      if(!email){ setStatus('error','❌ Please enter your email address.'); return; }
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('error','❌ Please enter a valid email address.'); return; }
+      if(!email){ setStatus('error','âŒ Please enter your email address.'); return; }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('error','âŒ Please enter a valid email address.'); return; }
 
-      setStatus('info','⏳ Checking for available certificates...'); toggleButton(true);
+      setStatus('info','â³ Checking for available certificates...'); toggleButton(true);
       const ac = new AbortController(); const to = setTimeout(()=>ac.abort(),12000);
 
       try{
@@ -411,11 +412,11 @@
         }
 
         const normalized = valid.map(c => c.certificateData || c).map(normalizeCert);
-        setStatus('ok', `<strong>✅ Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tab…<br><small>Tip: In the print dialog, disable “Headers and footers” to remove date/URL.</small>`);
+        setStatus('ok', `<strong>âœ… Found ${normalized.length} certificate${normalized.length>1?'s':''}.</strong> Opening in a new tabâ€¦<br><small>Tip: In the print dialog, disable â€œHeaders and footersâ€ to remove date/URL.</small>`);
         openCertificatesInNewTab(normalized, true);
       }catch(e){
         console.error(e);
-        setStatus('error','❌ Failed to check records. Please try again later.');
+        setStatus('error','âŒ Failed to check records. Please try again later.');
       }finally{
         clearTimeout(to); toggleButton(false);
       }
@@ -446,5 +447,6 @@
       updateTimes(); setInterval(updateTimes, 1000);
     });
   </script>
+  <script src="js/shared-footer-loader.js"></script>
 </body>
 </html>

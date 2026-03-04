@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -98,7 +98,7 @@
     document.getElementById("btnLogout").addEventListener("click", () => signOut(auth));
 
     async function fetchLinks() {
-      statusEl.textContent = "Loading links…";
+      statusEl.textContent = "Loading linksâ€¦";
       errorBox.classList.add("hidden");
       try {
         const user = auth.currentUser;
@@ -141,5 +141,6 @@
       }
     });
   </script>
+  <script src="js/shared-footer-loader.js"></script>
 </body>
 </html>

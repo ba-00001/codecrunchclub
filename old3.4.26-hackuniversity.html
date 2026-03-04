@@ -1,0 +1,1569 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hack University - Empowering Tomorrow's Innovators</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* =========================
+       Google-Style Design Tokens
+       ========================= */
+    :root {
+      --color-primary: #1a73e8;
+      --color-primary-hover: #1557b0;
+      --color-text: #202124;
+      --color-text-muted: #5f6368;
+      --color-border: #dadce0;
+      --color-bg: #f8f9fa;
+      --color-bg-white: #fff;
+      --color-success: #137333;
+      --color-success-bg: #e6f4ea;
+      --color-warning: #b45309;
+      --color-warning-bg: #fff4e5;
+      --color-danger: #d33b01;
+
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md: 0 3px 10px rgba(32,33,36,.18);
+      --shadow-lg: 0 6px 20px rgba(32,33,36,.25);
+
+      --transition-base: .2s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background: var(--color-bg);
+      min-height: 100vh;
+      color: var(--color-text);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* =========================
+       Navbar (clean & sticky) - UPDATED to FIXED
+       ========================= */
+    .navbar {
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 0;
+      box-shadow: var(--shadow-sm);
+
+      position: fixed;   /* UPDATED */
+      top: 0;            /* UPDATED */
+      left: 0;           /* UPDATED */
+      right: 0;          /* UPDATED */
+      z-index: 2000;     /* UPDATED: above clock */
+    }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 20px;
+    }
+    .nav-brand { font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing:.2px; }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav-link {
+      color: var(--color-text-muted); font-weight: 500; font-size: 14px;
+      padding: 8px 12px; border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+    }
+    .nav-link:hover { color: var(--color-primary); background: #f1f3f4; }
+
+    /* =========================
+       Navbar (mobile toggle)
+       ========================= */
+    .nav-toggle {
+      display: none; /* show only on mobile */
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-white);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
+
+    .nav-toggle:hover {
+      background: #f1f3f4;
+      border-color: #d2e3fc;
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: inline-flex; }
+
+      .nav-links {
+        display: none;              /* hidden by default */
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 12px;
+      }
+
+      .nav-links.is-open {
+        display: flex;              /* shown when toggled */
+      }
+
+      .nav-container {
+        flex-wrap: wrap;            /* allows links to drop below */
+        gap: 10px;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: 10px 12px;
+      }
+    }
+
+    /* =========================
+       Generic Container
+       ========================= */
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* =========================
+       Card (maps hu-card)
+       ========================= */
+    .card, .hu-card{
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+    }
+    .card:hover, .hu-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: #d2e3fc;
+    }
+
+    /* =========================
+       Headline styles
+       ========================= */
+    .title-xl {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800; letter-spacing: -.01em; line-height: 1.07;
+      color: var(--color-text);
+    }
+    .title-md { font-size: clamp(22px, 3.4vw, 30px); font-weight: 800; color: var(--color-text); line-height: 1.2; }
+    .subtitle { color: var(--color-text-muted); }
+    .section-lead {
+      max-width: 760px;
+      margin-top: 10px;
+      color: var(--color-text-muted);
+    }
+
+    /* =========================
+       Buttons (map hu-btn)
+       ========================= */
+    .btn, .hu-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 16px; min-height: 40px;
+      border-radius: 999px; border: 1px solid transparent;
+      font-weight: 800; letter-spacing: .02em;
+      background: var(--color-bg-white);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn:hover, .hu-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn:active, .hu-btn:active { transform: translateY(0); }
+
+    .btn.is-disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: var(--shadow-sm);
+      transform: none;
+    }
+
+    .calendar-status-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
+    .btn-primary, .hu-btn--brand {
+      background: var(--color-primary); color: #fff;
+    }
+    .btn-primary:hover, .hu-btn--brand:hover { background: var(--color-primary-hover); }
+
+    .btn-primary-soft {
+      background: #eef4ff;
+      color: #174ea6;
+      border: 1px solid #c7dafd;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(26, 115, 232, .12);
+      font-weight: 700;
+      letter-spacing: 0;
+      justify-content: flex-start;
+      text-align: left;
+      min-height: 44px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    .btn-primary-soft:hover {
+      background: #e3edff;
+      border-color: #a8c6fb;
+      color: #113b83;
+    }
+
+    .btn-ghost, .hu-btn--ghost {
+      background: #f8f9fa; color: #1e293b; border-color: var(--color-border);
+    }
+    .btn-ghost:hover, .hu-btn--ghost:hover { background: #eef2ff; border-color: #dbe4ff; color: #1e1b4b; }
+
+    .btn-light, .hu-btn--light {
+      background: #e8f0fe; color: var(--color-primary); border-color: #d2e3fc;
+    }
+    .btn-light:hover, .hu-btn--light:hover { background: #dbe4ff; }
+
+    /* Student portal dropdown */
+    .portal-dropdown {
+      position: relative;
+      width: 100%;
+      font-family: "Manrope","Google Sans","Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    .portal-trigger {
+      width: 100%;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      justify-content: space-between;
+      border: 1px solid #c7dafd;
+      border-radius: 16px;
+      padding: 12px 16px;
+      background: #eef4ff;
+      color: #174ea6;
+      box-shadow: 0 3px 10px rgba(26, 115, 232, .12);
+    }
+    .portal-trigger:hover {
+      background: #e3edff;
+      border-color: #a8c6fb;
+      color: #113b83;
+    }
+    .portal-trigger::-webkit-details-marker { display: none; }
+    .portal-trigger-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .portal-trigger-copy {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+    .portal-title {
+      font-size: .96rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+    .portal-subtitle {
+      font-size: .74rem;
+      font-weight: 600;
+      opacity: .88;
+      margin-top: 2px;
+    }
+    .portal-caret {
+      margin-left: auto;
+      transition: transform var(--transition-base);
+      font-size: .9rem;
+    }
+    .portal-dropdown[open] .portal-caret {
+      transform: rotate(180deg);
+    }
+    .portal-menu {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid #d2e3fc;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      box-shadow: 0 10px 26px rgba(32, 33, 36, .12);
+    }
+    .portal-link {
+      justify-content: flex-start;
+      font-weight: 700;
+      border-radius: 12px;
+      min-height: 44px;
+      background: #f8fbff;
+      border-color: #d2e3fc;
+    }
+    .portal-link:hover {
+      background: #e8f0fe;
+    }
+    .portal-menu-label {
+      margin: 4px 4px 0;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #5f6368;
+    }
+    .photo-album-dropdown {
+      width: min(100%, 460px);
+    }
+    .photo-album-dropdown .portal-menu {
+      text-align: left;
+    }
+
+    
+    .audience-grid {
+      align-items: stretch;
+    }
+    .audience-card {
+      min-height: 100%;
+      border-top: 4px solid #d2e3fc;
+    }
+    .audience-card--students { border-top-color: #1a73e8; }
+    .audience-card--companies { border-top-color: #137333; }
+    .audience-card--industry { border-top-color: #b45309; }
+
+    .mission-list {
+      list-style: disc;
+      padding-left: 18px;
+    }
+
+    .major-icon {
+      color: #1a73e8;
+      margin-bottom: 6px;
+    }
+
+    /* =========================
+       Chips / Badges (map hu-chip/hu-badge)
+       ========================= */
+    .chip, .hu-chip, .hu-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: #eef2ff; color: var(--color-primary);
+      border: 1px solid #d2e3fc; font-weight: 700; font-size: .9rem;
+    }
+
+    .badge--inperson{ background: var(--color-success-bg); color: var(--color-success); border-color:#ceead6 }
+    .badge--virtual { background: #e8f0fe; color: var(--color-primary); border-color:#d2e3fc }
+    .badge--tbd     { background: #f3f4f6; color: #6b7280; border-color:#e5e7eb }
+
+    /* =========================
+       Section spacing & dividers
+       ========================= */
+    .section { padding: clamp(40px, 7vh, 80px) 0; }
+    .divider {
+      height: 1px; background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+      margin: 20px 0;
+    }
+
+    /* =========================
+       Footer (ported clean style)
+       ========================= */
+    .footer { background: var(--color-primary); color: #fff; padding: 32px 0 48px; margin-top: 24px; }
+    .footer-container { max-width:1200px; margin:0 auto; padding:0 20px; }
+    .footer a { color:#e3f2ff; text-decoration:none; transition:opacity .2s ease; }
+    .footer a:hover { opacity:.95; text-decoration:underline; }
+
+    .footer-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr .8fr;
+      gap: clamp(20px, 3vw, 48px); align-items:start; margin-bottom: var(--spacing-xl);
+    }
+    .footer h4{ font-size:20px; font-weight:700; margin-bottom:12px; }
+    .footer p{ font-size:15px; opacity:.95; line-height:1.6; margin:10px 0; }
+
+    .footer ul{ list-style:none; padding:0; margin:0; }
+    .footer li{ margin:8px 0; }
+
+    .social-grid{
+      display:grid; grid-template-columns: repeat(6, minmax(60px,1fr));
+      gap: 10px 12px; margin-top: 10px;
+    }
+    .social-btn{
+      display:flex; align-items:center; justify-content:center;
+      padding:10px; border-radius: 10px; text-align:center;
+      background: rgba(255,255,255,.08);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .social-btn:hover{ transform: translateY(-2px); background: rgba(255,255,255,.16); }
+
+    .footer-bottom{
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid rgba(255,255,255,.25);
+      text-align:center;
+    }
+    .footer-bottom p{ margin:0 0 8px; font-size:14px; opacity:.95; }
+    .footer-bottom .credits{ font-size:13px; opacity:.92; }
+    .footer-bottom .credits a{ color:#bfe6ff; font-weight:600; }
+
+    @media (max-width: 960px){ .footer-grid{ grid-template-columns: 1fr 1fr } }
+    @media (max-width: 640px){
+      .footer-grid{ grid-template-columns: 1fr; }
+      .social-grid{ grid-template-columns: repeat(3, minmax(80px,1fr)); }
+      .footer { padding-bottom: 32px; }
+    }
+
+    /* A11y + motion */
+    *:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* =========================
+       Fixed Event Clock Bar
+       BELOW navbar (no space) - UPDATED
+       ========================= */
+    :root{
+      --navbar-h: 64px;     /* desktop navbar height estimate */
+      --navbar-h-m: 72px;   /* mobile navbar height estimate */
+      --clock-bar-h: 44px;
+    }
+
+    .event-clock-bar{
+      position: fixed;
+      top: var(--navbar-h);   /* BELOW navbar */
+      left: 0;
+      right: 0;
+      z-index: 1900;          /* under navbar, above content */
+      height: var(--clock-bar-h);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      padding: 0 14px;
+    }
+
+    .event-clock-label{
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .event-clock-time{
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+
+    .event-clock-date{
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px){
+      .event-clock-bar{
+        top: var(--navbar-h-m);
+      }
+    }
+
+    @media (max-width: 640px){
+      .event-clock-bar{
+        height: 40px;            /* slightly shorter */
+        padding: 0 10px;
+      }
+      .event-clock-time{
+        font-size: 12.5px;
+      }
+      .event-clock-date{
+        font-size: 12px;
+      }
+      .event-clock-date{
+        display: none;           /* optional: hide date on tiny screens */
+      }
+    }
+
+    /* Push page content below navbar + clock */
+    body{
+      padding-top: calc(var(--navbar-h) + var(--clock-bar-h));
+    }
+    @media (max-width: 768px){
+      body{
+        padding-top: calc(var(--navbar-h-m) + var(--clock-bar-h));
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <!-- Title line -->
+      <a data-link-key="nav.partners"
+        href="#"
+        aria-label="Hack University Worldwide Home"
+        class="brand-title"
+      >
+        Hack University Worldwide Initiative
+      </a>
+
+      <!-- URL line -->
+      <a data-link-key="nav.mission"
+        href="#"
+        class="brand-url"
+      >
+        HackUniversity.vercel.app / Home
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="huNavLinks"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Links -->
+    <div class="nav-links" id="huNavLinks">
+      <a data-link-key="resource.partners" class="nav-link" href="#">Partners</a>
+      <a data-link-key="resource.mission" class="nav-link" href="#">Mission</a>
+      <a data-link-key="resource.hackathons"
+        class="nav-link"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Hackathons</a>
+      <a data-link-key="resource.hackuniversityCalendar"
+        class="nav-link"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Calendar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FIXED EVENT CLOCK BAR (Always Visible, BELOW NAVBAR) -->
+<div class="event-clock-bar" role="status" aria-label="Event Clock - Eastern Time">
+  <span class="event-clock-label">
+    Organization Clock - <strong>Eastern Time (ET)</strong> · Miami, FL
+  </span>
+  <span id="et-clock" class="event-clock-time"></span>
+  <span class="event-clock-date">(<span id="et-date"></span>)</span>
+</div>
+
+<!-- Embedded CSS AFTER HTML -->
+<style>
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-title,
+  .brand-url {
+    display: inline-block;
+    white-space: nowrap; /* NEVER wrap */
+    text-decoration: none;
+  }
+
+  .brand-title {
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3vw, 1.25rem);
+  }
+
+  .brand-url {
+    font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+    color: #0f766e; /* best non-black accent */
+    text-decoration: underline;
+  }
+</style>
+
+<!-- HERO -->
+<header class="section" style="padding-top:48px;">
+  <div class="container">
+    <div class="text-center mt-6">
+      <h1 class="title-xl">Empowering Tomorrow's Innovators</h1>
+      <p class="subtitle max-w-3xl mx-auto mt-4 text-lg">
+        A global ecosystem supported by
+        <a data-link-key="partner.gdgatFiu" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Google Developer Group at Florida International University (GDG at FIU)
+        </a>,
+        <a data-link-key="partner.codecrunch" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Code Crunch
+        </a>,
+        <a data-link-key="partner.colorstack" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          ColorStack at FIU
+        </a>,
+        <a data-link-key="partner.cahsitFiu" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          CAHSI at FIU
+        </a>, and
+        <a data-link-key="partner.rpiCodeCrunch" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          Raspberry Pi Code Crunch
+        </a>,
+        enabling collaboration between students, builders, and industry through hackathons, mentorship, and hands-on projects.
+      </p>
+
+      <!-- UPDATED: HERO BUTTONS + PHOTO ALBUM -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7">
+        <a class="btn btn-ghost" href="#" data-link-key="resource.partners">
+          <i class="fa-regular fa-compass"></i> Explore Organization Partners
+        </a>
+
+        <details class="portal-dropdown photo-album-dropdown">
+          <summary class="btn portal-trigger" aria-label="Open photo albums menu">
+            <span class="portal-trigger-main">
+              <i class="fa-regular fa-images"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Photo Albums</span>
+                <span class="portal-subtitle">Choose an event or organization album</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="portal-menu-label">Photo Albums</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.AlbumHackUniversity">
+              <i class="fa-regular fa-images"></i> ALL ORGS ALBUM Photos (HACK UNIVERSITY)
+            </a>
+
+            <p class="portal-menu-label">Event Albums</p>
+
+             <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_305HackathonMarch">
+              <i class="fa-regular fa-images"></i> 2026 - 305 Hackathon March Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_HackFiestaMiamiFebruary">
+              <i class="fa-regular fa-images"></i> 2026 - Hack Fiesta Miami February Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_gdgStudyJams">
+              <i class="fa-regular fa-images"></i> 2026 - Spring GDG at FIU Study Jams Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2026_305HackathonJanuary">
+              <i class="fa-regular fa-images"></i> 2026 - 305 Hackathon January Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_Winterhackathon">
+              <i class="fa-regular fa-images"></i> 2025 - ColorStack Winter Hackathon Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_CodeFestDecember">
+              <i class="fa-regular fa-images"></i> 2025 - Code Fest December Edition Album
+            </a>
+
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_DevFestNovember">
+              <i class="fa-regular fa-images"></i> 2025 - DevFest November Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_EmpowerHackathonOctober">
+              <i class="fa-regular fa-images"></i> 2025 - Empower Hackathon October Edition Album
+            </a>
+
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.album2025_305HackathonSeptember">
+              <i class="fa-regular fa-images"></i> 2025 -305 Hackathon September Edition Album
+            </a>
+
+            <p class="portal-menu-label">ORGS Individual Albums</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumGdgatFiu">
+              <i class="fa-regular fa-images"></i> GDG at FIU Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumCodeCrunchWorldwide">
+              <i class="fa-regular fa-images"></i> Code Crunch WorldWide Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumColorStackFiu">
+              <i class="fa-regular fa-images"></i> ColorStack at FIU
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumCahsiatFiu">
+              <i class="fa-regular fa-images"></i> CAHSI at FIU Album
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.albumRaspberryPiCodeCrunchatFiu">
+              <i class="fa-regular fa-images"></i> Raspberry Pi Code Crunch at FIU Album
+            </a>
+          </div>
+        </details>
+      </div>
+
+      <p class="subtitle text-sm mt-4">
+        Hack University Library - Lowkey, No Skips: photos across GDG at FIU, Code Crunch, ColorStack, CAHSI at FIU, and Raspberry Pi Code Crunch.
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK ACTIONS (Students / Companies / Industry) -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <h2 class="title-md">Choose Your Path</h2>
+    <p class="section-lead">
+      Start from the portal that fits your role and jump directly into the right opportunities and resources.
+    </p>
+    <div class="grid md:grid-cols-3 gap-5 mt-5 audience-grid">
+
+      <!-- Students -->
+      <article class="hu-card p-6 md:p-7 audience-card audience-card--students">
+        <h3 class="title-md">For Students</h3>
+        <p class="subtitle mt-2">
+          Complete one OneStop form to unlock membership, hackathons, E-Board applications, programs, hacker guides, and community access in one place.
+        </p>
+
+        <div class="divider"></div>
+
+        <details class="portal-dropdown">
+          <summary class="btn w-full portal-trigger">
+            <span class="portal-trigger-main">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Go to Student Portal</span>
+                <span class="portal-subtitle">Membership, events, leadership, and resources</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="portal-menu-label">Get Started</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.studentLogin">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>
+                Student Login<br>
+                <span style="font-size:.8rem;font-weight:600;opacity:.85;">(13+ | OneStop Form)</span>
+              </span>
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.membershipHackuniversity" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-rocket"></i> Join Membership Hack University (13+ | OneStop Form)
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.membershipHackuniversity" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-pen-to-square"></i> Update Membership / Registration
+            </a>
+
+            <p class="portal-menu-label">Events Access</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.SubscribeGooglecalendar" target="_blank" rel="noopener noreferrer">
+              <i class="fa-regular fa-calendar"></i> Add Google Event Calendar
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="nav.calendar" target="_blank" rel="noopener noreferrer">
+              <i class="fa-regular fa-calendar"></i> Events Calendar
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="student.zoom" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-video"></i> Join Event Zoom Meetings
+            </a>
+
+            <p class="portal-menu-label">Hackathons</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="nav.hackathons" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-trophy"></i> Sign Up for Hackathons (16+)
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.membershipHackuniversity" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-pen-to-square"></i> Update Your Hackathon Registration (16+)
+            </a>
+
+            <p class="portal-menu-label">Resources & Certificates</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.toolkitHackerGuide" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-book-open"></i> Open Hacker Guide
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="student.HackathonWinners" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-medal"></i> Hackathon Winners Certificates
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="student.MembershipCertificates" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-certificate"></i> Membership Certificates
+            </a>
+
+            <p class="portal-menu-label">Community & Leadership</p>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="student.discord" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-discord"></i> Join Discord (OneStop Required)
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.hackuniversityplatforms" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-user-group"></i> GroupMe / Instagram Group Chat
+            </a>
+                        <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.hackuniversityplatforms" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-user-group"></i> Join the mailing list (Gmail account required)
+            </a>
+            <a class="btn btn-ghost w-full portal-link" href="#" data-link-key="resource.membershipHackuniversity" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-people-group"></i> Apply for the Student Executive Board
+            </a>
+
+          </div>
+        </details>
+      </article>
+
+      <!-- Companies -->
+      <article class="hu-card p-6 md:p-7 audience-card audience-card--companies">
+        <h3 class="title-md">For Companies</h3>
+        <p class="subtitle mt-2">
+          Sponsor, host challenges, and partner with student-led innovation.
+        </p>
+
+        <div class="divider"></div>
+
+        <a class="btn btn-primary-soft w-full"
+           data-link-key="resource.companyPortal"
+           href="#">
+          <i class="fa-solid fa-building"></i> Go to Company Portal
+        </a>
+      </article>
+
+      <!-- Industry -->
+      <article class="hu-card p-6 md:p-7 audience-card audience-card--industry">
+        <h3 class="title-md">For Industry Professionals</h3>
+        <p class="subtitle mt-2">
+          Mentor, judge, volunteer, or join our Fundraising Advisory Board.
+        </p>
+
+        <div class="divider"></div>
+
+        <a class="btn btn-primary-soft w-full"
+           data-link-key="resource.volunteerPortal"
+           href="#">
+          <i class="fa-solid fa-user-tie"></i> Go to Volunteer Portal
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar" class="section" style="padding-top:0;">
+  <div class="container">
+    <article class="hu-card p-6 md:p-8">
+      <h2 class="title-md">Big Tech Community Live Calendar - Hack University</h2>
+      <p class="section-lead">
+        Confirm active and upcoming in-person, hybrid, and virtual sessions before joining.
+      </p>
+
+      <div class="grid gap-3 mt-5">
+        <details class="portal-dropdown">
+          <summary class="btn w-full portal-trigger">
+            <span class="portal-trigger-main">
+              <i class="fa-regular fa-calendar-check"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Calendar Source of Truth</span>
+                <span class="portal-subtitle">Event details and shared Zoom notice</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="subtitle text-sm leading-relaxed">
+              Use the calendar below as the source of truth for all event details. The Zoom link on this page is the shared Zoom meeting used for all hybrid and virtual events. Please check and subscribe to the Hack University Google Calendar below to confirm that an event is scheduled before joining.
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              One shared calendar for events hosted across our partner organizations:
+              <a href="https://gdgatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GDG at FIU</a>,
+              <a href="https://codecrunchglobal.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Code Crunch</a>,
+              <a href="https://colorstackatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ColorStack at FIU</a>,
+              <a href="https://cahsiatfiu.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">CAHSI at FIU</a>, and
+              <a href="https://raspberrypicodecrunch.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Raspberry Pi Code Crunch</a>.
+            </p>
+          </div>
+        </details>
+
+        <details class="portal-dropdown">
+          <summary class="btn w-full portal-trigger">
+            <span class="portal-trigger-main">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span class="portal-trigger-copy">
+                <span class="portal-title">Google Calendar Tips</span>
+                <span class="portal-subtitle">Before you join Zoom</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-chevron-down portal-caret" aria-hidden="true"></i>
+          </summary>
+          <div class="portal-menu">
+            <p class="subtitle text-sm leading-relaxed">
+              #1 - Please note that all events take place in Eastern Time (ET), Miami, FL, USA --
+              <span id="tip-et-clock" class="font-semibold"></span>
+              (<span id="tip-et-date"></span>)
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              #2 - Before joining Zoom, open the Google Calendar to verify that there is an active or upcoming in-person, hybrid, or virtual session. Our Google Calendar events include important details such as event location or any additional forms required, if applicable. If nothing is listed on the calendar, there may not be a public event happening at this time.
+            </p>
+            <p class="subtitle text-sm leading-relaxed">
+              #3 - If you have any questions about the event schedule, please reach out to us on
+              <a href="https://www.linkedin.com/company/codecrunchworldwide" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              (fastest response),
+              <a href="https://hackuniversityplatforms.vercel.app/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Instagram Group Chat</a>,
+              or
+              <a href="https://hackuniversityplatforms.vercel.app/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">GroupMe</a>.
+            </p>
+          </div>
+        </details>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mt-5">
+        <a
+          href="https://zoomlink-hackathons.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary is-disabled"
+          id="zoom-meeting-link"
+          aria-disabled="true"
+        >
+          <i class="fa-solid fa-video"></i> Join Zoom Meeting
+        </a>
+        <a
+          href="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost"
+        >
+          <i class="fa-regular fa-calendar"></i> View Hack University [Google Calendar]
+        </a>
+        <a
+          href="https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-light"
+        >
+          <i class="fa-brands fa-google"></i> Subscribe to Google Calendar
+        </a>
+      </div>
+      <p id="calendar-status-note" class="calendar-status-note" aria-live="polite">
+        Checking the Hack University calendar for a live Zoom session...
+      </p>
+
+      <div class="hu-card p-4 md:p-5 mt-6">
+        <h3 class="font-extrabold text-xl text-center">Big Tech Community Live Calendar - Hack University</h3>
+        <p class="subtitle text-sm text-center mt-2 max-w-3xl mx-auto">
+          Use this live Google Calendar view to confirm that a Hack University event is scheduled, including room location and whether the Zoom meeting is active right now or starting soon.
+        </p>
+        <div class="mt-4">
+          <iframe
+            title="Big Tech Community Google Calendar"
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&src=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+            class="w-full"
+            style="height:1200px;border:1px solid #777;border-radius:12px;"
+            frameborder="0"
+            scrolling="no"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PARTNER ORGANIZATIONS -->
+<section id="partners" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+      <h2 class="title-md">Connect with Our Partner Organizations</h2>
+      <a data-link-key="resource.hackuniversityCalendar" class="btn btn-ghost" href="#"><i class="fa-regular fa-circle-question"></i> What is HU?</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- GDG -->
+      <article class="hu-card p-6">
+        <a data-link-key="social.attendance" href="#" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/f62d5d75-d45f-4c01-b444-1c99a4031e27"
+                 alt="Google Developer Club at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">Google Developer Club</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Google Developer Group focused on building community and sharing knowledge around Google technologies and software development. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a data-link-key="resource.gdg" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="partner.codeCrunch" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="social.linkedin" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="partner.codeCrunch" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="partner.codeCrunch" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="partner.codeCrunch" class="btn btn-ghost" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a data-link-key="student.discord" class="btn btn-ghost" href="#" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a data-link-key="resource.hackuniversityCalendar" class="btn btn-primary-soft w-full" href="#" target="_blank"><i class="fa-solid fa-globe-americas"></i> gdgatfiu.vercel.app</a>
+        </div>
+      </article>
+
+      <!-- Code Crunch -->
+      <article class="hu-card p-6">
+        <a data-link-key="social.attendance" href="#" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/5e2a6622-9702-438f-bb6b-25d8e894839e"
+                 alt="Code Crunch Worldwide"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">Code Crunch Worldwide</h3>
+          <p class="subtitle text-sm mt-1">Global coding community</p>
+        </a>
+        <p>
+          <br>An interdisciplinary tech club dedicated to coding, technical interview prep, and hackathons. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a data-link-key="partner.codeCrunchHome" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="partner.colorStack" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="social.linkedin" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="partner.colorStack" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="partner.colorStack" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="partner.colorStack" class="btn btn-ghost" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a data-link-key="student.discord" class="btn btn-ghost" href="#" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a data-link-key="resource.hackuniversityCalendar" class="btn btn-primary-soft w-full" href="#" target="_blank"><i class="fa-solid fa-globe-americas"></i> codecrunchglobal.vercel.app</a>
+        </div>
+      </article>
+
+      <!-- ColorStack -->
+      <article class="hu-card p-6">
+        <a data-link-key="social.attendance" href="#" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/0e2f3b36-a64a-4b73-bd28-e919853a4036"
+                 alt="ColorStack at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">ColorStack</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Part of a national network of 120+ chapters, focused on mentorship, community, and career pathways for underrepresented students in tech. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a data-link-key="partner.colorStackatfiu" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="partner.cahsi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="social.linkedin" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="partner.cahsi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="partner.cahsi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="partner.cahsi" class="btn btn-ghost" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a data-link-key="student.discord" class="btn btn-ghost" href="#" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a data-link-key="resource.hackuniversityCalendar" class="btn btn-primary-soft w-full" href="#" target="_blank"><i class="fa-solid fa-globe-americas"></i> colorstackatfiu.vercel.app</a>
+        </div>
+      </article>
+
+      <!-- CAHSI -->
+      <article class="hu-card p-6">
+        <a data-link-key="social.attendance" href="#" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/0c9b5533-3b83-4f27-99ef-67185a345355"
+                 alt="CAHSI at FIU"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">CAHSI</h3>
+          <p class="subtitle text-sm mt-1">at Florida International University</p>
+        </a>
+        <p>
+          <br>Part of the Computing Alliance of Hispanic-Serving Institutions (CAHSI) network across 60+ universities, expanding access to computing research and tech careers. Open Worldwide | All Universities | All Majors | High School Students (16+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a data-link-key="partner.cahsiatfiu" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="partner.rpi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="social.linkedin" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="partner.rpi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="partner.rpi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="partner.rpi" class="btn btn-ghost" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a data-link-key="student.discord" class="btn btn-ghost" href="#" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a data-link-key="resource.hackuniversityCalendar" class="btn btn-primary-soft w-full" href="#" target="_blank"><i class="fa-solid fa-globe-americas"></i> cahsiatfiu.vercel.app</a>
+        </div>
+      </article>
+
+      <!-- Raspberry Pi -->
+      <article class="hu-card p-6">
+        <a data-link-key="social.attendance" href="#" target="_blank" rel="noopener" class="block">
+          <div class="flex justify-center">
+            <img class="h-16 object-contain" loading="lazy"
+                 src="https://github.com/user-attachments/assets/1eaf8425-7b4b-4035-a84b-b9b0ed28c52c"
+                 alt="Raspberry Pi Code Crunch"/>
+          </div>
+          <h3 class="mt-4 text-xl font-extrabold">Raspberry Pi</h3>
+          <p class="subtitle text-sm mt-1">Code Crunch Community</p>
+        </a>
+        <p>
+          <br>A hands-on, project-based club and learning platform featuring structured learning paths, video tutorials, certificates, and resources in coding, AI, and electronics. Open Worldwide | All Universities | All Majors | High School Students (13+)
+        </p>
+        <div class="divider"></div>
+        <nav class="grid grid-cols-3 gap-2">
+          <a data-link-key="partner.rpi" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="student.join" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="nav.calendar" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="footer.hackUniversity" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="social.linkedin" class="btn btn-ghost" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="social.directory" class="btn btn-ghost" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+          <a data-link-key="social.directory" class="btn btn-ghost" href="#" target="_blank"><i class="fas fa-clipboard-check " ></i></a>
+        </nav>
+        <div class="mt-3">
+          <a data-link-key="social.directory" class="btn btn-primary-soft w-full" href="#" target="_blank"><i class="fa-solid fa-globe-americas"></i> raspberrypicodecrunch.vercel.app</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">1000+</div>
+        <div class="subtitle mt-1">Active Members</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">17+</div>
+        <div class="subtitle mt-1">Countries</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">112+</div>
+        <div class="subtitle mt-1">Universities</div>
+      </div>
+      <div class="hu-card p-6 text-center">
+        <div class="text-4xl font-extrabold" style="color:#1d4ed8;">170+</div>
+        <div class="subtitle mt-1">Events Hosted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION / ABOUT -->
+<section id="mission" class="section" style="padding-top:0;">
+  <div class="container">
+    <article class="hu-card p-7 md:p-8">
+      <h2 class="title-md">Our Mission</h2>
+      <p class="subtitle mt-3 text-lg">
+        Founded in <span style="color:#1d4ed8;font-weight:600;">August 2024</span>, Hack University unites multiple student organizations and global communities to
+        <span style="color:#1d4ed8;font-weight:600;">empower the next generation of innovators</span> through workshops, hackathons, and mentorship across disciplines and borders.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="hu-card p-5">
+          <h3 class="font-extrabold text-xl">Membership Benefits</h3>
+          <ul class="mt-3 space-y-2 text-sm subtitle mission-list">
+      
+            <li>100% Free with OneStop Membership Form (13+) </li>
+            <li>Access to 20 annual interdisciplinary hackathons</li>
+            <li>Interview prep, resume reviews, and coaching</li>
+            <li>Startup pitch development and entrepreneurship mentoring</li>
+            <li>Executive Board application opportunities</li>
+            <li>Cross-discipline networking and industry access</li>
+          </ul>
+        </div>
+        <div class="hu-card p-5">
+          <h3 class="font-extrabold text-xl">Community Access</h3>
+          <ul class="mt-3 space-y-2 text-sm subtitle mission-list">
+            <li><strong>Discord:</strong> coding help, team formation, mentorship (secured after OneStop)</li>
+            <li><strong>GroupMe:</strong> quick coordination & announcements (Open to all)</li>
+            <li><strong>Instagram Group</strong> highlights & networking (Open to all)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="hu-card p-5">
+        <h3 class="font-extrabold text-xl" style="color:#166534;">Who Can Join?</h3>
+        <p class="subtitle mt-2"><strong>All majors welcome - no coding experience required.</strong></p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4 text-center">
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-laptop-code"></i></div><div class="text-sm mt-1">CS</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-gears"></i></div><div class="text-sm mt-1">Engineering</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-briefcase"></i></div><div class="text-sm mt-1">Business</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-stethoscope"></i></div><div class="text-sm mt-1">Health</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-scale-balanced"></i></div><div class="text-sm mt-1">Law</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-palette"></i></div><div class="text-sm mt-1">Design</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-book-open"></i></div><div class="text-sm mt-1">Education</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-dna"></i></div><div class="text-sm mt-1">Biology</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-square-root-variable"></i></div><div class="text-sm mt-1">Math</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-flask-vial"></i></div><div class="text-sm mt-1">Chemistry</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-earth-americas"></i></div><div class="text-sm mt-1">Env. Sci</div></div>
+          <div class="hu-card p-3"><div class="text-2xl major-icon"><i class="fa-solid fa-star"></i></div><div class="text-sm mt-1">Any Major</div></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div>
+        <h4>Hack University</h4>
+        <p>Empowering the next generation of innovators through collaboration and hands-on learning.</p>
+        <a data-link-key="student.discord" class="inline-block mt-2 font-semibold" href="#" target="_blank" rel="noopener">
+          HackUniversity.vercel.app ->
+        </a>
+
+        <div class="social-grid mt-4">
+          <a data-link-key="social.linkedin" class="social-btn" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a data-link-key="social.directory" class="social-btn" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a data-link-key="social.directory" class="social-btn" href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a data-link-key="social.directory" class="social-btn" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a data-link-key="student.discord" class="social-btn" href="#" target="_blank"><i class="fab fa-discord"></i></a>
+          <a data-link-key="resource.hackuniversityCalendar" class="social-btn" href="#" target="_blank"><i class="far fa-calendar-alt"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="subtitle">
+          <li><a data-link-key="resource.mission" href="#">Mission</a></li>
+          <li><a data-link-key="resource.hackuniversityCalendar" href="#" target="_blank">Events</a></li>
+          <li>
+            <a data-link-key="footer.photos" href="#" target="_blank" rel="noopener noreferrer">
+              Photo Album
+            </a>
+          </li>
+          <li><a data-link-key="nav.hackathons" href="#" target="_blank">Hackathons</a></li>
+          <li><a data-link-key="resource.membership" href="#" target="_blank">Membership</a></li>
+          <li><a data-link-key="resource.eboard" href="#" target="_blank">Join E-Board</a></li>
+          <li><a data-link-key="resource.resources" href="#" target="_blank">Resources</a></li>
+          <li><a data-link-key="student.discord" href="#" target="_blank">Join Discord</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <address class="text-sm opacity-80 not-italic">
+          Florida International University<br>
+          Miami, FL<br>
+          <a data-link-key="contact.email" href="#" class="hover:opacity-100 text-decoration-none focus-visible">codecrunchclub@gmail.com</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>(c) 2025 Hack University.</p>
+      <div class="credits">
+        Built with care by <a data-link-key="social.founderLinkedin" href="#" target="_blank" rel="noopener">Brian Bazurto</a>.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const HU_LINKS = [
+    { key: "resource.mission", href: "https://codecrunchglobal.vercel.app/hackuniversity.html/#mission", newTab: false },
+    { key: "anchor.partners", href: "https://codecrunchglobal.vercel.app/hackuniversity.html/#partners", newTab: false },
+    { key: "brand.hackUniversity", href: "https://hackuniversity.vercel.app/", newTab: false },
+    { key: "footer.hackUniversity", href: "http://HackUniversity.vercel.app", newTab: true },
+    { key: "contact.email", href: "mailto:codecrunchclub@gmail.com", newTab: false },
+    { key: "social.linkedin", href: "https://www.linkedin.com/showcase/hack-university-global/", newTab: true },
+    { key: "social.founderLinkedin", href: "https://www.linkedin.com/in/iba001/", newTab: true },
+    { key: "social.directory", href: "https://hackuniversity-directory.vercel.app/", newTab: true },
+
+
+    { key: "social.attendance", href: "https://hackuniversity-attendance.vercel.app/", newTab: true },
+    { key: "footer.photos", href: "https://photos.app.goo.gl/71FC5SLTQcPRbXjx6", newTab: true },
+
+    { key: "nav.partners", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#partners", newTab: false },
+    { key: "nav.mission", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#mission", newTab: false },
+    { key: "resource.gdg", href: "https://gdgatfiu.vercel.app/", newTab: true },
+    { key: "nav.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
+    { key: "nav.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
+    { key: "partner.gdgatfiu", href: "https://gdgatfiu.vercel.app", newTab: true },
+    { key: "partner.codeCrunch", href: "https://codecrunchglobal.vercel.app/", newTab: true },
+    { key: "partner.colorStackatfiu", href: "https://colorstackatfiu.vercel.app/", newTab: true },
+    { key: "partner.cahsiatfiu", href: "https://cahsiatfiu.vercel.app/", newTab: true },
+    { key: "partner.rpiCodeCrunch", href: "https://raspberrypicodecrunch.vercel.app/", newTab: true },
+    { key: "hero.partners", href: "#partners", newTab: false },
+    { key: "student.hackerGuide", href: "https://codecrunchglobal.vercel.app/hacks-toolkit.html", newTab: true },
+
+
+    { key: "resource.AlbumHackUniversity", href: "https://hackuniversity-photos.vercel.app/", newTab: false },
+    { key: "resource.album2026_305HackathonMarch", href: "https://photos.app.goo.gl/S9YCZ6MgeTtreDKq6", newTab: true },
+    { key: "resource.album2026_HackFiestaMiamiFebruary", href: "https://photos.app.goo.gl/QaQsG1Ck32TRofBb8", newTab: true },
+    { key: "resource.album2026_gdgStudyJams", href: "https://photos.app.goo.gl/75igz9FH4cQzF4t68", newTab: true },
+    { key: "resource.album2026_305HackathonJanuary", href: "https://photos.google.com/share/AF1QipN4JtGK4n186ewkcYr5nypsPumWt99ypTrTyL9l1J__W5hlmtHl5UVg137HRBbZ3g?key=eGdBYlZNdS04aTQ3WWtTVGRKQ0g2UTh3c3ZWNVJn", newTab: true },
+    { key: "resource.album2025_Winterhackathon", href: "https://colorstack-family.slack.com/archives/C084ZCYQ50C/p1765833689585929", newTab: true },
+    { key: "resource.album2025_CodeFestDecember", href: "https://photos.app.goo.gl/9U7RVWPZ3h5uKeGZ7", newTab: true },
+    { key: "resource.album2025_DevFestNovember", href: "https://photos.app.goo.gl/vcns8Qwjsayofj2s7", newTab: true },
+    { key: "resource.album2025_305HackathonNovember", href: "https://photos.app.goo.gl/zCuBbq1fxYJavWnm9", newTab: true },
+    { key: "resource.album2025_EmpowerHackathonOctober", href: "https://photos.app.goo.gl/aXZn5AVC2HeMcu8V7", newTab: true },
+    { key: "resource.album2025_305HackathonSeptember", href: "https://photos.app.goo.gl/D29qiuz4nkeTKTs86", newTab: true },
+
+
+
+
+    
+    { key: "resource.albumGdgatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumCodeCrunchWorldwide", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumColorStackatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumCahsiatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.albumRaspberryPiCodeCrunchatFiu", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+
+
+    { key: "resource.SubscribeGooglecalendar", href: "https://calendar.google.com/calendar/u/0?cid=ODRjNGQ2NTA0NTA1OTdjNTkyZTc0ZThmNWZlODUxMzAxZjYwYTkyZjMwYmI1OTM2ODA5OTk3ODFkZmFjYWIxMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t", newTab: true },
+    { key: "resource.partners", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#partners", newTab: false },
+    { key: "resource.gdg", href: "https://gdgatfiu.vercel.app", newTab: true },
+    { key: "partner.codeCrunch", href: "https://codecrunchglobal.vercel.app", newTab: true },
+    { key: "partner.colorStack", href: "https://colorstackatfiu.vercel.app", newTab: true },
+    { key: "partner.cahsi", href: "https://cahsiatfiu.vercel.app", newTab: true },
+    { key: "partner.rpi", href: "https://raspberrypicodecrunch.vercel.app/", newTab: true },
+    { key: "resource.membership", href: "https://hackuniversity-membership.vercel.app/", newTab: true },
+    { key: "resource.eboard", href: "https://hackuniversity-eboard.vercel.app/", newTab: true },
+    { key: "resource.zoom", href: "https://hackuniversity-zoom.vercel.app/", newTab: true },
+    { key: "resource.photos", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "resource.toolkitHackerGuide", href: "https://codecrunchglobal.vercel.app/hacks-toolkit.html", newTab: true },
+    { key: "resource.hackuniversityCalendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
+
+    { key: "resource.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
+    { key: "resource.membershipHackuniversity", href: "https://hackuniversity-onestopform.vercel.app/", newTab: true },
+    { key: "resource.studentLogin", href: "https://hackuniversity-onestop.vercel.app/", newTab: true },
+        { key: "resource.companyPortal", href: "https://codecrunchglobal.vercel.app/hackuniversitydonate.html", newTab: true },
+            { key: "resource.volunteerPortal", href: "https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html", newTab: true },
+  { key: "resource.hackuniversityplatforms", href: "https://hackuniversityplatforms.vercel.app/", newTab: true },
+
+    { key: "hero.photos", href: "https://hackuniversity-photos.vercel.app/", newTab: true },
+    { key: "student.join", href: "https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html", newTab: true },
+    { key: "student.login", href: "https://codecrunchglobal.vercel.app/hackuniversity-main-students.html", newTab: false },
+    { key: "student.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
+    { key: "student.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
+
+
+
+
+    { key: "student.zoom", href: "https://hackuniversity-zoom.vercel.app/", newTab: true },
+
+    { key: "student.HackathonWinners", href: "https://codecrunchglobal.vercel.app/hackuniversity-hackwinners.html", newTab: true },
+    { key: "student.MembershipCertificates", href: "https://codecrunchglobal.vercel.app/hackuniversity-certifcatemembership.html", newTab: true },
+    { key: "student.discord", href: "https://codecrunchglobal.vercel.app/hackuniversity-discord.html", newTab: true },
+  
+    { key: "company.portal", href: "https://codecrunchglobal.vercel.app/hackuniversitydonate.html", newTab: false },
+    { key: "volunteer.portal", href: "https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html", newTab: false }
+  ];
+
+  (function bindManagedLinks() {
+    const linkMap = Object.fromEntries(HU_LINKS.map((item) => [item.key, item]));
+    const managedLinks = document.querySelectorAll("a[data-link-key]");
+
+    managedLinks.forEach((anchor) => {
+      const key = anchor.dataset.linkKey;
+      const item = linkMap[key];
+      if (!item) {
+        console.warn(`[HU_LINKS] Missing config for key: ${key}`);
+        return;
+      }
+
+      anchor.href = item.href;
+      if (item.newTab) {
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+      } else {
+        anchor.removeAttribute("target");
+        anchor.removeAttribute("rel");
+      }
+    });
+  })();
+
+  (function validatePageUrls() {
+    const urlSet = new Set(HU_LINKS.map((item) => item.href));
+    const anchors = document.querySelectorAll("a[href]");
+
+    anchors.forEach((anchor) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href.startsWith("javascript:")) return;
+      if (!urlSet.has(href)) {
+        console.warn(`[HU_LINKS] Missing URL in array: ${href}`);
+      }
+    });
+  })();
+
+  // Navbar toggle (mobile)
+  (function () {
+    const toggleBtn = document.querySelector(".nav-toggle");
+    const navLinks = document.getElementById("huNavLinks");
+
+    if (!toggleBtn || !navLinks) return;
+
+    const setExpanded = (expanded) => {
+      toggleBtn.setAttribute("aria-expanded", String(expanded));
+      navLinks.classList.toggle("is-open", expanded);
+      const icon = toggleBtn.querySelector("i");
+      if (icon) icon.className = expanded ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    };
+
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      setExpanded(!expanded);
+    });
+
+    navLinks.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      const href = a.getAttribute("href") || "";
+      if (href.startsWith("#")) setExpanded(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) setExpanded(false);
+    });
+
+    setExpanded(false);
+  })();
+
+  // Event FIXED Clock Bar (Eastern Time)
+  (function () {
+    let etClockInterval = null;
+
+    function startETClock() {
+      const clockEl = document.getElementById("et-clock");
+      const dateEl = document.getElementById("et-date");
+      const tipClockEl = document.getElementById("tip-et-clock");
+      const tipDateEl = document.getElementById("tip-et-date");
+      if (!clockEl || !dateEl) return;
+
+      const tz = "America/New_York";
+
+      const tick = () => {
+        const now = new Date();
+
+        const timeStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        }).format(now);
+
+        const dateStr = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        }).format(now);
+
+        clockEl.textContent = `${timeStr} ET`;
+        dateEl.textContent = dateStr;
+        if (tipClockEl) tipClockEl.textContent = `${timeStr} ET`;
+        if (tipDateEl) tipDateEl.textContent = dateStr;
+      };
+
+      tick();
+      if (etClockInterval) clearInterval(etClockInterval);
+      etClockInterval = setInterval(tick, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", startETClock);
+  })();
+
+  // Live Zoom availability based on the server-side calendar check.
+  (function () {
+    const zoomLink = document.getElementById("zoom-meeting-link");
+    const statusNote = document.getElementById("calendar-status-note");
+    if (!zoomLink || !statusNote) return;
+
+    const formatEt = (isoString) => {
+      if (!isoString) return "";
+      const date = new Date(isoString);
+      if (Number.isNaN(date.getTime())) return "";
+
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      }).format(date);
+    };
+
+    const setEnabled = (enabled) => {
+      zoomLink.classList.toggle("is-disabled", !enabled);
+      zoomLink.setAttribute("aria-disabled", String(!enabled));
+      if (enabled) {
+        zoomLink.removeAttribute("tabindex");
+      } else {
+        zoomLink.setAttribute("tabindex", "-1");
+      }
+    };
+
+    const applyStatus = (payload) => {
+      if (payload?.hasLiveEvent && payload.activeEvent) {
+        const endTime = formatEt(payload.activeEvent.end);
+        setEnabled(true);
+        statusNote.textContent = endTime
+          ? `Zoom is live now for "${payload.activeEvent.summary}" until ${endTime} ET.`
+          : `Zoom is live now for "${payload.activeEvent.summary}".`;
+        return;
+      }
+
+      setEnabled(false);
+
+      if (payload?.nextEvent?.start) {
+        const nextStart = formatEt(payload.nextEvent.start);
+        const label = payload.nextEvent.summary || "The next event";
+        statusNote.textContent = nextStart
+          ? `${label} starts ${nextStart} ET. Zoom will unlock when the event begins.`
+          : "No live Zoom event right now. Check the calendar for the next session.";
+        return;
+      }
+
+      statusNote.textContent = "No live Zoom event is scheduled right now. Check the calendar above for updates.";
+    };
+
+    async function loadCalendarStatus() {
+      try {
+        const response = await fetch("/api/calendar-status", {
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        applyStatus(payload);
+      } catch (error) {
+        setEnabled(false);
+        statusNote.textContent = "Unable to verify calendar status right now. Please use the Google Calendar link above.";
+        console.error("[calendar-status]", error);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCalendarStatus);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
