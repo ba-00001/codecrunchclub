@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar Debug - Hack University</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #d1d5db;
+      --brand: #1a73e8;
+      --brand-dark: #1557b0;
+      --success: #137333;
+      --danger: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 45%);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      margin-bottom: 20px;
+    }
+
+    h1, h2, p { margin: 0; }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 760px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    button, a.button-link {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--brand);
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    button:hover, a.button-link:hover {
+      background: var(--brand-dark);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #eef2ff;
+      color: #1e40af;
+    }
+
+    .status-pill.live {
+      background: #e8f5e9;
+      color: var(--success);
+    }
+
+    .status-pill.offline {
+      background: #fff4e5;
+      color: #9a6700;
+    }
+
+    .meta {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 16px;
+    }
+
+    .meta-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fafafa;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .event-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .event-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .event-item h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .event-item p {
+      margin-top: 6px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .error {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      border-radius: 12px;
+      background: #0f172a;
+      color: #e5e7eb;
+      overflow: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Hack University Calendar Debug</h1>
+    <p class="lead">
+      This page reads the Vercel API route and shows exactly what the site sees from the Google Calendar.
+      Use it to verify that events are loading, which event is currently considered live, and what the next event is.
+    </p>
+
+    <section class="card">
+      <div class="toolbar">
+        <button id="refresh-button" type="button">Refresh Calendar Status</button>
+        <a class="button-link" href="/api/calendar-status?debug=1" target="_blank" rel="noopener noreferrer">Open Raw JSON</a>
+        <span id="live-pill" class="status-pill">Checking status...</span>
+      </div>
+      <p id="error-message" class="error" hidden></p>
+      <div class="meta">
+        <div class="meta-item">
+          <div class="label">Calendar ID</div>
+          <div id="calendar-id" class="value">Loading...</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Checked At</div>
+          <div id="checked-at" class="value">Loading...</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Next Event</div>
+          <div id="next-event" class="value">Loading...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Live Event</h2>
+      <div id="live-event" class="event-list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Upcoming Timed Events</h2>
+      <div id="event-list" class="event-list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Raw Response Snapshot</h2>
+      <pre id="raw-json">Loading...</pre>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const refreshButton = document.getElementById("refresh-button");
+      const livePill = document.getElementById("live-pill");
+      const errorMessage = document.getElementById("error-message");
+      const calendarId = document.getElementById("calendar-id");
+      const checkedAt = document.getElementById("checked-at");
+      const nextEvent = document.getElementById("next-event");
+      const liveEvent = document.getElementById("live-event");
+      const eventList = document.getElementById("event-list");
+      const rawJson = document.getElementById("raw-json");
+
+      function formatEt(isoString) {
+        if (!isoString) return "N/A";
+        const date = new Date(isoString);
+        if (Number.isNaN(date.getTime())) return isoString;
+
+        return new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/New_York",
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true
+        }).format(date) + " ET";
+      }
+
+      function eventMarkup(event) {
+        if (!event) {
+          return "<div class=\"event-item\"><p>No event found.</p></div>";
+        }
+
+        const location = event.location ? `<p><strong>Location:</strong> ${event.location}</p>` : "";
+        const link = event.htmlLink
+          ? `<p><a href="${event.htmlLink}" target="_blank" rel="noopener noreferrer">Open in Google Calendar</a></p>`
+          : "";
+
+        return `
+          <div class="event-item">
+            <h3>${event.summary || "Untitled event"}</h3>
+            <p><strong>Starts:</strong> ${formatEt(event.start)}</p>
+            <p><strong>Ends:</strong> ${formatEt(event.end)}</p>
+            ${location}
+            ${link}
+          </div>
+        `;
+      }
+
+      async function loadStatus() {
+        errorMessage.hidden = true;
+        livePill.textContent = "Checking status...";
+        livePill.className = "status-pill";
+
+        try {
+          const response = await fetch("/api/calendar-status?debug=1", {
+            headers: { Accept: "application/json" }
+          });
+
+          const payload = await response.json();
+          rawJson.textContent = JSON.stringify(payload, null, 2);
+
+          if (!response.ok) {
+            throw new Error(payload.error || `Request failed with ${response.status}`);
+          }
+
+          calendarId.textContent = payload.calendarId || "N/A";
+          checkedAt.textContent = formatEt(payload.checkedAt);
+          nextEvent.textContent = payload.nextEvent
+            ? `${payload.nextEvent.summary} (${formatEt(payload.nextEvent.start)})`
+            : "No upcoming timed event found";
+
+          if (payload.hasLiveEvent) {
+            livePill.textContent = "Live event detected";
+            livePill.className = "status-pill live";
+          } else {
+            livePill.textContent = "No live event right now";
+            livePill.className = "status-pill offline";
+          }
+
+          liveEvent.innerHTML = eventMarkup(payload.activeEvent);
+
+          const events = Array.isArray(payload.upcomingEvents) ? payload.upcomingEvents : [];
+          eventList.innerHTML = events.length
+            ? events.map(eventMarkup).join("")
+            : "<div class=\"event-item\"><p>No timed events returned from the calendar.</p></div>";
+        } catch (error) {
+          errorMessage.hidden = false;
+          errorMessage.textContent = error.message || "Unable to load calendar data.";
+          livePill.textContent = "Request failed";
+          livePill.className = "status-pill offline";
+          liveEvent.innerHTML = "<div class=\"event-item\"><p>Unable to load live event data.</p></div>";
+          eventList.innerHTML = "<div class=\"event-item\"><p>Unable to load event list.</p></div>";
+        }
+      }
+
+      refreshButton.addEventListener("click", loadStatus);
+      document.addEventListener("DOMContentLoaded", loadStatus);
+    })();
+  </script>
+</body>
+</html>

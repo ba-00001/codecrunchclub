@@ -185,6 +185,20 @@
     .btn:hover, .hu-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
     .btn:active, .hu-btn:active { transform: translateY(0); }
 
+    .btn.is-disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: var(--shadow-sm);
+      transform: none;
+    }
+
+    .calendar-status-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
     .btn-primary, .hu-btn--brand {
       background: var(--color-primary); color: #fff;
     }
@@ -899,7 +913,9 @@
           href="https://zoomlink-hackathons.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn btn-primary"
+          class="btn btn-primary is-disabled"
+          id="zoom-meeting-link"
+          aria-disabled="true"
         >
           <i class="fa-solid fa-video"></i> Join Zoom Meeting
         </a>
@@ -920,6 +936,9 @@
           <i class="fa-brands fa-google"></i> Subscribe to Google Calendar
         </a>
       </div>
+      <p id="calendar-status-note" class="calendar-status-note" aria-live="polite">
+        Checking the Hack University calendar for a live Zoom session...
+      </p>
 
       <div class="hu-card p-4 md:p-5 mt-6">
         <h3 class="font-extrabold text-xl text-center">Big Tech Community Live Calendar - Hack University</h3>
@@ -1265,12 +1284,12 @@
     { key: "nav.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
     { key: "nav.calendar", href: "https://codecrunchglobal.vercel.app/hackuniversity.html#calendar", newTab: true },
     { key: "partner.gdgatfiu", href: "https://gdgatfiu.vercel.app", newTab: true },
-        { key: "partner.codeCrunch", href: "https://codecrunchglobal.vercel.app/", newTab: true },
+    { key: "partner.codeCrunch", href: "https://codecrunchglobal.vercel.app/", newTab: true },
     { key: "partner.colorStackatfiu", href: "https://colorstackatfiu.vercel.app/", newTab: true },
-        { key: "partner.cahsiatfiu", href: "https://cahsiatfiu.vercel.app/", newTab: true },
-                { key: "partner.rpiCodeCrunch", href: "https://raspberrypicodecrunch.vercel.app/", newTab: true },
-            { key: "hero.partners", href: "#partners", newTab: false },
-                { key: "student.hackerGuide", href: "https://codecrunchglobal.vercel.app/hacks-toolkit.html", newTab: true },
+    { key: "partner.cahsiatfiu", href: "https://cahsiatfiu.vercel.app/", newTab: true },
+    { key: "partner.rpiCodeCrunch", href: "https://raspberrypicodecrunch.vercel.app/", newTab: true },
+    { key: "hero.partners", href: "#partners", newTab: false },
+    { key: "student.hackerGuide", href: "https://codecrunchglobal.vercel.app/hacks-toolkit.html", newTab: true },
 
 
     { key: "resource.AlbumHackUniversity", href: "https://hackuniversity-photos.vercel.app/", newTab: false },
@@ -1449,6 +1468,84 @@
     }
 
     document.addEventListener("DOMContentLoaded", startETClock);
+  })();
+
+  // Live Zoom availability based on the server-side calendar check.
+  (function () {
+    const zoomLink = document.getElementById("zoom-meeting-link");
+    const statusNote = document.getElementById("calendar-status-note");
+    if (!zoomLink || !statusNote) return;
+
+    const formatEt = (isoString) => {
+      if (!isoString) return "";
+      const date = new Date(isoString);
+      if (Number.isNaN(date.getTime())) return "";
+
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      }).format(date);
+    };
+
+    const setEnabled = (enabled) => {
+      zoomLink.classList.toggle("is-disabled", !enabled);
+      zoomLink.setAttribute("aria-disabled", String(!enabled));
+      if (enabled) {
+        zoomLink.removeAttribute("tabindex");
+      } else {
+        zoomLink.setAttribute("tabindex", "-1");
+      }
+    };
+
+    const applyStatus = (payload) => {
+      if (payload?.hasLiveEvent && payload.activeEvent) {
+        const endTime = formatEt(payload.activeEvent.end);
+        setEnabled(true);
+        statusNote.textContent = endTime
+          ? `Zoom is live now for "${payload.activeEvent.summary}" until ${endTime} ET.`
+          : `Zoom is live now for "${payload.activeEvent.summary}".`;
+        return;
+      }
+
+      setEnabled(false);
+
+      if (payload?.nextEvent?.start) {
+        const nextStart = formatEt(payload.nextEvent.start);
+        const label = payload.nextEvent.summary || "The next event";
+        statusNote.textContent = nextStart
+          ? `${label} starts ${nextStart} ET. Zoom will unlock when the event begins.`
+          : "No live Zoom event right now. Check the calendar for the next session.";
+        return;
+      }
+
+      statusNote.textContent = "No live Zoom event is scheduled right now. Check the calendar above for updates.";
+    };
+
+    async function loadCalendarStatus() {
+      try {
+        const response = await fetch("/api/calendar-status", {
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        applyStatus(payload);
+      } catch (error) {
+        setEnabled(false);
+        statusNote.textContent = "Unable to verify calendar status right now. Please use the Google Calendar link above.";
+        console.error("[calendar-status]", error);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCalendarStatus);
   })();
 </script>
 
