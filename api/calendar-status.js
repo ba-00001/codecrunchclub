@@ -2,6 +2,9 @@ const CALENDAR_ID =
   "84c4d650450597c592e74e8f5fe851301f60a92f30bb593680999781dfacab12@group.calendar.google.com";
 
 const GOOGLE_API_BASE = "https://www.googleapis.com/calendar/v3/calendars";
+const LOOKAHEAD_DAYS = 548;
+const DEFAULT_HISTORY_START = "2024-08-01T00:00:00-04:00";
+const PAGE_SIZE = 2500;
 
 function toIsoString(value) {
   if (!value) return null;
@@ -35,35 +38,55 @@ module.exports = async function handler(req, res) {
 
   const debugMode = req.query?.debug === "1";
   const now = new Date();
-  const windowStart = new Date(now.getTime() - 12 * 60 * 60 * 1000);
-  const windowEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
-
-  const params = new URLSearchParams({
-    key: apiKey,
-    singleEvents: "true",
-    orderBy: "startTime",
-    timeMin: windowStart.toISOString(),
-    timeMax: windowEnd.toISOString(),
-    maxResults: "25"
-  });
-
-  const endpoint = `${GOOGLE_API_BASE}/${encodeURIComponent(CALENDAR_ID)}/events?${params.toString()}`;
+  const requestedSince = typeof req.query?.since === "string" ? req.query.since : "";
+  const parsedSince = requestedSince ? new Date(requestedSince) : new Date(DEFAULT_HISTORY_START);
+  const windowStart = Number.isNaN(parsedSince.getTime())
+    ? new Date(DEFAULT_HISTORY_START)
+    : parsedSince;
+  const windowEnd = new Date(now.getTime() + LOOKAHEAD_DAYS * 24 * 60 * 60 * 1000);
 
   try {
-    const response = await fetch(endpoint, {
-      headers: { Accept: "application/json" }
-    });
+    const items = [];
+    let pageToken = "";
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      return res.status(response.status).json({
-        error: "Google Calendar request failed",
-        details: errorText
+    while (true) {
+      const params = new URLSearchParams({
+        key: apiKey,
+        singleEvents: "true",
+        orderBy: "startTime",
+        timeMin: windowStart.toISOString(),
+        timeMax: windowEnd.toISOString(),
+        maxResults: String(PAGE_SIZE)
       });
+
+      if (pageToken) {
+        params.set("pageToken", pageToken);
+      }
+
+      const endpoint = `${GOOGLE_API_BASE}/${encodeURIComponent(CALENDAR_ID)}/events?${params.toString()}`;
+      const response = await fetch(endpoint, {
+        headers: { Accept: "application/json" }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return res.status(response.status).json({
+          error: "Google Calendar request failed",
+          details: errorText
+        });
+      }
+
+      const data = await response.json();
+      const pageItems = Array.isArray(data.items) ? data.items : [];
+      items.push(...pageItems);
+
+      if (!data.nextPageToken) {
+        break;
+      }
+
+      pageToken = data.nextPageToken;
     }
 
-    const data = await response.json();
-    const items = Array.isArray(data.items) ? data.items : [];
     const timedEvents = items.filter(isTimedEvent);
 
     let activeEvent = null;
@@ -91,7 +114,8 @@ module.exports = async function handler(req, res) {
       hasLiveEvent: Boolean(activeEvent),
       activeEvent: activeEvent ? toEventSummary(activeEvent) : null,
       nextEvent: nextEvent ? toEventSummary(nextEvent) : null,
-      upcomingEvents: debugMode ? timedEvents.slice(0, 10).map(toEventSummary) : undefined,
+      upcomingEvents: debugMode ? timedEvents.map(toEventSummary) : undefined,
+      eventCount: timedEvents.length,
       checkedAt: now.toISOString()
     });
   } catch (error) {

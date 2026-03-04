@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hack University - Hackathon Events</title>
+  <title>Hack University - Events & Hackathons</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -50,68 +50,17 @@
       line-height: 1.55;
     }
 
-    /* TIMEZONE */
-    .timezone-section {
-      background: var(--color-bg-white);
-      border-bottom: 1px solid var(--color-border);
-      padding: var(--spacing-lg) 20px;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .timezone-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .timezone-header h2 {
-      color: var(--color-text);
-      font-size: 28px;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .timezone-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .timezone-item {
-      background: var(--color-bg-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      text-align: center;
-      transition: all var(--transition-base);
-    }
-
-    .timezone-item:hover {
-      box-shadow: var(--shadow-md);
-      border-color: var(--color-primary);
-      transform: translateY(-2px);
-    }
-
-    .timezone-flag {
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
-
-    .timezone-time {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 4px;
-      font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-
-    .timezone-location {
-      color: var(--color-text-muted);
-      font-size: 12px;
+    :root {
+      --navbar-h: 64px;
+      --navbar-h-m: 72px;
+      --clock-bar-h: 44px;
     }
 
     /* QUICK LINKS (chips with popover tooltips) */
+    body {
+      padding-top: calc(var(--navbar-h) + var(--clock-bar-h));
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -324,6 +273,110 @@
       box-shadow: var(--shadow-md);
       border-color: var(--color-primary);
       transform: translateX(3px);
+    }
+
+    .calendar-events-block {
+      margin-top: var(--spacing-xl);
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-xl);
+    }
+
+    .calendar-events-note {
+      color: var(--color-text-muted);
+      font-size: 14px;
+      margin-top: 8px;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .calendar-event-item {
+      background: linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+      border: 1px solid #c7dafd;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: 0 8px 18px rgba(26, 115, 232, .08);
+      transition: all var(--transition-base);
+    }
+
+    .calendar-event-item:hover {
+      box-shadow: 0 10px 24px rgba(26, 115, 232, .14);
+      border-color: #a8c6fb;
+      transform: translateY(-2px);
+    }
+
+    .calendar-event-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .calendar-event-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      background: #e8f0fe;
+      color: #174ea6;
+      border: 1px solid #c7dafd;
+    }
+
+    .calendar-event-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .calendar-event-date,
+    .calendar-event-location,
+    .calendar-event-status {
+      margin-top: 6px;
+      color: var(--color-text-muted);
+      font-size: 14px;
+    }
+
+    .calendar-event-status strong {
+      color: var(--color-text);
+    }
+
+    .calendar-event-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .calendar-event-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid #c7dafd;
+      background: #1a73e8;
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .calendar-event-link:hover {
+      background: #1557b0;
+      box-shadow: 0 8px 18px rgba(26, 115, 232, .18);
+    }
+
+    .calendar-event-link.alt {
+      background: #fff;
+      color: #174ea6;
+    }
+
+    .calendar-event-link.alt:hover {
+      background: #eef4ff;
     }
 
     .hackathon-mode {
@@ -697,9 +750,11 @@
       background: var(--color-bg-white);
       border-bottom: 1px solid var(--color-border);
       padding: 12px 0;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 1000;
+      left: 0;
+      right: 0;
+      z-index: 2000;
       box-shadow: var(--shadow-sm);
     }
 
@@ -714,12 +769,26 @@
       flex-wrap: wrap;
     }
 
-    .nav-brand a {
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title {
       color: var(--color-primary);
       text-decoration: none;
-      font-size: 18px;
-      font-weight: 800;
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: clamp(0.95rem, 3vw, 1.25rem);
       letter-spacing: .2px;
+    }
+
+    .brand-url {
+      white-space: nowrap;
+      font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+      color: #0f766e;
+      text-decoration: underline;
     }
 
     .nav-toggle {
@@ -765,6 +834,10 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        padding-top: calc(var(--navbar-h-m) + var(--clock-bar-h));
+      }
+
       .nav-toggle {
         display: inline-flex;
       }
@@ -787,6 +860,151 @@
         padding: 10px 12px;
       }
     }
+
+    .event-clock-bar {
+      position: fixed;
+      top: var(--navbar-h);
+      left: 0;
+      right: 0;
+      z-index: 1900;
+      height: var(--clock-bar-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      padding: 0 14px;
+    }
+
+    .event-clock-label {
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .event-clock-time {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+
+    .event-clock-date {
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .track-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .track-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #d2e3fc;
+    }
+
+    .track-card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .track-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .track-chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d2e3fc;
+      background: #e8f0fe;
+      color: #174ea6;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .track-card h3 {
+      font-size: 17px;
+      line-height: 1.3;
+      color: var(--color-text);
+    }
+
+    .track-prompt {
+      color: #174ea6;
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .track-name {
+      color: var(--color-text);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .track-body {
+      border-top: 1px solid var(--color-border);
+      padding: 16px 18px 18px;
+      color: var(--color-text-muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .track-body p + p {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 960px) {
+      .track-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .event-clock-bar {
+        top: var(--navbar-h-m);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .event-clock-bar {
+        height: 40px;
+        padding: 0 10px;
+      }
+
+      .event-clock-time {
+        font-size: 12.5px;
+      }
+
+      .event-clock-date {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -794,13 +1012,11 @@
   <!-- NAV -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="nav-brand" style="display:flex; flex-direction:column; line-height:1.1;">
-        <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Worldwide Home" class="brand-title"
-          style="white-space:nowrap; font-weight:700; font-size: clamp(0.95rem, 3vw, 1.25rem);">
+      <div class="nav-brand">
+        <a href="https://hackuniversity.vercel.app/" aria-label="Hack University Worldwide Home" class="brand-title">
           Hack University Worldwide Initiative
         </a>
-        <a href="https://hackuniversity.vercel.app/" class="brand-url"
-          style="white-space:nowrap; font-size: clamp(0.8rem, 2.5vw, 1.05rem); color:#0f766e; text-decoration:underline;">
+        <a href="https://hackuniversity.vercel.app/" class="brand-url">
           HackUniversity.vercel.app
         </a>
       </div>
@@ -820,6 +1036,12 @@
       </div>
     </div>
   </nav>
+
+  <div class="event-clock-bar" role="status" aria-label="Hack University clock in Eastern Time">
+    <span class="event-clock-label">Hack University Clock - <strong>Eastern Time (ET)</strong> · Miami, FL</span>
+    <span id="et-clock" class="event-clock-time"></span>
+    <span class="event-clock-date">(<span id="et-date"></span>)</span>
+  </div>
 
   <script>
     (function () {
@@ -860,10 +1082,10 @@
       <p class="text-xs sm:text-sm text-gray-500 mb-2">
         <a href="https://hackuniversity.vercel.app" class="underline hover:no-underline">Hack University</a>
         <span aria-hidden="true"> / </span>
-        Hackathon Events
+        Events & Hackathons
       </p>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-        Hackathon Events
+        Events & Hackathons
       </h1>
 
       <div class="mt-4 w-full max-w-none">
@@ -878,46 +1100,60 @@
           entrepreneurship, and data analytics.
         </p>
 
-        <div class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-            <h3 class="text-gray-900 font-extrabold text-base">
-              Tech Build Hackathon <span class="font-semibold text-gray-700">(Code or Hardware)</span>
-            </h3>
-            <p class="mt-2 text-gray-600 text-sm leading-relaxed">
-              Participants design and build technical solutions using software, hardware, or a combination of both.
-            </p>
-            <p class="mt-3 text-gray-700 text-sm leading-relaxed">
-              <strong>Why it matters:</strong> Builds real-world engineering skills, hands-on problem solving, and
-              project experience students can showcase in portfolios and technical interviews.
-            </p>
-          </div>
+        <div class="track-grid">
+          <details class="track-card" open>
+            <summary>
+              <span class="track-chip">Technical Track</span>
+              <h3>Are you a CS or engineering major?</h3>
+            </summary>
+            <div class="track-body">
+              <p class="track-name">Tech Build Hackathon (Code or Hardware)</p>
+              <p>
+                This track is built for students who want to design, code, prototype, and ship technical solutions using
+                software, hardware, or both together.
+              </p>
+              <p>
+                It is a strong fit for computer science, computer engineering, electrical engineering, mechanical engineering,
+                and hands-on builders who want portfolio-ready project experience.
+              </p>
+            </div>
+          </details>
 
-          <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-            <h3 class="text-gray-900 font-extrabold text-base">
-              Business Venture Arena <span class="font-semibold text-gray-700">(Tech-to-Business Pitch)</span>
-            </h3>
-            <p class="mt-2 text-gray-600 text-sm leading-relaxed">
-              Teams translate technical ideas into viable, impact-driven business or startup concepts.
-            </p>
-            <p class="mt-3 text-gray-700 text-sm leading-relaxed">
-              <strong>Why it matters:</strong> Helps students communicate technical ideas, evaluate feasibility, and
-              think beyond code toward real-world adoption and impact.
-            </p>
-          </div>
+          <details class="track-card">
+            <summary>
+              <span class="track-chip">Venture Track</span>
+              <h3>Are you a business major or entrepreneur student?</h3>
+            </summary>
+            <div class="track-body">
+              <p class="track-name">Code to Cash: Develop the Next Business Startup Idea</p>
+              <p>
+                This track focuses on turning technical ideas into startup-ready concepts, market opportunities, and
+                business pitches that can actually be explained to judges, users, and investors.
+              </p>
+              <p>
+                It is ideal for business, finance, marketing, management, entrepreneurship, and students who want to bridge
+                innovation with commercial execution.
+              </p>
+            </div>
+          </details>
 
-          <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-            <h3 class="text-gray-900 font-extrabold text-base">
-              305 Excel Data Duel <span class="font-semibold text-gray-700">(Live Data Analytics Challenge)</span>
-            </h3>
-            <p class="mt-2 text-gray-600 text-sm leading-relaxed">
-              A live analytics competition where participants solve timed Excel-based data challenges, earn points, and
-              compete for a top score.
-            </p>
-            <p class="mt-3 text-gray-700 text-sm leading-relaxed">
-              <strong>Why it matters:</strong> Strengthens analytical thinking, data literacy, and decision-making
-              skills that are essential across business, engineering, and data-driven careers.
-            </p>
-          </div>
+          <details class="track-card">
+            <summary>
+              <span class="track-chip">Analytics Track</span>
+              <h3>Are you a student interested in analytics or data science?</h3>
+            </summary>
+            <div class="track-body">
+              <p class="track-name">305 Business Analytics / Data Science</p>
+              <p>
+                This challenge track is centered on data storytelling, analytics, dashboards, spreadsheet modeling, and
+                decision-making under time pressure.
+              </p>
+              <p>
+                It works well for students exploring business analytics, information systems, statistics, applied math,
+                operations, data science, or any role where insight and evidence drive strategy.
+              </p>
+            </div>
+          </details>
         </div>
 
         <p class="mt-5 text-gray-600 leading-relaxed">
@@ -927,45 +1163,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Time Zone Section -->
-  <div class="timezone-section" aria-labelledby="hq-title">
-    <div class="timezone-header">
-      <h2 id="hq-title">Hackathon HQ</h2>
-    </div>
-    <div class="timezone-grid">
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">US - HQ</div>
-        <div class="timezone-time" id="miami-time">--:--:--</div>
-        <div class="timezone-location" id="miami-label">Miami, FL (ET)</div>
-      </div>
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">UK</div>
-        <div class="timezone-time" id="london-time">--:--:--</div>
-        <div class="timezone-location">London (GMT)</div>
-      </div>
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">NG</div>
-        <div class="timezone-time" id="lagos-time">--:--:--</div>
-        <div class="timezone-location">Lagos (WAT)</div>
-      </div>
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">JP</div>
-        <div class="timezone-time" id="tokyo-time">--:--:--</div>
-        <div class="timezone-location">Tokyo (JST)</div>
-      </div>
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">AU</div>
-        <div class="timezone-time" id="sydney-time">--:--:--</div>
-        <div class="timezone-location">Sydney (AEDT)</div>
-      </div>
-      <div class="timezone-item" aria-live="polite">
-        <div class="timezone-flag">IN</div>
-        <div class="timezone-time" id="mumbai-time">--:--:--</div>
-        <div class="timezone-location">Mumbai (IST)</div>
-      </div>
-    </div>
-  </div>
 
   <div class="container">
     <!-- Quick Links -->
@@ -1043,23 +1240,43 @@
 
     <!-- HACK OPERATIONS / EVENTS -->
     <div class="hackathons-section">
-      <h2>HACK OPERATIONS</h2>
+      <h2>EVENTS & HACKATHONS</h2>
 
       <p class="mt-2 text-gray-600 max-w-2xl">
-        A problem-solving competition with Tech (coding/development) and Technopreneurship (no code - business pitch)
-        tracks.
+        Static Hack University hackathon cards and live Google Calendar events are shown below in separate card styles, sorted by date.
       </p>
       <br>
 
       <div class="section-header">
-        <h3>ACTIVE MISSIONS</h3>
-        <p>Upcoming events sorted by date</p>
+        <h3>HACKATHON TRACKS</h3>
+        <p>hackathon cards sorted by date</p>
       </div>
       <div class="hackathons-list" id="upcoming-events"></div>
 
+      <div class="calendar-events-block">
+        <div class="section-header">
+          <h3>GOOGLE CALENDAR EVENTS</h3>
+          <p>Live calendar cards pulled directly from the shared Google Calendar</p>
+        </div>
+        <p class="calendar-events-note">
+          These cards stay separate from the static JSON hackathon cards. They are ordered by date and link directly to the matching Google Calendar event details.
+        </p>
+        <div class="section-header">
+          <h3>UPCOMING CALENDAR EVENTS</h3>
+          <p>Upcoming Google Calendar items sorted from nearest to latest</p>
+        </div>
+        <div class="hackathons-list" id="calendar-events-upcoming"></div>
+
+        <div class="section-header" style="margin-top: 32px;">
+          <h3>PAST CALENDAR EVENTS</h3>
+          <p>Google Calendar history listed back to August 2024</p>
+        </div>
+        <div class="hackathons-list" id="calendar-events-past"></div>
+      </div>
+
       <div class="section-header" style="margin-top: 48px;">
-        <h3>PAST EVENTS</h3>
-        <p>Completed hackathons and events</p>
+        <h3>PAST HACKATHONS</h3>
+        <p>Completed site-managed hackathon cards</p>
       </div>
       <div class="hackathons-list" id="past-events"></div>
     </div>
@@ -1151,9 +1368,30 @@
     function nowInMiami() {
       return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     }
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
     function formatDateMiami(dateStr) {
       const d = asLocalDate(dateStr);
       return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/New_York' });
+    }
+    function formatDateTimeMiami(dateStr) {
+      const d = new Date(dateStr);
+      if (Number.isNaN(d.getTime())) return 'TBD';
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(d);
     }
     function getETAbbrev(date = nowInMiami()) {
       const miami = new Date(date.toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -1258,6 +1496,9 @@
     function isComingSoonUrl(url) {
       const s = String(url || '').toLowerCase();
       return s.includes('comingsoon') || s.includes('commingsoon');
+    }
+    function isUrlString(value) {
+      return /^https?:\/\//i.test(String(value || '').trim());
     }
 
     /* ---------- Modality helpers ---------- */
@@ -1970,37 +2211,148 @@
         : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No past events to display.</p>';
     }
 
-    // Live clocks
-    function updateTimes() {
+    function getCalendarEventStatus(event) {
       const now = new Date();
+      const start = new Date(event.start);
+      const end = new Date(event.end);
 
-      const miami = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-      document.getElementById('miami-time').textContent = miami.toTimeString().split(' ')[0];
-      const label = document.getElementById('miami-label');
-      if (label) label.textContent = `Miami, FL (${getETAbbrev()})`;
+      if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+        return 'Calendar event';
+      }
 
-      const london = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
-      document.getElementById('london-time').textContent = london.toTimeString().split(' ')[0];
+      if (now < start) {
+        return `Starts ${formatDateTimeMiami(event.start)} ${getETAbbrev(start)}`;
+      }
 
-      const lagos = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Lagos' }));
-      document.getElementById('lagos-time').textContent = lagos.toTimeString().split(' ')[0];
+      if (now <= end) {
+        return `Live now until ${formatDateTimeMiami(event.end)} ${getETAbbrev(end)}`;
+      }
 
-      const tokyo = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-      document.getElementById('tokyo-time').textContent = tokyo.toTimeString().split(' ')[0];
+      return `Ended ${formatDateTimeMiami(event.end)} ${getETAbbrev(end)}`;
+    }
 
-      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      document.getElementById('sydney-time').textContent = sydney.toTimeString().split(' ')[0];
+    function renderCalendarEventCard(event) {
+      const title = escapeHtml(event.summary || 'Calendar event');
+      const startDate = new Date(event.start);
+      const endDate = new Date(event.end);
+      const starts = `${formatDateTimeMiami(event.start)} ${getETAbbrev(startDate)}`;
+      const ends = `${formatDateTimeMiami(event.end)} ${getETAbbrev(endDate)}`;
+      const status = escapeHtml(getCalendarEventStatus(event));
+      const location = escapeHtml(event.location || 'Details available in Google Calendar');
+      const googleCalendarUrl = isValidUrl(event.htmlLink) ? event.htmlLink : '#';
+      const locationLink = isUrlString(event.location)
+        ? `<a class="calendar-event-link alt" href="${escapeHtml(event.location)}" target="_blank" rel="noopener">Open Event Link</a>`
+        : '';
 
-      const mumbai = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-      document.getElementById('mumbai-time').textContent = mumbai.toTimeString().split(' ')[0];
+      return `
+        <div class="calendar-event-item">
+          <div class="calendar-event-top">
+            <div class="calendar-event-title">${title}</div>
+            <div class="calendar-event-badge"><i class="far fa-calendar-alt" aria-hidden="true"></i> Google Calendar</div>
+          </div>
+          <div class="calendar-event-date"><strong>Starts:</strong> ${escapeHtml(starts)}</div>
+          <div class="calendar-event-date"><strong>Ends:</strong> ${escapeHtml(ends)}</div>
+          <div class="calendar-event-location"><strong>Location / Link:</strong> ${location}</div>
+          <div class="calendar-event-status"><strong>Status:</strong> ${status}</div>
+          <div class="calendar-event-actions">
+            <a class="calendar-event-link" href="${escapeHtml(googleCalendarUrl)}" target="_blank" rel="noopener">
+              <i class="fa-brands fa-google" aria-hidden="true"></i> See This Event on Google Calendar
+            </a>
+            ${locationLink}
+          </div>
+        </div>
+      `;
+    }
+
+    async function renderCalendarEvents() {
+      const upcomingContainer = document.getElementById('calendar-events-upcoming');
+      const pastContainer = document.getElementById('calendar-events-past');
+      if (!upcomingContainer || !pastContainer) return;
+
+      const loadingState = '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">Loading Google Calendar events...</p>';
+      upcomingContainer.innerHTML = loadingState;
+      pastContainer.innerHTML = loadingState;
+
+      try {
+        const response = await fetch('/api/calendar-status?debug=1&since=2024-08-01T00:00:00-04:00', {
+          headers: { Accept: 'application/json' }
+        });
+        const payload = await response.json();
+
+        if (!response.ok) {
+          throw new Error(typeof payload.error === 'string' ? payload.error : 'Unable to load calendar events.');
+        }
+
+        const now = new Date();
+        const events = Array.isArray(payload.upcomingEvents) ? payload.upcomingEvents : [];
+        const normalized = events.filter(event => {
+          const start = new Date(event.start);
+          const end = new Date(event.end);
+          return !Number.isNaN(start.getTime()) && !Number.isNaN(end.getTime());
+        });
+
+        const upcoming = normalized
+          .filter(event => new Date(event.end) >= now)
+          .sort((a, b) => new Date(a.start) - new Date(b.start));
+
+        const past = normalized
+          .filter(event => new Date(event.end) < now)
+          .sort((a, b) => new Date(b.start) - new Date(a.start));
+
+        upcomingContainer.innerHTML = upcoming.length
+          ? upcoming.map(renderCalendarEventCard).join('')
+          : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No upcoming Google Calendar events right now.</p>';
+
+        pastContainer.innerHTML = past.length
+          ? past.map(renderCalendarEventCard).join('')
+          : '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No past Google Calendar events were found from August 2024 onward.</p>';
+      } catch (error) {
+        const message = `<p style="text-align: center; color: var(--color-danger); padding: 24px;">Unable to load Google Calendar events right now. ${escapeHtml(error.message || '')}</p>`;
+        upcomingContainer.innerHTML = message;
+        pastContainer.innerHTML = message;
+      }
+    }
+
+    function startETClock() {
+      const clockEl = document.getElementById('et-clock');
+      const dateEl = document.getElementById('et-date');
+      if (!clockEl || !dateEl) return;
+
+      const tz = 'America/New_York';
+      const tick = () => {
+        const now = new Date();
+
+        const timeStr = new Intl.DateTimeFormat('en-US', {
+          timeZone: tz,
+          hour: 'numeric',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        }).format(now);
+
+        const dateStr = new Intl.DateTimeFormat('en-US', {
+          timeZone: tz,
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        }).format(now);
+
+        clockEl.textContent = `${timeStr} ET`;
+        dateEl.textContent = dateStr;
+      };
+
+      tick();
+      setInterval(tick, 1000);
     }
 
     // Init
     document.addEventListener('DOMContentLoaded', function () {
       renderHackathons();
-      updateTimes();
-      setInterval(updateTimes, 1000);
+      renderCalendarEvents();
+      startETClock();
       setInterval(renderHackathons, 60 * 1000);
+      setInterval(renderCalendarEvents, 5 * 60 * 1000);
 
       document.getElementById('year').textContent = new Date().getFullYear();
 
