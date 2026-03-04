@@ -61,6 +61,11 @@
       padding-top: calc(var(--navbar-h) + var(--clock-bar-h));
     }
 
+    body.embed-mode {
+      padding-top: 0;
+      background: transparent;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -415,6 +420,48 @@
 
     .calendar-tips-body p + p {
       margin-top: 10px;
+    }
+
+    .events-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 18px;
+      align-items: center;
+    }
+
+    .events-filter-label {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .events-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid #c7dafd;
+      background: #fff;
+      color: #174ea6;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .events-filter-btn:hover {
+      background: #eef4ff;
+      border-color: #a8c6fb;
+    }
+
+    .events-filter-btn.is-active {
+      background: #1a73e8;
+      border-color: #1a73e8;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(26, 115, 232, .18);
     }
 
     .events-load-more {
@@ -897,6 +944,10 @@
         padding-top: calc(var(--navbar-h-m) + var(--clock-bar-h));
       }
 
+      body.embed-mode {
+        padding-top: 0;
+      }
+
       .nav-toggle {
         display: inline-flex;
       }
@@ -963,6 +1014,8 @@
       gap: 16px;
       margin-top: 20px;
       max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .track-card {
@@ -986,6 +1039,9 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      align-items: center;
+      text-align: center;
+      position: relative;
     }
 
     .track-card summary::-webkit-details-marker {
@@ -995,7 +1051,6 @@
     .track-chip {
       display: inline-flex;
       align-items: center;
-      width: fit-content;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid #d2e3fc;
@@ -1011,6 +1066,7 @@
       font-size: 17px;
       line-height: 1.3;
       color: var(--color-text);
+      max-width: 620px;
     }
 
     .track-prompt {
@@ -1025,6 +1081,7 @@
       font-size: 14px;
       font-weight: 700;
       line-height: 1.5;
+      text-align: center;
     }
 
     .track-body {
@@ -1033,10 +1090,24 @@
       color: var(--color-text-muted);
       font-size: 14px;
       line-height: 1.65;
+      text-align: center;
     }
 
     .track-body p + p {
       margin-top: 10px;
+    }
+
+    .track-arrow {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      color: #174ea6;
+      font-size: 14px;
+      transition: transform var(--transition-base);
+    }
+
+    .track-card[open] .track-arrow {
+      transform: rotate(180deg);
     }
 
     @media (max-width: 960px) {
@@ -1064,6 +1135,16 @@
       .event-clock-date {
         display: none;
       }
+    }
+
+    body.embed-mode .navbar,
+    body.embed-mode .event-clock-bar,
+    body.embed-mode footer {
+      display: none !important;
+    }
+
+    body.embed-mode .container {
+      padding-top: 0;
     }
   </style>
 </head>
@@ -1105,6 +1186,11 @@
 
   <script src="js/hackathons-data.js"></script>
   <script>
+    const HACKATHONS_EMBED_MODE = new URLSearchParams(window.location.search).get('embed') === '1';
+    if (HACKATHONS_EMBED_MODE) {
+      document.body.classList.add('embed-mode');
+    }
+
     (function () {
       const toggleBtn = document.querySelector(".nav-toggle");
       const navLinks = document.getElementById("huNavLinks");
@@ -1162,10 +1248,11 @@
         </p>
 
         <div class="track-grid">
-          <details class="track-card" open>
+          <details class="track-card">
             <summary>
               <span class="track-chip">Technical Competition</span>
               <h3>Are you a CS or engineering major?</h3>
+              <i class="fa-solid fa-chevron-down track-arrow" aria-hidden="true"></i>
             </summary>
             <div class="track-body">
               <p class="track-name">Tech Build Hackathon (Code or Hardware)</p>
@@ -1184,6 +1271,7 @@
             <summary>
               <span class="track-chip">Start-Up Competition</span>
               <h3>Are you a business major or entrepreneur student?</h3>
+              <i class="fa-solid fa-chevron-down track-arrow" aria-hidden="true"></i>
             </summary>
             <div class="track-body">
               <p class="track-name">Code to Cash: Develop the Next Business Startup Idea</p>
@@ -1202,6 +1290,7 @@
             <summary>
               <span class="track-chip">Analytics Competition</span>
               <h3>Are you a student interested in analytics or data science?</h3>
+              <i class="fa-solid fa-chevron-down track-arrow" aria-hidden="true"></i>
             </summary>
             <div class="track-body">
               <p class="track-name">305 Business Analytics / Data Science</p>
@@ -1342,6 +1431,18 @@
           </p>
         </div>
       </details>
+      <div class="events-filter-bar" aria-label="Filter events by source">
+        <span class="events-filter-label">Filter Events By:</span>
+        <button class="events-filter-btn is-active" type="button" data-source-filter="all">
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i> All Events
+        </button>
+        <button class="events-filter-btn" type="button" data-source-filter="hackathon">
+          <i class="fa-solid fa-code" aria-hidden="true"></i> Hackathons
+        </button>
+        <button class="events-filter-btn" type="button" data-source-filter="calendar">
+          <i class="fa-regular fa-calendar" aria-hidden="true"></i> Google Calendar Events
+        </button>
+      </div>
       <div class="hackathons-list" id="upcoming-events"></div>
       <button id="upcoming-events-more" class="events-load-more" type="button" hidden>See More Events</button>
 
@@ -1625,7 +1726,7 @@
     }
 
     /* ---------- Button rules (UPDATED) ---------- */
-    function buildButtons(h, isPast) {
+    function buildButtons(h, isPast, isLive) {
       // Website is "ready" only if it's a real URL and not a coming-soon page
       const websiteReady = isValidUrl(h.url) && !isComingSoonUrl(h.url);
 
@@ -1667,6 +1768,7 @@
       }
 
       const secondary = [
+        { key: 'zoom', label: 'Zoom Meeting', enabled: !!isLive, url: SHARED_ZOOM_URL },
         { key: 'agenda', label: 'Agenda', enabled: !!h.agendaEnable, url: h.agendaUrl },
         { key: 'perks', label: 'Perks & Swag', enabled: !!h.perksEnable, url: h.perksUrl },
         { key: 'photoalbum', label: 'Photo Album', enabled: !!h.photoAlbumEnable, url: h.photoAlbumUrl },
@@ -1700,6 +1802,24 @@
     let calendarEventCache = [];
     let upcomingVisibleCount = EVENTS_PAGE_SIZE;
     let pastVisibleCount = EVENTS_PAGE_SIZE;
+    let currentEventSourceFilter = 'all';
+
+    function postEmbedHeight() {
+      if (!HACKATHONS_EMBED_MODE) return;
+      const height = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      window.parent.postMessage({ type: 'huHackathonsEmbedHeight', height }, '*');
+    }
+
+    function applySourceFilter(items) {
+      if (currentEventSourceFilter === 'all') return items;
+      return items.filter((item) => item.source === currentEventSourceFilter);
+    }
+
+    function updateSourceFilterButtons() {
+      document.querySelectorAll('[data-source-filter]').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.sourceFilter === currentEventSourceFilter);
+      });
+    }
 
     function renderPaginatedEventList(items, containerId, buttonId, emptyMessage) {
       const container = document.getElementById(containerId);
@@ -1751,7 +1871,7 @@
           : ``;
 
         // Updated: apply your new primary-button behavior
-        const { primary, secondary } = buildButtons(h, isPast);
+        const { primary, secondary } = buildButtons(h, isPast, status.isLive);
 
         const html = `
           <div class="hackathon-item">
@@ -1778,10 +1898,10 @@
           </div>
         `;
 
-        if (isPast) {
-          past.push({ sortDate: asLocalDate(h.startDate), html });
+      if (isPast) {
+          past.push({ sortDate: asLocalDate(h.startDate), html, source: 'hackathon' });
         } else {
-          upcoming.push({ sortDate: asLocalDate(h.startDate), html });
+          upcoming.push({ sortDate: asLocalDate(h.startDate), html, source: 'hackathon' });
         }
       });
 
@@ -1791,28 +1911,34 @@
         if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return;
 
         if (end < new Date()) {
-          past.push({ sortDate: start, html: renderCalendarEventCard(event) });
+          past.push({ sortDate: start, html: renderCalendarEventCard(event), source: 'calendar' });
         } else {
-          upcoming.push({ sortDate: start, html: renderCalendarEventCard(event) });
+          upcoming.push({ sortDate: start, html: renderCalendarEventCard(event), source: 'calendar' });
         }
       });
 
       upcoming.sort((a, b) => a.sortDate - b.sortDate);
       past.sort((a, b) => b.sortDate - a.sortDate);
 
+      const filteredUpcoming = applySourceFilter(upcoming);
+      const filteredPast = applySourceFilter(past);
+      updateSourceFilterButtons();
+
       renderPaginatedEventList(
-        upcoming,
+        filteredUpcoming,
         'upcoming-events',
         'upcoming-events-more',
         '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No upcoming events at this time.</p>'
       );
 
       renderPaginatedEventList(
-        past,
+        filteredPast,
         'past-events',
         'past-events-more',
         '<p style="text-align: center; color: var(--color-text-muted); padding: 24px;">No past events to display.</p>'
       );
+
+      postEmbedHeight();
     }
 
     function getCalendarEventStatus(event) {
@@ -1979,6 +2105,21 @@
           pastVisibleCount += EVENTS_PAGE_SIZE;
           renderHackathons();
         });
+      }
+
+      document.querySelectorAll('[data-source-filter]').forEach((button) => {
+        button.addEventListener('click', () => {
+          currentEventSourceFilter = button.dataset.sourceFilter || 'all';
+          upcomingVisibleCount = EVENTS_PAGE_SIZE;
+          pastVisibleCount = EVENTS_PAGE_SIZE;
+          renderHackathons();
+        });
+      });
+
+      if (HACKATHONS_EMBED_MODE) {
+        window.addEventListener('resize', postEmbedHeight);
+        setTimeout(postEmbedHeight, 50);
+        setTimeout(postEmbedHeight, 250);
       }
     });
   </script>

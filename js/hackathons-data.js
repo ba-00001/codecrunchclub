@@ -1,4 +1,4 @@
-﻿window.HACKATHONS_DATA = [
+window.HACKATHONS_DATA = [
   {
         name: '305 Hackathon: Edition Nov 2025 - Session A (Online)',
         theme: 'Theme: Veterans & DefenseTech',
@@ -8,11 +8,11 @@
         hoursPreset: '1w',
         url: 'https://codecrunchglobal.vercel.app/HACK-6.1-305HACKNOV-0.html',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon: Edition Nov 2025 - Session B (In-Person)',
@@ -25,11 +25,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-6.1-305HACKNOV-0.html',
         // 305hacknov2025.vercel.app
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // CodeFest 2025
@@ -44,11 +44,11 @@
         //codefesthack2025.vercel.app
         //codefesthack.vercel.app
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'CodeFest 2025 - Session B (In-person)',
@@ -60,11 +60,11 @@
         hackEndTime: '2025-12-06T21:00',
         url: 'https://codecrunchglobal.vercel.app/HACK-7.0-CODEFEST-2025.html',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // ColorStack Winter Hackathon
@@ -77,11 +77,11 @@
         hackEndTime: '2026-01-12T23:59',
         url: 'https://colorstackhack25.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // Jan 2026
@@ -170,11 +170,11 @@
         hackEndTime: '2026-03-20T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon Edition Mar 2026 - Session B (In-person)',
@@ -186,11 +186,11 @@
         hackEndTime: '2026-03-20T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // April 2026
@@ -204,11 +204,11 @@
         hackEndTime: '2026-04-11T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon Edition Apr 2026 - Session B (In-person)',
@@ -220,11 +220,11 @@
         hackEndTime: '2026-04-11T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // May 2026
@@ -238,11 +238,11 @@
         hackEndTime: '2026-05-09T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // June 2026
@@ -256,11 +256,11 @@
         hackEndTime: '2026-06-13T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // July 2026
@@ -274,11 +274,11 @@
         hackEndTime: '2026-07-11T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // August 2026
@@ -292,11 +292,11 @@
         hackEndTime: '2026-08-15T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // Sep 2026
@@ -310,11 +310,11 @@
         hackEndTime: '2026-09-12T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon Edition Sep 2026 - Session B (In-person)',
@@ -326,11 +326,11 @@
         hackEndTime: '2026-09-12T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // EmpowHER 2026
@@ -344,11 +344,11 @@
         hackEndTime: '2026-10-03T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'EmpowHER Hackathon 2026 - Session B (In-person)',
@@ -360,11 +360,11 @@
         hackEndTime: '2026-10-03T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // Nov 2026
@@ -378,11 +378,11 @@
         hackEndTime: '2026-11-07T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon Nov 2026 - Session B (In-person)',
@@ -394,11 +394,11 @@
         hackEndTime: '2026-11-07T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
       // CodeFest 2026
@@ -412,11 +412,11 @@
         hackEndTime: '2026-11-21T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'CodeFest Hackathon 2026 - Session B (In-person)',
@@ -428,11 +428,11 @@
         hackEndTime: '2026-11-21T21:00',
         url: 'https://codecrunchglobal.vercel.app/hackuniversity-comingsoon.html',
         registrationViaOneStop: true,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
 
 
@@ -451,11 +451,11 @@
         hoursPreset: '3d',
         url: 'https://codecrunchglobal.vercel.app/HACK-5-305-HACK-FALL2025.html',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'EmpowHER Hackathon 2025',
@@ -466,11 +466,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-6.1-305HACKNOV-0.html',
         //old direct https://empowherhack2025.vercel.app/
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'EmpowHER HackDAY 2025',
@@ -481,11 +481,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-6.1-305HACKNOV-0.html',
         // url: 'https://empowherhackdayfall25.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'SummerCodeX 2025',
@@ -496,11 +496,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-4-SummerCodeX25.HTML',
         // url: 'https://summercodexhack2025.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'CodeStorm 2025',
@@ -511,11 +511,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-CODESTORM.HTML',
         // url: 'https://codestormhack2025.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: '305 Hackathon: Spring 2025 edition',
@@ -526,11 +526,11 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-2-305-HACK-SPRING2025.html',
         // url: 'https://305hackspring2025.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       },
       {
         name: 'HackFiesta Miami 2025',
@@ -541,10 +541,10 @@
         url: 'https://codecrunchglobal.vercel.app/HACK-1-HACKFIESTA-SPRING2025.HTML',
         // url: 'https://hackfiestamiami2025.vercel.app/',
         registrationViaOneStop: false,
-        agendaEnable: false, agendaUrl: "https://",
-        perksEnable: false, perksUrl: "https://",
-        photoAlbumEnable: false, photoAlbumUrl: "https://",
-        mentorScheduleEnable: false, mentorScheduleUrl: "https://",
-        prizesEnable: false, prizesUrl: "https://"
+        agendaEnable: false, agendaUrl: "",
+        perksEnable: false, perksUrl: "",
+        photoAlbumEnable: false, photoAlbumUrl: "",
+        mentorScheduleEnable: false, mentorScheduleUrl: "",
+        prizesEnable: false, prizesUrl: ""
       }
     ];
