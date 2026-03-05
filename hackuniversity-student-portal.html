@@ -310,7 +310,7 @@
       const params = new URLSearchParams(window.location.search);
       const email = (params.get("email") || "").trim().toLowerCase();
       const providedName = (params.get("name") || "").trim();
-      const API_URL = "https://script.google.com/macros/s/AKfycbwDJn-5XBNXXYpR4cwHPFzIM61CdqnJFYJWqCCvntdXiTHiAwfRMyPj0AGm6y5TyegL/exec";
+      const API_URL = "https://script.google.com/macros/s/AKfycbyU0GP5fnlJUsAnU6AV4rsixexUDNKoCuY5cDUiDc1vapjw4Y7ORRaXBHq4DcAy-pwp/exec";
       const EMPTY_TEXT = "Not information available / Not updated";
       const OFFICIAL_ORGS = [
         "Hack University Worldwide",
@@ -449,7 +449,7 @@
                 <div class="list-item">
                   <div class="title">${escapeHtml(safeText(e?.eventKey))}</div>
                   <div class="meta">${escapeHtml(safeText(e?.statusText))}</div>
-                  <span class="badge ${e?.isActive ? "ok" : "no"}">${e?.isActive ? "Link Active" : "Link Locked"}</span>
+                  <span class="badge ${e?.errorCode ? "no" : (e?.isActive ? "ok" : "no")}">${e?.errorCode ? "Config Error" : (e?.isParticipant ? (e?.isActive ? "Registered - Live" : "Registered - Locked") : "Not Registered")}</span>
                   ${linkMarkup}
                 </div>
               `;

@@ -101,8 +101,48 @@ function formatDate(value) {
 
 function parseDate(value) {
   if (!value) return null;
-  const d = new Date(value);
-  return isNaN(d.getTime()) ? null : d;
+  if (Object.prototype.toString.call(value) === "[object Date]") {
+    return isNaN(value.getTime()) ? null : value;
+  }
+
+  const raw = String(value).trim();
+  if (!raw) return null;
+
+  // Try native parsing first (ISO and other standard formats).
+  var d = new Date(raw);
+  if (!isNaN(d.getTime())) return d;
+
+  // Supported custom format examples:
+  // 3.5.2026 @ 6 am est
+  // 3/5/2026 @ 6:30 pm edt
+  // 3-5-2026 6 am
+  var m = raw.match(
+    /^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})(?:\s*@?\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*([a-z]{2,4})?)?$/i
+  );
+  if (!m) return null;
+
+  var month = parseInt(m[1], 10);
+  var day = parseInt(m[2], 10);
+  var year = parseInt(m[3], 10);
+  var hour = m[4] ? parseInt(m[4], 10) : 0;
+  var minute = m[5] ? parseInt(m[5], 10) : 0;
+  var meridiem = String(m[6] || "").toLowerCase();
+  var tz = String(m[7] || "").toLowerCase();
+
+  if (meridiem) {
+    if (hour === 12) hour = 0;
+    if (meridiem === "pm") hour += 12;
+  }
+
+  // If timezone is specified, convert from that timezone to UTC.
+  // EST = UTC-5, EDT = UTC-4.
+  if (tz === "est" || tz === "edt") {
+    var offset = tz === "est" ? -5 : -4;
+    return new Date(Date.UTC(year, month - 1, day, hour - offset, minute, 0, 0));
+  }
+
+  // No explicit timezone: interpret in script local timezone.
+  return new Date(year, month - 1, day, hour, minute, 0, 0);
 }
 
 function canonicalClubName(name) {
@@ -215,6 +255,21 @@ function extractEventAccess(row, headers) {
   const now = new Date();
   const events = [];
 
+  if (!participantCols.length) {
+    events.push({
+      eventKey: "Unknown Event",
+      participantRaw: "",
+      isParticipant: false,
+      startAt: "",
+      endAt: "",
+      isActive: false,
+      statusText: "ERROR 1: Missing 'Participant of event' column",
+      errorCode: "ERROR_1",
+      links: []
+    });
+    return events;
+  }
+
   participantCols.forEach(function (col) {
     var suffix = "";
     var m = col.header.match(/#\s*([A-Za-z0-9.\-_]+)/);
@@ -243,13 +298,26 @@ function extractEventAccess(row, headers) {
     var end = endIdx >= 0 ? parseDate(row[endIdx]) : null;
     var isActive = !!(isParticipant && start && end && now >= start && now <= end);
 
-    var statusText = "No schedule configured";
-    if (!isParticipant) {
-      statusText = "Not registered for this event";
-    } else if (start && end) {
-      if (now < start) statusText = "Link unlocks when event starts";
+    var statusText = "Not registered for this event";
+    var errorCode = "";
+    if (linksIdx === -1) {
+      statusText = "ERROR 2: Missing event links column";
+      errorCode = "ERROR_2";
+    } else if (!start) {
+      statusText = "ERROR 3: Missing start date/time";
+      errorCode = "ERROR_3";
+    } else if (!end) {
+      statusText = "ERROR 4: Missing end date/time";
+      errorCode = "ERROR_4";
+    } else if (isParticipant) {
+      if (now < start) statusText = "Registered - event link unlocks when the event starts";
       else if (now > end) statusText = "Event ended — links closed";
       else statusText = "Event live — links active";
+    }
+
+    if (isParticipant && start && end && !errorCode) {
+      if (now > end) statusText = "Registered - event ended, links closed";
+      else if (now >= start && now <= end) statusText = "Registered - event live, link enabled";
     }
 
     events.push({
@@ -260,6 +328,7 @@ function extractEventAccess(row, headers) {
       endAt: end ? end.toISOString() : "",
       isActive: isActive,
       statusText: statusText,
+      errorCode: errorCode,
       links: links
     });
   });
