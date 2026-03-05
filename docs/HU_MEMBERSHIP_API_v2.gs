@@ -194,7 +194,10 @@ function extractClubs(row, headers) {
 function isHackathonHeader(header) {
   const h = String(header || "").trim();
   if (!h) return false;
-  return /(hackathon|h\.\d|b\.\d|register for)/i.test(h);
+  if (/(participant of event|event\s*link|apis|subscriptions|start date|end date|would you like to volunteer|organization rules|mlh partnered events)/i.test(h)) {
+    return false;
+  }
+  return /(hackathon|do you want to register|register for)/i.test(h);
 }
 
 function cleanEventName(header) {
@@ -218,6 +221,27 @@ function extractHackathons(row, headers) {
     });
   }
   return out;
+}
+
+function isMissingInfo(value) {
+  var v = String(value || "").trim().toLowerCase();
+  return !v || v === "-" || v === "no information" || v === "not updated";
+}
+
+function extractVolunteerStatus(row, headers) {
+  var idx = findHeaderIndex(headers, function (h) {
+    return /(^c2\.1|would you like to volunteer)/i.test(h);
+  });
+  if (idx < 0) {
+    return { status: "Not information available / Not updated", answer: "" };
+  }
+
+  var raw = String(row[idx] || "").trim();
+  if (isMissingInfo(raw)) {
+    return { status: "Not information available / Not updated", answer: "" };
+  }
+
+  return { status: "Answered", answer: raw };
 }
 
 function parseEventLinks(raw) {
@@ -358,6 +382,7 @@ function createMembershipObject(row, headers, idx) {
   var clubs = extractClubs(row, headers);
   var hackathons = extractHackathons(row, headers);
   var eventAccess = extractEventAccess(row, headers);
+  var volunteer = extractVolunteerStatus(row, headers);
 
   return {
     email: email,
@@ -372,7 +397,9 @@ function createMembershipObject(row, headers, idx) {
       signatureClubText: "Hack University Initiative",
       clubs: clubs,
       hackathons: hackathons,
-      eventAccess: eventAccess
+      eventAccess: eventAccess,
+      volunteerStatus: volunteer.status,
+      volunteerAnswer: volunteer.answer
     }
   };
 }
