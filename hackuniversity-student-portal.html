@@ -71,6 +71,102 @@
       border-radius: 16px;
       box-shadow: var(--shadow-md);
     }
+    .status {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .status.info { color: #174ea6; }
+    .status.error { color: #b3261e; }
+    .status.success { color: #137333; }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .profile-item {
+      background: #f8fbff;
+      border: 1px solid #d2e3fc;
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .profile-item .k {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #5f6368;
+      font-weight: 700;
+    }
+    .profile-item .v {
+      margin-top: 4px;
+      font-size: 14px;
+      color: #202124;
+      font-weight: 700;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .chip-list {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #d2e3fc;
+      background: #eef4ff;
+      color: #174ea6;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .link-row {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .mini-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      border: 1px solid #c7dafd;
+      background: #eef4ff;
+      color: #174ea6;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .club-detail-list {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .club-detail-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    .club-detail-item .n { font-size: 13px; font-weight: 800; color: #202124; }
+    .club-detail-item .d { margin-top: 4px; font-size: 12px; color: #5f6368; line-height: 1.45; }
+    .meta-keys {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #5f6368;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    @media (max-width: 640px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .club-detail-list { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -86,6 +182,7 @@
       <p class="text-xs tracking-wide uppercase text-blue-700 font-bold">Portal Access</p>
       <h1 class="text-2xl sm:text-3xl font-extrabold mt-2">Welcome to Your Student Portal</h1>
       <p id="portal-message" class="text-sm text-gray-600 mt-3">Loading your account details...</p>
+      <p id="portal-status" class="status info" aria-live="polite"></p>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
         <a class="btn btn-primary" href="https://hackuniversity-onestop.vercel.app/" target="_blank" rel="noopener">
@@ -98,20 +195,167 @@
           <i class="fab fa-discord"></i> Community Access
         </a>
       </div>
+
+      <div class="mt-8">
+        <h2 class="text-xl font-extrabold">Membership Profile</h2>
+        <p class="text-sm text-gray-600 mt-1">Information loaded from your OneStop membership record.</p>
+        <div id="profile-grid" class="profile-grid"></div>
+        <div id="club-chips" class="chip-list"></div>
+        <div id="profile-links" class="link-row"></div>
+        <div id="club-detail-list" class="club-detail-list"></div>
+        <div id="profile-meta-keys" class="meta-keys"></div>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-4">
+        <div class="card p-4">
+          <h3 class="font-extrabold text-base">Hackathon Registrations</h3>
+          <p class="text-sm text-gray-600 mt-2">Coming soon: this section will show your hackathon registration history and status.</p>
+        </div>
+        <div class="card p-4">
+          <h3 class="font-extrabold text-base">Event Registrations</h3>
+          <p class="text-sm text-gray-600 mt-2">Coming soon: this section will show your workshop, meeting, and event sign-ups.</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <script>
     (function () {
       const messageEl = document.getElementById("portal-message");
+      const statusEl = document.getElementById("portal-status");
+      const profileGrid = document.getElementById("profile-grid");
+      const clubChips = document.getElementById("club-chips");
+      const profileLinks = document.getElementById("profile-links");
+      const clubDetailList = document.getElementById("club-detail-list");
+      const profileMetaKeys = document.getElementById("profile-meta-keys");
       const params = new URLSearchParams(window.location.search);
-      const email = (params.get("email") || "").trim();
+      const email = (params.get("email") || "").trim().toLowerCase();
+      const providedName = (params.get("name") || "").trim();
+      const API_URL = "https://script.google.com/macros/s/AKfycbzAhhReD7EpGsT_biQmcuqsMu1t1wCs4MQTGuGpGKax1EisZvT_8qtyBKQMPStcpyHXqA/exec";
+
+      const setStatus = (type, text) => {
+        if (!statusEl) return;
+        statusEl.className = `status ${type}`;
+        statusEl.textContent = text;
+      };
+
+      const escapeHtml = (value) =>
+        String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const renderProfile = (record) => {
+        if (!profileGrid || !clubChips || !profileLinks || !clubDetailList || !profileMetaKeys) return;
+        const name = record.participantName || providedName || "Member";
+        const parseDate = (value) => {
+          const d = new Date(value || "");
+          return Number.isNaN(d.getTime()) ? null : d;
+        };
+        const memberSince = parseDate(record.memberDateSince);
+        const issuedAt = parseDate(record.submitDate || record.timestamp);
+        const info = [
+          { key: "Name", value: name },
+          { key: "Email", value: email || "Not provided" },
+          { key: "Membership ID", value: record.membershipID || "Not available" },
+          { key: "Member Since", value: memberSince ? memberSince.toLocaleDateString() : (record.memberDateSince || "Not available") },
+          { key: "Club Scope", value: record.clubText || "Hack University Initiative" },
+          { key: "Last Update", value: issuedAt ? issuedAt.toLocaleString() : (record.submitDate || "Not available") },
+          { key: "Signature Org", value: record.signatureClubText || "Hack University Initiative" },
+          { key: "Status", value: record.membershipStatus || "Active" }
+        ];
+
+        profileGrid.innerHTML = info.map((item) => `
+          <div class="profile-item">
+            <div class="k">${escapeHtml(item.key)}</div>
+            <div class="v">${escapeHtml(item.value)}</div>
+          </div>
+        `).join("");
+
+        const clubs = Array.isArray(record.clubs) ? record.clubs : [];
+        clubChips.innerHTML = clubs.length
+          ? clubs.map((club) => `<span class="chip">${escapeHtml(club?.name || "Club")}</span>`).join("")
+          : `<span class="chip">Hack University Worldwide</span>`;
+
+        const links = [];
+        if (record.discordJoinLink) {
+          links.push(`<a class="mini-btn" href="${escapeHtml(record.discordJoinLink)}" target="_blank" rel="noopener"><i class="fab fa-discord"></i> Discord</a>`);
+        }
+        if (record.groupmeLink) {
+          links.push(`<a class="mini-btn" href="${escapeHtml(record.groupmeLink)}" target="_blank" rel="noopener"><i class="fa-solid fa-users"></i> GroupMe</a>`);
+        }
+        if (record.portalLink) {
+          links.push(`<a class="mini-btn" href="${escapeHtml(record.portalLink)}" target="_blank" rel="noopener"><i class="fa-solid fa-right-to-bracket"></i> Portal Link</a>`);
+        }
+        profileLinks.innerHTML = links.join("");
+
+        clubDetailList.innerHTML = clubs
+          .map((club) => `
+            <div class="club-detail-item">
+              <div class="n">${escapeHtml(club?.name || "Club")}</div>
+              ${club?.description ? `<div class="d">${escapeHtml(club.description)}</div>` : ""}
+            </div>
+          `)
+          .join("");
+
+        profileMetaKeys.textContent = `Available data keys: ${Object.keys(record).sort().join(", ")}`;
+      };
+
+      const renderEmpty = () => {
+        if (!profileGrid || !clubChips || !profileLinks || !clubDetailList || !profileMetaKeys) return;
+        profileGrid.innerHTML = `
+          <div class="profile-item">
+            <div class="k">Profile</div>
+            <div class="v">No profile data loaded yet.</div>
+          </div>
+        `;
+        clubChips.innerHTML = "";
+        profileLinks.innerHTML = "";
+        clubDetailList.innerHTML = "";
+        profileMetaKeys.textContent = "";
+      };
+
       if (!messageEl) return;
-      if (email) {
-        messageEl.textContent = `Signed in as ${email}. Use the portal actions below to manage your student access, events, and certificates.`;
-      } else {
-        messageEl.textContent = "Use the portal actions below to continue with student access and membership tools.";
+      if (!email) {
+        messageEl.textContent = "Sign in through the OneStop page to load your membership profile.";
+        setStatus("error", "No login email detected. Please go back and login first.");
+        renderEmpty();
+        return;
       }
+
+      messageEl.textContent = `Signed in as ${email}.`;
+      setStatus("info", "Loading your membership profile...");
+
+      fetch(`${API_URL}?email=${encodeURIComponent(email)}&referer=${encodeURIComponent(window.location.href)}`, {
+        headers: { Accept: "application/json" }
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then((payload) => {
+          if (payload && payload.error) throw new Error(payload.error);
+          const rows = Array.isArray(payload?.certificates) ? payload.certificates : [];
+          if (!rows.length) {
+            setStatus("error", "No membership profile found for this email yet.");
+            renderEmpty();
+            return;
+          }
+
+          const selected = rows
+            .map((entry) => entry.certificateData || entry)
+            .filter(Boolean)
+            .sort((a, b) => new Date(b.memberDateSince || 0) - new Date(a.memberDateSince || 0))[0] || {};
+
+          renderProfile(selected);
+          setStatus("success", "Membership profile loaded.");
+        })
+        .catch(() => {
+          setStatus("error", "Could not load membership profile right now.");
+          renderEmpty();
+        });
     })();
   </script>
 </body>
