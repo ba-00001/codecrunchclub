@@ -422,6 +422,53 @@
       padding-left: 18px;
     }
 
+    .student-track-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .student-track {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .student-track summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 14px;
+      position: relative;
+      color: var(--color-text);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .student-track summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .student-track .student-track-arrow {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      color: #174ea6;
+      transition: transform .2s ease;
+    }
+
+    .student-track[open] .student-track-arrow {
+      transform: rotate(180deg);
+    }
+
+    .student-track-body {
+      border-top: 1px solid var(--color-border);
+      padding: 12px 14px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
     .major-icon {
       color: #1a73e8;
       margin-bottom: 6px;
@@ -787,6 +834,41 @@
         <p class="subtitle mt-2">
           Complete one OneStop form to unlock membership, hackathons, E-Board applications, programs, hacker guides, and community access in one place.
         </p>
+        <div class="student-track-list">
+          <details class="student-track">
+            <summary>
+              Technical Competition<br>Are you a CS or engineering major?
+              <i class="fa-solid fa-chevron-down student-track-arrow" aria-hidden="true"></i>
+            </summary>
+            <div class="student-track-body">
+              <p><strong>305 Tech Build Hackathon (Code or Hardware)</strong></p>
+              <p>This competition is built for students who want to design, code, prototype, and ship technical solutions using software, hardware, or both together.</p>
+              <p><strong>Why this matters for your career:</strong> You build a real project portfolio, strengthen technical interview readiness, and gain hands-on experience that helps with internships and full-time engineering roles.</p>
+            </div>
+          </details>
+          <details class="student-track">
+            <summary>
+              Start-Up Competition<br>Are you a business major or entrepreneur student?
+              <i class="fa-solid fa-chevron-down student-track-arrow" aria-hidden="true"></i>
+            </summary>
+            <div class="student-track-body">
+              <p><strong>305 Code to Cash: Develop the Next Business Startup Idea</strong></p>
+              <p>This competition focuses on turning technical ideas into startup-ready concepts, market opportunities, and business pitches.</p>
+              <p><strong>Why this matters for your career:</strong> You practice product thinking, communication, and go-to-market strategy, which are key for founder paths, consulting roles, product management, and business leadership tracks.</p>
+            </div>
+          </details>
+          <details class="student-track">
+            <summary>
+              Analytics Competition<br>Are you a student interested in data analytics or data science?
+              <i class="fa-solid fa-chevron-down student-track-arrow" aria-hidden="true"></i>
+            </summary>
+            <div class="student-track-body">
+              <p><strong>305 Business Data Analytics / Data Science</strong></p>
+              <p>This competition is centered on data storytelling, analytics, dashboards, spreadsheet modeling, and decision-making under time pressure.</p>
+              <p><strong>Why this matters for your career:</strong> You develop evidence-based problem solving, data communication, and dashboard skills used in analytics, finance, operations, and data science careers.</p>
+            </div>
+          </details>
+        </div>
 
         <div class="divider"></div>
 
@@ -884,60 +966,10 @@
           <p class="section-lead mt-4 text-center mx-auto" style="max-width:900px;">
             A hybrid global 3-in-1 competition that brings together technical innovation, entrepreneurship, and data analytics, plus live Google Calendar events from the Hack University ecosystem.
           </p>
-
-          <div class="hu-inline-track-grid">
-            <details class="hu-inline-track">
-              <summary>
-                <span class="hu-inline-chip">Technical Competition</span>
-                <h3>Are you a CS or engineering major?</h3>
-                <i class="fa-solid fa-chevron-down hu-inline-arrow" aria-hidden="true"></i>
-              </summary>
-              <div class="hu-inline-track-body">
-                <p><strong>Tech Build Hackathon (Code or Hardware)</strong></p>
-                <p>This competition is built for students who want to design, code, prototype, and ship technical solutions using software, hardware, or both together.</p>
-              </div>
-            </details>
-
-            <details class="hu-inline-track">
-              <summary>
-                <span class="hu-inline-chip">Start-Up Competition</span>
-                <h3>Are you a business major or entrepreneur student?</h3>
-                <i class="fa-solid fa-chevron-down hu-inline-arrow" aria-hidden="true"></i>
-              </summary>
-              <div class="hu-inline-track-body">
-                <p><strong>Code to Cash: Develop the Next Business Startup Idea</strong></p>
-                <p>This competition focuses on turning technical ideas into startup-ready concepts, market opportunities, and business pitches.</p>
-              </div>
-            </details>
-
-            <details class="hu-inline-track">
-              <summary>
-                <span class="hu-inline-chip">Analytics Competition</span>
-                <h3>Are you a student interested in analytics or data science?</h3>
-                <i class="fa-solid fa-chevron-down hu-inline-arrow" aria-hidden="true"></i>
-              </summary>
-              <div class="hu-inline-track-body">
-                <p><strong>305 Business Analytics / Data Science</strong></p>
-                <p>This competition is centered on data storytelling, analytics, dashboards, spreadsheet modeling, and decision-making under time pressure.</p>
-              </div>
-            </details>
-          </div>
         </div>
       </header>
 
       <div class="hu-inline-wrap">
-        <section class="hu-inline-quick">
-          <div class="quick-title">Quick Links</div>
-          <div id="hu-inline-quick-links" class="hu-inline-quick-list">
-            <a href="https://codecrunchglobal.vercel.app/hacks-toolkit.html" target="_blank" rel="noopener"><i class="fas fa-book"></i> Hacker Guide</a>
-            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener"><i class="fas fa-user-plus"></i> Hackathon Registration</a>
-            <a href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform-1.html" target="_blank" rel="noopener"><i class="fab fa-discord"></i> Discord Community</a>
-            <a href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener"><i class="fas fa-users"></i> GroupMe</a>
-            <a href="https://hackuniversityplatforms.vercel.app/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram Group</a>
-            <a href="https://codecrunchglobal.vercel.app/hackuniversity.html#calendar" target="_blank" rel="noopener"><i class="far fa-calendar-alt"></i> Google Calendar</a>
-          </div>
-        </section>
-
         <div class="hu-inline-panel">
           <h3>UPCOMING EVENTS</h3>
           <p class="subtitle mt-2">Hackathons and Google Calendar events together, sorted by date.</p>
