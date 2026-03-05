@@ -893,24 +893,12 @@
         <div class="divider"></div>
 
         <div class="student-login-box">
-          <p><strong>OneStop Form Login</strong></p>
-          <p><strong>Already registered?</strong> Enter your Gmail below to continue.</p>
-          <form id="student-login-form" class="simple-select-group">
-            <label class="simple-select-label" for="student-login-email">Registered Gmail / Google Account</label>
-            <input
-              id="student-login-email"
-              class="simple-select"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              required
-              placeholder="example@fiu.edu or example@gmail.com"
-            />
-            <button type="submit" class="btn btn-primary-soft w-full">
-              Continue with this email
-            </button>
-          </form>
-          <p class="student-login-register-note">Not register? or Update your registration <a href="https://hackuniversity-onestopform.vercel.app/" target="_blank" rel="noopener noreferrer">here.</a></p>
+          <p><strong>OneStop Login + Registration</strong></p>
+          <p>Use one page for login, new registration, and updates.</p>
+          <a class="btn btn-primary-soft w-full" href="https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html" target="_blank" rel="noopener noreferrer">
+            Open OneStop Login & Registration
+          </a>
+          <p class="student-login-register-note">E-Board applications are open year-round and use the same OneStop form.</p>
         </div>
 
         <div class="simple-select-group">
@@ -1886,7 +1874,7 @@
 
     { key: "resource.hackathons", href: "https://codecrunchglobal.vercel.app/hackathons.html", newTab: true },
     { key: "resource.membershipHackuniversity", href: "https://hackuniversity-onestopform.vercel.app/", newTab: true },
-    { key: "resource.studentLogin", href: "https://codecrunchglobal.vercel.app/hackuniversity-student-portal.html", newTab: true },
+    { key: "resource.studentLogin", href: "https://codecrunchglobal.vercel.app/hackuniversity-onestopform.html", newTab: true },
         { key: "resource.companyPortal", href: "https://codecrunchglobal.vercel.app/hackuniversitydonate.html", newTab: true },
             { key: "resource.volunteerPortal", href: "https://codecrunchglobal.vercel.app/hackathonvolunteer-wiki.html", newTab: true },
   { key: "resource.hackuniversityplatforms", href: "https://hackuniversityplatforms.vercel.app/", newTab: true },
@@ -1957,24 +1945,6 @@
 
         select.value = "";
       });
-    });
-  })();
-
-  (function bindStudentLoginForm() {
-    const form = document.getElementById("student-login-form");
-    const emailInput = document.getElementById("student-login-email");
-    if (!form || !emailInput) return;
-
-    const loginUrl = HU_LINKS.find((item) => item.key === "resource.studentLogin")?.href || "https://codecrunchglobal.vercel.app/hackuniversity-student-portal.html";
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const email = String(emailInput.value || "").trim();
-      if (!email) return;
-
-      const url = new URL(loginUrl);
-      url.searchParams.set("email", email);
-      window.open(url.toString(), "_blank", "noopener,noreferrer");
     });
   })();
 
