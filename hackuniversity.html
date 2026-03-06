@@ -1289,7 +1289,7 @@
             const source = String(description || '');
             if (!source.trim()) return '';
 
-            const labeledMatch = source.match(/Want to Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            const labeledMatch = source.match(/Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
             if (labeledMatch && isValidUrl(labeledMatch[1])) {
               return labeledMatch[1];
             }
@@ -1310,7 +1310,7 @@
             const source = String(description || '');
             if (!source.trim()) return '';
 
-            const tapInMatch = source.match(/Want to Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            const tapInMatch = source.match(/Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
             if (tapInMatch && isValidUrl(tapInMatch[1])) {
               return tapInMatch[1];
             }
@@ -1556,7 +1556,7 @@
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('Event Details', event.htmlLink, true, false)}
                   ${makeAction('Subscribe to Google Calendar', GOOGLE_CALENDAR_SUBSCRIBE_URL, true, true)}
-                  ${makeAction('View Hack University [Google Calendar]', GOOGLE_CALENDAR_VIEW_URL, true, true)}
+                  ${makeAction('View all Meetups & Workshops [Google Calendar]', GOOGLE_CALENDAR_VIEW_URL, true, true)}
                 </div>
               </div>
             `;
