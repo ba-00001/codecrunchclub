@@ -18,6 +18,7 @@ function isTimedEvent(event) {
 function toEventSummary(event) {
   return {
     summary: event.summary || "Untitled event",
+    description: event.description || "",
     start: toIsoString(event.start),
     end: toIsoString(event.end),
     location: event.location || "",

@@ -1004,6 +1004,8 @@
               <p>#2 - Before joining Zoom, open the Google Calendar to verify that there is an active or upcoming in-person, hybrid, or virtual session.</p>
               <a id="zoom-meeting-link" class="btn btn-primary-soft is-disabled" href="#" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">Join Shared Zoom Meeting</a>
               <p id="calendar-status-note" class="calendar-status-note">Zoom unlocks 15 minutes before eligible virtual or hybrid sessions.</p>
+              <a id="attendance-form-link" class="btn btn-primary-soft is-disabled" href="#" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">Submit Attendance Form</a>
+              <p id="attendance-status-note" class="calendar-status-note">Attendance opens 15 minutes before each event and closes 1 hour after it ends.</p>
             </div>
           </details>
 
@@ -1192,6 +1194,55 @@
             };
           }
 
+          function getRsvpTicketUrl(description) {
+            const source = String(description || '');
+            if (!source.trim()) return '';
+
+            const labeledMatch = source.match(/RSVP\/Event Ticket here:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            if (labeledMatch && isValidUrl(labeledMatch[1])) {
+              return labeledMatch[1];
+            }
+
+            const gdgMatch = source.match(/https?:\/\/gdg\.community\.dev\/[^\s<>"')\]}]*/i);
+            if (gdgMatch && isValidUrl(gdgMatch[0])) {
+              return gdgMatch[0];
+            }
+
+            const anyUrlMatch = source.match(/https?:\/\/[^\s<>"')\]}]+/i);
+            if (anyUrlMatch && isValidUrl(anyUrlMatch[0])) {
+              return anyUrlMatch[0];
+            }
+
+            return '';
+          }
+
+          function getHackathonRsvpTicketUrl(hackathon, websiteReady) {
+            const explicitUrl = String(hackathon?.RSVPEventTicketUrl || hackathon?.rsvpTicketUrl || '').trim();
+            const isExplicitEnabled = hackathon?.RSVPEventTicketEnable === true || hackathon?.rsvpTicketEnable === true;
+            const hasExplicitConfig = Object.prototype.hasOwnProperty.call(hackathon || {}, 'RSVPEventTicketEnable')
+              || Object.prototype.hasOwnProperty.call(hackathon || {}, 'RSVPEventTicketUrl')
+              || Object.prototype.hasOwnProperty.call(hackathon || {}, 'rsvpTicketEnable')
+              || Object.prototype.hasOwnProperty.call(hackathon || {}, 'rsvpTicketUrl');
+            if (hasExplicitConfig) {
+              return isExplicitEnabled && isValidUrl(explicitUrl) ? explicitUrl : '';
+            }
+
+            const sourceText = [
+              hackathon?.rsvpTicketText,
+              hackathon?.RSVPEventTicketText,
+              hackathon?.description,
+              hackathon?.notes,
+              hackathon?.theme
+            ].filter(Boolean).join('\n');
+            const parsedUrl = getRsvpTicketUrl(sourceText);
+            if (parsedUrl) return parsedUrl;
+
+            if (!hackathon) return '';
+            if (!websiteReady && hackathon.registrationViaOneStop === true) return ONE_STOP_FORM_URL;
+            if (websiteReady && isValidUrl(hackathon.url)) return hackathon.url;
+            return '';
+          }
+
           function getHackathonStatus(hackathon) {
             const now = nowMiami();
             const start = new Date(new Date(hackathon.startDate + 'T00:00:00').toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -1245,6 +1296,7 @@
           function buildHackathonButtons(hackathon, isPast, isLive, websiteReady) {
             const primary = [];
             const zoomSupport = getHackathonZoomSupport(hackathon);
+            const ticketUrl = getHackathonRsvpTicketUrl(hackathon, websiteReady);
 
             if (!isPast && websiteReady) {
               primary.push({
@@ -1266,6 +1318,12 @@
             }
 
             const secondary = [
+              {
+                label: 'RSVP/Event Ticket',
+                enabled: !!ticketUrl,
+                url: ticketUrl,
+                disabledMessage: 'RSVP/Event Ticket link is not available for this hackathon yet.'
+              },
               {
                 label: 'Zoom Meeting',
                 enabled: !!zoomSupport?.enabled,
@@ -1337,6 +1395,7 @@
 
           function renderCalendarCard(event) {
             const zoomSupport = getCalendarZoomSupport(event);
+            const ticketUrl = getRsvpTicketUrl(event.description);
             return `
               <div class="hu-inline-card is-calendar">
                 <div class="hu-inline-card-top">
@@ -1351,6 +1410,7 @@
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
                 <div class="hu-inline-actions">
+                  ${makeAction('RSVP/Event Ticket', ticketUrl, !!ticketUrl, false, { disabledMessage: 'RSVP/Event Ticket link is not available in this event description yet.' })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('See This Event on Google Calendar', event.htmlLink, true, false)}
                   ${makeAction('Subscribe to Google Calendar', GOOGLE_CALENDAR_SUBSCRIBE_URL, true, true)}
@@ -2029,14 +2089,19 @@
     document.addEventListener("DOMContentLoaded", startETClock);
   })();
 
-  // Live Zoom availability based on the server-side calendar check.
+  // Live Zoom and attendance availability based on the server-side calendar check.
   (function () {
     const zoomLink = document.getElementById("zoom-meeting-link");
     const statusNote = document.getElementById("calendar-status-note");
-    if (!zoomLink || !statusNote) return;
+    const attendanceLink = document.getElementById("attendance-form-link");
+    const attendanceStatusNote = document.getElementById("attendance-status-note");
+    if (!zoomLink || !statusNote || !attendanceLink || !attendanceStatusNote) return;
     const SHARED_ZOOM_URL = "https://zoomlink-hackathons.vercel.app/";
+    const ATTENDANCE_FORM_URL = "https://hackuniversity-attendance.vercel.app/";
     const ZOOM_UNLOCK_LEAD_MS = 15 * 60 * 1000;
     const HYBRID_ZOOM_GRACE_MS = 30 * 60 * 1000;
+    const ATTENDANCE_UNLOCK_LEAD_MS = 15 * 60 * 1000;
+    const ATTENDANCE_GRACE_MS = 60 * 60 * 1000;
     const CALENDAR_STATUS_URL = "/api/calendar-status?debug=1&since=2024-08-01T00:00:00-04:00";
 
     const formatEt = (isoString) => {
@@ -2079,20 +2144,41 @@
       };
     };
 
-    const setEnabled = (enabled) => {
-      zoomLink.classList.toggle("is-disabled", !enabled);
-      zoomLink.setAttribute("aria-disabled", String(!enabled));
+    const setLinkEnabled = (link, enabled, liveUrl) => {
+      link.classList.toggle("is-disabled", !enabled);
+      link.setAttribute("aria-disabled", String(!enabled));
       if (enabled) {
-        zoomLink.href = SHARED_ZOOM_URL;
-        zoomLink.removeAttribute("tabindex");
+        link.href = liveUrl;
+        link.removeAttribute("tabindex");
       } else {
-        zoomLink.href = "#";
-        zoomLink.setAttribute("tabindex", "-1");
+        link.href = "#";
+        link.setAttribute("tabindex", "-1");
       }
+    };
+
+    const setZoomEnabled = (enabled) => setLinkEnabled(zoomLink, enabled, SHARED_ZOOM_URL);
+    const setAttendanceEnabled = (enabled) => setLinkEnabled(attendanceLink, enabled, ATTENDANCE_FORM_URL);
+
+    const getAttendanceWindow = (event) => {
+      const start = new Date(event?.start);
+      const end = new Date(event?.end);
+      if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return null;
+
+      return {
+        start,
+        end,
+        unlockAt: new Date(start.getTime() - ATTENDANCE_UNLOCK_LEAD_MS),
+        closesAt: new Date(end.getTime() + ATTENDANCE_GRACE_MS)
+      };
     };
 
     const applyStatus = (events) => {
       const now = new Date();
+      const attendanceEvents = (Array.isArray(events) ? events : [])
+        .map((event) => ({ event, window: getAttendanceWindow(event) }))
+        .filter((item) => item.window)
+        .sort((a, b) => a.window.start - b.window.start);
+
       const zoomEvents = (Array.isArray(events) ? events : [])
         .map((event) => ({ event, window: getZoomWindow(event) }))
         .filter((item) => item.window)
@@ -2102,27 +2188,47 @@
 
       if (active) {
         const endTime = formatEt(active.window.closesAt.toISOString());
-        setEnabled(true);
+        setZoomEnabled(true);
         statusNote.textContent = endTime
           ? `Zoom is live now for "${active.event.summary}" until ${endTime} ET.`
           : `Zoom is live now for "${active.event.summary}".`;
+      } else {
+        setZoomEnabled(false);
+        const next = zoomEvents.find((item) => now < item.window.unlockAt);
+
+        if (next) {
+          const nextStart = formatEt(next.window.unlockAt.toISOString());
+          const label = next.event.summary || "The next event";
+          statusNote.textContent = nextStart
+            ? `${label} is next. Zoom unlocks at ${nextStart} ET, 15 minutes before the session starts.`
+            : "No live Zoom event right now. Check the calendar for the next session.";
+        } else {
+          statusNote.textContent = "No live Zoom event is scheduled right now. Check the calendar above for updates.";
+        }
+      }
+
+      const activeAttendance = attendanceEvents.find((item) => now >= item.window.unlockAt && now <= item.window.closesAt);
+      if (activeAttendance) {
+        const closeTime = formatEt(activeAttendance.window.closesAt.toISOString());
+        const label = activeAttendance.event.summary || "this event";
+        setAttendanceEnabled(true);
+        attendanceStatusNote.textContent = closeTime
+          ? `Attendance is open for "${label}" until ${closeTime} ET.`
+          : `Attendance is open for "${label}".`;
         return;
       }
 
-      setEnabled(false);
-
-      const next = zoomEvents.find((item) => now < item.window.unlockAt);
-
-      if (next) {
-        const nextStart = formatEt(next.window.unlockAt.toISOString());
-        const label = next.event.summary || "The next event";
-        statusNote.textContent = nextStart
-          ? `${label} is next. Zoom unlocks at ${nextStart} ET, 15 minutes before the session starts.`
-          : "No live Zoom event right now. Check the calendar for the next session.";
-        return;
+      setAttendanceEnabled(false);
+      const nextAttendance = attendanceEvents.find((item) => now < item.window.unlockAt);
+      if (nextAttendance) {
+        const unlockTime = formatEt(nextAttendance.window.unlockAt.toISOString());
+        const label = nextAttendance.event.summary || "The next event";
+        attendanceStatusNote.textContent = unlockTime
+          ? `${label} is next. Attendance opens at ${unlockTime} ET and stays open through 1 hour after the event ends.`
+          : "Attendance is not open right now. Check the calendar for the next event.";
+      } else {
+        attendanceStatusNote.textContent = "Attendance is not open right now. Check the calendar above for upcoming events.";
       }
-
-      statusNote.textContent = "No live Zoom event is scheduled right now. Check the calendar above for updates.";
     };
 
     async function loadCalendarStatus() {
@@ -2138,8 +2244,10 @@
         const payload = await response.json();
         applyStatus(payload?.upcomingEvents);
       } catch (error) {
-        setEnabled(false);
+        setZoomEnabled(false);
+        setAttendanceEnabled(false);
         statusNote.textContent = "Unable to verify calendar status right now. Please use the Google Calendar link above.";
+        attendanceStatusNote.textContent = "Unable to verify attendance window right now. Please check the event calendar.";
         console.error("[calendar-status]", error);
       }
     }
@@ -2148,6 +2256,12 @@
       if (zoomLink.getAttribute("aria-disabled") !== "true") return;
       event.preventDefault();
       window.alert(statusNote.textContent || "Zoom is not available yet for this event.");
+    });
+
+    attendanceLink.addEventListener("click", (event) => {
+      if (attendanceLink.getAttribute("aria-disabled") !== "true") return;
+      event.preventDefault();
+      window.alert(attendanceStatusNote.textContent || "Attendance is not available yet for this event.");
     });
 
     document.addEventListener("DOMContentLoaded", loadCalendarStatus);

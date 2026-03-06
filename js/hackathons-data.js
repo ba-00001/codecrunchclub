@@ -174,7 +174,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: true, RSVPEventTicketUrl: "https://gdg.community.dev/e/m5rrdc/"
       },
       {
         name: '305 Hackathon Edition Mar 2026 - Session B (In-person)',
@@ -190,7 +191,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: true, RSVPEventTicketUrl: "https://gdg.community.dev/e/m5rrdc/"
       },
 
       // April 2026
@@ -208,7 +210,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
       {
         name: '305 Hackathon Edition Apr 2026 - Session B (In-person)',
@@ -224,7 +227,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // May 2026
@@ -242,7 +246,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // June 2026
@@ -260,7 +265,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // July 2026
@@ -278,7 +284,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // August 2026
@@ -296,7 +303,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // Sep 2026
@@ -314,7 +322,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
       {
         name: '305 Hackathon Edition Sep 2026 - Session B (In-person)',
@@ -330,7 +339,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // EmpowHER 2026
@@ -348,7 +358,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
       {
         name: 'EmpowHER Hackathon 2026 - Session B (In-person)',
@@ -364,7 +375,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // Nov 2026
@@ -382,7 +394,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
       {
         name: '305 Hackathon Nov 2026 - Session B (In-person)',
@@ -398,7 +411,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
       // CodeFest 2026
@@ -416,7 +430,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
       {
         name: 'CodeFest Hackathon 2026 - Session B (In-person)',
@@ -432,7 +447,8 @@ window.HACKATHONS_DATA = [
         perksEnable: false, perksUrl: "",
         photoAlbumEnable: false, photoAlbumUrl: "",
         mentorScheduleEnable: false, mentorScheduleUrl: "",
-        prizesEnable: false, prizesUrl: ""
+        prizesEnable: false, prizesUrl: "",
+        RSVPEventTicketEnable: false, RSVPEventTicketUrl: ""
       },
 
 
