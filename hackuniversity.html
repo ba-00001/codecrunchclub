@@ -1075,10 +1075,6 @@
               .replace(/'/g, '&#39;');
           }
 
-          function formatMultilineHtml(value) {
-            return escapeHtml(value).replace(/\r?\n/g, '<br>');
-          }
-
           function formatDate(dateValue) {
             const d = typeof dateValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateValue)
               ? asLocalDate(dateValue)
@@ -1455,28 +1451,10 @@
             return '';
           }
 
-          function buildCalendarDescriptionRow(event) {
-            const raw = String(event?.description || '').trim();
-            if (!raw) return '';
-
-            const PREVIEW_LENGTH = 260;
-            const preview = raw.length > PREVIEW_LENGTH
-              ? `${raw.slice(0, PREVIEW_LENGTH).trimEnd()}...`
-              : raw;
-            const previewHtml = formatMultilineHtml(preview);
-
-            const detailsLink = isValidUrl(event?.htmlLink)
-              ? ` <a href="${escapeHtml(event.htmlLink)}" target="_blank" rel="noopener">See more details here</a>`
-              : '';
-
-            return `<div class="hu-inline-meta"><strong>Details:</strong> ${previewHtml}${detailsLink}</div>`;
-          }
-
           function renderCalendarCard(event) {
             const zoomSupport = getCalendarZoomSupport(event);
             const attendanceSupport = getCalendarAttendanceSupport(event);
             const ticketUrl = getRsvpTicketUrl(event.description);
-            const descriptionRow = buildCalendarDescriptionRow(event);
             return `
               <div class="hu-inline-card is-calendar">
                 <div class="hu-inline-card-top">
@@ -1486,7 +1464,6 @@
                 <div class="hu-inline-meta"><strong>Starts:</strong> ${escapeHtml(formatDateTime(event.start))} ${getETAbbrev(new Date(event.start))}</div>
                 <div class="hu-inline-meta"><strong>Ends:</strong> ${escapeHtml(formatDateTime(event.end))} ${getETAbbrev(new Date(event.end))}</div>
                 <div class="hu-inline-meta"><strong>Location / Link:</strong> ${escapeHtml(event.location || 'Details available in Google Calendar')}</div>
-                ${descriptionRow}
                 ${zoomSupport ? `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Shared Zoom link for ${escapeHtml(zoomSupport.mode)} sessions.</div>` : ''}
                 <div class="hu-inline-badges">
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
@@ -1495,7 +1472,7 @@
                   ${makeAction('RSVP/Event Ticket', ticketUrl, !!ticketUrl, false, { disabledMessage: 'RSVP/Event Ticket link is not available in this event description yet.' })}
                   ${makeAction('Attendance', ATTENDANCE_FORM_URL, !!attendanceSupport?.enabled, false, { disabledMessage: attendanceSupport?.message })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
-                  ${makeAction('See This Event on Google Calendar', event.htmlLink, true, false)}
+                  ${makeAction('Event Details', event.htmlLink, true, false)}
                   ${makeAction('Subscribe to Google Calendar', GOOGLE_CALENDAR_SUBSCRIBE_URL, true, true)}
                   ${makeAction('View Hack University [Google Calendar]', GOOGLE_CALENDAR_VIEW_URL, true, true)}
                 </div>
