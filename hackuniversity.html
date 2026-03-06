@@ -1289,7 +1289,7 @@
             const source = String(description || '');
             if (!source.trim()) return '';
 
-            const labeledMatch = source.match(/Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            const labeledMatch = source.match(/(?:Want\s+to\s+)?Join\?\s*Tap\s*In\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
             if (labeledMatch && isValidUrl(labeledMatch[1])) {
               return labeledMatch[1];
             }
@@ -1310,7 +1310,7 @@
             const source = String(description || '');
             if (!source.trim()) return '';
 
-            const tapInMatch = source.match(/Join\?\s*Tap In:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            const tapInMatch = source.match(/(?:Want\s+to\s+)?Join\?\s*Tap\s*In\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
             if (tapInMatch && isValidUrl(tapInMatch[1])) {
               return tapInMatch[1];
             }
