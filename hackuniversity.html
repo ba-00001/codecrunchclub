@@ -1285,16 +1285,37 @@
             return '';
           }
 
-          function getTapInUrl(description) {
-            const source = String(description || '');
+          function normalizeDescriptionText(description) {
+            return String(description || '')
+              .replace(/<br\s*\/?>/gi, '\n')
+              .replace(/<\/p>/gi, '\n')
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&nbsp;/gi, ' ')
+              .replace(/&amp;/gi, '&');
+          }
+
+          function getFirstUrlAfterLabel(description, labelRegex, urlRegex) {
+            const source = normalizeDescriptionText(description);
             if (!source.trim()) return '';
 
-            const labeledMatch = source.match(/(?:Want\s+to\s+)?Join\?\s*Tap\s*In\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
-            if (labeledMatch && isValidUrl(labeledMatch[1])) {
-              return labeledMatch[1];
+            const labelMatch = source.match(labelRegex);
+            if (!labelMatch || typeof labelMatch.index !== 'number') return '';
+
+            const tail = source.slice(labelMatch.index + labelMatch[0].length);
+            const urlMatch = tail.match(urlRegex);
+            if (urlMatch && isValidUrl(urlMatch[0])) {
+              return urlMatch[0];
             }
 
             return '';
+          }
+
+          function getTapInUrl(description) {
+            return getFirstUrlAfterLabel(
+              description,
+              /(?:Want\s+to\s+)?Join\?\s*Tap\s*In\s*:/i,
+              /https?:\/\/[^\s<>"')\]}]+/i
+            );
           }
 
           function getEventRoomInfo(description) {
@@ -1310,9 +1331,9 @@
             const source = String(description || '');
             if (!source.trim()) return '';
 
-            const tapInMatch = source.match(/(?:Want\s+to\s+)?Join\?\s*Tap\s*In\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
-            if (tapInMatch && isValidUrl(tapInMatch[1])) {
-              return tapInMatch[1];
+            const tapInUrl = getTapInUrl(source);
+            if (tapInUrl) {
+              return tapInUrl;
             }
 
             const labeledMatch = source.match(/GitHub Event Resources\s*&\s*Agenda\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
