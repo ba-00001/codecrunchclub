@@ -1013,7 +1013,7 @@
             <span class="hu-inline-filter-label">Filter Events By:</span>
             <button class="hu-inline-filter is-active" type="button" data-hu-filter="all"><i class="fa-solid fa-layer-group"></i> All Events</button>
             <button class="hu-inline-filter" type="button" data-hu-filter="hackathon"><i class="fa-solid fa-code"></i> Hackathons</button>
-            <button class="hu-inline-filter" type="button" data-hu-filter="calendar"><i class="fa-regular fa-calendar"></i> Google Calendar Events</button>
+            <button class="hu-inline-filter" type="button" data-hu-filter="calendar"><i class="fa-regular fa-calendar"></i> Meetups & Workshops</button>
           </div>
 
           <div id="hu-inline-upcoming" class="hu-inline-list"></div>
@@ -1464,7 +1464,7 @@
                 <div class="hu-inline-meta"><strong>Starts:</strong> ${escapeHtml(formatDateTime(event.start))} ${getETAbbrev(new Date(event.start))}</div>
                 <div class="hu-inline-meta"><strong>Ends:</strong> ${escapeHtml(formatDateTime(event.end))} ${getETAbbrev(new Date(event.end))}</div>
                 <div class="hu-inline-meta"><strong>Location / Link:</strong> ${escapeHtml(event.location || 'Details available in Google Calendar')}</div>
-                ${zoomSupport ? `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Shared Zoom link for ${escapeHtml(zoomSupport.mode)} sessions.</div>` : ''}
+                ${zoomSupport ? `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Shared Zoom link for ${escapeHtml(zoomSupport.mode)} sessions. | Zoom button will be enabled before the event starts.</div>` : ''}
                 <div class="hu-inline-badges">
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
