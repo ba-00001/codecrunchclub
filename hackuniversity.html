@@ -1267,6 +1267,32 @@
             return '';
           }
 
+          function getEventRoomInfo(description) {
+            const source = String(description || '');
+            if (!source.trim()) return '';
+
+            const roomMatch = source.match(/Event Room\s*:\s*([^|\r\n]+)/i);
+            if (!roomMatch) return '';
+            return String(roomMatch[1] || '').trim();
+          }
+
+          function getGithubResourcesAgendaUrl(description) {
+            const source = String(description || '');
+            if (!source.trim()) return '';
+
+            const labeledMatch = source.match(/GitHub Event Resources\s*&\s*Agenda\s*:\s*(https?:\/\/[^\s<>"')\]}]+)/i);
+            if (labeledMatch && isValidUrl(labeledMatch[1])) {
+              return labeledMatch[1];
+            }
+
+            const githubMatch = source.match(/https?:\/\/github\.com\/[^\s<>"')\]}]+/i);
+            if (githubMatch && isValidUrl(githubMatch[0])) {
+              return githubMatch[0];
+            }
+
+            return '';
+          }
+
           function getHackathonRsvpTicketUrl(hackathon, websiteReady) {
             const explicitUrl = String(hackathon?.RSVPEventTicketUrl || hackathon?.rsvpTicketUrl || '').trim();
             const isExplicitEnabled = hackathon?.RSVPEventTicketEnable === true || hackathon?.rsvpTicketEnable === true;
@@ -1388,7 +1414,7 @@
                 url: SHARED_ZOOM_URL,
                 disabledMessage: zoomSupport?.message
               },
-              { label: 'Agenda', enabled: !!hackathon.agendaEnable, url: hackathon.agendaUrl },
+              { label: 'GitHub Event Resources & Agenda', enabled: !!hackathon.agendaEnable, url: hackathon.agendaUrl },
               { label: 'Perks & Swag', enabled: !!hackathon.perksEnable, url: hackathon.perksUrl },
               { label: 'Photo Album', enabled: !!hackathon.photoAlbumEnable, url: hackathon.photoAlbumUrl },
               { label: 'Mentor Schedule', enabled: !!hackathon.mentorScheduleEnable, url: hackathon.mentorScheduleUrl },
@@ -1455,6 +1481,8 @@
             const zoomSupport = getCalendarZoomSupport(event);
             const attendanceSupport = getCalendarAttendanceSupport(event);
             const ticketUrl = getRsvpTicketUrl(event.description);
+            const roomInfo = getEventRoomInfo(event.description);
+            const githubResourcesUrl = getGithubResourcesAgendaUrl(event.description);
             return `
               <div class="hu-inline-card is-calendar">
                 <div class="hu-inline-card-top">
@@ -1464,12 +1492,14 @@
                 <div class="hu-inline-meta"><strong>Starts:</strong> ${escapeHtml(formatDateTime(event.start))} ${getETAbbrev(new Date(event.start))}</div>
                 <div class="hu-inline-meta"><strong>Ends:</strong> ${escapeHtml(formatDateTime(event.end))} ${getETAbbrev(new Date(event.end))}</div>
                 <div class="hu-inline-meta"><strong>Location / Link:</strong> ${escapeHtml(event.location || 'Details available in Google Calendar')}</div>
+                ${roomInfo ? `<div class="hu-inline-meta"><strong>Event Room:</strong> ${escapeHtml(roomInfo)}</div>` : ''}
                 ${zoomSupport ? `<div class="hu-inline-meta"><strong>Zoom Meeting:</strong> Shared Zoom link for ${escapeHtml(zoomSupport.mode)} sessions. | Zoom button will be enabled before the event starts.</div>` : ''}
                 <div class="hu-inline-badges">
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
                 <div class="hu-inline-actions">
                   ${makeAction('RSVP/Event Ticket', ticketUrl, !!ticketUrl, false, { disabledMessage: 'RSVP/Event Ticket link is not available in this event description yet.' })}
+                  ${makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
                   ${makeAction('Attendance', ATTENDANCE_FORM_URL, !!attendanceSupport?.enabled, false, { disabledMessage: attendanceSupport?.message })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('Event Details', event.htmlLink, true, false)}
