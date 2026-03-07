@@ -1594,12 +1594,10 @@
             const attendanceSupport = getCalendarAttendanceSupport(event);
             const isTabling = isTablingCalendarEvent(event);
             const tablingCheckInSupport = isTabling ? getCalendarTablingCheckInSupport(event) : null;
-            const ticketUrl = isTabling ? getTablingCheckInUrl(event.description) : getRsvpTicketUrl(event.description);
+            const ticketUrl = getRsvpTicketUrl(event.description);
             const tapInUrl = isTabling ? getTapInUrl(event.description) : '';
-            const ticketLabel = isTabling ? 'Tabling Check-in' : 'RSVP/Event Ticket';
-            const ticketDisabledMessage = isTabling
-              ? tablingCheckInSupport?.message
-              : 'RSVP/Event Ticket link is not available in this event description yet.';
+            const ticketLabel = 'RSVP/Event Ticket';
+            const ticketDisabledMessage = 'RSVP/Event Ticket link is not available in this event description yet.';
             const roomInfo = getEventRoomInfo(event.description);
             const githubResourcesUrl = getGithubResourcesAgendaUrl(event.description);
             return `
@@ -1617,11 +1615,11 @@
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
                 <div class="hu-inline-actions">
-                  ${makeAction(ticketLabel, ticketUrl, isTabling ? (!!ticketUrl && !!tablingCheckInSupport?.enabled) : !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
+                  ${isTabling ? '' : makeAction(ticketLabel, ticketUrl, !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
                   ${isTabling
                     ? makeAction('Join Tap In', tapInUrl, !!tapInUrl, false, { disabledMessage: 'Join Tap In link is not available in this event description yet.' })
                     : makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
-                  ${makeAction('Attendance', ATTENDANCE_FORM_URL, !!attendanceSupport?.enabled, false, { disabledMessage: attendanceSupport?.message })}
+                  ${makeAction(isTabling ? 'Tabling Check-in' : 'Attendance', ATTENDANCE_FORM_URL, isTabling ? !!tablingCheckInSupport?.enabled : !!attendanceSupport?.enabled, false, { disabledMessage: isTabling ? tablingCheckInSupport?.message : attendanceSupport?.message })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('Event Details', event.htmlLink, true, false)}
                   ${makeAction('Subscribe to Google Calendar', GOOGLE_CALENDAR_SUBSCRIBE_URL, true, true)}
