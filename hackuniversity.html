@@ -1617,7 +1617,7 @@
                 <div class="hu-inline-actions">
                   ${isTabling ? '' : makeAction(ticketLabel, ticketUrl, !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
                   ${isTabling
-                    ? makeAction('Join Tap In', tapInUrl, !!tapInUrl, false, { disabledMessage: 'Join Tap In link is not available in this event description yet.' })
+                    ? makeAction('Join ? Tap In', tapInUrl, !!tapInUrl, false, { disabledMessage: 'Join Tap In link is not available in this event description yet.' })
                     : makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
                   ${makeAction(isTabling ? 'Tabling Check-in' : 'Attendance', ATTENDANCE_FORM_URL, isTabling ? !!tablingCheckInSupport?.enabled : !!attendanceSupport?.enabled, false, { disabledMessage: isTabling ? tablingCheckInSupport?.message : attendanceSupport?.message })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
