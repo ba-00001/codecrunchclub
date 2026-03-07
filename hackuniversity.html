@@ -1310,12 +1310,31 @@
             return '';
           }
 
+          function normalizeExtractedUrl(url) {
+            const value = String(url || '').trim();
+            if (!value) return '';
+            if (isValidUrl(value)) return value;
+            if (/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#][^\s<>"')\]}]*)?$/i.test(value)) {
+              const prefixed = `https://${value}`;
+              return isValidUrl(prefixed) ? prefixed : '';
+            }
+            return '';
+          }
+
           function getTapInUrl(description) {
-            return getFirstUrlAfterLabel(
+            return normalizeExtractedUrl(getFirstUrlAfterLabel(
               description,
               /(?:Want\s+to\s+)?Join\??\s*Tap\s*In\s*:/i,
               /https?:\/\/[^\s<>"')\]}]+/i
-            );
+            ));
+          }
+
+          function getTablingCheckInUrl(description) {
+            return normalizeExtractedUrl(getFirstUrlAfterLabel(
+              description,
+              /Tabling\s*Check-?in\s*:/i,
+              /https?:\/\/[^\s<>"')\]}]+|[A-Za-z0-9.-]+\.[A-Za-z]{2,}[^\s<>"')\]}]*/i
+            ));
           }
 
           function getEventRoomInfo(description) {
@@ -1547,9 +1566,8 @@
             const zoomSupport = getCalendarZoomSupport(event);
             const attendanceSupport = getCalendarAttendanceSupport(event);
             const isTabling = isTablingCalendarEvent(event);
-            const ticketUrl = isTabling
-              ? (getTapInUrl(event.description) || getRsvpTicketUrl(event.description))
-              : getRsvpTicketUrl(event.description);
+            const ticketUrl = isTabling ? getTablingCheckInUrl(event.description) : getRsvpTicketUrl(event.description);
+            const tapInUrl = isTabling ? getTapInUrl(event.description) : '';
             const ticketLabel = isTabling ? 'Tabling Check-in' : 'RSVP/Event Ticket';
             const ticketDisabledMessage = isTabling
               ? 'Tabling Check-in link is not available in this event description yet.'
@@ -1572,7 +1590,9 @@
                 </div>
                 <div class="hu-inline-actions">
                   ${makeAction(ticketLabel, ticketUrl, !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
-                  ${isTabling ? '' : makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
+                  ${isTabling
+                    ? makeAction('Join Tap In', tapInUrl, !!tapInUrl, false, { disabledMessage: 'Join Tap In link is not available in this event description yet.' })
+                    : makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
                   ${makeAction('Attendance', ATTENDANCE_FORM_URL, !!attendanceSupport?.enabled, false, { disabledMessage: attendanceSupport?.message })}
                   ${zoomSupport ? makeAction('Zoom Meeting', SHARED_ZOOM_URL, zoomSupport.enabled, false, { disabledMessage: zoomSupport.message }) : ''}
                   ${makeAction('Event Details', event.htmlLink, true, false)}
