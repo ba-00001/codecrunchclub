@@ -1212,6 +1212,22 @@
             return `Attendance opens at ${unlockText} ET and stays available until ${closeText} ET.`;
           }
 
+          function isTablingCheckInWindowOpen(start, end) {
+            if (!(start instanceof Date) || Number.isNaN(start.getTime())) return false;
+            if (!(end instanceof Date) || Number.isNaN(end.getTime())) return false;
+            const now = new Date();
+            return now >= start && now <= end;
+          }
+
+          function getTablingCheckInDisabledMessage(start, end) {
+            if (!(start instanceof Date) || Number.isNaN(start.getTime()) || !(end instanceof Date) || Number.isNaN(end.getTime())) {
+              return 'Tabling Check-in is only available during the scheduled event time.';
+            }
+            const openText = formatDateTime(start);
+            const closeText = formatDateTime(end);
+            return `Tabling Check-in opens at ${openText} ET and stays available until ${closeText} ET.`;
+          }
+
           function getHackathonZoomSupport(hackathon) {
             const mode = getEventModeLabel(hackathon.modality);
             if (!mode) return null;
@@ -1260,6 +1276,17 @@
             return {
               enabled: isAttendanceWindowOpen(start, end),
               message: getAttendanceDisabledMessage(start, end)
+            };
+          }
+
+          function getCalendarTablingCheckInSupport(event) {
+            const start = new Date(event.start);
+            const end = new Date(event.end);
+            if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return null;
+
+            return {
+              enabled: isTablingCheckInWindowOpen(start, end),
+              message: getTablingCheckInDisabledMessage(start, end)
             };
           }
 
@@ -1566,11 +1593,12 @@
             const zoomSupport = getCalendarZoomSupport(event);
             const attendanceSupport = getCalendarAttendanceSupport(event);
             const isTabling = isTablingCalendarEvent(event);
+            const tablingCheckInSupport = isTabling ? getCalendarTablingCheckInSupport(event) : null;
             const ticketUrl = isTabling ? getTablingCheckInUrl(event.description) : getRsvpTicketUrl(event.description);
             const tapInUrl = isTabling ? getTapInUrl(event.description) : '';
             const ticketLabel = isTabling ? 'Tabling Check-in' : 'RSVP/Event Ticket';
             const ticketDisabledMessage = isTabling
-              ? 'Tabling Check-in link is not available in this event description yet.'
+              ? tablingCheckInSupport?.message
               : 'RSVP/Event Ticket link is not available in this event description yet.';
             const roomInfo = getEventRoomInfo(event.description);
             const githubResourcesUrl = getGithubResourcesAgendaUrl(event.description);
@@ -1589,7 +1617,7 @@
                   <span class="hu-inline-pill ${getCalendarStatusClass(event)}">${escapeHtml(getCalendarStatus(event))}</span>
                 </div>
                 <div class="hu-inline-actions">
-                  ${makeAction(ticketLabel, ticketUrl, !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
+                  ${makeAction(ticketLabel, ticketUrl, isTabling ? (!!ticketUrl && !!tablingCheckInSupport?.enabled) : !!ticketUrl, false, { disabledMessage: ticketDisabledMessage })}
                   ${isTabling
                     ? makeAction('Join Tap In', tapInUrl, !!tapInUrl, false, { disabledMessage: 'Join Tap In link is not available in this event description yet.' })
                     : makeAction('GitHub Event Resources & Agenda', githubResourcesUrl, !!githubResourcesUrl, false, { disabledMessage: 'GitHub Event Resources & Agenda link is not available in this event description yet.' })}
